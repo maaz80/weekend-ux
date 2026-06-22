@@ -63,6 +63,6 @@ const homeSchema = new mongoose.Schema({
      }
 }, { timestamps: true });
 
-const Home = mongoose.model("Home", homeSchema);
+const Home = mongoose.models.Home || mongoose.model("Home", homeSchema);
 
 export default Home;

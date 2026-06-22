@@ -7,17 +7,28 @@ cloudinary.config({
      api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-export const uploadToCloudinary = async (file, folder = "kreeya_media") => {
+export const uploadToCloudinary = async (file, folder = "weekend_ux_media") => {
      if (!file || typeof file === "string") return file || "";
      
      try {
           const arrayBuffer = await file.arrayBuffer();
           const buffer = Buffer.from(arrayBuffer);
+
+          const originalName = file.name || "image";
+          const nameWithoutExtension = originalName.substring(0, originalName.lastIndexOf('.')) || originalName;
+
+          const seoFriendlyName = nameWithoutExtension
+               .toLowerCase()
+               .replace(/[^a-z0-9]+/g, "-")
+               .replace(/^-+|-+$/g, "");
+
+          const publicId = seoFriendlyName || "image";
           
           return new Promise((resolve, reject) => {
                cloudinary.uploader.upload_stream(
                     {
                          folder,
+                         public_id: publicId,
                          resource_type: "auto"
                     },
                     (error, result) => {

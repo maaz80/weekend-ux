@@ -11,7 +11,7 @@ export const getAbout = async (req) => {
           if (!about) {
                about = new About({
                     hero: [{
-                         title: "We are Kreeya",
+                         title: "We are Weekend UX",
                          heading: "Designing a Better World Together",
                          buttonName: "Learn More",
                          bgImage: ""

@@ -55,7 +55,7 @@ export default function CourseCard({ course, setIsModal = false }) {
 
                     {/* Author */}
                     <p className="text-[16px] text-zinc-500 mt-1 font-urbanist">
-                         by {course?.instructor || "Determined-Polliras"}
+                         by {course?.instructor || course?.author || "Determined-Polliras"}
                     </p>
 
                     {/* Stats */}
@@ -63,22 +63,32 @@ export default function CourseCard({ course, setIsModal = false }) {
 
                          <div className="flex items-center gap-2 text-zinc-700">
                               <FiClock className="text-[#F4C430] shrink-0 text-[20px]" />
-                              <span>2 Weeks</span>
+                              <span>{course?.duration || "2 Weeks"}</span>
                          </div>
 
                          <div className="flex items-center gap-2 text-zinc-700">
                               <FiUsers className="text-[#F4C430] shrink-0 text-[20px]" />
-                              <span>156 Students</span>
+                              <span>
+                                   {course?.totalstudents 
+                                        ? (course.totalstudents.toLowerCase().includes("student") ? course.totalstudents : `${course.totalstudents} Students`) 
+                                        : "156 Students"
+                                   }
+                              </span>
                          </div>
 
                          <div className="flex items-center gap-2 text-zinc-700">
                               <FiBarChart2 className="text-[#F4C430] shrink-0 text-[20px]" />
-                              <span>All Levels</span>
+                              <span>{course?.levels || "All Levels"}</span>
                          </div>
 
                          <div className="flex items-center gap-2 text-zinc-700">
                               <FiBookOpen className="text-[#F4C430] shrink-0 text-[20px]" />
-                              <span>20 Lessons</span>
+                              <span>
+                                   {course?.totallessons 
+                                        ? (course.totallessons.toLowerCase().includes("lesson") ? course.totallessons : `${course.totallessons} Lessons`) 
+                                        : "20 Lessons"
+                                   }
+                              </span>
                          </div>
 
                     </div>
@@ -91,11 +101,11 @@ export default function CourseCard({ course, setIsModal = false }) {
                                    <span className="font-semibold">
                                         Starts:
                                    </span>{" "}
-                                   {course?.deadline || "10th Dec, 26"}
+                                   {course?.startdate || course?.deadline || "10th Dec, 26"}
                               </p>
 
                               <p className="text-[12px] md:text-[13px] text-zinc-900 font-semibold mt-1">
-                                   Duration: {course?.courseLength || "6 Months"}
+                                   Duration: {course?.courselength || course?.courseLength || "6 Months"}
                               </p>
                          </div>
 

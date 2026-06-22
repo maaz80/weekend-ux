@@ -1,5 +1,7 @@
 'use client'
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useHomeData } from "@/context/HomeDataContext";
 import { HiMinus, HiPlus } from "react-icons/hi";
 
 const defaultFaqs = [
@@ -28,21 +30,78 @@ const defaultFaqs = [
           answer: "A UI/UX design firm specializes in creating user-centered digital experiences by fusing interaction design, visual design, and user research to create products that are simple to use, captivating, and efficient."
      }
 ];
-const FAQ = ({ paddings, faqData }) => {
-     const [faqs, setFaqs] = useState(defaultFaqs);
+
+const FAQ = ({ paddings, faqData: initialFaqData }) => {
+     const { faqData: homeFaqData } = useHomeData();
+     const pathname = usePathname();
+     const [faqInfo, setFaqInfo] = useState(null);
      const [activeIndex, setActiveIndex] = useState(0);
+
      const toggleFaq = (index) => {
           setActiveIndex(index === activeIndex ? null : index);
      };
 
+     useEffect(() => {
+          if (initialFaqData) {
+               setFaqInfo(initialFaqData);
+               return;
+          }
 
-     // useEffect(() => {
-     //      if (faqData?.faq && faqData.faq.length > 0) {
-     //           setFaqs(faqData.faq);
-     //      } else {
-     //           setFaqs(defaultFaqs);
-     //      }
-     // }, [faqData]);
+          let slug = "home";
+          if (pathname && pathname !== "/") {
+               // Normalise path slug (e.g. /category/blogs -> category-blogs)
+               slug = pathname.replace(/^\/|\/$/g, "").replace(/\//g, "-");
+          }
+
+          if (slug === "home") {
+               if (homeFaqData) {
+                    setFaqInfo(homeFaqData);
+               }
+          } else {
+               let isMounted = true;
+               async function fetchPageFaq() {
+                    try {
+                         const res = await fetch(`/api/pages/${slug}/faq`);
+                         if (res.ok) {
+                              const data = await res.json();
+                              if (isMounted) {
+                                   setFaqInfo(data);
+                              }
+                         }
+                    } catch (error) {
+                         console.error(`Failed to fetch FAQ for page: ${slug}`, error);
+                    }
+               }
+               fetchPageFaq();
+               return () => {
+                    isMounted = false;
+               };
+          }
+     }, [initialFaqData, pathname, homeFaqData]);
+
+     const faqs = faqInfo?.faq && faqInfo.faq.length > 0
+          ? faqInfo.faq
+          : defaultFaqs;
+
+     const title = faqInfo?.title && faqInfo.title.trim()
+          ? faqInfo.title.trim()
+          : "FAQ";
+
+     const startheading = faqInfo?.startheading && faqInfo.startheading.trim()
+          ? faqInfo.startheading.trim()
+          : "All You";
+
+     const midheading = faqInfo?.midheading && faqInfo.midheading.trim()
+          ? faqInfo.midheading.trim()
+          : "Need";
+
+     const endheading = faqInfo?.endheading && faqInfo.endheading.trim()
+          ? faqInfo.endheading.trim()
+          : "To Know";
+
+     const description = faqInfo?.description && faqInfo.description.trim()
+          ? faqInfo.description.trim()
+          : "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs.";
 
      return (
           <section className={` relative z-999 ${paddings} py-15 min-h-[160vh] bg-white`}>
@@ -56,25 +115,25 @@ const FAQ = ({ paddings, faqData }) => {
                <div className="custom-width mx-auto relative z-50">
 
                     {/* Heading */}
+                    <div className="mx-auto max-w-212.5 text-center mb-10 md:mb-20">
+                         <span className="font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] text-official">
+                              {title}
+                         </span>
 
-                    {/* Heading */}
-                     <div className="mx-auto max-w-212.5 text-center mb-10 md:mb-20">
-                          <span className="font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] text-official">
-                               FAQ
-                          </span>
+                         <h3 className="mt-4 font-playfair text-[38px] leading-[1.05] text-neutral-900 md:text-[58px] lg:text-[72px]">
+                              {startheading}{" "}
+                              {midheading && (
+                                   <span className="italic text-official">
+                                        {midheading}
+                                   </span>
+                              )}{" "}
+                              {endheading}
+                         </h3>
 
-                          <h3 className="mt-4 font-playfair text-[38px] leading-[1.05] text-neutral-900 md:text-[58px] lg:text-[72px]">
-                               All You{" "}
-                               <span className="italic text-official">
-                                    Need
-                               </span>{" "}
-                               To Know
-                          </h3>
-
-                          <p className="mx-auto mt-5 max-w-200 font-urbanist text-[15px] leading-5.5 md:leading-7 text-neutral-900/80 md:text-[17px]">
-                               Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs.
-                          </p>
-                     </div>
+                         <p className="mx-auto mt-5 max-w-200 font-urbanist text-[15px] leading-5.5 md:leading-7 text-neutral-900/80 md:text-[17px]">
+                              {description}
+                         </p>
+                    </div>
                     {/* FAQ */}
 
                     <div className="space-y-6 cursor-pointer">

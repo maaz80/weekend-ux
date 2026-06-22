@@ -16,10 +16,17 @@ import { PiFilesFill } from "react-icons/pi";
 import { TbLogin } from "react-icons/tb";
 import CardBg from '@/app/assets/weekend-ux-course-details-call-card-bg.webp';
 
-export default function Details() {
+export default function Details({ data }) {
      const [openChapter, setOpenChapter] = useState(1);
 
-     const curriculum = [
+     const curriculum = (data?.chapter && data.chapter.chaptername) ? [
+          {
+               id: 1,
+               title: data.chapter.chaptername,
+               lessons: data.chapter.totallessons || data.chapter.lessons?.length || 0,
+               items: data.chapter.lessons?.map(l => l.lessonname) || []
+          }
+     ] : [
           {
                id: 1,
                title: "Chapter Title",
@@ -65,11 +72,11 @@ export default function Details() {
                               {/* Category */}
                               <div className="flex flex-wrap items-center gap-4 mb-6">
                                    <span className="bg-[#7C3AED] text-white text-[14px] px-3 py-1 rounded">
-                                        Development
+                                        {data?.category || "Development"}
                                    </span>
 
                                    <span className="text-[18px] text-zinc-600 font-medium">
-                                        by Determined-Poitras
+                                        by {data?.author || "Determined-Poitras"}
                                    </span>
                               </div>
 
@@ -77,22 +84,34 @@ export default function Details() {
                               <div className="flex flex-wrap gap-x-8 gap-y-4 mb-12 text-neutral-900">
                                    <div className="flex items-center gap-2">
                                         <span className="text-official text-[20px]"><GoClockFill /></span>
-                                        <span>2 Weeks</span>
+                                        <span>{data?.courselength || data?.duration || "2 Weeks"}</span>
                                    </div>
 
                                    <div className="flex items-center gap-2">
                                         <span className="text-official text-[20px]"><FaGraduationCap /></span>
-                                        <span>156 Students</span>
+                                        <span>
+                                             {data?.totalstudents 
+                                                  ? (data.totalstudents.toString().toLowerCase().includes("students") 
+                                                       ? data.totalstudents 
+                                                       : `${data.totalstudents} Students`) 
+                                                  : "156 Students"}
+                                        </span>
                                    </div>
 
                                    <div className="flex items-center gap-2">
                                         <span className="text-official text-[20px]"><BsBarChartFill /></span>
-                                        <span>All levels</span>
+                                        <span>{data?.levels || "All levels"}</span>
                                    </div>
 
                                    <div className="flex items-center gap-2">
                                         <span className="text-official text-[20px]"><PiFilesFill /></span>
-                                        <span>20 Lessons</span>
+                                        <span>
+                                             {data?.totallessons 
+                                                  ? (data.totallessons.toString().toLowerCase().includes("lessons") 
+                                                       ? data.totallessons 
+                                                       : `${data.totallessons} Lessons`) 
+                                                  : "20 Lessons"}
+                                        </span>
                                    </div>
                               </div>
 
@@ -103,13 +122,7 @@ export default function Details() {
                                    </h2>
 
                                    <p className="font-urbanist text-neutral-900 leading-6 text-[16px]">
-                                        Thank you for buying our courses. We ensure that our users
-                                        have a rewarding experience while they discover, assess and
-                                        purchase our courses, whether it is an instructor-led or
-                                        self-paced training. As with any online purchase experience,
-                                        there are terms and conditions that govern our Refund Policy.
-                                        When you buy a training course from us, you agree to our
-                                        Privacy Policy, Terms of Use and Refund Policy.
+                                        {data?.overview || "Thank you for buying our courses. We ensure that our users have a rewarding experience while they discover, assess and purchase our courses, whether it is an instructor-led or self-paced training. As with any online purchase experience, there are terms and conditions that govern our Refund Policy. When you buy a training course from us, you agree to our Privacy Policy, Terms of Use and Refund Policy."}
                                    </p>
                               </div>
 

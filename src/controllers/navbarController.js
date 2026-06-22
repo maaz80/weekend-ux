@@ -12,7 +12,7 @@ export const getNavbar = async (req) => {
                navbar = new Navbar({
                     logo: {
                          image: "",
-                         alt: "Kreeya Logo"
+                         alt: "Weekend UX Logo"
                     },
                     buttonText: "Refer & Earn",
                     searchPlaceholder: "Search courses...",

@@ -1,4 +1,8 @@
-const stats = [
+"use client";
+
+import { useHomeData } from "@/context/HomeDataContext";
+
+const STATIC_STATS = [
      {
           number: "500+",
           title: "Designers Trained",
@@ -26,6 +30,38 @@ const stats = [
 ];
 
 export default function Details() {
+     const { homeData } = useHomeData();
+
+     const whyTitle = (homeData?.why?.title && homeData.why.title.trim())
+          ? homeData.why.title
+          : "Why Weekend UX";
+
+     const startheading = (homeData?.why?.startheading && homeData.why.startheading.trim())
+          ? homeData.why.startheading
+          : "The Numbers Behind Every";
+
+     const midheading = (homeData?.why?.midheading && homeData.why.midheading.trim())
+          ? homeData.why.midheading
+          : "Designer";
+
+     const endheading = (homeData?.why?.endheading && homeData.why.endheading.trim())
+          ? homeData.why.endheading
+          : " We've Trained.";
+
+     const rawCards = homeData?.why?.card;
+     const hasValidCards = Array.isArray(rawCards) && rawCards.length > 0 && rawCards.some(c => c.value && c.value.trim());
+
+     const stats = hasValidCards
+          ? rawCards.filter(c => c.value && c.value.trim()).map((item, idx) => {
+               const fallback = STATIC_STATS[idx] || STATIC_STATS[0];
+               return {
+                    number: item.value && item.value.trim() ? item.value : fallback.number,
+                    title: item.valueName && item.valueName.trim() ? item.valueName : fallback.title,
+                    description: item.description && item.description.trim() ? item.description : fallback.description,
+               };
+          })
+          : STATIC_STATS;
+
      return (
           <section className="relative overflow-hidden">
                {/* Background */}
@@ -45,12 +81,13 @@ export default function Details() {
                          {/* Left Content */}
                          <div className="relative">
                               <p className="mb-5 text-[10px] font-medium uppercase tracking-[0.45em] text-[#fff8d6] font-inter">
-                                   Why Weekend UX
+                                   {whyTitle}
                               </p>
 
                               <h2 className="max-w-150 font-serif text-[38px] md:leading-16 text-[#1B1B1B] md:text-[56px] leading-12">
-                                   The Numbers Behind Every{" "}
-                                   <span className="italic text-white">Designer</span> We've Trained.
+                                   {startheading}{" "}
+                                   {midheading && <span className="italic text-white">{midheading}</span>}
+                                   {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>}
                               </h2>
 
                          </div>

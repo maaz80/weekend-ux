@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ProgramsSidebar from './ProgramSidebar';
 import CourseCard from './CourseCard';
+import { useHomeData } from "@/context/HomeDataContext";
 
 const staticCourses = [
      {
@@ -140,9 +141,20 @@ const staticCourses = [
 ];
 
 const ProgramModalContent = ({ setIsModal }) => {
+     const { coursesData } = useHomeData();
      const [activeMobileIndex, setActiveMobileIndex] = useState(null);
-     const courses = staticCourses;
-     const categories = ["All", ...new Set(courses.map(c => c.category))];
+     
+     const courses = coursesData?.course && coursesData.course.length > 0
+          ? coursesData.course.map(c => ({
+               ...c,
+               // Make sure course properties match what the CourseCard component expects
+               _id: c._id || c.slug,
+               courseLength: c.courselength || c.duration || "6 Months",
+               deadline: c.startdate || "10th Dec, 26"
+          }))
+          : staticCourses;
+
+     const categories = ["All", ...new Set(courses.map(c => c.category).filter(Boolean))];
      const [activeCategory, setActiveCategory] = useState('All');
 
      const filteredCourses =

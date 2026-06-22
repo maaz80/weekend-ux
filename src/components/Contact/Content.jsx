@@ -1,7 +1,55 @@
 import DecorativeImage from "@/app/assets/weekend-ux-contact-decorative-image.webp";
 import Map from "@/app/assets/weekend-ux-contact-map.webp";
 
-const Content = () => {
+const Content = ({ data }) => {
+     const leftSection = data?.leftsection;
+
+     const imageSrc = leftSection?.image && leftSection.image.trim()
+          ? leftSection.image.trim()
+          : DecorativeImage.src || DecorativeImage;
+
+     const inquiriesTitle = leftSection?.inquiries?.title && leftSection.inquiries.title.trim()
+          ? leftSection.inquiries.title.trim()
+          : "Inquiries";
+
+     const inquiriesEmail = leftSection?.inquiries?.email && leftSection.inquiries.email.trim()
+          ? leftSection.inquiries.email.trim()
+          : "hello@weekendux.com";
+
+     const inquiriesPhone = leftSection?.inquiries?.phone && leftSection.inquiries.phone.trim()
+          ? leftSection.inquiries.phone.trim()
+          : "+91 888 888 8888";
+
+     const locationTitle = leftSection?.location?.title && leftSection.location.title.trim()
+          ? leftSection.location.title.trim()
+          : "Location";
+
+     const locationAddress = leftSection?.location?.address && leftSection.location.address.trim()
+          ? leftSection.location.address.trim()
+          : "424 Madison Avenue\nNew Delhi, DL 10017";
+
+     const socialTitle = leftSection?.social?.title && leftSection.social.title.trim()
+          ? leftSection.social.title.trim()
+          : "Socials";
+
+     const rawPlatforms = leftSection?.social?.platform;
+     const hasValidPlatforms = Array.isArray(rawPlatforms) && rawPlatforms.length > 0 && rawPlatforms.some(p => p.label && p.label.trim());
+
+     const socialPlatforms = hasValidPlatforms
+          ? rawPlatforms.filter(p => p.label && p.label.trim()).map(p => ({
+               label: p.label.trim(),
+               url: p.url && p.url.trim() ? p.url.trim() : "#"
+          }))
+          : [
+               { label: "Instagram", url: "#" },
+               { label: "LinkedIn", url: "#" },
+               { label: "Dribbble", url: "#" }
+          ];
+
+     const mapImageSrc = data?.mapimage && data.mapimage.trim()
+          ? data.mapimage.trim()
+          : Map.src || Map;
+
      return (
           <section className="py-10 md:py-16 font-urbanist bg-[#FFFCEE]">
                <div className="custom-width px-4 md:px-6 lg:px-8">
@@ -18,7 +66,7 @@ const Content = () => {
 
                               <div className="overflow-hidden rounded-xl">
                                    <img
-                                        src={DecorativeImage.src}
+                                        src={imageSrc}
                                         alt="Office"
                                         className="w-full h-60 md:h-80 object-cover"
                                    />
@@ -32,12 +80,12 @@ const Content = () => {
 
                                    <div>
                                         <h3 className="text-[24px] font-bold text-neutral-900 mb-3">
-                                             Inquiries
+                                             {inquiriesTitle}
                                         </h3>
 
                                         <div className="text-sm md:text-[16px] text-neutral-600">
-                                             <p>hello@weekendux.com</p>
-                                             <p>+91 888 888 8888</p>
+                                             <p>{inquiriesEmail}</p>
+                                             <p>{inquiriesPhone}</p>
                                         </div>
                                    </div>
 
@@ -45,12 +93,13 @@ const Content = () => {
 
                                    <div>
                                         <h3 className="text-[24px] font-bold text-neutral-900 mb-3">
-                                             Location
+                                             {locationTitle}
                                         </h3>
 
                                         <div className="text-sm md:text-[16px] text-neutral-600 leading-6">
-                                             <p>424 Madison Avenue</p>
-                                             <p>New Delhi, DL 10017</p>
+                                             {locationAddress.split('\n').map((line, idx) => (
+                                                  <p key={idx}>{line}</p>
+                                             ))}
                                         </div>
                                    </div>
 
@@ -58,13 +107,13 @@ const Content = () => {
 
                                    <div>
                                         <h3 className="text-[24px] font-bold text-neutral-900 mb-3">
-                                             Socials
+                                             {socialTitle}
                                         </h3>
 
                                         <div className="flex flex-wrap gap-4 text-sm text-neutral-600 italic">
-                                             <a href="#">Instagram</a>
-                                             <a href="#">LinkedIn</a>
-                                             <a href="#">Dribbble</a>
+                                             {socialPlatforms.map((social, idx) => (
+                                                  <a key={idx} href={social.url}>{social.label}</a>
+                                             ))}
                                         </div>
                                    </div>
 
@@ -148,7 +197,7 @@ const Content = () => {
                          <div className="relative">
 
                               <img
-                                   src={Map.src}
+                                   src={mapImageSrc}
                                    alt="Map"
                                    className="w-full h-75 md:h-112.5 lg:h-150 object-cover rounded-3xl"
                               />

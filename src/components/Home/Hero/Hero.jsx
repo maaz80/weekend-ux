@@ -3,8 +3,10 @@
 import { useState, useEffect } from "react";
 // import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import Button from "../../ui/Button";
+import { useHomeData } from "@/context/HomeDataContext";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 
-const slides = [
+const staticSlides = [
      {
           tagline: "Learn As You Desire",
           titleHtml: "Design <span class=\"italic text-yellow-400\">Skills</span> That<br/>Actually Get You Hired.",
@@ -29,21 +31,45 @@ const slides = [
 ];
 
 export default function Hero() {
+     const { homeData } = useHomeData();
      const [currentSlide, setCurrentSlide] = useState(0);
 
+     const slides = (homeData?.hero && homeData.hero.length > 0)
+          ? homeData.hero.map((slide, idx) => {
+               const fallback = staticSlides[idx] || staticSlides[0];
+               const tagline = slide?.title?.trim() ? slide.title.trim() : fallback.tagline;
+               
+               const start = slide?.startheading?.trim() || "";
+               const mid = slide?.midheading?.trim() || "";
+               const end = slide?.endheading?.trim() || "";
+               
+               const titleHtml = (start || mid || end)
+                    ? `${start} ${mid ? `<span class="italic text-yellow-400">${mid}</span>` : ""} ${end}`.trim()
+                    : fallback.titleHtml;
+
+               const description = slide?.description?.trim() ? slide.description.trim() : fallback.description;
+               const bgImage = slide?.bgImage?.trim() ? slide.bgImage.trim() : fallback.bgImage;
+               const buttonText = slide?.buttonName?.trim() ? slide.buttonName.trim() : fallback.buttonText;
+
+               return { tagline, titleHtml, description, bgImage, buttonText };
+          })
+          : staticSlides;
+
      const nextSlide = () => {
-          setCurrentSlide((prev) => (prev + 1) % slides.length);
+          setCurrentSlide((prev) => (prev + 1) % (slides.length || 1));
      };
 
      const prevSlide = () => {
-          setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+          setCurrentSlide((prev) => (prev - 1 + (slides.length || 1)) % (slides.length || 1));
      };
 
      // Auto-play
      useEffect(() => {
-          const timer = setInterval(nextSlide, 6000);
+          const timer = setInterval(() => {
+               setCurrentSlide((prev) => (prev + 1) % (slides.length || 1));
+          }, 6000);
           return () => clearInterval(timer);
-     }, []);
+     }, [slides.length]);
 
      return (
           <section className="relative min-h-145 overflow-hidden bg-black text-white select-none">
@@ -59,11 +85,13 @@ export default function Hero() {
                               }`}
                          >
                               {/* Background Image */}
-                              <div
-                                   className="absolute inset-0 bg-cover bg-center"
-                                   style={{
-                                        backgroundImage: `url('${slide.bgImage}')`,
-                                   }}
+                              <OptimizedImage
+                                   src={slide.bgImage}
+                                   alt={slide.tagline || "Slide background"}
+                                   className="absolute inset-0 w-full h-full"
+                                   priority={index === 0}
+                                   objectFit="cover"
+                                   fallbackSrc="/images/weekend-ux-hero-bg-template.webp"
                               />
                               {/* Dark Overlay for better text readability */}
                               {/* <div className="absolute inset-0 bg-black/40" /> */}

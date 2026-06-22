@@ -37,7 +37,7 @@ const storage = new CloudinaryStorage({
           // const uniqueSuffix = Math.random().toString(36).substring(2, 5);
 
           return {
-               folder: "kreeya_media",
+               folder: "weekend_ux_media",
                public_id: `${seoFriendlyName}`,
                resource_type: "auto",
                allowed_formats: ["jpg", "png", "jpeg", "webp", "mp4", "mov", "webm"]

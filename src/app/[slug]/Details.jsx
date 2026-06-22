@@ -1,23 +1,88 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import {
      FaFacebookF,
      FaInstagram,
      FaYoutube,
 } from "react-icons/fa";
-import { FiArrowLeft } from "react-icons/fi";
 import CardBg from '../assets/weekend-ux-course-details-call-card-bg.webp';
 import { CiShare2 } from "react-icons/ci";
-const headings = [
-     "Heading 1",
-     "Heading 2",
-     "Heading 1",
-     "Heading 1",
-     "Heading 1",
-     "Heading 1",
-];
 
-export default function Details() {
+export default function Details({ data }) {
+     const [headingsList, setHeadingsList] = useState([]);
+     const [activeId, setActiveId] = useState("");
+     const contentRef = useRef(null);
+
+     const dateStr = data?.date || "22nd July, 2026";
+     const readStr = data?.read || "3 min read";
+     const coverImage = data?.image || "/images/hero-bg.jpg";
+     const htmlContent = data?.content ? data.content.map(c => c.data).join("") : "";
+
+     useEffect(() => {
+          if (!htmlContent || !contentRef.current) return;
+
+          const parseAndSetupHeadings = () => {
+               if (!contentRef.current) return false;
+               const headingElements = contentRef.current.querySelectorAll("h1, h2, h3");
+               if (headingElements && headingElements.length > 0) {
+                    const parsed = Array.from(headingElements).map((el, index) => {
+                         const id = `blog-heading-${index}`;
+                         el.id = id;
+                         el.style.scrollMarginTop = "130px"; // Inline offset style to clear header cleanly
+                         return {
+                              id,
+                              text: el.innerText || el.textContent || "",
+                              level: el.tagName
+                         };
+                    });
+                    setHeadingsList(parsed);
+                    setActiveId(prev => prev || (parsed[0] ? parsed[0].id : ""));
+                    return true;
+               }
+               return false;
+          };
+
+          // 1. Try parsing immediately (if content is already rendered)
+          const success = parseAndSetupHeadings();
+          if (success) return;
+
+          // 2. Observe DOM modifications (react instantly when dangerouslySetInnerHTML commits)
+          const observer = new MutationObserver(() => {
+               const done = parseAndSetupHeadings();
+               if (done) {
+                    observer.disconnect();
+               }
+          });
+
+          observer.observe(contentRef.current, {
+               childList: true,
+               subtree: true
+          });
+
+          // 3. Backup timeout
+          const timer = setTimeout(() => {
+               parseAndSetupHeadings();
+          }, 250);
+
+          return () => {
+               observer.disconnect();
+               clearTimeout(timer);
+          };
+     }, [htmlContent, data]);
+
+     const handleScroll = (id) => {
+          setActiveId(id);
+
+          const element = document.getElementById(id);
+          if (element) {
+               element.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+               });
+          }
+     };
+
      return (
           <section className="bg-[#F8F6EE] py-10 lg:py-16">
                <div className="custom-width px-4 md:px-6 lg:px-8">
@@ -30,9 +95,9 @@ export default function Details() {
 
                               {/* Date */}
                               <div className="flex items-center gap-2 text-[14px] text-neutral-600">
-                                   <span>22nd July, 2026</span>
+                                   <span>{dateStr}</span>
                                    <span>|</span>
-                                   <span>3 min read</span>
+                                   <span>{readStr}</span>
                               </div>
 
                               {/* Social */}
@@ -57,25 +122,33 @@ export default function Details() {
                               </div>
 
                               {/* TOC */}
-                              <div className="mt-10">
-                                   <h3 className="font-urbanist font-bold text-[22px] text-neutral-900 uppercase">
-                                        Table Of Content
-                                   </h3>
+                              {headingsList.length > 0 && (
+                                   <div className="mt-10">
+                                        <h3 className="font-urbanist font-bold text-[22px] text-neutral-900 uppercase">
+                                             Table Of Content
+                                        </h3>
 
-                                   <div className="mt-6 space-y-3">
-                                        {headings.map((item, index) => (
-                                             <button
-                                                  key={index}
-                                                  className={`w-full text-left px-4 py-3 rounded-md transition-all ${index === 1
-                                                       ? "bg-neutral-900 text-white"
-                                                       : "text-neutral-800 hover:bg-neutral-100"
-                                                       }`}
-                                             >
-                                                  {item}
-                                             </button>
-                                        ))}
+                                        <div className="mt-6 space-y-2">
+                                             {headingsList.map((item) => {
+                                                  const isActive = item.id === activeId;
+                                                  return (
+                                                       <button
+                                                            key={item.id}
+                                                            onClick={() => handleScroll(item.id)}
+                                                            className={`w-full text-left px-3 py-2 rounded-lg transition-all cursor-pointer leading-7.5 line-clamp-1 ${
+                                                                 isActive
+                                                                      ? "bg-neutral-900 text-white font-bold"
+                                                                      : "text-neutral-800 hover:bg-neutral-200/60 hover:text-orange-500 font-medium"
+                                                            }`}
+                                                           
+                                                       >
+                                                            {item.text}
+                                                       </button>
+                                                  );
+                                             })}
+                                        </div>
                                    </div>
-                              </div>
+                              )}
 
                               {/* CTA CARD */}
                               <div className="mt-10 rounded-xl overflow-hidden relative h-57.5">
@@ -100,7 +173,7 @@ export default function Details() {
                                              </p>
                                         </div>
 
-                                        <button className="h-12 rounded-lg bg-[#F7C600] text-neutral-900 font-medium">
+                                        <button className="h-12 rounded-lg bg-[#F7C600] text-neutral-900 font-medium cursor-pointer">
                                              Book a Call
                                         </button>
 
@@ -113,67 +186,22 @@ export default function Details() {
 
                          <div>
 
-                              {/* HERO IMAGE */}
-
-                              <div className="overflow-hidden rounded-2xl">
+                              {/* HERO COVER IMAGE */}
+                              <div className="overflow-hidden rounded-2xl bg-zinc-100">
                                    <img
-                                        src="/images/hero-bg.jpg"
-                                        alt="Blog"
+                                        src={coverImage}
+                                        alt={data?.alt || data?.title || "Blog Cover"}
                                         className="w-full h-65 md:h-112.5 lg:h-137.5 object-cover"
                                    />
                               </div>
 
-                              {/* BLOG CONTENT */}
-
+                              {/* BLOG CONTENT RENDERER */}
                               <div className="mt-8 lg:mt-12">
-
-                                   <h1 className="font-urbanist text-[28px] md:text-[34px] lg:text-[40px] font-medium text-neutral-900">
-                                        Use Rich Text when developing cms for blog
-                                   </h1>
-
-                                   <div className="mt-6 space-y-6 text-neutral-600 text-[16px] leading-[1.9]">
-
-                                        <p>
-                                             Thank you for buying our courses. We ensure that our
-                                             users have a rewarding experience while they discover,
-                                             assess, and purchase our courses, whether it is an
-                                             instructor-led or self-paced training.
-                                        </p>
-
-                                        <p>
-                                             As with any online purchase experience, there are
-                                             terms and conditions that govern our Refund Policy.
-                                             When you buy a training course from us, you agree to
-                                             our Privacy Policy, Terms of Use and Refund Policy.
-                                        </p>
-
-                                        <p>
-                                             Thank you for buying our courses. We ensure that our
-                                             users have a rewarding experience while they discover,
-                                             assess and purchase our courses. Whether it is an
-                                             instructor-led or self-paced training.
-                                        </p>
-
-                                   </div>
-
-                                   <h2 className="mt-12 font-urbanist text-[28px] font-medium text-neutral-900">
-                                        For Self Placed Learning:
-                                   </h2>
-
-                                   <div className="mt-5 space-y-6 text-neutral-600 text-[16px] leading-[1.9]">
-                                        <p>
-                                             Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                             Eaque molestiae sint tempora laboriosam, nemo velit
-                                             voluptas aspernatur praesentium architecto.
-                                        </p>
-
-                                        <p>
-                                             Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                             Perspiciatis deleniti voluptatem pariatur quaerat
-                                             molestiae praesentium.
-                                        </p>
-                                   </div>
-
+                                   <div 
+                                        ref={contentRef}
+                                        className="blog-content"
+                                        dangerouslySetInnerHTML={{ __html: htmlContent }}
+                                   />
                               </div>
 
                          </div>

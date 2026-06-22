@@ -15,7 +15,7 @@ export const getContact = async (req) => {
                          image: "",
                          inquiries: {
                               title: "Inquiries",
-                              email: "info@kreeya.com",
+                              email: "info@weekend.com",
                               phone: "+91 99999 99999"
                          },
                          location: {

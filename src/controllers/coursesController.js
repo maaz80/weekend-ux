@@ -141,3 +141,27 @@ export const updateCourses = async (req) => {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }
 };
+
+// GET SINGLE COURSE BY SLUG / ID (from the list of courses)
+export const getCourseBySlug = async (req, { params }) => {
+     try {
+          await connectDB();
+          const { idOrSlug } = await params;
+          const coursesPage = await Courses.findOne();
+          
+          if (!coursesPage) {
+               return NextResponse.json({ error: "No courses configured" }, { status: 404 });
+          }
+
+          // Search in course array by slug or _id
+          const courseItem = coursesPage.course.find(c => c.slug === idOrSlug || (c._id && c._id.toString() === idOrSlug));
+
+          if (!courseItem) {
+               return NextResponse.json({ error: "Course not found" }, { status: 404 });
+          }
+
+          return NextResponse.json(courseItem);
+     } catch (error) {
+          return NextResponse.json({ error: error.message }, { status: 500 });
+     }
+};

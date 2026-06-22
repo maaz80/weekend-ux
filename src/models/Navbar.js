@@ -17,6 +17,6 @@ const navbarSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
-const Navbar = mongoose.model("Navbar", navbarSchema);
+const Navbar = mongoose.models.Navbar || mongoose.model("Navbar", navbarSchema);
 
 export default Navbar;

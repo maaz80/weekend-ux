@@ -3,6 +3,7 @@
 import { useState } from "react";
 import ProgramsSidebar from './ProgramSidebar';
 import CourseCard from './CourseCard';
+import { useHomeData } from "@/context/HomeDataContext";
 
 const staticCourses = [
      {
@@ -140,12 +141,54 @@ const staticCourses = [
 ];
 
 const OurPrograms = ({ data }) => {
+     const { homeData, coursesData } = useHomeData();
      const [activeMobileIndex, setActiveMobileIndex] = useState(null);
-     const courses = staticCourses;
-     const categories = [...new Set(courses.map(c => c.category))];
-     const [activeCategory, setActiveCategory] = useState('Generative AI');
+     const [activeCategory, setActiveCategory] = useState(null);
 
-     const filteredCourses = courses.filter(c => c.category === activeCategory);
+     const rawCourses = coursesData?.course;
+     const hasValidCourses = Array.isArray(rawCourses) && rawCourses.length > 0 && rawCourses.some(c => c.title && c.title.trim());
+
+     const courses = hasValidCourses
+          ? rawCourses.filter(c => c.title && c.title.trim()).map((c, idx) => {
+               return {
+                    _id: c._id || String(idx + 1),
+                    slug: c.slug && c.slug.trim() ? c.slug : `course-${idx + 1}`,
+                    title: c.title.trim(),
+                    category: c.category && c.category.trim() ? c.category : "UI & UX Design",
+                    description: c.overview && c.overview.trim() ? c.overview.trim() : (c.seodescription && c.seodescription.trim() ? c.seodescription.trim() : "AWS provides services for every domain such as computing, data storage, data analytics, robotics, and"),
+                    image: c.image && c.image.trim() ? c.image.trim() : "/images/weekend-ux-program-image-template.webp",
+                    alt: c.alt && c.alt.trim() ? c.alt.trim() : c.title.trim(),
+                    deadline: c.startdate && c.startdate.trim() ? c.startdate.trim() : "10th Dec, 26",
+                    courseLength: c.courselength && c.courselength.trim() ? c.courselength.trim() : "6 Months"
+               };
+          })
+          : staticCourses;
+
+     const categories = [...new Set(courses.map(c => c.category))];
+     const currentCategory = activeCategory || categories[0] || "Generative AI";
+     const filteredCourses = courses.filter(c => c.category === currentCategory);
+
+     const courseConf = homeData?.course;
+
+     const title = (courseConf?.title && courseConf.title.trim())
+          ? courseConf.title
+          : "Our Courses";
+
+     const startheading = (courseConf?.startheading && courseConf.startheading.trim())
+          ? courseConf.startheading
+          : "Every";
+
+     const midheading = (courseConf?.midheading && courseConf.midheading.trim())
+          ? courseConf.midheading
+          : "Course";
+
+     const endheading = (courseConf?.endheading && courseConf.endheading.trim())
+          ? courseConf.endheading
+          : " We Teach.\nPick Yours";
+
+     const description = (courseConf?.description && courseConf.description.trim())
+          ? courseConf.description
+          : "browse full syllabuses, pick your level, and choose between in-person batches or recordings. Content only unlocks after you enroll — no online access.";
 
      return (
           <section
@@ -158,15 +201,25 @@ const OurPrograms = ({ data }) => {
                     {/* Heading Area */}
                     <div className="text-center mb-16">
                          <p className="text-[12px] font-semibold tracking-[0.25em] text-yellow-600 uppercase font-inter mb-3">
-                              Our Courses
+                              {title}
                          </p>
                          <h2 className="font-playfair text-[38px] md:text-[56px] leading-tight text-zinc-900 font-medium">
-                              Every <span className="italic text-yellow font-normal">Course</span> We Teach.
-                              <br />
-                              Pick Yours
+                              {startheading}{" "}
+                              {midheading && <span className="italic text-yellow font-normal">{midheading}</span>}
+                              {endheading && (
+                                   <>
+                                        {endheading.startsWith(" ") ? "" : " "}
+                                        {endheading.split('\n').map((line, index) => (
+                                             <span key={index}>
+                                                  {index > 0 && <br />}
+                                                  {line}
+                                             </span>
+                                        ))}
+                                   </>
+                              )}
                          </h2>
                          <p className="mt-4 mx-auto max-w-155 text-sm md:text-base text-zinc-500 leading-relaxed font-urbanist">
-                              browse full syllabuses, pick your level, and choose between in-person batches or recordings. Content only unlocks after you enroll — no online access.
+                              {description}
                          </p>
                     </div>
 
@@ -178,7 +231,7 @@ const OurPrograms = ({ data }) => {
                                    <ProgramsSidebar
                                         key={cat}
                                         category={cat}
-                                        isActive={activeCategory === cat}
+                                        isActive={currentCategory === cat}
                                         onClick={() => setActiveCategory(cat)}
                                    />
                               ))}

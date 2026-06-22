@@ -7,6 +7,7 @@ import CourseCard from "@/components/Courses/CourseCard";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import FAQ from "@/components/FAQ";
 import {  FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { useHomeData } from "@/context/HomeDataContext";
 
 const staticCourses = [
      {
@@ -144,12 +145,24 @@ const staticCourses = [
 ];
 
 export default function CoursesPage() {
+     const { coursesData } = useHomeData();
+
      const [searchQuery, setSearchQuery] = useState("");
      const [activeCategory, setActiveCategory] = useState("All");
      const [currentPage, setCurrentPage] = useState(1);
      const coursesPerPage = 6;
 
-     const categories = ["All", ...new Set(staticCourses.map(c => c.category))];
+     // Use dynamic courses from database configuration, fallback to static mockup data
+     const coursesList = coursesData?.course && coursesData.course.length > 0
+          ? coursesData.course
+          : staticCourses;
+
+     const hero = coursesData?.hero?.[0] || {};
+     const heroStart = hero.startheading && hero.startheading.trim() ? hero.startheading.trim() : "Explore Our";
+     const heroEnd = hero.endheading && hero.endheading.trim() ? hero.endheading.trim() : "Courses";
+
+     // Dynamically construct unique categories list
+     const categories = ["All", ...new Set(coursesList.map(c => c.category).filter(Boolean))];
 
      const handleCategoryChange = (category) => {
           setActiveCategory(category);
@@ -161,9 +174,10 @@ export default function CoursesPage() {
           setCurrentPage(1);
      };
 
-     const filteredCourses = staticCourses.filter(course => {
-          const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-               course.description.toLowerCase().includes(searchQuery.toLowerCase());
+     const filteredCourses = coursesList.filter(course => {
+          const matchesSearch = 
+               (course.title || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+               (course.overview || course.description || course.seodescription || "").toLowerCase().includes(searchQuery.toLowerCase());
           const matchesCategory = activeCategory === "All" || course.category === activeCategory;
           return matchesSearch && matchesCategory;
      });
@@ -215,7 +229,9 @@ export default function CoursesPage() {
                          className="object-cover object-center opacity-60 z-0"
                     />
                     {/* Content */}
-                    <h1 className="text-[28px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">Explore Our <span className="text-official italic">Courses</span></h1>
+                    <h1 className="text-[28px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">
+                         {heroStart} <span className="text-official italic">{heroEnd}</span>
+                    </h1>
                </section>
 
                {/* Courses Section with warm light background */}
@@ -323,7 +339,7 @@ export default function CoursesPage() {
                </section>
 
                {/* Common Shared Components (RelatedBlogs, FAQ, Footer) */}
-               <RelatedBlogs />
+               <RelatedBlogs data={coursesData?.relatedBlogs} />
                <FAQ paddings="py-20" />
                
           </div>

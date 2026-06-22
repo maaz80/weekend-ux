@@ -5,21 +5,33 @@ import { createContext, useContext, useState, useEffect } from "react";
 const HomeDataContext = createContext({
      homeData: null,
      faqData: null,
+     coursesData: null,
+     navbarData: null,
+     footerGlobalData: null,
+     footerColumnsData: null,
      loading: true,
 });
 
 export function HomeDataProvider({ children }) {
      const [homeData, setHomeData] = useState(null);
      const [faqData, setFaqData] = useState(null);
+     const [coursesData, setCoursesData] = useState(null);
+     const [navbarData, setNavbarData] = useState(null);
+     const [footerGlobalData, setFooterGlobalData] = useState(null);
+     const [footerColumnsData, setFooterColumnsData] = useState(null);
      const [loading, setLoading] = useState(true);
 
      useEffect(() => {
           let isMounted = true;
           async function fetchAllData() {
                try {
-                    const [homeRes, faqRes] = await Promise.all([
+                    const [homeRes, faqRes, coursesRes, navbarRes, footerGlobalRes, footerColumnsRes] = await Promise.all([
                          fetch("/api/home"),
-                         fetch("/api/pages/home/faq")
+                         fetch("/api/pages/home/faq"),
+                         fetch("/api/courses"),
+                         fetch("/api/navbar"),
+                         fetch("/api/footer-columns/global"),
+                         fetch("/api/footer-columns")
                     ]);
 
                     if (homeRes.ok) {
@@ -35,8 +47,36 @@ export function HomeDataProvider({ children }) {
                     } else {
                          console.warn("Failed to fetch FAQ data, status code:", faqRes.status);
                     }
+
+                    if (coursesRes.ok) {
+                         const cData = await coursesRes.json();
+                         if (isMounted) setCoursesData(cData);
+                    } else {
+                         console.warn("Failed to fetch courses data, status code:", coursesRes.status);
+                    }
+
+                    if (navbarRes.ok) {
+                         const nData = await navbarRes.json();
+                         if (isMounted) setNavbarData(nData);
+                    } else {
+                         console.warn("Failed to fetch navbar settings, status code:", navbarRes.status);
+                    }
+
+                    if (footerGlobalRes.ok) {
+                         const fgData = await footerGlobalRes.json();
+                         if (isMounted) setFooterGlobalData(fgData);
+                    } else {
+                         console.warn("Failed to fetch footer global settings, status code:", footerGlobalRes.status);
+                    }
+
+                    if (footerColumnsRes.ok) {
+                         const fcData = await footerColumnsRes.json();
+                         if (isMounted) setFooterColumnsData(fcData);
+                    } else {
+                         console.warn("Failed to fetch footer columns, status code:", footerColumnsRes.status);
+                    }
                } catch (error) {
-                    console.error("Error fetching homepage config/FAQ from API:", error);
+                    console.error("Error fetching homepage config/FAQ/Courses/Navbar/Footer from API:", error);
                } finally {
                     if (isMounted) {
                          setLoading(false);
@@ -52,7 +92,7 @@ export function HomeDataProvider({ children }) {
      }, []);
 
      return (
-          <HomeDataContext.Provider value={{ homeData, faqData, loading }}>
+          <HomeDataContext.Provider value={{ homeData, faqData, coursesData, navbarData, footerGlobalData, footerColumnsData, loading }}>
                {children}
           </HomeDataContext.Provider>
      );

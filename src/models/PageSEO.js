@@ -20,5 +20,5 @@ const pageSEOSchema = new mongoose.Schema({
      }
 }, { timestamps: true });
 
-const PageSEO = mongoose.model("PageSEO", pageSEOSchema);
+const PageSEO = mongoose.models.PageSEO || mongoose.model("PageSEO", pageSEOSchema);
 export default PageSEO;

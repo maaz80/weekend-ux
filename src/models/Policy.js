@@ -13,6 +13,6 @@ const policySchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
-const Policy = mongoose.model("Policy", policySchema);
+const Policy = mongoose.models.Policy || mongoose.model("Policy", policySchema);
 
 export default Policy;

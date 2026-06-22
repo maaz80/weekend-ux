@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 
-const locationSchema = new mongoose.Schema({
+const locationItemSchema = new mongoose.Schema({
      hero: [{
           title: String,
-          seotitle:String,
-          seodescription:String,
-          slug:String,
+          seotitle: String,
+          seodescription: String,
+          slug: String,
           heading: String,
           buttonName: String
      }],
@@ -14,7 +14,6 @@ const locationSchema = new mongoose.Schema({
           imageurl: String,
           alt: String,
      },
-  
      relatedBlogs: {
           title: String,
           startheading: String,
@@ -22,9 +21,11 @@ const locationSchema = new mongoose.Schema({
           endheading: String,
           description: String
      }
+});
 
+const locationSchema = new mongoose.Schema({
+     title: String,
+     items: [locationItemSchema]
 }, { timestamps: true });
 
-const Location = mongoose.models.Location || mongoose.model("Location", locationSchema);
-
-export default Location;
+export default mongoose.models.Location || mongoose.model("Location", locationSchema);

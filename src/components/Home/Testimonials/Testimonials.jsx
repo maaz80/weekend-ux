@@ -41,7 +41,10 @@ const DEFAULT_TESTIMONIALS = [
      }
 ];
 
+import { useHomeData } from "@/context/HomeDataContext";
+
 const Testimonials = ({ data }) => {
+     const { homeData } = useHomeData();
      const sliderRef = useRef();
      const [currentIndex, setCurrentIndex] = useState(0);
      const [maxIndex, setMaxIndex] = useState(0);
@@ -50,6 +53,23 @@ const Testimonials = ({ data }) => {
 
      const pathnames = pathname.split("/").filter((x) => x);
      const isLocation = pathname.startsWith("/location");
+
+     const testimonialsConf = homeData?.testimonials;
+     const startTitle = (testimonialsConf?.startheading && testimonialsConf.startheading.trim())
+          ? testimonialsConf.startheading
+          : (data?.startTitle || "What Our");
+
+     const midTitle = (testimonialsConf?.midheading && testimonialsConf.midheading.trim())
+          ? testimonialsConf.midheading
+          : (data?.midTitle || "Students");
+
+     const endTitle = (testimonialsConf?.endheading && testimonialsConf.endheading.trim())
+          ? testimonialsConf.endheading
+          : (data?.endTitle || "Say About Us");
+
+     const testimonialsDescription = (testimonialsConf?.description && testimonialsConf.description.trim())
+          ? testimonialsConf.description
+          : (data?.description || "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs.");
      // ✅ Card width
      const cardWidthRef = useRef(0);
 
@@ -166,7 +186,7 @@ const Testimonials = ({ data }) => {
      }, [maxIndex]);
 
      return (
-          <div className='relative min-h-100 md:min-h-84.25 mx-auto w-full px-4 sm:px-6 lg:px-10 pt-18 lg:pt-16'>
+          <div className='relative min-h-100 md:min-h-84.25 mx-auto w-full px-4 sm:px-6 lg:px-10 pt-18 lg:pt-16 overflow-hidden'>
                <Image src={Map} alt="Testimonial Map Bg" fetchPriority='high' decoding="async" className='absolute top-0 inset-0 w-full h-screen md:h-[110vh] z-10 object-cover' />
 
                {/* Heading */}
@@ -176,18 +196,18 @@ const Testimonials = ({ data }) => {
                     </h2>
                ) : (
                     <h2 className="text-[38px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 font-medium text-center w-[99%] md:w-[60%] mx-auto z-20 relative font-playfair text-black">
-                         {data?.startTitle || "What Our"}{" "}
+                         {startTitle}{" "}
                          <span className="relative inline-block text-official italic">
-                              {data?.midTitle || "Students"}
+                              {midTitle}
                          
                          </span>{' '}
-                         {data?.endTitle || "Say About Us"}
+                         {endTitle}
                     </h2>
                )
                }
                {/* Description */}
                <p className={`text-[14px] 2xl:text-[16px] text-black/60 leading-6 md:leading-7 text-center ${isLocation ? 'max-w-3xl' : 'max-w-4xl'}  mx-auto mt-6 z-20 relative`}>
-                    {isLocation ? "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs." : (data?.description || "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs.")}
+                    {isLocation ? "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs." : testimonialsDescription}
                </p>
 
 

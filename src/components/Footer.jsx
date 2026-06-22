@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Button from './ui/Button';
+import { useHomeData } from "@/context/HomeDataContext";
 import { CiYoutube } from "react-icons/ci";
 import { RiTwitterXLine, RiTwitterXFill } from "react-icons/ri";
 import { 
@@ -92,7 +93,25 @@ const DEFAULT_LOCATIONS = [
 ];
 
 export default function Footer() {
+     const { footerGlobalData, footerColumnsData } = useHomeData();
      const [locations, setLocations] = useState(DEFAULT_LOCATIONS);
+
+     useEffect(() => {
+          async function fetchLocations() {
+               try {
+                    const res = await fetch("/api/locations");
+                    if (res.ok) {
+                         const data = await res.json();
+                         if (Array.isArray(data) && data.length > 0) {
+                              setLocations(data);
+                         }
+                    }
+               } catch (error) {
+                    console.error("Failed to fetch locations for footer:", error);
+               }
+          }
+          fetchLocations();
+     }, []);
      const defaultColumns = [
           {
                title: "Company",
@@ -128,56 +147,29 @@ export default function Footer() {
                ]
           }
      ];
-     const [footerColumns, setFooterColumns] = useState(defaultColumns);
-     const [settings, setSettings] = useState(DEFAULT_SETTINGS);
 
-     // useEffect(() => {
-     //      const fetchLocations = async () => {
-     //           const data = await getLocations();
-     //           setLocations(data);
-     //      };
+     const settings = footerGlobalData || DEFAULT_SETTINGS;
+     const footerColumns = (footerColumnsData && footerColumnsData.length > 0)
+          ? footerColumnsData
+          : defaultColumns;
 
-     //      const fetchFooterColumns = async () => {
-     //           try {
-     //                const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/footer-columns`);
-     //                if (res.ok) {
-     //                     const data = await res.json();
-     //                     if (data && data.length > 0) {
-     //                          setFooterColumns(data);
-     //                     }
-     //                }
-     //           } catch (err) {
-     //                console.error("Failed to fetch footer columns", err);
-     //           }
-     //      };
+     const cardTitle = settings?.card?.title && settings.card.title.trim()
+          ? settings.card.title.trim()
+          : "Start Your Growth Journey Today!";
 
-     //      const fetchFooterSettings = async () => {
-     //           try {
-     //                const res = await fetch(`${import.meta.env.VITE_API_URL || "http://localhost:5000/api"}/footer-columns/global`);
-     //                if (res.ok) {
-     //                     const data = await res.json();
-     //                     setSettings(data);
-     //                }
-     //           } catch (err) {
-     //                console.error("Failed to fetch global footer settings", err);
-     //           }
-     //      };
-
-     //      fetchLocations();
-     //      fetchFooterColumns();
-     //      fetchFooterSettings();
-     // }, []);
+     const cardButtonName = settings?.card?.buttonName && settings.card.buttonName.trim()
+          ? settings.card.buttonName.trim()
+          : "Explore Programs";
 
      return (
           <footer className="bg-[#1C1C1C] text-white w-full -mt-10 relative z-1000 pb-16">
                <div className="absolute -top-22.5 md:-top-45 left-0 right-0 mx-auto w-[90%] md:w-[80%] max-w-[80%] h-45 md:h-90 z-20 flex flex-col items-start justify-center px-2 md:px-10 lg:px-30">
                     <Image src='/images/weekend-ux-footer-decorative-bg.webp' alt="weekend-ux-footer-decorative-bg" fill className="bg-center object-contain " />
                     <div className="font-playfair text-[17px] md:text-[28px] lg:text-[56px] text-neutral-900 max-w-150 relative z-50 leading-9 md:leading-12 lg:leading-16" >
-
-                         Start Your Growth Journey Today!
+                         {cardTitle}
                     </div>
                     <Button variant="dark" className="mt-0 md:mt-4 lg:mt-10 hover:scale-105 relative z-50">
-                         Explore Programs
+                         {cardButtonName}
                     </Button>
                </div>
                <div className="mx-auto max-w-330 px-6 md:px-9 2xl:px-10 pt-32 md:pt-44 2xl:pt-56 pb-5">
@@ -344,25 +336,30 @@ function FooterTextBlock({ title, slug, items }) {
 
                <div className="flex gap-2 flex-wrap">
 
-                    {items?.map((item, index) => (
-                         <div
-                              key={item.slug || item._id}
-                              className="flex items-center gap-2"
-                         >
-
-                              <Link
-                                   href={item?.hero?.title ? `/${item.slug || item._id}` : "#"}
-                                   className="text-[13px] text-white/45 leading-8 hover:text-white transition-colors"
+                    {items?.map((item, index) => {
+                         const itemSlug = item.hero?.[0]?.slug || item.slug || "";
+                         const itemTitle = item.hero?.[0]?.title || item.title || "";
+                         
+                         return (
+                              <div
+                                   key={itemSlug || item._id}
+                                   className="flex items-center gap-2"
                               >
-                                   {item.title}
-                              </Link>
 
-                              {index !== items.length - 1 && (
-                                   <span className="text-white/45">|</span>
-                              )}
+                                   <Link
+                                        href={itemSlug ? `/${itemSlug}` : "#"}
+                                        className="text-[13px] text-white/45 leading-8 hover:text-white transition-colors"
+                                   >
+                                        {itemTitle}
+                                   </Link>
 
-                         </div>
-                    ))}
+                                   {index !== items.length - 1 && (
+                                        <span className="text-white/45">|</span>
+                                   )}
+
+                              </div>
+                         );
+                    })}
 
                </div>
 

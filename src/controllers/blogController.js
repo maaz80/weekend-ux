@@ -177,6 +177,9 @@ export const createBlog = async (req) => {
                slug = `${baseSlug}-${count++}`;
           }
 
+          const featuredVal = formData.get("featured");
+          const featured = featuredVal === "true" || featuredVal === true;
+
           const newBlogItem = {
                image: imageUrl,
                alt: alt || title,
@@ -186,7 +189,8 @@ export const createBlog = async (req) => {
                slug,
                date: date || new Date().toLocaleDateString(),
                read: read || "5 min read",
-               content: content
+               content: content,
+               featured: featured
           };
 
           blogPage.blogs.push(newBlogItem);
@@ -239,6 +243,11 @@ export const updateBlog = async (req, { params }) => {
           if (seodescription !== null && seodescription !== undefined) existingBlog.seodescription = seodescription;
           if (date) existingBlog.date = date;
           if (read) existingBlog.read = read;
+
+          const featuredVal = formData.get("featured");
+          if (featuredVal !== null && featuredVal !== undefined) {
+               existingBlog.featured = featuredVal === "true" || featuredVal === true;
+          }
 
           // Handle slug update if custom slug or title changes
           const customSlug = formData.get("slug");

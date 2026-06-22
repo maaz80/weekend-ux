@@ -13,6 +13,6 @@ const disclaimerSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
-const Disclaimer = mongoose.model("Disclaimer", disclaimerSchema);
+const Disclaimer = mongoose.models.Disclaimer || mongoose.model("Disclaimer", disclaimerSchema);
 
 export default Disclaimer;
