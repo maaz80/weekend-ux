@@ -151,14 +151,14 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
      };
 
      return (
-          <div className={`fixed open-sans inset-0 z-[999999] flex items-center justify-center bg-black/50 backdrop-blur-sm ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-full opacity-0 pointer-events-none'} transition-all duration-500 ease-in-out`} role="dialog" aria-labelledby="auth-modal-title" aria-modal="true">
+          <div className={`fixed open-sans inset-0 z-999999 flex items-center justify-center bg-black/50 backdrop-blur-sm ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-full opacity-0 pointer-events-none'} transition-all duration-500 ease-in-out`} role="dialog" aria-labelledby="auth-modal-title" aria-modal="true">
                <h2 id="auth-modal-title" className="sr-only hidden">
                     {authMode === "signup" ? "Sign Up" : authMode === "forgot" ? "Forgot Password" : authMode === "reset" ? "Reset Password" : "Sign In"}
                </h2>
 
                {/* Modal container */}
                <div className="w-[90%] max-w-4xl bg-white rounded-2xl shadow-2xl relative overflow-hidden p-6 md:p-10 text-neutral-900">
-                    <div className="flex flex-col md:flex-row h-auto md:h-[500px]">
+                    <div className="flex flex-col md:flex-row h-auto md:h-125">
 
                          {/* LEFT PANEL - ILLUSTRATION */}
                          <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8 rounded-xl md:rounded-none">

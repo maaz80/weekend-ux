@@ -196,7 +196,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                        }
                                                   `}} />
                                                   <div 
-                                                       className="absolute top-full mt-2 left-0 w-70 bg-zinc-950/95 backdrop-blur-md border border-zinc-800 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-y-auto max-h-64 z-[999999] divide-y divide-zinc-900 search-dropdown-scroll"
+                                                       className="absolute top-full mt-2 left-0 w-70 bg-zinc-950/95 backdrop-blur-md border border-zinc-800 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-y-auto max-h-64 z-999999 divide-y divide-zinc-900 search-dropdown-scroll"
                                                        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                                                   >
                                                        {searchResults.length > 0 ? (
@@ -304,7 +304,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              <FiChevronDown className={`text-base transition-transform duration-300 ${isUserDropdownOpen ? "rotate-180" : ""}`} />
                                         </button>
                                         {isUserDropdownOpen && (
-                                             <div className="absolute right-0 mt-2 w-48 rounded-xl bg-zinc-900 shadow-2xl p-2 border border-zinc-800 z-[99999] flex flex-col">
+                                             <div className="absolute right-0 mt-2 w-48 rounded-xl bg-zinc-900 shadow-2xl p-2 border border-zinc-800 z-99999 flex flex-col">
                                                   <button 
                                                        onClick={async () => {
                                                             await logoutUser();
@@ -352,7 +352,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              }
                                         `}} />
                                         <div 
-                                             className="absolute top-full left-4 right-4 bg-zinc-950/95 backdrop-blur-md border border-zinc-800 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-y-auto max-h-64 z-[999999] divide-y divide-zinc-900 search-dropdown-scroll"
+                                             className="absolute top-full left-4 right-4 bg-zinc-950/95 backdrop-blur-md border border-zinc-800 rounded-xl shadow-[0_10px_40px_rgba(0,0,0,0.5)] overflow-y-auto max-h-64 z-999999 divide-y divide-zinc-900 search-dropdown-scroll"
                                              style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                                         >
                                              {searchResults.length > 0 ? (

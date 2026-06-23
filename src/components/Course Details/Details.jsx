@@ -300,7 +300,7 @@ export default function Details({ data }) {
 
                {/* LOCK MODAL */}
                {showLockModal && (
-                    <div className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+                    <div className="fixed inset-0 z-999999 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
                          <div className="w-full max-w-md bg-white rounded-2xl p-8 shadow-2xl text-center relative border border-zinc-100 text-neutral-900">
                               
                               <button 
@@ -343,7 +343,7 @@ export default function Details({ data }) {
 
                {/* VIDEO LIGHTBOX PLAYER */}
                {activeVideo && (
-                    <div className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
+                    <div className="fixed inset-0 z-999999 flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
                          <div className="w-full max-w-5xl bg-zinc-950 rounded-2xl overflow-hidden shadow-2xl relative text-white">
                               
                               <div className="px-6 py-4 bg-zinc-900 border-b border-zinc-800 flex justify-between items-center text-white">
