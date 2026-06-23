@@ -30,7 +30,7 @@ export const generateAndSendOTP = async (phone, email) => {
                subject: "Your OTP for Weekend UX Booking",
                html: `
                     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
-                         <h2 style="color: #f97316; text-align: center;">Weekend UX Booking Verification</h2>
+                         <h2 style="color: #FFB500; text-align: center;">Weekend UX Booking Verification</h2>
                          <p style="font-size: 16px; color: #333;">Hello,</p>
                          <p style="font-size: 16px; color: #333;">Your OTP for booking verification is:</p>
                          <div style="background-color: #f7f7f7; padding: 15px; text-align: center; font-size: 32px; font-weight: bold; letter-spacing: 5px; border-radius: 8px; margin: 20px 0;">
