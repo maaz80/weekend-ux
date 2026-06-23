@@ -8,7 +8,12 @@ const QuickAccessBar = () => {
                <div className="mx-auto flex h-14 max-w-4xl">
 
                     {/* Request Callback */}
-                    <button className="flex flex-1 items-center justify-center gap-2 text-[13px] md:text-sm font-medium text-neutral-900 transition hover:bg-zinc-50 cursor-pointer">
+                    <a
+                         href="https://wa.me/919599272764?text=Hi! I would like to request a callback."
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="flex flex-1 items-center justify-center gap-2 text-[13px] md:text-sm font-medium text-neutral-900 transition hover:bg-zinc-50"
+                    >
                          <FiPhoneCall className="text-base shrink-0" />
                          <span className="hidden sm:inline">
                               Request Callback
@@ -16,7 +21,7 @@ const QuickAccessBar = () => {
                          <span className="sm:hidden">
                               Callback
                          </span>
-                    </button>
+                    </a>
 
                     {/* Call */}
                     <a

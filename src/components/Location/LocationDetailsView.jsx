@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 import { useHomeData } from "@/context/HomeDataContext";
 import HomeFeature from "@/components/Home/Features/Feature";
 import HomeWhyChoose from "@/components/Home/Details/Details";
@@ -60,10 +61,11 @@ export default function LocationDetailsView({ data }) {
                {/* 3. CONTENT SECTION (DYNAMIC EDITOR CONTENT + IMAGE WITH FLOAT WRAPPING) */}
                <div className="custom-width py-15 text-neutral-900 font-urbanist min-h-60 overflow-hidden">
                     {data?.image?.imageurl && (
-                         <img 
+                         <OptimizedImage 
                               src={data.image.imageurl} 
                               alt={data.image.alt || data.title || "Location view"} 
                               className="w-full md:w-[50%] h-60 md:h-90 object-cover rounded-xl md:float-right md:ml-8 md:mb-6 mb-5"
+                              sizes="(max-width: 768px) 100vw, 50vw"
                          />
                     )}
                     <div 
@@ -85,7 +87,14 @@ export default function LocationDetailsView({ data }) {
                <RelatedBlogs />
 
                {/* 8. FAQ (FROM HOME DATA) */}
-               <FAQ faqData={faqData} />
+               <FAQ faqData={(data?.faq?.items && data.faq.items.length > 0) ? {
+                    faq: data.faq.items,
+                    title: data.faq.title && data.faq.title.trim() ? data.faq.title.trim() : "FAQ",
+                    startheading: data.faq.startheading && data.faq.startheading.trim() ? data.faq.startheading.trim() : "Location",
+                    midheading: data.faq.midheading && data.faq.midheading.trim() ? data.faq.midheading.trim() : "FAQ",
+                    endheading: data.faq.endheading && data.faq.endheading.trim() ? data.faq.endheading.trim() : "",
+                    description: data.faq.description && data.faq.description.trim() ? data.faq.description.trim() : "",
+               } : faqData} />
           </main>
      );
 }

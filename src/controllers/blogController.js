@@ -150,6 +150,10 @@ export const createBlog = async (req) => {
           // Content is sent as serialized JSON array of { data: String }
           const contentStr = formData.get("content");
           const content = contentStr ? JSON.parse(contentStr) : [];
+
+          // FAQ is sent as serialized JSON object containing meta and items
+          const faqStr = formData.get("faq");
+          const faq = faqStr ? JSON.parse(faqStr) : { title: "", startheading: "", midheading: "", endheading: "", description: "", items: [] };
           
           const imageFile = formData.get("image");
           let imageUrl = "";
@@ -190,7 +194,8 @@ export const createBlog = async (req) => {
                date: date || new Date().toLocaleDateString(),
                read: read || "5 min read",
                content: content,
-               featured: featured
+               featured: featured,
+               faq: faq
           };
 
           blogPage.blogs.push(newBlogItem);
@@ -235,6 +240,11 @@ export const updateBlog = async (req, { params }) => {
           const contentStr = formData.get("content");
           if (contentStr) {
                existingBlog.content = JSON.parse(contentStr);
+          }
+
+          const faqStr = formData.get("faq");
+          if (faqStr) {
+               existingBlog.faq = JSON.parse(faqStr);
           }
           
           if (title) existingBlog.title = title;

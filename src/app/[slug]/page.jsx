@@ -1,72 +1,106 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import Image from "next/image";
 import BlogDetailsView from "./Details";
 import CourseDetailsView from "@/components/Course Details/Details";
 import LocationDetailsView from "@/components/Location/LocationDetailsView";
 import FAQ from "@/components/FAQ";
 import RelatedBlogs from "@/components/RelatedBlogs";
+import Image from "next/image";
+import Blog from "@/models/Blog";
+import Courses from "@/models/Courses";
+import Location from "@/models/Location";
+import connectDB from "@/config/db";
 
-export default function DynamicSlugPage() {
-     const params = useParams();
-     const slug = params?.slug;
-
-     const [data, setData] = useState(null);
-     const [dataType, setDataType] = useState(null); // "blog" | "course" | "location" | "not_found"
-     const [loading, setLoading] = useState(true);
-
-     useEffect(() => {
-          if (!slug) return;
+async function getSlugData(slug) {
+     try {
+          await connectDB();
           
-          async function fetchDetails() {
-               try {
-                    // Fetch all in parallel to reduce loading latency (optimized Approach A dispatcher)
-                    const [blogRes, courseRes, locationRes] = await Promise.all([
-                         fetch(`/api/blogs/${slug}`),
-                         fetch(`/api/courses/${slug}`),
-                         fetch(`/api/location-items/${slug}`)
-                    ]);
-
-                    if (blogRes.ok) {
-                         const blogData = await blogRes.json();
-                         setDataType("blog");
-                         setData(blogData);
-                    } else if (courseRes.ok) {
-                         const courseData = await courseRes.json();
-                         setDataType("course");
-                         setData(courseData);
-                    } else if (locationRes.ok) {
-                         const locationData = await locationRes.json();
-                         setDataType("location");
-                         setData(locationData);
-                    } else {
-                         setDataType("not_found");
-                     }
-               } catch (error) {
-                    console.error("Failed to fetch dynamic content:", error);
-                    setDataType("not_found");
-               } finally {
-                    setLoading(false);
-               }
+          // 1. Check blog
+          const blogPage = await Blog.findOne();
+          if (blogPage) {
+               const blog = blogPage.blogs.find(b => b.slug === slug);
+               if (blog) return { type: "blog", data: JSON.parse(JSON.stringify(blog)) };
           }
+          
+          // 2. Check course
+          const coursesPage = await Courses.findOne();
+          if (coursesPage) {
+               const course = coursesPage.course.find(c => c.slug === slug);
+               if (course) return { type: "course", data: JSON.parse(JSON.stringify(course)) };
+          }
+          
+          // 3. Check location
+          const locationDoc = await Location.findOne({ "items.hero.slug": slug });
+          if (locationDoc) {
+               const item = locationDoc.items.find(it => it.hero?.[0]?.slug === slug);
+               if (item) return { type: "location", data: JSON.parse(JSON.stringify(item)) };
+          }
+     } catch (error) {
+          console.error("Error in getSlugData fetching database:", error);
+     }
+     
+     return null;
+}
 
-          fetchDetails();
-     }, [slug]);
-
-     if (loading) {
-          return (
-               <div className="min-h-screen bg-black text-white flex items-center justify-center font-urbanist">
-                    <div className="text-center animate-pulse">
-                         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-official mx-auto mb-4"></div>
-                         <p className="text-zinc-400">Loading details...</p>
-                    </div>
-               </div>
-          );
+export async function generateMetadata({ params }) {
+     const { slug } = await params;
+     const result = await getSlugData(slug);
+     if (!result) {
+          return {
+               title: "Not Found",
+          };
      }
 
-     if (dataType === "not_found" || !data) {
+     const { type, data } = result;
+     let title = "";
+     let description = "";
+     let imageUrl = "";
+
+     if (type === "blog") {
+          title = data.seotitle || data.title || "Blog";
+          description = data.seodescription || data.title;
+          imageUrl = data.image || "";
+     } else if (type === "course") {
+          title = data.seotitle || data.title || "Course";
+          description = data.seodescription || data.overview;
+          imageUrl = data.image || "";
+     } else if (type === "location") {
+          title = data.hero?.[0]?.seotitle || data.title || "Location";
+          description = data.hero?.[0]?.seodescription || data.title;
+          imageUrl = data.image?.imageurl || "";
+     }
+
+     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://weekendux.co";
+     const pageUrl = `${baseUrl}/${slug}`;
+     const finalImageUrl = imageUrl || `${baseUrl}/images/weekend-ux-blogs-hero-bg.webp`;
+
+     return {
+          title,
+          description,
+          openGraph: {
+               title,
+               description,
+               url: pageUrl,
+               type: "article",
+               images: [
+                    {
+                         url: finalImageUrl,
+                         alt: title,
+                    }
+               ],
+          },
+          twitter: {
+               card: "summary_large_image",
+               title,
+               description,
+               images: [finalImageUrl],
+          },
+     };
+}
+
+export default async function DynamicSlugPage({ params }) {
+     const { slug } = await params;
+     const result = await getSlugData(slug);
+
+     if (!result) {
           return (
                <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center font-urbanist px-4 text-center">
                     <h1 className="text-6xl font-bold font-playfair text-official mb-4">404</h1>
@@ -81,11 +115,13 @@ export default function DynamicSlugPage() {
           );
      }
 
-     if (dataType === "location") {
+     const { type, data } = result;
+
+     if (type === "location") {
           return <LocationDetailsView data={data} />;
      }
 
-     if (dataType === "course") {
+     if (type === "course") {
           const heroTitle = data?.title && data.title.trim()
                ? data.title.trim()
                : "Advance Certificate in AI for UI UX";
@@ -108,7 +144,14 @@ export default function DynamicSlugPage() {
                     </section>
                     <CourseDetailsView data={data} />
                     <RelatedBlogs />
-                    <FAQ />
+                    <FAQ faqData={(data?.faq?.items && data.faq.items.length > 0) ? {
+                         faq: data.faq.items,
+                         title: data.faq.title && data.faq.title.trim() ? data.faq.title.trim() : "FAQ",
+                         startheading: data.faq.startheading && data.faq.startheading.trim() ? data.faq.startheading.trim() : "Course",
+                         midheading: data.faq.midheading && data.faq.midheading.trim() ? data.faq.midheading.trim() : "FAQ",
+                         endheading: data.faq.endheading && data.faq.endheading.trim() ? data.faq.endheading.trim() : "",
+                         description: data.faq.description && data.faq.description.trim() ? data.faq.description.trim() : ""
+                    } : null} />
                </div>
           );
      }
@@ -139,9 +182,14 @@ export default function DynamicSlugPage() {
                
                <BlogDetailsView data={data} />
                <RelatedBlogs />
-               <FAQ />
+               <FAQ faqData={(data?.faq?.items && data.faq.items.length > 0) ? {
+                    faq: data.faq.items,
+                    title: data.faq.title && data.faq.title.trim() ? data.faq.title.trim() : "FAQ",
+                    startheading: data.faq.startheading && data.faq.startheading.trim() ? data.faq.startheading.trim() : "Blog",
+                    midheading: data.faq.midheading && data.faq.midheading.trim() ? data.faq.midheading.trim() : "FAQ",
+                    endheading: data.faq.endheading && data.faq.endheading.trim() ? data.faq.endheading.trim() : "",
+                    description: data.faq.description && data.faq.description.trim() ? data.faq.description.trim() : ""
+               } : null} />
           </div>
      );
 }
-
-

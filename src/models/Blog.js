@@ -25,6 +25,17 @@ const blogSchema = new mongoose.Schema({
           featured: {
                type: Boolean,
                default: false
+          },
+          faq: {
+               title: String,
+               startheading: String,
+               midheading: String,
+               endheading: String,
+               description: String,
+               items: [{
+                    ques: String,
+                    ans: String
+               }]
           }
      }]
 

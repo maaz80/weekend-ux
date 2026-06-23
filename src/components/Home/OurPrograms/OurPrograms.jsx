@@ -4,6 +4,7 @@ import { useState } from "react";
 import ProgramsSidebar from './ProgramSidebar';
 import CourseCard from './CourseCard';
 import { useHomeData } from "@/context/HomeDataContext";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const staticCourses = [
      {
@@ -142,8 +143,10 @@ const staticCourses = [
 
 const OurPrograms = ({ data }) => {
      const { homeData, coursesData } = useHomeData();
-     const [activeMobileIndex, setActiveMobileIndex] = useState(null);
-     const [activeCategory, setActiveCategory] = useState(null);
+     const [activeMobileIndex, setActiveMobileIndex] = useState(0);
+     const [activeCategory, setActiveCategory] = useState("All");
+     const [currentPage, setCurrentPage] = useState(1);
+     const coursesPerPage = 4;
 
      const rawCourses = coursesData?.course;
      const hasValidCourses = Array.isArray(rawCourses) && rawCourses.length > 0 && rawCourses.some(c => c.title && c.title.trim());
@@ -164,9 +167,46 @@ const OurPrograms = ({ data }) => {
           })
           : staticCourses;
 
-     const categories = [...new Set(courses.map(c => c.category))];
-     const currentCategory = activeCategory || categories[0] || "Generative AI";
-     const filteredCourses = courses.filter(c => c.category === currentCategory);
+     const categories = ["All", ...new Set(courses.map(c => c.category))];
+     const currentCategory = activeCategory || "All";
+     
+     const filteredCourses = currentCategory === "All"
+          ? courses
+          : courses.filter(c => c.category === currentCategory);
+
+     const totalPages = Math.ceil(filteredCourses.length / coursesPerPage);
+
+     const getPageNumbers = () => {
+          const pages = [];
+          if (totalPages <= 4) {
+               for (let i = 1; i <= totalPages; i++) {
+                    pages.push(i);
+               }
+               return pages;
+          }
+
+          const start = Math.max(1, Math.min(currentPage, totalPages - 2));
+          const actualStart = currentPage < 3 ? 1 : start;
+          
+          const end = Math.min(totalPages, actualStart + (currentPage < 3 ? 2 : 2));
+          for (let i = actualStart; i <= end; i++) {
+               pages.push(i);
+          }
+
+          const lastPageInWindow = pages[pages.length - 1];
+          if (lastPageInWindow < totalPages) {
+               if (totalPages - lastPageInWindow > 1) {
+                    pages.push("...");
+               }
+               pages.push(totalPages);
+          }
+          return pages;
+     };
+
+     const displayedCourses = filteredCourses.slice(
+          (currentPage - 1) * coursesPerPage,
+          currentPage * coursesPerPage
+     );
 
      const courseConf = homeData?.course;
 
@@ -226,22 +266,83 @@ const OurPrograms = ({ data }) => {
                     {/* DESKTOP VIEW */}
                     <div className="hidden md:flex mt-10 items-start justify-between gap-10">
                          {/* Categories Sidebar */}
-                         <div className="space-y-1.5 w-[28%] xl:w-[22%]">
+                         <div className="space-y-1.5 w-[28%] xl:w-[22%] shrink-0">
                               {categories.map((cat) => (
                                    <ProgramsSidebar
                                         key={cat}
-                                        category={cat}
+                                        category={cat === "All" ? "All Courses" : cat}
                                         isActive={currentCategory === cat}
-                                        onClick={() => setActiveCategory(cat)}
+                                        onClick={() => {
+                                             setActiveCategory(cat);
+                                             setCurrentPage(1);
+                                        }}
                                    />
                               ))}
                          </div>
 
-                         {/* Course Cards Grid */}
-                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-[70%] xl:w-[75%] max-h-[75vh] overflow-y-auto pr-2 hide-scrollbar">
-                              {filteredCourses.map((course) => (
-                                   <CourseCard key={course._id} course={course} setIsModal={false} />
-                              ))}
+                         {/* Course Cards Column with Pagination */}
+                         <div className="flex-1 w-[70%] xl:w-[75%] flex flex-col gap-8">
+                              {/* Grid */}
+                              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                   {displayedCourses.map((course) => (
+                                        <CourseCard key={course._id} course={course} setIsModal={false} />
+                                   ))}
+                              </div>
+
+                              {/* Professional Pagination */}
+                              {totalPages > 1 && (
+                                   <div className="flex items-center justify-center gap-3 mt-4">
+                                        {/* Previous button */}
+                                        <button
+                                             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                             disabled={currentPage === 1}
+                                             className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === 1
+                                                       ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                       : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                  }`}
+                                        >
+                                             <FiChevronLeft className="text-lg" />
+                                        </button>
+
+                                        {/* Page Numbers */}
+                                        {getPageNumbers().map((item, idx) => {
+                                             if (item === "...") {
+                                                  return (
+                                                       <span
+                                                            key={`ellipsis-${idx}`}
+                                                            className="w-10 h-10 flex items-center justify-center text-sm font-semibold text-zinc-400 select-none"
+                                                       >
+                                                            ...
+                                                       </span>
+                                                  );
+                                             }
+                                             return (
+                                                  <button
+                                                       key={`page-${item}`}
+                                                       onClick={() => setCurrentPage(item)}
+                                                       className={`w-10 h-10 rounded-xl border text-sm font-semibold transition-all cursor-pointer ${currentPage === item
+                                                                 ? "bg-official text-black border-transparent shadow-sm font-bold"
+                                                                 : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                            }`}
+                                                  >
+                                                       {item}
+                                                  </button>
+                                             );
+                                        })}
+
+                                        {/* Next button */}
+                                        <button
+                                             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                             disabled={currentPage === totalPages}
+                                             className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === totalPages
+                                                       ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                       : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                  }`}
+                                        >
+                                             <FiChevronRight className="text-lg" />
+                                        </button>
+                                   </div>
+                              )}
                          </div>
                     </div>
 
@@ -249,7 +350,9 @@ const OurPrograms = ({ data }) => {
                     <div className="md:hidden mt-8 space-y-3">
                          {categories.map((cat, index) => {
                               const isOpen = activeMobileIndex === index;
-                              const categoryCourses = courses.filter((c) => c.category === cat);
+                              const categoryCourses = cat === "All"
+                                   ? courses
+                                   : courses.filter((c) => c.category === cat);
 
                               return (
                                    <div key={cat} className="overflow-hidden">
@@ -261,7 +364,7 @@ const OurPrograms = ({ data }) => {
                                              className="cursor-pointer"
                                         >
                                              <ProgramsSidebar
-                                                  category={cat}
+                                                  category={cat === "All" ? "All Courses" : cat}
                                                   isActive={isOpen}
                                              />
                                         </div>

@@ -2,6 +2,7 @@
 
 import { FiDownload, FiClock, FiUsers, FiBarChart2, FiBookOpen } from "react-icons/fi";
 import { useRouter } from "next/navigation";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 
 const CourseImage = "/images/weekend-ux-program-image-template.webp";
 
@@ -15,33 +16,18 @@ export default function CourseCard({ course, setIsModal = false }) {
 
      const imageSrc = course?.image || CourseImage;
 
-     const getImg = (w) => {
-          if (typeof imageSrc === "string" && imageSrc.includes("/upload/")) {
-               return imageSrc.replace(
-                    "/upload/",
-                    `/upload/w_${w},q_auto:eco,f_auto/`
-               );
-          }
-          return imageSrc;
-     };
+
 
      return (
           <div className="w-full bg-white border border-[#DCD7CC] rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 min-h-122.5 max-h-122.5">
 
                {/* Course Image */}
                <div className="relative h-47.5 md:h-56.5 overflow-hidden bg-zinc-100">
-                    <img
-                         src={getImg(600)}
-                         srcSet={`
-                              ${getImg(320)} 320w,
-                              ${getImg(480)} 480w,
-                              ${getImg(768)} 768w
-                         `}
-                         sizes="(max-width:768px) 100vw, 400px"
+                    <OptimizedImage
+                         src={imageSrc}
                          alt={course?.alt || course?.title || "Course Image"}
-                         loading="lazy"
-                         decoding="async"
                          className="w-full h-full object-cover"
+                         sizes="(max-width: 768px) 100vw, 400px"
                     />
                </div>
 

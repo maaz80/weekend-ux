@@ -6,13 +6,20 @@ const navbarSchema = new mongoose.Schema({
           image: String,
           alt: String
      },
-     buttonText: String,
 
      searchPlaceholder: String,
 
      dropdownName: String, //more
 
      loginButtonName: String,
+
+     moreItems: {
+          title: String,
+          items: [{
+               title: String,
+               link: String
+          }]
+     }
 
 
 }, { timestamps: true });

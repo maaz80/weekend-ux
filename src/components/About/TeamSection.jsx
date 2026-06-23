@@ -1,5 +1,6 @@
 import Team1 from "@/app/assets/weekend-ux-about-team-member-1.webp";
 import Team2 from "@/app/assets/weekend-ux-about-team-member-2.webp";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 
 const staticTeam = [
      {
@@ -87,10 +88,11 @@ const TeamSection = ({ data }) => {
                                         key={member.id}
                                         className={`group relative overflow-hidden rounded-3xl ${idx === 1 ? 'h-110 mt-5' : 'h-142.5'}`}
                                    >
-                                        <img
+                                        <OptimizedImage
                                              src={member.image}
                                              alt={member.name}
                                              className={`${idx === 1 ? 'h-110' : 'h-142.5'}  w-full object-cover transition duration-700 group-hover:scale-105`}
+                                             sizes="(max-width: 640px) 100vw, 50vw"
                                         />
 
                                         {/* Content */}

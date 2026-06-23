@@ -6,25 +6,42 @@ import { FaGraduationCap } from "react-icons/fa6";
 import {
      FiChevronDown,
      FiChevronUp,
-     FiFileText,
      FiUser,
      FiMail,
      FiPhone,
 } from "react-icons/fi";
 import { GoClockFill } from "react-icons/go";
 import { PiFilesFill } from "react-icons/pi";
-import { TbLogin } from "react-icons/tb";
 import CardBg from '@/app/assets/weekend-ux-course-details-call-card-bg.webp';
+import { useEffect } from "react";
+import { X, Lock, Play } from "lucide-react";
+import AuthModal from "@/components/AuthModal";
+import Form from "./Form";
 
 export default function Details({ data }) {
      const [openChapter, setOpenChapter] = useState(1);
+     const [isLoggedIn, setIsLoggedIn] = useState(false);
+     const [showLockModal, setShowLockModal] = useState(false);
+     const [showAuthModal, setShowAuthModal] = useState(false);
+     const [activeVideo, setActiveVideo] = useState(null); // { url, name }
+
+     useEffect(() => {
+          if (typeof window !== "undefined") {
+               setIsLoggedIn(!!localStorage.getItem("userToken"));
+          }
+     }, []);
+
+     const handleAuthSuccess = () => {
+          setIsLoggedIn(true);
+          setShowLockModal(false);
+     };
 
      const curriculum = (data?.chapter && data.chapter.chaptername) ? [
           {
                id: 1,
                title: data.chapter.chaptername,
                lessons: data.chapter.totallessons || data.chapter.lessons?.length || 0,
-               items: data.chapter.lessons?.map(l => l.lessonname) || []
+               items: data.chapter.lessons || []
           }
      ] : [
           {
@@ -169,20 +186,55 @@ export default function Details({ data }) {
                                                        </button>
 
                                                        {isOpen && (
-                                                            <div className="border-t border-[#E5E0D6] px-5 py-5">
-                                                                 <div className="space-y-4">
-                                                                      {chapter.items.map((lesson, idx) => (
-                                                                           <div
-                                                                                key={idx}
-                                                                                className="flex items-center gap-3 text-[18px] text-neutral-900 h-14.5 px-5 font-medium"
-                                                                           >
-                                                                                <TbLogin
-                                                                                     size={18}
-                                                                                     className="text-neutral-900"
-                                                                                />
-                                                                                <span>{lesson}</span>
-                                                                           </div>
-                                                                      ))}
+                                                            <div className="border-t border-[#E5E0D6] px-3 md:px-5 py-5">
+                                                                 <div className="space-y-2">
+                                                                      {chapter.items.map((lesson, idx) => {
+                                                                           const isObject = typeof lesson === "object" && lesson !== null;
+                                                                           const lessonName = isObject ? lesson.lessonname : lesson;
+                                                                           const videoUrl = isObject ? lesson.video?.videourl : null;
+                                                                           const duration = isObject ? lesson.video?.duration : null;
+
+                                                                           return (
+                                                                                <div
+                                                                                     key={idx}
+                                                                                     onClick={() => {
+                                                                                          if (isLoggedIn) {
+                                                                                               setActiveVideo({
+                                                                                                    url: videoUrl,
+                                                                                                    name: lessonName
+                                                                                               });
+                                                                                          } else {
+                                                                                               setShowLockModal(true);
+                                                                                          }
+                                                                                     }}
+                                                                                     className="flex items-center justify-between text-[15px] md:text-[17px] text-neutral-900 h-14.5 px-4 md:px-5 font-medium rounded-xl hover:bg-zinc-100/70 border border-transparent hover:border-zinc-200/50 transition cursor-pointer group"
+                                                                                >
+                                                                                     <div className="flex items-center gap-3">
+                                                                                          {isLoggedIn ? (
+                                                                                               <span className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 transition-colors group-hover:bg-yellow-500 group-hover:text-neutral-900">
+                                                                                                    <Play size={12} className="fill-current" />
+                                                                                               </span>
+                                                                                          ) : (
+                                                                                               <span className="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-400">
+                                                                                                    <Lock size={12} />
+                                                                                               </span>
+                                                                                          )}
+                                                                                          <span className="font-semibold text-zinc-800 transition-colors group-hover:text-yellow-600">
+                                                                                               {lessonName}
+                                                                                          </span>
+                                                                                     </div>
+
+                                                                                     <div className="flex items-center gap-3">
+                                                                                          {duration && (
+                                                                                               <span className="text-sm text-zinc-500 font-medium">{duration} mins</span>
+                                                                                          )}
+                                                                                          {!isLoggedIn && (
+                                                                                               <span className="text-[10px] uppercase tracking-wider bg-zinc-100 text-zinc-500 px-2 py-0.5 rounded font-bold">Locked</span>
+                                                                                          )}
+                                                                                     </div>
+                                                                                </div>
+                                                                           );
+                                                                      })}
                                                                  </div>
                                                             </div>
                                                        )}
@@ -210,75 +262,7 @@ export default function Details({ data }) {
                                              to enroll into the course.
                                         </p>
 
-                                        <form className="space-y-4">
-                                             <div>
-                                                  <label className="block text-sm text-neutral-900 mb-2">
-                                                       Full Name
-                                                  </label>
-
-                                                  <div className="relative">
-                                                       <FiUser className="absolute left-3 top-3 text-neutral-900 text-[16px]" />
-
-                                                       <input
-                                                            type="text"
-                                                            placeholder="John Doe"
-                                                            className="w-full h-10 border border-neutral-200 rounded-lg pl-10 pr-4 outline-none focus:border-official text-neutral-900 placeholder:text-neutral-500 text-[14px]"
-                                                       />
-                                                  </div>
-                                             </div>
-
-                                             <div>
-                                                  <label className="block text-sm text-neutral-900 mb-2">
-                                                       Email
-                                                  </label>
-
-                                                  <div className="relative">
-                                                       <FiMail className="absolute left-3 top-3.5 text-neutral-900 text-[16px]" />
-
-                                                       <input
-                                                            type="email"
-                                                            placeholder="example@email.com"
-                                                            className="w-full h-10 border border-neutral-200 rounded-lg pl-10 pr-4 outline-none focus:border-official text-neutral-900 placeholder:text-neutral-500 text-[14px]"
-                                                       />
-                                                  </div>
-                                             </div>
-
-                                             <div>
-                                                  <label className="block text-sm text-neutral-900 mb-2">
-                                                       Mobile Number
-                                                  </label>
-
-                                                  <div className="relative">
-                                                       <FiPhone className="absolute left-3 top-3.5 text-neutral-900 text-[16px]" />
-
-                                                       <input
-                                                            type="tel"
-                                                            placeholder="+91 Enter 10 digit mobile number"
-                                                            className="w-full h-10 border border-neutral-200 rounded-lg pl-10 pr-4 outline-none focus:border-official text-neutral-900 placeholder:text-neutral-500 text-[14px]"
-                                                       />
-                                                  </div>
-                                             </div>
-
-                                             <label className="flex items-start gap-2 text-xs text-zinc-500">
-                                                  <input
-                                                       type="checkbox"
-                                                       defaultChecked
-                                                       className="mt-1 accent-official"
-                                                  />
-
-                                                  <span>
-                                                       By providing your contact details, you agree
-                                                       to our Terms of Use & Privacy Policy.
-                                                  </span>
-                                             </label>
-
-                                             <button
-                                                  type="submit"
-                                                  className="w-full h-12 bg-official rounded-lg font-medium text-zinc-900 hover:opacity-90 transition-all cursor-pointer"
-                                             >
-                                                  Talk to our advisor
-                                             </button>
-                                        </form>
+                                        <Form />
                                    </div>
 
                                    {/* Banner */}
@@ -313,6 +297,87 @@ export default function Details({ data }) {
 
                     </div>
                </div>
+
+               {/* LOCK MODAL */}
+               {showLockModal && (
+                    <div className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+                         <div className="w-full max-w-md bg-white rounded-2xl p-8 shadow-2xl text-center relative border border-zinc-100 text-neutral-900">
+                              
+                              <button 
+                                   onClick={() => setShowLockModal(false)}
+                                   className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-600 transition cursor-pointer"
+                                   aria-label="Close"
+                              >
+                                   <X size={20} />
+                               </button>
+
+                              <div className="w-16 h-16 bg-yellow-50 rounded-full flex items-center justify-center mx-auto mb-6 text-yellow-500 border border-yellow-100">
+                                   <Lock size={30} />
+                              </div>
+
+                              <h3 className="text-xl font-playfair font-bold text-neutral-900 mb-2">Lesson Locked</h3>
+                              <p className="text-sm text-zinc-500 mb-6 leading-relaxed">
+                                   This lesson is reserved for enrolled members. Please log in or sign up to unlock access to all video lectures.
+                              </p>
+
+                              <div className="flex flex-col gap-3">
+                                   <button 
+                                        onClick={() => {
+                                             setShowLockModal(false);
+                                             setShowAuthModal(true);
+                                        }}
+                                        className="w-full h-11 bg-yellow-400 hover:bg-yellow-500 text-neutral-900 rounded-lg text-sm font-semibold transition cursor-pointer"
+                                   >
+                                        Log In / Sign Up
+                                   </button>
+                                   <button 
+                                        onClick={() => setShowLockModal(false)}
+                                        className="w-full h-11 border border-zinc-200 hover:bg-zinc-50 text-neutral-600 rounded-lg text-sm font-semibold transition cursor-pointer"
+                                   >
+                                        Cancel
+                                   </button>
+                              </div>
+                         </div>
+                    </div>
+               )}
+
+               {/* VIDEO LIGHTBOX PLAYER */}
+               {activeVideo && (
+                    <div className="fixed inset-0 z-[999999] flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
+                         <div className="w-full max-w-5xl bg-zinc-950 rounded-2xl overflow-hidden shadow-2xl relative text-white">
+                              
+                              <div className="px-6 py-4 bg-zinc-900 border-b border-zinc-800 flex justify-between items-center text-white">
+                                   <div>
+                                        <span className="text-[11px] uppercase tracking-wider text-yellow-500 font-bold">Now Playing</span>
+                                        <h4 className="text-lg font-semibold font-playfair">{activeVideo.name}</h4>
+                                   </div>
+                                   <button 
+                                        onClick={() => setActiveVideo(null)}
+                                        className="p-2 hover:bg-zinc-800 rounded-full transition cursor-pointer text-zinc-400 hover:text-white"
+                                        aria-label="Close video player"
+                                   >
+                                        <X size={20} />
+                                   </button>
+                              </div>
+
+                              <div className="relative aspect-video w-full bg-black">
+                                   <video 
+                                        src={activeVideo.url || "https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-his-computer-34354-large.mp4"}
+                                        controls
+                                        autoPlay
+                                        className="w-full h-full object-contain"
+                                   />
+                              </div>
+                         </div>
+                    </div>
+               )}
+
+               {/* AUTH MODAL FALLBACK */}
+               <AuthModal 
+                    isOpen={showAuthModal} 
+                    onClose={() => setShowAuthModal(false)} 
+                    onAuthSuccess={handleAuthSuccess}
+               />
           </section>
      );
 }

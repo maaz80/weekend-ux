@@ -2,6 +2,7 @@
 
 import { FiDownload } from "react-icons/fi";
 import { useRouter } from 'next/navigation';
+import OptimizedImage from "@/components/ui/OptimizedImage";
 
 const CourseImage = '/images/weekend-ux-program-image-template.webp';
 
@@ -13,29 +14,17 @@ export default function CourseCard({ course, setIsModal = false }) {
      };
 
      const imageSrc = course?.image || CourseImage;
-     const getImg = (w) => {
-          if (typeof imageSrc === 'string' && imageSrc.includes("/upload/")) {
-               return imageSrc.replace("/upload/", `/upload/w_${w},q_auto:eco,f_auto/`);
-          }
-          return imageSrc;
-     };
+
 
      return (
           <div className="w-73.5 md:w-full rounded-2xl border min-h-100 md:min-h-125 border-zinc-100 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col">
                {/* Image section */}
                <div className="relative rounded-xl overflow-hidden h-50 md:h-65.5 w-full bg-zinc-100">
-                    <img
-                         src={getImg(300)}
-                         srcSet={`
-                             ${getImg(280)} 280w,
-                             ${getImg(420)} 420w,
-                             ${getImg(600)} 600w
-                          `}
-                         sizes="(max-width: 768px) 100vw, 320px"
+                    <OptimizedImage
+                         src={imageSrc}
                          alt={course?.alt || course?.title || "Course Cover Image"}
-                         loading="lazy"
-                         decoding="async"
                          className="w-full h-full object-cover"
+                         sizes="(max-width: 768px) 100vw, 320px"
                     />
                </div>
 

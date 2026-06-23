@@ -14,10 +14,17 @@ export const getNavbar = async (req) => {
                          image: "",
                          alt: "Weekend UX Logo"
                     },
-                    buttonText: "Refer & Earn",
                     searchPlaceholder: "Search courses...",
                     dropdownName: "Courses",
-                    loginButtonName: "Sign In"
+                    loginButtonName: "Sign In",
+                    moreItems: {
+                         title: "More",
+                         items: [
+                              { title: "AI Tools & Models", link: "#" },
+                              { title: "Learning Paths", link: "#" },
+                              { title: "Community Forum", link: "#" }
+                         ]
+                    }
                });
                await navbar.save();
           }
@@ -33,22 +40,28 @@ export const updateNavbar = async (req) => {
           await connectDB();
           const formData = await req.formData();
 
-          const buttonText = formData.get("buttonText");
           const searchPlaceholder = formData.get("searchPlaceholder");
           const dropdownName = formData.get("dropdownName");
           const loginButtonName = formData.get("loginButtonName");
           const logoAlt = formData.get("logoAlt") || formData.get("alt");
           const logoFile = formData.get("logoImage") || formData.get("image");
+          const moreItemsStr = formData.get("moreItems");
 
           let navbar = await Navbar.findOne();
           if (!navbar) {
                navbar = new Navbar();
           }
 
-          if (buttonText !== null && buttonText !== undefined) navbar.buttonText = buttonText;
           if (searchPlaceholder !== null && searchPlaceholder !== undefined) navbar.searchPlaceholder = searchPlaceholder;
           if (dropdownName !== null && dropdownName !== undefined) navbar.dropdownName = dropdownName;
           if (loginButtonName !== null && loginButtonName !== undefined) navbar.loginButtonName = loginButtonName;
+          if (moreItemsStr !== null && moreItemsStr !== undefined) {
+               try {
+                    navbar.moreItems = JSON.parse(moreItemsStr);
+               } catch (e) {
+                    console.error("Failed to parse moreItems:", e);
+               }
+          }
 
           if (!navbar.logo) {
                navbar.logo = { image: "", alt: "" };

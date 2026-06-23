@@ -1,5 +1,7 @@
 import DecorativeImage from "@/app/assets/weekend-ux-contact-decorative-image.webp";
 import Map from "@/app/assets/weekend-ux-contact-map.webp";
+import OptimizedImage from "@/components/ui/OptimizedImage";
+import Form from "./Form";
 
 const Content = ({ data }) => {
      const leftSection = data?.leftsection;
@@ -65,10 +67,11 @@ const Content = ({ data }) => {
                               {/* Image */}
 
                               <div className="overflow-hidden rounded-xl">
-                                   <img
+                                   <OptimizedImage
                                         src={imageSrc}
                                         alt="Office"
                                         className="w-full h-60 md:h-80 object-cover"
+                                        sizes="(max-width: 1024px) 100vw, 50vw"
                                    />
                               </div>
 
@@ -128,65 +131,7 @@ const Content = ({ data }) => {
                                    Enquire Here!
                               </h2>
 
-                              <form className="space-y-4 max-w-130 mx-auto">
-
-                                   <div>
-                                        <label className="block text-[14px] text-neutral-700 mb-2">
-                                             Full Name
-                                        </label>
-
-                                        <input
-                                             type="text"
-                                             placeholder="Full Name"
-                                             className="w-full h-10 border border-[#E5E0D6] px-4 text-sm outline-none focus:border-official bg-transparent rounded-sm placeholder:text-neutral-400"
-                                        />
-                                   </div>
-
-                                   <div>
-                                        <label className="block text-[14px] text-neutral-700 mb-2">
-                                             Email Id
-                                        </label>
-
-                                        <input
-                                             type="email"
-                                             placeholder="Email"
-                                             className="w-full h-10 border border-[#E5E0D6] px-4 text-sm outline-none focus:border-official bg-transparent rounded-sm placeholder:text-neutral-400"
-                                        />
-                                   </div>
-
-                                   <div>
-                                        <label className="block text-[14px] text-neutral-700 mb-2">
-                                             Phone Number
-                                        </label>
-
-                                        <input
-                                             type="tel"
-                                             placeholder="Phone Number"
-                                             className="w-full h-10 border border-[#E5E0D6] px-4 text-sm outline-none focus:border-official bg-transparent rounded-sm placeholder:text-neutral-400"
-                                        />
-                                   </div>
-
-                                   <div>
-                                        <label className="block text-[14px] text-neutral-700 mb-2">
-                                             Description (optional)
-                                        </label>
-
-                                        <textarea
-                                             rows={4}
-                                             placeholder="Description"
-                                             className="w-full border border-[#E5E0D6] p-4 text-sm outline-none resize-none focus:border-official bg-transparent rounded-sm placeholder:text-neutral-400"
-                                        />
-                                   </div>
-
-                                   <button
-                                        type="submit"
-                                        className="w-full h-12 bg-official text-neutral-900 font-medium rounded-md flex items-center justify-center gap-2 hover:opacity-90 transition-all cursor-pointer"
-                                   >
-                                        Get in Touch
-                                        <span>↗</span>
-                                   </button>
-
-                              </form>
+                               <Form />
                          </div>
                     </div>
 
@@ -196,10 +141,11 @@ const Content = ({ data }) => {
 
                          <div className="relative">
 
-                              <img
+                              <OptimizedImage
                                    src={mapImageSrc}
                                    alt="Map"
                                    className="w-full h-75 md:h-112.5 lg:h-150 object-cover rounded-3xl"
+                                   sizes="100vw"
                               />
 
                               {/* Floating Card */}

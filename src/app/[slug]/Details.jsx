@@ -8,6 +8,7 @@ import {
 } from "react-icons/fa";
 import CardBg from '../assets/weekend-ux-course-details-call-card-bg.webp';
 import { CiShare2 } from "react-icons/ci";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 
 export default function Details({ data }) {
      const [headingsList, setHeadingsList] = useState([]);
@@ -188,10 +189,11 @@ export default function Details({ data }) {
 
                               {/* HERO COVER IMAGE */}
                               <div className="overflow-hidden rounded-2xl bg-zinc-100">
-                                   <img
+                                   <OptimizedImage
                                         src={coverImage}
                                         alt={data?.alt || data?.title || "Blog Cover"}
                                         className="w-full h-65 md:h-112.5 lg:h-137.5 object-cover"
+                                        sizes="100vw"
                                    />
                               </div>
 

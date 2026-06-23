@@ -1,6 +1,7 @@
 import React from 'react'
 import { IoIosArrowForward } from 'react-icons/io'
 import Link from 'next/link'
+import OptimizedImage from '@/components/ui/OptimizedImage'
 
 const BlogCard = ({ blog, height ='h-62.5 md:h-95'}) => {
      const slugOrId = blog?.slug || blog?._id || blog?.id || "";
@@ -14,10 +15,11 @@ const BlogCard = ({ blog, height ='h-62.5 md:h-95'}) => {
                     >
                          {/* Image */}
                          <div className="overflow-hidden rounded-md bg-zinc-100">
-                              <img
+                              <OptimizedImage
                                    src={imageSrc}
                                    alt={blog?.alt || blog?.title || "Blog Image"}
                                    className={`w-full object-cover transition duration-700 group-hover:scale-105 ${height}`}
+                                   sizes="(max-width: 768px) 100vw, 50vw"
                               />
                          </div>
 

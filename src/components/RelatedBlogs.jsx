@@ -5,6 +5,7 @@ import { useHomeData } from "@/context/HomeDataContext";
 import { usePathname } from "next/navigation";
 import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 
 const staticBlogs = [
      {
@@ -93,7 +94,7 @@ export default function RelatedBlogs({ data }) {
 
 
                     {/* Heading */}
-                    <div className={`mx-auto max-w-212.5 text-center ${pathname === '/' ? 'pt-30' : 'pt-16'}`}>
+                    <div className={`mx-auto max-w-212.5 text-center ${pathname === '/' ? 'pt-0' : 'pt-16'}`}>
                          <span className="font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] text-white">
                               {title}
                          </span>
@@ -122,10 +123,11 @@ export default function RelatedBlogs({ data }) {
                                    >
                                         {/* Image */}
                                         <div className="overflow-hidden rounded-md bg-zinc-100">
-                                             <img
+                                             <OptimizedImage
                                                   src={imageSrc}
                                                   alt={blog.title}
                                                   className="h-62.5 w-full object-cover transition duration-700 group-hover:scale-105 md:h-70"
+                                                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                                              />
                                         </div>
 

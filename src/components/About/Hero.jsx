@@ -1,4 +1,5 @@
 import Image from "next/image";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 
 export default function Hero({ data }) {
      const title = data?.title?.trim() ? data.title.trim() : "Learn as you desire";
@@ -11,10 +12,11 @@ export default function Hero({ data }) {
                <Image src='/images/weekend-ux-decorative-diamond.webp' alt="weekend-ux-decorative-diamond" className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-30" width={200} height={200} style={{ height: 'auto' }}/>
                {/* Hero Header Section */}
                <section className="relative h-62.5 md:h-100 w-full flex flex-col gap-5 items-center justify-center bg-zinc-950 overflow-hidden">
-                    <img
+                    <OptimizedImage
                          src={bgImage}
                          alt="About Hero Background"
                          className="absolute inset-0 w-full h-full object-cover object-center opacity-60 z-0"
+                         sizes="100vw"
                     />
                     {/* Content */}
                     <span className="font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] relative z-50 text-official">

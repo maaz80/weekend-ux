@@ -31,53 +31,58 @@ const defaultFaqs = [
      }
 ];
 
+const faqCache = {};
+
 const FAQ = ({ paddings, faqData: initialFaqData }) => {
      const { faqData: homeFaqData } = useHomeData();
      const pathname = usePathname();
-     const [faqInfo, setFaqInfo] = useState(null);
+     const [fetchedFaq, setFetchedFaq] = useState({});
      const [activeIndex, setActiveIndex] = useState(0);
 
      const toggleFaq = (index) => {
           setActiveIndex(index === activeIndex ? null : index);
      };
 
+     // Determine the page slug from pathname
+     let slug = "home";
+     if (pathname && pathname !== "/") {
+          // Normalise path slug (e.g. /category/blogs -> category-blogs)
+          slug = pathname.replace(/^\/|\/$/g, "").replace(/\//g, "-");
+     }
+
      useEffect(() => {
-          if (initialFaqData) {
-               setFaqInfo(initialFaqData);
+          if (initialFaqData || slug === "home") {
                return;
           }
 
-          let slug = "home";
-          if (pathname && pathname !== "/") {
-               // Normalise path slug (e.g. /category/blogs -> category-blogs)
-               slug = pathname.replace(/^\/|\/$/g, "").replace(/\//g, "-");
+          // If already cached, do nothing (it will render instantly from memory)
+          if (faqCache[slug]) {
+               return;
           }
 
-          if (slug === "home") {
-               if (homeFaqData) {
-                    setFaqInfo(homeFaqData);
-               }
-          } else {
-               let isMounted = true;
-               async function fetchPageFaq() {
-                    try {
-                         const res = await fetch(`/api/pages/${slug}/faq`);
-                         if (res.ok) {
-                              const data = await res.json();
-                              if (isMounted) {
-                                   setFaqInfo(data);
-                              }
+          let isMounted = true;
+          async function fetchPageFaq() {
+               try {
+                    const res = await fetch(`/api/pages/${slug}/faq`);
+                    if (res.ok) {
+                         const data = await res.json();
+                         faqCache[slug] = data; // Cache the response
+                         if (isMounted) {
+                              setFetchedFaq(prev => ({ ...prev, [slug]: data }));
                          }
-                    } catch (error) {
-                         console.error(`Failed to fetch FAQ for page: ${slug}`, error);
                     }
+               } catch (error) {
+                    console.error(`Failed to fetch FAQ for page: ${slug}`, error);
                }
-               fetchPageFaq();
-               return () => {
-                    isMounted = false;
-               };
           }
-     }, [initialFaqData, pathname, homeFaqData]);
+          fetchPageFaq();
+          return () => {
+               isMounted = false;
+          };
+     }, [initialFaqData, slug]);
+
+     // Determine active faqInfo dynamically to prevent synchronous setState inside useEffect
+     const faqInfo = initialFaqData || (slug === "home" ? homeFaqData : (faqCache[slug] || fetchedFaq[slug]));
 
      const faqs = faqInfo?.faq && faqInfo.faq.length > 0
           ? faqInfo.faq

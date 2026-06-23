@@ -31,6 +31,17 @@ const coursesSchema = new mongoose.Schema({
                          duration: String
                     }
                }]
+          },
+          faq: {
+               title: String,
+               startheading: String,
+               midheading: String,
+               endheading: String,
+               description: String,
+               items: [{
+                    ques: String,
+                    ans: String
+               }]
           }
 
      }],

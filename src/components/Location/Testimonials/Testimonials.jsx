@@ -7,6 +7,7 @@ import testiImage from '@/app/assets/weekend-ux-testimonials-user-default-icon.w
 import { usePathname } from "next/navigation";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import Image from 'next/image';
+import OptimizedImage from "@/components/ui/OptimizedImage";
 
 const DEFAULT_TESTIMONIALS = [
      {
@@ -221,14 +222,12 @@ const Testimonials = ({ data }) => {
 
                                    {/* User */}
                                    <div className="flex items-center gap-4">
-                                        <Image
-                                             src={item.image}
-                                             alt={`${item.name} profile`}
-                                             onError={(e) => {
-                                                  e.target.src = testiImage;
-                                             }}
-                                             className="w-15 h-15 rounded-full object-cover border border-[#E5E5E5]"
-                                        />
+                                        <OptimizedImage
+                              src={typeof item.image === 'string' ? item.image : item.image?.src || testiImage.src}
+                              alt={`${item.name} profile`}
+                              fallbackSrc={testiImage.src}
+                              className="w-15 h-15 rounded-full object-cover border border-[#E5E5E5]"
+                        />
 
                                         <div>
                                              <h3 className="text-[24px] font-bold leading-none text-[#1F1F1F]">

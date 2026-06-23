@@ -189,7 +189,8 @@ export const addItem = async (req, { params }) => {
                     midheading: parsedData.relatedBlogs?.midheading || parsedData.relatedMid || "",
                     endheading: parsedData.relatedBlogs?.endheading || parsedData.relatedEnd || "",
                     description: parsedData.relatedBlogs?.description || parsedData.relatedDesc || ""
-               }
+               },
+               faq: parsedData.faq || { title: "", startheading: "", midheading: "", endheading: "", description: "", items: [] }
           };
 
           location.items.push(newItem);
@@ -295,7 +296,8 @@ export const updateItem = async (req, { params }) => {
                     midheading: parsedData.relatedBlogs?.midheading || parsedData.relatedMid || location.items[itemIndex].relatedBlogs?.midheading || "",
                     endheading: parsedData.relatedBlogs?.endheading || parsedData.relatedEnd || location.items[itemIndex].relatedBlogs?.endheading || "",
                     description: parsedData.relatedBlogs?.description || parsedData.relatedDesc || location.items[itemIndex].relatedBlogs?.description || ""
-               }
+               },
+               faq: parsedData.faq !== undefined ? parsedData.faq : location.items[itemIndex].faq
           };
 
           location.items[itemIndex] = updatedItem;

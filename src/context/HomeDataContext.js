@@ -9,6 +9,7 @@ const HomeDataContext = createContext({
      navbarData: null,
      footerGlobalData: null,
      footerColumnsData: null,
+     testimonialsData: null,
      loading: true,
 });
 
@@ -19,19 +20,21 @@ export function HomeDataProvider({ children }) {
      const [navbarData, setNavbarData] = useState(null);
      const [footerGlobalData, setFooterGlobalData] = useState(null);
      const [footerColumnsData, setFooterColumnsData] = useState(null);
+     const [testimonialsData, setTestimonialsData] = useState(null);
      const [loading, setLoading] = useState(true);
 
      useEffect(() => {
           let isMounted = true;
           async function fetchAllData() {
                try {
-                    const [homeRes, faqRes, coursesRes, navbarRes, footerGlobalRes, footerColumnsRes] = await Promise.all([
+                    const [homeRes, faqRes, coursesRes, navbarRes, footerGlobalRes, footerColumnsRes, testimonialsRes] = await Promise.all([
                          fetch("/api/home"),
                          fetch("/api/pages/home/faq"),
                          fetch("/api/courses"),
                          fetch("/api/navbar"),
                          fetch("/api/footer-columns/global"),
-                         fetch("/api/footer-columns")
+                         fetch("/api/footer-columns"),
+                         fetch("/api/testimonials")
                     ]);
 
                     if (homeRes.ok) {
@@ -75,6 +78,13 @@ export function HomeDataProvider({ children }) {
                     } else {
                          console.warn("Failed to fetch footer columns, status code:", footerColumnsRes.status);
                     }
+
+                    if (testimonialsRes.ok) {
+                         const tData = await testimonialsRes.json();
+                         if (isMounted) setTestimonialsData(tData);
+                    } else {
+                         console.warn("Failed to fetch testimonials, status code:", testimonialsRes.status);
+                    }
                } catch (error) {
                     console.error("Error fetching homepage config/FAQ/Courses/Navbar/Footer from API:", error);
                } finally {
@@ -92,7 +102,7 @@ export function HomeDataProvider({ children }) {
      }, []);
 
      return (
-          <HomeDataContext.Provider value={{ homeData, faqData, coursesData, navbarData, footerGlobalData, footerColumnsData, loading }}>
+          <HomeDataContext.Provider value={{ homeData, faqData, coursesData, navbarData, footerGlobalData, footerColumnsData, testimonialsData, loading }}>
                {children}
           </HomeDataContext.Provider>
      );

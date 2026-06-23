@@ -1,12 +1,13 @@
 "use client";
 
 import Map from '@/app/assets/weekend-ux-testimonials-bg.webp';
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import comma from '@/app/assets/weekend-ux-testimonials-decoratice-comma.webp';
 import testiImage from '@/app/assets/weekend-ux-testimonials-user-default-icon.webp';
 import { usePathname } from "next/navigation";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import Image from 'next/image';
+import OptimizedImage from "@/components/ui/OptimizedImage";
 
 const DEFAULT_TESTIMONIALS = [
      {
@@ -44,15 +45,26 @@ const DEFAULT_TESTIMONIALS = [
 import { useHomeData } from "@/context/HomeDataContext";
 
 const Testimonials = ({ data }) => {
-     const { homeData } = useHomeData();
+     const { homeData, testimonialsData } = useHomeData();
      const sliderRef = useRef();
      const [currentIndex, setCurrentIndex] = useState(0);
      const [maxIndex, setMaxIndex] = useState(0);
-     const [testimonialsList, setTestimonialsList] = useState(DEFAULT_TESTIMONIALS);
+     const testimonialsList = useMemo(() => {
+          if (testimonialsData && Array.isArray(testimonialsData) && testimonialsData.length > 0) {
+               return testimonialsData.map((review) => ({
+                    name: review.name,
+                    role: review.role || "Student",
+                    image: review.avatar || testiImage,
+                    text: review.quote
+               }));
+          }
+          return DEFAULT_TESTIMONIALS;
+     }, [testimonialsData]);
      const pathname = usePathname();
 
      const pathnames = pathname.split("/").filter((x) => x);
      const isLocation = pathname.startsWith("/location");
+
 
      const testimonialsConf = homeData?.testimonials;
      const startTitle = (testimonialsConf?.startheading && testimonialsConf.startheading.trim())
@@ -98,24 +110,7 @@ const Testimonials = ({ data }) => {
           );
      };
 
-     // ✅ Fetch all reviews dynamically
-     // useEffect(() => {
-     //      const fetchReviews = async () => {
-     //           const data = await getAllReviews();
-     //           if (data && data.length > 0) {
-     //                const formatted = data.map((review) => ({
-     //                     name: review.name,
-     //                     role: review.role || review.courseName || "Student",
-     //                     image: review.image || testiImage,
-     //                     text: review.text
-     //                }));
-     //                setTestimonialsList(formatted);
-     //           } else {
-     //                setTestimonialsList(DEFAULT_TESTIMONIALS);
-     //           }
-     //      };
-     //      fetchReviews();
-     // }, []);
+
 
      // ✅ Calculate maxIndex (responsive safe)
      useEffect(() => {
@@ -186,8 +181,8 @@ const Testimonials = ({ data }) => {
      }, [maxIndex]);
 
      return (
-          <div className='relative min-h-100 md:min-h-84.25 mx-auto w-full px-4 sm:px-6 lg:px-10 pt-18 lg:pt-16 overflow-hidden'>
-               <Image src={Map} alt="Testimonial Map Bg" fetchPriority='high' decoding="async" className='absolute top-0 inset-0 w-full h-screen md:h-[110vh] z-10 object-cover' />
+          <div className='relative min-h-215 md:min-h-200.25 mx-auto w-full px-4 sm:px-6 lg:px-10 pt-18 lg:pt-16 overflow-hidden'>
+               <Image src={Map} alt="Testimonial Map Bg" fetchPriority='high' decoding="async" className='absolute top-0 inset-0 w-full min-h-[120vh] md:h-[110vh] z-10 object-cover' />
 
                {/* Heading */}
                {isLocation ? (
@@ -199,7 +194,7 @@ const Testimonials = ({ data }) => {
                          {startTitle}{" "}
                          <span className="relative inline-block text-official italic">
                               {midTitle}
-                         
+
                          </span>{' '}
                          {endTitle}
                     </h2>
@@ -246,14 +241,12 @@ const Testimonials = ({ data }) => {
 
                                    {/* User */}
                                    <div className="flex items-center gap-4">
-                                        <Image
-                                             src={item.image}
-                                             alt={`${item.name} profile`}
-                                             onError={(e) => {
-                                                  e.target.src = testiImage;
-                                             }}
-                                             className="w-15 h-15 rounded-full object-cover border border-[#E5E5E5]"
-                                        />
+                                        <OptimizedImage
+                              src={typeof item.image === 'string' ? item.image : item.image?.src || testiImage.src}
+                              alt={`${item.name} profile`}
+                              fallbackSrc={testiImage.src}
+                              className="w-15 h-15 rounded-full object-cover border border-[#E5E5E5]"
+                        />
 
                                         <div>
                                              <h3 className="text-[24px] font-bold leading-none text-[#1F1F1F]">

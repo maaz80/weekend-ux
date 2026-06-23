@@ -85,8 +85,13 @@ export const updateCourses = async (req) => {
 
           if (contentType.includes("multipart/form-data")) {
                const formData = await req.formData();
+               console.log("--- updateCourses MULTIPART UPLOAD ---");
+               console.log("Incoming Content-Type:", contentType);
+               console.log("FormData Keys:", Array.from(formData.keys()));
+               
                const dataStr = formData.get("data");
                updateData = dataStr ? JSON.parse(dataStr) : {};
+               console.log("Parsed updateData Courses Count:", updateData.course?.length);
                
                // Handle course images and videos
                if (updateData.course && Array.isArray(updateData.course)) {
@@ -94,16 +99,27 @@ export const updateCourses = async (req) => {
                          // Course Image
                          const imageFile = formData.get(`courseImage_${i}`);
                          if (imageFile) {
+                              console.log(`Uploading course image for index ${i}...`);
                               updateData.course[i].image = await uploadToCloudinary(imageFile, "courses/images");
+                              console.log(`Course image uploaded successfully: ${updateData.course[i].image}`);
                          }
                          
                          // Lesson Videos
                          if (updateData.course[i].chapter && updateData.course[i].chapter.lessons) {
                               for (let j = 0; j < updateData.course[i].chapter.lessons.length; j++) {
-                                   const videoFile = formData.get(`courseVideo_${i}_${j}`);
+                                   const videoKey = `courseVideo_${i}_${j}`;
+                                   const videoFile = formData.get(videoKey);
                                    if (videoFile) {
+                                        console.log(`Found video file for key ${videoKey}. File Name: ${videoFile.name}, Size: ${videoFile.size} bytes`);
                                         updateData.course[i].chapter.lessons[j].video = updateData.course[i].chapter.lessons[j].video || {};
-                                        updateData.course[i].chapter.lessons[j].video.videourl = await uploadToCloudinary(videoFile, "courses/videos");
+                                        
+                                        console.log(`Uploading video to Cloudinary for key ${videoKey}...`);
+                                        const uploadedUrl = await uploadToCloudinary(videoFile, "courses/videos");
+                                        console.log(`Video uploaded successfully to URL: ${uploadedUrl}`);
+                                        
+                                        updateData.course[i].chapter.lessons[j].video.videourl = uploadedUrl;
+                                   } else {
+                                        console.log(`No video file received for key ${videoKey}`);
                                    }
                               }
                          }

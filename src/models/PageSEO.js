@@ -13,10 +13,6 @@ const pageSEOSchema = new mongoose.Schema({
      description: {
           type: String,
           trim: true
-     },
-     keywords: {
-          type: String,
-          trim: true
      }
 }, { timestamps: true });
 
