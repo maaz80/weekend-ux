@@ -227,10 +227,10 @@ export default function Details({ data }) {
 
                                                                                      <div className="flex items-center gap-3">
                                                                                           {duration && (
-                                                                                               <span className="text-sm text-zinc-500 font-medium">{duration} mins</span>
+                                                                                               <span className="text-sm text-zinc-600 font-medium">{duration} mins</span>
                                                                                           )}
                                                                                           {!isLoggedIn && (
-                                                                                               <span className="text-[10px] uppercase tracking-wider bg-zinc-100 text-zinc-500 px-2 py-0.5 rounded font-bold">Locked</span>
+                                                                                               <span className="text-[10px] uppercase tracking-wider bg-zinc-100 text-zinc-600 px-2 py-0.5 rounded font-bold">Locked</span>
                                                                                           )}
                                                                                      </div>
                                                                                 </div>
@@ -318,7 +318,7 @@ export default function Details({ data }) {
                               </div>
 
                               <h3 className="text-xl font-playfair font-bold text-neutral-900 mb-2">Lesson Locked</h3>
-                              <p className="text-sm text-zinc-500 mb-6 leading-relaxed">
+                              <p className="text-sm text-zinc-600 mb-6 leading-relaxed">
                                    This lesson is reserved for enrolled members. Please log in or sign up to unlock access to all video lectures.
                               </p>
 

@@ -16,6 +16,7 @@ export default function CoursesPage() {
                          alt="weekend-ux-course-details-hero-bg"
                          fill
                          priority
+                         fetchPriority="high"
                          className="object-cover object-center opacity-60 z-0"
                     />
                     {/* Content */}
