@@ -40,7 +40,8 @@ export default function ContactUs() {
                          src='/images/weekend-ux-contact-hero-bg.webp'
                          alt="weekend-ux-contact-hero-bg"
                          fill
-                         priority
+                         priority={true}
+                         fetchPriority="high"
                          className="object-fill object-center opacity-60 z-0"
                     />
                     {/* Content */}
@@ -48,7 +49,16 @@ export default function ContactUs() {
                     <h1 className="custom-width text-[32px] md:text-[38px] 2xl:text-[56px] text-center leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">
                          {title}
                     </h1>
-                    <Image src='/images/weekend-ux-decorative-diamond.webp' alt="weekend-ux-decorative-diamond" className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-99999" width={200} height={200} style={{ height: 'auto' }} />
+                    <Image 
+                         src='/images/weekend-ux-decorative-diamond.webp' 
+                         alt="weekend-ux-decorative-diamond" 
+                         className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-99999" 
+                         width={200} 
+                         height={200} 
+                         style={{ height: 'auto' }} 
+                         priority={true}
+                         fetchPriority="high"
+                    />
                </section>
                <Content data={contactData} />
                <RelatedBlogs data={contactData?.relatedBlogs} />

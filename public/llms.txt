@@ -1,0 +1,16 @@
+# Weekend UX
+
+Weekend UX is a premier design education and training platform, providing professional UI/UX design courses, resources, and insights.
+
+## Core Resources
+
+- [Home](https://weekendux.co/): The main gateway to Weekend UX.
+- [Courses](https://weekendux.co/courses): Professional UI/UX design courses, schedules, curriculums, and enrollment details.
+- [Blogs](https://weekendux.co/category/blogs): Latest articles, design trends, case studies, and tutorials from our journal.
+- [About Us](https://weekendux.co/about-us): Learn about our philosophy, track record, proving methods, and creative minds.
+- [Contact Us](https://weekendux.co/contact-us): Get in touch for inquiries, collaborations, or support.
+
+## Legal and Information
+
+- [Privacy Policy](https://weekendux.co/privacy-policy): Privacy policies and data practices.
+- [Disclaimer](https://weekendux.co/disclaimer): Terms of use and legal disclaimers.

@@ -15,6 +15,7 @@ const nextConfig = {
       'react-icons',
       'lucide-react',
     ],
+    optimizeCss: true,
   },
 };
 

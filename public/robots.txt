@@ -1,0 +1,11 @@
+# SEO-optimized robots.txt for Weekend UX
+User-agent: *
+Allow: /
+
+# Disallow internal and administrative API endpoints
+Disallow: /api/admin/
+Disallow: /api/auth/
+
+# Sitemap and Host declarations
+Sitemap: https://weekendux.co/sitemap.xml
+Host: https://weekendux.co
