@@ -6,9 +6,9 @@ import { NextResponse } from "next/server";
 export const getDisclaimer = async (req) => {
      try {
           await connectDB();
-          let disclaimer = await Disclaimer.findOne();
+          let disclaimer = await Disclaimer.findOne().lean();
           if (!disclaimer) {
-               disclaimer = new Disclaimer({
+               const newDisclaimer = new Disclaimer({
                     title: "Disclaimer",
                     content: "Your disclaimer text goes here...",
                     relatedBlogs: {
@@ -19,9 +19,12 @@ export const getDisclaimer = async (req) => {
                          description: "Stay updated with the latest trends and stories from our design blog."
                     }
                });
-               await disclaimer.save();
+               await newDisclaimer.save();
+               disclaimer = newDisclaimer.toObject();
           }
-          return NextResponse.json(disclaimer);
+          const response = NextResponse.json(disclaimer);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

@@ -8,7 +8,7 @@ export const getFaq = async (req, { params }) => {
           await connectDB();
           const { pageId } = await params;
 
-          const data = await Faq.findOne({ pageSlug: pageId });
+          const data = await Faq.findOne({ pageSlug: pageId }).lean();
 
           if (!data) {
                return NextResponse.json({
@@ -21,7 +21,9 @@ export const getFaq = async (req, { params }) => {
                });
           }
 
-          return NextResponse.json(data);
+          const response = NextResponse.json(data);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

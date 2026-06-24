@@ -8,13 +8,15 @@ export const getPageSEO = async (req, { params }) => {
           await connectDB();
           const { pageId } = await params;
 
-          const seo = await PageSEO.findOne({ pageSlug: pageId });
+          const seo = await PageSEO.findOne({ pageSlug: pageId }).lean();
 
           if (!seo) {
                return NextResponse.json({ title: "", description: "" });
           }
 
-          return NextResponse.json(seo);
+          const response = NextResponse.json(seo);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

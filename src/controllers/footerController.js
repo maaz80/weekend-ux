@@ -6,8 +6,10 @@ import { NextResponse } from "next/server";
 export const getFooterColumns = async (req) => {
      try {
           await connectDB();
-          const columns = await Footer.find({ isGlobal: { $ne: true } }).sort({ order: 1 });
-          return NextResponse.json(columns);
+          const columns = await Footer.find({ isGlobal: { $ne: true } }).sort({ order: 1 }).lean();
+          const response = NextResponse.json(columns);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }
@@ -17,9 +19,9 @@ export const getFooterColumns = async (req) => {
 export const getFooterGlobalSettings = async (req) => {
      try {
           await connectDB();
-          let settings = await Footer.findOne({ isGlobal: true });
+          let settings = await Footer.findOne({ isGlobal: true }).lean();
           if (!settings) {
-               settings = new Footer({
+               const newSettings = new Footer({
                     isGlobal: true,
                     navigation: [
                          { itemname: "Home", itempath: "/" },
@@ -43,11 +45,14 @@ export const getFooterGlobalSettings = async (req) => {
                     },
                     buttonname: "Refer & Earn",
                     buttontitle: "Follow us!",
-                    copyright: "© 2026 - Shiksha Design All Rights Reserved."
+                    copyright: "© 2026 - Weekend UX All Rights Reserved."
                });
-               await settings.save();
+               await newSettings.save();
+               settings = newSettings.toObject();
           }
-          return NextResponse.json(settings);
+          const response = NextResponse.json(settings);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

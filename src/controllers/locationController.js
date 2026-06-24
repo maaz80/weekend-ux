@@ -16,8 +16,10 @@ const slugifyText = (value = "") =>
 export const getLocations = async (req) => {
      try {
           await connectDB();
-          const data = await Location.find().sort({ createdAt: -1 });
-          return NextResponse.json(data);
+          const data = await Location.find().sort({ createdAt: -1 }).lean();
+          const response = NextResponse.json(data);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }
@@ -28,11 +30,13 @@ export const getLocationById = async (req, { params }) => {
      try {
           await connectDB();
           const { id } = await params;
-          const data = await Location.findById(id);
+          const data = await Location.findById(id).lean();
           if (!data) {
                return NextResponse.json({ error: "Location group not found" }, { status: 404 });
           }
-          return NextResponse.json(data);
+          const response = NextResponse.json(data);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }
@@ -208,17 +212,19 @@ export const getItem = async (req, { params }) => {
           await connectDB();
           const { id, locationId, itemId } = await params;
           const finalLocationId = locationId || id;
-          const location = await Location.findById(finalLocationId);
+          const location = await Location.findById(finalLocationId).lean();
           if (!location) {
                return NextResponse.json({ error: "Location group not found" }, { status: 404 });
           }
 
-          const item = location.items.id(itemId);
+          const item = location.items.find(it => it._id && it._id.toString() === itemId);
           if (!item) {
                return NextResponse.json({ error: "Item not found" }, { status: 404 });
           }
 
-          return NextResponse.json(item);
+          const response = NextResponse.json(item);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }
@@ -344,7 +350,7 @@ export const getLocationItemBySlug = async (req, { params }) => {
 
           const locationDoc = await Location.findOne({
                "items.hero.slug": idOrSlug
-          });
+          }).select("items").lean();
 
           if (!locationDoc) {
                return NextResponse.json({ error: "Location item not found" }, { status: 404 });
@@ -358,7 +364,9 @@ export const getLocationItemBySlug = async (req, { params }) => {
                return NextResponse.json({ error: "Location item not found" }, { status: 404 });
           }
 
-          return NextResponse.json(item);
+          const response = NextResponse.json(item);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (error) {
           return NextResponse.json({ error: error.message }, { status: 500 });
      }

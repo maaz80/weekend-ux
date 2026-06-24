@@ -16,9 +16,9 @@ const createSlug = (title) => {
 export const getBlogs = async (req) => {
      try {
           await connectDB();
-          let blogPage = await Blog.findOne();
+          let blogPage = await Blog.findOne().lean();
           if (!blogPage) {
-               blogPage = new Blog({
+               const newBlogPage = new Blog({
                     hero: {
                          starttitle: "Our Latest",
                          endtitle: "Blogs"
@@ -44,9 +44,12 @@ export const getBlogs = async (req) => {
                          }
                     ]
                });
-               await blogPage.save();
+               await newBlogPage.save();
+               blogPage = newBlogPage.toObject();
           }
-          return NextResponse.json(blogPage);
+          const response = NextResponse.json(blogPage);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }
@@ -115,7 +118,7 @@ export const getBlogBySlug = async (req, { params }) => {
      try {
           await connectDB();
           const { idOrSlug } = await params;
-          const blogPage = await Blog.findOne();
+          const blogPage = await Blog.findOne().select("blogs").lean();
           
           if (!blogPage) {
                return NextResponse.json({ error: "No blogs configured" }, { status: 404 });
@@ -128,7 +131,9 @@ export const getBlogBySlug = async (req, { params }) => {
                return NextResponse.json({ error: "Blog not found" }, { status: 404 });
           }
 
-          return NextResponse.json(blog);
+          const response = NextResponse.json(blog);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (error) {
           return NextResponse.json({ error: error.message }, { status: 500 });
      }

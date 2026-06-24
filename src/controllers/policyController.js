@@ -6,9 +6,9 @@ import { NextResponse } from "next/server";
 export const getPolicy = async (req) => {
      try {
           await connectDB();
-          let policy = await Policy.findOne();
+          let policy = await Policy.findOne().lean();
           if (!policy) {
-               policy = new Policy({
+               const newPolicy = new Policy({
                     title: "Privacy Policy",
                     content: "Your privacy policy text goes here...",
                     relatedBlogs: {
@@ -19,9 +19,12 @@ export const getPolicy = async (req) => {
                          description: "Stay updated with the latest trends and stories from our design blog."
                     }
                });
-               await policy.save();
+               await newPolicy.save();
+               policy = newPolicy.toObject();
           }
-          return NextResponse.json(policy);
+          const response = NextResponse.json(policy);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

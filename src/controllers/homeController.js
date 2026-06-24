@@ -57,7 +57,9 @@ export const getHome = async (req) => {
                });
                await home.save();
           }
-          return NextResponse.json(home);
+          const response = NextResponse.json(home);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

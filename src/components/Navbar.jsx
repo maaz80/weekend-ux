@@ -3,13 +3,20 @@
 import { useState, useEffect, useRef } from "react";
 import { FiSearch, FiChevronDown, FiMenu, FiX } from "react-icons/fi";
 import Image from "next/image";
-import ProgramModalContent from "./Home/OurPrograms/ProgramModalContent";
+import dynamic from "next/dynamic";
+const ProgramModalContent = dynamic(
+     () => import("./Home/OurPrograms/ProgramModalContent"),
+     { ssr: false }
+);
 import Link from "next/link";
 import Button from "./ui/Button";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import Logo from "@/app/assets/weekend-ux-logo.webp";
+const AuthModal = dynamic(
+     () => import("./AuthModal"),
+     { ssr: false }
+);
 import { useHomeData } from "@/context/HomeDataContext";
-import AuthModal from "./AuthModal";
 import { getCurrentUser, logoutUser, getUserToken } from "@/utils/auth.js";
 
 const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
@@ -141,6 +148,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              setIsSearchOpen(false);
                                         }
                                    }}
+                                   aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                                    className="md:hidden text-white hover:text-yellow-400 text-2xl transition cursor-pointer flex items-center"
                               >
                                    {isMenuOpen ? <FiX /> : <FiMenu />}
@@ -250,6 +258,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              setIsMenuOpen(false);
                                         }
                                    }}
+                                   aria-label={isSearchOpen ? "Close search" : "Open search"}
                                    className="md:hidden text-white hover:text-yellow-400 text-xl transition cursor-pointer flex items-center"
                               >
                                    {isSearchOpen ? <FiX className="text-lg" /> : <FiSearch />}
@@ -477,7 +486,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
 
                          {/* Modal Body */}
                          <div className="w-full h-full overflow-y-auto">
-                              <ProgramModalContent setIsModal={setIsCoursesModalOpen} />
+                              {isCoursesModalOpen && <ProgramModalContent setIsModal={setIsCoursesModalOpen} />}
                          </div>
                     </div>
                </div>

@@ -58,7 +58,7 @@ function getIconComponent(iconName) {
 const DEFAULT_SETTINGS = {
      buttontitle: "Follow us!",
      buttonname: "Refer & Earn",
-     copyright: "© 2026 - Shiksha Design All Rights Reserved.",
+     copyright: "© 2026 - Weekend UX All Rights Reserved.",
      socials: [
           { icon: "FaFacebookF", path: "https://www.facebook.com/weekendux/" },
           { icon: "RiTwitterXLine", path: "https://twitter.com" },
@@ -203,6 +203,7 @@ export default function Footer() {
                                                        target="_blank"
                                                        rel="noopener noreferrer"
                                                        key={i}
+                                                       aria-label={social.icon ? social.icon.replace(/^(Fa|Ri|Ci|Fi)/, "").replace(/([A-Z])/g, " $1").trim() : "Social media"}
                                                        className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-white"
                                                   >
                                                        <IconComponent size={18} />
@@ -289,7 +290,7 @@ export default function Footer() {
                          />
 
 
-                         <p className="mt-1 text-[13px] text-white/40">{settings?.copyright || "© 2026 - Shiksha Design All Rights Reserved."}</p>
+                         <p className="mt-1 text-[13px] text-white/40">{settings?.copyright || "© 2026 - Weekend UX All Rights Reserved."}</p>
                     </div>
                </div>
           </footer>

@@ -154,12 +154,12 @@ export const forgotPassword = async (req) => {
 
           // Send Email
           await transporter.sendMail({
-               from: process.env.EMAIL_FROM || '"Shiksha" <no-reply@shiksha.com>',
+               from: process.env.EMAIL_FROM || '"Weekend UX" <no-reply@weekendux.com>',
                to: email,
-               subject: "Password Reset OTP - Shiksha",
+               subject: "Password Reset OTP - Weekend UX",
                html: `
                     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; padding: 20px; border: 1px solid #e5e7eb; border-radius: 10px;">
-                         <h2 style="color: #f97316; text-align: center;">Shiksha Password Reset</h2>
+                         <h2 style="color: #f97316; text-align: center;">Weejebd UX Password Reset</h2>
                          <p>Hello ${user.name},</p>
                          <p>You requested to reset your password. Use the following 6-digit OTP to reset it:</p>
                          <div style="text-align: center; margin: 30px 0;">

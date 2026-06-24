@@ -6,8 +6,10 @@ import { NextResponse } from "next/server";
 export const getTestimonials = async (req) => {
      try {
           await connectDB();
-          const testimonials = await Testimonial.find().sort({ createdAt: -1 });
-          return NextResponse.json(testimonials);
+          const testimonials = await Testimonial.find().sort({ createdAt: -1 }).lean();
+          const response = NextResponse.json(testimonials);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (error) {
           return NextResponse.json({ error: error.message }, { status: 500 });
      }

@@ -14,21 +14,21 @@ async function getSlugData(slug) {
           await connectDB();
           
           // 1. Check blog
-          const blogPage = await Blog.findOne();
+          const blogPage = await Blog.findOne().select("blogs").lean();
           if (blogPage) {
                const blog = blogPage.blogs.find(b => b.slug === slug);
                if (blog) return { type: "blog", data: JSON.parse(JSON.stringify(blog)) };
           }
           
           // 2. Check course
-          const coursesPage = await Courses.findOne();
+          const coursesPage = await Courses.findOne().select("course").lean();
           if (coursesPage) {
                const course = coursesPage.course.find(c => c.slug === slug);
                if (course) return { type: "course", data: JSON.parse(JSON.stringify(course)) };
           }
           
           // 3. Check location
-          const locationDoc = await Location.findOne({ "items.hero.slug": slug });
+          const locationDoc = await Location.findOne({ "items.hero.slug": slug }).select("items").lean();
           if (locationDoc) {
                const item = locationDoc.items.find(it => it.hero?.[0]?.slug === slug);
                if (item) return { type: "location", data: JSON.parse(JSON.stringify(item)) };

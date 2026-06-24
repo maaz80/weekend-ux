@@ -34,7 +34,7 @@ export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto"
  */
 export default function OptimizedImage({
      src,
-     alt = "Optimized Image",
+     alt = "",
      className = "",
      priority = false, // Set to true if this image appears above the fold (e.g. Hero banner)
      sizes = "100vw",

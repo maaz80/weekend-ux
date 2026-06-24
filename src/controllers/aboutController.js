@@ -7,9 +7,9 @@ import { NextResponse } from "next/server";
 export const getAbout = async (req) => {
      try {
           await connectDB();
-          let about = await About.findOne();
+          let about = await About.findOne().lean();
           if (!about) {
-               about = new About({
+               const newAbout = new About({
                     hero: [{
                          title: "We are Weekend UX",
                          heading: "Designing a Better World Together",
@@ -44,9 +44,12 @@ export const getAbout = async (req) => {
                          description: "Read our latest news and announcements."
                     }
                });
-               await about.save();
+               await newAbout.save();
+               about = newAbout.toObject();
           }
-          return NextResponse.json(about);
+          const response = NextResponse.json(about);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

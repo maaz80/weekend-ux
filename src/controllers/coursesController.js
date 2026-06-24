@@ -69,7 +69,9 @@ export const getCourses = async (req) => {
                });
                await courses.save();
           }
-          return NextResponse.json(courses);
+          const response = NextResponse.json(courses);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

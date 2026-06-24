@@ -28,7 +28,9 @@ export const getNavbar = async (req) => {
                });
                await navbar.save();
           }
-          return NextResponse.json(navbar);
+          const response = NextResponse.json(navbar);
+          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

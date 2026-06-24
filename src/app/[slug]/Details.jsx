@@ -104,19 +104,19 @@ export default function Details({ data }) {
                               {/* Social */}
                               <div className="flex items-center gap-3 mt-5">
 
-                                   <button className="w-9 h-9 rounded-full border border-neutral-400 flex items-center justify-center text-neutral-900">
+                                   <button aria-label="Share this article" className="w-9 h-9 rounded-full border border-neutral-400 flex items-center justify-center text-neutral-900">
                                         <CiShare2 size={16} />
                                    </button>
 
-                                   <button className="w-9 h-9 rounded-full bg-neutral-500 text-white flex items-center justify-center">
+                                   <button aria-label="Share on Facebook" className="w-9 h-9 rounded-full bg-neutral-500 text-white flex items-center justify-center">
                                         <FaFacebookF size={15} />
                                    </button>
 
-                                   <button className="w-9 h-9 rounded-full bg-neutral-500 text-white flex items-center justify-center">
+                                   <button aria-label="Share on Instagram" className="w-9 h-9 rounded-full bg-neutral-500 text-white flex items-center justify-center">
                                         <FaInstagram size={15} />
                                    </button>
 
-                                   <button className="w-9 h-9 rounded-full bg-neutral-500 text-white flex items-center justify-center">
+                                   <button aria-label="Share on YouTube" className="w-9 h-9 rounded-full bg-neutral-500 text-white flex items-center justify-center">
                                         <FaYoutube size={15} />
                                    </button>
 
@@ -194,6 +194,7 @@ export default function Details({ data }) {
                                         alt={data?.alt || data?.title || "Blog Cover"}
                                         className="w-full h-65 md:h-112.5 lg:h-137.5 object-cover"
                                         sizes="100vw"
+                                        priority={true}
                                    />
                               </div>
 
