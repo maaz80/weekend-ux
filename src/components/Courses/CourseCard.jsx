@@ -6,7 +6,7 @@ import OptimizedImage from "@/components/ui/OptimizedImage";
 
 const CourseImage = "/images/weekend-ux-program-image-template.webp";
 
-export default function CourseCard({ course, setIsModal = false }) {
+export default function CourseCard({ course, setIsModal = false, priority = false, fetchPriority = undefined }) {
      const router = useRouter();
 
      const handleClick = () => {
@@ -28,6 +28,8 @@ export default function CourseCard({ course, setIsModal = false }) {
                          alt={course?.alt || "weekend-ux-program-image-template"}
                          className="w-full h-full object-cover"
                          sizes="(max-width: 768px) 100vw, 400px"
+                         priority={priority}
+                         fetchPriority={fetchPriority}
                     />
                </div>
 
@@ -35,9 +37,9 @@ export default function CourseCard({ course, setIsModal = false }) {
                <div className="p-4">
 
                     {/* Title */}
-                    <h3 className="font-urbanist text-[18px] md:text-[24px] font-bold text-zinc-900 leading-8 line-clamp-1 ">
+                    <h2 className="font-urbanist text-[18px] md:text-[24px] font-bold text-zinc-900 leading-8 line-clamp-1 ">
                          {course?.title}
-                    </h3>
+                    </h2>
 
                     {/* Author */}
                     <p className="text-[16px] text-zinc-500 mt-1 font-urbanist">

@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import Image from "next/image";
 import Hero from "@/components/About/Hero";
 import FeatureStrip from "@/components/About/FeatureStrip";
 import RelatedBlogs from "@/components/RelatedBlogs";
@@ -10,26 +6,21 @@ import Content from "@/components/About/Content";
 import Details from "@/components/About/Details";
 import TeamSection from "@/components/About/TeamSection";
 
-export default function About() {
-     const [aboutData, setAboutData] = useState(null);
-     const [loading, setLoading] = useState(true);
+// Database imports for server-side pre-rendering
+import connectDB from "@/config/db";
+import AboutModel from "@/models/About";
 
-     useEffect(() => {
-          async function fetchAbout() {
-               try {
-                    const res = await fetch("/api/about");
-                    if (res.ok) {
-                         const data = await res.json();
-                         setAboutData(data);
-                    }
-               } catch (error) {
-                    console.error("Failed to fetch about page config:", error);
-               } finally {
-                    setLoading(false);
-               }
+export default async function About() {
+     let aboutData = null;
+     try {
+          await connectDB();
+          const doc = await AboutModel.findOne().lean();
+          if (doc) {
+               aboutData = JSON.parse(JSON.stringify(doc));
           }
-          fetchAbout();
-     }, []);
+     } catch (error) {
+          console.error("Failed to fetch about page config on server:", error);
+     }
 
      return (
           <div className="bg-white text-neutral-900">

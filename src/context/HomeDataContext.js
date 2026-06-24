@@ -14,18 +14,23 @@ const HomeDataContext = createContext({
      loading: true,
 });
 
-export function HomeDataProvider({ children }) {
-     const [homeData, setHomeData] = useState(null);
-     const [faqData, setFaqData] = useState(null);
-     const [coursesData, setCoursesData] = useState(null);
-     const [navbarData, setNavbarData] = useState(null);
-     const [footerGlobalData, setFooterGlobalData] = useState(null);
-     const [footerColumnsData, setFooterColumnsData] = useState(null);
-     const [testimonialsData, setTestimonialsData] = useState(null);
-     const [blogsData, setBlogsData] = useState(null);
-     const [loading, setLoading] = useState(true);
+export function HomeDataProvider({ children, initialData }) {
+     const [homeData, setHomeData] = useState(initialData?.homeData || null);
+     const [faqData, setFaqData] = useState(initialData?.faqData || null);
+     const [coursesData, setCoursesData] = useState(initialData?.coursesData || null);
+     const [navbarData, setNavbarData] = useState(initialData?.navbarData || null);
+     const [footerGlobalData, setFooterGlobalData] = useState(initialData?.footerGlobalData || null);
+     const [footerColumnsData, setFooterColumnsData] = useState(initialData?.footerColumnsData || null);
+     const [testimonialsData, setTestimonialsData] = useState(initialData?.testimonialsData || null);
+     const [blogsData, setBlogsData] = useState(initialData?.blogsData || null);
+     const [loading, setLoading] = useState(!initialData);
 
      useEffect(() => {
+          if (initialData) {
+               setLoading(false);
+               return;
+          }
+
           let isMounted = true;
           async function fetchAllData() {
                try {
@@ -109,7 +114,7 @@ export function HomeDataProvider({ children }) {
           return () => {
                isMounted = false;
           };
-     }, []);
+     }, [initialData]);
 
      return (
           <HomeDataContext.Provider value={{ homeData, faqData, coursesData, navbarData, footerGlobalData, footerColumnsData, testimonialsData, blogsData, loading }}>

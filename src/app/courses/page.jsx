@@ -262,9 +262,13 @@ export default function CoursesPage() {
                          {displayedCourses.length > 0 ? (
                               <div>
                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-                                        {displayedCourses.map((course) => (
+                                        {displayedCourses.map((course, idx) => (
                                              <div key={course._id} className="w-full max-w-sm text-black">
-                                                  <CourseCard course={course} />
+                                                  <CourseCard 
+                                                       course={course} 
+                                                       priority={idx < 3 && currentPage === 1} 
+                                                       fetchPriority={idx === 0 && currentPage === 1 ? "high" : undefined} 
+                                                  />
                                              </div>
                                         ))}
                                    </div>
@@ -275,6 +279,7 @@ export default function CoursesPage() {
                                              {/* Previous button */}
                                              <button
                                                   onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                                  aria-label="Previous Page"
                                                   disabled={currentPage === 1}
                                                   className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === 1
                                                             ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
@@ -313,6 +318,7 @@ export default function CoursesPage() {
                                              {/* Next button */}
                                              <button
                                                   onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                                  aria-label="Next Page"
                                                   disabled={currentPage === totalPages}
                                                   className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === totalPages
                                                             ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"

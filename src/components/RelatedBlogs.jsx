@@ -108,7 +108,7 @@ export default function RelatedBlogs({ data }) {
                                         <div className="overflow-hidden rounded-md bg-zinc-100">
                                              <OptimizedImage
                                                   src={imageSrc}
-                                                  alt={blog.alt || blog.title || "weekend-ux-blog-image-template"}
+                                                  alt={blog.alt || ""}
                                                   className="h-62.5 w-full object-cover transition duration-700 group-hover:scale-105 md:h-70"
                                                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                                              />

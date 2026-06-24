@@ -1,31 +1,23 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import FAQ from "@/components/FAQ";
 import Content from "@/components/Contact/Content";
 
-export default function ContactUs() {
-     const [contactData, setContactData] = useState(null);
-     const [loading, setLoading] = useState(true);
+// Database imports for server-side pre-rendering
+import connectDB from "@/config/db";
+import ContactModel from "@/models/Contact";
 
-     useEffect(() => {
-          async function fetchContact() {
-               try {
-                    const res = await fetch("/api/contact");
-                    if (res.ok) {
-                         const data = await res.json();
-                         setContactData(data);
-                    }
-               } catch (error) {
-                    console.error("Failed to fetch contact page configuration:", error);
-               } finally {
-                    setLoading(false);
-               }
+export default async function ContactUs() {
+     let contactData = null;
+     try {
+          await connectDB();
+          const doc = await ContactModel.findOne().lean();
+          if (doc) {
+               contactData = JSON.parse(JSON.stringify(doc));
           }
-          fetchContact();
-     }, []);
+     } catch (error) {
+          console.error("Failed to fetch contact page configuration on server:", error);
+     }
 
      const title = contactData?.title && contactData.title.trim()
           ? contactData.title.trim()
@@ -58,7 +50,7 @@ export default function ContactUs() {
                          style={{ height: 'auto' }} 
                          priority={true}
                          fetchPriority="high"
-                    />
+                     />
                </section>
                <Content data={contactData} />
                <RelatedBlogs data={contactData?.relatedBlogs} />
