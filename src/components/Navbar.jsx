@@ -131,7 +131,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
      }
      return (
           <>
-               <nav className="w-full border-b border-yellow-500/10 bg-black/4 backdrop-blur-2xl font-urbanist sticky top-0 z-99999">
+               <nav className="w-full border-b border-yellow-500/10 bg-zinc-950/90 backdrop-blur-2xl font-urbanist sticky top-0 z-99999">
 
                     {/* MAIN NAVBAR */}
                     <div className="max-w-7xl mx-auto h-16 md:h-20 px-4 md:px-6 flex items-center justify-between">
