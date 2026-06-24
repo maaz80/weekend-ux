@@ -22,7 +22,7 @@ import {
      FaTiktok, 
      FaDribbble, 
      FaBehance 
-} from "react-icons/fa";
+} from "react-icons/fa6";
 
 const SOCIAL_ICON_MAP = {
      CiYoutube,

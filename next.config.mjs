@@ -17,15 +17,8 @@ const nextConfig = {
     ],
     optimizeCss: true,
   },
-  // ✅ Add this:
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
-  },
-  // ✅ Add karo
-  modularizeImports: {
-    'react-icons/?(((\\w*)?/?)*)': {
-      transform: 'react-icons/{{ matches.[1] }}/{{member}}',
-    },
   },
 };
 
