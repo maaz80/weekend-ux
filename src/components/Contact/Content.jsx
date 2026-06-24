@@ -72,6 +72,8 @@ const Content = ({ data }) => {
                                         alt="weekend-ux-contact-decorative-image"
                                         className="w-full h-60 md:h-80 object-cover"
                                         sizes="(max-width: 1024px) 100vw, 50vw"
+                                        priority={true}
+                                        fetchPriority="high"
                                    />
                               </div>
 

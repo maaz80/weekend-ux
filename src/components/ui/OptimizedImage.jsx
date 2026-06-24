@@ -39,7 +39,8 @@ export default function OptimizedImage({
      priority = false, // Set to true if this image appears above the fold (e.g. Hero banner)
      sizes = "100vw",
      objectFit = "cover",
-     fallbackSrc = "/images/weekend-ux-hero-bg-template.webp"
+     fallbackSrc = "/images/weekend-ux-hero-bg-template.webp",
+     fetchPriority = undefined // Optional fetch priority attribute
 }) {
      const imageSrc = src || fallbackSrc;
      const isCloudinary = imageSrc.includes("cloudinary.com");
@@ -52,6 +53,7 @@ export default function OptimizedImage({
                     className={`${className}`}
                     loading={priority ? "eager" : "lazy"}
                     style={{ objectFit }}
+                    fetchPriority={fetchPriority}
                />
           );
      }
@@ -75,6 +77,7 @@ export default function OptimizedImage({
                className={`${className}`}
                loading={priority ? "eager" : "lazy"}
                style={{ objectFit }}
+               fetchPriority={fetchPriority}
           />
      );
 }
