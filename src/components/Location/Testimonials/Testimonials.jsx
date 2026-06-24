@@ -168,7 +168,7 @@ const Testimonials = ({ data }) => {
 
      return (
           <div className='relative min-h-100 md:min-h-84.25 mx-auto w-full px-4 sm:px-6 lg:px-10 pt-18 lg:pt-16'>
-               <Image src={Map} alt="Testimonial Map Bg" fetchPriority='high' decoding="async" className='absolute top-0 inset-0 w-full h-screen md:h-[110vh] z-10 object-cover' />
+               <Image src={Map} alt="weekend-ux-testimonials-bg" fetchPriority='high' decoding="async" className='absolute top-0 inset-0 w-full h-screen md:h-[110vh] z-10 object-cover' />
 
                {/* Heading */}
 
@@ -211,7 +211,7 @@ const Testimonials = ({ data }) => {
                                    {/* Quote Icon */}
                                    <Image
                                         src={comma}
-                                        alt="quote"
+                                        alt="weekend-ux-testimonials-decoratice-comma"
                                         className="absolute top-6 right-6 w-18  -scale-x-100"
                                    />
 

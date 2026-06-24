@@ -22,7 +22,7 @@ export default function CourseCard({ course, setIsModal = false }) {
                <div className="relative rounded-xl overflow-hidden h-50 md:h-65.5 w-full bg-zinc-100">
                     <OptimizedImage
                          src={imageSrc}
-                         alt={course?.alt || ""}
+                         alt={course?.alt || "weekend-ux-program-image-template"}
                          className="w-full h-full object-cover"
                          sizes="(max-width: 768px) 100vw, 320px"
                     />
@@ -31,9 +31,9 @@ export default function CourseCard({ course, setIsModal = false }) {
                {/* Content */}
                <div className="p-2 md:p-3 flex flex-col grow">
                     {/* Title */}
-                    <h3 className="font-urbanist text-[18px] md:text-[23px] 2xl:text-[24px] font-bold leading-8 md:leading-9 text-zinc-900 min-h-14 flex items-center ">
+                    <h2 className="font-urbanist text-[18px] md:text-[23px] 2xl:text-[24px] font-bold leading-8 md:leading-9 text-zinc-900 min-h-14 flex items-center ">
                          {course?.title}
-                    </h3>
+                    </h2>
 
                     {/* Description */}
                     <p className="mt-2 text-xs md:text-[16px] text-zinc-500 font-urbanist line-clamp-2 leading-6">

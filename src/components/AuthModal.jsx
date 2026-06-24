@@ -164,7 +164,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                          <div className="w-full md:w-1/2 flex items-center justify-center p-4 md:p-8 rounded-xl md:rounded-none">
                               <img
                                    src={loginImage.src || loginImage}
-                                   alt="illustration"
+                                   alt="weekend-ux-login-decorative-image"
                                    width={363}
                                    height={512}
                                    className="w-full  h-auto object-contain rounded-lg"

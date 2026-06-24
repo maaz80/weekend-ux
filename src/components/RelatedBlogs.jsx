@@ -125,7 +125,7 @@ export default function RelatedBlogs({ data }) {
                                         <div className="overflow-hidden rounded-md bg-zinc-100">
                                              <OptimizedImage
                                                   src={imageSrc}
-                                                  alt={blog.alt || ""}
+                                                  alt={blog.alt || blog.title || "weekend-ux-blog-image-template"}
                                                   className="h-62.5 w-full object-cover transition duration-700 group-hover:scale-105 md:h-70"
                                                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                                              />
@@ -133,9 +133,9 @@ export default function RelatedBlogs({ data }) {
 
                                         {/* Title */}
                                         <div className="mt-2 md:mt-5 flex items-start justify-between gap-4">
-                                             <h3 className="font-urbanist text-[20px] md:text-[26px] leading-[1.35] text-neutral-900 line-clamp-2">
+                                             <h2 className="font-urbanist text-[20px] md:text-[26px] leading-[1.35] text-neutral-900 line-clamp-2">
                                                   {blog.title}
-                                             </h3>
+                                             </h2>
 
                                              <IoIosArrowForward
                                                   size={22}

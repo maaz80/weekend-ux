@@ -87,7 +87,7 @@ export default function Hero() {
                               {/* Background Image */}
                               <OptimizedImage
                                    src={slide.bgImage}
-                                   alt={slide.tagline || "Slide background"}
+                                   alt={slide.tagline || "weekend-ux-hero-bg-template"}
                                    className="absolute inset-0 w-full h-full"
                                    priority={index === 0}
                                    objectFit="cover"

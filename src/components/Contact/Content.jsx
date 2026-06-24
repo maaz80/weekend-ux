@@ -69,7 +69,7 @@ const Content = ({ data }) => {
                               <div className="overflow-hidden rounded-xl">
                                    <OptimizedImage
                                         src={imageSrc}
-                                        alt="Office"
+                                        alt="weekend-ux-contact-decorative-image"
                                         className="w-full h-60 md:h-80 object-cover"
                                         sizes="(max-width: 1024px) 100vw, 50vw"
                                    />
@@ -143,7 +143,7 @@ const Content = ({ data }) => {
 
                               <OptimizedImage
                                    src={mapImageSrc}
-                                   alt="Map"
+                                   alt="weekend-ux-contact-map"
                                    className="w-full h-75 md:h-112.5 lg:h-150 object-cover rounded-3xl"
                                    sizes="100vw"
                               />

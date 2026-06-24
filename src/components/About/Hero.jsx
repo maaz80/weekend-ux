@@ -14,7 +14,7 @@ export default function Hero({ data }) {
                <section className="relative h-62.5 md:h-100 w-full flex flex-col gap-5 items-center justify-center bg-zinc-950 overflow-hidden">
                     <OptimizedImage
                          src={bgImage}
-                         alt="About Hero Background"
+                         alt="weekend-ux-location-hero-bg"
                          className="absolute inset-0 w-full h-full object-cover object-center opacity-60 z-0"
                          sizes="100vw"
                     />

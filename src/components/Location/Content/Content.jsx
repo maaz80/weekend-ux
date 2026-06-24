@@ -11,7 +11,7 @@ const Content = () => {
           <p className="leading-6 mt-3 text-[#1C1C1C80]">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam repellendus a esse, neque earum quisquam, voluptatum quos necessitatibus architecto quae illo excepturi, rerum voluptatem aut officia! At reprehenderit suscipit odit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam repellendus a esse, neque earum quisquam, voluptatum quos necessitatibus architecto quae illo excepturi, rerum voluptatem aut officia! At reprehenderit suscipit odit.</p>
         </div>
         <div className="w-full md:w-[50%] h-60 md:h-90">
-          <Image src='/images/hero-bg.jpg' alt='temp' width={150} height={120} className="w-full object-fill rounded-xl h-60 md:h-90" />
+          <Image src='/images/hero-bg.jpg' alt='weekend-ux-lacation-hero-bg' width={150} height={120} className="w-full object-fill rounded-xl h-60 md:h-90" />
         </div>
       </div>
       <div className="leading-6 text-[#1C1C1C80]">

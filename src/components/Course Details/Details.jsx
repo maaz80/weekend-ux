@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import { X, Lock, Play } from "lucide-react";
 import AuthModal from "@/components/AuthModal";
 import Form from "./Form";
+import OptimizedImage from "../ui/OptimizedImage";
 
 export default function Details({ data }) {
      const [openChapter, setOpenChapter] = useState(1);
@@ -107,10 +108,10 @@ export default function Details({ data }) {
                                    <div className="flex items-center gap-2">
                                         <span className="text-official text-[20px]"><FaGraduationCap /></span>
                                         <span>
-                                             {data?.totalstudents 
-                                                  ? (data.totalstudents.toString().toLowerCase().includes("students") 
-                                                       ? data.totalstudents 
-                                                       : `${data.totalstudents} Students`) 
+                                             {data?.totalstudents
+                                                  ? (data.totalstudents.toString().toLowerCase().includes("students")
+                                                       ? data.totalstudents
+                                                       : `${data.totalstudents} Students`)
                                                   : "156 Students"}
                                         </span>
                                    </div>
@@ -123,10 +124,10 @@ export default function Details({ data }) {
                                    <div className="flex items-center gap-2">
                                         <span className="text-official text-[20px]"><PiFilesFill /></span>
                                         <span>
-                                             {data?.totallessons 
-                                                  ? (data.totallessons.toString().toLowerCase().includes("lessons") 
-                                                       ? data.totallessons 
-                                                       : `${data.totallessons} Lessons`) 
+                                             {data?.totallessons
+                                                  ? (data.totallessons.toString().toLowerCase().includes("lessons")
+                                                       ? data.totallessons
+                                                       : `${data.totallessons} Lessons`)
                                                   : "20 Lessons"}
                                         </span>
                                    </div>
@@ -267,12 +268,13 @@ export default function Details({ data }) {
 
                                    {/* Banner */}
                                    <div className="mt-6 rounded-xl overflow-hidden relative h-64.5">
-                                        <img
+
+                                        <OptimizedImage
                                              src={CardBg.src}
                                              alt="weekend-ux-course-details-call-card-bg"
                                              className="w-full h-full object-cover"
+                                             sizes="100vw"
                                         />
-
                                         <div className="absolute inset-0 bg-black/25" />
 
                                         <div className="absolute inset-0 p-10 flex flex-col justify-between">
@@ -302,14 +304,14 @@ export default function Details({ data }) {
                {showLockModal && (
                     <div className="fixed inset-0 z-999999 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
                          <div className="w-full max-w-md bg-white rounded-2xl p-8 shadow-2xl text-center relative border border-zinc-100 text-neutral-900">
-                              
-                              <button 
+
+                              <button
                                    onClick={() => setShowLockModal(false)}
                                    className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-600 transition cursor-pointer"
                                    aria-label="Close"
                               >
                                    <X size={20} />
-                               </button>
+                              </button>
 
                               <div className="w-16 h-16 bg-yellow-50 rounded-full flex items-center justify-center mx-auto mb-6 text-yellow-500 border border-yellow-100">
                                    <Lock size={30} />
@@ -321,7 +323,7 @@ export default function Details({ data }) {
                               </p>
 
                               <div className="flex flex-col gap-3">
-                                   <button 
+                                   <button
                                         onClick={() => {
                                              setShowLockModal(false);
                                              setShowAuthModal(true);
@@ -330,7 +332,7 @@ export default function Details({ data }) {
                                    >
                                         Log In / Sign Up
                                    </button>
-                                   <button 
+                                   <button
                                         onClick={() => setShowLockModal(false)}
                                         className="w-full h-11 border border-zinc-200 hover:bg-zinc-50 text-neutral-600 rounded-lg text-sm font-semibold transition cursor-pointer"
                                    >
@@ -345,13 +347,13 @@ export default function Details({ data }) {
                {activeVideo && (
                     <div className="fixed inset-0 z-999999 flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
                          <div className="w-full max-w-5xl bg-zinc-950 rounded-2xl overflow-hidden shadow-2xl relative text-white">
-                              
+
                               <div className="px-6 py-4 bg-zinc-900 border-b border-zinc-800 flex justify-between items-center text-white">
                                    <div>
                                         <span className="text-[11px] uppercase tracking-wider text-yellow-500 font-bold">Now Playing</span>
-                                        <h4 className="text-lg font-semibold font-playfair">{activeVideo.name}</h4>
+                                        <h2 className="text-lg font-semibold font-playfair">{activeVideo.name}</h2>
                                    </div>
-                                   <button 
+                                   <button
                                         onClick={() => setActiveVideo(null)}
                                         className="p-2 hover:bg-zinc-800 rounded-full transition cursor-pointer text-zinc-400 hover:text-white"
                                         aria-label="Close video player"
@@ -361,7 +363,7 @@ export default function Details({ data }) {
                               </div>
 
                               <div className="relative aspect-video w-full bg-black">
-                                   <video 
+                                   <video
                                         src={activeVideo.url || "https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-his-computer-34354-large.mp4"}
                                         controls
                                         autoPlay
@@ -373,9 +375,9 @@ export default function Details({ data }) {
                )}
 
                {/* AUTH MODAL FALLBACK */}
-               <AuthModal 
-                    isOpen={showAuthModal} 
-                    onClose={() => setShowAuthModal(false)} 
+               <AuthModal
+                    isOpen={showAuthModal}
+                    onClose={() => setShowAuthModal(false)}
                     onAuthSuccess={handleAuthSuccess}
                />
           </section>

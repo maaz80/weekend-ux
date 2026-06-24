@@ -17,7 +17,7 @@ const BlogCard = ({ blog, height ='h-62.5 md:h-95'}) => {
                          <div className="overflow-hidden rounded-md bg-zinc-100">
                               <OptimizedImage
                                    src={imageSrc}
-                                   alt={blog?.alt || ""}
+                                   alt={blog?.alt || blog?.title || "Blog Image"}
                                    className={`w-full object-cover transition duration-700 group-hover:scale-105 ${height}`}
                                    sizes="(max-width: 768px) 100vw, 50vw"
                               />
@@ -25,9 +25,9 @@ const BlogCard = ({ blog, height ='h-62.5 md:h-95'}) => {
 
                          {/* Title */}
                          <div className="mt-2 md:mt-5 flex items-start justify-between gap-4">
-                              <h3 className="font-urbanist text-[20px] md:text-[26px] leading-[1.35] text-neutral-900 line-clamp-2">
+                              <h2 className="font-urbanist text-[20px] md:text-[26px] leading-[1.35] text-neutral-900 line-clamp-2">
                                    {blog?.title || "Untitled Post"}
-                              </h3>
+                              </h2>
 
                               <IoIosArrowForward
                                    size={22}

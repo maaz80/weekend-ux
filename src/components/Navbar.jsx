@@ -166,7 +166,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                    ) : (
                                         <Image
                                              src={Logo}
-                                             alt="Logo"
+                                                  alt="weekend-ux-logo"
                                              width={50}
                                              height={40}
                                              className="w-auto h-9 md:h-auto"
@@ -219,7 +219,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                            {course.image && (
                                                                                 <img 
                                                                                      src={course.image} 
-                                                                                     alt="" 
+                                                                                     alt="weekend-ux-course-image" 
                                                                                      className="w-10 h-10 object-cover rounded-lg bg-zinc-850 border border-zinc-700/50 shrink-0" 
                                                                                 />
                                                                            )}
