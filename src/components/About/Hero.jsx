@@ -17,6 +17,8 @@ export default function Hero({ data }) {
                          alt="weekend-ux-location-hero-bg"
                          className="absolute inset-0 w-full h-full object-cover object-center opacity-60 z-0"
                          sizes="100vw"
+                         priority={true}
+                         fetchPriority="high"
                     />
                     {/* Content */}
                     <span className="font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] relative z-50 text-official">

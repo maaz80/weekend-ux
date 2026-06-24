@@ -100,9 +100,9 @@ export default function FeatureStrip({ data }) {
                                         {item.icon}
                                    </div>
                                    <div>
-                                        <h3 className="font-serif text-[22px] leading-tight text-black lg:text-[28px]">
+                                        <h2 className="font-serif text-[22px] leading-tight text-black lg:text-[28px]">
                                              {item.title}
-                                        </h3>
+                                        </h2>
 
                                         {item.subtitle && (
                                              <p className="font-serif text-[22px] leading-tight text-black lg:text-[28px]">

@@ -61,7 +61,7 @@ const TeamSection = ({ data }) => {
 
                          {/* LEFT CONTENT */}
                          <div>
-                              <span className="font-urbanist text-[12px] font-semibold tracking-[0.35em] uppercase text-official">
+                              <span className="font-urbanist text-[12px] font-semibold tracking-[0.35em] uppercase text-[#8F6A00]">
                                    {title}
                               </span>
 
@@ -69,14 +69,14 @@ const TeamSection = ({ data }) => {
                                    {startheading}
                                    <br />
                                    {midheading && (
-                                        <span className="italic text-official">
+                                        <span className="italic text-[#8F6A00]">
                                              {midheading}
                                         </span>
                                    )}
                                    {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>}
                               </h2>
 
-                              <p className="mt-6 max-w-[320px] font-urbanist text-[14px] leading-7 text-[#77726B]">
+                              <p className="mt-6 max-w-[320px] font-urbanist text-[14px] leading-7 text-[#5A5652]">
                                    {description}
                               </p>
                          </div>
