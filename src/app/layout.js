@@ -1,4 +1,4 @@
-import { Urbanist, Inter, Playfair_Display } from "next/font/google";
+// import { Urbanist, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
@@ -15,26 +15,26 @@ import FooterModel from "@/models/Footer";
 import Testimonial from "@/models/Testimonial";
 import Blog from "@/models/Blog";
 
-const urbanist = Urbanist({
-  subsets: ["latin"],
-  variable: "--font-urbanist",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
+// const urbanist = Urbanist({
+//   subsets: ["latin"],
+//   variable: "--font-urbanist",
+//   weight: ["400", "500", "600", "700"],
+//   display: "swap",
+// });
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
+// const playfair = Playfair_Display({
+//   subsets: ["latin"],
+//   variable: "--font-playfair",
+//   weight: ["400", "500", "600", "700"],
+//   display: "swap",
+// });
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
+// const inter = Inter({
+//   subsets: ["latin"],
+//   variable: "--font-inter",
+//   weight: ["400", "500", "600", "700"],
+//   display: "swap",
+// });
 
 export const metadata = {
   title: "Weekend UX",
@@ -87,7 +87,7 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={` ${playfair.variable} ${urbanist.variable} ${inter.variable} h-full antialiased`}
+      className={`  h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <HomeDataProvider initialData={initialData}>
