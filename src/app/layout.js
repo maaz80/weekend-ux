@@ -19,18 +19,21 @@ const urbanist = Urbanist({
   subsets: ["latin"],
   variable: "--font-urbanist",
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   weight: ["400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata = {
