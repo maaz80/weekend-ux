@@ -163,18 +163,21 @@ export default function Hero() {
                </button> */}
 
                {/* Dot Indicators */}
-               <div className="absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2 gap-3">
+               <div className="absolute bottom-8 left-1/2 z-30 flex -translate-x-1/2">
                     {slides.map((_, index) => (
                          <button
                               key={index}
                               onClick={() => setCurrentSlide(index)}
-                              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer relative after:content-[''] after:absolute after:-inset-4 ${
-                                   index === currentSlide
-                                        ? "w-8 bg-yellow-400"
-                                        : "w-2.5 bg-white/30 hover:bg-white/60"
-                              }`}
+                              className="flex h-11 w-11 items-center justify-center cursor-pointer"
                               aria-label={`Go to slide ${index + 1}`}
-                         />
+                         >
+                              <span
+                                   className={`block rounded-full transition-all duration-300 h-2.5 ${index === currentSlide
+                                             ? "w-8 bg-yellow-400"
+                                             : "w-2.5 bg-white/30 hover:bg-white/60"
+                                        }`}
+                              />
+                         </button>
                     ))}
                </div>
 
