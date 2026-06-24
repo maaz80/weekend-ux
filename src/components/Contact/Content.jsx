@@ -84,9 +84,9 @@ const Content = ({ data }) => {
                                    {/* Enquiries */}
 
                                    <div>
-                                        <h3 className="text-[24px] font-bold text-neutral-900 mb-3">
+                                        <h2 className="text-[24px] font-bold text-neutral-900 mb-3">
                                              {inquiriesTitle}
-                                        </h3>
+                                        </h2>
 
                                         <div className="text-sm md:text-[16px] text-neutral-600">
                                              <p>{inquiriesEmail}</p>
@@ -97,9 +97,9 @@ const Content = ({ data }) => {
                                    {/* Location */}
 
                                    <div>
-                                        <h3 className="text-[24px] font-bold text-neutral-900 mb-3">
+                                        <h2 className="text-[24px] font-bold text-neutral-900 mb-3">
                                              {locationTitle}
-                                        </h3>
+                                        </h2>
 
                                         <div className="text-sm md:text-[16px] text-neutral-600 leading-6">
                                              {locationAddress.split('\n').map((line, idx) => (
@@ -111,9 +111,9 @@ const Content = ({ data }) => {
                                    {/* Social */}
 
                                    <div>
-                                        <h3 className="text-[24px] font-bold text-neutral-900 mb-3">
+                                        <h2 className="text-[24px] font-bold text-neutral-900 mb-3">
                                              {socialTitle}
-                                        </h3>
+                                        </h2>
 
                                         <div className="flex flex-wrap gap-4 text-sm text-neutral-600 italic">
                                              {socialPlatforms.map((social, idx) => (

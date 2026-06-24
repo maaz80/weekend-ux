@@ -42,7 +42,7 @@ export default function ContactUs() {
                          fill
                          priority={true}
                          fetchPriority="high"
-                         className="object-fill object-center opacity-60 z-0"
+                         className="object-cover object-center opacity-60 z-0"
                     />
                     {/* Content */}
 
