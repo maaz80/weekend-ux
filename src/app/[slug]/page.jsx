@@ -172,6 +172,7 @@ export default async function DynamicSlugPage({ params }) {
                          fill
                          priority
                          fetchPriority="high"
+                         loading='lazy'
                          className="object-cover object-center opacity-65 z-0"
                      />
                     

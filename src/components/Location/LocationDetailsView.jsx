@@ -36,6 +36,7 @@ export default function LocationDetailsView({ data }) {
                               alt="weekend-ux-policy-hero-bg"
                               fill
                               priority
+                              fetchPriority="high"
                               className="object-cover object-center opacity-60 z-0"
                          />
                          

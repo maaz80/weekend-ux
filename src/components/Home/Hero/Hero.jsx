@@ -90,6 +90,7 @@ export default function Hero() {
                                    alt={slide.tagline || "weekend-ux-hero-bg-template"}
                                    className="absolute inset-0 w-full h-full"
                                    priority={index === 0}
+                                   fetchPriority={index === 0 ? "high" : undefined}
                                    objectFit="cover"
                                    fallbackSrc="/images/weekend-ux-hero-bg-template.webp"
                               />
