@@ -11,13 +11,13 @@ const staticFeaturedBlogs = [
      {
           id: "static-1",
           title: "The Future of AI in Product Design and User Experience",
-          image: "/images/hero-bg.jpg",
+          image: "/images/hero-bg.webp",
           slug: "the-future-of-ai-in-product-design"
      },
      {
           id: "static-2",
           title: "How Modern UX Designers Create Experiences That Convert",
-          image: "/images/hero-bg.jpg",
+          image: "/images/hero-bg.webp",
           slug: "how-modern-ux-designers-create-experiences"
      },
 ];
@@ -26,37 +26,37 @@ const staticMoreBlogs = [
      {
           id: "static-1",
           title: "The Future of AI in Product Design and User Experience",
-          image: "/images/hero-bg.jpg",
+          image: "/images/hero-bg.webp",
           slug: "the-future-of-ai-in-product-design"
      },
      {
           id: "static-2",
           title: "How Modern UX Designers Create Experiences That Convert",
-          image: "/images/hero-bg.jpg",
+          image: "/images/hero-bg.webp",
           slug: "how-modern-ux-designers-create-experiences"
      },
      {
           id: "static-3",
           title: "The Future of AI in Product Design and User Experience",
-          image: "/images/hero-bg.jpg",
+          image: "/images/hero-bg.webp",
           slug: "the-future-of-ai-in-product-design"
      },
      {
           id: "static-4",
           title: "How Modern UX Designers Create Experiences That Convert",
-          image: "/images/hero-bg.jpg",
+          image: "/images/hero-bg.webp",
           slug: "how-modern-ux-designers-create-experiences"
      },
      {
           id: "static-5",
           title: "The Future of AI in Product Design and User Experience",
-          image: "/images/hero-bg.jpg",
+          image: "/images/hero-bg.webp",
           slug: "the-future-of-ai-in-product-design"
      },
      {
           id: "static-6",
           title: "How Modern UX Designers Create Experiences That Convert",
-          image: "/images/hero-bg.jpg",
+          image: "/images/hero-bg.webp",
           slug: "how-modern-ux-designers-create-experiences"
      },
 ];
@@ -126,7 +126,7 @@ export default function Blogs() {
 
           const start = Math.max(1, Math.min(currentPage, totalPages - 2));
           const actualStart = currentPage < 3 ? 1 : start;
-          
+
           const end = Math.min(totalPages, actualStart + (currentPage < 3 ? 2 : 2));
           for (let i = actualStart; i <= end; i++) {
                pages.push(i);
@@ -169,7 +169,7 @@ export default function Blogs() {
                {/* Featured Blogs Section */}
                <div className="custom-width py-20">
                     <h2 className="text-[28px] md:text-[40px] text-neutral-900 font-medium font-playfair mb-4">
-                         <span className="text-official italic">{featuredStart}</span> {featuredEnd}
+                         <span className="text-[#8F6A00] italic">{featuredStart}</span> {featuredEnd}
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
                          {activeFeaturedBlogs.map((blog, idx) => (
@@ -177,6 +177,8 @@ export default function Blogs() {
                                    key={blog._id || blog.id || idx}
                                    blog={blog}
                                    height="h-62.5 md:h-95"
+                                   priority={idx < 2 && currentPage === 1}
+                                   fetchPriority={idx === 0 && currentPage === 1 ? "high" : undefined}
                               />
                          ))}
                     </div>
@@ -185,7 +187,7 @@ export default function Blogs() {
                {/* Explore More Blogs Section */}
                <div className="custom-width pb-20">
                     <h2 className="text-[28px] md:text-[40px] text-neutral-900 font-medium font-playfair mb-4">
-                         Explore <span className="text-official italic">More</span> Blogs
+                         Explore <span className="text-[#8F6A00] italic">More</span> Blogs
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
                          {displayedBlogs.map((blog, idx) => (
@@ -206,8 +208,8 @@ export default function Blogs() {
                                    aria-label="Previous Page"
                                    disabled={currentPage === 1}
                                    className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === 1
-                                             ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                             : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                        ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                        : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
                                         }`}
                               >
                                    <FiChevronLeft className="text-lg" />
@@ -230,8 +232,8 @@ export default function Blogs() {
                                              key={`page-${item}`}
                                              onClick={() => setCurrentPage(item)}
                                              className={`w-10 h-10 rounded-xl border text-sm font-semibold transition-all cursor-pointer ${currentPage === item
-                                                       ? "bg-official text-black border-transparent shadow-sm"
-                                                       : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                  ? "bg-official text-black border-transparent shadow-sm"
+                                                  : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
                                                   }`}
                                         >
                                              {item}
@@ -245,8 +247,8 @@ export default function Blogs() {
                                    aria-label="Next Page"
                                    disabled={currentPage === totalPages}
                                    className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === totalPages
-                                             ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                             : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                        ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                        : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
                                         }`}
                               >
                                    <FiChevronRight className="text-lg" />
@@ -254,7 +256,7 @@ export default function Blogs() {
                          </div>
                     )}
                </div>
-               
+
                {/* <RelatedBlogs /> */}
                <FAQ />
           </div>

@@ -17,7 +17,7 @@ export default function Details({ data }) {
 
      const dateStr = data?.date || "22nd July, 2026";
      const readStr = data?.read || "3 min read";
-     const coverImage = data?.image || "/images/hero-bg.jpg";
+     const coverImage = data?.image || "/images/hero-bg.webp";
      const htmlContent = data?.content ? data.content.map(c => c.data).join("") : "";
 
      useEffect(() => {
@@ -136,12 +136,11 @@ export default function Details({ data }) {
                                                        <button
                                                             key={item.id}
                                                             onClick={() => handleScroll(item.id)}
-                                                            className={`w-full text-left px-3 py-2 rounded-lg transition-all cursor-pointer leading-7.5 line-clamp-1 ${
-                                                                 isActive
+                                                            className={`w-full text-left px-3 py-2 rounded-lg transition-all cursor-pointer leading-7.5 line-clamp-1 ${isActive
                                                                       ? "bg-neutral-900 text-white font-bold"
                                                                       : "text-neutral-800 hover:bg-neutral-200/60 hover:text-orange-500 font-medium"
-                                                            }`}
-                                                           
+                                                                 }`}
+
                                                        >
                                                             {item.text}
                                                        </button>
@@ -200,7 +199,7 @@ export default function Details({ data }) {
 
                               {/* BLOG CONTENT RENDERER */}
                               <div className="mt-8 lg:mt-12">
-                                   <div 
+                                   <div
                                         ref={contentRef}
                                         className="blog-content"
                                         dangerouslySetInnerHTML={{ __html: htmlContent }}

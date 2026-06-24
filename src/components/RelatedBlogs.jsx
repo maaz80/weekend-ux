@@ -97,7 +97,7 @@ export default function RelatedBlogs({ data }) {
                     <div className="mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
                          {activeBlogs.map((blog) => {
                               const slugOrId = blog.slug || blog._id || blog.id;
-                              const imageSrc = blog.image && blog.image.trim() ? blog.image.trim() : "/images/hero-bg.jpg";
+                              const imageSrc = blog.image && blog.image.trim() ? blog.image.trim() : "/images/hero-bg.webp";
                               return (
                                    <Link
                                         key={slugOrId}
