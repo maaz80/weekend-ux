@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
   images: {
     remotePatterns: [
       {
@@ -8,6 +7,13 @@ const nextConfig = {
         hostname: 'res.cloudinary.com',
         pathname: '/**',
       },
+    ],
+  },
+  // Optimize package imports to reduce unused JavaScript and keep bundle sizes minimal
+  experimental: {
+    optimizePackageImports: [
+      'react-icons',
+      'lucide-react',
     ],
   },
 };

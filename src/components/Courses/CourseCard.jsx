@@ -25,7 +25,7 @@ export default function CourseCard({ course, setIsModal = false }) {
                <div className="relative h-47.5 md:h-56.5 overflow-hidden bg-zinc-100">
                     <OptimizedImage
                          src={imageSrc}
-                         alt={course?.alt || course?.title || "Course Image"}
+                         alt={course?.alt || ""}
                          className="w-full h-full object-cover"
                          sizes="(max-width: 768px) 100vw, 400px"
                     />

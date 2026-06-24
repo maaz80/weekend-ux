@@ -260,7 +260,7 @@ const Testimonials = ({ data }) => {
                                         }}
                                         aria-label={`Go to slide ${i + 1}`}
                                         aria-current={currentIndex === i ? "true" : undefined}
-                                        className="p-2 md:p-3 cursor-pointer"
+                                        className="w-11 h-11 flex items-center justify-center cursor-pointer"
                                    >
                                         <span className={`block rounded-full transition-all duration-300
                     ${currentIndex === i ? "w-6 h-2 bg-gray-800" : "w-2 h-2 bg-gray-300"}`}

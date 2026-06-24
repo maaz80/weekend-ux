@@ -17,7 +17,7 @@ const BlogCard = ({ blog, height ='h-62.5 md:h-95'}) => {
                          <div className="overflow-hidden rounded-md bg-zinc-100">
                               <OptimizedImage
                                    src={imageSrc}
-                                   alt={blog?.alt || blog?.title || "Blog Image"}
+                                   alt={blog?.alt || ""}
                                    className={`w-full object-cover transition duration-700 group-hover:scale-105 ${height}`}
                                    sizes="(max-width: 768px) 100vw, 50vw"
                               />

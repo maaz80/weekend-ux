@@ -219,7 +219,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                            {course.image && (
                                                                                 <img 
                                                                                      src={course.image} 
-                                                                                     alt={course.title} 
+                                                                                     alt="" 
                                                                                      className="w-10 h-10 object-cover rounded-lg bg-zinc-850 border border-zinc-700/50 shrink-0" 
                                                                                 />
                                                                            )}
@@ -379,7 +379,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                  {course.image && (
                                                                       <img 
                                                                            src={course.image} 
-                                                                           alt={course.title} 
+                                                                           alt="" 
                                                                            className="w-10 h-10 object-cover rounded-lg bg-zinc-850 border border-zinc-700/50 shrink-0" 
                                                                       />
                                                                  )}

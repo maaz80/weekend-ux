@@ -22,7 +22,7 @@ export default function CourseCard({ course, setIsModal = false }) {
                <div className="relative rounded-xl overflow-hidden h-50 md:h-65.5 w-full bg-zinc-100">
                     <OptimizedImage
                          src={imageSrc}
-                         alt={course?.alt || course?.title || "Course Cover Image"}
+                         alt={course?.alt || ""}
                          className="w-full h-full object-cover"
                          sizes="(max-width: 768px) 100vw, 320px"
                     />

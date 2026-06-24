@@ -168,7 +168,7 @@ export default function Hero() {
                          <button
                               key={index}
                               onClick={() => setCurrentSlide(index)}
-                              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
+                              className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer relative after:content-[''] after:absolute after:-inset-4 ${
                                    index === currentSlide
                                         ? "w-8 bg-yellow-400"
                                         : "w-2.5 bg-white/30 hover:bg-white/60"
