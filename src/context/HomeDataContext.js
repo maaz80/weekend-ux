@@ -10,6 +10,7 @@ const HomeDataContext = createContext({
      footerGlobalData: null,
      footerColumnsData: null,
      testimonialsData: null,
+     blogsData: null,
      loading: true,
 });
 
@@ -21,20 +22,22 @@ export function HomeDataProvider({ children }) {
      const [footerGlobalData, setFooterGlobalData] = useState(null);
      const [footerColumnsData, setFooterColumnsData] = useState(null);
      const [testimonialsData, setTestimonialsData] = useState(null);
+     const [blogsData, setBlogsData] = useState(null);
      const [loading, setLoading] = useState(true);
 
      useEffect(() => {
           let isMounted = true;
           async function fetchAllData() {
                try {
-                    const [homeRes, faqRes, coursesRes, navbarRes, footerGlobalRes, footerColumnsRes, testimonialsRes] = await Promise.all([
+                    const [homeRes, faqRes, coursesRes, navbarRes, footerGlobalRes, footerColumnsRes, testimonialsRes, blogsRes] = await Promise.all([
                          fetch("/api/home"),
                          fetch("/api/pages/home/faq"),
                          fetch("/api/courses"),
                          fetch("/api/navbar"),
                          fetch("/api/footer-columns/global"),
                          fetch("/api/footer-columns"),
-                         fetch("/api/testimonials")
+                         fetch("/api/testimonials"),
+                         fetch("/api/blogs")
                     ]);
 
                     if (homeRes.ok) {
@@ -85,8 +88,15 @@ export function HomeDataProvider({ children }) {
                     } else {
                          console.warn("Failed to fetch testimonials, status code:", testimonialsRes.status);
                     }
+
+                    if (blogsRes.ok) {
+                         const bData = await blogsRes.json();
+                         if (isMounted) setBlogsData(bData);
+                    } else {
+                         console.warn("Failed to fetch blogs, status code:", blogsRes.status);
+                    }
                } catch (error) {
-                    console.error("Error fetching homepage config/FAQ/Courses/Navbar/Footer from API:", error);
+                    console.error("Error fetching homepage config/FAQ/Courses/Navbar/Footer/Blogs from API:", error);
                } finally {
                     if (isMounted) {
                          setLoading(false);
@@ -102,7 +112,7 @@ export function HomeDataProvider({ children }) {
      }, []);
 
      return (
-          <HomeDataContext.Provider value={{ homeData, faqData, coursesData, navbarData, footerGlobalData, footerColumnsData, testimonialsData, loading }}>
+          <HomeDataContext.Provider value={{ homeData, faqData, coursesData, navbarData, footerGlobalData, footerColumnsData, testimonialsData, blogsData, loading }}>
                {children}
           </HomeDataContext.Provider>
      );

@@ -29,30 +29,13 @@ const staticBlogs = [
 ];
 
 export default function RelatedBlogs({ data }) {
-     const { homeData } = useHomeData();
-     const [blogsList, setBlogsList] = useState([]);
-
-     useEffect(() => {
-          async function fetchBlogs() {
-               try {
-                    const res = await fetch("/api/blogs");
-                    if (res.ok) {
-                         const json = await res.json();
-                         if (json?.blogs && Array.isArray(json.blogs)) {
-                              // Slice top 3 blogs
-                              setBlogsList(json.blogs.slice(0, 3));
-                         }
-                    }
-               } catch (error) {
-                    console.error("Failed to fetch blogs in RelatedBlogs component:", error);
-               }
-          }
-          fetchBlogs();
-     }, []);
-
-     const activeBlogs = blogsList.length > 0 ? blogsList : staticBlogs;
+     const { homeData, blogsData } = useHomeData();
 
      const config = data || homeData?.relatedBlogs;
+
+     const activeBlogs = (blogsData?.blogs && Array.isArray(blogsData.blogs) && blogsData.blogs.length > 0)
+          ? blogsData.blogs.slice(0, 3)
+          : staticBlogs;
 
      const title = (config?.title && config.title.trim())
           ? config.title
