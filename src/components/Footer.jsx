@@ -206,7 +206,7 @@ export default function Footer() {
                                                        rel="noopener noreferrer"
                                                        key={i}
                                                        aria-label={social.icon ? social.icon.replace(/^(Fa|Ri|Ci|Fi)/, "").replace(/([A-Z])/g, " $1").trim() : "Social media"}
-                                                       className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-zinc-950 hover:bg-official/80 transition-colors duration-200"
+                                                       className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-white hover:bg-official/80 transition-colors duration-200"
                                                   >
                                                        <IconComponent size={18} />
                                                   </a>
@@ -216,7 +216,7 @@ export default function Footer() {
                                         [FaFacebookF, RiTwitterXLine, FaInstagram, FaLinkedinIn, CiYoutube].map((Icon, i) => (
                                              <div
                                                   key={i}
-                                                  className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-zinc-950 hover:bg-official/80 transition-colors duration-200"
+                                                  className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-white hover:bg-official/80 transition-colors duration-200"
                                              >
                                                   <Icon size={18} strokeWidth={1.2} />
                                              </div>
