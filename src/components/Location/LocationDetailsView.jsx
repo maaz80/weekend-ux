@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import OptimizedImage from "@/components/ui/OptimizedImage";
+import Breadcrumb from "@/components/Breadcrumb";
 import { useHomeData } from "@/context/HomeDataContext";
 import HomeFeature from "@/components/Home/Features/Feature";
 import Link from "next/link";
@@ -23,6 +24,7 @@ export default function LocationDetailsView({ data }) {
           <main className="min-h-screen bg-white text-neutral-900 font-urbanist">
                {/* 1. HERO SECTION */}
                <div className="bg-white text-white font-urbanist flex flex-col relative">
+                    <Breadcrumb />
                     <Image 
                          src='/images/weekend-ux-decorative-diamond.webp' 
                          alt="weekend-ux-decorative-diamond" 
@@ -31,7 +33,7 @@ export default function LocationDetailsView({ data }) {
                          height={200} 
                          style={{ height: 'auto' }}
                     />
-                    <section className="relative h-62.5 md:h-100 w-full flex flex-col gap-5 items-center justify-center bg-zinc-950 overflow-hidden">
+                    <section className="relative h-66.5 md:h-104 w-full flex flex-col gap-5 items-center justify-center bg-zinc-950 overflow-hidden">
                          <Image
                               src='/images/weekend-ux-location-hero-bg.webp'
                               alt="weekend-ux-policy-hero-bg"

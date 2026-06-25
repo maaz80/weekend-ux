@@ -3,6 +3,7 @@
 // Trigger compilation
 import { useState } from "react";
 import Image from "next/image";
+import Breadcrumb from "@/components/Breadcrumb";
 import CourseCard from "@/components/Courses/CourseCard";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import FAQ from "@/components/FAQ";
@@ -217,10 +218,11 @@ export default function CoursesPage() {
      );
 
      return (
-          <div className="min-h-screen bg-black text-white font-urbanist flex flex-col pt-22 md:pt-12">
+          <div className="min-h-screen bg-black text-white font-urbanist flex flex-col relative pt-22 md:pt-12">
+               <Breadcrumb />
 
                {/* Hero Header Section */}
-               <section className="relative h-35.5 md:h-100 w-full flex items-center justify-center bg-zinc-950 overflow-hidden">
+               <section className="relative h-39.5 md:h-104 w-full flex items-center justify-center bg-zinc-950 overflow-hidden">
                     <Image
                          src="/images/weekend-ux-courses-hero-bg.webp"
                          alt="weekend-ux-courses-hero-bg"

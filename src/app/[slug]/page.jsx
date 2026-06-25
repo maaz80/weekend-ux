@@ -4,6 +4,7 @@ import LocationDetailsView from "@/components/Location/LocationDetailsView";
 import FAQ from "@/components/FAQ";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import Image from "next/image";
+import Breadcrumb from "@/components/Breadcrumb";
 import Blog from "@/models/Blog";
 import Courses from "@/models/Courses";
 import Location from "@/models/Location";
@@ -127,9 +128,10 @@ export default async function DynamicSlugPage({ params }) {
                : "Advance Certificate in AI for UI UX";
 
           return (
-               <div className="min-h-screen bg-black text-white font-urbanist flex flex-col ">
+               <div className="min-h-screen bg-black text-white font-urbanist flex flex-col relative">
+                    <Breadcrumb />
                     {/* Hero Header Section */}
-                    <section className="relative h-56.5 md:h-100 w-full flex md:items-center items-end pb-12 md:pb-0 justify-center bg-zinc-950 overflow-hidden">
+                    <section className="relative h-60.5 md:h-104 w-full flex md:items-center items-end pb-12 md:pb-0 justify-center bg-zinc-950 overflow-hidden">
                          <Image
                               src="/images/weekend-ux-course-details-hero-bg.webp"
                               alt="weekend-ux-course-details-hero-bg"
@@ -163,9 +165,10 @@ export default async function DynamicSlugPage({ params }) {
           : "Explore Our Blogs";
 
      return (
-          <div className="min-h-screen bg-white text-white font-urbanist flex flex-col pt-15 md:pt-11">
+          <div className="min-h-screen bg-white text-white font-urbanist flex flex-col relative pt-15 md:pt-11">
+               <Breadcrumb />
                {/* Hero Header Section */}
-               <section className="relative h-52.5 md:h-100 w-full flex md:items-center items-end pb-12 md:pb-0 justify-center bg-zinc-950 ">
+               <section className="relative h-56.5 md:h-104 w-full flex md:items-center items-end pb-12 md:pb-0 justify-center bg-zinc-950 ">
                     <Image
                          src="/images/weekend-ux-blogs-hero-bg.webp"
                          alt="weekend-ux-policy-hero-bg"

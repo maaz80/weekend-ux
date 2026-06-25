@@ -9,6 +9,7 @@ import OptimizedImage from "@/components/ui/OptimizedImage";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import FAQ from "@/components/FAQ";
 import Image from "next/image";
+import Breadcrumb from "@/components/Breadcrumb";
 
 const SearchResultsContent = () => {
      const searchParams = useSearchParams();
@@ -88,10 +89,11 @@ const SearchResultsContent = () => {
      };
 
      return (
-          <div className="min-h-screen pb-20 pt-16 md:pt-12 font-urbanist bg-white">
+          <div className="min-h-screen pb-20 pt-16 md:pt-12 font-urbanist bg-white relative">
+               <Breadcrumb />
 
                {/* HEADER */}
-               <div className=" text-white h-58.5 md:h-100 w-full z-999 flex flex-col items-center justify-end md:justify-center text-center relative overflow-hidden pb-5 md:pb-0">
+               <div className=" text-white h-62.5 md:h-104 w-full z-999 flex flex-col items-center justify-end md:justify-center text-center relative overflow-hidden pb-5 md:pb-0">
                     <Image
                          src='/images/weekend-ux-policy-hero-bg.webp'
                          alt="weekend-ux-policy-hero-bg"

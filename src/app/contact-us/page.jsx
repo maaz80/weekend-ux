@@ -2,6 +2,7 @@ import Image from "next/image";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import FAQ from "@/components/FAQ";
 import Content from "@/components/Contact/Content";
+import Breadcrumb from "@/components/Breadcrumb";
 
 // Database imports for server-side pre-rendering
 import connectDB from "@/config/db";
@@ -25,9 +26,10 @@ export default async function ContactUs() {
 
      return (
           <div className=" bg-white text-white font-urbanist flex flex-col relative  pt-15 md:pt-10">
+               <Breadcrumb />
 
                {/* Hero Header Section */}
-               <section className="relative h-42.5 md:h-100 w-full flex flex-col gap-5 md:items-center items-end justify-center bg-zinc-950 ">
+               <section className="relative h-46.5 md:h-104 w-full flex flex-col gap-5 md:items-center items-end justify-center bg-zinc-950 ">
                     <Image
                          src='/images/weekend-ux-contact-hero-bg.webp'
                          alt="weekend-ux-contact-hero-bg"
