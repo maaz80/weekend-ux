@@ -40,14 +40,14 @@ export const getAuthHeader = () => {
 };
 
 // Signup API call
-export const signupUser = async (name, email, password) => {
+export const signupUser = async (name, email, otp) => {
      try {
           const res = await fetch(`${API}/auth/signup`, {
                method: "POST",
                headers: {
                     "Content-Type": "application/json",
                },
-               body: JSON.stringify({ name, email, password }),
+               body: JSON.stringify({ name, email, otp }),
           });
 
           const data = await res.json();
@@ -68,14 +68,14 @@ export const signupUser = async (name, email, password) => {
 };
 
 // Login API call
-export const loginUser = async (email, password) => {
+export const loginUser = async (email, otp) => {
      try {
           const res = await fetch(`${API}/auth/login`, {
                method: "POST",
                headers: {
                     "Content-Type": "application/json",
                },
-               body: JSON.stringify({ email, password }),
+               body: JSON.stringify({ email, otp }),
           });
 
           const data = await res.json();
@@ -91,6 +91,30 @@ export const loginUser = async (email, password) => {
           return data;
      } catch (error) {
           console.error("Login error:", error);
+          throw error;
+     }
+};
+
+// Send Auth OTP
+export const sendAuthOTP = async (email) => {
+     try {
+          const res = await fetch(`${API}/auth/send-otp`, {
+               method: "POST",
+               headers: {
+                    "Content-Type": "application/json",
+               },
+               body: JSON.stringify({ email }),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok) {
+               throw new Error(data.error || "Failed to send OTP");
+          }
+
+          return data;
+     } catch (error) {
+          console.error("Send auth OTP error:", error);
           throw error;
      }
 };

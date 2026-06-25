@@ -109,7 +109,7 @@ const FAQ = ({ paddings, faqData: initialFaqData }) => {
           : "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs.";
 
      return (
-          <section className={` relative z-999 ${paddings} py-15 min-h-[160vh] bg-white`}>
+          <section className={` relative z-999 ${paddings} pt-15 pb-35 md:pb-70  bg-white`}>
                {/* Background */}
                <div
                     className="absolute inset-0 bg-cover bg-center z-10"

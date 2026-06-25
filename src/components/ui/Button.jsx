@@ -8,16 +8,16 @@ const Button = ({
 
      const variants = {
           primary:
-               "bg-yellow text-black hover:bg-yellow-300",
+               "bg-official text-black hover:bg-official/80",
 
           secondary:
-               "bg-[#1a1a1a] text-white border border-yellow/20 hover:bg-[#242424]",
-               dark:"bg-neutral-900 text-white text-[13px] md:text-base"
+               "bg-[#1a1a1a] text-white border border-official/20 hover:bg-[#242424]",
+          dark: "bg-neutral-900 text-white text-[13px] md:text-base"
      };
 
      const sizes = {
-          md: "px-6 h-12 text-sm rounded-xl",
-          sm: "px-3 h-8 text-[11px] font-semibold rounded-lg",
+          md: "px-6 h-12 text-sm rounded-[6px]",
+          sm: "px-3 h-8 text-[11px] font-semibold rounded-[6px]",
      };
 
      return (

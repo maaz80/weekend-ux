@@ -168,9 +168,11 @@ export default function Footer() {
                     <div className="font-playfair text-[17px] md:text-[28px] lg:text-[56px] text-neutral-900 max-w-150 relative z-50 leading-9 md:leading-12 lg:leading-16" >
                          {cardTitle}
                     </div>
-                    <Button variant="dark" className="mt-0 md:mt-4 lg:mt-10 hover:scale-105 relative z-50">
-                         {cardButtonName}
-                    </Button>
+                    <Link href="/courses">
+                         <Button variant="dark" className="mt-0 md:mt-4 lg:mt-10 hover:scale-105 relative z-50">
+                              {cardButtonName}
+                         </Button>
+                    </Link>
                </div>
                <div className="mx-auto max-w-330 px-6 md:px-9 2xl:px-10 pt-32 md:pt-44 2xl:pt-56 pb-5">
 
@@ -187,7 +189,7 @@ export default function Footer() {
                               <h3 className="text-[20px] mb-5">{settings?.buttontitle || "Follow us!"}</h3>
 
                               {(settings?.buttonname || !settings) && (
-                                   <button className="w-43 h-11 border border-white/70 rounded-lg text-[12px] text-[#8FA1B2] mb-5 hover:bg-white/5 transition">
+                                   <button className="w-43 h-11 border border-white/70 rounded-md text-[12px] text-[#8FA1B2] mb-5 hover:bg-white/5 transition">
                                         {settings?.buttonname || "Refer & Earn"}
                                    </button>
                               )}

@@ -2,6 +2,7 @@ import { Urbanist, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import Chatbot from "@/components/Chatbot";
 import QuickAccessBar from "@/components/QuickAccessBar";
 import { HomeDataProvider } from "@/context/HomeDataContext";
 
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
           <main className="flex-grow">
                {children}
           </main>
+          <Chatbot />
           <QuickAccessBar />
           <Footer />
         </HomeDataProvider>

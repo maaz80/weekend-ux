@@ -7,10 +7,10 @@ import FAQ from "@/components/FAQ";
 
 export default function CoursesPage() {
      return (
-          <div className="min-h-screen bg-black text-white font-urbanist flex flex-col">
+          <div className="min-h-screen bg-black text-white font-urbanist flex flex-col pt-15 md:pt-11">
 
                {/* Hero Header Section */}
-               <section className="relative h-62.5 md:h-100 w-full flex items-center justify-center bg-zinc-950 overflow-hidden">
+               <section className="relative h-62.5 md:h-100 w-full flex md:items-center items-end pb-12 md:pb-0 justify-center bg-zinc-950 overflow-hidden">
                     <Image
                          src="/images/weekend-ux-course-details-hero-bg.webp"
                          alt="weekend-ux-course-details-hero-bg"

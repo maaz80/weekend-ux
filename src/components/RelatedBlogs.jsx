@@ -70,7 +70,7 @@ export default function RelatedBlogs({ data }) {
                />
 
                {/* Yellow Overlay */}
-               <div className="absolute inset-0 bg-[#F8C400]/25" />
+               <div className="absolute inset-0 bg-official/25" />
 
                {/* Content */}
                <div className="relative z-10 mx-auto max-w-360 px-5 py-16 md:px-8 md:py-20 xl:px-12 xl:py-24">

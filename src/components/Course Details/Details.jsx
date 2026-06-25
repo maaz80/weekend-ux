@@ -37,48 +37,57 @@ export default function Details({ data }) {
           setShowLockModal(false);
      };
 
-     const curriculum = (data?.chapter && data.chapter.chaptername) ? [
-          {
-               id: 1,
-               title: data.chapter.chaptername,
-               lessons: data.chapter.totallessons || data.chapter.lessons?.length || 0,
-               items: data.chapter.lessons || []
-          }
-     ] : [
-          {
-               id: 1,
-               title: "Chapter Title",
-               lessons: 5,
-               duration: "45 Mins",
-               items: [
-                    "Lessons name",
-                    "Lessons name",
-                    "Lessons name",
-                    "Lessons name",
-               ],
-          },
-          {
-               id: 2,
-               title: "Chapter Title",
-               lessons: 5,
-               duration: "45 Mins",
-               items: [],
-          },
-          {
-               id: 3,
-               title: "Chapter Title",
-               lessons: 5,
-               duration: "45 Mins",
-               items: [],
-          },
-          {
-               id: 4,
-               title: "Chapter Title",
-               lessons: 5,
-               duration: "45 Mins",
-               items: [],
-          },
-     ];
+     const curriculum = Array.isArray(data?.chapter) && data.chapter.length > 0
+          ? data.chapter.map((ch, index) => ({
+               id: index + 1,
+               title: ch.chaptername || `Chapter ${index + 1}`,
+               lessons: ch.totallessons || ch.lessons?.length || 0,
+               items: ch.lessons || []
+          }))
+          : (data?.chapter && data.chapter.chaptername)
+               ? [
+                    {
+                         id: 1,
+                         title: data.chapter.chaptername,
+                         lessons: data.chapter.totallessons || data.chapter.lessons?.length || 0,
+                         items: data.chapter.lessons || []
+                    }
+               ]
+               : [
+                    {
+                         id: 1,
+                         title: "Chapter Title",
+                         lessons: 5,
+                         duration: "45 Mins",
+                         items: [
+                              "Lessons name",
+                              "Lessons name",
+                              "Lessons name",
+                              "Lessons name",
+                         ],
+                    },
+                    {
+                         id: 2,
+                         title: "Chapter Title",
+                         lessons: 5,
+                         duration: "45 Mins",
+                         items: [],
+                    },
+                    {
+                         id: 3,
+                         title: "Chapter Title",
+                         lessons: 5,
+                         duration: "45 Mins",
+                         items: [],
+                    },
+                    {
+                         id: 4,
+                         title: "Chapter Title",
+                         lessons: 5,
+                         duration: "45 Mins",
+                         items: [],
+                    },
+               ];
 
      return (
           <section className="bg-[#F8F6EE] py-12 lg:py-20 font-urbanist">
@@ -187,7 +196,7 @@ export default function Details({ data }) {
                                                        </button>
 
                                                        {isOpen && (
-                                                            <div className="border-t border-[#E5E0D6] px-3 md:px-5 py-5">
+                                                            <div className="border-t border-[#E5E0D6] px-0 md:px-5 py-5">
                                                                  <div className="space-y-2">
                                                                       {chapter.items.map((lesson, idx) => {
                                                                            const isObject = typeof lesson === "object" && lesson !== null;
@@ -212,7 +221,7 @@ export default function Details({ data }) {
                                                                                 >
                                                                                      <div className="flex items-center gap-3">
                                                                                           {isLoggedIn ? (
-                                                                                               <span className="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 transition-colors group-hover:bg-yellow-500 group-hover:text-neutral-900">
+                                                                                               <span className="w-8 h-8 rounded-full bg-official/50 flex items-center justify-center text-official transition-colors group-hover:bg-official/80 group-hover:text-neutral-900">
                                                                                                     <Play size={12} className="fill-current" />
                                                                                                </span>
                                                                                           ) : (
@@ -220,7 +229,7 @@ export default function Details({ data }) {
                                                                                                     <Lock size={12} />
                                                                                                </span>
                                                                                           )}
-                                                                                          <span className="font-semibold text-zinc-800 transition-colors group-hover:text-yellow-600">
+                                                                                          <span className="font-semibold text-zinc-800 transition-colors group-hover:text-official/80 line-clamp-1">
                                                                                                {lessonName}
                                                                                           </span>
                                                                                      </div>
@@ -313,11 +322,11 @@ export default function Details({ data }) {
                                    <X size={20} />
                               </button>
 
-                              <div className="w-16 h-16 bg-yellow-50 rounded-full flex items-center justify-center mx-auto mb-6 text-yellow-500 border border-yellow-100">
+                              <div className="w-16 h-16 bg-official/30 rounded-full flex items-center justify-center mx-auto mb-6 text-official border border-official/50">
                                    <Lock size={30} />
                               </div>
 
-                              <h3 className="text-xl font-playfair font-bold text-neutral-900 mb-2">Lesson Locked</h3>
+                              <h3 className="text-xl font-bold text-neutral-900 mb-2">Lesson Locked</h3>
                               <p className="text-sm text-zinc-600 mb-6 leading-relaxed">
                                    This lesson is reserved for enrolled members. Please log in or sign up to unlock access to all video lectures.
                               </p>
@@ -328,7 +337,7 @@ export default function Details({ data }) {
                                              setShowLockModal(false);
                                              setShowAuthModal(true);
                                         }}
-                                        className="w-full h-11 bg-yellow-400 hover:bg-yellow-500 text-neutral-900 rounded-lg text-sm font-semibold transition cursor-pointer"
+                                        className="w-full h-11 bg-official hover:bg-official/80 text-neutral-900 rounded-lg text-sm font-semibold transition cursor-pointer"
                                    >
                                         Log In / Sign Up
                                    </button>
@@ -350,7 +359,7 @@ export default function Details({ data }) {
 
                               <div className="px-6 py-4 bg-zinc-900 border-b border-zinc-800 flex justify-between items-center text-white">
                                    <div>
-                                        <span className="text-[11px] uppercase tracking-wider text-yellow-500 font-bold">Now Playing</span>
+                                        <span className="text-[11px] uppercase tracking-wider text-official font-bold">Now Playing</span>
                                         <h2 className="text-lg font-semibold font-playfair">{activeVideo.name}</h2>
                                    </div>
                                    <button

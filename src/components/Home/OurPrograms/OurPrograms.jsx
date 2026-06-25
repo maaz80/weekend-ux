@@ -240,12 +240,12 @@ const OurPrograms = ({ data }) => {
 
                     {/* Heading Area */}
                     <div className="text-center mb-16">
-                         <p className="text-[12px] font-semibold tracking-[0.25em] text-yellow-600 uppercase font-inter mb-3">
+                         <p className="text-[12px] font-semibold tracking-[0.25em] text-official uppercase font-inter mb-3">
                               {title}
                          </p>
                          <h2 className="font-playfair text-[38px] md:text-[56px] leading-tight text-zinc-900 font-medium">
                               {startheading}{" "}
-                              {midheading && <span className="italic text-yellow font-normal">{midheading}</span>}
+                              {midheading && <span className="italic text-official font-normal">{midheading}</span>}
                               {endheading && (
                                    <>
                                         {endheading.startsWith(" ") ? "" : " "}

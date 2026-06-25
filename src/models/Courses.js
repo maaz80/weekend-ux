@@ -21,7 +21,7 @@ const coursesSchema = new mongoose.Schema({
           duration: String,
           category: String,
           overview: String,
-          chapter: {
+          chapter:[ {
                chaptername: String,
                totallessons: String,
                lessons: [{
@@ -31,7 +31,7 @@ const coursesSchema = new mongoose.Schema({
                          duration: String
                     }
                }]
-          },
+          }],
           faq: {
                title: String,
                startheading: String,

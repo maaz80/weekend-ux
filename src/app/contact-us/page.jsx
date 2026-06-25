@@ -24,10 +24,10 @@ export default async function ContactUs() {
           : "Contact Us";
 
      return (
-          <div className=" bg-white text-white font-urbanist flex flex-col relative ">
+          <div className=" bg-white text-white font-urbanist flex flex-col relative  pt-15 md:pt-10">
 
                {/* Hero Header Section */}
-               <section className="relative h-32.5 md:h-100 w-full flex flex-col gap-5 items-center justify-center bg-zinc-950 ">
+               <section className="relative h-42.5 md:h-100 w-full flex flex-col gap-5 md:items-center items-end justify-center bg-zinc-950 ">
                     <Image
                          src='/images/weekend-ux-contact-hero-bg.webp'
                          alt="weekend-ux-contact-hero-bg"

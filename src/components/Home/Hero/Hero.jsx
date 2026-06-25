@@ -5,25 +5,26 @@ import { useState, useEffect } from "react";
 import Button from "../../ui/Button";
 import { useHomeData } from "@/context/HomeDataContext";
 import OptimizedImage from "@/components/ui/OptimizedImage";
+import Link from "next/link";
 
 const staticSlides = [
      {
           tagline: "Learn As You Desire",
-          titleHtml: "Design <span class=\"italic text-yellow-400\">Skills</span> That<br/>Actually Get You Hired.",
+          titleHtml: "Design <span class=\"italic text-official\">Skills</span> That<br/>Actually Get You Hired.",
           description: "Explore a curated, collaborative environment. Find your right fit, online or in-person.",
           bgImage: "/images/weekend-ux-hero-bg-template.webp",
           buttonText: "Explore Programs"
      },
      {
           tagline: "Build Your Future",
-          titleHtml: "Master <span class=\"italic text-yellow-400\">Products</span> With<br/>Industry Leading Mentors.",
+          titleHtml: "Master <span class=\"italic text-official\">Products</span> With<br/>Industry Leading Mentors.",
           description: "Hands-on UI/UX design workshops, real-world case studies, and personalized portfolio reviews.",
           bgImage: "/images/weekend-ux-hero-bg-template.webp",
           buttonText: "Explore Programs"
      },
      {
           tagline: "Collaborate & Grow",
-          titleHtml: "Join <span class=\"italic text-yellow-400\">Community</span> Of<br/>Creative Designers & Creators.",
+          titleHtml: "Join <span class=\"italic text-official\">Community</span> Of<br/>Creative Designers & Creators.",
           description: "Connect with thousands of alumni, work on live briefs, and fast-track your design career today.",
           bgImage: "/images/weekend-ux-hero-bg-template.webp",
           buttonText: "Explore Programs"
@@ -44,7 +45,7 @@ export default function Hero() {
                const end = slide?.endheading?.trim() || "";
                
                const titleHtml = (start || mid || end)
-                    ? `${start} ${mid ? `<span class="italic text-yellow-400">${mid}</span>` : ""} ${end}`.trim()
+                    ? `${start} ${mid ? `<span class="italic text-official">${mid}</span>` : ""} ${end}`.trim()
                     : fallback.titleHtml;
 
                const description = slide?.description?.trim() ? slide.description.trim() : fallback.description;
@@ -72,7 +73,7 @@ export default function Hero() {
      }, [slides.length]);
 
      return (
-          <section className="relative min-h-145 overflow-hidden bg-black text-white select-none">
+          <section className="relative min-h-145 overflow-hidden bg-black text-white select-none mt-16">
                {/* Slides Wrapper */}
                <div className="relative min-h-145 w-full">
                     {slides.map((slide, index) => (
@@ -101,7 +102,7 @@ export default function Hero() {
                               <div className="relative z-20 mx-auto flex min-h-145 max-w-337.5 items-center px-6 sm:px-10 lg:px-16">
                                    <div className="max-w-197.5">
                                         <p
-                                             className={`mb-5 text-[11px] md:text-[14px] font-semibold font-inter uppercase tracking-[0.45em] text-yellow-400 transition-all duration-700 transform delay-100 ${
+                                             className={`mb-5 text-[11px] md:text-[14px] font-semibold font-inter uppercase tracking-[0.45em] text-official transition-all duration-700 transform delay-100 ${
                                                   index === currentSlide
                                                        ? "translate-y-0 opacity-100"
                                                        : "translate-y-8 opacity-0"
@@ -136,9 +137,11 @@ export default function Hero() {
                                                        : "translate-y-8 opacity-0"
                                              }`}
                                         >
-                                             <Button variant="primary" className="mt-10 hover:scale-101">
-                                                  {slide.buttonText}
-                                             </Button>
+                                             <Link href="/courses">
+                                                  <Button variant="primary" className="mt-10 hover:scale-101">
+                                                       {slide.buttonText}
+                                                  </Button>
+                                             </Link>
                                         </div>
                                    </div>
                               </div>
@@ -149,7 +152,7 @@ export default function Hero() {
                {/* Navigation Arrows */}
                {/* <button
                     onClick={prevSlide}
-                    className="absolute left-6 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/10 bg-black/40 p-3 text-white backdrop-blur-md transition-all hover:bg-yellow-400 hover:text-black hover:scale-110 active:scale-95 cursor-pointer hidden md:flex items-center justify-center"
+                    className="absolute left-6 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/10 bg-black/40 p-3 text-white backdrop-blur-md transition-all hover:bg-official/80 hover:text-black hover:scale-110 active:scale-95 cursor-pointer hidden md:flex items-center justify-center"
                     aria-label="Previous slide"
                >
                     <FiChevronLeft size={24} />
@@ -157,7 +160,7 @@ export default function Hero() {
 
                <button
                     onClick={nextSlide}
-                    className="absolute right-6 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/10 bg-black/40 p-3 text-white backdrop-blur-md transition-all hover:bg-yellow-400 hover:text-black hover:scale-110 active:scale-95 cursor-pointer hidden md:flex items-center justify-center"
+                    className="absolute right-6 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/10 bg-black/40 p-3 text-white backdrop-blur-md transition-all hover:bg-official/80 hover:text-black hover:scale-110 active:scale-95 cursor-pointer hidden md:flex items-center justify-center"
                     aria-label="Next slide"
                >
                     <FiChevronRight size={24} />
@@ -174,7 +177,7 @@ export default function Hero() {
                          >
                               <span
                                    className={`block rounded-full transition-all duration-300 h-2.5 ${index === currentSlide
-                                             ? "w-8 bg-yellow-400"
+                                             ? "w-8 bg-official"
                                              : "w-2.5 bg-white/30 hover:bg-white/60"
                                         }`}
                               />

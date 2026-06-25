@@ -148,10 +148,10 @@ export default function Blogs() {
      );
 
      return (
-          <div className="min-h-screen bg-white text-white font-urbanist flex flex-col">
+          <div className="min-h-screen bg-white text-white font-urbanist flex flex-col pt-15 md:pt-11">
 
                {/* Hero Header Section */}
-               <section className="relative h-32.5 md:h-100 w-full flex items-center justify-center bg-zinc-950 ">
+               <section className="relative h-42.5 md:h-100 w-full flex md:items-center items-end pb-12 md:pb-0 justify-center bg-zinc-950 ">
                     <Image
                          src="/images/weekend-ux-blogs-hero-bg.webp"
                          alt="weekend-ux-policy-hero-bg"

@@ -341,7 +341,7 @@ const Form = () => {
                                              setStatus("idle");
                                              if (timerRef.current) clearInterval(timerRef.current);
                                         }}
-                                        className="hover:text-official cursor-pointer transition font-medium"
+                                        className="hover:text-official/80 cursor-pointer transition font-medium"
                                    >
                                         ← Edit Details
                                    </button>

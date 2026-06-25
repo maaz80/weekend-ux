@@ -12,12 +12,21 @@ const navbarSchema = new mongoose.Schema({
      dropdownName: String, //more
 
      loginButtonName: String,
+     
+     authDecorativeImage: String,
 
      moreItems: {
           title: String,
-          items: [{
+          // items: [{
+          //      title: String,
+          //      link: String
+          // }],
+          dropdown_items: [{
                title: String,
-               link: String
+               items: [{
+                    name: String,
+                    link: String
+               }]
           }]
      }
 

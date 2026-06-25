@@ -43,10 +43,10 @@ export default async function Disclaimer() {
           : "We value your privacy and are committed to protecting your personal information...";
 
      return (
-          <div className="min-h-screen bg-white text-white font-urbanist flex flex-col relative">
+          <div className="min-h-screen bg-white text-white font-urbanist flex flex-col relative pt-16 md:pt-12">
 
                {/* Hero Header Section */}
-               <section className="relative h-32.5 md:h-100 w-full flex items-center justify-center bg-zinc-950 ">
+               <section className="relative h-42.5 md:h-100 w-full flex md:items-center items-end pb-12 md:pb-0 justify-center bg-zinc-950 ">
                     <Image
                          src='/images/weekend-ux-policy-hero-bg.webp'
                          alt="weekend-ux-policy-hero-bg"

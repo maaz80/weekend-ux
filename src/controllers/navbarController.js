@@ -17,14 +17,25 @@ export const getNavbar = async (req) => {
                     searchPlaceholder: "Search courses...",
                     dropdownName: "Courses",
                     loginButtonName: "Sign In",
-                    moreItems: {
-                         title: "More",
-                         items: [
-                              { title: "AI Tools & Models", link: "#" },
-                              { title: "Learning Paths", link: "#" },
-                              { title: "Community Forum", link: "#" }
-                         ]
-                    }
+                     moreItems: {
+                          title: "More",
+                          dropdown_items: [
+                               {
+                                    title: "AI Tools & Models",
+                                    items: [
+                                         { name: "ChatGPT", link: "#" },
+                                         { name: "Midjourney", link: "#" }
+                                    ]
+                               },
+                               {
+                                    title: "Learning Paths",
+                                    items: [
+                                         { name: "UI Design", link: "#" },
+                                         { name: "UX Research", link: "#" }
+                                    ]
+                               }
+                          ]
+                     }
                });
                await navbar.save();
           }
@@ -48,6 +59,7 @@ export const updateNavbar = async (req) => {
           const logoAlt = formData.get("logoAlt") || formData.get("alt");
           const logoFile = formData.get("logoImage") || formData.get("image");
           const moreItemsStr = formData.get("moreItems");
+          const authDecorativeImageFile = formData.get("authDecorativeImage");
 
           let navbar = await Navbar.findOne();
           if (!navbar) {
@@ -72,6 +84,10 @@ export const updateNavbar = async (req) => {
 
           if (logoFile) {
                navbar.logo.image = await uploadToCloudinary(logoFile, "navbar");
+          }
+
+          if (authDecorativeImageFile !== null && authDecorativeImageFile !== undefined) {
+               navbar.authDecorativeImage = await uploadToCloudinary(authDecorativeImageFile, "navbar");
           }
 
           await navbar.save();

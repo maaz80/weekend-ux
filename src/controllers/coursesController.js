@@ -39,19 +39,21 @@ export const getCourses = async (req) => {
                               duration: "30h 45m",
                               category: "Design",
                               overview: "Learn modern UI/UX design practices using Figma. This course covers everything from wireframing to high-fidelity prototyping and design systems.",
-                              chapter: {
-                                   chaptername: "Introduction to Figma",
-                                   totallessons: "5",
-                                   lessons: [
-                                        {
-                                             lessonname: "Figma Interface Tour",
-                                             video: {
-                                                  videourl: "",
-                                                  duration: "10:15"
+                              chapter: [
+                                   {
+                                        chaptername: "Introduction to Figma",
+                                        totallessons: "5",
+                                        lessons: [
+                                             {
+                                                  lessonname: "Figma Interface Tour",
+                                                  video: {
+                                                       videourl: "",
+                                                       duration: "10:15"
+                                                  }
                                              }
-                                        }
-                                   ]
-                              }
+                                        ]
+                                   }
+                              ]
                          }
                     ],
                     card: {
@@ -106,22 +108,43 @@ export const updateCourses = async (req) => {
                               console.log(`Course image uploaded successfully: ${updateData.course[i].image}`);
                          }
                          
-                         // Lesson Videos
-                         if (updateData.course[i].chapter && updateData.course[i].chapter.lessons) {
-                              for (let j = 0; j < updateData.course[i].chapter.lessons.length; j++) {
-                                   const videoKey = `courseVideo_${i}_${j}`;
-                                   const videoFile = formData.get(videoKey);
-                                   if (videoFile) {
-                                        console.log(`Found video file for key ${videoKey}. File Name: ${videoFile.name}, Size: ${videoFile.size} bytes`);
-                                        updateData.course[i].chapter.lessons[j].video = updateData.course[i].chapter.lessons[j].video || {};
-                                        
-                                        console.log(`Uploading video to Cloudinary for key ${videoKey}...`);
-                                        const uploadedUrl = await uploadToCloudinary(videoFile, "courses/videos");
-                                        console.log(`Video uploaded successfully to URL: ${uploadedUrl}`);
-                                        
-                                        updateData.course[i].chapter.lessons[j].video.videourl = uploadedUrl;
-                                   } else {
-                                        console.log(`No video file received for key ${videoKey}`);
+                         // Lesson Videos (checking if chapter is an array or legacy object)
+                         if (updateData.course[i].chapter) {
+                              if (Array.isArray(updateData.course[i].chapter)) {
+                                   for (let chIdx = 0; chIdx < updateData.course[i].chapter.length; chIdx++) {
+                                        const chapter = updateData.course[i].chapter[chIdx];
+                                        if (chapter && chapter.lessons && Array.isArray(chapter.lessons)) {
+                                             for (let j = 0; j < chapter.lessons.length; j++) {
+                                                  const videoKey = `courseVideo_${i}_${chIdx}_${j}`;
+                                                  const videoFile = formData.get(videoKey);
+                                                  if (videoFile) {
+                                                       console.log(`Found video file for key ${videoKey}. File Name: ${videoFile.name}, Size: ${videoFile.size} bytes`);
+                                                       chapter.lessons[j].video = chapter.lessons[j].video || {};
+                                                       
+                                                       console.log(`Uploading video to Cloudinary for key ${videoKey}...`);
+                                                       const uploadedUrl = await uploadToCloudinary(videoFile, "courses/videos");
+                                                       console.log(`Video uploaded successfully to URL: ${uploadedUrl}`);
+                                                       
+                                                       chapter.lessons[j].video.videourl = uploadedUrl;
+                                                  }
+                                             }
+                                        }
+                                   }
+                              } else if (updateData.course[i].chapter.lessons) {
+                                   // Legacy single-chapter object fallback
+                                   for (let j = 0; j < updateData.course[i].chapter.lessons.length; j++) {
+                                        const videoKey = `courseVideo_${i}_${j}`;
+                                        const videoFile = formData.get(videoKey);
+                                        if (videoFile) {
+                                             console.log(`Found video file for key ${videoKey}. File Name: ${videoFile.name}, Size: ${videoFile.size} bytes`);
+                                             updateData.course[i].chapter.lessons[j].video = updateData.course[i].chapter.lessons[j].video || {};
+                                             
+                                             console.log(`Uploading video to Cloudinary for key ${videoKey}...`);
+                                             const uploadedUrl = await uploadToCloudinary(videoFile, "courses/videos");
+                                             console.log(`Video uploaded successfully to URL: ${uploadedUrl}`);
+                                             
+                                             updateData.course[i].chapter.lessons[j].video.videourl = uploadedUrl;
+                                        }
                                    }
                               }
                          }

@@ -55,7 +55,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                     {/* CTA button */}
                     <button
                          onClick={handleClick}
-                         className="w-full h-12 rounded-xl text-zinc-800 text-[16px] font-medium flex items-center justify-center gap-2 border border-zinc-200 cursor-pointer hover:bg-linear-to-r from-zinc-500 to-zinc-900 hover:text-white hover:border-transparent transition-all duration-300 ease-in-out mt-auto"
+                         className="w-full h-12 rounded-xl text-zinc-800 text-[16px] font-medium flex items-center justify-center gap-2 border border-zinc-200 hover:border-none cursor-pointer hover:bg-linear-to-r from-zinc-500 to-zinc-900 hover:text-white hover:border-transparent transition-all duration-300 ease-in-out mt-auto"
                     >
                          <FiDownload className="text-base" />
                          Download Brochure

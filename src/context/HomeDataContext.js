@@ -24,6 +24,7 @@ export function HomeDataProvider({ children, initialData }) {
      const [testimonialsData, setTestimonialsData] = useState(initialData?.testimonialsData || null);
      const [blogsData, setBlogsData] = useState(initialData?.blogsData || null);
      const [loading, setLoading] = useState(!initialData);
+     const [isChatbotOpen, setIsChatbotOpen] = useState(false);
 
      useEffect(() => {
           if (initialData) {
@@ -117,7 +118,7 @@ export function HomeDataProvider({ children, initialData }) {
      }, [initialData]);
 
      return (
-          <HomeDataContext.Provider value={{ homeData, faqData, coursesData, navbarData, footerGlobalData, footerColumnsData, testimonialsData, blogsData, loading }}>
+          <HomeDataContext.Provider value={{ homeData, faqData, coursesData, navbarData, footerGlobalData, footerColumnsData, testimonialsData, blogsData, loading, isChatbotOpen, setIsChatbotOpen }}>
                {children}
           </HomeDataContext.Provider>
      );

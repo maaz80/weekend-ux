@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Hero() {
          return (
@@ -20,9 +21,11 @@ export default function Hero() {
 
                         <h1 className="custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">Best Design Academy in Delhi that teacher you actual skills in person</h1>
     
-                        <button className="px-5 h-10 rounded-xl bg-yellow-400 text-neutral-900 font-urbanist relative z-50">
-                             Explore Programs
-                        </button>
+                        <Link href="/courses">
+                             <button className="px-5 h-10 rounded-xl bg-official text-neutral-900 font-urbanist relative z-50">
+                                  Explore Programs
+                             </button>
+                        </Link>
                    </section>
           </div>
      );

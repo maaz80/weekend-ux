@@ -4,6 +4,7 @@ import Image from "next/image";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import { useHomeData } from "@/context/HomeDataContext";
 import HomeFeature from "@/components/Home/Features/Feature";
+import Link from "next/link";
 import HomeWhyChoose from "@/components/Home/Details/Details";
 import HomePhilosophy from "@/components/Home/Philosophy/Philosophy";
 import HomeTestimonials from "@/components/Home/Testimonials/Testimonials";
@@ -49,9 +50,11 @@ export default function LocationDetailsView({ data }) {
                          </h1>
 
                          {heroBtn && (
-                              <button className="px-5 h-10 rounded-xl bg-yellow-400 text-neutral-900 font-urbanist relative z-50 hover:bg-yellow-500 transition-all font-semibold cursor-pointer">
-                                   {heroBtn}
-                              </button>
+                              <Link href="/courses">
+                                   <button className="px-5 h-10 rounded-xl bg-official text-neutral-900 font-urbanist relative z-50 hover:bg-official/80 transition-all font-semibold cursor-pointer">
+                                        {heroBtn}
+                                   </button>
+                              </Link>
                          )}
                     </section>
                </div>

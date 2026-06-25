@@ -3,6 +3,7 @@ import User from "../models/Auth.js";
 import { transporter } from "../config/mailer.js";
 import { NextResponse } from "next/server";
 import connectDB from "../config/db.js";
+import OTP from "../models/otpModel.js";
 
 const generateToken = (id) => {
      return jwt.sign({ id }, process.env.JWT_SECRET || "your-secret-key", {
@@ -13,25 +14,38 @@ const generateToken = (id) => {
 export const signup = async (req) => {
      try {
           await connectDB();
-          const { name, email, password } = await req.json();
+          const { name, email, otp } = await req.json();
 
           // Validation
-          if (!name || !email || !password) {
-               return NextResponse.json({ error: "Please provide all fields" }, { status: 400 });
+          if (!name || !email || !otp) {
+               return NextResponse.json({ error: "Please provide name, email, and OTP" }, { status: 400 });
+          }
+
+          // Check if OTP is valid
+          const otpRecord = await OTP.findOne({ email });
+          if (!otpRecord) {
+               return NextResponse.json({ error: "No OTP found. Please request a new one." }, { status: 400 });
+          }
+          if (otpRecord.otp !== otp) {
+               return NextResponse.json({ error: "Invalid OTP" }, { status: 400 });
           }
 
           // Check if user exists
           const userExists = await User.findOne({ email });
           if (userExists) {
-               return NextResponse.json({ error: "User already exists" }, { status: 400 });
+               return NextResponse.json({ error: "User already registered. Please login instead." }, { status: 400 });
           }
 
-          // Create user
+          // Create user with a random password to satisfy schema validation
+          const randomPassword = Math.random().toString(36).substring(2, 12) + "A1!";
           const user = await User.create({
                name,
                email,
-               password,
+               password: randomPassword,
           });
+
+          // Delete OTP record
+          await OTP.deleteOne({ email });
 
           // Generate token
           const token = generateToken(user._id);
@@ -53,25 +67,30 @@ export const signup = async (req) => {
 export const login = async (req) => {
      try {
           await connectDB();
-          const { email, password } = await req.json();
+          const { email, otp } = await req.json();
 
           // Validation
-          if (!email || !password) {
-               return NextResponse.json({ error: "Please provide email and password" }, { status: 400 });
+          if (!email || !otp) {
+               return NextResponse.json({ error: "Please provide email and OTP" }, { status: 400 });
           }
 
-          // Check if user exists and get password field
-          const user = await User.findOne({ email }).select("+password");
+          // Check if OTP is valid
+          const otpRecord = await OTP.findOne({ email });
+          if (!otpRecord) {
+               return NextResponse.json({ error: "No OTP found. Please request a new one." }, { status: 400 });
+          }
+          if (otpRecord.otp !== otp) {
+               return NextResponse.json({ error: "Invalid OTP" }, { status: 400 });
+          }
 
+          // Check if user exists
+          const user = await User.findOne({ email });
           if (!user) {
-               return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+               return NextResponse.json({ error: "User not found. Please sign up first." }, { status: 404 });
           }
 
-          // Check password
-          const isMatched = await user.matchPassword(password);
-          if (!isMatched) {
-               return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
-          }
+          // Delete OTP record
+          await OTP.deleteOne({ email });
 
           // Generate token
           const token = generateToken(user._id);
@@ -212,5 +231,52 @@ export const resetPassword = async (req) => {
      } catch (error) {
           console.error("Reset password error:", error);
           return NextResponse.json({ error: error.message || "Failed to reset password" }, { status: 500 });
+     }
+};
+
+export const sendAuthOTP = async (req) => {
+     try {
+          await connectDB();
+          const { email } = await req.json();
+
+          if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+               return NextResponse.json({ error: "Valid email address is required" }, { status: 400 });
+          }
+
+          // Generate 6-digit OTP
+          const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+          // Store OTP in database
+          await OTP.findOneAndUpdate(
+               { email },
+               { otp, email, attempts: 0, isVerified: false, createdAt: new Date() },
+               { upsert: true, new: true }
+          );
+
+          // Send OTP via Email
+          await transporter.sendMail({
+               from: process.env.EMAIL_FROM,
+               to: email,
+               subject: "Your OTP Verification Code - Weekend UX",
+               html: `
+                    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 10px;">
+                         <h2 style="color: #FFD400; text-align: center;">Weekend UX Verification</h2>
+                         <p style="font-size: 16px; color: #333;">Hello,</p>
+                         <p style="font-size: 16px; color: #333;">Your verification OTP code for login/signup is:</p>
+                         <div style="background-color: #f7f7f7; padding: 15px; text-align: center; font-size: 32px; font-weight: bold; letter-spacing: 5px; border-radius: 8px; margin: 20px 0;">
+                              ${otp}
+                         </div>
+                         <p style="font-size: 14px; color: #666;">This OTP is valid for 10 minutes.</p>
+                         <p style="font-size: 14px; color: #666;">If you didn't request this, please ignore this email.</p>
+                         <hr style="margin: 20px 0;" />
+                         <p style="font-size: 12px; color: #999; text-align: center;">© Weekend UX - Intelligent Design Solutions</p>
+                    </div>
+               `
+          });
+
+          return NextResponse.json({ success: true, message: "OTP sent to your email" });
+     } catch (error) {
+          console.error("Send auth OTP error:", error);
+          return NextResponse.json({ error: error.message || "Failed to send OTP" }, { status: 500 });
      }
 };

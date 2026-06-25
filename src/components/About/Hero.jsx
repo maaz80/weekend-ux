@@ -1,5 +1,6 @@
 import Image from "next/image";
 import OptimizedImage from "@/components/ui/OptimizedImage";
+import Link from "next/link";
 
 export default function Hero({ data }) {
      const title = data?.title?.trim() ? data.title.trim() : "Learn as you desire";
@@ -8,7 +9,7 @@ export default function Hero({ data }) {
      const bgImage = data?.bgImage?.trim() ? data.bgImage.trim() : "/images/weekend-ux-location-hero-bg.webp";
 
      return (
-          <div className=" bg-white text-white font-urbanist flex flex-col relative">
+          <div className=" bg-white text-white font-urbanist flex flex-col relative pt-16 md:pt-12">
                <Image src='/images/weekend-ux-decorative-diamond.webp' alt="weekend-ux-decorative-diamond" className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-30" width={200} height={200} style={{ height: 'auto' }}/>
                {/* Hero Header Section */}
                <section className="relative h-62.5 md:h-100 w-full flex flex-col gap-5 items-center justify-center bg-zinc-950 overflow-hidden">
@@ -29,9 +30,11 @@ export default function Hero({ data }) {
                          {heading}
                     </h1>
 
-                    <button className="px-5 h-10 rounded-xl bg-yellow-400 text-neutral-900 font-urbanist relative z-50 cursor-pointer hover:scale-102 transition">
-                         {buttonName}
-                    </button>
+                    <Link href="/courses">
+                         <button className="px-5 h-10 rounded-xl bg-official text-neutral-900 font-urbanist relative z-50 cursor-pointer hover:scale-102 transition">
+                              {buttonName}
+                         </button>
+                    </Link>
                </section>
           </div>
      );

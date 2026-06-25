@@ -217,10 +217,10 @@ export default function CoursesPage() {
      );
 
      return (
-          <div className="min-h-screen bg-black text-white font-urbanist flex flex-col">
+          <div className="min-h-screen bg-black text-white font-urbanist flex flex-col pt-22 md:pt-12">
 
                {/* Hero Header Section */}
-               <section className="relative h-32.5 md:h-100 w-full flex items-center justify-center bg-zinc-950 overflow-hidden">
+               <section className="relative h-35.5 md:h-100 w-full flex items-center justify-center bg-zinc-950 overflow-hidden">
                     <Image
                          src="/images/weekend-ux-courses-hero-bg.webp"
                          alt="weekend-ux-courses-hero-bg"
@@ -336,7 +336,7 @@ export default function CoursesPage() {
                                    <p className="text-zinc-500 text-lg">No courses found matching your criteria.</p>
                                    <button
                                         onClick={() => { setSearchQuery(""); setActiveCategory("All"); }}
-                                        className="mt-4 text-yellow font-medium hover:underline cursor-pointer"
+                                        className="mt-4 text-official font-medium hover:underline cursor-pointer"
                                    >
                                         Reset Filters
                                    </button>

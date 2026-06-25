@@ -6,7 +6,7 @@ const ProgramsSidebar = ({ isActive, onClick, category }) => {
                onClick={onClick}
                className={`
         w-full md:w-56 2xl:w-64 h-12 md:h-11 2xl:h-12 
-        rounded-xl flex items-center justify-between 
+        rounded-md flex items-center justify-between 
         text-[15px] font-medium
         px-4 py-1 cursor-pointer 
         transition-all duration-300 ease-in-out
