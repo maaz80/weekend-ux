@@ -169,7 +169,7 @@ const OurPrograms = ({ data }) => {
 
      const categories = ["All", ...new Set(courses.map(c => c.category))];
      const currentCategory = activeCategory || "All";
-     
+
      const filteredCourses = currentCategory === "All"
           ? courses
           : courses.filter(c => c.category === currentCategory);
@@ -187,7 +187,7 @@ const OurPrograms = ({ data }) => {
 
           const start = Math.max(1, Math.min(currentPage, totalPages - 2));
           const actualStart = currentPage < 3 ? 1 : start;
-          
+
           const end = Math.min(totalPages, actualStart + (currentPage < 3 ? 2 : 2));
           for (let i = actualStart; i <= end; i++) {
                pages.push(i);
@@ -266,7 +266,7 @@ const OurPrograms = ({ data }) => {
                     {/* DESKTOP VIEW */}
                     <div className="hidden md:flex mt-10 items-start justify-between gap-10">
                          {/* Categories Sidebar */}
-                         <div className="space-y-1.5 w-[28%] xl:w-[22%] shrink-0">
+                         <div className="space-y-1.5 w-[28%] xl:w-[22%] shrink-0 sticky top-36 self-start">
                               {categories.map((cat) => (
                                    <ProgramsSidebar
                                         key={cat}
@@ -281,16 +281,16 @@ const OurPrograms = ({ data }) => {
                          </div>
 
                          {/* Course Cards Column with Pagination */}
-                         <div className="flex-1 w-[70%] xl:w-[75%] flex flex-col gap-8">
+                         <div className="flex-1 w-[70%] xl:w-[75%] flex flex-col gap-8 ">
                               {/* Grid */}
-                              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 ">
                                    {displayedCourses.map((course, idx) => (
-                                        <CourseCard 
-                                             key={course._id} 
-                                             course={course} 
-                                             setIsModal={false} 
-                                             priority={idx === 0 && currentPage === 1} 
-                                             fetchPriority={idx === 0 && currentPage === 1 ? "high" : undefined} 
+                                        <CourseCard
+                                             key={course._id}
+                                             course={course}
+                                             setIsModal={false}
+                                             priority={idx === 0 && currentPage === 1}
+                                             fetchPriority={idx === 0 && currentPage === 1 ? "high" : undefined}
                                         />
                                    ))}
                               </div>
@@ -304,8 +304,8 @@ const OurPrograms = ({ data }) => {
                                              aria-label="Previous Page"
                                              disabled={currentPage === 1}
                                              className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === 1
-                                                       ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                       : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                  ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                  : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
                                                   }`}
                                         >
                                              <FiChevronLeft className="text-lg" />
@@ -328,8 +328,8 @@ const OurPrograms = ({ data }) => {
                                                        key={`page-${item}`}
                                                        onClick={() => setCurrentPage(item)}
                                                        className={`w-10 h-10 rounded-xl border text-sm font-semibold transition-all cursor-pointer ${currentPage === item
-                                                                 ? "bg-official text-black border-transparent shadow-sm font-bold"
-                                                                 : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                            ? "bg-official text-black border-transparent shadow-sm font-bold"
+                                                            : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
                                                             }`}
                                                   >
                                                        {item}
@@ -343,8 +343,8 @@ const OurPrograms = ({ data }) => {
                                              aria-label="Next Page"
                                              disabled={currentPage === totalPages}
                                              className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === totalPages
-                                                       ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                       : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                  ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                  : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
                                                   }`}
                                         >
                                              <FiChevronRight className="text-lg" />
