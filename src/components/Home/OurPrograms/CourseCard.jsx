@@ -45,10 +45,10 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                     {/* Metadata */}
                     <div className="flex items-center justify-between text-[13px] md:text-[16px] text-zinc-800 font-bold font-urbanist mt-5 mb-5 border-t border-zinc-50 pt-4">
                          <p>
-                              <span className="text-zinc-400 font-normal">Starts:</span> {course?.deadline}
+                              <span className="text-zinc-500 font-normal">Starts:</span> {course?.deadline}
                          </p>
                          <p>
-                              <span className="text-zinc-400 font-normal">Duration:</span> {course?.courseLength}
+                              <span className="text-zinc-500 font-normal">Duration:</span> {course?.courseLength}
                          </p>
                     </div>
 

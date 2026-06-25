@@ -125,13 +125,13 @@ const Chatbot = () => {
                               )}
                          </div>
                          <div className="flex flex-col text-left">
-                              <span className="text-white font-light text-xl tracking-wide leading-tight">Hi there!</span>
-                              <span className="text-white text-[11px] leading-tight mt-0.5">Welcome to Weekend UX. How can we help?</span>
+                              <span className="text-zinc-950 font-light text-xl tracking-wide leading-tight font-semibold">Hi there!</span>
+                              <span className="text-zinc-800 text-[11px] leading-tight mt-0.5 font-medium">Welcome to Weekend UX. How can we help?</span>
                          </div>
                     </div>
                     <button 
                          onClick={() => setIsChatbotOpen(false)}
-                         className="text-white hover:text-white transition-all duration-300 hover:rotate-90 p-1 rounded-full cursor-pointer"
+                         className="text-zinc-950 hover:text-zinc-700 transition-all duration-300 hover:rotate-90 p-1 rounded-full cursor-pointer"
                          aria-label="Close chat"
                     >
                          <X size={20} />
