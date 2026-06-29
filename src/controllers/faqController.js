@@ -1,7 +1,6 @@
 import Faq from "../models/Faq.js";
 import connectDB from "../config/db.js";
 import { NextResponse } from "next/server";
-import { setCacheHeader } from "../utils/cache.js";
 
 // Get data for a specific page
 export const getFaq = async (req, { params }) => {
@@ -23,7 +22,8 @@ export const getFaq = async (req, { params }) => {
           }
 
           const response = NextResponse.json(data);
-          return setCacheHeader(req, response);
+          // response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

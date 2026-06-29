@@ -2,7 +2,6 @@ import About from "../models/About.js";
 import connectDB from "../config/db.js";
 import { uploadToCloudinary } from "../config/cloudinary.js";
 import { NextResponse } from "next/server";
-import { setCacheHeader } from "../utils/cache.js";
 
 // GET ABOUT PAGE CONFIGURATION
 export const getAbout = async (req) => {
@@ -49,7 +48,8 @@ export const getAbout = async (req) => {
                about = newAbout.toObject();
           }
           const response = NextResponse.json(about);
-          return setCacheHeader(req, response);
+          // response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

@@ -1,7 +1,6 @@
 import PageSEO from "../models/PageSEO.js";
 import connectDB from "../config/db.js";
 import { NextResponse } from "next/server";
-import { setCacheHeader } from "../utils/cache.js";
 
 // Get SEO for a specific page
 export const getPageSEO = async (req, { params }) => {
@@ -16,7 +15,8 @@ export const getPageSEO = async (req, { params }) => {
           }
 
           const response = NextResponse.json(seo);
-          return setCacheHeader(req, response);
+          // response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

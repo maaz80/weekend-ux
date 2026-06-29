@@ -1,7 +1,6 @@
 import Disclaimer from "../models/Disclaimer.js";
 import connectDB from "../config/db.js";
 import { NextResponse } from "next/server";
-import { setCacheHeader } from "../utils/cache.js";
 
 // GET DISCLAIMER CONFIGURATION
 export const getDisclaimer = async (req) => {
@@ -24,7 +23,8 @@ export const getDisclaimer = async (req) => {
                disclaimer = newDisclaimer.toObject();
           }
           const response = NextResponse.json(disclaimer);
-          return setCacheHeader(req, response);
+          // response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

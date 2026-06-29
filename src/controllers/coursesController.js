@@ -2,7 +2,6 @@ import Courses from "../models/Courses.js";
 import connectDB from "../config/db.js";
 import { uploadToCloudinary } from "../config/cloudinary.js";
 import { NextResponse } from "next/server";
-import { setCacheHeader } from "../utils/cache.js";
 
 const createSlug = (title) => {
      return title
@@ -73,7 +72,8 @@ export const getCourses = async (req) => {
                await courses.save();
           }
           const response = NextResponse.json(courses);
-          return setCacheHeader(req, response);
+          // response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
+          return response;
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }
