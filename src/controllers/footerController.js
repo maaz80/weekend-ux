@@ -1,6 +1,7 @@
 import Footer from "../models/Footer.js";
 import connectDB from "../config/db.js";
 import { NextResponse } from "next/server";
+import { setCacheHeader } from "../utils/cache.js";
 
 // GET ALL FOOTER COLUMNS
 export const getFooterColumns = async (req) => {
@@ -8,8 +9,7 @@ export const getFooterColumns = async (req) => {
           await connectDB();
           const columns = await Footer.find({ isGlobal: { $ne: true } }).sort({ order: 1 }).lean();
           const response = NextResponse.json(columns);
-          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
-          return response;
+          return setCacheHeader(req, response);
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }
@@ -51,8 +51,7 @@ export const getFooterGlobalSettings = async (req) => {
                settings = newSettings.toObject();
           }
           const response = NextResponse.json(settings);
-          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
-          return response;
+          return setCacheHeader(req, response);
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

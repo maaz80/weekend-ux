@@ -2,6 +2,7 @@ import Navbar from "../models/Navbar.js";
 import connectDB from "../config/db.js";
 import { uploadToCloudinary } from "../config/cloudinary.js";
 import { NextResponse } from "next/server";
+import { setCacheHeader } from "../utils/cache.js";
 
 // GET NAVBAR SETTINGS
 export const getNavbar = async (req) => {
@@ -40,8 +41,7 @@ export const getNavbar = async (req) => {
                await navbar.save();
           }
           const response = NextResponse.json(navbar);
-          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
-          return response;
+          return setCacheHeader(req, response);
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

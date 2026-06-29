@@ -1,6 +1,7 @@
 import Policy from "../models/Policy.js";
 import connectDB from "../config/db.js";
 import { NextResponse } from "next/server";
+import { setCacheHeader } from "../utils/cache.js";
 
 // GET PRIVACY POLICY CONFIGURATION
 export const getPolicy = async (req) => {
@@ -23,8 +24,7 @@ export const getPolicy = async (req) => {
                policy = newPolicy.toObject();
           }
           const response = NextResponse.json(policy);
-          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
-          return response;
+          return setCacheHeader(req, response);
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }

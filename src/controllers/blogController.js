@@ -2,6 +2,7 @@ import Blog from "../models/Blog.js";
 import connectDB from "../config/db.js";
 import { uploadToCloudinary } from "../config/cloudinary.js";
 import { NextResponse } from "next/server";
+import { setCacheHeader } from "../utils/cache.js";
 
 // Slug generator
 const createSlug = (title) => {
@@ -48,8 +49,7 @@ export const getBlogs = async (req) => {
                blogPage = newBlogPage.toObject();
           }
           const response = NextResponse.json(blogPage);
-          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
-          return response;
+          return setCacheHeader(req, response);
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }
@@ -132,8 +132,7 @@ export const getBlogBySlug = async (req, { params }) => {
           }
 
           const response = NextResponse.json(blog);
-          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
-          return response;
+          return setCacheHeader(req, response);
      } catch (error) {
           return NextResponse.json({ error: error.message }, { status: 500 });
      }

@@ -2,6 +2,7 @@ import Location from "../models/Location.js";
 import connectDB from "../config/db.js";
 import { uploadToCloudinary } from "../config/cloudinary.js";
 import { NextResponse } from "next/server";
+import { setCacheHeader } from "../utils/cache.js";
 import mongoose from "mongoose";
 
 const slugifyText = (value = "") =>
@@ -18,8 +19,7 @@ export const getLocations = async (req) => {
           await connectDB();
           const data = await Location.find().sort({ createdAt: -1 }).lean();
           const response = NextResponse.json(data);
-          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
-          return response;
+          return setCacheHeader(req, response);
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }
@@ -35,8 +35,7 @@ export const getLocationById = async (req, { params }) => {
                return NextResponse.json({ error: "Location group not found" }, { status: 404 });
           }
           const response = NextResponse.json(data);
-          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
-          return response;
+          return setCacheHeader(req, response);
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }
@@ -223,8 +222,7 @@ export const getItem = async (req, { params }) => {
           }
 
           const response = NextResponse.json(item);
-          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
-          return response;
+          return setCacheHeader(req, response);
      } catch (err) {
           return NextResponse.json({ error: err.message }, { status: 500 });
      }
@@ -365,8 +363,7 @@ export const getLocationItemBySlug = async (req, { params }) => {
           }
 
           const response = NextResponse.json(item);
-          response.headers.set("Cache-Control", "public, s-maxage=60, stale-while-revalidate=300");
-          return response;
+          return setCacheHeader(req, response);
      } catch (error) {
           return NextResponse.json({ error: error.message }, { status: 500 });
      }
