@@ -27,82 +27,50 @@ export function HomeDataProvider({ children, initialData }) {
      const [isChatbotOpen, setIsChatbotOpen] = useState(false);
 
      useEffect(() => {
-          if (initialData) {
-               setLoading(false);
-               return;
-          }
-
           let isMounted = true;
-          async function fetchAllData() {
+
+          async function fetchMissingData() {
+               const promises = [];
+               const keys = [];
+
+               if (!homeData) { promises.push(fetch("/api/home")); keys.push("home"); }
+               if (!faqData) { promises.push(fetch("/api/pages/home/faq")); keys.push("faq"); }
+               if (!coursesData) { promises.push(fetch("/api/courses")); keys.push("courses"); }
+               if (!navbarData) { promises.push(fetch("/api/navbar")); keys.push("navbar"); }
+               if (!footerGlobalData) { promises.push(fetch("/api/footer-columns/global")); keys.push("footerGlobal"); }
+               if (!footerColumnsData) { promises.push(fetch("/api/footer-columns")); keys.push("footerColumns"); }
+               if (!testimonialsData) { promises.push(fetch("/api/testimonials")); keys.push("testimonials"); }
+               if (!blogsData) { promises.push(fetch("/api/blogs")); keys.push("blogs"); }
+
+               if (promises.length === 0) {
+                    if (isMounted) setLoading(false);
+                    return;
+               }
+
                try {
-                    const [homeRes, faqRes, coursesRes, navbarRes, footerGlobalRes, footerColumnsRes, testimonialsRes, blogsRes] = await Promise.all([
-                         fetch("/api/home"),
-                         fetch("/api/pages/home/faq"),
-                         fetch("/api/courses"),
-                         fetch("/api/navbar"),
-                         fetch("/api/footer-columns/global"),
-                         fetch("/api/footer-columns"),
-                         fetch("/api/testimonials"),
-                         fetch("/api/blogs")
-                    ]);
+                    const responses = await Promise.all(promises);
 
-                    if (homeRes.ok) {
-                         const hData = await homeRes.json();
-                         if (isMounted) setHomeData(hData);
-                    } else {
-                         console.warn("Failed to fetch home data, status code:", homeRes.status);
-                    }
+                    for (let i = 0; i < responses.length; i++) {
+                         const res = responses[i];
+                         const key = keys[i];
+                         if (res.ok) {
+                              const data = await res.json();
+                              if (!isMounted) return;
 
-                    if (faqRes.ok) {
-                         const fData = await faqRes.json();
-                         if (isMounted) setFaqData(fData);
-                    } else {
-                         console.warn("Failed to fetch FAQ data, status code:", faqRes.status);
-                    }
-
-                    if (coursesRes.ok) {
-                         const cData = await coursesRes.json();
-                         if (isMounted) setCoursesData(cData);
-                    } else {
-                         console.warn("Failed to fetch courses data, status code:", coursesRes.status);
-                    }
-
-                    if (navbarRes.ok) {
-                         const nData = await navbarRes.json();
-                         if (isMounted) setNavbarData(nData);
-                    } else {
-                         console.warn("Failed to fetch navbar settings, status code:", navbarRes.status);
-                    }
-
-                    if (footerGlobalRes.ok) {
-                         const fgData = await footerGlobalRes.json();
-                         if (isMounted) setFooterGlobalData(fgData);
-                    } else {
-                         console.warn("Failed to fetch footer global settings, status code:", footerGlobalRes.status);
-                    }
-
-                    if (footerColumnsRes.ok) {
-                         const fcData = await footerColumnsRes.json();
-                         if (isMounted) setFooterColumnsData(fcData);
-                    } else {
-                         console.warn("Failed to fetch footer columns, status code:", footerColumnsRes.status);
-                    }
-
-                    if (testimonialsRes.ok) {
-                         const tData = await testimonialsRes.json();
-                         if (isMounted) setTestimonialsData(tData);
-                    } else {
-                         console.warn("Failed to fetch testimonials, status code:", testimonialsRes.status);
-                    }
-
-                    if (blogsRes.ok) {
-                         const bData = await blogsRes.json();
-                         if (isMounted) setBlogsData(bData);
-                    } else {
-                         console.warn("Failed to fetch blogs, status code:", blogsRes.status);
+                              if (key === "home") setHomeData(data);
+                              else if (key === "faq") setFaqData(data);
+                              else if (key === "courses") setCoursesData(data);
+                              else if (key === "navbar") setNavbarData(data);
+                              else if (key === "footerGlobal") setFooterGlobalData(data);
+                              else if (key === "footerColumns") setFooterColumnsData(data);
+                              else if (key === "testimonials") setTestimonialsData(data);
+                              else if (key === "blogs") setBlogsData(data);
+                         } else {
+                              console.warn(`Failed to fetch missing context data for: ${key}, status: ${res.status}`);
+                         }
                     }
                } catch (error) {
-                    console.error("Error fetching homepage config/FAQ/Courses/Navbar/Footer/Blogs from API:", error);
+                    console.error("Error fetching missing homepage config data:", error);
                } finally {
                     if (isMounted) {
                          setLoading(false);
@@ -110,7 +78,7 @@ export function HomeDataProvider({ children, initialData }) {
                }
           }
 
-          fetchAllData();
+          fetchMissingData();
 
           return () => {
                isMounted = false;

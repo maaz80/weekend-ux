@@ -1,3 +1,4 @@
+import { cache } from "react";
 import BlogDetailsView from "./Details";
 import CourseDetailsView from "@/components/Course Details/Details";
 import LocationDetailsView from "@/components/Location/LocationDetailsView";
@@ -10,26 +11,30 @@ import Courses from "@/models/Courses";
 import Location from "@/models/Location";
 import connectDB from "@/config/db";
 
-async function getSlugData(slug) {
+// Memoize getSlugData per-request and perform parallel DB queries to prevent waterfalls
+const getSlugData = cache(async (slug) => {
      try {
           await connectDB();
           
+          const [blogPage, coursesPage, locationDoc] = await Promise.all([
+               Blog.findOne().select("blogs").lean(),
+               Courses.findOne().select("course").lean(),
+               Location.findOne({ "items.hero.slug": slug }).select("items").lean()
+          ]);
+          
           // 1. Check blog
-          const blogPage = await Blog.findOne().select("blogs").lean();
           if (blogPage) {
                const blog = blogPage.blogs.find(b => b.slug === slug);
                if (blog) return { type: "blog", data: JSON.parse(JSON.stringify(blog)) };
           }
           
           // 2. Check course
-          const coursesPage = await Courses.findOne().select("course").lean();
           if (coursesPage) {
                const course = coursesPage.course.find(c => c.slug === slug);
                if (course) return { type: "course", data: JSON.parse(JSON.stringify(course)) };
           }
           
           // 3. Check location
-          const locationDoc = await Location.findOne({ "items.hero.slug": slug }).select("items").lean();
           if (locationDoc) {
                const item = locationDoc.items.find(it => it.hero?.[0]?.slug === slug);
                if (item) return { type: "location", data: JSON.parse(JSON.stringify(item)) };
@@ -39,7 +44,7 @@ async function getSlugData(slug) {
      }
      
      return null;
-}
+});
 
 export async function generateMetadata({ params }) {
      const { slug } = await params;
