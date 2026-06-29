@@ -192,7 +192,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
           <>
                <div className="font-urbanist fixed w-full top-0 z-99999">
                     {/* Top Bar */}
-                    <div className="w-full bg-official text-white py-1.5 md:py-2 text-[11px] md:text-[13px] font-semibold border-b border-zinc-950/10 relative z-50">
+                    <div className="w-full bg-official text-neutral-900 py-1.5 md:py-2 text-[11px] md:text-[13px] font-semibold border-b border-zinc-950/10 relative z-50">
                          <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 flex-col md:flex-row px-3 md:px-6 pb-0.5 md:pb-0">
                               <div className="flex items-center gap-4 md:gap-6">
                                    <a href="tel:+919311500423" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
@@ -417,7 +417,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                         onMouseEnter={() => setIsMenuOpen(false)}
                                    >
                                         {/* BUTTON */}
-                                        <button className="h-11 px-5 rounded-t-md flex items-center gap-2 text-sm text-white transition-all duration-300 cursor-pointer group-hover:bg-white group-hover:text-black">
+                                        <button className="h-11 px-5 rounded-t-md flex items-center gap-2 text-sm text-neutral-900 transition-all duration-300 cursor-pointer group-hover:bg-white group-hover:text-black">
                                              {moreTitle}
                                              <FiChevronDown className="text-base transition-all duration-300 group-hover:rotate-180" />
                                         </button>

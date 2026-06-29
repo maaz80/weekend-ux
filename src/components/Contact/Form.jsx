@@ -270,7 +270,7 @@ const Form = () => {
                               <button
                                    type="submit"
                                    disabled={loading}
-                                   className={`w-full h-12  font-medium rounded-md flex items-center justify-center gap-2 h transition-all cursor-pointer ${loading ? "opacity-60 cursor-not-allowed bg-official/50 text-neutral-500" : "bg-official over:opacity-90 text-neutral-900"}`}
+                                   className={`w-full h-12  font-bold rounded-md flex items-center justify-center gap-2 h transition-all cursor-pointer ${loading ? "opacity-60 cursor-not-allowed bg-official/50 text-neutral-500" : "bg-official over:opacity-90 text-neutral-900"}`}
                               >
                                    {loading ? (
                                         <>

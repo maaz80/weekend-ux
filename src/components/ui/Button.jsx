@@ -27,7 +27,7 @@ const Button = ({
          inline-flex
          items-center
          justify-center
-         font-medium
+         font-bold
          transition-all
          duration-300
          cursor-pointer

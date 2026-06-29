@@ -43,7 +43,7 @@ const QuickAccessBar = () => {
                     {/* Live Chat */}
                     <div 
                          onClick={() => setIsChatbotOpen(!isChatbotOpen)}
-                         className="flex flex-1 items-center justify-center gap-2 text-[14px] md:text-sm font-semibold text-black transition cursor-pointer mr-2.5 md:mr-0 select-none"
+                         className="flex flex-1 items-center justify-center gap-2 text-[14px] md:text-sm font-bold text-black transition cursor-pointer mr-2.5 md:mr-0 select-none"
                     >
                          <div className={`flex items-center justify-center gap-2 w-35 h-12 rounded-md transition-all duration-300 ${isChatbotOpen ? 'bg-neutral-900 text-official' : 'bg-official text-neutral-900 hover:bg-official/80'}`}>
                               <FiMessageSquare className="text-base shrink-0" />

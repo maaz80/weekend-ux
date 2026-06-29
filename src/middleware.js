@@ -24,6 +24,14 @@ export function middleware(request) {
   response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version');
 
+  // Cache bypass for admin / authenticated requests
+  const url = new URL(request.url);
+  if (request.headers.has('authorization') || url.searchParams.has('_t') || url.searchParams.get('admin') === 'true') {
+    response.headers.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+    response.headers.set('Pragma', 'no-cache');
+    response.headers.set('Expires', '0');
+  }
+
   return response;
 }
 

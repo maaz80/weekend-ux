@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:ror="http://www.rorweb.com/0.1/">
+  <channel>
+    <title>Weekend UX</title>
+    <link>https://weekendux.co</link>
+    <description>Weekend UX - Premium Design and Development Learning Platform</description>
+    
+    <!-- Home page -->
+    <item>
+      <link>https://weekendux.co/</link>
+      <title>Weekend UX - Home</title>
+      <description>Premium design and development learning platform. Upskill with industry-relevant training programs.</description>
+      <ror:updatePeriod>day</ror:updatePeriod>
+      <ror:sortOrder>1</ror:sortOrder>
+      <ror:resourceOf>sitemap</ror:resourceOf>
+    </item>
+    
+    <!-- About Us -->
+    <item>
+      <link>https://weekendux.co/about-us</link>
+      <title>About Us - Weekend UX</title>
+      <description>Learn more about Weekend UX, our mission, vision, and the team empowering next-generation design leaders.</description>
+      <ror:updatePeriod>month</ror:updatePeriod>
+      <ror:sortOrder>2</ror:sortOrder>
+      <ror:resourceOf>sitemap</ror:resourceOf>
+    </item>
+    
+    <!-- Courses -->
+    <item>
+      <link>https://weekendux.co/courses</link>
+      <title>Courses - Weekend UX</title>
+      <description>Explore our comprehensive list of UI/UX design, frontend, and backend development courses.</description>
+      <ror:updatePeriod>week</ror:updatePeriod>
+      <ror:sortOrder>2</ror:sortOrder>
+      <ror:resourceOf>sitemap</ror:resourceOf>
+    </item>
+
+    <!-- Contact Us -->
+    <item>
+      <link>https://weekendux.co/contact-us</link>
+      <title>Contact Us - Weekend UX</title>
+      <description>Get in touch with us for course inquiries, support, or partnership opportunities.</description>
+      <ror:updatePeriod>month</ror:updatePeriod>
+      <ror:sortOrder>3</ror:sortOrder>
+      <ror:resourceOf>sitemap</ror:resourceOf>
+    </item>
+    
+    <!-- Location -->
+    <item>
+      <link>https://weekendux.co/location</link>
+      <title>Our Locations - Weekend UX</title>
+      <description>Find Weekend UX physical centers, campuses, and virtual training hubs.</description>
+      <ror:updatePeriod>month</ror:updatePeriod>
+      <ror:sortOrder>3</ror:sortOrder>
+      <ror:resourceOf>sitemap</ror:resourceOf>
+    </item>
+
+    <!-- Privacy Policy -->
+    <item>
+      <link>https://weekendux.co/privacy-policy</link>
+      <title>Privacy Policy - Weekend UX</title>
+      <description>Read our privacy policy regarding how we collect, store, and manage user data securely.</description>
+      <ror:updatePeriod>year</ror:updatePeriod>
+      <ror:sortOrder>4</ror:sortOrder>
+      <ror:resourceOf>sitemap</ror:resourceOf>
+    </item>
+
+    <!-- Disclaimer -->
+    <item>
+      <link>https://weekendux.co/disclaimer</link>
+      <title>Disclaimer - Weekend UX</title>
+      <description>Legal disclaimer and terms of usage for the Weekend UX platform.</description>
+      <ror:updatePeriod>year</ror:updatePeriod>
+      <ror:sortOrder>4</ror:sortOrder>
+      <ror:resourceOf>sitemap</ror:resourceOf>
+    </item>
+  </channel>
+</rss>

@@ -281,7 +281,7 @@ const Form = () => {
                               <button
                                    type="submit"
                                    disabled={loading}
-                                   className={`w-full h-12  rounded-lg font-medium  transition-all cursor-pointer flex items-center justify-center gap-2 ${loading ? "opacity-60 cursor-not-allowed bg-official/50 text-neutral-500" : "bg-official text-neutral-900 hover:opacity-90"}`}
+                                   className={`w-full h-12  rounded-lg font-bold  transition-all cursor-pointer flex items-center justify-center gap-2 ${loading ? "opacity-60 cursor-not-allowed bg-official/50 text-neutral-500" : "bg-official text-neutral-900 hover:opacity-90"}`}
                               >
                                    {loading ? (
                                         <>

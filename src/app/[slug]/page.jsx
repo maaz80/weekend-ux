@@ -131,7 +131,7 @@ export default async function DynamicSlugPage({ params }) {
                <div className="min-h-screen bg-black text-white font-urbanist flex flex-col relative">
                     <Breadcrumb />
                     {/* Hero Header Section */}
-                    <section className="relative h-60.5 md:h-104 w-full flex md:items-center items-end pb-12 md:pb-0 justify-center bg-zinc-950 overflow-hidden">
+                    <section className="relative h-65.5 md:h-114 w-full flex md:items-center items-end pb-7 md:pb-0 justify-center bg-zinc-950 overflow-hidden">
                          <Image
                               src="/images/weekend-ux-course-details-hero-bg.webp"
                               alt="weekend-ux-course-details-hero-bg"
@@ -141,7 +141,7 @@ export default async function DynamicSlugPage({ params }) {
                               className="object-cover object-center opacity-60 z-0"
                          />
                          {/* Content */}
-                         <h1 className="text-[22px] md:text-[38px] 2xl:text-[56px] leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair text-center px-4">
+                         <h1 className="text-[22px] md:text-[38px] 2xl:text-[56px] leading-8 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair text-center px-4">
                               {heroTitle}
                          </h1>
                     </section>
@@ -179,7 +179,7 @@ export default async function DynamicSlugPage({ params }) {
                      />
                     
                     {/* Content */}
-                    <h1 className="custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair px-4">
+                    <h1 className="custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-8 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair px-4">
                          {heroTitle}
                     </h1>
                     <Image src="/images/weekend-ux-decorative-diamond.webp" alt="weekend-ux-decorative-diamond" className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-30" width={200} height={200} style={{ height: "auto" }} />

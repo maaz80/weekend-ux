@@ -297,7 +297,7 @@ export default function Details({ data }) {
                                                   </p>
                                              </div>
 
-                                             <button className="h-12 bg-official rounded-lg text-zinc-900 font-medium">
+                                             <button className="h-12 bg-official rounded-lg text-neutral-900 font-bold">
                                                   Book a Call
                                              </button>
                                         </div>
