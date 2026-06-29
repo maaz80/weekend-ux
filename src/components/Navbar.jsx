@@ -244,7 +244,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              }
                                         }}
                                         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                                        className="md:hidden text-white hover:text-official/80 text-2xl transition cursor-pointer flex items-center"
+                                        className="md:hidden text-neutral-900 hover:text-official/80 text-2xl transition cursor-pointer flex items-center"
                                    >
                                         {isMenuOpen ? <FiX /> : <FiMenu />}
                                    </button>
@@ -407,7 +407,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              }
                                         }}
                                         aria-label={isSearchOpen ? "Close search" : "Open search"}
-                                        className="md:hidden text-white hover:text-official/80 text-xl transition cursor-pointer flex items-center"
+                                        className="md:hidden text-neutral-900 hover:text-official/80 text-xl transition cursor-pointer flex items-center"
                                    >
                                         {isSearchOpen ? <FiX className="text-lg" /> : <FiSearch />}
                                    </button>
@@ -463,7 +463,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                        e.stopPropagation();
                                                        setIsUserDropdownOpen(!isUserDropdownOpen);
                                                   }}
-                                                  className="flex items-center gap-2 text-sm text-white hover:text-official/80 transition cursor-pointer font-medium"
+                                                  className="flex items-center gap-2 text-sm text-neutral-900 hover:text-official/80 transition cursor-pointer font-medium"
                                              >
                                                   <span>{user.name}</span>
                                                   <FiChevronDown className={`text-base transition-transform duration-300 ${isUserDropdownOpen ? "rotate-180" : ""}`} />
@@ -628,7 +628,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
 
                                         {user ? (
                                              <div className="flex flex-col gap-2 pt-2 border-t border-zinc-800">
-                                                  <span className="text-sm text-zinc-400 font-semibold px-2">Logged in as {user.name}</span>
+                                                  <span className="text-sm text-neutral-400 font-semibold px-2">Logged in as {user.name}</span>
                                                   <button
                                                        onClick={async () => {
                                                             await logoutUser();
