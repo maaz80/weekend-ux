@@ -77,7 +77,7 @@ export default function RelatedBlogs({ data }) {
 
 
                     {/* Heading */}
-                    <div className={`mx-auto max-w-212.5 text-center ${pathname === '/' ? 'pt-0' : 'pt-16'}`}>
+                    <div className={`mx-auto max-w-212.5 text-center ${pathname === '/' ? 'pt-0' : 'pt-0'}`}>
                          <span className="font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] text-white">
                               {title}
                          </span>

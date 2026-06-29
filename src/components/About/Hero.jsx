@@ -31,7 +31,7 @@ export default function Hero({ data }) {
                     </h1>
 
                     <Link href="/courses">
-                         <button className="px-5 h-10 rounded-xl bg-official text-neutral-900 font-urbanist relative z-50 cursor-pointer hover:scale-102 transition">
+                         <button className="px-5 h-10 rounded-xl bg-official text-neutral-900 font-urbanist relative z-50 cursor-pointer hover:scale-102 transition font-bold">
                               {buttonName}
                          </button>
                     </Link>
