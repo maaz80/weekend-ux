@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 const loginImage = "/images/weekend-ux-login-decorative-image.webp";
-import { Mail, User, X, KeyRound } from "lucide-react";
+import { Mail, User, X, KeyRound, Phone } from "lucide-react";
 import { signupUser, loginUser, sendAuthOTP } from "@/utils/auth.js";
 import { useHomeData } from "@/context/HomeDataContext";
 
@@ -22,6 +22,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
      const [formData, setFormData] = useState({
           name: "",
           email: "",
+          phone: "",
           password: "",
           confirmPassword: "",
           otp: "",
@@ -70,6 +71,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                setFormData({
                     name: "",
                     email: "",
+                    phone: "",
                     password: "",
                     confirmPassword: "",
                     otp: "",
@@ -84,11 +86,27 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
           };
      }, [isOpen]);
 
+     const validateName = (name) => {
+          const trimmed = name?.trim() || "";
+          return trimmed.length >= 2 && /^[A-Za-z]+(?: [A-Za-z]+)*$/.test(trimmed);
+     };
+
+     const validatePhone = (phone) => {
+          const cleaned = (phone || "").replace(/\D/g, "");
+          return /^[6-9]\d{9}$/.test(cleaned);
+     };
+
      const handleChange = (e) => {
           const { name, value, type, checked } = e.target;
+          let nextValue = type === "checkbox" ? checked : value;
+
+          if (name === "phone") {
+               nextValue = nextValue.replace(/\D/g, "").slice(0, 10);
+          }
+
           setFormData(prev => ({
                ...prev,
-               [name]: type === "checkbox" ? checked : value
+               [name]: nextValue
           }));
           setError("");
           setSuccessMessage("");
@@ -96,6 +114,19 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
 
      const handleSendOTP = async (e) => {
           if (e) e.preventDefault();
+
+          if (authMode === "signup") {
+               if (!validateName(formData.name)) {
+                    setError("Please enter a valid full name");
+                    return;
+               }
+
+               if (!validatePhone(formData.phone)) {
+                    setError("Please enter a valid 10-digit mobile number");
+                    return;
+               }
+          }
+
           if (!formData.email || !/^\S+@\S+\.\S+$/.test(formData.email)) {
                setError("Please provide a valid email address");
                return;
@@ -131,8 +162,20 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
 
           try {
                if (authMode === "signup") {
-                    if (!formData.name || !formData.email || !formData.otp) {
-                         setError("Please fill in all fields");
+                    if (!validateName(formData.name)) {
+                         setError("Please enter a valid full name");
+                         setLoading(false);
+                         return;
+                    }
+
+                    if (!validatePhone(formData.phone)) {
+                         setError("Please enter a valid 10-digit mobile number");
+                         setLoading(false);
+                         return;
+                    }
+
+                    if (!formData.email || !formData.otp) {
+                         setError("Please fill in all required fields");
                          setLoading(false);
                          return;
                     }
@@ -142,12 +185,13 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                          return;
                     }
 
-                    await signupUser(formData.name, formData.email, formData.otp);
+                    await signupUser(formData.name.trim(), formData.email.trim(), formData.phone.replace(/\D/g, ""), formData.otp);
 
                     // Success
                     setFormData({
                          name: "",
                          email: "",
+                         phone: "",
                          password: "",
                          confirmPassword: "",
                          otp: "",
@@ -169,6 +213,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                     setFormData({
                          name: "",
                          email: "",
+                         phone: "",
                          password: "",
                          confirmPassword: "",
                          otp: "",
@@ -234,21 +279,40 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
 
                                    {/* Signup only: Full Name */}
                                    {authMode === "signup" && (
-                                        <div className="relative text-left">
-                                             <label className="text-[13px] font-semibold text-neutral-600">Full Name</label>
-                                             <div className="relative mt-1">
-                                                  <input
-                                                       type="text"
-                                                       name="name"
-                                                       value={formData.name}
-                                                       onChange={handleChange}
-                                                       placeholder="John Doe"
-                                                       className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-black"
-                                                       required
-                                                  />
-                                                  <User className="absolute top-1/2 -translate-y-1/2 left-3 text-zinc-400" size={18} />
+                                        <>
+                                             <div className="relative text-left">
+                                                  <label className="text-[13px] font-semibold text-neutral-600">Full Name</label>
+                                                  <div className="relative mt-1">
+                                                       <input
+                                                            type="text"
+                                                            name="name"
+                                                            value={formData.name}
+                                                            onChange={handleChange}
+                                                            placeholder="John Doe"
+                                                            className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-black"
+                                                            required
+                                                       />
+                                                       <User className="absolute top-1/2 -translate-y-1/2 left-3 text-zinc-400" size={18} />
+                                                  </div>
                                              </div>
-                                        </div>
+
+                                             <div className="relative text-left">
+                                                  <label className="text-[13px] font-semibold text-neutral-600">Mobile Number</label>
+                                                  <div className="relative mt-1">
+                                                       <input
+                                                            type="tel"
+                                                            name="phone"
+                                                            value={formData.phone}
+                                                            onChange={handleChange}
+                                                            placeholder="9876543210"
+                                                            maxLength={10}
+                                                            className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-black"
+                                                            required
+                                                       />
+                                                       <Phone className="absolute top-1/2 -translate-y-1/2 left-3 text-zinc-400" size={18} />
+                                                  </div>
+                                             </div>
+                                        </>
                                    )}
 
                                    {/* Email Input */}
@@ -374,6 +438,11 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                         </span>
                                    )}
                               </p>
+                              {authMode === "signup" && (
+                                   <p className="text-[11px] text-center mt-2 text-red-600">
+                                        Name, email and phone number must be entered correctly to enroll in the course.
+                                   </p>
+                              )}
 
                          </div>
                     </div>

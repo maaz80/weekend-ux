@@ -279,7 +279,7 @@ const Form = () => {
                                         </>
                                    ) : (
                                         <>
-                                             Get in Touch
+                                            Submit
                                              <span>↗</span>
                                         </>
                                    )}

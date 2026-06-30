@@ -39,11 +39,11 @@ export default function Hero() {
           ? homeData.hero.map((slide, idx) => {
                const fallback = staticSlides[idx] || staticSlides[0];
                const tagline = slide?.title?.trim() ? slide.title.trim() : fallback.tagline;
-               
+
                const start = slide?.startheading?.trim() || "";
                const mid = slide?.midheading?.trim() || "";
                const end = slide?.endheading?.trim() || "";
-               
+
                const titleHtml = (start || mid || end)
                     ? `${start} ${mid ? `<span class="italic text-official">${mid}</span>` : ""} ${end}`.trim()
                     : fallback.titleHtml;
@@ -73,17 +73,16 @@ export default function Hero() {
      }, [slides.length]);
 
      return (
-          <section className="relative min-h-145 overflow-hidden bg-black text-white select-none mt-16">
+          <section id="home-hero" className="relative min-h-145 overflow-hidden bg-black text-white select-none mt-12">
                {/* Slides Wrapper */}
                <div className="relative min-h-145 w-full">
                     {slides.map((slide, index) => (
                          <div
                               key={index}
-                              className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
-                                   index === currentSlide
-                                        ? "opacity-100 z-10 scale-100"
-                                        : "opacity-0 z-0 pointer-events-none scale-105"
-                              }`}
+                              className={`absolute inset-0 transition-all duration-1000 ease-in-out ${index === currentSlide
+                                   ? "opacity-100 z-10 scale-100"
+                                   : "opacity-0 z-0 pointer-events-none scale-105"
+                                   }`}
                          >
                               {/* Background Image */}
                               <OptimizedImage
@@ -102,40 +101,36 @@ export default function Hero() {
                               <div className="relative z-20 mx-auto flex min-h-145 max-w-337.5 items-center px-6 sm:px-10 lg:px-16">
                                    <div className="max-w-197.5">
                                         <p
-                                             className={`mb-5 text-[11px] md:text-[14px] font-semibold font-inter uppercase tracking-[0.45em] text-official transition-all duration-700 transform delay-100 ${
-                                                  index === currentSlide
-                                                       ? "translate-y-0 opacity-100"
-                                                       : "translate-y-8 opacity-0"
-                                             }`}
+                                             className={`mb-5 text-[11px] md:text-[14px] font-semibold font-inter uppercase tracking-[0.45em] text-official transition-all duration-700 transform delay-100 ${index === currentSlide
+                                                  ? "translate-y-0 opacity-100"
+                                                  : "translate-y-8 opacity-0"
+                                                  }`}
                                         >
                                              {slide.tagline}
                                         </p>
 
                                         <h1
-                                             className={`font-playfair text-[37px] leading-13 md:leading-16 text-white md:text-[56px] transition-all duration-700 transform delay-300 ${
-                                                  index === currentSlide
-                                                       ? "translate-y-0 opacity-100"
-                                                       : "translate-y-8 opacity-0"
-                                             }`}
+                                             className={`font-playfair text-[37px] leading-13 md:leading-16 text-white md:text-[56px] transition-all duration-700 transform delay-300 ${index === currentSlide
+                                                  ? "translate-y-0 opacity-100"
+                                                  : "translate-y-8 opacity-0"
+                                                  }`}
                                              dangerouslySetInnerHTML={{ __html: slide.titleHtml }}
                                         />
 
                                         <p
-                                             className={`mt-8 max-w-105 text-base leading-8 text-white/70 lg:text-lg font-urbanist transition-all duration-700 transform delay-500 ${
-                                                  index === currentSlide
-                                                       ? "translate-y-0 opacity-100"
-                                                       : "translate-y-8 opacity-0"
-                                             }`}
+                                             className={`mt-8 max-w-105 text-base leading-8 text-white/70 lg:text-lg font-urbanist transition-all duration-700 transform delay-500 ${index === currentSlide
+                                                  ? "translate-y-0 opacity-100"
+                                                  : "translate-y-8 opacity-0"
+                                                  }`}
                                         >
                                              {slide.description}
                                         </p>
 
                                         <div
-                                             className={`transition-all duration-700 transform delay-700 ${
-                                                  index === currentSlide
-                                                       ? "translate-y-0 opacity-100"
-                                                       : "translate-y-8 opacity-0"
-                                             }`}
+                                             className={`transition-all duration-700 transform delay-700 ${index === currentSlide
+                                                  ? "translate-y-0 opacity-100"
+                                                  : "translate-y-8 opacity-0"
+                                                  }`}
                                         >
                                              <Link href="/courses">
                                                   <Button variant="primary" className="mt-10 hover:scale-101">
@@ -177,8 +172,8 @@ export default function Hero() {
                          >
                               <span
                                    className={`block rounded-full transition-all duration-300 h-2.5 ${index === currentSlide
-                                             ? "w-8 bg-official"
-                                             : "w-2.5 bg-white/30 hover:bg-white/60"
+                                        ? "w-8 bg-official"
+                                        : "w-2.5 bg-white/30 hover:bg-white/60"
                                         }`}
                               />
                          </button>

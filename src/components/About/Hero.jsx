@@ -9,10 +9,10 @@ export default function Hero({ data }) {
      const bgImage = data?.bgImage?.trim() ? data.bgImage.trim() : "/images/weekend-ux-location-hero-bg.webp";
 
      return (
-          <div className=" bg-white text-white font-urbanist flex flex-col relative pt-16 md:pt-12">
+          <div id="about-hero" className=" bg-white text-white font-urbanist flex flex-col relative pt-16 md:pt-8">
                <Image src='/images/weekend-ux-decorative-diamond.webp' alt="weekend-ux-decorative-diamond" className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-30" width={200} height={200} style={{ height: 'auto' }}/>
                {/* Hero Header Section */}
-               <section className="relative h-62.5 md:h-100 w-full flex flex-col gap-5 items-center justify-center bg-zinc-950 overflow-hidden">
+               <section className="relative h-62.5 md:h-120 w-full flex flex-col gap-5 items-center justify-center bg-zinc-950 overflow-hidden">
                     <OptimizedImage
                          src={bgImage}
                          alt="weekend-ux-location-hero-bg"

@@ -136,7 +136,7 @@ export default async function DynamicSlugPage({ params }) {
                <div className="min-h-screen bg-black text-white font-urbanist flex flex-col relative">
                     <Breadcrumb />
                     {/* Hero Header Section */}
-                    <section className="relative h-65.5 md:h-114 w-full flex md:items-center items-end pb-7 md:pb-0 justify-center bg-zinc-950 overflow-hidden">
+                    <section className="relative h-65.5 md:h-114 w-full flex md:items-center items-end pb-7 md:pb-0 justify-center bg-zinc-950 overflow-hidden" data-navbar-light="true" id='course-details-hero'>
                          <Image
                               src="/images/weekend-ux-course-details-hero-bg.webp"
                               alt="weekend-ux-course-details-hero-bg"
@@ -170,10 +170,10 @@ export default async function DynamicSlugPage({ params }) {
           : "Explore Our Blogs";
 
      return (
-          <div className="min-h-screen bg-white text-white font-urbanist flex flex-col relative pt-15 md:pt-11">
+          <div className="min-h-screen bg-white text-white font-urbanist flex flex-col relative pt-15 md:pt-8">
                <Breadcrumb />
                {/* Hero Header Section */}
-               <section className="relative h-56.5 md:h-104 w-full flex md:items-center items-end pb-12 md:pb-0 justify-center bg-zinc-950 ">
+               <section className="relative h-61.5 md:h-114 w-full flex md:items-center items-end pb-12 md:pb-0 justify-center bg-zinc-950 " data-navbar-light="true" id='blog-details-hero'>
                     <Image
                          src="/images/weekend-ux-blogs-hero-bg.webp"
                          alt="weekend-ux-policy-hero-bg"

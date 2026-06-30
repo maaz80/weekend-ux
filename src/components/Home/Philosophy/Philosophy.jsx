@@ -15,7 +15,7 @@ const Philosophy = () => {
           : "“Design can't be learned by watching someone else design. Weekend UX exists because the only way to get better is to sit down, make something, and get honest feedback on it.”";
 
      return (
-          <div className='relative w-full min-h-75 flex items-center justify-center'>
+          <div id="home-philosophy" data-navbar-light="true" className='relative w-full min-h-75 flex items-center justify-center'>
                {/* Background */}
                <div
                     className="absolute inset-0 bg-cover bg-center z-10"

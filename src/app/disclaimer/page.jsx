@@ -44,11 +44,11 @@ export default async function Disclaimer() {
           : "We value your privacy and are committed to protecting your personal information...";
 
      return (
-          <div className="min-h-screen bg-white text-white font-urbanist flex flex-col relative pt-16 md:pt-12">
+          <div className="min-h-screen bg-white text-white font-urbanist flex flex-col relative pt-16 md:pt-8" >
                <Breadcrumb />
 
                {/* Hero Header Section */}
-               <section className="relative h-46.5 md:h-104 w-full flex md:items-center items-end pb-12 md:pb-0 justify-center bg-zinc-950 ">
+               <section className="relative h-51.5 md:h-114 w-full flex md:items-center items-end pb-12 md:pb-0 justify-center bg-zinc-950 " data-navbar-light="true" id='disclaimer-hero'>
                     <Image
                          src='/images/weekend-ux-policy-hero-bg.webp'
                          alt="weekend-ux-policy-hero-bg"

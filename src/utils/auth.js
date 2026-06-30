@@ -40,14 +40,14 @@ export const getAuthHeader = () => {
 };
 
 // Signup API call
-export const signupUser = async (name, email, otp) => {
+export const signupUser = async (name, email, phone, otp) => {
      try {
           const res = await fetch(`${API}/auth/signup`, {
                method: "POST",
                headers: {
                     "Content-Type": "application/json",
                },
-               body: JSON.stringify({ name, email, otp }),
+               body: JSON.stringify({ name, email, phone, otp }),
           });
 
           const data = await res.json();

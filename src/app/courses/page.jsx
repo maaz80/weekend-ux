@@ -7,7 +7,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import CourseCard from "@/components/Courses/CourseCard";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import FAQ from "@/components/FAQ";
-import {  FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useHomeData } from "@/context/HomeDataContext";
 
 const staticCourses = [
@@ -176,7 +176,7 @@ export default function CoursesPage() {
      };
 
      const filteredCourses = coursesList.filter(course => {
-          const matchesSearch = 
+          const matchesSearch =
                (course.title || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
                (course.overview || course.description || course.seodescription || "").toLowerCase().includes(searchQuery.toLowerCase());
           const matchesCategory = activeCategory === "All" || course.category === activeCategory;
@@ -196,7 +196,7 @@ export default function CoursesPage() {
 
           const start = Math.max(1, Math.min(currentPage, totalPages - 2));
           const actualStart = currentPage < 3 ? 1 : start;
-          
+
           const end = Math.min(totalPages, actualStart + (currentPage < 3 ? 2 : 2));
           for (let i = actualStart; i <= end; i++) {
                pages.push(i);
@@ -222,7 +222,7 @@ export default function CoursesPage() {
                <Breadcrumb />
 
                {/* Hero Header Section */}
-               <section className="relative h-39.5 md:h-104 w-full flex items-center justify-center bg-zinc-950 overflow-hidden">
+               <section id="courses-hero" className="relative h-39.5 md:h-104 w-full flex items-center justify-center bg-zinc-950 overflow-hidden">
                     <Image
                          src="/images/weekend-ux-courses-hero-bg.webp"
                          alt="weekend-ux-courses-hero-bg"
@@ -267,10 +267,10 @@ export default function CoursesPage() {
                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                                         {displayedCourses.map((course, idx) => (
                                              <div key={course._id} className="w-full max-w-sm text-black">
-                                                  <CourseCard 
-                                                       course={course} 
-                                                       priority={idx < 3 && currentPage === 1} 
-                                                       fetchPriority={idx === 0 && currentPage === 1 ? "high" : undefined} 
+                                                  <CourseCard
+                                                       course={course}
+                                                       priority={idx < 3 && currentPage === 1}
+                                                       fetchPriority={idx === 0 && currentPage === 1 ? "high" : undefined}
                                                   />
                                              </div>
                                         ))}
@@ -285,8 +285,8 @@ export default function CoursesPage() {
                                                   aria-label="Previous Page"
                                                   disabled={currentPage === 1}
                                                   className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === 1
-                                                            ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                            : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                       ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                       : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
                                                        }`}
                                              >
                                                   <FiChevronLeft className="text-lg" />
@@ -309,8 +309,8 @@ export default function CoursesPage() {
                                                             key={`page-${item}`}
                                                             onClick={() => setCurrentPage(item)}
                                                             className={`w-10 h-10 rounded-xl border text-sm font-semibold transition-all cursor-pointer ${currentPage === item
-                                                                      ? "bg-official text-black border-transparent shadow-sm"
-                                                                      : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                                 ? "bg-official text-black border-transparent shadow-sm"
+                                                                 : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
                                                                  }`}
                                                        >
                                                             {item}
@@ -324,8 +324,8 @@ export default function CoursesPage() {
                                                   aria-label="Next Page"
                                                   disabled={currentPage === totalPages}
                                                   className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === totalPages
-                                                            ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                            : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                       ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                       : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
                                                        }`}
                                              >
                                                   <FiChevronRight className="text-lg" />
@@ -350,7 +350,7 @@ export default function CoursesPage() {
                {/* Common Shared Components (RelatedBlogs, FAQ, Footer) */}
                <RelatedBlogs data={coursesData?.relatedBlogs} />
                <FAQ paddings="py-20" />
-               
+
           </div>
      );
 }

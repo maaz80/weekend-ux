@@ -51,7 +51,7 @@ export default function Details({ data }) {
           : STATIC_STATS;
 
      return (
-          <section className="relative overflow-hidden">
+          <section className="relative overflow-hidden" data-navbar-light="true" id='about-why'>
                {/* Background */}
                <div
                     className="absolute inset-0 bg-cover bg-center"

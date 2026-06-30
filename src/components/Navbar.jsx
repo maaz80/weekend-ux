@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { FiSearch, FiChevronDown, FiMenu, FiX } from "react-icons/fi";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -26,10 +26,12 @@ import { FaXTwitter } from "react-icons/fa6";
 const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
      const { navbarData, coursesData } = useHomeData();
      const router = useRouter();
+     const pathname = usePathname();
      const [isMenuOpen, setIsMenuOpen] = useState(initialMenuOpen);
      const [suggestedResults, setSuggestedResults] = useState([]);
      const [isSearchOpen, setIsSearchOpen] = useState(initialSearchOpen);
      const [isCoursesModalOpen, setIsCoursesModalOpen] = useState(false);
+     const [isMoreButtonLight, setIsMoreButtonLight] = useState(false);
      const [user, setUser] = useState(null);
      const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
      const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
@@ -161,6 +163,56 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
      const moreItemsDropdownList = navbarData?.moreItems?.dropdown_items || [];
 
      useEffect(() => {
+          const routeSectionIds = pathname === "/"
+               ? ["home-hero", "home-philosophy"]
+               : pathname === "/about-us"
+                    ? ["about-hero"]
+                    : pathname === "/courses"
+                         ? ["courses-hero"]
+                         : [];
+
+          const explicitSections = Array.from(
+               document.querySelectorAll("[data-navbar-light='true'], [data-navbar-light-section='true']")
+          ).filter((section) => section instanceof HTMLElement);
+
+          const sectionIds = [...new Set([...routeSectionIds, ...explicitSections.map((section) => section.id).filter(Boolean)])];
+          const sections = sectionIds
+               .map((id) => document.getElementById(id))
+               .filter(Boolean);
+
+          if (sections.length === 0) {
+               setIsMoreButtonLight(false);
+               return;
+          }
+
+          const updateLightState = () => {
+               const isVisible = sections.some((section) => {
+                    const rect = section.getBoundingClientRect();
+                    return rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+               });
+               setIsMoreButtonLight(isVisible);
+          };
+
+          updateLightState();
+
+          const observer = new IntersectionObserver((entries) => {
+               const isVisible = entries.some((entry) => entry.isIntersecting);
+               setIsMoreButtonLight(isVisible);
+          }, { threshold: 0.2 });
+
+          sections.forEach((section) => observer.observe(section));
+
+          window.addEventListener("scroll", updateLightState, { passive: true });
+          window.addEventListener("resize", updateLightState);
+
+          return () => {
+               observer.disconnect();
+               window.removeEventListener("scroll", updateLightState);
+               window.removeEventListener("resize", updateLightState);
+          };
+     }, [pathname]);
+
+     useEffect(() => {
           const html = document.documentElement;
           if (isCoursesModalOpen) {
                const scrollBarWidth = window.innerWidth - html.clientWidth;
@@ -244,7 +296,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              }
                                         }}
                                         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                                        className="md:hidden text-neutral-900 hover:text-official/80 text-2xl transition cursor-pointer flex items-center"
+                                        className={`md:hidden ${isMoreButtonLight ? "text-white" : "text-neutral-900"} hover:text-official/80 text-2xl transition cursor-pointer flex items-center`}
                                    >
                                         {isMenuOpen ? <FiX /> : <FiMenu />}
                                    </button>
@@ -407,7 +459,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              }
                                         }}
                                         aria-label={isSearchOpen ? "Close search" : "Open search"}
-                                        className="md:hidden text-neutral-900 hover:text-official/80 text-xl transition cursor-pointer flex items-center"
+                                        className={`md:hidden ${isMoreButtonLight ? "text-white" : "text-neutral-900"} hover:text-official/80 text-xl transition cursor-pointer flex items-center`}
                                    >
                                         {isSearchOpen ? <FiX className="text-lg" /> : <FiSearch />}
                                    </button>
@@ -417,9 +469,9 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                         onMouseEnter={() => setIsMenuOpen(false)}
                                    >
                                         {/* BUTTON */}
-                                        <button className="h-11 px-5 rounded-t-md flex items-center gap-2 text-sm text-neutral-900 transition-all duration-300 cursor-pointer group-hover:bg-white group-hover:text-black">
+                                        <button className={`h-11 px-5 rounded-t-md flex items-center gap-2 text-sm transition-all duration-300 cursor-pointer ${isMoreButtonLight ? "text-white" : "text-neutral-900"} group-hover:bg-white group-hover:text-black`}>
                                              {moreTitle}
-                                             <FiChevronDown className="text-base transition-all duration-300 group-hover:rotate-180" />
+                                             <FiChevronDown className={`text-base transition-all duration-300 group-hover:rotate-180 ${isMoreButtonLight ? "text-white group-hover:text-black" : "text-neutral-900 group-hover:text-black"}`} />
                                         </button>
                                         {/* DROPDOWN */}
                                         <div className="absolute top-11 right-0 w-245 p-6 bg-white border border-zinc-100 opacity-0 invisible -translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-99999 rounded-b-md">

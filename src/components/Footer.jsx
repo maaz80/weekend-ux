@@ -128,7 +128,6 @@ export default function Footer() {
                title: "For Business",
                links: [
                     { label: "About us", path: "/about-us" },
-                    { label: "Careers", path: "/careers" },
                ]
           },
           {
@@ -168,7 +167,7 @@ export default function Footer() {
                     <div className="font-playfair text-[17px] md:text-[28px] lg:text-[56px] text-neutral-900 max-w-150 relative z-50 leading-9 md:leading-12 lg:leading-16" >
                          {cardTitle}
                     </div>
-                    <Link href="/courses">
+                    <Link href="/contact-us">
                          <Button variant="dark" className="mt-0 md:mt-4 lg:mt-10 hover:scale-105 relative z-50">
                               {cardButtonName}
                          </Button>
@@ -206,7 +205,7 @@ export default function Footer() {
                                                        rel="noopener noreferrer"
                                                        key={i}
                                                        aria-label={social.icon ? social.icon.replace(/^(Fa|Ri|Ci|Fi)/, "").replace(/([A-Z])/g, " $1").trim() : "Social media"}
-                                                       className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-white hover:bg-official/80 transition-colors duration-200"
+                                                       className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-neutral-900 hover:bg-official/80 transition-colors duration-200"
                                                   >
                                                        <IconComponent size={18} />
                                                   </a>
@@ -216,7 +215,7 @@ export default function Footer() {
                                         [FaFacebookF, RiTwitterXLine, FaInstagram, FaLinkedinIn, CiYoutube].map((Icon, i) => (
                                              <div
                                                   key={i}
-                                                  className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-white hover:bg-official/80 transition-colors duration-200"
+                                                  className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-neutral-900 hover:bg-official/80 transition-colors duration-200"
                                              >
                                                   <Icon size={18} strokeWidth={1.2} />
                                              </div>

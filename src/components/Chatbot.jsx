@@ -99,7 +99,7 @@ const Chatbot = () => {
 
      return (
           <div 
-               className={`fixed right-4 md:right-10 z-99998 w-[calc(100%-2rem)] sm:w-95 h-130 max-h-[calc(100vh-120px)] bg-white rounded-md shadow-2xl border border-zinc-100 flex flex-col overflow-hidden transition-all duration-500 ease-in-out select-none ${
+               className={`fixed right-4 md:right-10 z-99998 w-[calc(100%-2rem)] sm:w-95 h-130 max-h-[calc(100vh-120px)] bg-white rounded-md shadow-2xl  flex flex-col overflow-hidden transition-all duration-500 ease-in-out select-none ${
                     isChatbotOpen 
                          ? "bottom-14 translate-y-0 opacity-100 pointer-events-auto" 
                          : "bottom-0 translate-y-[calc(100%+56px)] opacity-0 pointer-events-none"
@@ -134,7 +134,7 @@ const Chatbot = () => {
                          className="text-zinc-950 hover:text-zinc-700 transition-all duration-300 hover:rotate-90 p-1 rounded-full cursor-pointer"
                          aria-label="Close chat"
                     >
-                         <X size={20} />
+                         <X size={20} strokeWidth={3 }/>
                     </button>
                </div>
 
