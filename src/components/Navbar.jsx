@@ -214,7 +214,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
 
      useEffect(() => {
           const html = document.documentElement;
-          if (isCoursesModalOpen) {
+          if (isCoursesModalOpen || isMenuOpen) {
                const scrollBarWidth = window.innerWidth - html.clientWidth;
                html.style.overflow = "hidden";
                html.style.paddingRight = `${scrollBarWidth}px`;
@@ -226,7 +226,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                html.style.overflow = "";
                html.style.paddingRight = "";
           };
-     }, [isCoursesModalOpen]);
+     }, [isCoursesModalOpen, isMenuOpen]);
 
      const [prevInitialMenuOpen, setPrevInitialMenuOpen] = useState(initialMenuOpen);
      if (initialMenuOpen !== prevInitialMenuOpen) {
@@ -668,7 +668,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
 
                          {/* MOBILE MENU */}
                          {isMenuOpen && (
-                              <div className="md:hidden border-t border-official/10 bg-black/95 px-4 py-5 flex flex-col gap-4">
+                              <div className="md:hidden border-t border-official/10 bg-black/95 px-4 pt-5 pb-12 md:pb-5 flex flex-col gap-4 max-h-[calc(100vh-130px)] overflow-y-auto">
                                    {/* MOBILE BUTTONS */}
                                    <div className="flex flex-col gap-3">
                                         <Button variant="primary" className="w-full justify-center" onClick={() => {
