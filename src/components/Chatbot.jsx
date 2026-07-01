@@ -125,7 +125,7 @@ const Chatbot = () => {
                               )}
                          </div>
                          <div className="flex flex-col text-left">
-                              <span className="text-zinc-950 font-light text-xl tracking-wide leading-tight font-semibold">Hi there!</span>
+                              <span className="text-zinc-950 text-xl tracking-wide leading-tight font-semibold">Hi there!</span>
                               <span className="text-zinc-800 text-[11px] leading-tight mt-0.5 font-medium">Welcome to Weekend UX. How can we help?</span>
                          </div>
                     </div>
