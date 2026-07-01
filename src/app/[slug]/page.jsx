@@ -15,25 +15,25 @@ import connectDB from "@/config/db";
 const getSlugData = cache(async (slug) => {
      try {
           await connectDB();
-          
+
           const [blogPage, coursesPage, locationDoc] = await Promise.all([
                Blog.findOne().select("blogs").lean(),
                Courses.findOne().select("course").lean(),
                Location.findOne({ "items.hero.slug": slug }).select("items").lean()
           ]);
-          
+
           // 1. Check blog
           if (blogPage) {
                const blog = blogPage.blogs.find(b => b.slug === slug);
                if (blog) return { type: "blog", data: JSON.parse(JSON.stringify(blog)) };
           }
-          
+
           // 2. Check course
           if (coursesPage) {
                const course = coursesPage.course.find(c => c.slug === slug);
                if (course) return { type: "course", data: JSON.parse(JSON.stringify(course)) };
           }
-          
+
           // 3. Check location
           if (locationDoc) {
                const item = locationDoc.items.find(it => it.hero?.[0]?.slug === slug);
@@ -42,7 +42,7 @@ const getSlugData = cache(async (slug) => {
      } catch (error) {
           console.error("Error in getSlugData fetching database:", error);
      }
-     
+
      return null;
 });
 
@@ -74,7 +74,7 @@ export async function generateMetadata({ params }) {
           imageUrl = data.image?.imageurl || "";
      }
 
-     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://weekendux.co";
+     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://weekend-ui.netlify.app";
      const pageUrl = `${baseUrl}/${slug}`;
      const finalImageUrl = imageUrl || `${baseUrl}/images/weekend-ux-blogs-hero-bg.webp`;
 
@@ -184,15 +184,15 @@ export default async function DynamicSlugPage({ params }) {
                          priority
                          fetchPriority="high"
                          className="object-cover object-center opacity-65 z-0"
-                     />
-                    
+                    />
+
                     {/* Content */}
                     <h1 className="custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-8 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair px-4">
                          {heroTitle}
                     </h1>
                     <Image src="/images/weekend-ux-decorative-diamond.webp" alt="weekend-ux-decorative-diamond" className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-30" width={200} height={200} style={{ height: "auto" }} />
                </section>
-               
+
                <BlogDetailsView data={data} />
                <RelatedBlogs />
                <FAQ faqData={(data?.faq?.items && data.faq.items.length > 0) ? {

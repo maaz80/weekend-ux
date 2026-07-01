@@ -5,49 +5,49 @@
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
     <!-- Home Page -->
     <url>
-        <loc>https://weekendux.co/</loc>
+        <loc>https://weekend-ui.netlify.app/</loc>
         <lastmod>2026-06-25</lastmod>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
     <!-- About Us Page -->
     <url>
-        <loc>https://weekendux.co/about-us</loc>
+        <loc>https://weekend-ui.netlify.app/about-us</loc>
         <lastmod>2026-06-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1</priority>
     </url>
     <!-- Courses Page -->
     <url>
-        <loc>https://weekendux.co/courses</loc>
+        <loc>https://weekend-ui.netlify.app/courses</loc>
         <lastmod>2026-06-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1</priority>
     </url>
     <!-- Contact Us Page -->
     <url>
-        <loc>https://weekendux.co/contact-us</loc>
+        <loc>https://weekend-ui.netlify.app/contact-us</loc>
         <lastmod>2026-06-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1</priority>
     </url>
     <!-- Location Page -->
     <url>
-        <loc>https://weekendux.co/location</loc>
+        <loc>https://weekend-ui.netlify.app/location</loc>
         <lastmod>2026-06-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>1</priority>
     </url>
     <!-- Privacy Policy Page -->
     <url>
-        <loc>https://weekendux.co/privacy-policy</loc>
+        <loc>https://weekend-ui.netlify.app/privacy-policy</loc>
         <lastmod>2026-06-25</lastmod>
         <changefreq>yearly</changefreq>
         <priority>1</priority>
     </url>
     <!-- Disclaimer Page -->
     <url>
-        <loc>https://weekendux.co/disclaimer</loc>
+        <loc>https://weekend-ui.netlify.app/disclaimer</loc>
         <lastmod>2026-06-25</lastmod>
         <changefreq>yearly</changefreq>
         <priority>1</priority>
