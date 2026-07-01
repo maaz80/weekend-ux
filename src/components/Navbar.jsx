@@ -739,7 +739,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                >
                     {/* Modal Content container */}
                     <div
-                         className="bg-[#FCFBF7] w-[95%] h-full max-h-[88vh] md:max-h-[85vh] shadow-2xl relative flex flex-col overflow-hidden hide-scrollbar"
+                         className="bg-[#FCFBF7] w-full h-full max-h-[88vh] md:max-h-[85vh] shadow-2xl relative flex flex-col overflow-hidden hide-scrollbar"
                          onClick={(e) => e.stopPropagation()}
                          onMouseEnter={clearCloseTimeout}
                          onMouseLeave={startCloseTimeout}

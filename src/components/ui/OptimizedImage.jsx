@@ -76,7 +76,7 @@ export default function OptimizedImage({
                alt={alt}
                className={`${className}`}
                loading={priority ? "eager" : "lazy"}
-               style={{ objectFit }}
+               // style={{ objectFit }}
                fetchPriority={fetchPriority}
           />
      );

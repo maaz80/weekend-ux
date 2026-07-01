@@ -140,11 +140,10 @@ const staticCourses = [
           courseLength: "2 Months"
      },
 ];
-
 const OurPrograms = ({ data }) => {
      const { homeData, coursesData } = useHomeData();
-     const [activeMobileIndex, setActiveMobileIndex] = useState(0);
-     const [activeCategory, setActiveCategory] = useState("All");
+     const [activeMobileIndex, setActiveMobileIndex] = useState(null);
+     const [activeCategory, setActiveCategory] = useState(null);
      const [currentPage, setCurrentPage] = useState(1);
      const coursesPerPage = 4;
 
@@ -167,10 +166,10 @@ const OurPrograms = ({ data }) => {
           })
           : staticCourses;
 
-     const categories = ["All", ...new Set(courses.map(c => c.category))];
-     const currentCategory = activeCategory || "All";
+     const categories = [...new Set(courses.map(c => c.category).filter(Boolean))];
+     const currentCategory = activeCategory || null;
 
-     const filteredCourses = currentCategory === "All"
+     const filteredCourses = !currentCategory
           ? courses
           : courses.filter(c => c.category === currentCategory);
 
@@ -267,19 +266,22 @@ const OurPrograms = ({ data }) => {
                     <div className="hidden md:flex mt-10 items-start justify-between gap-10">
                          {/* Categories Sidebar */}
                          <div className="space-y-1.5 w-[28%] xl:w-[22%] shrink-0 sticky top-36 self-start">
+                              {/* Static Heading */}
+                              <div className="w-full text-[13px] font-bold uppercase tracking-wider text-zinc-400 border-b border-zinc-100 pb-2 mb-3 text-left pl-4 select-none">
+                                   Categories
+                              </div>
                               {categories.map((cat) => (
                                    <ProgramsSidebar
                                         key={cat}
-                                        category={cat === "All" ? "All Courses" : cat}
+                                        category={cat}
                                         isActive={currentCategory === cat}
                                         onClick={() => {
-                                             setActiveCategory(cat);
+                                             setActiveCategory(currentCategory === cat ? null : cat);
                                              setCurrentPage(1);
                                         }}
                                    />
                               ))}
                          </div>
-
                          {/* Course Cards Column with Pagination */}
                          <div className="flex-1 w-[70%] xl:w-[75%] flex flex-col gap-8 ">
                               {/* Grid */}
@@ -356,11 +358,28 @@ const OurPrograms = ({ data }) => {
 
                     {/* MOBILE VIEW */}
                     <div className="md:hidden mt-8 space-y-3">
+                         {/* Static Heading */}
+                         <div className="w-full text-[12px] font-bold uppercase tracking-wider text-zinc-400 border-b border-zinc-100 pb-2 mb-4 text-left pl-2 select-none">
+                              Categories
+                         </div>
+
+                         {/* All Courses shown initially when no category is active/open */}
+                         {activeMobileIndex === null && (
+                              <div className="mb-6">
+                                   <h3 className="text-[14px] font-bold text-zinc-800 mb-3 pl-2">All Courses</h3>
+                                   <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
+                                        {courses.map((course) => (
+                                             <div key={course._id} className="min-w-70 shrink-0">
+                                                  <CourseCard course={course} />
+                                             </div>
+                                        ))}
+                                   </div>
+                              </div>
+                         )}
+
                          {categories.map((cat, index) => {
                               const isOpen = activeMobileIndex === index;
-                              const categoryCourses = cat === "All"
-                                   ? courses
-                                   : courses.filter((c) => c.category === cat);
+                              const categoryCourses = courses.filter((c) => c.category === cat);
 
                               return (
                                    <div key={cat} className="overflow-hidden">
@@ -372,7 +391,7 @@ const OurPrograms = ({ data }) => {
                                              className="cursor-pointer"
                                         >
                                              <ProgramsSidebar
-                                                  category={cat === "All" ? "All Courses" : cat}
+                                                  category={cat}
                                                   isActive={isOpen}
                                              />
                                         </div>

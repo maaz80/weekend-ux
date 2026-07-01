@@ -149,16 +149,17 @@ const ProgramModalContent = ({ setIsModal }) => {
                ...c,
                // Make sure course properties match what the CourseCard component expects
                _id: c._id || c.slug,
+               description: c.overview && c.overview.trim() ? c.overview.trim() : (c.seodescription && c.seodescription.trim() ? c.seodescription.trim() : ""),
                courseLength: c.courselength || c.duration || "6 Months",
                deadline: c.startdate || "10th Dec, 26"
           }))
           : staticCourses;
 
-     const categories = ["All", ...new Set(courses.map(c => c.category).filter(Boolean))];
-     const [activeCategory, setActiveCategory] = useState('All');
+     const categories = [...new Set(courses.map(c => c.category).filter(Boolean))];
+     const [activeCategory, setActiveCategory] = useState(null);
 
      const filteredCourses =
-          activeCategory === "All"
+          !activeCategory
                ? courses
                : courses.filter(c => c.category === activeCategory);
 
@@ -170,12 +171,16 @@ const ProgramModalContent = ({ setIsModal }) => {
                     <div className="hidden md:flex mt-4 items-start justify-between gap-10">
                          {/* Categories Sidebar */}
                          <div className="space-y-1.5 w-[28%] xl:w-[22%]">
+                              {/* Static Heading */}
+                              <div className="w-full text-[13px] font-bold uppercase tracking-wider text-zinc-400 border-b border-zinc-100 pb-2 mb-3 text-left pl-4 select-none">
+                                   Categories
+                              </div>
                               {categories.map((cat) => (
                                    <ProgramsSidebar
                                         key={cat}
                                         category={cat}
                                         isActive={activeCategory === cat}
-                                        onClick={() => setActiveCategory(cat)}
+                                        onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
                                    />
                               ))}
                          </div>
@@ -190,12 +195,28 @@ const ProgramModalContent = ({ setIsModal }) => {
 
                     {/* MOBILE VIEW */}
                     <div className="md:hidden mt-4 space-y-3">
+                         {/* Static Heading */}
+                         <div className="w-full text-[12px] font-bold uppercase tracking-wider text-zinc-400 border-b border-zinc-100 pb-2 mb-4 text-left pl-2 select-none">
+                              Categories
+                         </div>
+
+                         {/* All Courses shown initially when no category is active/open */}
+                         {activeMobileIndex === null && (
+                              <div className="mb-6">
+                                   <h3 className="text-[14px] font-bold text-zinc-800 mb-3 pl-2">All Courses</h3>
+                                   <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
+                                        {courses.map((course) => (
+                                             <div key={course._id} className="min-w-70 shrink-0">
+                                                  <CourseCard course={course} setIsModal={setIsModal} />
+                                             </div>
+                                        ))}
+                                   </div>
+                              </div>
+                         )}
+
                          {categories.map((cat, index) => {
                               const isOpen = activeMobileIndex === index;
-                              const categoryCourses =
-                                   cat === "All"
-                                        ? courses
-                                        : courses.filter((c) => c.category === cat);
+                              const categoryCourses = courses.filter((c) => c.category === cat);
 
                               return (
                                    <div key={cat} className="overflow-hidden">

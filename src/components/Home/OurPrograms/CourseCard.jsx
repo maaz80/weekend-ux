@@ -1,6 +1,6 @@
 "use client";
 
-import { FiDownload } from "react-icons/fi";
+import { GoArrowRight  } from "react-icons/go";
 import { useRouter } from 'next/navigation';
 import OptimizedImage from "@/components/ui/OptimizedImage";
 
@@ -23,7 +23,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                     <OptimizedImage
                          src={imageSrc}
                          alt={course?.alt || "weekend-ux-program-image-template"}
-                         className="w-full h-full object-cover"
+                         className="w-full h-full object-fill"
                          sizes="(max-width: 768px) 100vw, 320px"
                          priority={priority}
                          fetchPriority={fetchPriority}
@@ -39,7 +39,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
 
                     {/* Description */}
                     <p className="mt-2 text-xs md:text-[16px] text-zinc-500 font-urbanist line-clamp-2 leading-6">
-                         {course?.description || "AWS provides services for every domain such as computing, data storage, data analytics, robotics, and"}
+                         {course?.description || course?.overview || "AWS provides services for every domain such as computing, data storage, data analytics, robotics, and"}
                     </p>
 
                     {/* Metadata */}
@@ -57,8 +57,9 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                          onClick={handleClick}
                          className="w-full h-12 rounded-xl text-zinc-800 text-[16px] font-medium flex items-center justify-center gap-2 border border-zinc-200 hover:border-none cursor-pointer hover:bg-linear-to-r from-zinc-500 to-zinc-900 hover:text-white hover:border-transparent transition-all duration-300 ease-in-out mt-auto"
                     >
-                         <FiDownload className="text-base" />
-                         Download Brochure
+                         {/* <FiDownload className="text-base" /> */}
+                         Course Syllablus
+                         <GoArrowRight />
                     </button>
                </div>
           </div>

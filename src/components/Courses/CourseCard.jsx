@@ -1,8 +1,9 @@
 "use client";
 
-import { FiDownload, FiClock, FiUsers, FiBarChart2, FiBookOpen } from "react-icons/fi";
+import { FiClock, FiUsers, FiBarChart2, FiBookOpen } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import OptimizedImage from "@/components/ui/OptimizedImage";
+import { GoArrowRight } from "react-icons/go";
 
 const CourseImage = "/images/weekend-ux-program-image-template.webp";
 
@@ -26,7 +27,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                     <OptimizedImage
                          src={imageSrc}
                          alt={course?.alt || "weekend-ux-program-image-template"}
-                         className="w-full h-full object-cover"
+                         className="w-full h-full object-fill"
                          sizes="(max-width: 768px) 100vw, 400px"
                          priority={priority}
                          fetchPriority={fetchPriority}
@@ -57,8 +58,8 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                          <div className="flex items-center gap-2 text-zinc-700">
                               <FiUsers className="text-[#F4C430] shrink-0 text-[20px]" />
                               <span>
-                                   {course?.totalstudents 
-                                        ? (course.totalstudents.toLowerCase().includes("student") ? course.totalstudents : `${course.totalstudents} Students`) 
+                                   {course?.totalstudents
+                                        ? (course.totalstudents.toLowerCase().includes("student") ? course.totalstudents : `${course.totalstudents} Students`)
                                         : "156 Students"
                                    }
                               </span>
@@ -72,8 +73,8 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                          <div className="flex items-center gap-2 text-zinc-700">
                               <FiBookOpen className="text-[#F4C430] shrink-0 text-[20px]" />
                               <span>
-                                   {course?.totallessons 
-                                        ? (course.totallessons.toLowerCase().includes("lesson") ? course.totallessons : `${course.totallessons} Lessons`) 
+                                   {course?.totallessons
+                                        ? (course.totallessons.toLowerCase().includes("lesson") ? course.totallessons : `${course.totallessons} Lessons`)
                                         : "20 Lessons"
                                    }
                               </span>
@@ -101,8 +102,9 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                               onClick={handleClick}
                               className="h-10 px-4 rounded-md border border-zinc-300 bg-white text-zinc-700 text-[12px] md:text-[13px] font-medium flex items-center gap-2 whitespace-nowrap hover:bg-zinc-50 transition-all duration-300 cursor-pointer"
                          >
-                              <FiDownload size={14} />
-                              Download Brochure
+                              {/* <FiDownload size={14} /> */}
+                              Course Syllablus
+                              <GoArrowRight />
                          </button>
 
                     </div>
