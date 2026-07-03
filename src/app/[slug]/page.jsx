@@ -10,6 +10,8 @@ import Blog from "@/models/Blog";
 import Courses from "@/models/Courses";
 import Location from "@/models/Location";
 import connectDB from "@/config/db";
+import { generatePageMetadata, getPageSEOData } from "@/utils/seo";
+
 
 // Memoize getSlugData per-request and perform parallel DB queries to prevent waterfalls
 const getSlugData = cache(async (slug) => {
@@ -50,9 +52,7 @@ export async function generateMetadata({ params }) {
      const { slug } = await params;
      const result = await getSlugData(slug);
      if (!result) {
-          return {
-               title: "Not Found",
-          };
+          return generatePageMetadata("not-found", "Page Not Found - Weekend UX", "The page you are looking for does not exist.", `/${slug}`);
      }
 
      const { type, data } = result;
@@ -110,12 +110,16 @@ export default async function DynamicSlugPage({ params }) {
      const result = await getSlugData(slug);
 
      if (!result) {
+          const seo = await getPageSEOData("not-found");
+          const displayTitle = seo?.title || "Page Not Found";
+          const displayDesc = seo?.description || "The link you followed may be broken, or the page may have been removed.";
+
           return (
                <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center font-urbanist px-4 text-center">
                     <h1 className="text-6xl font-bold font-playfair text-official mb-4">404</h1>
-                    <h2 className="text-2xl font-semibold mb-2">Page Not Found</h2>
+                    <h2 className="text-2xl font-semibold mb-2">{displayTitle}</h2>
                     <p className="text-zinc-400 max-w-md mb-6">
-                         The link you followed may be broken, or the page may have been removed.
+                         {displayDesc}
                     </p>
                     <a href="/" className="px-6 py-3 bg-official text-black rounded-lg font-medium hover:opacity-90 transition-all">
                          Go to Homepage

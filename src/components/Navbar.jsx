@@ -247,11 +247,11 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                     <div className="w-full bg-official text-neutral-900 py-1.5 md:py-2 text-[11px] md:text-[13px] font-semibold border-b border-zinc-950/10 relative z-50">
                          <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 flex-col md:flex-row px-3 md:px-6 pb-0.5 md:pb-0">
                               <div className="flex items-center gap-4 md:gap-6">
-                                   <a href="tel:+919311500423" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                                   <a href="tel:+919599272764" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                                         <FaPhoneAlt size={12} className="md:w-3.5 md:h-3.5" aria-hidden="true" />
                                         <span>+91 9599272764</span>
                                    </a>
-                                   <a href="mailto:business@kreeyadesign.com" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                                   <a href="mailto:business@weekendux.com" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                                         <FaEnvelope size={12} className="md:w-3.5 md:h-3.5" aria-hidden="true" />
                                         <span className="">business@weekendux.com</span>
                                    </a>

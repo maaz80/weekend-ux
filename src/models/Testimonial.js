@@ -2,11 +2,6 @@ import mongoose from "mongoose";
 
 const testimonialSchema = new mongoose.Schema({
 
-     avatar: {
-          type: String,
-          required: true
-     },
-
      quote: {
           type: String,
           required: true

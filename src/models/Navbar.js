@@ -17,10 +17,6 @@ const navbarSchema = new mongoose.Schema({
 
      moreItems: {
           title: String,
-          // items: [{
-          //      title: String,
-          //      link: String
-          // }],
           dropdown_items: [{
                title: String,
                items: [{

@@ -22,12 +22,8 @@ export const createTestimonial = async (req) => {
           const quote = formData.get("quote");
           const name = formData.get("name");
           const role = formData.get("role");
-          const avatarFile = formData.get("avatar");
-
-          const avatar = await uploadToCloudinary(avatarFile, "testimonials");
 
           const testimonial = new Testimonial({
-               avatar,
                quote,
                name,
                role
@@ -51,11 +47,6 @@ export const updateTestimonial = async (req, { params }) => {
                name: formData.get("name"),
                role: formData.get("role")
           };
-
-          const avatarFile = formData.get("avatar");
-          if (avatarFile) {
-               updateData.avatar = await uploadToCloudinary(avatarFile, "testimonials");
-          }
 
           const testimonial = await Testimonial.findByIdAndUpdate(
                id,

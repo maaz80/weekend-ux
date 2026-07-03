@@ -42,6 +42,13 @@ const DEFAULT_TESTIMONIALS = [
      }
 ];
 
+const getInitials = (nameStr) => {
+     if (!nameStr) return "";
+     const parts = nameStr.trim().split(/\s+/);
+     if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+     return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+};
+
 const Testimonials = ({ data }) => {
      const sliderRef = useRef();
      const [currentIndex, setCurrentIndex] = useState(0);
@@ -222,12 +229,9 @@ const Testimonials = ({ data }) => {
 
                                    {/* User */}
                                    <div className="flex items-center gap-4">
-                                        <OptimizedImage
-                              src={typeof item.image === 'string' ? item.image : item.image?.src || testiImage.src}
-                              alt={`${item.name} profile`}
-                              fallbackSrc={testiImage.src}
-                              className="w-15 h-15 rounded-full object-cover border border-[#E5E5E5]"
-                        />
+                                        <div className="w-15 h-15 rounded-full bg-official text-black flex items-center justify-center font-bold text-lg border border-official/20 shrink-0 select-none">
+                                             {getInitials(item.name)}
+                                        </div>
 
                                         <div>
                                              <h3 className="text-[24px] font-bold leading-none text-[#1F1F1F]">
