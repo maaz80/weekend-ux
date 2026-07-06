@@ -1,3 +1,15 @@
+if (typeof globalThis.fetch === "function" && !globalThis.__fetchIntercepted) {
+  globalThis.__fetchIntercepted = true;
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = function (input, init) {
+    if (typeof input === "string" && input.startsWith("/api/")) {
+      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://weekend-backend.onrender.com";
+      input = `${baseUrl.replace(/\/$/, "")}${input}`;
+    }
+    return originalFetch(input, init);
+  };
+}
+
 import { Urbanist, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
