@@ -1,21 +1,10 @@
-if (typeof globalThis.fetch === "function" && !globalThis.__fetchIntercepted) {
-  globalThis.__fetchIntercepted = true;
-  const originalFetch = globalThis.fetch;
-  globalThis.fetch = function (input, init) {
-    if (typeof input === "string" && input.startsWith("/api/")) {
-      const baseUrl = process.env.NEXT_PUBLIC_API_URL || "https://weekend-backend.onrender.com";
-      input = `${baseUrl.replace(/\/$/, "")}${input}`;
-    }
-    return originalFetch(input, init);
-  };
-}
-
 import { Urbanist, Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Chatbot from "@/components/Chatbot";
 import QuickAccessBar from "@/components/QuickAccessBar";
+import ClientFetchConfig from "@/components/ClientFetchConfig";
 import { HomeDataProvider } from "@/context/HomeDataContext";
 import connectDB from "@/config/db";
 import NavbarModel from "@/models/Navbar";
@@ -77,6 +66,7 @@ export default async function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
         <HomeDataProvider initialData={initialData}>
+          <ClientFetchConfig />
           <Navbar />
           <main className="flex-grow">
                {children}
