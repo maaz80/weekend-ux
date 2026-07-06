@@ -1,6 +1,5 @@
 const getApiBase = () => {
-     // In Next.js client-side we use "/api" since it is on the same domain.
-     const baseUrl = typeof window !== "undefined" ? "" : (process.env.NEXT_PUBLIC_API_URL || "");
+     const baseUrl = process.env.NEXT_PUBLIC_API_URL || "";
      return baseUrl ? `${baseUrl.replace(/\/$/, "")}/api` : "/api";
 };
 
