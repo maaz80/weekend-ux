@@ -28,7 +28,17 @@ const staticBlogs = [
      },
 ];
 
-export default function RelatedBlogs({ data }) {
+export default function RelatedBlogs({
+     data,
+     bgImage = "/images/weekend-ux-related-blogs-bg.webp",
+     overlayColor = "bg-official/25",
+     taglineColor = "text-white",
+     titleColor = "text-neutral",
+     titleHighlightColor = "text-white",
+     descriptionColor = "text-neutral/80",
+     blogTitleColor = "text-neutral",
+     arrowColor = "text-neutral"
+}) {
      const { homeData, blogsData } = useHomeData();
 
      const config = data || homeData?.relatedBlogs;
@@ -65,12 +75,12 @@ export default function RelatedBlogs({ data }) {
                <div
                     className="absolute inset-0 bg-cover bg-center"
                     style={{
-                         backgroundImage: "url('/images/weekend-ux-related-blogs-bg.webp')",
+                         backgroundImage: `url('${bgImage}')`,
                     }}
                />
 
-               {/* Yellow Overlay */}
-               <div className="absolute inset-0 bg-official/25" />
+               {/* Overlay */}
+               <div className={`absolute inset-0 ${overlayColor}`} />
 
                {/* Content */}
                <div className="relative z-10 mx-auto max-w-360 px-5 py-16 md:px-8 md:py-20 xl:px-12 xl:py-24">
@@ -78,17 +88,17 @@ export default function RelatedBlogs({ data }) {
 
                     {/* Heading */}
                     <div className={`mx-auto max-w-212.5 text-center ${pathname === '/' ? 'pt-0' : 'pt-0'}`}>
-                         <span className="font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] text-white">
+                         <span className={`font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] ${taglineColor}`}>
                               {title}
                          </span>
 
-                         <h2 className="mt-4 font-playfair text-[38px] leading-[1.05] text-neutral-900 md:text-[58px] lg:text-[72px]">
+                         <h2 className={`mt-4 font-playfair text-[38px] leading-[1.05] md:text-[58px] lg:text-[72px] ${titleColor}`}>
                               {startheading}{" "}
-                              {midheading && <span className="italic text-white">{midheading}</span>}
+                              {midheading && <span className={`italic ${titleHighlightColor}`}>{midheading}</span>}
                               {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>}
                          </h2>
 
-                         <p className="mx-auto mt-5 max-w-200 font-urbanist text-[15px] leading-7 text-neutral-900/80 md:text-[17px]">
+                         <p className={`mx-auto mt-5 max-w-200 font-urbanist text-[15px] leading-7 md:text-[17px] ${descriptionColor}`}>
                               {description}
                          </p>
                     </div>
@@ -116,13 +126,13 @@ export default function RelatedBlogs({ data }) {
 
                                         {/* Title */}
                                         <div className="mt-2 md:mt-5 flex items-start justify-between gap-4">
-                                             <h2 className="font-urbanist text-[20px] md:text-[26px] leading-[1.35] text-neutral-900 line-clamp-2">
+                                             <h2 className={`font-urbanist text-[20px] md:text-[26px] leading-[1.35] line-clamp-2 ${blogTitleColor}`}>
                                                   {blog.title}
                                              </h2>
 
                                              <IoIosArrowForward
                                                   size={22}
-                                                  className="mt-1 md:mt-2 shrink-0 text-neutral-900 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100"
+                                                  className={`mt-1 md:mt-2 shrink-0 opacity-0 transition-all duration-300 group-hover:translate-x-1 group-hover:opacity-100 ${arrowColor}`}
                                              />
                                         </div>
                                    </Link>

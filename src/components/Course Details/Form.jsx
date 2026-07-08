@@ -1,7 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { FiUser, FiMail, FiPhone, FiLock } from "react-icons/fi";
+import Button from "@/components/ui/Button";
 
-const Form = () => {
+const Form = ({
+     inputBgColor = "bg-transparent",
+     inputBorderColor = "border-neutral-200",
+     inputFocusColor = "focus:border-official",
+     buttonSize = "w-full h-12 rounded-lg font-bold text-sm"
+}) => {
      const [status, setStatus] = useState("idle");
      const [otpStep, setOtpStep] = useState(false);
      const [formData, setFormData] = useState({
@@ -203,16 +209,16 @@ const Form = () => {
                     </div>
                )}
 
-               <form onSubmit={otpStep ? handleSubmitWithOTP : handleSendOTP} className="space-y-4 text-neutral-900">
+               <form onSubmit={otpStep ? handleSubmitWithOTP : handleSendOTP} className="space-y-4 text-neutral">
                     {!otpStep ? (
                          <>
                               <div>
-                                   <label className="block text-sm text-neutral-900 mb-2">
+                                   <label className="block text-sm text-neutral mb-2">
                                         Full Name
                                    </label>
 
                                    <div className="relative">
-                                        <FiUser className="absolute left-3 top-3 text-neutral-900 text-[16px]" />
+                                        <FiUser className="absolute left-3 top-3 text-neutral text-[16px]" />
 
                                         <input
                                              type="text"
@@ -220,19 +226,19 @@ const Form = () => {
                                              value={formData.fullName}
                                              onChange={handleChange}
                                              placeholder="John Doe"
-                                             className={`w-full h-10 border rounded-lg pl-10 pr-4 outline-none focus:border-official text-neutral-900 placeholder:text-neutral-500 text-[14px] transition-colors ${errors.fullName ? "border-red-400 focus:border-red-400" : "border-neutral-200"}`}
+                                             className={`w-full h-10 border rounded-lg pl-10 pr-4 outline-none text-neutral placeholder:text-neutral-500 text-[14px] transition-colors ${inputFocusColor} ${inputBgColor} ${errors.fullName ? "border-red-400 focus:border-red-400" : inputBorderColor}`}
                                         />
                                    </div>
                                    {errors.fullName && <p className="text-red-500 text-xs mt-1 pl-1">{errors.fullName}</p>}
                               </div>
 
                               <div>
-                                   <label className="block text-sm text-neutral-900 mb-2">
+                                   <label className="block text-sm text-neutral mb-2">
                                         Email
                                    </label>
 
                                    <div className="relative">
-                                        <FiMail className="absolute left-3 top-3.5 text-neutral-900 text-[16px]" />
+                                        <FiMail className="absolute left-3 top-3.5 text-neutral text-[16px]" />
 
                                         <input
                                              type="email"
@@ -240,19 +246,19 @@ const Form = () => {
                                              value={formData.email}
                                              onChange={handleChange}
                                              placeholder="example@email.com"
-                                             className={`w-full h-10 border rounded-lg pl-10 pr-4 outline-none focus:border-official text-neutral-900 placeholder:text-neutral-500 text-[14px] transition-colors ${errors.email ? "border-red-400 focus:border-red-400" : "border-neutral-200"}`}
+                                             className={`w-full h-10 border rounded-lg pl-10 pr-4 outline-none text-neutral placeholder:text-neutral-500 text-[14px] transition-colors ${inputFocusColor} ${inputBgColor} ${errors.email ? "border-red-400 focus:border-red-400" : inputBorderColor}`}
                                         />
                                    </div>
                                    {errors.email && <p className="text-red-500 text-xs mt-1 pl-1">{errors.email}</p>}
                               </div>
 
                               <div>
-                                   <label className="block text-sm text-neutral-900 mb-2">
+                                   <label className="block text-sm text-neutral mb-2">
                                         Mobile Number
                                    </label>
 
                                    <div className="relative">
-                                        <FiPhone className="absolute left-3 top-3.5 text-neutral-900 text-[16px]" />
+                                        <FiPhone className="absolute left-3 top-3.5 text-neutral text-[16px]" />
 
                                         <input
                                              type="tel"
@@ -260,7 +266,7 @@ const Form = () => {
                                              value={formData.phone}
                                              onChange={handleChange}
                                              placeholder="+91 Enter 10 digit mobile number"
-                                             className={`w-full h-10 border rounded-lg pl-10 pr-4 outline-none focus:border-official text-neutral-900 placeholder:text-neutral-500 text-[14px] transition-colors ${errors.phone ? "border-red-400 focus:border-red-400" : "border-neutral-200"}`}
+                                             className={`w-full h-10 border rounded-lg pl-10 pr-4 outline-none text-neutral placeholder:text-neutral-500 text-[14px] transition-colors ${inputFocusColor} ${inputBgColor} ${errors.phone ? "border-red-400 focus:border-red-400" : inputBorderColor}`}
                                         />
                                    </div>
                                    {errors.phone && <p className="text-red-500 text-xs mt-1 pl-1">{errors.phone}</p>}
@@ -278,10 +284,12 @@ const Form = () => {
                                    </span>
                               </label>
 
-                              <button
+                              <Button
                                    type="submit"
                                    disabled={loading}
-                                   className={`w-full h-12  rounded-lg font-bold  transition-all cursor-pointer flex items-center justify-center gap-2 ${loading ? "opacity-60 cursor-not-allowed bg-official/50 text-neutral-500" : "bg-official text-neutral-900 hover:opacity-90"}`}
+                                   variant="primary"
+                                   size={buttonSize}
+                                   className={`gap-2 ${loading ? "opacity-60 cursor-not-allowed bg-official/50 text-neutral-500" : ""}`}
                               >
                                    {loading ? (
                                         <>
@@ -291,24 +299,24 @@ const Form = () => {
                                    ) : (
                                         "Talk to our advisor"
                                    )}
-                              </button>
+                              </Button>
                          </>
                     ) : (
                          <>
                               <div className="bg-orange-50 p-4 rounded-lg border border-orange-200 text-xs text-neutral-800">
-                                   <p className="font-semibold text-neutral-900 mb-1">
+                                   <p className="font-semibold text-neutral mb-1">
                                         ✓ OTP sent to <span className="text-official">{formData.email}</span>
                                    </p>
                                    <p className="text-neutral-600">Enter the 6-digit verification code sent to your email</p>
                               </div>
 
                               <div>
-                                   <label className="block text-sm text-neutral-900 mb-2">
+                                   <label className="block text-sm text-neutral mb-2">
                                         OTP Code <span className="text-red-500">*</span>
                                    </label>
 
                                    <div className="relative">
-                                        <FiLock className="absolute left-3 top-3.5 text-neutral-900 text-[16px]" />
+                                        <FiLock className="absolute left-3 top-3.5 text-neutral text-[16px]" />
 
                                         <input
                                              type="text"
@@ -317,7 +325,7 @@ const Form = () => {
                                              onChange={handleChange}
                                              placeholder="Enter 6-digit OTP"
                                              maxLength={6}
-                                             className={`w-full h-10 border rounded-lg pl-10 pr-4 outline-none focus:border-official text-neutral-900 placeholder:text-neutral-500 text-[14px] transition-colors ${errors.otp ? "border-red-400 focus:border-red-400" : "border-neutral-200"}`}
+                                             className={`w-full h-10 border rounded-lg pl-10 pr-4 outline-none text-neutral placeholder:text-neutral-500 text-[14px] transition-colors ${inputFocusColor} ${inputBgColor} ${errors.otp ? "border-red-400 focus:border-red-400" : inputBorderColor}`}
                                         />
                                    </div>
                                    {errors.otp && <p className="text-red-500 text-xs mt-1 pl-1">{errors.otp}</p>}
@@ -347,10 +355,12 @@ const Form = () => {
                                    </button>
                               </div>
 
-                              <button
+                              <Button
                                    type="submit"
                                    disabled={loading || status === "loading"}
-                                   className={`w-full h-12 bg-official rounded-lg font-medium text-zinc-900 hover:opacity-90 transition-all cursor-pointer flex items-center justify-center gap-2 ${loading || status === "loading" ? "opacity-60 cursor-not-allowed" : ""}`}
+                                   variant="primary"
+                                   size={buttonSize}
+                                   className={`gap-2 ${loading || status === "loading" ? "opacity-60 cursor-not-allowed bg-official/50 text-neutral-500" : ""}`}
                               >
                                    {status === "loading" ? (
                                         <>
@@ -362,7 +372,7 @@ const Form = () => {
                                    ) : (
                                         "Verify & Submit"
                                    )}
-                              </button>
+                              </Button>
                          </>
                     )}
                </form>

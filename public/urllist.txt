@@ -1,7 +1,7 @@
-https://weekend-ui.netlify.app/
-https://weekend-ui.netlify.app/about-us
-https://weekend-ui.netlify.app/courses
-https://weekend-ui.netlify.app/contact-us
-https://weekend-ui.netlify.app/location
-https://weekend-ui.netlify.app/privacy-policy
-https://weekend-ui.netlify.app/disclaimer
+https://weekend-backend.onrender.com/
+https://weekend-backend.onrender.com/about-us
+https://weekend-backend.onrender.com/courses
+https://weekend-backend.onrender.com/contact-us
+https://weekend-backend.onrender.com/location
+https://weekend-backend.onrender.com/privacy-policy
+https://weekend-backend.onrender.com/disclaimer

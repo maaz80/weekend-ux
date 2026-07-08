@@ -17,7 +17,16 @@ const staticTeam = [
      },
 ];
 
-const TeamSection = ({ data }) => {
+const TeamSection = ({
+     data,
+     bgColor = "bg-[#F8F6EE]",
+     tagColor = "text-[#8F6A00]",
+     headingColor = "text-[#2C2A28]",
+     midHeadingColor = "text-[#8F6A00]",
+     descriptionColor = "text-[#5A5652]",
+     cardNameColor = "text-white",
+     cardRoleColor = "text-official"
+}) => {
      const title = data?.title && data.title.trim()
           ? data.title.trim()
           : "Team";
@@ -54,29 +63,29 @@ const TeamSection = ({ data }) => {
           : staticTeam;
 
      return (
-          <section className="bg-[#F8F6EE] py-16 lg:py-24">
+          <section className={`py-16 lg:py-24 ${bgColor}`}>
                <div className="custom-width px-4 sm:px-6 lg:px-8">
 
                     <div className="grid lg:grid-cols-[380px_1fr] gap-10 lg:gap-16 items-center">
 
                          {/* LEFT CONTENT */}
                          <div>
-                              <span className="font-urbanist text-[12px] font-semibold tracking-[0.35em] uppercase text-[#8F6A00]">
+                              <span className={`font-urbanist text-[12px] font-semibold tracking-[0.35em] uppercase ${tagColor}`}>
                                    {title}
                               </span>
 
-                              <h2 className="mt-4 font-playfair text-[42px] md:text-[56px] leading-[1.05] text-[#2C2A28]">
+                              <h2 className={`mt-4 font-playfair text-[42px] md:text-[56px] leading-[1.05] ${headingColor}`}>
                                    {startheading}
                                    <br />
                                    {midheading && (
-                                        <span className="italic text-[#8F6A00]">
+                                        <span className={`italic ${midHeadingColor}`}>
                                              {midheading}
                                         </span>
                                    )}
                                    {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>}
                               </h2>
 
-                              <p className="mt-6 max-w-[320px] font-urbanist text-[14px] leading-7 text-[#5A5652]">
+                              <p className={`mt-6 max-w-[320px] font-urbanist text-[14px] leading-7 ${descriptionColor}`}>
                                    {description}
                               </p>
                          </div>
@@ -97,11 +106,11 @@ const TeamSection = ({ data }) => {
 
                                         {/* Content */}
                                         <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                                             <h3 className="font-urbanist text-[28px] font-medium text-white">
+                                             <h3 className={`font-urbanist text-[28px] font-medium ${cardNameColor}`}>
                                                   {member.name}
                                              </h3>
 
-                                             <p className="mt-1 font-urbanist text-[15px] text-official">
+                                             <p className={`mt-1 font-urbanist text-[15px] ${cardRoleColor}`}>
                                                   {member.role}
                                              </p>
                                         </div>

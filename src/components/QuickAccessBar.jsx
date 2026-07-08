@@ -15,7 +15,7 @@ const QuickAccessBar = () => {
                          href="https://wa.me/919599272764?text=Hi! I would like to request a callback."
                          target="_blank"
                          rel="noopener noreferrer"
-                         className="flex flex-1 items-center justify-center gap-2 text-[13px] md:text-sm font-medium text-neutral-900 transition hover:bg-zinc-50"
+                         className="flex flex-1 items-center justify-center gap-2 text-[13px] md:text-sm font-medium text-neutral transition hover:bg-zinc-50"
                     >
                          <FiPhoneCall className="text-base shrink-0" />
                          <span className="hidden sm:inline">
@@ -29,7 +29,7 @@ const QuickAccessBar = () => {
                     {/* Call */}
                     <a
                          href="tel:9195992 72764"
-                         className="flex flex-1 items-center justify-center gap-2 text-[13px] md:text-sm font-medium text-neutral-900 transition hover:bg-zinc-50"
+                         className="flex flex-1 items-center justify-center gap-2 text-[13px] md:text-sm font-medium text-neutral transition hover:bg-zinc-50"
                     >
                          <FiPhone className="text-base shrink-0" />
                          <span className="hidden md:inline">
@@ -43,9 +43,9 @@ const QuickAccessBar = () => {
                     {/* Live Chat */}
                     <div 
                          onClick={() => setIsChatbotOpen(!isChatbotOpen)}
-                         className="flex flex-1 items-center justify-center gap-2 text-[14px] md:text-sm font-bold text-black transition cursor-pointer mr-2.5 md:mr-0 select-none"
+                         className="flex flex-1 items-center justify-center gap-2 text-[14px] md:text-sm font-bold text-neutral transition cursor-pointer mr-2.5 md:mr-0 select-none"
                     >
-                         <div className={`flex items-center justify-center gap-2 w-35 h-12 rounded-md transition-all duration-300 ${isChatbotOpen ? 'bg-neutral-900 text-official' : 'bg-official text-neutral-900 hover:bg-official/80'}`}>
+                         <div className={`flex items-center justify-center gap-2 w-35 h-12 rounded-md transition-all duration-300 ${isChatbotOpen ? 'bg-neutral text-official' : 'bg-official text-neutral hover:bg-official/80'}`}>
                               <FiMessageSquare className="text-base shrink-0" />
                               <span>Live Chat</span>
                          </div>

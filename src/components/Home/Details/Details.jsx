@@ -29,7 +29,17 @@ const STATIC_STATS = [
      },
 ];
 
-export default function Details() {
+export default function Details({
+     bgImage = "/images/weekend-ux-details-bg.webp",
+     overlayColor = "bg-[#F4B400]/40",
+     taglineColor = "text-[#fff8d6]",
+     titleColor = "text-[#1B1B1B]",
+     titleHighlightColor = "text-white",
+     cardNumberColor = "text-[#171717]",
+     cardTitleColor = "text-[#171717]",
+     cardDescriptionColor = "text-[#2A2A2A]/80",
+     cardDividerColor = "bg-[#1B1B1B]/15"
+}) {
      const { homeData } = useHomeData();
 
      const whyTitle = (homeData?.why?.title && homeData.why.title.trim())
@@ -68,25 +78,25 @@ export default function Details() {
                <div
                     className="absolute inset-0 bg-cover bg-center"
                     style={{
-                         backgroundImage: "url('/images/weekend-ux-details-bg.webp')",
+                         backgroundImage: `url('${bgImage}')`,
                     }}
                />
 
                {/* Overlay */}
-               <div className="absolute inset-0 bg-[#F4B400]/40" />
+               <div className={`absolute inset-0 ${overlayColor}`} />
 
                <div className="relative z-10 mx-auto max-w-360 px-5 py-14 md:px-10 md:py-20 xl:px-16">
                     <div className="grid items-start gap-12 lg:grid-cols-[1fr_620px]">
 
                          {/* Left Content */}
                          <div className="relative">
-                              <p className="mb-5 text-[10px] font-medium uppercase tracking-[0.45em] text-[#fff8d6] font-inter">
+                              <p className={`mb-5 text-[10px] font-medium uppercase tracking-[0.45em] ${taglineColor} font-inter`}>
                                    {whyTitle}
                               </p>
 
-                              <h2 className="max-w-150 font-serif text-[38px] md:leading-16 text-[#1B1B1B] md:text-[56px] leading-12">
+                              <h2 className={`max-w-150 font-serif text-[38px] md:leading-16 ${titleColor} md:text-[56px] leading-12`}>
                                    {startheading}{" "}
-                                   {midheading && <span className="italic text-white">{midheading}</span>}
+                                   {midheading && <span className={`italic ${titleHighlightColor}`}>{midheading}</span>}
                                    {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>}
                               </h2>
 
@@ -108,17 +118,17 @@ export default function Details() {
                   hover:-translate-y-1
                 "
                                    >
-                                        <h3 className="text-center text-[42px] font-semibold leading-none text-[#171717]">
+                                        <h3 className={`text-center text-[42px] font-semibold leading-none ${cardNumberColor}`}>
                                              {item.number}
                                         </h3>
 
-                                        <p className="mt-2 text-center font-medium text-[#171717]">
+                                        <p className={`mt-2 text-center font-medium ${cardTitleColor}`}>
                                              {item.title}
                                         </p>
 
-                                        <div className="my-5 h-px bg-[#1B1B1B]/15" />
+                                        <div className={`my-5 h-px ${cardDividerColor}`} />
 
-                                        <p className="text-sm leading-6 text-[#2A2A2A]/80 text-center">
+                                        <p className={`text-sm leading-6 ${cardDescriptionColor} text-center`}>
                                              {item.description}
                                         </p>
                                    </div>

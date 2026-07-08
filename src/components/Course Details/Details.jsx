@@ -18,6 +18,9 @@ import { X, Lock, Play } from "lucide-react";
 import AuthModal from "@/components/AuthModal";
 import Form from "./Form";
 import OptimizedImage from "../ui/OptimizedImage";
+import Button from "@/components/ui/Button";
+import CallCard from "./CallCard";
+import Curriculum from "./Curriculum";
 
 export default function Details({ data }) {
      const [openChapter, setOpenChapter] = useState(1);
@@ -108,7 +111,7 @@ export default function Details({ data }) {
                               </div>
 
                               {/* Stats */}
-                              <div className="flex flex-wrap gap-x-8 gap-y-4 mb-12 text-neutral-900">
+                              <div className="flex flex-wrap gap-x-8 gap-y-4 mb-12 text-neutral">
                                    <div className="flex items-center gap-2">
                                         <span className="text-official text-[20px]"><GoClockFill /></span>
                                         <span>{data?.courselength || data?.duration || "2 Weeks"}</span>
@@ -148,7 +151,7 @@ export default function Details({ data }) {
                                         Overview
                                    </h2>
 
-                                   <p className="font-urbanist text-neutral-900 leading-6 text-[16px]">
+                                   <p className="font-urbanist text-neutral leading-6 text-[16px]">
                                         {data?.overview || "Thank you for buying our courses. We ensure that our users have a rewarding experience while they discover, assess and purchase our courses, whether it is an instructor-led or self-paced training. As with any online purchase experience, there are terms and conditions that govern our Refund Policy. When you buy a training course from us, you agree to our Privacy Policy, Terms of Use and Refund Policy."}
                                    </p>
                               </div>
@@ -159,99 +162,20 @@ export default function Details({ data }) {
                                         Curriculum
                                    </h2>
 
-                                   <div className="space-y-3">
-                                        {curriculum.map((chapter) => {
-                                             const isOpen = openChapter === chapter.id;
-
-                                             return (
-                                                  <div
-                                                       key={chapter.id}
-                                                       className="border border-[#E5E0D6] rounded-lg overflow-hidden bg-transparent"
-                                                  >
-                                                       <button
-                                                            onClick={() =>
-                                                                 setOpenChapter(isOpen ? null : chapter.id)
-                                                            }
-                                                            className="w-full px-5 py-4 flex items-center justify-between text-left cursor-pointer"
-                                                       >
-                                                            <div className="flex items-center gap-3 text-neutral-900 text-[18px] font-medium">
-                                                                 {isOpen ? (
-                                                                      <FiChevronUp size={18} />
-                                                                 ) : (
-                                                                      <FiChevronDown size={18} />
-                                                                 )}
-
-                                                                 <span className="font-medium text-zinc-800">
-                                                                      {chapter.title}
-                                                                 </span>
-                                                            </div>
-
-                                                            <div className="flex items-center gap-5 text-[18px] font-medium text-neutral-900">
-                                                                 <span>{chapter.lessons} Lessons</span>
-
-                                                                 {/* {chapter.duration && (
-                                                                      <span>{chapter.duration}</span>
-                                                                 )} */}
-                                                            </div>
-                                                       </button>
-
-                                                       {isOpen && (
-                                                            <div className="border-t border-[#E5E0D6] px-0 md:px-5 py-5">
-                                                                 <div className="space-y-2">
-                                                                      {chapter.items.map((lesson, idx) => {
-                                                                           const isObject = typeof lesson === "object" && lesson !== null;
-                                                                           const lessonName = isObject ? lesson.lessonname : lesson;
-                                                                           const videoUrl = isObject ? lesson.video?.videourl : null;
-                                                                           const duration = isObject ? lesson.video?.duration : null;
-
-                                                                           return (
-                                                                                <div
-                                                                                     key={idx}
-                                                                                     onClick={() => {
-                                                                                          if (isLoggedIn) {
-                                                                                               setActiveVideo({
-                                                                                                    url: videoUrl,
-                                                                                                    name: lessonName
-                                                                                               });
-                                                                                          } else {
-                                                                                               setShowLockModal(true);
-                                                                                          }
-                                                                                     }}
-                                                                                     className="flex items-center justify-between text-[15px] md:text-[17px] text-neutral-900 h-14.5 px-4 md:px-5 font-medium rounded-xl hover:bg-zinc-100/70 border border-transparent hover:border-zinc-200/50 transition cursor-pointer group"
-                                                                                >
-                                                                                     <div className="flex items-center gap-3">
-                                                                                          {isLoggedIn ? (
-                                                                                               <span className="w-8 h-8 rounded-full bg-official/50 flex items-center justify-center text-official transition-colors group-hover:bg-official/80 group-hover:text-neutral-900">
-                                                                                                    <Play size={12} className="fill-current" />
-                                                                                               </span>
-                                                                                          ) : (
-                                                                                               <span className="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-400">
-                                                                                                    <Lock size={12} />
-                                                                                               </span>
-                                                                                          )}
-                                                                                          <span className="font-semibold text-zinc-800 transition-colors group-hover:text-official/80 line-clamp-1">
-                                                                                               {lessonName}
-                                                                                          </span>
-                                                                                     </div>
-
-                                                                                     <div className="flex items-center gap-3">
-                                                                                          {duration && (
-                                                                                               <span className="text-sm text-zinc-600 font-medium">{duration} mins</span>
-                                                                                          )}
-                                                                                          {!isLoggedIn && (
-                                                                                               <span className="text-[10px] uppercase tracking-wider bg-zinc-100 text-zinc-600 px-2 py-0.5 rounded font-bold">Locked</span>
-                                                                                          )}
-                                                                                     </div>
-                                                                                </div>
-                                                                           );
-                                                                      })}
-                                                                 </div>
-                                                            </div>
-                                                       )}
-                                                  </div>
-                                             );
-                                        })}
-                                   </div>
+                                   <Curriculum
+                                        curriculum={curriculum}
+                                        isLoggedIn={isLoggedIn}
+                                        onLessonClick={(lessonName, videoUrl) => {
+                                             if (isLoggedIn) {
+                                                  setActiveVideo({
+                                                       url: videoUrl,
+                                                       name: lessonName
+                                                  });
+                                             } else {
+                                                  setShowLockModal(true);
+                                             }
+                                        }}
+                                   />
                               </div>
                          </div>
 
@@ -261,12 +185,12 @@ export default function Details({ data }) {
 
                                    {/* Admission Form */}
                                    <div className="bg-white rounded-2xl shadow-sm p-10">
-                                        <h2 className="text-center text-[24px] font-bold text-neutral-900 leading-9">
+                                        <h2 className="text-center text-[24px] font-bold text-neutral leading-9">
                                              Admissions Close On 7th Oct
                                         </h2>
 
 
-                                        <p className="text-center text-sm text-neutral-900 leading-5 my-4">
+                                        <p className="text-center text-sm text-neutral leading-5 my-4">
                                              Still not sure? Talk with our advisor and get
                                              your doubts sorted before you miss the chance
                                              to enroll into the course.
@@ -276,31 +200,13 @@ export default function Details({ data }) {
                                    </div>
 
                                    {/* Banner */}
-                                   <div className="mt-6 rounded-xl overflow-hidden relative h-64.5">
-
-                                        <OptimizedImage
-                                             src={CardBg.src}
-                                             alt="weekend-ux-course-details-call-card-bg"
-                                             className="w-full h-full object-cover"
-                                             sizes="100vw"
+                                   <div className="mt-6">
+                                        <CallCard
+                                             title="Design is more than just being creative!"
+                                             subtitle="Learn how to make design that sells"
+                                             buttonText="Book a Call"
+                                             bgImage={CardBg.src}
                                         />
-                                        <div className="absolute inset-0 bg-black/25" />
-
-                                        <div className="absolute inset-0 p-10 flex flex-col justify-between">
-                                             <div>
-                                                  <h3 className="text-white text-[24px] font-playfair leading-tight font-semibold">
-                                                       Design is more than just being creative!
-                                                  </h3>
-
-                                                  <p className="text-white mt-3">
-                                                       Learn how to make design that sells
-                                                  </p>
-                                             </div>
-
-                                             <button className="h-12 bg-official rounded-lg text-neutral-900 font-bold">
-                                                  Book a Call
-                                             </button>
-                                        </div>
                                    </div>
 
                               </div>
@@ -311,8 +217,8 @@ export default function Details({ data }) {
 
                {/* LOCK MODAL */}
                {showLockModal && (
-                    <div className="fixed inset-0 z-999999 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-                         <div className="w-full max-w-md bg-white rounded-2xl p-8 shadow-2xl text-center relative border border-zinc-100 text-neutral-900">
+                    <div className="fixed inset-0 z-999999 flex items-center justify-center bg-neutral/60 backdrop-blur-sm p-4">
+                         <div className="w-full max-w-md bg-white rounded-2xl p-8 shadow-2xl text-center relative border border-zinc-100 text-neutral">
 
                               <button
                                    onClick={() => setShowLockModal(false)}
@@ -326,21 +232,23 @@ export default function Details({ data }) {
                                    <Lock size={30} />
                               </div>
 
-                              <h3 className="text-xl font-bold text-neutral-900 mb-2">Lesson Locked</h3>
+                              <h3 className="text-xl font-bold text-neutral mb-2">Lesson Locked</h3>
                               <p className="text-sm text-zinc-600 mb-6 leading-relaxed">
                                    This lesson is reserved for enrolled members. Please log in or sign up to unlock access to all video lectures.
                               </p>
 
                               <div className="flex flex-col gap-3">
-                                   <button
+                                   <Button
                                         onClick={() => {
                                              setShowLockModal(false);
                                              setShowAuthModal(true);
                                         }}
-                                        className="w-full h-11 bg-official hover:bg-official/80 text-neutral-900 rounded-lg text-sm font-semibold transition cursor-pointer"
+                                        variant="primary"
+                                        size="h11"
+                                        className="w-full text-sm font-semibold"
                                    >
                                         Log In / Sign Up
-                                   </button>
+                                   </Button>
                                    <button
                                         onClick={() => setShowLockModal(false)}
                                         className="w-full h-11 border border-zinc-200 hover:bg-zinc-50 text-neutral-600 rounded-lg text-sm font-semibold transition cursor-pointer"
@@ -354,7 +262,7 @@ export default function Details({ data }) {
 
                {/* VIDEO LIGHTBOX PLAYER */}
                {activeVideo && (
-                    <div className="fixed inset-0 z-999999 flex items-center justify-center bg-black/90 backdrop-blur-md p-4">
+                    <div className="fixed inset-0 z-999999 flex items-center justify-center bg-neutral/90 backdrop-blur-md p-4">
                          <div className="w-full max-w-5xl bg-zinc-950 rounded-2xl overflow-hidden shadow-2xl relative text-white">
 
                               <div className="px-6 py-4 bg-zinc-900 border-b border-zinc-800 flex justify-between items-center text-white">
@@ -371,7 +279,7 @@ export default function Details({ data }) {
                                    </button>
                               </div>
 
-                              <div className="relative aspect-video w-full bg-black">
+                              <div className="relative aspect-video w-full bg-neutral">
                                    <video
                                         src={activeVideo.url || "https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-his-computer-34354-large.mp4"}
                                         controls

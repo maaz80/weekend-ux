@@ -2,12 +2,12 @@
 <rss version="2.0" xmlns:ror="http://www.rorweb.com/0.1/">
   <channel>
     <title>Weekend UX</title>
-    <link>https://weekend-ui.netlify.app</link>
+    <link>https://weekend-backend.onrender.com</link>
     <description>Weekend UX - Premium Design and Development Learning Platform</description>
     
     <!-- Home page -->
     <item>
-      <link>https://weekend-ui.netlify.app/</link>
+      <link>https://weekend-backend.onrender.com/</link>
       <title>Weekend UX - Home</title>
       <description>Premium design and development learning platform. Upskill with industry-relevant training programs.</description>
       <ror:updatePeriod>day</ror:updatePeriod>
@@ -17,7 +17,7 @@
     
     <!-- About Us -->
     <item>
-      <link>https://weekend-ui.netlify.app/about-us</link>
+      <link>https://weekend-backend.onrender.com/about-us</link>
       <title>About Us - Weekend UX</title>
       <description>Learn more about Weekend UX, our mission, vision, and the team empowering next-generation design leaders.</description>
       <ror:updatePeriod>month</ror:updatePeriod>
@@ -27,7 +27,7 @@
     
     <!-- Courses -->
     <item>
-      <link>https://weekend-ui.netlify.app/courses</link>
+      <link>https://weekend-backend.onrender.com/courses</link>
       <title>Courses - Weekend UX</title>
       <description>Explore our comprehensive list of UI/UX design, frontend, and backend development courses.</description>
       <ror:updatePeriod>week</ror:updatePeriod>
@@ -37,7 +37,7 @@
 
     <!-- Contact Us -->
     <item>
-      <link>https://weekend-ui.netlify.app/contact-us</link>
+      <link>https://weekend-backend.onrender.com/contact-us</link>
       <title>Contact Us - Weekend UX</title>
       <description>Get in touch with us for course inquiries, support, or partnership opportunities.</description>
       <ror:updatePeriod>month</ror:updatePeriod>
@@ -47,7 +47,7 @@
     
     <!-- Location -->
     <item>
-      <link>https://weekend-ui.netlify.app/location</link>
+      <link>https://weekend-backend.onrender.com/location</link>
       <title>Our Locations - Weekend UX</title>
       <description>Find Weekend UX physical centers, campuses, and virtual training hubs.</description>
       <ror:updatePeriod>month</ror:updatePeriod>
@@ -57,7 +57,7 @@
 
     <!-- Privacy Policy -->
     <item>
-      <link>https://weekend-ui.netlify.app/privacy-policy</link>
+      <link>https://weekend-backend.onrender.com/privacy-policy</link>
       <title>Privacy Policy - Weekend UX</title>
       <description>Read our privacy policy regarding how we collect, store, and manage user data securely.</description>
       <ror:updatePeriod>year</ror:updatePeriod>
@@ -67,7 +67,7 @@
 
     <!-- Disclaimer -->
     <item>
-      <link>https://weekend-ui.netlify.app/disclaimer</link>
+      <link>https://weekend-backend.onrender.com/disclaimer</link>
       <title>Disclaimer - Weekend UX</title>
       <description>Legal disclaimer and terms of usage for the Weekend UX platform.</description>
       <ror:updatePeriod>year</ror:updatePeriod>

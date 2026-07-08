@@ -19,7 +19,17 @@ const STATIC_STATS = [
      },
 ];
 
-export default function Details({ data }) {
+export default function Details({
+     data,
+     bgImage = "/images/weekend-ux-about-properties-bg.webp",
+     taglineColor = "text-[#fff8d6]",
+     titleColor = "text-official",
+     titleHighlightColor = "text-white",
+     cardNumberColor = "text-white",
+     cardTitleColor = "text-white",
+     cardDescriptionColor = "text-white/80",
+     cardDividerColor = "bg-white/15"
+}) {
      const whyTitle = data?.title && data.title.trim()
           ? data.title.trim()
           : "Why Weekend UX";
@@ -56,8 +66,8 @@ export default function Details({ data }) {
                <div
                     className="absolute inset-0 bg-cover bg-center"
                     style={{
-                         backgroundImage: "url('/images/weekend-ux-about-properties-bg.webp')",
-                    }}
+                         backgroundImage: `url('${bgImage}')`,
+                     }}
                />
 
                <div className="relative z-10 mx-auto max-w-360 px-5 py-14 md:px-10 md:py-20 xl:px-16">
@@ -65,13 +75,13 @@ export default function Details({ data }) {
 
                          {/* Left Content */}
                          <div className="relative">
-                              <p className="mb-5 text-[10px] font-medium uppercase tracking-[0.45em] text-[#fff8d6] font-inter">
+                              <p className={`mb-5 text-[10px] font-medium uppercase tracking-[0.45em] ${taglineColor} font-inter`}>
                                    {whyTitle}
                               </p>
 
-                              <h2 className="max-w-150 font-serif text-[38px] md:leading-16 text-official md:text-[56px] leading-12">
+                              <h2 className={`max-w-150 font-serif text-[38px] md:leading-16 ${titleColor} md:text-[56px] leading-12`}>
                                    {startheading}{" "}
-                                   {midheading && <span className="italic text-white">{midheading}</span>}
+                                   {midheading && <span className={`italic ${titleHighlightColor}`}>{midheading}</span>}
                                    {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>}
                               </h2>
 
@@ -93,17 +103,17 @@ export default function Details({ data }) {
                   hover:-translate-y-1
                 "
                                    >
-                                        <h3 className="text-center text-[42px] font-semibold leading-none text-white">
+                                        <h3 className={`text-center text-[42px] font-semibold leading-none ${cardNumberColor}`}>
                                              {item.number}
                                         </h3>
 
-                                        <p className="mt-2 text-center font-medium text-white">
+                                        <p className={`mt-2 text-center font-medium ${cardTitleColor}`}>
                                              {item.title}
                                         </p>
 
-                                        <div className="my-5 h-px bg-white/15" />
+                                        <div className={`my-5 h-px ${cardDividerColor}`} />
 
-                                        <p className="text-sm leading-6 text-white/80 text-center">
+                                        <p className={`text-sm leading-6 ${cardDescriptionColor} text-center`}>
                                              {item.description}
                                         </p>
                                    </div>

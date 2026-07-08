@@ -23,7 +23,7 @@ export default async function About() {
      }
 
      return (
-          <div className="bg-white text-neutral-900">
+          <div className="bg-white text-neutral">
                <Hero data={aboutData?.hero?.[0]} />
                <FeatureStrip data={aboutData?.features} />
                <Content data={aboutData?.quote} />

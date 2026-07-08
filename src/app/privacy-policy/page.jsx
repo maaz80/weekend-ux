@@ -64,7 +64,7 @@ export default async function PrivacyPolicy() {
                     <Image src='/images/weekend-ux-decorative-diamond.webp' alt="weekend-ux-decorative-diamond" className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-30" width={200} height={200} style={{ height: 'auto' }} />
                     
                </section>
-               <div className="custom-width flex flex-col gap-4 items-start text-neutral-900 py-20">
+               <div className="custom-width flex flex-col gap-4 items-start text-neutral py-20">
                     <div 
                          className="w-full text-[14px] leading-6 my-8 blog-content"
                          dangerouslySetInnerHTML={{ __html: content || "" }}

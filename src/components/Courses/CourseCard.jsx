@@ -7,7 +7,22 @@ import { GoArrowRight } from "react-icons/go";
 
 const CourseImage = "/images/weekend-ux-program-image-template.webp";
 
-export default function CourseCard({ course, setIsModal = false, priority = false, fetchPriority = undefined }) {
+export default function CourseCard({
+     course,
+     setIsModal = false,
+     priority = false,
+     fetchPriority = undefined,
+     cardBgColor = "bg-white",
+     cardBorderColor = "border-[#DCD7CC]",
+     cardTitleColor = "text-zinc-900",
+     cardSubTitleColor = "text-zinc-500",
+     statIconColor = "text-[#F4C430]",
+     statTextColor = "text-zinc-700",
+     dividerColor = "border-zinc-100",
+     buttonBgColor = "bg-white",
+     buttonTextColor = "text-zinc-700",
+     buttonBorderColor = "border-zinc-300"
+}) {
      const router = useRouter();
 
      const handleClick = () => {
@@ -17,10 +32,8 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
 
      const imageSrc = course?.image || CourseImage;
 
-
-
      return (
-          <div className="w-full bg-white border border-[#DCD7CC] rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 min-h-122.5 max-h-122.5">
+          <div className={`w-full border rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 min-h-122.5 max-h-122.5 ${cardBgColor} ${cardBorderColor}`}>
 
                {/* Course Image */}
                <div className="relative h-47.5 md:h-56.5 overflow-hidden bg-zinc-100">
@@ -38,25 +51,25 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                <div className="p-4">
 
                     {/* Title */}
-                    <h2 className="font-urbanist text-[18px] md:text-[24px] font-bold text-zinc-900 leading-8 line-clamp-1 ">
+                    <h2 className={`font-urbanist text-[18px] md:text-[24px] font-bold leading-8 line-clamp-1 ${cardTitleColor}`}>
                          {course?.title}
                     </h2>
 
                     {/* Author */}
-                    <p className="text-[16px] text-zinc-500 mt-1 font-urbanist">
+                    <p className={`text-[16px] mt-1 font-urbanist ${cardSubTitleColor}`}>
                          by {course?.instructor || course?.author || "Determined-Polliras"}
                     </p>
 
                     {/* Stats */}
                     <div className="grid grid-cols-2 gap-y-3 gap-x-4 mt-5 text-[12px] md:text-[14px] font-medium">
 
-                         <div className="flex items-center gap-2 text-zinc-700">
-                              <FiClock className="text-[#F4C430] shrink-0 text-[20px]" />
+                         <div className={`flex items-center gap-2 ${statTextColor}`}>
+                              <FiClock className={`shrink-0 text-[20px] ${statIconColor}`} />
                               <span>{course?.duration || "2 Weeks"}</span>
                          </div>
 
-                         <div className="flex items-center gap-2 text-zinc-700">
-                              <FiUsers className="text-[#F4C430] shrink-0 text-[20px]" />
+                         <div className={`flex items-center gap-2 ${statTextColor}`}>
+                              <FiUsers className={`shrink-0 text-[20px] ${statIconColor}`} />
                               <span>
                                    {course?.totalstudents
                                         ? (course.totalstudents.toLowerCase().includes("student") ? course.totalstudents : `${course.totalstudents} Students`)
@@ -65,13 +78,13 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                               </span>
                          </div>
 
-                         <div className="flex items-center gap-2 text-zinc-700">
-                              <FiBarChart2 className="text-[#F4C430] shrink-0 text-[20px]" />
+                         <div className={`flex items-center gap-2 ${statTextColor}`}>
+                              <FiBarChart2 className={`shrink-0 text-[20px] ${statIconColor}`} />
                               <span>{course?.levels || "All Levels"}</span>
                          </div>
 
-                         <div className="flex items-center gap-2 text-zinc-700">
-                              <FiBookOpen className="text-[#F4C430] shrink-0 text-[20px]" />
+                         <div className={`flex items-center gap-2 ${statTextColor}`}>
+                              <FiBookOpen className={`shrink-0 text-[20px] ${statIconColor}`} />
                               <span>
                                    {course?.totallessons
                                         ? (course.totallessons.toLowerCase().includes("lesson") ? course.totallessons : `${course.totallessons} Lessons`)
@@ -83,24 +96,24 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                     </div>
 
                     {/* Bottom Section */}
-                    <div className="flex items-end justify-between gap-3 mt-5 pt-4 border-t border-zinc-100">
+                    <div className={`flex items-end justify-between gap-3 mt-5 pt-4 border-t ${dividerColor}`}>
 
                          <div className="flex-1">
-                              <p className="text-[12px] md:text-[13px] text-zinc-700">
+                              <p className={`text-[12px] md:text-[13px] ${statTextColor}`}>
                                    <span className="font-semibold">
                                         Starts:
                                    </span>{" "}
                                    {course?.startdate || course?.deadline || "10th Dec, 26"}
                               </p>
 
-                              <p className="text-[12px] md:text-[13px] text-zinc-900 font-semibold mt-1">
+                              <p className={`text-[12px] md:text-[13px] font-semibold mt-1 ${cardTitleColor}`}>
                                    Duration: {course?.courselength || course?.courseLength || "6 Months"}
                               </p>
                          </div>
 
                          <button
                               onClick={handleClick}
-                              className="h-10 px-4 rounded-md border border-zinc-300 bg-white text-zinc-700 text-[12px] md:text-[13px] font-medium flex items-center gap-2 whitespace-nowrap hover:bg-zinc-50 transition-all duration-300 cursor-pointer"
+                              className={`h-10 px-4 rounded-md border font-medium flex items-center gap-2 whitespace-nowrap hover:bg-zinc-50/10 transition-all duration-300 cursor-pointer ${buttonBgColor} ${buttonTextColor} ${buttonBorderColor}`}
                          >
                               {/* <FiDownload size={14} /> */}
                               Course Syllablus

@@ -167,14 +167,14 @@ const Chatbot = () => {
                                                   <span className="text-[9px] text-neutral-400 leading-none">{msg.timestamp}</span>
                                              </div>
                                              {/* Message Bubble */}
-                                             <div className="bg-white text-neutral-900 p-3 rounded-md text-[13px] leading-relaxed shadow-[0_1px_2px_rgba(0,0,0,0.05)] mt-0.5 text-left border border-zinc-100">
+                                             <div className="bg-white text-neutral p-3 rounded-md text-[13px] leading-relaxed shadow-[0_1px_2px_rgba(0,0,0,0.05)] mt-0.5 text-left border border-zinc-100">
                                                   {msg.text}
                                              </div>
                                         </div>
                                    </div>
                               ) : (
                                    /* User Message Bubble */
-                                   <div className="bg-official text-neutral-900 p-3 rounded-md text-[13px] leading-relaxed max-w-[80%] self-end ml-auto shadow-[0_1px_2px_rgba(0,0,0,0.05)] text-left font-medium">
+                                   <div className="bg-official text-neutral p-3 rounded-md text-[13px] leading-relaxed max-w-[80%] self-end ml-auto shadow-[0_1px_2px_rgba(0,0,0,0.05)] text-left font-medium">
                                         {msg.text}
                                    </div>
                               )}
@@ -224,7 +224,7 @@ const Chatbot = () => {
                                    key={index}
                                    type="button"
                                    onClick={() => handleSendMessage(qa.q)}
-                                   className="border border-official text-neutral-800 bg-white hover:bg-official hover:text-neutral-900 transition-all duration-200 text-[11px] font-semibold px-2.5 py-1 rounded-md text-left cursor-pointer shadow-sm shrink-0"
+                                   className="border border-official text-neutral-800 bg-white hover:bg-official hover:text-neutral transition-all duration-200 text-[11px] font-semibold px-2.5 py-1 rounded-md text-left cursor-pointer shadow-sm shrink-0"
                               >
                                    {qa.q}
                               </button>
@@ -241,7 +241,7 @@ const Chatbot = () => {
                               onChange={(e) => setInputValue(e.target.value)}
                               placeholder="Write your query..."
                               disabled={isTyping}
-                              className="w-full pl-3 pr-10 py-2.5 bg-transparent text-sm text-neutral-900 outline-none placeholder-zinc-400 disabled:opacity-50"
+                              className="w-full pl-3 pr-10 py-2.5 bg-transparent text-sm text-neutral outline-none placeholder-zinc-400 disabled:opacity-50"
                          />
                          <button
                               type="submit"

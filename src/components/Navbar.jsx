@@ -244,7 +244,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
           <>
                <div className="font-urbanist fixed w-full top-0 z-99999">
                     {/* Top Bar */}
-                    <div className="w-full bg-official text-neutral-900 py-1.5 md:py-2 text-[11px] md:text-[13px] font-semibold border-b border-zinc-950/10 relative z-50">
+                    <div className="w-full bg-official text-neutral py-1.5 md:py-2 text-[11px] md:text-[13px] font-semibold border-b border-zinc-950/10 relative z-50">
                          <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 flex-col md:flex-row px-3 md:px-6 pb-0.5 md:pb-0">
                               <div className="flex items-center gap-4 md:gap-6">
                                    <a href="tel:+919599272764" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
@@ -296,7 +296,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              }
                                         }}
                                         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                                        className={`md:hidden ${isMoreButtonLight ? "text-white" : "text-neutral-900"} hover:text-official/80 text-2xl transition cursor-pointer flex items-center`}
+                                        className={`md:hidden ${isMoreButtonLight ? "text-white" : "text-neutral"} hover:text-official/80 text-2xl transition cursor-pointer flex items-center`}
                                    >
                                         {isMenuOpen ? <FiX /> : <FiMenu />}
                                    </button>
@@ -343,7 +343,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                        value={searchQuery}
                                                        onChange={(e) => setSearchQuery(e.target.value)}
                                                        placeholder={searchPlaceholderLabel}
-                                                       className="w-70 h-11 pl-11 pr-4 rounded-md bg-white outline-none text-sm text-black border border-transparent focus:border-official transition-all duration-300"
+                                                       className="w-70 h-11 pl-11 pr-4 rounded-md bg-white outline-none text-sm text-neutral border border-transparent focus:border-official transition-all duration-300"
                                                   />
                                              </form>
 
@@ -385,7 +385,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                                                          />
                                                                                                     )}
                                                                                                     <div className="flex-1 min-w-0">
-                                                                                                         <div className="text-xs font-semibold text-neutral-900 truncate line-clamp-1 group-hover:text-official transition-colors">
+                                                                                                         <div className="text-xs font-semibold text-neutral truncate line-clamp-1 group-hover:text-official transition-colors">
                                                                                                               {course.title}
                                                                                                          </div>
                                                                                                          <div className="text-[10px] text-zinc-500 truncate line-clamp-1 mt-0.5 font-medium">
@@ -422,7 +422,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                                                          />
                                                                                                     )}
                                                                                                     <div className="flex-1 min-w-0">
-                                                                                                         <div className="text-xs font-semibold text-neutral-900 truncate line-clamp-1 group-hover:text-official transition-colors">
+                                                                                                         <div className="text-xs font-semibold text-neutral truncate line-clamp-1 group-hover:text-official transition-colors">
                                                                                                               {course.title}
                                                                                                          </div>
                                                                                                          <div className="text-[10px] text-zinc-500 truncate line-clamp-1 mt-0.5 font-medium">
@@ -459,7 +459,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              }
                                         }}
                                         aria-label={isSearchOpen ? "Close search" : "Open search"}
-                                        className={`md:hidden ${isMoreButtonLight ? "text-white" : "text-neutral-900"} hover:text-official/80 text-xl transition cursor-pointer flex items-center`}
+                                        className={`md:hidden ${isMoreButtonLight ? "text-white" : "text-neutral"} hover:text-official/80 text-xl transition cursor-pointer flex items-center`}
                                    >
                                         {isSearchOpen ? <FiX className="text-lg" /> : <FiSearch />}
                                    </button>
@@ -469,9 +469,9 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                         onMouseEnter={() => setIsMenuOpen(false)}
                                    >
                                         {/* BUTTON */}
-                                        <button className={`h-11 px-5 rounded-t-md flex items-center gap-2 text-sm transition-all duration-300 cursor-pointer ${isMoreButtonLight ? "text-white" : "text-neutral-900"} group-hover:bg-white group-hover:text-black`}>
+                                        <button className={`h-11 px-5 rounded-t-md flex items-center gap-2 text-sm transition-all duration-300 cursor-pointer ${isMoreButtonLight ? "text-white" : "text-neutral"} group-hover:bg-white group-hover:text-neutral`}>
                                              {moreTitle}
-                                             <FiChevronDown className={`text-base transition-all duration-300 group-hover:rotate-180 ${isMoreButtonLight ? "text-white group-hover:text-black" : "text-neutral-900 group-hover:text-black"}`} />
+                                             <FiChevronDown className={`text-base transition-all duration-300 group-hover:rotate-180 ${isMoreButtonLight ? "text-white group-hover:text-neutral" : "text-neutral group-hover:text-neutral"}`} />
                                         </button>
                                         {/* DROPDOWN */}
                                         <div className="absolute top-11 right-0 w-245 p-6 bg-white border border-zinc-100 opacity-0 invisible -translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-99999 rounded-b-md">
@@ -479,7 +479,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                   {moreItemsDropdownList && moreItemsDropdownList.length > 0 ? (
                                                        moreItemsDropdownList.map((cat, catIdx) => (
                                                             <div key={catIdx} className="flex flex-col">
-                                                                 <h3 className="text-[14px] font-bold uppercase tracking-wider text-neutral-900 border-b border-zinc-100 pb-2 mb-3">
+                                                                 <h3 className="text-[14px] font-bold uppercase tracking-wider text-neutral border-b border-zinc-100 pb-2 mb-3">
                                                                       {cat.title}
                                                                  </h3>
                                                                  <div className="flex flex-col gap-2">
@@ -498,7 +498,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                   ) : (
                                                        <a
                                                             href="/courses"
-                                                            className="col-span-4 flex items-center justify-center h-12 text-sm text-neutral-900 font-semibold hover:text-official/80 transition"
+                                                            className="col-span-4 flex items-center justify-center h-12 text-sm text-neutral font-semibold hover:text-official/80 transition"
                                                        >
                                                             All Courses
                                                        </a>
@@ -515,7 +515,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                        e.stopPropagation();
                                                        setIsUserDropdownOpen(!isUserDropdownOpen);
                                                   }}
-                                                  className="flex items-center gap-2 text-sm text-neutral-900 hover:text-official/80 transition cursor-pointer font-medium"
+                                                  className="flex items-center gap-2 text-sm text-neutral hover:text-official/80 transition cursor-pointer font-medium"
                                              >
                                                   <span>{user.name}</span>
                                                   <FiChevronDown className={`text-base transition-transform duration-300 ${isUserDropdownOpen ? "rotate-180" : ""}`} />
@@ -545,7 +545,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
 
                          {/* MOBILE SEARCH DROPDOWN */}
                          {isSearchOpen && (
-                              <div ref={mobileSearchRef} className="md:hidden border-t border-official/10 bg-black/95 px-4 py-4 relative">
+                              <div ref={mobileSearchRef} className="md:hidden border-t border-official/10 bg-neutral/95 px-4 py-4 relative">
                                    <div className="relative">
                                         <form onSubmit={handleSearchSubmit} className="relative">
                                              <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
@@ -555,7 +555,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                   onChange={(e) => setSearchQuery(e.target.value)}
                                                   placeholder={searchPlaceholderLabel}
                                                   autoFocus
-                                                  className="w-full h-11 pl-11 pr-4 rounded-md bg-white outline-none text-sm text-black border border-transparent focus:border-official transition-all duration-300"
+                                                  className="w-full h-11 pl-11 pr-4 rounded-md bg-white outline-none text-sm text-neutral border border-transparent focus:border-official transition-all duration-300"
                                              />
                                         </form>
                                    </div>
@@ -668,7 +668,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
 
                          {/* MOBILE MENU */}
                          {isMenuOpen && (
-                              <div className="md:hidden border-t border-official/10 bg-black/95 px-4 pt-5 pb-12 md:pb-5 flex flex-col gap-4 max-h-[calc(100vh-130px)] overflow-y-auto">
+                              <div className="md:hidden border-t border-official/10 bg-neutral/95 px-4 pt-5 pb-12 md:pb-5 flex flex-col gap-4 max-h-[calc(100vh-130px)] overflow-y-auto">
                                    {/* MOBILE BUTTONS */}
                                    <div className="flex flex-col gap-3">
                                         <Button variant="primary" className="w-full justify-center" onClick={() => {
@@ -734,7 +734,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                {/* ALL COURSES MODAL */}
                <div
                     onClick={() => setIsCoursesModalOpen(false)}
-                    className={`w-full fixed left-0 right-0 bottom-0 top-0 md:top-12 z-9999 bg-black/20 backdrop-blur-lg flex items-center justify-center p-4 md:p-6 transition-all duration-400 hide-scrollbar ease-in-out ${isCoursesModalOpen ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-full pointer-events-none"
+                    className={`w-full fixed left-0 right-0 bottom-0 top-0 md:top-12 z-9999 bg-neutral/20 backdrop-blur-lg flex items-center justify-center p-4 md:p-6 transition-all duration-400 hide-scrollbar ease-in-out ${isCoursesModalOpen ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-full pointer-events-none"
                          }`}
                >
                     {/* Modal Content container */}

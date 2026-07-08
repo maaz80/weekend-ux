@@ -15,7 +15,7 @@ export async function generatePageMetadata(pageId, defaultTitle, defaultDesc, pa
      const seo = await getPageSEOData(pageId);
      const title = seo?.title || defaultTitle || "Weekend UX";
      const description = seo?.description || defaultDesc || "Weekend UX learning platform";
-     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://weekend-ui.netlify.app";
+     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://weekend-backend.onrender.com";
      const pageUrl = `${baseUrl}${pathname}`;
 
      // Default decorative fallback image from public folder

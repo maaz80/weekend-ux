@@ -1,7 +1,7 @@
 import Hero from "./Hero";
 
 export default {
-     title: "Sections/Hero",
+     title: "Location/Hero",
      component: Hero,
      parameters: {
           layout: "fullscreen",

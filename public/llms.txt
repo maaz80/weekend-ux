@@ -4,13 +4,13 @@ Weekend UX is a premier design education and training platform, providing profes
 
 ## Core Resources
 
-- [Home](https://weekend-ui.netlify.app/): The main gateway to Weekend UX.
-- [Courses](https://weekend-ui.netlify.app/courses): Professional UI/UX design courses, schedules, curriculums, and enrollment details.
-- [Blogs](https://weekend-ui.netlify.app/category/blogs): Latest articles, design trends, case studies, and tutorials from our journal.
-- [About Us](https://weekend-ui.netlify.app/about-us): Learn about our philosophy, track record, proving methods, and creative minds.
-- [Contact Us](https://weekend-ui.netlify.app/contact-us): Get in touch for inquiries, collaborations, or support.
+- [Home](https://weekend-backend.onrender.com/): The main gateway to Weekend UX.
+- [Courses](https://weekend-backend.onrender.com/courses): Professional UI/UX design courses, schedules, curriculums, and enrollment details.
+- [Blogs](https://weekend-backend.onrender.com/category/blogs): Latest articles, design trends, case studies, and tutorials from our journal.
+- [About Us](https://weekend-backend.onrender.com/about-us): Learn about our philosophy, track record, proving methods, and creative minds.
+- [Contact Us](https://weekend-backend.onrender.com/contact-us): Get in touch for inquiries, collaborations, or support.
 
 ## Legal and Information
 
-- [Privacy Policy](https://weekend-ui.netlify.app/privacy-policy): Privacy policies and data practices.
-- [Disclaimer](https://weekend-ui.netlify.app/disclaimer): Terms of use and legal disclaimers.
+- [Privacy Policy](https://weekend-backend.onrender.com/privacy-policy): Privacy policies and data practices.
+- [Disclaimer](https://weekend-backend.onrender.com/disclaimer): Terms of use and legal disclaimers.

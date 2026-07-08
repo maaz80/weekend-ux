@@ -171,7 +171,7 @@ export default function Blogs() {
 
                {/* Featured Blogs Section */}
                <div className="custom-width py-20">
-                    <h2 className="text-[28px] md:text-[40px] text-neutral-900 font-medium font-playfair mb-4">
+                    <h2 className="text-[28px] md:text-[40px] text-neutral font-medium font-playfair mb-4">
                          <span className="text-[#8F6A00] italic">{featuredStart}</span> {featuredEnd}
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
@@ -189,7 +189,7 @@ export default function Blogs() {
 
                {/* Explore More Blogs Section */}
                <div className="custom-width pb-20">
-                    <h2 className="text-[28px] md:text-[40px] text-neutral-900 font-medium font-playfair mb-4">
+                    <h2 className="text-[28px] md:text-[40px] text-neutral font-medium font-playfair mb-4">
                          Explore <span className="text-[#8F6A00] italic">More</span> Blogs
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
@@ -212,7 +212,7 @@ export default function Blogs() {
                                    disabled={currentPage === 1}
                                    className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === 1
                                         ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                        : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                        : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-neutral"
                                         }`}
                               >
                                    <FiChevronLeft className="text-lg" />
@@ -235,8 +235,8 @@ export default function Blogs() {
                                              key={`page-${item}`}
                                              onClick={() => setCurrentPage(item)}
                                              className={`w-10 h-10 rounded-xl border text-sm font-semibold transition-all cursor-pointer ${currentPage === item
-                                                  ? "bg-official text-black border-transparent shadow-sm"
-                                                  : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                  ? "bg-official text-neutral border-transparent shadow-sm"
+                                                  : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-neutral"
                                                   }`}
                                         >
                                              {item}
@@ -251,7 +251,7 @@ export default function Blogs() {
                                    disabled={currentPage === totalPages}
                                    className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === totalPages
                                         ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                        : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                        : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-neutral"
                                         }`}
                               >
                                    <FiChevronRight className="text-lg" />

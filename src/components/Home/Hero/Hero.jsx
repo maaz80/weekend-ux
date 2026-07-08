@@ -11,27 +11,45 @@ const staticSlides = [
      {
           tagline: "Learn As You Desire",
           titleHtml: "Design <span class=\"italic text-official\">Skills</span> That<br/>Actually Get You Hired.",
-          description: "Explore a curated, collaborative environment. Find your right fit, online or in-person.",
+          points: [
+               "Explore a curated, collaborative environment.",
+               "Find your right fit, online or in-person.",
+               "Industry vetted curriculum designed by mentors."
+          ],
           bgImage: "/images/weekend-ux-hero-bg-template.webp",
           buttonText: "Explore Programs"
      },
      {
           tagline: "Build Your Future",
           titleHtml: "Master <span class=\"italic text-official\">Products</span> With<br/>Industry Leading Mentors.",
-          description: "Hands-on UI/UX design workshops, real-world case studies, and personalized portfolio reviews.",
+          points: [
+               "Hands-on UI/UX design workshops.",
+               "Real-world case studies & projects.",
+               "Personalized portfolio reviews & critiques."
+          ],
           bgImage: "/images/weekend-ux-hero-bg-template.webp",
           buttonText: "Explore Programs"
      },
      {
           tagline: "Collaborate & Grow",
           titleHtml: "Join <span class=\"italic text-official\">Community</span> Of<br/>Creative Designers & Creators.",
-          description: "Connect with thousands of alumni, work on live briefs, and fast-track your design career today.",
+          points: [
+               "Connect with thousands of active alumni.",
+               "Work on live briefs and team hackathons.",
+               "Fast-track your design career starting today."
+          ],
           bgImage: "/images/weekend-ux-hero-bg-template.webp",
           buttonText: "Explore Programs"
      }
 ];
 
-export default function Hero() {
+export default function Hero({
+     bgColor = "bg-neutral",
+     taglineColor = "text-official",
+     titleColor = "text-white",
+     pointsColor = "text-white/70",
+     activeDotColor = "bg-official"
+}) {
      const { homeData } = useHomeData();
      const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -48,11 +66,13 @@ export default function Hero() {
                     ? `${start} ${mid ? `<span class="italic text-official">${mid}</span>` : ""} ${end}`.trim()
                     : fallback.titleHtml;
 
-               const description = slide?.description?.trim() ? slide.description.trim() : fallback.description;
+               const points = Array.isArray(slide?.points) && slide.points.length > 0
+                    ? slide.points
+                    : fallback.points;
                const bgImage = slide?.bgImage?.trim() ? slide.bgImage.trim() : fallback.bgImage;
                const buttonText = slide?.buttonName?.trim() ? slide.buttonName.trim() : fallback.buttonText;
 
-               return { tagline, titleHtml, description, bgImage, buttonText };
+               return { tagline, titleHtml, points, bgImage, buttonText };
           })
           : staticSlides;
 
@@ -73,7 +93,7 @@ export default function Hero() {
      }, [slides.length]);
 
      return (
-          <section id="home-hero" className="relative min-h-145 overflow-hidden bg-black text-white select-none mt-12">
+          <section id="home-hero" className={`relative min-h-145 overflow-hidden text-white select-none mt-12 ${bgColor}`}>
                {/* Slides Wrapper */}
                <div className="relative min-h-145 w-full">
                     {slides.map((slide, index) => (
@@ -95,13 +115,13 @@ export default function Hero() {
                                    fallbackSrc="/images/weekend-ux-hero-bg-template.webp"
                               />
                               {/* Dark Overlay for better text readability */}
-                              {/* <div className="absolute inset-0 bg-black/40" /> */}
+                              {/* <div className="absolute inset-0 bg-neutral/40" /> */}
 
                               {/* Content */}
                               <div className="relative z-20 mx-auto flex min-h-145 max-w-337.5 items-center px-6 sm:px-10 lg:px-16">
                                    <div className="max-w-197.5">
                                         <p
-                                             className={`mb-5 text-[11px] md:text-[14px] font-semibold font-inter uppercase tracking-[0.45em] text-official transition-all duration-700 transform delay-100 ${index === currentSlide
+                                             className={`mb-5 text-[11px] md:text-[14px] font-semibold font-inter uppercase tracking-[0.45em] transition-all duration-700 transform delay-100 ${taglineColor} ${index === currentSlide
                                                   ? "translate-y-0 opacity-100"
                                                   : "translate-y-8 opacity-0"
                                                   }`}
@@ -110,21 +130,26 @@ export default function Hero() {
                                         </p>
 
                                         <h1
-                                             className={`font-playfair text-[37px] leading-13 md:leading-16 text-white md:text-[56px] transition-all duration-700 transform delay-300 ${index === currentSlide
+                                             className={`font-playfair text-[37px] leading-13 md:leading-16 md:text-[56px] transition-all duration-700 transform delay-300 ${titleColor} ${index === currentSlide
                                                   ? "translate-y-0 opacity-100"
                                                   : "translate-y-8 opacity-0"
                                                   }`}
                                              dangerouslySetInnerHTML={{ __html: slide.titleHtml }}
                                         />
 
-                                        <p
-                                             className={`mt-8 max-w-105 text-base leading-8 text-white/70 lg:text-lg font-urbanist transition-all duration-700 transform delay-500 ${index === currentSlide
+                                        <ul
+                                             className={`mt-8 max-w-140 text-base leading-7 font-urbanist transition-all duration-700 transform delay-500 space-y-2 list-none ${pointsColor} ${index === currentSlide
                                                   ? "translate-y-0 opacity-100"
                                                   : "translate-y-8 opacity-0"
                                                   }`}
                                         >
-                                             {slide.description}
-                                        </p>
+                                             {Array.isArray(slide.points) && slide.points.filter(p => p.trim() !== "").map((point, pIdx) => (
+                                                  <li key={pIdx} className="flex items-start gap-2 text-[15px] md:text-[17px]">
+                                                       {/* <span className="text-official select-none mt-1 shrink-0">•</span> */}
+                                                       <span>{point}</span>
+                                                  </li>
+                                             ))}
+                                        </ul>
 
                                         <div
                                              className={`transition-all duration-700 transform delay-700 ${index === currentSlide
@@ -147,7 +172,7 @@ export default function Hero() {
                {/* Navigation Arrows */}
                {/* <button
                     onClick={prevSlide}
-                    className="absolute left-6 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/10 bg-black/40 p-3 text-white backdrop-blur-md transition-all hover:bg-official/80 hover:text-black hover:scale-110 active:scale-95 cursor-pointer hidden md:flex items-center justify-center"
+                    className="absolute left-6 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/10 bg-neutral/40 p-3 text-white backdrop-blur-md transition-all hover:bg-official/80 hover:text-neutral hover:scale-110 active:scale-95 cursor-pointer hidden md:flex items-center justify-center"
                     aria-label="Previous slide"
                >
                     <FiChevronLeft size={24} />
@@ -155,7 +180,7 @@ export default function Hero() {
 
                <button
                     onClick={nextSlide}
-                    className="absolute right-6 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/10 bg-black/40 p-3 text-white backdrop-blur-md transition-all hover:bg-official/80 hover:text-black hover:scale-110 active:scale-95 cursor-pointer hidden md:flex items-center justify-center"
+                    className="absolute right-6 top-1/2 z-30 -translate-y-1/2 rounded-full border border-white/10 bg-neutral/40 p-3 text-white backdrop-blur-md transition-all hover:bg-official/80 hover:text-neutral hover:scale-110 active:scale-95 cursor-pointer hidden md:flex items-center justify-center"
                     aria-label="Next slide"
                >
                     <FiChevronRight size={24} />
@@ -172,7 +197,7 @@ export default function Hero() {
                          >
                               <span
                                    className={`block rounded-full transition-all duration-300 h-2.5 ${index === currentSlide
-                                        ? "w-8 bg-official"
+                                        ? `w-8 ${activeDotColor}`
                                         : "w-2.5 bg-white/30 hover:bg-white/60"
                                         }`}
                               />

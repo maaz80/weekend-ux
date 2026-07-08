@@ -92,7 +92,14 @@ const DEFAULT_LOCATIONS = [
      }
 ];
 
-export default function Footer() {
+export default function Footer({
+     footerGlobalData: initialGlobalData,
+     footerColumnsData: initialColumnsData,
+     bgColor = "bg-[#1C1C1C]",
+     textColor = "text-white",
+     bannerBgImage = "/images/weekend-ux-footer-decorative-bg.webp",
+     bannerTitleColor = "text-neutral"
+}) {
      const { footerGlobalData, footerColumnsData } = useHomeData();
      const [locations, setLocations] = useState(DEFAULT_LOCATIONS);
 
@@ -147,10 +154,12 @@ export default function Footer() {
           }
      ];
 
-     const settings = footerGlobalData || DEFAULT_SETTINGS;
-     const footerColumns = (footerColumnsData && footerColumnsData.length > 0)
-          ? footerColumnsData
-          : defaultColumns;
+     const settings = initialGlobalData || footerGlobalData || DEFAULT_SETTINGS;
+     const footerColumns = (initialColumnsData && initialColumnsData.length > 0)
+          ? initialColumnsData
+          : (footerColumnsData && footerColumnsData.length > 0)
+               ? footerColumnsData
+               : defaultColumns;
 
      const cardTitle = settings?.card?.title && settings.card.title.trim()
           ? settings.card.title.trim()
@@ -161,10 +170,10 @@ export default function Footer() {
           : "Explore Programs";
 
      return (
-          <footer className="bg-[#1C1C1C] text-white w-full -mt-10 relative z-1000 pb-16">
+          <footer className={`w-full -mt-10 relative z-1000 pb-16 ${bgColor} ${textColor}`}>
                <div className="absolute -top-22.5 md:-top-45 left-0 right-0 mx-auto w-[90%] md:w-[80%] max-w-[80%] h-45 md:h-90 z-20 flex flex-col items-start justify-center px-2 md:px-10 lg:px-30">
-                    <Image src='/images/weekend-ux-footer-decorative-bg.webp' alt="weekend-ux-footer-decorative-bg" fill className="bg-center object-contain " />
-                    <div className="font-playfair text-[17px] md:text-[28px] lg:text-[56px] text-neutral-900 max-w-150 relative z-50 leading-9 md:leading-12 lg:leading-16" >
+                    <Image src={bannerBgImage} alt="weekend-ux-footer-decorative-bg" fill className="bg-center object-contain " />
+                    <div className={`font-playfair text-[17px] md:text-[28px] lg:text-[56px] max-w-150 relative z-50 leading-9 md:leading-12 lg:leading-16 ${bannerTitleColor}`} >
                          {cardTitle}
                     </div>
                     <Link href="/contact-us">
@@ -205,7 +214,7 @@ export default function Footer() {
                                                        rel="noopener noreferrer"
                                                        key={i}
                                                        aria-label={social.icon ? social.icon.replace(/^(Fa|Ri|Ci|Fi)/, "").replace(/([A-Z])/g, " $1").trim() : "Social media"}
-                                                       className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-neutral-900 hover:bg-official/80 transition-colors duration-200"
+                                                       className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-neutral hover:bg-official/80 transition-colors duration-200"
                                                   >
                                                        <IconComponent size={18} />
                                                   </a>
@@ -215,7 +224,7 @@ export default function Footer() {
                                         [FaFacebookF, RiTwitterXLine, FaInstagram, FaLinkedinIn, CiYoutube].map((Icon, i) => (
                                              <div
                                                   key={i}
-                                                  className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-neutral-900 hover:bg-official/80 transition-colors duration-200"
+                                                  className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-neutral hover:bg-official/80 transition-colors duration-200"
                                              >
                                                   <Icon size={18} strokeWidth={1.2} />
                                              </div>
@@ -242,16 +251,6 @@ export default function Footer() {
                                    </div>
                               );
                          })}
-
-                         {/* App Buttons */}
-                         {/* <div className="order-2 md:order-6 2xl:order-6">
-                              <h3 className="text-[20px] mb-5">Learn On the Go!</h3>
-
-                              <div className="space-y-3">
-                                   <AppButton icon="android" text="Get Android App" />
-                                   <AppButton icon="apple" text="Get ios App" />
-                              </div>
-                         </div> */}
                     </div>
 
                     {/* Divider */}

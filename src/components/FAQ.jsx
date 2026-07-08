@@ -33,7 +33,20 @@ const defaultFaqs = [
 
 const faqCache = {};
 
-const FAQ = ({ paddings, faqData: initialFaqData }) => {
+const FAQ = ({
+     paddings,
+     faqData: initialFaqData,
+     bgImage = "/images/weekend-ux-faq-bg.webp",
+     bgColor = "bg-white",
+     taglineColor = "text-official",
+     titleColor = "text-neutral",
+     titleHighlightColor = "text-official",
+     descriptionColor = "text-neutral/80",
+     questionClosedColor = "text-neutral",
+     questionOpenColor = "text-official",
+     answerColor = "text-neutral",
+     dividerColor = "border-gray-300"
+}) => {
      const { faqData: homeFaqData } = useHomeData();
      const pathname = usePathname();
      const [fetchedFaq, setFetchedFaq] = useState({});
@@ -109,33 +122,35 @@ const FAQ = ({ paddings, faqData: initialFaqData }) => {
           : "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs.";
 
      return (
-          <section className={` relative z-999 ${paddings} pt-15 pb-35 md:pb-70  bg-white`}>
+          <section className={` relative z-999 ${paddings} pt-15 pb-35 md:pb-70 ${bgColor}`}>
                {/* Background */}
-               <div
-                    className="absolute inset-0 bg-cover bg-center z-10"
-                    style={{
-                         backgroundImage: "url('/images/weekend-ux-faq-bg.webp')",
-                    }}
-               />
+               {bgImage && (
+                    <div
+                         className="absolute inset-0 bg-cover bg-center z-10"
+                         style={{
+                              backgroundImage: `url('${bgImage}')`,
+                         }}
+                    />
+               )}
                <div className="custom-width mx-auto relative z-50">
 
                     {/* Heading */}
                     <div className="mx-auto max-w-212.5 text-center mb-10 md:mb-20">
-                         <span className="font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] text-official">
+                         <span className={`font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] ${taglineColor}`}>
                               {title}
                          </span>
 
-                         <h3 className="mt-4 font-playfair text-[38px] leading-[1.05] text-neutral-900 md:text-[58px] lg:text-[72px]">
+                         <h3 className={`mt-4 font-playfair text-[38px] leading-[1.05] md:text-[58px] lg:text-[72px] ${titleColor}`}>
                               {startheading}{" "}
                               {midheading && (
-                                   <span className="italic text-official">
+                                   <span className={`italic ${titleHighlightColor}`}>
                                         {midheading}
                                    </span>
                               )}{" "}
                               {endheading}
                          </h3>
 
-                         <p className="mx-auto mt-5 max-w-200 font-urbanist text-[15px] leading-5.5 md:leading-7 text-neutral-900/80 md:text-[17px]">
+                         <p className={`mx-auto mt-5 max-w-200 font-urbanist text-[15px] leading-5.5 md:leading-7 md:text-[17px] ${descriptionColor}`}>
                               {description}
                          </p>
                     </div>
@@ -150,7 +165,7 @@ const FAQ = ({ paddings, faqData: initialFaqData }) => {
                               return (
                                    <div
                                         key={index}
-                                        className="border-b border-gray-300 pb-6 plus-jakarta-sans "
+                                        className={`pb-6 plus-jakarta-sans ${dividerColor} border-b`}
                                    >
 
                                         {/* Question */}
@@ -161,7 +176,7 @@ const FAQ = ({ paddings, faqData: initialFaqData }) => {
                                         >
 
                                              <span
-                                                  className={`text-[18px] md:text-[24px] cursor-pointer transition ${isOpen ? "text-official" : "text-neutral-900"
+                                                  className={`text-[18px] md:text-[24px] cursor-pointer transition ${isOpen ? questionOpenColor : questionClosedColor
                                                        }`}
                                              >
                                                   {faq.question || faq.ques}
@@ -170,13 +185,13 @@ const FAQ = ({ paddings, faqData: initialFaqData }) => {
                                              <span className="relative text-lg md:text-xl w-5 h-5 inline-block">
 
                                                   <HiPlus
-                                                       className={`absolute inset-0 text-neutral-900 cursor-pointer transition-all duration-300 ${isOpen ? "opacity-0 rotate-180 " : "opacity-100 rotate-0"
-                                                            }`}
+                                                       className={`absolute inset-0 cursor-pointer transition-all duration-300 ${isOpen ? "opacity-0 rotate-180 " : "opacity-100 rotate-0"
+                                                            } ${questionClosedColor}`}
                                                   />
 
                                                   <HiMinus
-                                                       className={`absolute text-official cursor-pointer inset-0 transition-all duration-300 ${isOpen ? "opacity-100 rotate-0" : "opacity-0 -rotate-180"
-                                                            }`}
+                                                       className={`absolute cursor-pointer inset-0 transition-all duration-300 ${isOpen ? "opacity-100 rotate-0" : "opacity-0 -rotate-180"
+                                                            } ${questionOpenColor}`}
                                                   />
 
                                              </span>
@@ -194,7 +209,7 @@ const FAQ = ({ paddings, faqData: initialFaqData }) => {
 
                                              <div className="overflow-hidden">
 
-                                                  <p className="text-neutral-900  text-[12px] md:text-[16px] lg:text-[18px] leading-5 md:leading-6 lg:leading-8">
+                                                  <p className={`text-[12px] md:text-[16px] lg:text-[18px] leading-5 md:leading-6 lg:leading-8 ${answerColor}`}>
                                                        {faq.answer || faq.ans}
                                                   </p>
 
@@ -212,6 +227,6 @@ const FAQ = ({ paddings, faqData: initialFaqData }) => {
 
           </section>
      );
-};
+};;
 
 export default FAQ;

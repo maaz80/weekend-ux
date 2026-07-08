@@ -3,7 +3,18 @@ import Map from "@/app/assets/weekend-ux-contact-map.webp";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import Form from "./Form";
 
-const Content = ({ data }) => {
+const Content = ({
+     data,
+     bgColor = "bg-[#FFFCEE]",
+     infoTextColor = "text-neutral-600",
+     inquiriesTitleColor = "text-neutral",
+     locationTitleColor = "text-neutral",
+     socialTitleColor = "text-neutral",
+     mapRounded = "rounded-3xl",
+     formBgColor = "bg-white",
+     formHeadingColor = "text-neutral",
+     formShadow = "shadow-[0_8px_24px_rgba(156,163,175,0.15)]"
+}) => {
      const leftSection = data?.leftsection;
 
      const imageSrc = leftSection?.image && leftSection.image.trim()
@@ -53,7 +64,7 @@ const Content = ({ data }) => {
           : Map.src || Map;
 
      return (
-          <section className="py-10 md:py-16 font-urbanist bg-[#FFFCEE]">
+          <section className={`py-10 md:py-16 font-urbanist ${bgColor}`}>
                <div className="custom-width px-4 md:px-6 lg:px-8">
 
                     {/* ================= TOP SECTION ================= */}
@@ -84,11 +95,11 @@ const Content = ({ data }) => {
                                    {/* Enquiries */}
 
                                    <div>
-                                        <h2 className="text-[24px] font-bold text-neutral-900 mb-3">
+                                        <h2 className={`text-[24px] font-bold mb-3 ${inquiriesTitleColor}`}>
                                              {inquiriesTitle}
                                         </h2>
 
-                                        <div className="text-sm md:text-[16px] text-neutral-600">
+                                        <div className={`text-sm md:text-[16px] ${infoTextColor}`}>
                                              <p>{inquiriesEmail}</p>
                                              <p>{inquiriesPhone}</p>
                                         </div>
@@ -97,11 +108,11 @@ const Content = ({ data }) => {
                                    {/* Location */}
 
                                    <div>
-                                        <h2 className="text-[24px] font-bold text-neutral-900 mb-3">
+                                        <h2 className={`text-[24px] font-bold mb-3 ${locationTitleColor}`}>
                                              {locationTitle}
                                         </h2>
 
-                                        <div className="text-sm md:text-[16px] text-neutral-600 leading-6">
+                                        <div className={`text-sm md:text-[16px] leading-6 ${infoTextColor}`}>
                                              {locationAddress.split('\n').map((line, idx) => (
                                                   <p key={idx}>{line}</p>
                                              ))}
@@ -111,11 +122,11 @@ const Content = ({ data }) => {
                                    {/* Social */}
 
                                    <div>
-                                        <h2 className="text-[24px] font-bold text-neutral-900 mb-3">
+                                        <h2 className={`text-[24px] font-bold mb-3 ${socialTitleColor}`}>
                                              {socialTitle}
                                         </h2>
 
-                                        <div className="flex flex-wrap gap-4 text-sm text-neutral-600 italic">
+                                        <div className={`flex flex-wrap gap-4 text-sm italic ${infoTextColor}`}>
                                              {socialPlatforms.map((social, idx) => (
                                                   <a key={idx} href={social.url}>{social.label}</a>
                                              ))}
@@ -127,9 +138,9 @@ const Content = ({ data }) => {
 
                          {/* RIGHT SIDE */}
 
-                         <div className="mt-10 md:mt-0 p-5 md:p-10 bg-white rounded-2xl shadow-[0_8px_24px_rgba(156,163,175,0.15)]">
+                         <div className={`mt-10 md:mt-0 p-5 md:p-10 rounded-2xl ${formBgColor} ${formShadow}`}>
 
-                              <h2 className="font-playfair text-[26px] md:text-[40px] text-center text-neutral-900 mb-8">
+                              <h2 className={`font-playfair text-[26px] md:text-[40px] text-center mb-8 ${formHeadingColor}`}>
                                    Enquire Here!
                               </h2>
 
@@ -146,7 +157,7 @@ const Content = ({ data }) => {
                               <OptimizedImage
                                    src={mapImageSrc}
                                    alt="weekend-ux-contact-map"
-                                   className="w-full h-75 md:h-112.5 lg:h-150 object-cover rounded-3xl"
+                                   className={`w-full h-75 md:h-112.5 lg:h-150 object-cover ${mapRounded}`}
                                    sizes="100vw"
                               />
 
@@ -156,7 +167,7 @@ const Content = ({ data }) => {
 
                                    <div className="bg-official rounded-xl px-8 py-6 text-center shadow-xl">
 
-                                        <h3 className="font-urbanist font-bold text-[24px] text-neutral-900">
+                                        <h3 className="font-urbanist font-bold text-[24px] text-neutral">
                                              Our Classroom
                                         </h3>
 
@@ -167,7 +178,7 @@ const Content = ({ data }) => {
                                         </p>
 
                                         <div className="flex justify-center mt-4">
-                                             <div className="w-3 h-3 rounded-full bg-neutral-900"></div>
+                                             <div className="w-3 h-3 rounded-full bg-neutral"></div>
                                         </div>
 
                                    </div>

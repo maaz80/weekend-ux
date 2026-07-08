@@ -26,7 +26,7 @@ export default function FeatureStrip() {
                <div className="mx-auto max-w-95 md:max-w-310 min-h-137.5 md:min-h-104 flex flex-col items-start justify-center">
                     {/* Intro Text */}
                     <div className="max-w-212.5">
-                         <p className="font-serif text-[20px] leading-[1.55] text-black md:text-[26px] lg:text-[32px]">
+                         <p className="font-serif text-[20px] leading-[1.55] text-neutral md:text-[26px] lg:text-[32px]">
                               Weekend UX is a hands-on design institute,
                               in-person classes and structured recordings
                               built for people who learn by doing, not
@@ -41,22 +41,22 @@ export default function FeatureStrip() {
                                    key={index}
                                    className={`flex items-center gap-5`}
                               >
-                                   <div className="shrink-0 text-black">
+                                   <div className="shrink-0 text-neutral">
                                         {item.icon}
                                    </div>
                                    <div>
-                                        <h2 className="font-serif text-[22px] leading-tight text-black lg:text-[28px]">
+                                        <h2 className="font-serif text-[22px] leading-tight text-neutral lg:text-[28px]">
                                              {item.title}
                                         </h2>
 
-                                        <p className="font-serif text-[22px] leading-tight text-black lg:text-[28px]">
+                                        <p className="font-serif text-[22px] leading-tight text-neutral lg:text-[28px]">
                                              {item.subtitle}
                                         </p>
                                    </div>
                                    {/* Border  */}
                                    {index < features.length - 1 && (
                                         <div className="min-w-32  items-center justify-center hidden md:flex">
-                                             <div className="w-0.5 h-18 bg-black"></div>
+                                             <div className="w-0.5 h-18 bg-neutral"></div>
                                         </div>
                                    )}
                               </div>

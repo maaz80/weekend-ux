@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 const loginImage = "/images/weekend-ux-login-decorative-image.webp";
 import { Mail, User, X, KeyRound, Phone } from "lucide-react";
 import { signupUser, loginUser, sendAuthOTP } from "@/utils/auth.js";
+import Button from "@/components/ui/Button";
 import { useHomeData } from "@/context/HomeDataContext";
 
 const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
@@ -231,13 +232,13 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
      };
 
      return (
-          <div className={`fixed open-sans inset-0 z-999999 flex items-center justify-center bg-black/50 backdrop-blur-sm ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-full opacity-0 pointer-events-none'} transition-all duration-500 ease-in-out`} role="dialog" aria-labelledby="auth-modal-title" aria-modal="true">
+          <div className={`fixed open-sans inset-0 z-999999 flex items-center justify-center bg-neutral/50 backdrop-blur-sm ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-full opacity-0 pointer-events-none'} transition-all duration-500 ease-in-out`} role="dialog" aria-labelledby="auth-modal-title" aria-modal="true">
                <h2 id="auth-modal-title" className="sr-only hidden">
                     {authMode === "signup" ? "Sign Up" : authMode === "forgot" ? "Forgot Password" : authMode === "reset" ? "Reset Password" : "Sign In"}
                </h2>
 
                {/* Modal container */}
-               <div className="w-[90%] max-w-4xl bg-white rounded-2xl shadow-2xl relative overflow-hidden p-6 md:p-10 text-neutral-900">
+               <div className="w-[90%] max-w-4xl bg-white rounded-2xl shadow-2xl relative overflow-hidden p-6 md:p-10 text-neutral">
                     <div className="flex flex-col md:flex-row h-auto md:h-125">
 
                          {/* LEFT PANEL - ILLUSTRATION */}
@@ -257,7 +258,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                          {/* RIGHT PANEL - FORM */}
                          <div className="w-full md:w-1/2 flex flex-col justify-center px-4 md:px-12 py-6 md:py-0">
 
-                              <h3 className="text-2xl font-bold text-neutral-900 mb-6">
+                              <h3 className="text-2xl font-bold text-neutral mb-6">
                                    {authMode === "signup" ? "Create Account" : "Welcome Back"}
                               </h3>
 
@@ -289,7 +290,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                                             value={formData.name}
                                                             onChange={handleChange}
                                                             placeholder="John Doe"
-                                                            className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-black"
+                                                            className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-neutral"
                                                             required
                                                        />
                                                        <User className="absolute top-1/2 -translate-y-1/2 left-3 text-zinc-400" size={18} />
@@ -306,7 +307,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                                             onChange={handleChange}
                                                             placeholder="9876543210"
                                                             maxLength={10}
-                                                            className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-black"
+                                                            className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-neutral"
                                                             required
                                                        />
                                                        <Phone className="absolute top-1/2 -translate-y-1/2 left-3 text-zinc-400" size={18} />
@@ -325,7 +326,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                                   value={formData.email}
                                                   onChange={handleChange}
                                                   placeholder="example@email.com"
-                                                  className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-black"
+                                                  className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-neutral"
                                                   required
                                              />
                                              <Mail className="absolute top-1/2 -translate-y-1/2 left-3 text-zinc-400" size={18} />
@@ -344,7 +345,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                                        onChange={handleChange}
                                                        placeholder="Enter 6-digit OTP"
                                                        maxLength={6}
-                                                       className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-black font-semibold tracking-widest text-center"
+                                                       className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-neutral font-semibold tracking-widest text-center"
                                                        required
                                                   />
                                                   <KeyRound className="absolute top-1/2 -translate-y-1/2 left-3 text-zinc-400" size={18} />
@@ -385,21 +386,23 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                         </div>
                                    )}
 
-                                   {/* Submit Button */}
-                                   <button
-                                        type="submit"
-                                        disabled={loading || otpSending || (otpSent && !formData.otp)}
-                                        className={`w-full bg-official hover:bg-official/80 text-neutral-900 h-11 rounded-lg text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center gap-2 ${loading || otpSending || (otpSent && !formData.otp) ? "opacity-70 cursor-not-allowed" : ""}`}
-                                   >
-                                        {loading || otpSending ? (
-                                             <>
-                                                  <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                                                  <span>{otpSending ? "Sending OTP..." : "Processing..."}</span>
-                                             </>
-                                        ) : (
-                                             otpSent ? (authMode === "signup" ? "Verify & Sign Up" : "Verify & Login") : "Get OTP"
-                                        )}
-                                   </button>
+                                    {/* Submit Button */}
+                                    <Button
+                                         type="submit"
+                                         disabled={loading || otpSending || (otpSent && !formData.otp)}
+                                         variant="primary"
+                                         size="h11"
+                                         className={`w-full text-sm font-bold ${loading || otpSending || (otpSent && !formData.otp) ? "opacity-70 cursor-not-allowed bg-official/50 text-neutral-500" : ""}`}
+                                    >
+                                         {loading || otpSending ? (
+                                              <>
+                                                   <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                                                   <span>{otpSending ? "Sending OTP..." : "Processing..."}</span>
+                                              </>
+                                         ) : (
+                                              otpSent ? (authMode === "signup" ? "Verify & Sign Up" : "Verify & Login") : "Get OTP"
+                                         )}
+                                    </Button>
 
                                    {/* Keep Signed checkbox */}
                                    {authMode === "login" && (

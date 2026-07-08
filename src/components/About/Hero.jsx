@@ -1,8 +1,14 @@
 import Image from "next/image";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import Link from "next/link";
+import Button from "@/components/ui/Button";
 
-export default function Hero({ data }) {
+export default function Hero({
+     data,
+     titleColor = "text-official",
+     headingColor = "text-white",
+     bgColor = "bg-zinc-950"
+}) {
      const title = data?.title?.trim() ? data.title.trim() : "Learn as you desire";
      const heading = data?.heading?.trim() ? data.heading.trim() : "Best Design Academy in Delhi that teaches you actual skills in person";
      const buttonName = data?.buttonName?.trim() ? data.buttonName.trim() : "Explore Programs";
@@ -12,7 +18,7 @@ export default function Hero({ data }) {
           <div id="about-hero" className=" bg-white text-white font-urbanist flex flex-col relative pt-16 md:pt-8">
                <Image src='/images/weekend-ux-decorative-diamond.webp' alt="weekend-ux-decorative-diamond" className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-30" width={200} height={200} style={{ height: 'auto' }}/>
                {/* Hero Header Section */}
-               <section className="relative h-62.5 md:h-120 w-full flex flex-col gap-5 items-center justify-center bg-zinc-950 overflow-hidden">
+               <section className={`relative h-62.5 md:h-120 w-full flex flex-col gap-5 items-center justify-center overflow-hidden ${bgColor}`}>
                     <OptimizedImage
                          src={bgImage}
                          alt="weekend-ux-location-hero-bg"
@@ -22,18 +28,22 @@ export default function Hero({ data }) {
                          fetchPriority="high"
                     />
                     {/* Content */}
-                    <span className="font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] relative z-50 text-official">
+                    <span className={`font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] relative z-50 ${titleColor}`}>
                          {title}
                     </span>
 
-                    <h1 className="custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">
+                    <h1 className={`custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-10 md:leading-15 2xl:leading-20 relative z-50 font-playfair ${headingColor}`}>
                          {heading}
                     </h1>
 
                     <Link href="/courses">
-                         <button className="px-5 h-10 rounded-xl bg-official text-neutral-900 font-urbanist relative z-50 cursor-pointer hover:scale-102 transition font-bold">
+                         <Button
+                              variant="primary"
+                              size="h10"
+                              className="font-urbanist relative z-50 hover:scale-102"
+                         >
                               {buttonName}
-                         </button>
+                         </Button>
                     </Link>
                </section>
           </div>

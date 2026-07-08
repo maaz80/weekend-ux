@@ -124,7 +124,7 @@ export default function Details({ data }) {
                                 {/* Social */}
                                 <div className="flex items-center gap-3 mt-5">
 
-                                     <button aria-label="Share this article" className="w-9 h-9 rounded-full border border-neutral-400 flex items-center justify-center text-neutral-900">
+                                     <button aria-label="Share this article" className="w-9 h-9 rounded-full border border-neutral-400 flex items-center justify-center text-neutral">
                                           <CiShare2 size={16} />
                                      </button>
 
@@ -145,7 +145,7 @@ export default function Details({ data }) {
                                 {/* TOC */}
                                 {headingsList.length > 0 && (
                                      <div className="mt-10">
-                                          <h2 className="font-urbanist font-bold text-[22px] text-neutral-900 uppercase">
+                                          <h2 className="font-urbanist font-bold text-[22px] text-neutral uppercase">
                                                Table Of Content
                                           </h2>
 
@@ -157,7 +157,7 @@ export default function Details({ data }) {
                                                               key={item.id}
                                                               onClick={() => handleScroll(item.id)}
                                                               className={`w-full text-left px-3 py-2 rounded-lg transition-all cursor-pointer leading-7.5 line-clamp-1 ${isActive
-                                                                        ? "bg-neutral-900 text-white font-bold"
+                                                                        ? "bg-neutral text-white font-bold"
                                                                         : "text-neutral-800 hover:bg-neutral-200/60 hover:text-orange-500 font-medium"
                                                                    }`}
 
@@ -180,7 +180,7 @@ export default function Details({ data }) {
                                           className="object-cover"
                                      />
 
-                                     <div className="absolute inset-0 bg-black/25" />
+                                     <div className="absolute inset-0 bg-neutral/25" />
 
                                      <div className="absolute inset-0 p-4 flex flex-col justify-between">
 
@@ -194,7 +194,7 @@ export default function Details({ data }) {
                                                </p>
                                           </div>
 
-                                          <button className="h-12 rounded-lg bg-[#F7C600] text-neutral-900 font-medium cursor-pointer">
+                                          <button className="h-12 rounded-lg bg-[#F7C600] text-neutral font-medium cursor-pointer">
                                                Book a Call
                                           </button>
 

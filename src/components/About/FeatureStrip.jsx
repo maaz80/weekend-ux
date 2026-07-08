@@ -25,7 +25,12 @@ function getIconComponent(iconName, defaultIcon) {
      return defaultIcon;
 }
 
-export default function FeatureStrip({ data }) {
+export default function FeatureStrip({
+     data,
+     bgColor = "bg-official",
+     textColor = "text-neutral",
+     borderColor = "bg-neutral"
+}) {
      const introText = data?.description && data.description.trim()
           ? data.description.trim()
           : "Weekend UX is a hands-on design institute, in-person classes and structured recordings built for people who learn by doing, not watching.";
@@ -79,12 +84,12 @@ export default function FeatureStrip({ data }) {
           ];
 
      return (
-          <section className="relative overflow-hidden bg-official">
+          <section className={`relative overflow-hidden ${bgColor}`}>
 
                <div className="mx-auto max-w-95 md:max-w-310 min-h-137.5 md:min-h-104 flex flex-col items-start justify-center">
                     {/* Intro Text */}
                     <div className="max-w-212.5">
-                         <p className="font-serif text-[20px] leading-[1.55] text-black md:text-[26px] lg:text-[32px]">
+                         <p className={`font-serif text-[20px] leading-[1.55] md:text-[26px] lg:text-[32px] ${textColor}`}>
                               {introText}
                          </p>
                     </div>
@@ -96,16 +101,16 @@ export default function FeatureStrip({ data }) {
                                    key={index}
                                    className={`flex items-center gap-5`}
                               >
-                                   <div className="shrink-0 text-black">
+                                   <div className={`shrink-0 ${textColor}`}>
                                         {item.icon}
                                    </div>
                                    <div>
-                                        <h2 className="font-serif text-[22px] leading-tight text-black lg:text-[28px]">
+                                        <h2 className={`font-serif text-[22px] leading-tight lg:text-[28px] ${textColor}`}>
                                              {item.title}
                                         </h2>
 
                                         {item.subtitle && (
-                                             <p className="font-serif text-[22px] leading-tight text-black lg:text-[28px]">
+                                             <p className={`font-serif text-[22px] leading-tight lg:text-[28px] ${textColor}`}>
                                                   {item.subtitle}
                                              </p>
                                         )}
@@ -113,7 +118,7 @@ export default function FeatureStrip({ data }) {
                                    {/* Border  */}
                                    {index < featPoints.length - 1 && (
                                         <div className="min-w-32  items-center justify-center hidden md:flex">
-                                             <div className="w-0.5 h-18 bg-black"></div>
+                                             <div className={`w-0.5 h-18 ${borderColor}`}></div>
                                         </div>
                                    )}
                               </div>

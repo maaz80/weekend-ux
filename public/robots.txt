@@ -13,5 +13,5 @@ Disallow: /_next/
 Disallow: /static/
 
 # Sitemap and Host declarations
-Sitemap: https://weekend-ui.netlify.app/sitemap.xml
-Host: https://weekend-ui.netlify.app
+Sitemap: https://weekend-backend.onrender.com/sitemap.xml
+Host: https://weekend-backend.onrender.com

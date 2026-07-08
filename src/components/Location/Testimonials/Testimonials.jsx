@@ -179,7 +179,7 @@ const Testimonials = ({ data }) => {
 
                {/* Heading */}
 
-                    <h2 className="text-[38px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 font-medium text-center w-[99%] md:w-[60%] mx-auto z-20 relative font-playfair text-black">
+                    <h2 className="text-[38px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 font-medium text-center w-[99%] md:w-[60%] mx-auto z-20 relative font-playfair text-neutral">
                          {data?.startTitle || "What Our"}{" "}
                          <span className="relative inline-block text-official italic">
                               {data?.midTitle || "Students"}
@@ -189,7 +189,7 @@ const Testimonials = ({ data }) => {
                     </h2>
 
                {/* Description */}
-               <p className={`text-[14px] 2xl:text-[16px] text-black/60 leading-6 md:leading-7 text-center ${isLocation ? 'max-w-3xl' : 'max-w-4xl'}  mx-auto mt-6 z-20 relative`}>
+               <p className={`text-[14px] 2xl:text-[16px] text-neutral/60 leading-6 md:leading-7 text-center ${isLocation ? 'max-w-3xl' : 'max-w-4xl'}  mx-auto mt-6 z-20 relative`}>
                     {isLocation ? "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs." : (data?.description || "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs.")}
                </p>
 
@@ -229,7 +229,7 @@ const Testimonials = ({ data }) => {
 
                                    {/* User */}
                                    <div className="flex items-center gap-4">
-                                        <div className="w-15 h-15 rounded-full bg-official text-black flex items-center justify-center font-bold text-lg border border-official/20 shrink-0 select-none">
+                                        <div className="w-15 h-15 rounded-full bg-official text-neutral flex items-center justify-center font-bold text-lg border border-official/20 shrink-0 select-none">
                                              {getInitials(item.name)}
                                         </div>
 

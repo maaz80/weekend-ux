@@ -68,7 +68,7 @@ export default async function RootLayout({ children }) {
         <HomeDataProvider initialData={initialData}>
           <ClientFetchConfig />
           <Navbar />
-          <main className="flex-grow">
+          <main className="grow">
                {children}
           </main>
           <Chatbot />

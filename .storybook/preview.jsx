@@ -2,6 +2,7 @@
 import { MdAddPhotoAlternate } from "react-icons/md";
 import "../src/app/globals.css";
 import { INITIAL_VIEWPORTS } from "storybook/viewport";
+import { withThemeByClassName } from "@storybook/addon-themes";
 
 // const customViewports = {
 
@@ -49,8 +50,20 @@ const preview = {
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely
       test: "todo"
-    }
+    },
+    nextjs: {
+      appDirectory: true,
+    },
   },
+  decorators: [
+    withThemeByClassName({
+      themes: {
+        light: "light",
+        dark: "dark",
+      },
+      defaultTheme: "light",
+    }),
+  ],
 };
 
 export default preview;

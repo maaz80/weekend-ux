@@ -218,7 +218,7 @@ export default function CoursesPage() {
      );
 
      return (
-          <div className="min-h-screen bg-black text-white font-urbanist flex flex-col relative pt-22 md:pt-12">
+          <div className="min-h-screen bg-neutral text-white font-urbanist flex flex-col relative pt-22 md:pt-12">
                <Breadcrumb />
 
                {/* Hero Header Section */}
@@ -250,8 +250,8 @@ export default function CoursesPage() {
                                         <button
                                              key={category}
                                              onClick={() => handleCategoryChange(category)}
-                                             className={`px-5 h-8 md:h-12 rounded-lg text-[10px] md:text-[13px] font-medium transition-all duration-300 hover:bg-neutral-900 hover:text-white cursor-pointer ${activeCategory === category
-                                                  ? "bg-neutral-900 text-white shadow-md"
+                                             className={`px-5 h-8 md:h-12 rounded-lg text-[10px] md:text-[13px] font-medium transition-all duration-300 hover:bg-neutral hover:text-white cursor-pointer ${activeCategory === category
+                                                  ? "bg-neutral text-white shadow-md"
                                                   : "bg-transparent text-zinc-600 hover:text-white"
                                                   }`}
                                         >
@@ -266,7 +266,7 @@ export default function CoursesPage() {
                               <div>
                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                                         {displayedCourses.map((course, idx) => (
-                                             <div key={course._id} className="w-full max-w-sm text-black">
+                                             <div key={course._id} className="w-full max-w-sm text-neutral">
                                                   <CourseCard
                                                        course={course}
                                                        priority={idx < 3 && currentPage === 1}
@@ -286,7 +286,7 @@ export default function CoursesPage() {
                                                   disabled={currentPage === 1}
                                                   className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === 1
                                                        ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                       : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                       : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-neutral"
                                                        }`}
                                              >
                                                   <FiChevronLeft className="text-lg" />
@@ -309,8 +309,8 @@ export default function CoursesPage() {
                                                             key={`page-${item}`}
                                                             onClick={() => setCurrentPage(item)}
                                                             className={`w-10 h-10 rounded-xl border text-sm font-semibold transition-all cursor-pointer ${currentPage === item
-                                                                 ? "bg-official text-black border-transparent shadow-sm"
-                                                                 : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                                 ? "bg-official text-neutral border-transparent shadow-sm"
+                                                                 : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-neutral"
                                                                  }`}
                                                        >
                                                             {item}
@@ -325,7 +325,7 @@ export default function CoursesPage() {
                                                   disabled={currentPage === totalPages}
                                                   className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === totalPages
                                                        ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                       : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                       : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-neutral"
                                                        }`}
                                              >
                                                   <FiChevronRight className="text-lg" />

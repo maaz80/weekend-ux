@@ -307,7 +307,7 @@ const OurPrograms = ({ data }) => {
                                              disabled={currentPage === 1}
                                              className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === 1
                                                   ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                  : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                  : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-neutral"
                                                   }`}
                                         >
                                              <FiChevronLeft className="text-lg" />
@@ -330,8 +330,8 @@ const OurPrograms = ({ data }) => {
                                                        key={`page-${item}`}
                                                        onClick={() => setCurrentPage(item)}
                                                        className={`w-10 h-10 rounded-xl border text-sm font-semibold transition-all cursor-pointer ${currentPage === item
-                                                            ? "bg-official text-black border-transparent shadow-sm font-bold"
-                                                            : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                            ? "bg-official text-neutral border-transparent shadow-sm font-bold"
+                                                            : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-neutral"
                                                             }`}
                                                   >
                                                        {item}
@@ -346,7 +346,7 @@ const OurPrograms = ({ data }) => {
                                              disabled={currentPage === totalPages}
                                              className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === totalPages
                                                   ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                  : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-black"
+                                                  : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-neutral"
                                                   }`}
                                         >
                                              <FiChevronRight className="text-lg" />

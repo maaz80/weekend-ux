@@ -9,7 +9,7 @@ import Content from "@/components/Location/Content/Content";
 
 export default function Location() {
   return (
-    <main className="min-h-screen bg-white text-neutral-900">
+    <main className="min-h-screen bg-white text-neutral">
       <Hero />
       <Feature />
       <Content />

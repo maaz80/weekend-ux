@@ -1,10 +1,89 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --neutral: #1C1C1C;
+  --foreground: var(--neutral);
   --yellow-primary: #FFD400;
   /* --font-orange:#FFB500; */
+
+  /* Foregrounds */
+  --fg-blue: #003D63;
+  --fg-neutral: #1C1C1C;
+  --fg-green: #00783E;
+  --fg-gray: #CACACA;
+  --fg-orange: #9C4C00;
+  --fg-red: #C20001;
+
+  /* Borders */
+  --bd-neutral: #1C1C1C;
+  --bd-neutral-muted: #1C1C1C3D;
+  --bd-green: #006931;
+  --bd-neutral-light: #0000000F;
+  --bd-green-light: #D6EBDC;
+  --bd-orange: #EE9A00;
+  --bd-orange-light: #F6E2C0;
+  --bd-red: #C50006;
+  --bd-red-light: #F8DEDA;
+
+  /* Backgrounds */
+  --bg-white: #FFFFFF;
+  --bg-yellow-light: #FFF583;
+  --bg-gray-light: #F5F5F5;
+  --bg-cream: #FFFCEE;
+  --bg-green: #0E8147;
+  --bg-black: #000000;
+  --bg-green-light: #EBF9EF;
+  --bg-yellow-brand: #FFB500;
+  --bg-neutral: #1C1C1C;
+  --bg-cream-brand: #FFF3D8;
+  --bg-red: #E32729;
+  --bg-gray: #EEEEEE;
+  --bg-red-light: #FFF0EE;
+  --bg-gray-soft: #F8F8F8;
+}
+
+.dark {
+  --background: #0a0a0a;
+  --neutral: #ededed;
+  --foreground: var(--neutral);
+
+  /* Foregrounds */
+  --fg-blue: #8ab4f8; /* Dark mode friendly blue */
+  --fg-neutral: #ededed;
+  --fg-green: #81c995;
+  --fg-gray: #5f6368;
+  --fg-orange: #f29900;
+  --fg-red: #f28b82;
+
+  /* Borders */
+  --bd-neutral: #ededed;
+  --bd-neutral-muted: #ffffff3D;
+  --bd-green: #81c995;
+  --bd-neutral-light: #ffffff0F;
+  --bd-green-light: #1b3a24;
+  --bd-orange: #f29900;
+  --bd-orange-light: #412f12;
+  --bd-red: #f28b82;
+  --bd-red-light: #3c1e1e;
+
+  /* Backgrounds */
+  --bg-white: #121212;
+  --bg-yellow-light: #4c3e00;
+  --bg-gray-light: #202124;
+  --bg-cream: #1e1b12;
+  --bg-green: #137333;
+  --bg-black: #000000;
+  --bg-green-light: #132a13;
+  --bg-yellow-brand: #f29900;
+  --bg-neutral: #202124;
+  --bg-cream-brand: #2b2315;
+  --bg-red: #c5221f;
+  --bg-gray: #2d2d2d;
+  --bg-red-light: #321010;
+  --bg-gray-soft: #1c1c1c;
 }
 
 @theme {
@@ -12,20 +91,91 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-yellow: var(--yellow-primary);
+  --color-neutral: var(--neutral);
+
+  /* Foregrounds */
+  --color-fg-blue: var(--fg-blue);
+  --color-fg-neutral: var(--fg-neutral);
+  --color-fg-green: var(--fg-green);
+  --color-fg-gray: var(--fg-gray);
+  --color-fg-orange: var(--fg-orange);
+  --color-fg-red: var(--fg-red);
+
+  /* Borders */
+  --color-bd-neutral: var(--bd-neutral);
+  --color-bd-neutral-muted: var(--bd-neutral-muted);
+  --color-bd-green: var(--bd-green);
+  --color-bd-neutral-light: var(--bd-neutral-light);
+  --color-bd-green-light: var(--bd-green-light);
+  --color-bd-orange: var(--bd-orange);
+  --color-bd-orange-light: var(--bd-orange-light);
+  --color-bd-red: var(--bd-red);
+  --color-bd-red-light: var(--bd-red-light);
+
+  /* Backgrounds */
+  --color-bg-white: var(--bg-white);
+  --color-bg-yellow-light: var(--bg-yellow-light);
+  --color-bg-gray-light: var(--bg-gray-light);
+  --color-bg-cream: var(--bg-cream);
+  --color-bg-green: var(--bg-green);
+  --color-bg-black: var(--bg-black);
+  --color-bg-green-light: var(--bg-green-light);
+  --color-bg-yellow-brand: var(--bg-yellow-brand);
+  --color-bg-neutral: var(--bg-neutral);
+  --color-bg-cream-brand: var(--bg-cream-brand);
+  --color-bg-red: var(--bg-red);
+  --color-bg-gray: var(--bg-gray);
+  --color-bg-red-light: var(--bg-red-light);
+  --color-bg-gray-soft: var(--bg-gray-soft);
+  
+  /* Theme overrides to ensure backward compatibility and safety */
+  --color-neutral-900: var(--neutral);
+  --color-neutral-950: var(--neutral);
+  --color-black: var(--neutral);
+  
   /* Register your imported fonts */
   --font-urbanist: var(--font-urbanist);
   --font-playfair: var(--font-playfair);
   --font-inter: var(--font-inter);
   /* Set the default sans-serif font utility (font-sans) */
   --font-sans: var(--font-urbanist);
+
+  /* Typography Scale Overrides */
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 1rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl: 1.875rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
+  --text-5xl: 3rem;
+  --text-5xl--line-height: 1;
+  --text-6xl: 3.75rem;
+  --text-6xl--line-height: 1;
+  --text-7xl: 4.5rem;
+  --text-7xl--line-height: 1;
+  --text-8xl: 6rem;
+  --text-8xl--line-height: 1;
+  --text-9xl: 8rem;
+  --text-9xl--line-height: 1;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
+/* @media (prefers-color-scheme: dark) {
+  :root:not(.light) {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --neutral: #ededed;
+    --foreground: var(--neutral);
   }
-}
+} */
 
 body {
   background: var(--background);

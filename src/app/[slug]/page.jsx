@@ -74,7 +74,7 @@ export async function generateMetadata({ params }) {
           imageUrl = data.image?.imageurl || "";
      }
 
-     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://weekend-ui.netlify.app";
+     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://weekend-backend.onrender.com";
      const pageUrl = `${baseUrl}/${slug}`;
      const finalImageUrl = imageUrl || `${baseUrl}/images/weekend-ux-blogs-hero-bg.webp`;
 
@@ -115,13 +115,13 @@ export default async function DynamicSlugPage({ params }) {
           const displayDesc = seo?.description || "The link you followed may be broken, or the page may have been removed.";
 
           return (
-               <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center font-urbanist px-4 text-center">
+               <div className="min-h-screen bg-neutral text-white flex flex-col items-center justify-center font-urbanist px-4 text-center">
                     <h1 className="text-6xl font-bold font-playfair text-official mb-4">404</h1>
                     <h2 className="text-2xl font-semibold mb-2">{displayTitle}</h2>
                     <p className="text-zinc-400 max-w-md mb-6">
                          {displayDesc}
                     </p>
-                    <a href="/" className="px-6 py-3 bg-official text-black rounded-lg font-medium hover:opacity-90 transition-all">
+                    <a href="/" className="px-6 py-3 bg-official text-neutral rounded-lg font-medium hover:opacity-90 transition-all">
                          Go to Homepage
                     </a>
                </div>
@@ -140,7 +140,7 @@ export default async function DynamicSlugPage({ params }) {
                : "Advance Certificate in AI for UI UX";
 
           return (
-               <div className="min-h-screen bg-black text-white font-urbanist flex flex-col relative">
+               <div className="min-h-screen bg-neutral text-white font-urbanist flex flex-col relative">
                     <Breadcrumb />
                     {/* Hero Header Section */}
                     <section className="relative h-65.5 md:h-114 w-full flex md:items-center items-end pb-7 md:pb-0 justify-center bg-zinc-950 overflow-hidden" data-navbar-light="true" id='course-details-hero'>

@@ -8,7 +8,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 
 export default function CoursesPage() {
      return (
-          <div className="min-h-screen bg-black text-white font-urbanist flex flex-col relative pt-15 md:pt-11">
+          <div className="min-h-screen bg-neutral text-white font-urbanist flex flex-col relative pt-15 md:pt-11">
                <Breadcrumb />
 
                {/* Hero Header Section */}

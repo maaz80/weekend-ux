@@ -1,8 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Button from "@/components/ui/Button";
 
-const Form = () => {
+const Form = ({
+     inputBgColor = "bg-transparent",
+     inputBorderColor = "border-[#E5E0D6]",
+     inputFocusColor = "focus:border-official",
+     buttonSize = "w-full h-12 rounded-md font-bold text-sm"
+}) => {
      const [status, setStatus] = useState("idle");
      const [otpStep, setOtpStep] = useState(false);
      const [formData, setFormData] = useState({
@@ -205,7 +211,7 @@ const Form = () => {
                     </div>
                )}
 
-               <form onSubmit={otpStep ? handleSubmitWithOTP : handleSendOTP} className="space-y-4 max-w-130 mx-auto text-neutral-900" noValidate>
+               <form onSubmit={otpStep ? handleSubmitWithOTP : handleSendOTP} className="space-y-4 max-w-130 mx-auto text-neutral" noValidate>
                     {!otpStep ? (
                          <>
                               <div>
@@ -218,7 +224,7 @@ const Form = () => {
                                         value={formData.fullName}
                                         onChange={handleChange}
                                         placeholder="Full Name"
-                                        className={`w-full h-10 border px-4 text-sm outline-none focus:border-official bg-transparent rounded-sm placeholder:text-neutral-400 transition-colors ${errors.fullName ? "border-red-400" : "border-[#E5E0D6]"}`}
+                                        className={`w-full h-10 border px-4 text-sm outline-none rounded-sm placeholder:text-neutral-400 transition-colors ${inputFocusColor} ${inputBgColor} ${errors.fullName ? "border-red-400" : inputBorderColor}`}
                                    />
                                    {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
                               </div>
@@ -233,7 +239,7 @@ const Form = () => {
                                         value={formData.email}
                                         onChange={handleChange}
                                         placeholder="Email"
-                                        className={`w-full h-10 border px-4 text-sm outline-none focus:border-official bg-transparent rounded-sm placeholder:text-neutral-400 transition-colors ${errors.email ? "border-red-400" : "border-[#E5E0D6]"}`}
+                                        className={`w-full h-10 border px-4 text-sm outline-none rounded-sm placeholder:text-neutral-400 transition-colors ${inputFocusColor} ${inputBgColor} ${errors.email ? "border-red-400" : inputBorderColor}`}
                                    />
                                    {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
                               </div>
@@ -248,7 +254,7 @@ const Form = () => {
                                         value={formData.phone}
                                         onChange={handleChange}
                                         placeholder="Phone Number"
-                                        className={`w-full h-10 border px-4 text-sm outline-none focus:border-official bg-transparent rounded-sm placeholder:text-neutral-400 transition-colors ${errors.phone ? "border-red-400" : "border-[#E5E0D6]"}`}
+                                        className={`w-full h-10 border px-4 text-sm outline-none rounded-sm placeholder:text-neutral-400 transition-colors ${inputFocusColor} ${inputBgColor} ${errors.phone ? "border-red-400" : inputBorderColor}`}
                                    />
                                    {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
                               </div>
@@ -263,14 +269,16 @@ const Form = () => {
                                         value={formData.message}
                                         onChange={handleChange}
                                         placeholder="Description"
-                                        className="w-full border border-[#E5E0D6] p-4 text-sm outline-none resize-none focus:border-official bg-transparent rounded-sm placeholder:text-neutral-400"
+                                        className={`w-full border p-4 text-sm outline-none resize-none rounded-sm placeholder:text-neutral-400 ${inputBorderColor} ${inputFocusColor} ${inputBgColor}`}
                                    />
                               </div>
 
-                              <button
+                              <Button
                                    type="submit"
                                    disabled={loading}
-                                   className={`w-full h-12  font-bold rounded-md flex items-center justify-center gap-2 h transition-all cursor-pointer ${loading ? "opacity-60 cursor-not-allowed bg-official/50 text-neutral-500" : "bg-official over:opacity-90 text-neutral-900"}`}
+                                   variant="primary"
+                                   size={buttonSize}
+                                   className={`gap-2 ${loading ? "opacity-60 cursor-not-allowed bg-official/50 text-neutral-500" : ""}`}
                               >
                                    {loading ? (
                                         <>
@@ -283,12 +291,12 @@ const Form = () => {
                                              <span>↗</span>
                                         </>
                                    )}
-                              </button>
+                              </Button>
                          </>
                     ) : (
                          <>
                               <div className="bg-orange-50 p-4 rounded-lg border border-orange-200 text-neutral-800 text-sm">
-                                   <p className="font-semibold text-neutral-900 mb-1">
+                                   <p className="font-semibold text-neutral mb-1">
                                         ✓ OTP sent to <span className="text-official">{formData.email}</span>
                                    </p>
                                    <p className="text-xs text-neutral-600">Enter the 6-digit verification code sent to your email</p>
@@ -305,7 +313,7 @@ const Form = () => {
                                         onChange={handleChange}
                                         placeholder="Enter 6-digit OTP"
                                         maxLength={6}
-                                        className={`w-full h-10 border px-4 text-sm outline-none focus:border-official bg-transparent rounded-sm placeholder:text-neutral-400 ${errors.otp ? "border-red-400" : "border-[#E5E0D6]"}`}
+                                        className={`w-full h-10 border px-4 text-sm outline-none rounded-sm placeholder:text-neutral-400 ${inputFocusColor} ${inputBgColor} ${errors.otp ? "border-red-400" : inputBorderColor}`}
                                    />
                                    {errors.otp && <p className="text-red-500 text-xs mt-1">{errors.otp}</p>}
                               </div>
@@ -334,10 +342,12 @@ const Form = () => {
                                    </button>
                               </div>
 
-                              <button
+                              <Button
                                    type="submit"
                                    disabled={loading || status === "loading"}
-                                   className={`w-full h-12 bg-official text-neutral-900 font-medium rounded-md flex items-center justify-center gap-2 transition-all cursor-pointer ${loading || status === "loading" ? "opacity-60 cursor-not-allowed" : "hover:opacity-90"}`}
+                                   variant="primary"
+                                   size={buttonSize}
+                                   className={`gap-2 ${loading || status === "loading" ? "opacity-60 cursor-not-allowed bg-official/50 text-neutral-500" : ""}`}
                               >
                                    {status === "loading" ? (
                                         <>
@@ -352,7 +362,7 @@ const Form = () => {
                                              <span>↗</span>
                                         </>
                                    )}
-                              </button>
+                              </Button>
                          </>
                     )}
                </form>

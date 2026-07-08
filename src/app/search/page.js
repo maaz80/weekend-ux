@@ -135,7 +135,7 @@ const SearchResultsContent = () => {
 
                                    {/* SEARCH WIDGET */}
                                    <div className="bg-white border border-zinc-250/60 p-5 rounded-md shadow-sm text-left">
-                                        <h3 className="text-sm font-bold text-neutral-900 mb-3 flex items-center gap-2">
+                                        <h3 className="text-sm font-bold text-neutral mb-3 flex items-center gap-2">
                                              <FiSearch className="text-official" />
                                              Refine Search
                                         </h3>
@@ -145,7 +145,7 @@ const SearchResultsContent = () => {
                                                   value={searchQuery}
                                                   onChange={(e) => setSearchQuery(e.target.value)}
                                                   placeholder="Search courses..."
-                                                  className="w-full h-11 pl-4 pr-10 rounded-md border border-zinc-200 bg-zinc-50 outline-none text-sm text-black focus:border-official transition-all duration-300"
+                                                  className="w-full h-11 pl-4 pr-10 rounded-md border border-zinc-200 bg-zinc-50 outline-none text-sm text-neutral focus:border-official transition-all duration-300"
                                              />
                                              <button
                                                   type="submit"
@@ -158,7 +158,7 @@ const SearchResultsContent = () => {
 
                                    {/* CATEGORY FILTERS */}
                                    <div className="bg-white border border-zinc-250/60 p-5 rounded-md shadow-sm text-left">
-                                        <h3 className="text-sm font-bold text-neutral-900 mb-3 flex items-center gap-2">
+                                        <h3 className="text-sm font-bold text-neutral mb-3 flex items-center gap-2">
                                              <FiFilter className="text-official" />
                                              Filter by Category
                                         </h3>
@@ -177,12 +177,12 @@ const SearchResultsContent = () => {
                                                             type="button"
                                                             onClick={() => selectCategory(cat)}
                                                             className={`w-full flex items-center justify-between text-xs px-3 py-2.5 rounded-md font-semibold transition-all duration-200 cursor-pointer ${isSelected
-                                                                      ? "bg-official text-neutral-900 shadow-sm"
+                                                                      ? "bg-official text-neutral shadow-sm"
                                                                       : "bg-zinc-50 text-neutral-700 hover:bg-zinc-100"
                                                                  }`}
                                                        >
                                                             <span>{cat}</span>
-                                                            <span className={`px-1.5 py-0.5 rounded-md text-[9px] font-bold ${isSelected ? 'bg-neutral-900 text-white' : 'bg-zinc-200 text-zinc-600'}`}>
+                                                            <span className={`px-1.5 py-0.5 rounded-md text-[9px] font-bold ${isSelected ? 'bg-neutral text-white' : 'bg-zinc-200 text-zinc-600'}`}>
                                                                  {count}
                                                             </span>
                                                        </button>
@@ -194,7 +194,7 @@ const SearchResultsContent = () => {
                                    {/* CATEGORY SUGGESTIONS */}
                                    {suggestedCategories.length > 0 && (
                                         <div className="bg-white border border-zinc-250/60 p-5 rounded-md shadow-sm text-left animate-fadeIn">
-                                             <h3 className="text-sm font-bold text-neutral-900 mb-2 flex items-center gap-2">
+                                             <h3 className="text-sm font-bold text-neutral mb-2 flex items-center gap-2">
                                                   <FiCompass className="text-official" />
                                                   Suggested Categories
                                              </h3>
@@ -205,7 +205,7 @@ const SearchResultsContent = () => {
                                                             key={cat}
                                                             type="button"
                                                             onClick={() => selectCategory(cat)}
-                                                            className="border border-official/40 text-neutral-800 bg-white hover:bg-official hover:text-neutral-900 transition-all text-xs font-semibold px-2.5 py-1.5 rounded-md cursor-pointer shadow-sm shrink-0"
+                                                            className="border border-official/40 text-neutral-800 bg-white hover:bg-official hover:text-neutral transition-all text-xs font-semibold px-2.5 py-1.5 rounded-md cursor-pointer shadow-sm shrink-0"
                                                        >
                                                             {cat}
                                                        </button>
@@ -222,7 +222,7 @@ const SearchResultsContent = () => {
                                    {/* DIRECT MATCHES SECTION */}
                                    <div>
                                         <div className="flex items-center justify-between border-b border-zinc-200 pb-3 mb-6 text-left">
-                                             <h2 className="text-lg font-bold text-neutral-900 flex items-center gap-2">
+                                             <h2 className="text-lg font-bold text-neutral flex items-center gap-2">
                                                   <FiBookOpen className="text-official" />
                                                   Matching Courses ({directMatches.length})
                                              </h2>
@@ -250,7 +250,7 @@ const SearchResultsContent = () => {
                                                             <div className="flex-1 flex flex-col justify-between text-left min-w-0">
                                                                  <div>
                                                                       <div className="flex flex-wrap items-center gap-2.5 mb-2">
-                                                                           <span className="bg-official/10 text-neutral-900 text-[10px] font-extrabold px-2.5 py-0.5 rounded-md uppercase tracking-wide">
+                                                                           <span className="bg-official/10 text-neutral text-[10px] font-extrabold px-2.5 py-0.5 rounded-md uppercase tracking-wide">
                                                                                 {course.category}
                                                                            </span>
                                                                            <span className="text-zinc-500 text-xs font-semibold flex items-center gap-1">
@@ -258,7 +258,7 @@ const SearchResultsContent = () => {
                                                                                 {course.courselength || "12 Weeks"}
                                                                            </span>
                                                                       </div>
-                                                                      <h3 className="text-lg font-extrabold text-neutral-900 mb-2 hover:text-official transition-colors">
+                                                                      <h3 className="text-lg font-extrabold text-neutral mb-2 hover:text-official transition-colors">
                                                                            {course.title}
                                                                       </h3>
                                                                       <p className="text-zinc-600 text-xs md:text-sm line-clamp-2 leading-relaxed">
@@ -273,7 +273,7 @@ const SearchResultsContent = () => {
                                                                       </span>
                                                                       <Link
                                                                            href={`/${course.slug || course._id}`}
-                                                                           className="bg-neutral-900 hover:bg-official hover:text-neutral-900 text-white text-xs font-bold px-4 py-2 rounded-md transition-all duration-300 cursor-pointer"
+                                                                           className="bg-neutral hover:bg-official hover:text-neutral text-white text-xs font-bold px-4 py-2 rounded-md transition-all duration-300 cursor-pointer"
                                                                       >
                                                                            Explore Course
                                                                       </Link>
@@ -295,7 +295,7 @@ const SearchResultsContent = () => {
                                    {relatedSuggestions.length > 0 && (
                                         <div className="mt-8 animate-fadeIn">
                                              <div className="flex items-center justify-between border-b border-zinc-200 pb-3 mb-6 text-left">
-                                                  <h2 className="text-lg font-bold text-neutral-900 flex items-center gap-2">
+                                                  <h2 className="text-lg font-bold text-neutral flex items-center gap-2">
                                                        <FiCompass className="text-official" />
                                                        Related Suggestions ({relatedSuggestions.length})
                                                   </h2>
@@ -329,7 +329,7 @@ const SearchResultsContent = () => {
                                                                                 {course.courselength || "12 Weeks"}
                                                                            </span>
                                                                       </div>
-                                                                      <h3 className="text-lg font-extrabold text-neutral-900 mb-2 hover:text-official transition-colors">
+                                                                      <h3 className="text-lg font-extrabold text-neutral mb-2 hover:text-official transition-colors">
                                                                            {course.title}
                                                                       </h3>
                                                                       <p className="text-zinc-600 text-xs md:text-sm line-clamp-2 leading-relaxed">
@@ -344,7 +344,7 @@ const SearchResultsContent = () => {
                                                                       </span>
                                                                       <Link
                                                                            href={`/${course.slug || course._id}`}
-                                                                           className="bg-neutral-900 hover:bg-official hover:text-neutral-900 text-white text-xs font-bold px-4 py-2 rounded-md transition-all duration-300 cursor-pointer"
+                                                                           className="bg-neutral hover:bg-official hover:text-neutral text-white text-xs font-bold px-4 py-2 rounded-md transition-all duration-300 cursor-pointer"
                                                                       >
                                                                            Explore Course
                                                                       </Link>

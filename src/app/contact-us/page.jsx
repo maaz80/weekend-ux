@@ -29,7 +29,7 @@ export default async function ContactUs() {
                <Breadcrumb />
 
                {/* Hero Header Section */}
-               <section className="relative h-51.5 md:h-114 w-full flex flex-col gap-5 md:items-center items-end justify-center bg-neutral-950 " data-navbar-light="true" id='contact-hero'>
+               <section className="relative h-51.5 md:h-114 w-full flex flex-col gap-5 md:items-center items-end justify-center bg-neutral " data-navbar-light="true" id='contact-hero'>
                     <Image
                          src='/images/weekend-ux-contact-hero-bg.webp'
                          alt="weekend-ux-contact-hero-bg"
