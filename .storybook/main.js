@@ -15,7 +15,7 @@ const config = {
   ],
   "framework": "@storybook/nextjs-vite",
   "staticDirs": [
-    "..\\public"
+    "../public"
   ],
   async viteFinal(config) {
     config.resolve = config.resolve || {};
