@@ -7,7 +7,25 @@ import { signupUser, loginUser, sendAuthOTP } from "@/utils/auth.js";
 import Button from "@/components/ui/Button";
 import { useHomeData } from "@/context/HomeDataContext";
 
-const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
+const AuthModal = ({
+     isOpen,
+     onClose,
+     onAuthSuccess,
+     backdropBgColor = "bg-neutral/50 backdrop-blur-sm",
+     modalBgColor = "bg-white",
+     titleColor = "text-neutral",
+     titleTextSize = "text-2xl",
+     labelColor = "text-neutral-600",
+     inputBgColor = "bg-white",
+     inputTextColor = "text-neutral",
+     inputBorderColor = "border-zinc-200",
+     inputFocusColor = "focus:border-official focus:ring-1 focus:ring-official",
+     submitButtonClass = "",
+     toggleTextColor = "text-neutral-600",
+     toggleLinkColor = "text-official hover:underline cursor-pointer font-bold",
+     keepSignedColor = "accent-official cursor-pointer",
+     agreeTermsColor = "accent-official cursor-pointer",
+}) => {
      const { navbarData } = useHomeData();
      const authDecorativeImage = navbarData?.authDecorativeImage || loginImage;
      const [authMode, setAuthMode] = useState("login"); // "login", "signup"
@@ -232,13 +250,13 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
      };
 
      return (
-          <div className={`fixed open-sans inset-0 z-999999 flex items-center justify-center bg-neutral/50 backdrop-blur-sm ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-full opacity-0 pointer-events-none'} transition-all duration-500 ease-in-out`} role="dialog" aria-labelledby="auth-modal-title" aria-modal="true">
+          <div className={`fixed open-sans inset-0 z-999999 flex items-center justify-center ${backdropBgColor} ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : '-translate-y-full opacity-0 pointer-events-none'} transition-all duration-500 ease-in-out`} role="dialog" aria-labelledby="auth-modal-title" aria-modal="true">
                <h2 id="auth-modal-title" className="sr-only hidden">
                     {authMode === "signup" ? "Sign Up" : authMode === "forgot" ? "Forgot Password" : authMode === "reset" ? "Reset Password" : "Sign In"}
                </h2>
 
                {/* Modal container */}
-               <div className="w-[90%] max-w-4xl bg-white rounded-2xl shadow-2xl relative overflow-hidden p-6 md:p-10 text-neutral">
+               <div className={`w-[90%] max-w-4xl ${modalBgColor} rounded-2xl shadow-2xl relative overflow-hidden p-6 md:p-10 text-neutral`}>
                     <div className="flex flex-col md:flex-row h-auto md:h-125">
 
                          {/* LEFT PANEL - ILLUSTRATION */}
@@ -258,7 +276,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                          {/* RIGHT PANEL - FORM */}
                          <div className="w-full md:w-1/2 flex flex-col justify-center px-4 md:px-12 py-6 md:py-0">
 
-                              <h3 className="text-2xl font-bold text-neutral mb-6">
+                              <h3 className={`${titleTextSize} font-bold ${titleColor} mb-6`}>
                                    {authMode === "signup" ? "Create Account" : "Welcome Back"}
                               </h3>
 
@@ -282,7 +300,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                    {authMode === "signup" && (
                                         <>
                                              <div className="relative text-left">
-                                                  <label className="text-[13px] font-semibold text-neutral-600">Full Name</label>
+                                                  <label className={`text-[13px] font-semibold ${labelColor}`}>Full Name</label>
                                                   <div className="relative mt-1">
                                                        <input
                                                             type="text"
@@ -290,7 +308,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                                             value={formData.name}
                                                             onChange={handleChange}
                                                             placeholder="John Doe"
-                                                            className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-neutral"
+                                                            className={`w-full pl-10 pr-4 h-11 border ${inputBorderColor} rounded-lg text-sm outline-none ${inputFocusColor} ${inputBgColor} ${inputTextColor}`}
                                                             required
                                                        />
                                                        <User className="absolute top-1/2 -translate-y-1/2 left-3 text-zinc-400" size={18} />
@@ -298,7 +316,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                              </div>
 
                                              <div className="relative text-left">
-                                                  <label className="text-[13px] font-semibold text-neutral-600">Mobile Number</label>
+                                                  <label className={`text-[13px] font-semibold ${labelColor}`}>Mobile Number</label>
                                                   <div className="relative mt-1">
                                                        <input
                                                             type="tel"
@@ -307,7 +325,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                                             onChange={handleChange}
                                                             placeholder="9876543210"
                                                             maxLength={10}
-                                                            className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-neutral"
+                                                            className={`w-full pl-10 pr-4 h-11 border ${inputBorderColor} rounded-lg text-sm outline-none ${inputFocusColor} ${inputBgColor} ${inputTextColor}`}
                                                             required
                                                        />
                                                        <Phone className="absolute top-1/2 -translate-y-1/2 left-3 text-zinc-400" size={18} />
@@ -318,7 +336,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
 
                                    {/* Email Input */}
                                    <div className="relative text-left">
-                                        <label className="text-[13px] font-semibold text-neutral-600">Email Address</label>
+                                        <label className={`text-[13px] font-semibold ${labelColor}`}>Email Address</label>
                                         <div className="relative mt-1">
                                              <input
                                                   type="email"
@@ -326,7 +344,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                                   value={formData.email}
                                                   onChange={handleChange}
                                                   placeholder="example@email.com"
-                                                  className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-neutral"
+                                                  className={`w-full pl-10 pr-4 h-11 border ${inputBorderColor} rounded-lg text-sm outline-none ${inputFocusColor} ${inputBgColor} ${inputTextColor}`}
                                                   required
                                              />
                                              <Mail className="absolute top-1/2 -translate-y-1/2 left-3 text-zinc-400" size={18} />
@@ -336,7 +354,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                    {/* OTP Input (Rendered below Email once sent) */}
                                    {otpSent && (
                                         <div className="relative text-left animate-fadeIn">
-                                             <label className="text-[13px] font-semibold text-neutral-600">Verification OTP</label>
+                                             <label className={`text-[13px] font-semibold ${labelColor}`}>Verification OTP</label>
                                              <div className="relative mt-1">
                                                   <input
                                                        type="text"
@@ -345,7 +363,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                                        onChange={handleChange}
                                                        placeholder="Enter 6-digit OTP"
                                                        maxLength={6}
-                                                       className="w-full pl-10 pr-4 h-11 border border-zinc-200 rounded-lg text-sm outline-none focus:border-official focus:ring-1 focus:ring-official bg-white text-neutral font-semibold tracking-widest text-center"
+                                                       className={`w-full pl-10 pr-4 h-11 border ${inputBorderColor} rounded-lg text-sm outline-none ${inputFocusColor} ${inputBgColor} ${inputTextColor} font-semibold tracking-widest text-center`}
                                                        required
                                                   />
                                                   <KeyRound className="absolute top-1/2 -translate-y-1/2 left-3 text-zinc-400" size={18} />
@@ -361,7 +379,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                                             type="button"
                                                             onClick={handleSendOTP}
                                                             disabled={otpSending}
-                                                            className="text-xs font-bold text-official hover:underline bg-transparent border-none cursor-pointer p-0"
+                                                            className={`text-xs ${toggleLinkColor} bg-transparent border-none cursor-pointer p-0`}
                                                        >
                                                             {otpSending ? "Sending..." : "Resend OTP"}
                                                        </button>
@@ -372,14 +390,14 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
 
                                    {/* Signup Terms checkbox */}
                                    {authMode === "signup" && (
-                                        <div className="flex items-center text-[12px] text-neutral-600 py-1 text-left">
+                                        <div className={`flex items-center text-[12px] ${toggleTextColor} py-1 text-left`}>
                                              <label className="flex items-center gap-2 cursor-pointer">
                                                   <input
                                                        type="checkbox"
                                                        name="agreeTerms"
                                                        checked={formData.agreeTerms}
                                                        onChange={handleChange}
-                                                       className="accent-official cursor-pointer"
+                                                       className={`${agreeTermsColor}`}
                                                   />
                                                   I agree to the Terms & Conditions
                                              </label>
@@ -392,7 +410,7 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                                          disabled={loading || otpSending || (otpSent && !formData.otp)}
                                          variant="primary"
                                          size="h11"
-                                         className={`w-full text-sm font-bold ${loading || otpSending || (otpSent && !formData.otp) ? "opacity-70 cursor-not-allowed bg-official/50 text-neutral-500" : ""}`}
+                                         className={`w-full text-sm font-bold ${submitButtonClass} ${loading || otpSending || (otpSent && !formData.otp) ? "opacity-70 cursor-not-allowed bg-official/50 text-neutral-500" : ""}`}
                                     >
                                          {loading || otpSending ? (
                                               <>
@@ -406,14 +424,14 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
 
                                    {/* Keep Signed checkbox */}
                                    {authMode === "login" && (
-                                        <div className="flex items-center text-[12px] text-neutral-600 py-1 text-left">
+                                        <div className={`flex items-center text-[12px] ${toggleTextColor} py-1 text-left`}>
                                              <label className="flex items-center gap-2 cursor-pointer">
                                                   <input
                                                        type="checkbox"
                                                        name="keepSigned"
                                                        checked={formData.keepSigned}
                                                        onChange={handleChange}
-                                                       className="accent-official cursor-pointer"
+                                                       className={`${keepSignedColor}`}
                                                   />
                                                   Keep me signed in
                                              </label>
@@ -422,24 +440,24 @@ const AuthModal = ({ isOpen, onClose, onAuthSuccess }) => {
                               </form>
 
                               {/* Toggle Mode */}
-                              <p className="text-sm text-center mt-6 text-neutral-600">
+                              <p className={`text-sm text-center mt-6 ${toggleTextColor}`}>
                                    {authMode === "signup" ? "Already have an account?" : "Don't have an account?"}
                                    {authMode === "login" && (
                                         <span
                                              onClick={() => { setAuthMode("signup"); setError(""); setSuccessMessage(""); setOtpSent(false); }}
-                                             className="hover:underline ml-1 cursor-pointer font-bold"
+                                             className={`${toggleLinkColor} ml-1`}
                                         >
                                              Sign up
                                         </span>
-                                   )}
+                                    )}
                                    {authMode === "signup" && (
                                         <span
                                              onClick={() => { setAuthMode("login"); setError(""); setSuccessMessage(""); setOtpSent(false); }}
-                                             className="hover:underline ml-1 cursor-pointer font-bold"
+                                             className={`${toggleLinkColor} ml-1`}
                                         >
                                              Login
                                         </span>
-                                   )}
+                                    )}
                               </p>
                               {authMode === "signup" && (
                                    <p className="text-[11px] text-center mt-2 text-red-600">

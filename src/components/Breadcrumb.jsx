@@ -39,7 +39,14 @@ const getPathForSegment = (segment, originalSegments) => {
      return "/" + pathSegments.join("/");
 };
 
-export default function Breadcrumb() {
+export default function Breadcrumb({
+     navBackground = "absolute left-0 w-full z-40 backdrop-blur-xl py-2.5 md:py-3 top-30 md:top-29 select-none",
+     textSize = "text-[13px] md:text-[14px]",
+     fontFamily = "font-urbanist",
+     linkColor = "text-white/70 hover:text-white",
+     separatorColor = "text-white/40",
+     activeColor = "text-white",
+}) {
      const pathname = usePathname();
 
      // Do not show breadcrumbs on the Home page
@@ -49,9 +56,9 @@ export default function Breadcrumb() {
      const segments = originalSegments.filter(s => s !== "category");
 
      return (
-          <nav className="absolute left-0 w-full z-40 backdrop-blur-xl  py-2.5 md:py-3 top-30 md:top-29 select-none">
-               <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10 flex items-center gap-1.5 md:gap-2 text-[13px] md:text-[14px] font-medium text-white/70 font-urbanist">
-                    <Link href="/" className="hover:text-white transition-colors duration-200 shrink-0">
+          <nav className={navBackground}>
+               <div className={`mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10 flex items-center gap-1.5 md:gap-2 ${textSize} font-medium ${fontFamily}`}>
+                    <Link href="/" className={`${linkColor} transition-colors duration-200 shrink-0`}>
                          Home
                     </Link>
 
@@ -62,13 +69,13 @@ export default function Breadcrumb() {
 
                          return (
                               <div key={idx} className="flex items-center gap-1.5 md:gap-2 min-w-0">
-                                   <FiChevronRight size={12} className="text-white/40 shrink-0" />
+                                   <FiChevronRight size={12} className={`${separatorColor} shrink-0`} />
                                    {isLast ? (
-                                        <span className="text-white font-semibold truncate max-w-37.5 sm:max-w-62.5 md:max-w-none">
+                                        <span className={`${activeColor} font-semibold truncate max-w-37.5 sm:max-w-62.5 md:max-w-none`}>
                                              {label}
                                         </span>
                                    ) : (
-                                        <Link href={path} className="hover:text-white transition-colors duration-200 truncate max-w-25 sm:max-w-45 md:max-w-none shrink-0">
+                                        <Link href={path} className={`${linkColor} transition-colors duration-200 truncate max-w-25 sm:max-w-45 md:max-w-none shrink-0`}>
                                              {label}
                                         </Link>
                                    )}

@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useEffect } from "react";
 
-const HomeDataContext = createContext({
+export const HomeDataContext = createContext({
      homeData: null,
      faqData: null,
      coursesData: null,
@@ -48,29 +48,39 @@ export function HomeDataProvider({ children, initialData }) {
                }
 
                try {
-                    const responses = await Promise.all(promises);
+                    const results = await Promise.allSettled(promises);
 
-                    for (let i = 0; i < responses.length; i++) {
-                         const res = responses[i];
+                    for (let i = 0; i < results.length; i++) {
+                         const result = results[i];
                          const key = keys[i];
-                         if (res.ok) {
-                              const data = await res.json();
-                              if (!isMounted) return;
 
-                              if (key === "home") setHomeData(data);
-                              else if (key === "faq") setFaqData(data);
-                              else if (key === "courses") setCoursesData(data);
-                              else if (key === "navbar") setNavbarData(data);
-                              else if (key === "footerGlobal") setFooterGlobalData(data);
-                              else if (key === "footerColumns") setFooterColumnsData(data);
-                              else if (key === "testimonials") setTestimonialsData(data);
-                              else if (key === "blogs") setBlogsData(data);
+                         if (result.status === "fulfilled") {
+                              const res = result.value;
+                              if (res.ok) {
+                                   try {
+                                        const data = await res.json();
+                                        if (!isMounted) return;
+
+                                        if (key === "home") setHomeData(data);
+                                        else if (key === "faq") setFaqData(data);
+                                        else if (key === "courses") setCoursesData(data);
+                                        else if (key === "navbar") setNavbarData(data);
+                                        else if (key === "footerGlobal") setFooterGlobalData(data);
+                                        else if (key === "footerColumns") setFooterColumnsData(data);
+                                        else if (key === "testimonials") setTestimonialsData(data);
+                                        else if (key === "blogs") setBlogsData(data);
+                                   } catch (jsonErr) {
+                                        console.error(`Failed to parse JSON for key: ${key}`, jsonErr);
+                                   }
+                              } else {
+                                   console.warn(`Failed to fetch missing context data for: ${key}, status: ${res.status}`);
+                              }
                          } else {
-                              console.warn(`Failed to fetch missing context data for: ${key}, status: ${res.status}`);
+                              console.error(`Network error fetching missing context data for: ${key}:`, result.reason);
                          }
                     }
                } catch (error) {
-                    console.error("Error fetching missing homepage config data:", error);
+                    console.error("Error in fetching missing homepage config data batch:", error);
                } finally {
                     if (isMounted) {
                          setLoading(false);

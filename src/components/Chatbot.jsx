@@ -29,7 +29,18 @@ const CUSTOM_QUESTIONS = [
      }
 ];
 
-const Chatbot = () => {
+const Chatbot = ({
+     chatBgColor = "bg-white",
+     headerBgColor = "bg-official",
+     headerTextColor = "text-zinc-950",
+     headerSubtextColor = "text-zinc-800",
+     closeButtonColor = "text-zinc-950 hover:text-zinc-700",
+     botBubbleClass = "bg-white text-neutral border border-zinc-100",
+     userBubbleClass = "bg-official text-neutral",
+     quickQuestionClass = "border-official text-neutral-800 bg-white hover:bg-official hover:text-neutral",
+     inputBgClass = "bg-zinc-50 border border-zinc-200 focus-within:border-official",
+     sendButtonColor = "text-zinc-400 hover:text-official",
+}) => {
      const { isChatbotOpen, setIsChatbotOpen, navbarData } = useHomeData();
      const [messages, setMessages] = useState([
           {
@@ -99,14 +110,14 @@ const Chatbot = () => {
 
      return (
           <div 
-               className={`fixed right-4 md:right-10 z-99998 w-[calc(100%-2rem)] sm:w-95 h-130 max-h-[calc(100vh-120px)] bg-white rounded-md shadow-2xl  flex flex-col overflow-hidden transition-all duration-500 ease-in-out select-none ${
+               className={`fixed right-4 md:right-10 z-99998 w-[calc(100%-2rem)] sm:w-95 h-130 max-h-[calc(100vh-120px)] ${chatBgColor} rounded-md shadow-2xl  flex flex-col overflow-hidden transition-all duration-500 ease-in-out select-none ${
                     isChatbotOpen 
                          ? "bottom-14 translate-y-0 opacity-100 pointer-events-auto" 
                          : "bottom-0 translate-y-[calc(100%+56px)] opacity-0 pointer-events-none"
                }`}
           >
                {/* HEADER */}
-               <div className="bg-official px-5 py-4 flex items-center justify-between border-b border-official/20">
+               <div className={`${headerBgColor} px-5 py-4 flex items-center justify-between border-b border-official/20`}>
                     <div className="flex items-center gap-3">
                          {/* Circle Icon Logo */}
                          <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center p-1.5 shrink-0 overflow-hidden shadow-md border border-zinc-100">
@@ -125,13 +136,13 @@ const Chatbot = () => {
                               )}
                          </div>
                          <div className="flex flex-col text-left">
-                              <span className="text-zinc-950 text-xl tracking-wide leading-tight font-semibold">Hi there!</span>
-                              <span className="text-zinc-800 text-[11px] leading-tight mt-0.5 font-medium">Welcome to Weekend UX. How can we help?</span>
+                              <span className={`${headerTextColor} text-xl tracking-wide leading-tight font-semibold`}>Hi there!</span>
+                              <span className={`${headerSubtextColor} text-[11px] leading-tight mt-0.5 font-medium`}>Welcome to Weekend UX. How can we help?</span>
                          </div>
                     </div>
                     <button 
                          onClick={() => setIsChatbotOpen(false)}
-                         className="text-zinc-950 hover:text-zinc-700 transition-all duration-300 hover:rotate-90 p-1 rounded-full cursor-pointer"
+                         className={`${closeButtonColor} transition-all duration-300 hover:rotate-90 p-1 rounded-full cursor-pointer`}
                          aria-label="Close chat"
                     >
                          <X size={20} strokeWidth={3 }/>
@@ -167,14 +178,14 @@ const Chatbot = () => {
                                                   <span className="text-[9px] text-neutral-400 leading-none">{msg.timestamp}</span>
                                              </div>
                                              {/* Message Bubble */}
-                                             <div className="bg-white text-neutral p-3 rounded-md text-[13px] leading-relaxed shadow-[0_1px_2px_rgba(0,0,0,0.05)] mt-0.5 text-left border border-zinc-100">
+                                             <div className={`${botBubbleClass} p-3 rounded-md text-[13px] leading-relaxed shadow-[0_1px_2px_rgba(0,0,0,0.05)] mt-0.5 text-left`}>
                                                   {msg.text}
                                              </div>
                                         </div>
                                    </div>
                               ) : (
                                    /* User Message Bubble */
-                                   <div className="bg-official text-neutral p-3 rounded-md text-[13px] leading-relaxed max-w-[80%] self-end ml-auto shadow-[0_1px_2px_rgba(0,0,0,0.05)] text-left font-medium">
+                                   <div className={`${userBubbleClass} p-3 rounded-md text-[13px] leading-relaxed max-w-[80%] self-end ml-auto shadow-[0_1px_2px_rgba(0,0,0,0.05)] text-left font-medium`}>
                                         {msg.text}
                                    </div>
                               )}
@@ -204,7 +215,7 @@ const Chatbot = () => {
                                         <span className="text-[12px] font-bold text-neutral-800 leading-none mb-0.5">Weekend UX Bot</span>
                                         <span className="text-[9px] text-neutral-400 leading-none">Typing...</span>
                                    </div>
-                                   <div className="bg-white p-3 rounded-md mt-0.5 shadow-[0_1px_2px_rgba(0,0,0,0.05)] flex items-center space-x-1 justify-center w-14 h-9 border border-zinc-100">
+                                   <div className={`${botBubbleClass} p-3 rounded-md mt-0.5 shadow-[0_1px_2px_rgba(0,0,0,0.05)] flex items-center space-x-1 justify-center w-14 h-9`}>
                                         <div className="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce" style={{ animationDelay: '0ms', animationDuration: '0.6s' }}></div>
                                         <div className="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce" style={{ animationDelay: '150ms', animationDuration: '0.6s' }}></div>
                                         <div className="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce" style={{ animationDelay: '300ms', animationDuration: '0.6s' }}></div>
@@ -224,7 +235,7 @@ const Chatbot = () => {
                                    key={index}
                                    type="button"
                                    onClick={() => handleSendMessage(qa.q)}
-                                   className="border border-official text-neutral-800 bg-white hover:bg-official hover:text-neutral transition-all duration-200 text-[11px] font-semibold px-2.5 py-1 rounded-md text-left cursor-pointer shadow-sm shrink-0"
+                                   className={`${quickQuestionClass} transition-all duration-200 text-[11px] font-semibold px-2.5 py-1 rounded-md text-left cursor-pointer shadow-sm shrink-0`}
                               >
                                    {qa.q}
                               </button>
@@ -234,7 +245,7 @@ const Chatbot = () => {
 
                {/* FOOTER INPUT */}
                <form onSubmit={handleFormSubmit} className="p-3 bg-white border-t border-zinc-100 flex gap-2 items-center">
-                    <div className="relative flex-1 flex items-center bg-zinc-50 border border-zinc-200 rounded-md focus-within:border-official transition-all duration-300">
+                    <div className={`relative flex-1 flex items-center rounded-md ${inputBgClass} transition-all duration-300`}>
                          <input
                               type="text"
                               value={inputValue}
@@ -246,7 +257,7 @@ const Chatbot = () => {
                          <button
                               type="submit"
                               disabled={!inputValue.trim() || isTyping}
-                              className="absolute right-2 text-zinc-400 hover:text-official disabled:opacity-30 transition-all duration-300 cursor-pointer p-1"
+                              className={`absolute right-2 ${sendButtonColor} disabled:opacity-30 transition-all duration-300 cursor-pointer p-1`}
                               aria-label="Send query"
                          >
                               <Send size={16} />
