@@ -12,31 +12,26 @@ import OptimizedImage from "@/components/ui/OptimizedImage";
 const DEFAULT_TESTIMONIALS = [
      {
           name: "Kathy Sullivan",
-          role: "Data Scientist",
           image: testiImage,
           text: `"I had an amazing experience! The training was top-notch, and the mentors were incredibly helpful. I highly recommend them to anyone looking to level up!"`,
      },
      {
           name: "Alex Carter",
-          role: "Full Stack Developer",
           image: testiImage,
           text: `"The curriculum is highly industry-relevant. The hands-on projects and community support helped me gain real confidence in web development."`,
      },
      {
           name: "Sophia Martinez",
-          role: "Product Designer",
           image: testiImage,
           text: `"Mentorship here is outstanding. The guidance on design systems and portfolio reviews completely changed my approach to product design."`,
      },
      {
           name: "David Kim",
-          role: "AI Specialist",
           image: testiImage,
           text: `"Extremely well-structured courses with deep insights into modern AI. The labs and practical exercises made complex concepts easy to grasp."`,
      },
      {
           name: "Aisha Patel",
-          role: "Project Manager",
           image: testiImage,
           text: `"Great learning environment and superb support team. The interactive sessions and alumni network added immense value to my career."`,
      }
@@ -60,7 +55,6 @@ const Testimonials = ({ data }) => {
           if (testimonialsData && Array.isArray(testimonialsData) && testimonialsData.length > 0) {
                return testimonialsData.map((review) => ({
                     name: review.name,
-                    role: review.role || "Student",
                     image: review.avatar || testiImage,
                     text: review.quote
                }));
@@ -256,10 +250,6 @@ const Testimonials = ({ data }) => {
                                              <h3 className="text-[24px] font-bold leading-none text-[#1F1F1F]">
                                                   {item.name}
                                              </h3>
-
-                                             <p className="mt-2 text-[17px] italic text-[#8B8B8B]">
-                                                  {item.role}
-                                             </p>
                                         </div>
                                    </div>
                               </div>
