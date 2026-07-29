@@ -12,7 +12,8 @@ const Button = ({
 
           secondary:
                "bg-[#1a1a1a] text-white border border-official/20 hover:bg-[#242424]",
-          dark: "bg-neutral text-white text-[13px] md:text-base"
+          dark: "bg-neutral text-white text-[13px] md:text-base",
+          empty:"bg-transparent text-official hover:bg-official hover:text-neutral border-official border",
      };
 
      const sizes = {

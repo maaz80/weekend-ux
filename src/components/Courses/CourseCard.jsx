@@ -1,6 +1,5 @@
 "use client";
 
-import { FiClock, FiUsers, FiBarChart2, FiBookOpen } from "react-icons/fi";
 import { useRouter } from "next/navigation";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import { GoArrowRight } from "react-icons/go";
@@ -27,7 +26,7 @@ export default function CourseCard({
 
      const handleClick = () => {
           if (setIsModal) setIsModal(false);
-          router.push(`/${course.slug || course._id}`);
+          router.push(`/courses/${course.slug || course._id}`);
      };
 
      const imageSrc = course?.image || CourseImage;
@@ -60,41 +59,6 @@ export default function CourseCard({
                          by {course?.instructor || course?.author || "Determined-Polliras"}
                     </p>
 
-                    {/* Stats */}
-                    <div className="grid grid-cols-2 gap-y-3 gap-x-4 mt-5 text-[12px] md:text-[14px] font-medium">
-
-                         <div className={`flex items-center gap-2 ${statTextColor}`}>
-                              <FiClock className={`shrink-0 text-[20px] ${statIconColor}`} />
-                              <span>{course?.duration || "2 Weeks"}</span>
-                         </div>
-
-                         <div className={`flex items-center gap-2 ${statTextColor}`}>
-                              <FiUsers className={`shrink-0 text-[20px] ${statIconColor}`} />
-                              <span>
-                                   {course?.totalstudents
-                                        ? (course.totalstudents.toLowerCase().includes("student") ? course.totalstudents : `${course.totalstudents} Students`)
-                                        : "156 Students"
-                                   }
-                              </span>
-                         </div>
-
-                         <div className={`flex items-center gap-2 ${statTextColor}`}>
-                              <FiBarChart2 className={`shrink-0 text-[20px] ${statIconColor}`} />
-                              <span>{course?.levels || "All Levels"}</span>
-                         </div>
-
-                         <div className={`flex items-center gap-2 ${statTextColor}`}>
-                              <FiBookOpen className={`shrink-0 text-[20px] ${statIconColor}`} />
-                              <span>
-                                   {course?.totallessons
-                                        ? (course.totallessons.toLowerCase().includes("lesson") ? course.totallessons : `${course.totallessons} Lessons`)
-                                        : "20 Lessons"
-                                   }
-                              </span>
-                         </div>
-
-                    </div>
-
                     {/* Bottom Section */}
                     <div className={`flex items-end justify-between gap-3 mt-5 pt-4 border-t ${dividerColor}`}>
 
@@ -104,10 +68,6 @@ export default function CourseCard({
                                         Starts:
                                    </span>{" "}
                                    {course?.startdate || course?.deadline || "10th Dec, 26"}
-                              </p>
-
-                              <p className={`text-[12px] md:text-[13px] font-semibold mt-1 ${cardTitleColor}`}>
-                                   Duration: {course?.courselength || course?.courseLength || "6 Months"}
                               </p>
                          </div>
 

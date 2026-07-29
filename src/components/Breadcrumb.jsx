@@ -31,8 +31,8 @@ const formatSegment = (segment) => {
 };
 
 const getPathForSegment = (segment, originalSegments) => {
-     if (segment === "blogs") {
-          return "/category/blogs";
+     if (segment === "blog" || segment === "blogs") {
+          return "/blog";
      }
      const originalIndex = originalSegments.indexOf(segment);
      const pathSegments = originalSegments.slice(0, originalIndex + 1);

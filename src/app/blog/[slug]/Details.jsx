@@ -6,7 +6,7 @@ import {
      FaInstagram,
      FaYoutube,
 } from "react-icons/fa";
-import CardBg from '../assets/weekend-ux-course-details-call-card-bg.webp';
+import CardBg from '@/app/assets/weekend-ux-course-details-call-card-bg.webp';
 import { CiShare2 } from "react-icons/ci";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import Image from "next/image";

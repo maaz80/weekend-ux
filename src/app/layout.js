@@ -1,32 +1,14 @@
-import { Urbanist, Inter, Playfair_Display } from "next/font/google";
-import "./globals.css";
 import Footer from "@/components/Footer";
+import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Chatbot from "@/components/Chatbot";
+import LeadModal from "@/components/LeadModal";
 import QuickAccessBar from "@/components/QuickAccessBar";
 import ClientFetchConfig from "@/components/ClientFetchConfig";
 import { HomeDataProvider } from "@/context/HomeDataContext";
 import connectDB from "@/config/db";
 import NavbarModel from "@/models/Navbar";
 import FooterModel from "@/models/Footer";
-
-const urbanist = Urbanist({
-  subsets: ["latin"],
-  variable: "--font-urbanist",
-  weight: ["400", "500", "600", "700"],
-});
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  variable: "--font-playfair",
-  weight: ["400", "500", "600", "700"],
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  weight: ["400", "500", "600", "700"],
-});
 
 export const metadata = {
   title: "Weekend UX",
@@ -62,7 +44,7 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={` ${playfair.variable} ${urbanist.variable} ${inter.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
       <body className="min-h-full flex flex-col">
         <HomeDataProvider initialData={initialData}>
@@ -72,6 +54,7 @@ export default async function RootLayout({ children }) {
                {children}
           </main>
           <Chatbot />
+          <LeadModal />
           <QuickAccessBar />
           <Footer />
         </HomeDataProvider>
@@ -79,4 +62,3 @@ export default async function RootLayout({ children }) {
     </html>
   );
 }
-

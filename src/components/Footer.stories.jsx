@@ -70,7 +70,7 @@ export const Default = {
                ],
                navigation: [
                     { itemname: "Home", itempath: "/" },
-                    { itemname: "Blogs", itempath: "/category/blogs" },
+                    { itemname: "Blogs", itempath: "/blog" },
                     { itemname: "Courses", itempath: "/courses" },
                     { itemname: "About us", itempath: "/about-us" },
                     { itemname: "Disclaimer", itempath: "/disclaimer" },
@@ -87,7 +87,7 @@ export const Default = {
                          { label: "Disclaimer", path: "/disclaimer" },
                          { label: "Privacy Policy", path: "/privacy-policy" },
                          { label: "Contact us", path: "/contact-us" },
-                         { label: "Blogs", path: "/category/blogs" },
+                         { label: "Blogs", path: "/blog" },
                     ]
                },
                {

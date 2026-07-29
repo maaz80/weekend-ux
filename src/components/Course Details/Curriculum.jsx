@@ -1,15 +1,36 @@
-import { useState } from "react";
-import { FiChevronDown, FiChevronUp, FiLock } from "react-icons/fi";
-import { Play, Lock } from "lucide-react";
+import { useState, useEffect } from "react";
+import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 
 export default function Curriculum({
      curriculum = [],
-     isLoggedIn = false,
-     onLessonClick,
-     themeColor = "text-official",
-     borderColor = "border-[#E5E0D6]"
+     borderColor = "border-[#E5E0D6]",
+     courseId
 }) {
      const [openChapter, setOpenChapter] = useState(1);
+     const [leadSubmitted, setLeadSubmitted] = useState(false);
+
+     useEffect(() => {
+          if (typeof window !== "undefined") {
+               setLeadSubmitted(localStorage.getItem("leadSubmitted") === "true");
+
+               const handleLeadSubmitted = () => {
+                    setLeadSubmitted(true);
+               };
+
+               window.addEventListener("leadSubmitted", handleLeadSubmitted);
+               return () => {
+                    window.removeEventListener("leadSubmitted", handleLeadSubmitted);
+               };
+          }
+     }, []);
+
+     const handleLessonClick = () => {
+          if (!leadSubmitted) {
+               window.dispatchEvent(new CustomEvent("openLeadModal", {
+                    detail: { courseId }
+               }));
+          }
+     };
 
      return (
           <div className="space-y-3">
@@ -38,57 +59,35 @@ export default function Curriculum({
                                              {chapter.title}
                                         </span>
                                    </div>
-
-                                   <div className="flex items-center gap-5 text-[18px] font-medium text-neutral">
-                                        <span>{chapter.lessons} Lessons</span>
-                                   </div>
                               </button>
 
                               {isOpen && (
-                                   <div className={`border-t px-0 md:px-5 py-5 ${borderColor}`}>
-                                        <div className="space-y-2">
+                                   <div className={`border-t px-0 md:px-5 py-4 ${borderColor}`}>
+                                        <div className="space-y-1">
                                              {chapter.items?.map((lesson, idx) => {
                                                   const isObject = typeof lesson === "object" && lesson !== null;
-                                                  const lessonName = isObject ? lesson.lessonname : lesson;
-                                                  const videoUrl = isObject ? lesson.video?.videourl : null;
-                                                  const duration = isObject ? lesson.video?.duration : null;
+                                                  const lessonName = isObject ? (lesson.lessonname || lesson.title) : lesson;
 
                                                   return (
                                                        <div
                                                             key={idx}
-                                                            onClick={() => {
-                                                                 if (onLessonClick) {
-                                                                      onLessonClick(lessonName, videoUrl);
-                                                                 }
-                                                            }}
-                                                            className="flex items-center justify-between text-[15px] md:text-[17px] text-neutral h-14.5 px-4 md:px-5 font-medium rounded-xl hover:bg-zinc-100/70 border border-transparent hover:border-zinc-200/50 transition cursor-pointer group"
+                                                            onClick={handleLessonClick}
+                                                            className={`flex items-center gap-3 text-[15px] md:text-[16px] text-neutral h-11 px-4 md:px-5 font-semibold text-zinc-800 transition-all duration-300 ${
+                                                                 !leadSubmitted
+                                                                      ? "blur-[3px] select-none cursor-pointer hover:opacity-85"
+                                                                      : ""
+                                                            }`}
                                                        >
-                                                            <div className="flex items-center gap-3">
-                                                                 {isLoggedIn ? (
-                                                                      <span className={`w-8 h-8 rounded-full bg-official/50 flex items-center justify-center transition-colors group-hover:bg-official/80 group-hover:text-neutral ${themeColor}`}>
-                                                                           <Play size={12} className="fill-current" />
-                                                                      </span>
-                                                                 ) : (
-                                                                      <span className="w-8 h-8 rounded-full bg-zinc-100 flex items-center justify-center text-zinc-400">
-                                                                           <Lock size={12} />
-                                                                      </span>
-                                                                 )}
-                                                                 <span className="font-semibold text-zinc-800 transition-colors group-hover:text-official/80 line-clamp-1">
-                                                                      {lessonName}
-                                                                 </span>
-                                                            </div>
-
-                                                            <div className="flex items-center gap-3">
-                                                                 {duration && (
-                                                                      <span className="text-sm text-zinc-600 font-medium">{duration} mins</span>
-                                                                 )}
-                                                                 {!isLoggedIn && (
-                                                                      <span className="text-[10px] uppercase tracking-wider bg-zinc-100 text-zinc-600 px-2 py-0.5 rounded font-bold">Locked</span>
-                                                                 )}
-                                                            </div>
+                                                            <span className="w-1.5 h-1.5 rounded-full bg-official shrink-0" />
+                                                            <span className="line-clamp-1">
+                                                                 {lessonName}
+                                                            </span>
                                                        </div>
                                                   );
                                              })}
+                                             {(!chapter.items || chapter.items.length === 0) && (
+                                                  <div className="text-sm text-zinc-400 py-2 px-5">No topics listed for this chapter.</div>
+                                             )}
                                         </div>
                                    </div>
                               )}

@@ -337,13 +337,13 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                         {/* SEARCH */}
                                         <div ref={desktopSearchRef} className="relative">
                                              <form onSubmit={handleSearchSubmit} className="relative">
-                                                  <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-lg pointer-events-none" />
+                                                  <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl pointer-events-none" />
                                                   <input
                                                        type="text"
                                                        value={searchQuery}
                                                        onChange={(e) => setSearchQuery(e.target.value)}
                                                        placeholder={searchPlaceholderLabel}
-                                                       className="w-70 h-11 pl-11 pr-4 rounded-md bg-white outline-none text-sm text-neutral border border-transparent focus:border-official transition-all duration-300"
+                                                       className="w-70 h-11 pl-11 pr-4 rounded-md bg-white outline-none text-sm text-neutral border border-transparent focus:border-official transition-all duration-300 placeholder:text-lg hover:placeholder:text-official placeholder:transition-all placeholder:duration-300"
                                                   />
                                              </form>
 
@@ -372,7 +372,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                                      {searchResults.map((course) => (
                                                                                           <Link
                                                                                                key={course._id || course.slug}
-                                                                                               href={`/${course.slug || course._id}`}
+                                                                                               href={`/courses/${course.slug || course._id}`}
                                                                                                onClick={() => setSearchQuery("")}
                                                                                                className="block px-4 py-3 hover:bg-zinc-50 transition-colors text-left group"
                                                                                           >
@@ -409,7 +409,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                                      {suggestedResults.slice(0, 4).map((course) => (
                                                                                           <Link
                                                                                                key={course._id || course.slug}
-                                                                                               href={`/${course.slug || course._id}`}
+                                                                                               href={`/courses/${course.slug || course._id}`}
                                                                                                onClick={() => setSearchQuery("")}
                                                                                                className="block px-4 py-3 hover:bg-zinc-50 transition-colors text-left group"
                                                                                           >
@@ -536,7 +536,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              )}
                                         </div>
                                    ) : (
-                                        <Button variant="primary" className="hidden md:inline-flex" onClick={() => setIsAuthModalOpen(true)}>
+                                        <Button variant="empty" className="hidden md:inline-flex" onClick={() => setIsAuthModalOpen(true)}>
                                              {loginLabel}
                                         </Button>
                                    )}
@@ -585,7 +585,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                            {searchResults.map((course) => (
                                                                                 <Link
                                                                                      key={course._id || course.slug}
-                                                                                     href={`/${course.slug || course._id}`}
+                                                                                     href={`/courses/${course.slug || course._id}`}
                                                                                      onClick={() => {
                                                                                           setSearchQuery("");
                                                                                           setIsSearchOpen(false);
@@ -625,7 +625,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                            {suggestedResults.slice(0, 3).map((course) => (
                                                                                 <Link
                                                                                      key={course._id || course.slug}
-                                                                                     href={`/${course.slug || course._id}`}
+                                                                                     href={`/courses/${course.slug || course._id}`}
                                                                                      onClick={() => {
                                                                                           setSearchQuery("");
                                                                                           setIsSearchOpen(false);

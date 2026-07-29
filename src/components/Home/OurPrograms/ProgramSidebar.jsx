@@ -12,8 +12,8 @@ const ProgramsSidebar = ({ isActive, onClick, category }) => {
         transition-all duration-300 ease-in-out
 
         ${isActive
-                    ? 'bg-linear-to-r from-zinc-500 to-zinc-900 text-white shadow-sm'
-                         : 'bg-transparent text-zinc-500 hover:bg-zinc-100/80 hover:text-zinc-900'}
+                         ? 'bg-linear-to-r from-zinc-800 to-zinc-900 text-white shadow-sm'
+                    : 'bg-transparent text-zinc-500 hover:bg-linear-to-r from-zinc-800 to-zinc-900 hover:text-white transition-all duration-300 ease-in-out'}
       `}
           >
                <div>{category}</div>

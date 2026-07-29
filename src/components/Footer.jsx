@@ -68,7 +68,7 @@ const DEFAULT_SETTINGS = {
      ],
      navigation: [
           { itemname: "Home", itempath: "/" },
-          { itemname: "Blogs", itempath: "/category/blogs" },
+          { itemname: "Blogs", itempath: "/blog" },
           { itemname: "Courses", itempath: "/courses" },
           { itemname: "About us", itempath: "/about-us" },
           { itemname: "Disclaimer", itempath: "/disclaimer" },
@@ -128,7 +128,7 @@ export default function Footer({
                     { label: "Disclaimer", path: "/disclaimer" },
                     { label: "Privacy Policy", path: "/privacy-policy" },
                     { label: "Contact us", path: "/contact-us" },
-                    { label: "Blogs", path: "/category/blogs" },
+                    { label: "Blogs", path: "/blog" },
                ]
           },
           {
@@ -279,7 +279,7 @@ export default function Footer({
                                         ? settings.navigation.map(nav => ({ title: nav.itemname, to: nav.itempath }))
                                         : [
                                              { title: "Home", to: "/" },
-                                             { title: "Blogs", to: "/category/blogs" },
+                                             { title: "Blogs", to: "/blog" },
                                              { title: "Courses", to: "/courses" },
                                              { to: '/about-us', title: 'About us' },
                                              { to: '/disclaimer', title: 'Disclaimer' },
@@ -348,7 +348,7 @@ function FooterTextBlock({ title, slug, items }) {
                               >
 
                                    <Link
-                                        href={itemSlug ? `/${itemSlug}` : "#"}
+                                        href={itemSlug ? `/location/${itemSlug}` : "#"}
                                         className="text-[13px] text-white/70 leading-8 hover:text-white transition-colors"
                                    >
                                         {itemTitle}

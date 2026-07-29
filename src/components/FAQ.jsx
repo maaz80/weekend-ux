@@ -56,11 +56,11 @@ const FAQ = ({
           setActiveIndex(index === activeIndex ? null : index);
      };
 
-     // Determine the page slug from pathname
      let slug = "home";
      if (pathname && pathname !== "/") {
           // Normalise path slug (e.g. /category/blogs -> category-blogs)
           slug = pathname.replace(/^\/|\/$/g, "").replace(/\//g, "-");
+          if (slug === "blog") slug = "category-blogs";
      }
 
      useEffect(() => {

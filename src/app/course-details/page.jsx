@@ -24,7 +24,7 @@ export default function CoursesPage() {
                     {/* Content */}
                     <h1 className="text-[22px] md:text-[38px] 2xl:text-[56px] leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">Advance Certificate in AI for UI UX</h1>
                </section>
-               <Details/>
+               {/* <Details/> */}
                <RelatedBlogs/>
                <FAQ/>
           </div>

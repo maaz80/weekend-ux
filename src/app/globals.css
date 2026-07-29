@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Urbanist:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -7,6 +8,10 @@
   --neutral: #1C1C1C;
   --foreground: var(--neutral);
   --yellow-primary: #FFD400;
+  
+  --font-urbanist: 'Urbanist', sans-serif;
+  --font-playfair: 'Playfair Display', serif;
+  --font-inter: 'Inter', sans-serif;
   /* --font-orange:#FFB500; */
 
   /* Foregrounds */

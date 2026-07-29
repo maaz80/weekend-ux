@@ -17,7 +17,7 @@ const BlogCard = ({
 
      return (
           <div>
-               <Link href={`/${slugOrId}`} className="block">
+               <Link href={`/blog/${slugOrId}`} className="block">
                     <article
                          className="group cursor-pointer"
                     >

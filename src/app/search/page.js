@@ -253,10 +253,7 @@ const SearchResultsContent = () => {
                                                                            <span className="bg-official/10 text-neutral text-[10px] font-extrabold px-2.5 py-0.5 rounded-md uppercase tracking-wide">
                                                                                 {course.category}
                                                                            </span>
-                                                                           <span className="text-zinc-500 text-xs font-semibold flex items-center gap-1">
-                                                                                <FiClock size={12} />
-                                                                                {course.courselength || "12 Weeks"}
-                                                                           </span>
+                                                                            {/* Removed course length */}
                                                                       </div>
                                                                       <h3 className="text-lg font-extrabold text-neutral mb-2 hover:text-official transition-colors">
                                                                            {course.title}
@@ -272,7 +269,7 @@ const SearchResultsContent = () => {
                                                                            Professional Syllabus • Beginner to Pro
                                                                       </span>
                                                                       <Link
-                                                                           href={`/${course.slug || course._id}`}
+                                                                           href={`/courses/${course.slug || course._id}`}
                                                                            className="bg-neutral hover:bg-official hover:text-neutral text-white text-xs font-bold px-4 py-2 rounded-md transition-all duration-300 cursor-pointer"
                                                                       >
                                                                            Explore Course
@@ -324,10 +321,7 @@ const SearchResultsContent = () => {
                                                                            <span className="bg-zinc-100 text-zinc-700 text-[10px] font-bold px-2.5 py-0.5 rounded-md uppercase tracking-wide border border-zinc-200">
                                                                                 {course.category}
                                                                            </span>
-                                                                           <span className="text-zinc-500 text-xs font-semibold flex items-center gap-1">
-                                                                                <FiClock size={12} />
-                                                                                {course.courselength || "12 Weeks"}
-                                                                           </span>
+                                                                            {/* Removed course length */}
                                                                       </div>
                                                                       <h3 className="text-lg font-extrabold text-neutral mb-2 hover:text-official transition-colors">
                                                                            {course.title}
@@ -343,7 +337,7 @@ const SearchResultsContent = () => {
                                                                            Suggested course in same category
                                                                       </span>
                                                                       <Link
-                                                                           href={`/${course.slug || course._id}`}
+                                                                           href={`/courses/${course.slug || course._id}`}
                                                                            className="bg-neutral hover:bg-official hover:text-neutral text-white text-xs font-bold px-4 py-2 rounded-md transition-all duration-300 cursor-pointer"
                                                                       >
                                                                            Explore Course
@@ -381,3 +375,4 @@ export default function SearchPage() {
           </Suspense>
      );
 }
+

@@ -10,7 +10,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
      const router = useRouter();
      const handleClick = () => {
           if (setIsModal) setIsModal(false)
-          router.push(`/${course.slug || course._id}`);
+          router.push(`/courses/${course.slug || course._id}`);
      };
 
      const imageSrc = course?.image || CourseImage;
@@ -47,15 +47,12 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                          <p>
                               <span className="text-zinc-500 font-normal">Starts:</span> {course?.deadline}
                          </p>
-                         <p>
-                              <span className="text-zinc-500 font-normal">Duration:</span> {course?.courseLength}
-                         </p>
                     </div>
 
                     {/* CTA button */}
                     <button
                          onClick={handleClick}
-                         className="w-full h-12 rounded-xl text-zinc-800 text-[16px] font-medium flex items-center justify-center gap-2 border border-zinc-200 hover:border-none cursor-pointer hover:bg-linear-to-r from-zinc-500 to-zinc-900 hover:text-white hover:border-transparent transition-all duration-300 ease-in-out mt-auto"
+                         className="w-full h-12 rounded-xl text-zinc-800 text-[16px] font-medium flex items-center justify-center gap-2 border border-zinc-200 hover:border-none cursor-pointer hover:bg-linear-to-r from-zinc-800 to-zinc-900 hover:text-white hover:border-transparent transition-all duration-300 ease-in-out mt-auto"
                     >
                          {/* <FiDownload className="text-base" /> */}
                          Course Syllablus

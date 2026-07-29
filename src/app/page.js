@@ -1,6 +1,6 @@
 import FAQ from "@/components/FAQ";
 import Details from "@/components/Home/Details/Details";
-import Feature from "@/components/Home/Features/Feature";
+// import Feature from "@/components/Home/Features/Feature";
 import Hero from "@/components/Home/Hero/Hero";
 import OurPrograms from "@/components/Home/OurPrograms/OurPrograms";
 import Philosophy from "@/components/Home/Philosophy/Philosophy";
@@ -17,7 +17,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-neutral text-white">
       <Hero />
-      <Feature />
+      {/* <Feature /> */}
       <OurPrograms />
       <Details />
       <Philosophy />

@@ -111,7 +111,7 @@ export default function RelatedBlogs({
                               return (
                                    <Link
                                         key={slugOrId}
-                                        href={`/${slugOrId}`}
+                                        href={`/blog/${slugOrId}`}
                                         className="group block cursor-pointer"
                                    >
                                         {/* Image */}
