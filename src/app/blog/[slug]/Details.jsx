@@ -10,6 +10,8 @@ import CardBg from '@/app/assets/weekend-ux-course-details-call-card-bg.webp';
 import { CiShare2 } from "react-icons/ci";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import Image from "next/image";
+import AuthorWrittenBy from '@/components/Blogs/AuthorWrittenBy';
+import AuthorAbout from '@/components/Blogs/AuthorAbout';
 
 export default function Details({ data }) {
      const dateStr = data?.date || "22nd July, 2026";
@@ -23,7 +25,7 @@ export default function Details({ data }) {
           if (!htmlContent) return { processedHtmlContent: "", headingsList: [] };
 
           let headingIndex = 0;
-          const processed = htmlContent.replace(/<h([1-3])\b([^>]*)>(.*?)<\/h\1>/gi, (match, level, attrs, content) => {
+          const processed = htmlContent.replace(/<h2\b([^>]*)>(.*?)<\/h2>/gi, (match, attrs, content) => {
                const id = `blog-heading-${headingIndex}`;
                headingIndex++;
                
@@ -32,7 +34,7 @@ export default function Details({ data }) {
                headings.push({
                     id,
                     text,
-                    level: `H${level}`
+                    level: "H2"
                });
 
                // Inject scroll-margin-top to clear the sticky header when scrolling
@@ -50,7 +52,7 @@ export default function Details({ data }) {
                     newAttrs = `${newAttrs} id="${id}"`;
                }
 
-               return `<h${level}${newAttrs}>${content}</h${level}>`;
+               return `<h2${newAttrs}>${content}</h2>`;
           });
 
           return { processedHtmlContent: processed, headingsList: headings };
@@ -65,42 +67,42 @@ export default function Details({ data }) {
           }
      }, [headingsList, activeId]);
 
-     // Sync active heading with scroll position using IntersectionObserver
+     // Viewport-relative scroll spy using getBoundingClientRect (100% exact heading match)
      useEffect(() => {
-          if (headingsList.length === 0) return;
+          if (!headingsList.length) return;
 
-          const observer = new IntersectionObserver(
-               (entries) => {
-                    // Find the first heading that is currently intersecting the viewport trigger area
-                    const visibleEntry = entries.find((entry) => entry.isIntersecting);
-                    if (visibleEntry) {
-                         setActiveId(visibleEntry.target.id);
-                      }
-                 },
-                 {
-                      // Offset to trigger when heading is near the top of the content area
-                      rootMargin: "-140px 0px -60% 0px",
-                      threshold: 0
-                 }
-            );
+          const handleScroll = () => {
+               const headerOffset = 160; // Pixel threshold below fixed header
+               let currentActiveId = headingsList[0]?.id || "";
 
-            headingsList.forEach((h) => {
-                 const el = document.getElementById(h.id);
-                 if (el) observer.observe(el);
-            });
+               for (let i = 0; i < headingsList.length; i++) {
+                    const el = document.getElementById(headingsList[i].id);
+                    if (el) {
+                         const rect = el.getBoundingClientRect();
+                         if (rect.top <= headerOffset) {
+                              currentActiveId = headingsList[i].id;
+                         } else {
+                              break;
+                         }
+                    }
+               }
 
-            return () => observer.disconnect();
-       }, [headingsList]);
+               setActiveId(currentActiveId);
+          };
+
+          handleScroll();
+          window.addEventListener("scroll", handleScroll, { passive: true });
+          return () => window.removeEventListener("scroll", handleScroll);
+     }, [headingsList]);
 
        const handleScroll = (id) => {
             setActiveId(id);
 
             const element = document.getElementById(id);
             if (element) {
-                 element.scrollIntoView({
-                      behavior: "smooth",
-                      block: "start"
-                 });
+                 const yOffset = -130;
+                 const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                 window.scrollTo({ top: y, behavior: 'smooth' });
             }
        };
 
@@ -218,6 +220,11 @@ export default function Details({ data }) {
                                      />
                                 </div>
 
+                                 {/* AUTHOR WRITTEN BY CARD */}
+                                 <div className="mt-8">
+                                     <AuthorWrittenBy author={data?.author} date={data?.date} read={data?.read} />
+                                 </div>
+
                                 {/* BLOG CONTENT RENDERER */}
                                 <div className="mt-8 lg:mt-12">
                                      <div
@@ -225,6 +232,11 @@ export default function Details({ data }) {
                                           dangerouslySetInnerHTML={{ __html: processedHtmlContent }}
                                      />
                                 </div>
+
+                                 {/* ABOUT THE AUTHOR CARD */}
+                                 <div className="mt-10 mb-4">
+                                     <AuthorAbout author={data?.author} />
+                                 </div>
 
                            </div>
 

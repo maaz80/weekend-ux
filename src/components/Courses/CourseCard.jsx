@@ -60,25 +60,27 @@ export default function CourseCard({
                     </p>
 
                     {/* Bottom Section */}
-                    <div className={`flex items-end justify-between gap-3 mt-5 pt-4 border-t ${dividerColor}`}>
+                    <div className={`flex flex-col items-end justify-between gap-3 mt-5 pt-4 border-t ${dividerColor}`}>
+<div className="w-full line-clamp-3">{course?.overview}</div>
+                         <div className="flex items-center justify-between w-full">
+                              <div className="flex-1">
+                                   <p className={`text-[12px] md:text-[13px] ${statTextColor}`}>
+                                        <span className="font-semibold">
+                                             Starts:
+                                        </span>{" "}
+                                        {course?.startdate || course?.deadline || "10th Dec, 26"}
+                                   </p>
+                              </div>
 
-                         <div className="flex-1">
-                              <p className={`text-[12px] md:text-[13px] ${statTextColor}`}>
-                                   <span className="font-semibold">
-                                        Starts:
-                                   </span>{" "}
-                                   {course?.startdate || course?.deadline || "10th Dec, 26"}
-                              </p>
+                              <button
+                                   onClick={handleClick}
+                                   className={`h-10 px-4 rounded-md border font-medium flex items-center gap-2 whitespace-nowrap hover:bg-zinc-50/10 transition-all duration-300 cursor-pointer ${buttonBgColor} ${buttonTextColor} ${buttonBorderColor}`}
+                              >
+                                   {/* <FiDownload size={14} /> */}
+                                   Course Syllablus
+                                   <GoArrowRight />
+                              </button>
                          </div>
-
-                         <button
-                              onClick={handleClick}
-                              className={`h-10 px-4 rounded-md border font-medium flex items-center gap-2 whitespace-nowrap hover:bg-zinc-50/10 transition-all duration-300 cursor-pointer ${buttonBgColor} ${buttonTextColor} ${buttonBorderColor}`}
-                         >
-                              {/* <FiDownload size={14} /> */}
-                              Course Syllablus
-                              <GoArrowRight />
-                         </button>
 
                     </div>
                </div>
