@@ -38,6 +38,8 @@ async function getLayoutInitialData() {
   }
 }
 
+import StaticPageSchemaRenderer from "@/components/StaticPageSchemaRenderer";
+
 export default async function RootLayout({ children }) {
   const initialData = await getLayoutInitialData();
 
@@ -46,9 +48,88 @@ export default async function RootLayout({ children }) {
       lang="en"
       className="h-full antialiased"
     >
+      <head>
+        {/* Global WebSite Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Weekend UX",
+              "description": "Weekend UX is a leading UI/UX Design training institute offering industry-focused courses, mentorship, and placement assistance.",
+              "url": "https://weekendux.com/",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": {
+                  "@type": "EntryPoint",
+                  "urlTemplate": "https://weekendux.com/search?q={search_term_string}"
+                },
+                "query-input": "required name=search_term_string"
+              },
+              "sameAs": [
+                "https://www.linkedin.com/in/weekend-ux-7b03212a8/",
+                "https://www.instagram.com/weekendux1/",
+                "https://www.facebook.com/weekendux/"
+              ]
+            })
+          }}
+        />
+        {/* Global Organization Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "Weekend UX",
+              "alternateName": "WeekendUX",
+              "url": "https://weekendux.com/",
+              "logo": "https://weekendux.com/logo.png",
+              "description": "Leading design education platform providing UI/UX Design Course, Figma Design Course, Product Design Course, and Web Development training.",
+              "sameAs": [
+                "https://www.linkedin.com/in/weekend-ux-7b03212a8/",
+                "https://www.instagram.com/weekendux1/",
+                "https://www.facebook.com/weekendux/"
+              ],
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Weekend UX Training Center",
+                "addressLocality": "New Delhi",
+                "addressRegion": "Delhi",
+                "postalCode": "110001",
+                "addressCountry": "IN"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "contactType": "Admissions & Support",
+                "telephone": "+919599272764",
+                "email": "business@weekendux.com"
+              },
+              "knowsAbout": [
+                "UI Design",
+                "UX Design",
+                "Figma Design",
+                "Product Design",
+                "Web Development",
+                "Graphic Design",
+                "AI Design Tools"
+              ],
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "4.9",
+                "reviewCount": "520",
+                "bestRating": "5",
+                "worstRating": "1"
+              }
+            })
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <HomeDataProvider initialData={initialData}>
           <ClientFetchConfig />
+          <StaticPageSchemaRenderer />
           <Navbar />
           <main className="grow">
                {children}

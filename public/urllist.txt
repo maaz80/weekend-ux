@@ -1,7 +1,10 @@
-https://weekend-backend.onrender.com/
-https://weekend-backend.onrender.com/about-us
-https://weekend-backend.onrender.com/courses
-https://weekend-backend.onrender.com/contact-us
-https://weekend-backend.onrender.com/location
-https://weekend-backend.onrender.com/privacy-policy
-https://weekend-backend.onrender.com/disclaimer
+https://weekendux.com/
+https://weekendux.com/about-us
+https://weekendux.com/courses
+https://weekendux.com/contact-us
+https://weekendux.com/blog
+https://weekendux.com/privacy-policy
+https://weekendux.com/disclaimer
+https://weekendux.com/blog/what-is-the-difference-between-ui-and-ux
+https://weekendux.com/blog/10-usability-heuristics-for-user-interface-design
+https://weekendux.com/blog/best-training-in-ui-ux-design-course

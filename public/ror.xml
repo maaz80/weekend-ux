@@ -1,78 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:ror="http://www.rorweb.com/0.1/">
-  <channel>
-    <title>Weekend UX</title>
-    <link>https://weekend-backend.onrender.com</link>
-    <description>Weekend UX - Premium Design and Development Learning Platform</description>
-    
-    <!-- Home page -->
-    <item>
-      <link>https://weekend-backend.onrender.com/</link>
-      <title>Weekend UX - Home</title>
-      <description>Premium design and development learning platform. Upskill with industry-relevant training programs.</description>
-      <ror:updatePeriod>day</ror:updatePeriod>
-      <ror:sortOrder>1</ror:sortOrder>
-      <ror:resourceOf>sitemap</ror:resourceOf>
-    </item>
-    
-    <!-- About Us -->
-    <item>
-      <link>https://weekend-backend.onrender.com/about-us</link>
-      <title>About Us - Weekend UX</title>
-      <description>Learn more about Weekend UX, our mission, vision, and the team empowering next-generation design leaders.</description>
-      <ror:updatePeriod>month</ror:updatePeriod>
-      <ror:sortOrder>2</ror:sortOrder>
-      <ror:resourceOf>sitemap</ror:resourceOf>
-    </item>
-    
-    <!-- Courses -->
-    <item>
-      <link>https://weekend-backend.onrender.com/courses</link>
-      <title>Courses - Weekend UX</title>
-      <description>Explore our comprehensive list of UI/UX design, frontend, and backend development courses.</description>
-      <ror:updatePeriod>week</ror:updatePeriod>
-      <ror:sortOrder>2</ror:sortOrder>
-      <ror:resourceOf>sitemap</ror:resourceOf>
-    </item>
-
-    <!-- Contact Us -->
-    <item>
-      <link>https://weekend-backend.onrender.com/contact-us</link>
-      <title>Contact Us - Weekend UX</title>
-      <description>Get in touch with us for course inquiries, support, or partnership opportunities.</description>
-      <ror:updatePeriod>month</ror:updatePeriod>
-      <ror:sortOrder>3</ror:sortOrder>
-      <ror:resourceOf>sitemap</ror:resourceOf>
-    </item>
-    
-    <!-- Location -->
-    <item>
-      <link>https://weekend-backend.onrender.com/location</link>
-      <title>Our Locations - Weekend UX</title>
-      <description>Find Weekend UX physical centers, campuses, and virtual training hubs.</description>
-      <ror:updatePeriod>month</ror:updatePeriod>
-      <ror:sortOrder>3</ror:sortOrder>
-      <ror:resourceOf>sitemap</ror:resourceOf>
-    </item>
-
-    <!-- Privacy Policy -->
-    <item>
-      <link>https://weekend-backend.onrender.com/privacy-policy</link>
-      <title>Privacy Policy - Weekend UX</title>
-      <description>Read our privacy policy regarding how we collect, store, and manage user data securely.</description>
-      <ror:updatePeriod>year</ror:updatePeriod>
-      <ror:sortOrder>4</ror:sortOrder>
-      <ror:resourceOf>sitemap</ror:resourceOf>
-    </item>
-
-    <!-- Disclaimer -->
-    <item>
-      <link>https://weekend-backend.onrender.com/disclaimer</link>
-      <title>Disclaimer - Weekend UX</title>
-      <description>Legal disclaimer and terms of usage for the Weekend UX platform.</description>
-      <ror:updatePeriod>year</ror:updatePeriod>
-      <ror:sortOrder>4</ror:sortOrder>
-      <ror:resourceOf>sitemap</ror:resourceOf>
-    </item>
-  </channel>
+<rss xmlns:ror="http://rorweb.com/0.1/" version="2.0">
+<channel>
+  <title>ROR Sitemap for https://weekendux.com</title>
+  <link>https://weekendux.com</link>
+  <item>
+    <link>https://weekendux.com/</link>
+    <title>Page 1</title>
+    <ror:sortOrder>0</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://weekendux.com/about-us</link>
+    <title>Page 2</title>
+    <ror:sortOrder>1</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://weekendux.com/courses</link>
+    <title>Page 3</title>
+    <ror:sortOrder>2</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://weekendux.com/contact-us</link>
+    <title>Page 4</title>
+    <ror:sortOrder>3</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://weekendux.com/blog</link>
+    <title>Page 5</title>
+    <ror:sortOrder>4</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://weekendux.com/privacy-policy</link>
+    <title>Page 6</title>
+    <ror:sortOrder>5</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://weekendux.com/disclaimer</link>
+    <title>Page 7</title>
+    <ror:sortOrder>6</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://weekendux.com/blog/what-is-the-difference-between-ui-and-ux</link>
+    <title>Page 8</title>
+    <ror:sortOrder>7</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://weekendux.com/blog/10-usability-heuristics-for-user-interface-design</link>
+    <title>Page 9</title>
+    <ror:sortOrder>8</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://weekendux.com/blog/best-training-in-ui-ux-design-course</link>
+    <title>Page 10</title>
+    <ror:sortOrder>9</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+</channel>
 </rss>

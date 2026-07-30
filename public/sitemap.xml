@@ -1,55 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-    <!-- Home Page -->
-    <url>
-        <loc>https://weekend-backend.onrender.com/</loc>
-        <lastmod>2026-06-25</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>1</priority>
-    </url>
-    <!-- About Us Page -->
-    <url>
-        <loc>https://weekend-backend.onrender.com/about-us</loc>
-        <lastmod>2026-06-25</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>1</priority>
-    </url>
-    <!-- Courses Page -->
-    <url>
-        <loc>https://weekend-backend.onrender.com/courses</loc>
-        <lastmod>2026-06-25</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>1</priority>
-    </url>
-    <!-- Contact Us Page -->
-    <url>
-        <loc>https://weekend-backend.onrender.com/contact-us</loc>
-        <lastmod>2026-06-25</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>1</priority>
-    </url>
-    <!-- Location Page -->
-    <url>
-        <loc>https://weekend-backend.onrender.com/location</loc>
-        <lastmod>2026-06-25</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>1</priority>
-    </url>
-    <!-- Privacy Policy Page -->
-    <url>
-        <loc>https://weekend-backend.onrender.com/privacy-policy</loc>
-        <lastmod>2026-06-25</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>1</priority>
-    </url>
-    <!-- Disclaimer Page -->
-    <url>
-        <loc>https://weekend-backend.onrender.com/disclaimer</loc>
-        <lastmod>2026-06-25</lastmod>
-        <changefreq>yearly</changefreq>
-        <priority>1</priority>
-    </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://weekendux.com/</loc>
+    <lastmod>2026-07-30T15:42:31+05:30</lastmod>
+  </url>
+  <url>
+    <loc>https://weekendux.com/about-us</loc>
+    <lastmod>2026-07-30T15:42:31+05:30</lastmod>
+  </url>
+  <url>
+    <loc>https://weekendux.com/courses</loc>
+    <lastmod>2026-07-30T15:42:31+05:30</lastmod>
+  </url>
+  <url>
+    <loc>https://weekendux.com/contact-us</loc>
+    <lastmod>2026-07-30T15:42:31+05:30</lastmod>
+  </url>
+  <url>
+    <loc>https://weekendux.com/blog</loc>
+    <lastmod>2026-07-30T15:42:31+05:30</lastmod>
+  </url>
+  <url>
+    <loc>https://weekendux.com/privacy-policy</loc>
+    <lastmod>2026-07-30T15:42:31+05:30</lastmod>
+  </url>
+  <url>
+    <loc>https://weekendux.com/disclaimer</loc>
+    <lastmod>2026-07-30T15:42:31+05:30</lastmod>
+  </url>
+  <url>
+    <loc>https://weekendux.com/blog/what-is-the-difference-between-ui-and-ux</loc>
+    <lastmod>2026-07-30T15:42:31+05:30</lastmod>
+  </url>
+  <url>
+    <loc>https://weekendux.com/blog/10-usability-heuristics-for-user-interface-design</loc>
+    <lastmod>2026-07-30T15:42:31+05:30</lastmod>
+  </url>
+  <url>
+    <loc>https://weekendux.com/blog/best-training-in-ui-ux-design-course</loc>
+    <lastmod>2026-07-30T15:42:31+05:30</lastmod>
+  </url>
 </urlset>

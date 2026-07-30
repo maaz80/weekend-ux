@@ -44,9 +44,9 @@ export default function LocationDetailsView({ data }) {
                               className="object-cover object-center opacity-60 z-0"
                          />
 
-                         <span className="font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] relative z-50 text-official">
+                         {/* <span className="font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] relative z-50 text-official">
                               {heroDescription}
-                         </span>
+                         </span> */}
 
                          <h1 className="custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-8 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair px-4">
                               {heroTitle}
@@ -67,7 +67,7 @@ export default function LocationDetailsView({ data }) {
                </div>
 
                {/* 2. FEATURES STRIP (FROM HOME DATA) */}
-               <HomeFeature />
+               {/* <HomeFeature /> */}
 
                {/* 3. CONTENT SECTION (DYNAMIC EDITOR CONTENT + IMAGE WITH FLOAT WRAPPING) */}
                <div className="custom-width py-15 text-neutral font-urbanist min-h-60 overflow-hidden">

@@ -1,16 +1,16 @@
-# Weekend UX
+# https://weekendux.com Site Summary for AI Crawlers
 
-Weekend UX is a premier design education and training platform, providing professional UI/UX design courses, resources, and insights.
+> Generated on 2026-07-30T10:12:31.938Z
 
-## Core Resources
+## Primary Pages
 
-- [Home](https://weekend-backend.onrender.com/): The main gateway to Weekend UX.
-- [Courses](https://weekend-backend.onrender.com/courses): Professional UI/UX design courses, schedules, curriculums, and enrollment details.
-- [Blogs](https://weekend-backend.onrender.com/category/blogs): Latest articles, design trends, case studies, and tutorials from our journal.
-- [About Us](https://weekend-backend.onrender.com/about-us): Learn about our philosophy, track record, proving methods, and creative minds.
-- [Contact Us](https://weekend-backend.onrender.com/contact-us): Get in touch for inquiries, collaborations, or support.
-
-## Legal and Information
-
-- [Privacy Policy](https://weekend-backend.onrender.com/privacy-policy): Privacy policies and data practices.
-- [Disclaimer](https://weekend-backend.onrender.com/disclaimer): Terms of use and legal disclaimers.
+- [https://weekendux.com/](https://weekendux.com/)
+- [https://weekendux.com/about-us](https://weekendux.com/about-us)
+- [https://weekendux.com/courses](https://weekendux.com/courses)
+- [https://weekendux.com/contact-us](https://weekendux.com/contact-us)
+- [https://weekendux.com/blog](https://weekendux.com/blog)
+- [https://weekendux.com/privacy-policy](https://weekendux.com/privacy-policy)
+- [https://weekendux.com/disclaimer](https://weekendux.com/disclaimer)
+- [https://weekendux.com/blog/what-is-the-difference-between-ui-and-ux](https://weekendux.com/blog/what-is-the-difference-between-ui-and-ux)
+- [https://weekendux.com/blog/10-usability-heuristics-for-user-interface-design](https://weekendux.com/blog/10-usability-heuristics-for-user-interface-design)
+- [https://weekendux.com/blog/best-training-in-ui-ux-design-course](https://weekendux.com/blog/best-training-in-ui-ux-design-course)

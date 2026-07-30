@@ -7,6 +7,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Courses from "@/models/Courses";
 import connectDB from "@/config/db";
 import { generatePageMetadata, getPageSEOData } from "@/utils/seo";
+import SchemaRenderer from "@/components/SchemaRenderer";
 
 // Fetch only course data
 const getCourseData = cache(async (slug) => {
@@ -110,6 +111,25 @@ export default async function CourseSlugPage({ params }) {
                          {heroTitle}
                     </h1>
                </section>
+               <SchemaRenderer schemas={data?.schemas} />
+               
+               {/* Server-rendered static JSON-LD fallback for No-JS/Control+U */}
+               {data?.schemas && Array.isArray(data.schemas) && data.schemas.map((schemaStr, idx) => {
+                    if (!schemaStr || !schemaStr.trim()) return null;
+                    try {
+                         const cleanJson = JSON.stringify(JSON.parse(schemaStr));
+                         return (
+                              <script
+                                   key={idx}
+                                   type="application/ld+json"
+                                   dangerouslySetInnerHTML={{ __html: cleanJson }}
+                              />
+                         );
+                    } catch(e) {
+                         return null;
+                    }
+               })}
+
                <CourseDetailsView data={data} />
                <RelatedBlogs />
                <FAQ faqData={(data?.faq?.items && data.faq.items.length > 0) ? {

@@ -7,6 +7,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Blog from "@/models/Blog";
 import connectDB from "@/config/db";
 import { generatePageMetadata, getPageSEOData } from "@/utils/seo";
+import SchemaRenderer from "@/components/SchemaRenderer";
 
 // Fetch only blog data
 const getBlogData = cache(async (slug) => {
@@ -113,8 +114,27 @@ export default async function BlogSlugPage({ params }) {
                     <Image src="/images/weekend-ux-decorative-diamond.webp" alt="weekend-ux-decorative-diamond" className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-30" width={200} height={200} style={{ height: "auto" }} />
                </section>
 
-               <BlogDetailsView data={data} />
-               <RelatedBlogs />
+                <SchemaRenderer schemas={data?.schemas} />
+                
+                {/* Server-rendered static JSON-LD fallback for No-JS/Control+U */}
+                {data?.schemas && Array.isArray(data.schemas) && data.schemas.map((schemaStr, idx) => {
+                     if (!schemaStr || !schemaStr.trim()) return null;
+                     try {
+                          const cleanJson = JSON.stringify(JSON.parse(schemaStr));
+                          return (
+                               <script
+                                    key={idx}
+                                    type="application/ld+json"
+                                    dangerouslySetInnerHTML={{ __html: cleanJson }}
+                               />
+                          );
+                     } catch(e) {
+                          return null;
+                     }
+                })}
+
+                <BlogDetailsView data={data} />
+                <RelatedBlogs />
                <FAQ faqData={(data?.faq?.items && data.faq.items.length > 0) ? {
                     faq: data.faq.items,
                     title: data.faq.title && data.faq.title.trim() ? data.faq.title.trim() : "FAQ",

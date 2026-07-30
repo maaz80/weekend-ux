@@ -1,17 +1,16 @@
-# ==============================================================================
-# ROBOTS.TXT FOR WEEKEND UX (HTTP://WEEKENDUX.CO)
-# ==============================================================================
-
+# robots.txt generated at build time
 User-agent: *
 Allow: /
 
-# Disallow internal and administrative paths
-Disallow: /api/admin/
-Disallow: /api/auth/
-Disallow: /search
-Disallow: /_next/
-Disallow: /static/
+# AI Crawlers
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
 
-# Sitemap and Host declarations
-Sitemap: https://weekend-backend.onrender.com/sitemap.xml
-Host: https://weekend-backend.onrender.com
+Sitemap: https://weekendux.com/sitemap.xml
+Sitemap: https://weekendux.com/ror.xml

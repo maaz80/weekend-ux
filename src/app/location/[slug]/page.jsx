@@ -3,6 +3,7 @@ import LocationDetailsView from "@/components/Location/LocationDetailsView";
 import Location from "@/models/Location";
 import connectDB from "@/config/db";
 import { generatePageMetadata, getPageSEOData } from "@/utils/seo";
+import SchemaRenderer from "@/components/SchemaRenderer";
 
 // Fetch only location data
 const getLocationData = cache(async (slug) => {
@@ -84,5 +85,28 @@ export default async function LocationSlugPage({ params }) {
           );
      }
 
-     return <LocationDetailsView data={data} />;
+     return (
+          <>
+               <SchemaRenderer schemas={data?.schemas} />
+               
+               {/* Server-rendered static JSON-LD fallback for No-JS/Control+U */}
+               {data?.schemas && Array.isArray(data.schemas) && data.schemas.map((schemaStr, idx) => {
+                    if (!schemaStr || !schemaStr.trim()) return null;
+                    try {
+                         const cleanJson = JSON.stringify(JSON.parse(schemaStr));
+                         return (
+                              <script
+                                   key={idx}
+                                   type="application/ld+json"
+                                   dangerouslySetInnerHTML={{ __html: cleanJson }}
+                              />
+                         );
+                    } catch(e) {
+                         return null;
+                    }
+               })}
+
+               <LocationDetailsView data={data} />
+          </>
+     );
 }

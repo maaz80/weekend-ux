@@ -347,10 +347,10 @@ export default function Details({ data }) {
                <section className="bg-[#F8F6EE] py-12 lg:py-20 font-urbanist w-full">
                     <div className="custom-width px-4 sm:px-6 lg:px-16">
                          {/* New Custom Section with Left-side Info and Right-side Form/Banner */}
-                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
                               
                               {/* LEFT COLUMN: Content */}
-                              <div className="space-y-8">
+                              <div className="space-y-8 lg:col-span-2">
                                    <div>
                                         <h1 className="font-playfair text-[32px] md:text-[44px] font-extrabold leading-tight text-zinc-900">
                                              {displayTitle}
@@ -506,8 +506,8 @@ export default function Details({ data }) {
                                         {data?.brochureSubtext || "Chart your path to a thriving career as a UI/UX designer. Explore our course brochure for an in-depth look at the syllabus training from the best UI UX Design Institute in Delhi. Download now."}
                                    </p>
                                    
-                                   <p className="font-urbanist text-[16px] md:text-[17px] font-semibold text-zinc-800 pt-2">
-                                        Get in touch <span className="text-official font-bold">{data?.brochurePhones || "+91 9911782350 or +91 9811818122"}</span>
+                                   <p className="font-urbanist text-[16px] md:text-[17px] text-zinc-800 pt-2">
+                                        Get in touch <span className=" font-bold">{data?.brochurePhones || "+91 9911782350 or +91 9811818122"}</span>
                                    </p>
                               </div>
 
@@ -523,7 +523,7 @@ export default function Details({ data }) {
                                                   window.dispatchEvent(new CustomEvent("openLeadModal"));
                                              }
                                         }}
-                                        className="h-12 px-8 bg-zinc-900 hover:bg-zinc-800 text-white rounded-xl text-sm font-semibold transition cursor-pointer flex items-center justify-center hover:shadow-lg duration-300 font-urbanist"
+                                        className="h-12 px-8 bg-transparent text-official hover:bg-official hover:text-[#1c1c1c] border border-official rounded-[6px] text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center font-urbanist"
                                    >
                                         Get Brochure
                                    </button>
@@ -538,8 +538,8 @@ export default function Details({ data }) {
                          <div className="relative overflow-hidden">
                               
                               {/* Optional background abstract circles */}
-                              <div className="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-black/5 pointer-events-none"></div>
-                              <div className="absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-black/5 pointer-events-none"></div>
+                              {/* <div className="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-black/5 pointer-events-none"></div> */}
+                              {/* <div className="absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-black/5 pointer-events-none"></div> */}
 
                               <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] xl:grid-cols-[1fr_520px] gap-12 items-center relative z-10">
                                    
@@ -555,7 +555,7 @@ export default function Details({ data }) {
                                         </div>
 
                                         {/* Bottom Apply Now and Arrows Row */}
-                                        <div className="flex flex-wrap items-center justify-between gap-6 pt-6 border-t border-zinc-900/10 mt-4">
+                                        <div className="flex flex-wrap items-center justify-between gap-6 pt-6 border-t border-zinc-900/50 mt-4">
                                              <button 
                                                   onClick={() => {
                                                        window.dispatchEvent(new CustomEvent("openLeadModal"));
@@ -593,8 +593,8 @@ export default function Details({ data }) {
                                    </div>
 
                                    {/* Right Card display */}
-                                   <div className="w-full">
-                                        <div className="bg-white text-zinc-900 rounded-3xl p-8 shadow-xl border border-blue-100 min-h-55 flex flex-col justify-between transition-all duration-500 transform hover:scale-[1.01]">
+                                   <div className="w-full min-h-65">
+                                        <div className="bg-white text-zinc-900 rounded-3xl p-8 shadow-lg border border-blue-100 min-h-55 flex flex-col justify-between transition-all duration-500 transform hover:scale-[1.01]">
                                              
                                              <p className="font-urbanist text-[15px] md:text-[16px] text-zinc-650 leading-relaxed text-left mb-6 font-medium">
                                                   {shortTermItems[sliderIndex]?.description}
@@ -637,7 +637,7 @@ export default function Details({ data }) {
                           {/* Case Studies Carousel Layout */}
                           <div className="overflow-hidden relative w-full px-2">
                                <div 
-                                    className="flex transition-transform duration-500 ease-in-out"
+                                    className="flex transition-transform duration-500 ease-in-out min-h-100"
                                     style={{ transform: `translateX(-${caseStudyIndex * (100 / visibleCards)}%)` }}
                                >
                                     {caseStudiesItems.map((study, idx) => (

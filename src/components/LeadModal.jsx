@@ -186,7 +186,7 @@ export default function LeadModal() {
                                    <button
                                         type="submit"
                                         disabled={loading}
-                                        className="w-full h-12 bg-zinc-900 hover:bg-zinc-800 text-white rounded-xl text-sm font-semibold transition cursor-pointer flex items-center justify-center gap-2 hover:shadow-lg transition-all duration-300 font-urbanist mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="w-full h-12 bg-official text-black rounded-xl text-sm font-semibold cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 font-urbanist mt-6 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90"
                                    >
                                         {loading ? "Unlocking..." : "Submit & Unlock"}
                                    </button>

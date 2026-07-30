@@ -9,13 +9,11 @@ const nextConfig = {
       },
     ],
   },
-  // Optimize package imports to reduce unused JavaScript and keep bundle sizes minimal
   experimental: {
     optimizePackageImports: [
       'react-icons',
       'lucide-react',
     ],
-    optimizeCss: true,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
