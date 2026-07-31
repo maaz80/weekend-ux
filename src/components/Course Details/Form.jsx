@@ -225,7 +225,7 @@ const Form = ({
                                              name="fullName"
                                              value={formData.fullName}
                                              onChange={handleChange}
-                                             placeholder="John Doe"
+                                             placeholder="Enter your full name"
                                              className={`w-full h-10 border rounded-lg pl-10 pr-4 outline-none text-neutral placeholder:text-neutral-500 text-[14px] transition-colors ${inputFocusColor} ${inputBgColor} ${errors.fullName ? "border-red-400 focus:border-red-400" : inputBorderColor}`}
                                         />
                                    </div>
@@ -245,7 +245,7 @@ const Form = ({
                                              name="email"
                                              value={formData.email}
                                              onChange={handleChange}
-                                             placeholder="example@email.com"
+                                             placeholder="Enter your email"
                                              className={`w-full h-10 border rounded-lg pl-10 pr-4 outline-none text-neutral placeholder:text-neutral-500 text-[14px] transition-colors ${inputFocusColor} ${inputBgColor} ${errors.email ? "border-red-400 focus:border-red-400" : inputBorderColor}`}
                                         />
                                    </div>
@@ -265,7 +265,7 @@ const Form = ({
                                              name="phone"
                                              value={formData.phone}
                                              onChange={handleChange}
-                                             placeholder="+91 Enter 10 digit mobile number"
+                                             placeholder="Enter your mobile number"
                                              className={`w-full h-10 border rounded-lg pl-10 pr-4 outline-none text-neutral placeholder:text-neutral-500 text-[14px] transition-colors ${inputFocusColor} ${inputBgColor} ${errors.phone ? "border-red-400 focus:border-red-400" : inputBorderColor}`}
                                         />
                                    </div>
@@ -279,8 +279,7 @@ const Form = ({
                                         className="mt-1 accent-official shrink-0"
                                    />
                                    <span>
-                                        By providing your contact details, you agree
-                                        to our Terms of Use & Privacy Policy.
+                                        You accept our Terms of Use & Privacy Policy by entering your contact information.
                                    </span>
                               </label>
 
@@ -294,10 +293,10 @@ const Form = ({
                                    {loading ? (
                                         <>
                                              <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                                             <span className="ml-1">Booking Call...</span>
+                                             <span className="ml-1">Enquiring...</span>
                                         </>
                                    ) : (
-                                        "Talk to our advisor"
+                                        "Enquire Now"
                                    )}
                               </Button>
                          </>
@@ -368,7 +367,7 @@ const Form = ({
                                              <span className="ml-1">Verifying...</span>
                                         </>
                                    ) : status === "success" ? (
-                                        <span>✓ Booking Submitted</span>
+                                        <span>✓ Enquiry Submitted</span>
                                    ) : (
                                         "Verify & Submit"
                                    )}

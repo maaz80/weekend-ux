@@ -5,6 +5,7 @@
   "scripts": {
     "prebuild": "node generate_seo_files.js",
     "build": "npm run prebuild && next build",
+    "clean": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\"",
     "dev": "next dev",
     "start": "next start",
     "lint": "eslint",

@@ -447,6 +447,16 @@ export default function Details({ data }) {
                                              </div>
                                         </div>
                                    </div>
+
+                                   {/* Custom Rich Text Content below Social Media icons */}
+                                   {data?.promoSocialBottomContent && (
+                                        <div className="pt-6 border-t border-zinc-200">
+                                             <div 
+                                                  className="prose prose-zinc max-w-none font-urbanist text-[16px] md:text-[17px] text-zinc-700 leading-relaxed space-y-4 [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:text-zinc-900 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-zinc-900 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-zinc-900 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_a]:text-official [&_a]:underline"
+                                                  dangerouslySetInnerHTML={{ __html: data.promoSocialBottomContent }}
+                                             />
+                                        </div>
+                                   )}
                               </div>
 
                               {/* RIGHT COLUMN: Sidebar Form and CallCard Card */}
@@ -458,9 +468,7 @@ export default function Details({ data }) {
                                              Admissions Close On 7th Oct
                                         </h2>
                                         <p className="text-center text-sm text-neutral leading-relaxed mb-6">
-                                             Still not sure? Talk with our advisor and get
-                                             your doubts sorted before you miss the chance
-                                             to enroll into the course.
+                                             Not sure yet? Before you pass up the opportunity to sign up for the course, speak with our counselor and get your questions answered.
                                         </p>
                                         <Form />
                                    </div>
@@ -523,7 +531,7 @@ export default function Details({ data }) {
                                                   window.dispatchEvent(new CustomEvent("openLeadModal"));
                                              }
                                         }}
-                                        className="h-12 px-8 bg-transparent text-official hover:bg-official hover:text-[#1c1c1c] border border-official rounded-[6px] text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center font-urbanist"
+                                        className="h-12 px-8 bg-transparent text-official hover:bg-official hover:text-[#1c1c1c] border border-official rounded-md text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center font-urbanist"
                                    >
                                         Get Brochure
                                    </button>
@@ -872,23 +880,39 @@ function getDomainIconSVG(iconName, color = "currentColor") {
 
 function getIconBadge(text) {
      const lower = (text || "").toLowerCase().trim();
+
+     if (text && (text.startsWith("/") || text.startsWith("http"))) {
+          return (
+               <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center border border-zinc-200 bg-white shrink-0 shadow-sm">
+                    <img 
+                         src={text} 
+                         alt="Course Icon" 
+                         className="w-full h-full object-cover"
+                         onError={(e) => {
+                              e.target.onerror = null;
+                              e.target.src = "/images/Figma.webp";
+                         }}
+                    />
+               </div>
+          );
+     }
+
      if (lower === "xd") {
           return (
-               <div className="w-12 h-12 rounded-full bg-pink-100 text-pink-700 flex items-center justify-center font-bold text-lg border border-pink-200">
+               <div className="w-12 h-12 rounded-full bg-pink-100 text-pink-700 flex items-center justify-center font-bold text-lg border border-pink-200 shrink-0">
                     Xd
                </div>
           );
      }
-     if (lower === "fg" || lower === "figma") {
-          return (
-               <div className="w-12 h-12 rounded-full bg-zinc-900 text-orange-500 flex items-center justify-center font-bold text-lg border border-zinc-800">
-                    Fg
-               </div>
-          );
-     }
+
+     // Default fallback image using /images/Figma.webp
      return (
-          <div className="w-12 h-12 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-lg border border-orange-200 font-urbanist">
-               {text || "UX"}
+          <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center border border-zinc-200 bg-white shrink-0 shadow-sm">
+               <img 
+                    src="/images/Figma.webp" 
+                    alt={text || "Figma Icon"} 
+                    className="w-full h-full object-fill"
+               />
           </div>
      );
 }
