@@ -36,7 +36,7 @@ export async function generateMetadata({ params }) {
      const description = data.seodescription || data.title;
      const imageUrl = data.image || "";
 
-     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://weekend-backend.onrender.com";
+     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.weekendux.com";
      const pageUrl = `${baseUrl}/blog/${slug}`;
      const finalImageUrl = imageUrl || `${baseUrl}/images/weekend-ux-blogs-hero-bg.webp`;
 
