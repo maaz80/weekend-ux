@@ -309,7 +309,7 @@ export default function Footer({
                     </div>
 
                     {/* Divider */}
-                    <div className="border-t border-white/5 mt-12 pt-12">
+                    <div className="border-t border-white/5 mt-6 md:mt-12 pt-6 md:pt-12">
 
                          {/* Dynamic Footer Blocks */}
                          {locations?.length > 0 &&
@@ -326,7 +326,7 @@ export default function Footer({
                     </div>
 
                     {/* Bottom Divider */}
-                    <div className="border-t border-white/5 mt-10 pt-8 text-center flex flex-col items-center justify-center">
+                    <div className="border-t border-white/5 mt-6 md:mt-10 pt-6 md:pt-8 text-center flex flex-col items-center justify-center">
                          <FooterNav
                               title="Explore"
                               items={

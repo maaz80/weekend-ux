@@ -117,8 +117,8 @@ export default function LeadModal() {
      if (!isOpen) return null;
 
      return (
-          <div className="fixed inset-0 z-9999 flex items-center justify-center bg-zinc-950/70 backdrop-blur-md p-4 transition-all duration-300">
-               <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl relative border border-zinc-150 text-neutral text-center transform scale-100 transition-all duration-300 animate-in fade-in zoom-in-95 ">
+          <div className="fixed inset-0 z-9999 flex items-center justify-center bg-zinc-950/70 backdrop-blur-md p-2 md:p-4 transition-all duration-300">
+               <div className="w-full max-w-md bg-white rounded-3xl p-5 md:p-8 shadow-2xl relative border border-zinc-150 text-neutral text-center transform scale-100 transition-all duration-300 animate-in fade-in zoom-in-95 ">
                     
                     {/* Close Button */}
                     <button
@@ -142,7 +142,7 @@ export default function LeadModal() {
                     ) : (
                          <>
                               {/* Lock Icon */}
-                              <div className="w-14 h-14 bg-official/10 text-official rounded-full flex items-center justify-center mx-auto mb-6 border border-official/20">
+                              <div className="w-14 h-14 bg-official/10 text-official rounded-full flex items-center justify-center mx-auto mb-1 md:mb-6 border border-official/20">
                                    <Lock size={24} />
                               </div>
 

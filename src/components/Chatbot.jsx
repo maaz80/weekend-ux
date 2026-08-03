@@ -151,7 +151,7 @@ export default function Chatbot({
      closeButtonColor = "text-zinc-950 hover:text-zinc-700",
      botBubbleClass = "bg-white text-neutral border border-zinc-200",
      userBubbleClass = "bg-official text-neutral font-medium",
-     quickQuestionClass = "border-official text-neutral bg-white hover:bg-official hover:text-neutral",
+     quickQuestionClass = "border-zinc-200 text-neutral bg-white hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white hover:border-zinc-800",
      inputBgClass = "bg-zinc-50 border border-zinc-200 focus-within:border-official",
      sendButtonColor = "text-zinc-400 hover:text-official",
 }) {
@@ -491,7 +491,7 @@ export default function Chatbot({
                {/* HEADER */}
                <div className={`${headerBgColor} px-4 py-3 flex items-center justify-between border-b border-official/20`}>
                     <div className="flex items-center gap-3">
-                         <div className="w-9 h-9 rounded-full bg-white flex items-center justify-center p-1 shrink-0 overflow-hidden shadow-sm border border-zinc-200">
+                         <div className="w-9 h-9 p-2 rounded-full bg-white flex items-center justify-center  shrink-0 overflow-hidden shadow-sm border border-zinc-200">
                               {hasLogoImage ? (
                                    <img
                                         src={navbarData.logo.image.trim()}
@@ -545,7 +545,7 @@ export default function Chatbot({
                                    {/* Avatar Header for Bot */}
                                    {showAvatar && (
                                         <div className="flex items-center gap-2 mb-1">
-                                             <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center p-0.5 shrink-0 shadow-xs border border-zinc-200 overflow-hidden">
+                                             <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center p-1.5 shrink-0 shadow-xs border border-zinc-200 overflow-hidden">
                                                   {hasLogoImage ? (
                                                        <img src={navbarData.logo.image.trim()} alt="Logo" className="w-full h-full object-contain" />
                                                   ) : (
@@ -585,21 +585,21 @@ export default function Chatbot({
                                                   <div className="grid grid-cols-2 gap-1.5">
                                                        <button
                                                             onClick={resetChat}
-                                                            className="bg-white hover:bg-official text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-official text-center shadow-xs flex items-center justify-center gap-1.5"
+                                                            className="bg-white hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-zinc-800 text-center shadow-xs flex items-center justify-center gap-1.5"
                                                        >
                                                             <RotateCcw size={13} />
                                                             Restart Chat
                                                        </button>
                                                        <a
                                                             href="mailto:support@weekendux.in?subject=Inquiry from Chatbot"
-                                                            className="bg-white hover:bg-official text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-official text-center shadow-xs flex items-center justify-center gap-1.5"
+                                                            className="bg-white hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-zinc-800 text-center shadow-xs flex items-center justify-center gap-1.5"
                                                        >
                                                             <Calendar size={13} />
                                                             Book Call
                                                        </a>
                                                        <Link
                                                             href="/courses"
-                                                            className="bg-white hover:bg-official text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-official text-center shadow-xs flex items-center justify-center gap-1.5"
+                                                            className="bg-white hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-zinc-800 text-center shadow-xs flex items-center justify-center gap-1.5"
                                                        >
                                                             Explore Courses
                                                        </Link>
@@ -636,7 +636,7 @@ export default function Chatbot({
                                                        key={oIdx}
                                                        type="button"
                                                        onClick={() => handleOptionClick(m.questionId, opt, m.isWelcomeCard)}
-                                                       className={`${quickQuestionClass} transition-all duration-200 text-[11px] font-semibold px-3 py-1.5 rounded-full text-left cursor-pointer shadow-xs border inline-flex items-center gap-1 hover:scale-[1.02]`}
+                                                       className={`${quickQuestionClass} transition-all duration-200 text-[11px] font-semibold px-3 py-1.5 rounded-full text-left cursor-pointer shadow-xs border inline-flex items-center gap-1 hover:scale-[1.02] hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white hover:border-zinc-800`}
                                                   >
                                                        <span>{opt}</span>
                                                   </button>
@@ -655,8 +655,8 @@ export default function Chatbot({
                                                             type="button"
                                                             onClick={() => handleMultiOptionToggle(opt)}
                                                             className={`transition-all duration-200 text-[11px] font-semibold px-3 py-1.5 rounded-full cursor-pointer shadow-xs border inline-flex items-center gap-1 hover:scale-[1.02] ${isSelected
-                                                                      ? "bg-official text-neutral border-official"
-                                                                      : "bg-white text-neutral border-zinc-200 hover:bg-zinc-100"
+                                                                      ? "bg-linear-to-r from-zinc-800 to-zinc-900 text-white border-zinc-800"
+                                                                      : "bg-white text-neutral border-zinc-200 hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white hover:border-zinc-800"
                                                                  }`}
                                                        >
                                                             <span>{opt}</span>
