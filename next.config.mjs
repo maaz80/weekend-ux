@@ -3,15 +3,16 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        // Redirect non-www → www (canonical main domain is www.weekendux.com)
         source: '/:path*',
         has: [
           {
             type: 'host',
-            value: 'www.weekendux.com',
+            value: 'weekendux.com',
           },
         ],
-        destination: 'https://weekendux.com/:path*',
-        permanent: true, // HTTP 301 Permanent Redirect for Hostinger / Node
+        destination: 'https://www.weekendux.com/:path*',
+        permanent: true,
       },
     ];
   },

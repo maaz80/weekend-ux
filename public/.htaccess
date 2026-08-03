@@ -20,9 +20,9 @@ DirectorySlash Off
     RewriteCond %{HTTPS} off
     RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # 4. CANONICAL REDIRECT (WWW TO NON-WWW)
-    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-    RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+    # 4. CANONICAL REDIRECT (NON-WWW TO WWW)
+    RewriteCond %{HTTP_HOST} ^weekendux\.com$ [NC]
+    RewriteRule ^ https://www.weekendux.com%{REQUEST_URI} [R=301,L]
 
     # 5. BLOCK BAD BOTS & EMPTY USER AGENTS
     RewriteCond %{HTTP_USER_AGENT} (curl|wget|python|nikto|sqlmap|masscan|zgrab|nmap|dirbuster|gobuster|wfuzz|hydra|metasploit) [NC,OR]
