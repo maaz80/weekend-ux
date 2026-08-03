@@ -8,6 +8,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Blog from "@/models/Blog";
 import connectDB from "@/config/db";
 import { generatePageMetadata, getPageSEOData } from "@/utils/seo";
+import { headers } from "next/headers";
 import SchemaRenderer from "@/components/SchemaRenderer";
 
 // Fetch only blog data
@@ -36,7 +37,10 @@ export async function generateMetadata({ params }) {
      const description = data.seodescription || data.title;
      const imageUrl = data.image || "";
 
-     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.weekendux.com";
+     const headersList = await headers();
+     const host = headersList.get("x-forwarded-host") || headersList.get("host") || "";
+     const proto = headersList.get("x-forwarded-proto") || "https";
+     const baseUrl = host ? `${proto}://${host}` : (process.env.NEXT_PUBLIC_BASE_URL || "https://www.weekendux.com");
      const pageUrl = `${baseUrl}/blog/${slug}`;
      const finalImageUrl = imageUrl || `${baseUrl}/images/weekend-ux-blogs-hero-bg.webp`;
 

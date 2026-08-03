@@ -3,6 +3,7 @@ import LocationDetailsView from "@/components/Location/LocationDetailsView";
 import Location from "@/models/Location";
 import connectDB from "@/config/db";
 import { generatePageMetadata, getPageSEOData } from "@/utils/seo";
+import { headers } from "next/headers";
 import SchemaRenderer from "@/components/SchemaRenderer";
 
 // Fetch only location data
@@ -31,7 +32,10 @@ export async function generateMetadata({ params }) {
      const description = data.hero?.[0]?.seodescription || data.title;
      const imageUrl = data.image?.imageurl || "";
 
-     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.weekendux.com";
+     const headersList = await headers();
+     const host = headersList.get("x-forwarded-host") || headersList.get("host") || "";
+     const proto = headersList.get("x-forwarded-proto") || "https";
+     const baseUrl = host ? `${proto}://${host}` : (process.env.NEXT_PUBLIC_BASE_URL || "https://www.weekendux.com");
      const pageUrl = `${baseUrl}/location/${slug}`;
      const finalImageUrl = imageUrl || `${baseUrl}/images/weekend-ux-blogs-hero-bg.webp`;
 
