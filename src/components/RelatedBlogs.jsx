@@ -83,7 +83,7 @@ export default function RelatedBlogs({
                <div className={`absolute inset-0 ${overlayColor}`} />
 
                {/* Content */}
-               <div className="relative z-10 mx-auto max-w-360 px-5 py-16 md:px-8 md:py-20 xl:px-12 xl:py-24">
+               <div className="relative z-10 mx-auto max-w-360 px-5 py-10 md:px-8 md:py-20 xl:px-12 xl:py-24">
 
 
                     {/* Heading */}
@@ -119,7 +119,7 @@ export default function RelatedBlogs({
                                              <OptimizedImage
                                                   src={imageSrc}
                                                   alt={blog.alt || ""}
-                                                  className="h-62.5 w-full object-fill transition duration-700 group-hover:scale-105 md:h-70"
+                                                  className="h-55.5 w-full object-fill transition duration-700 group-hover:scale-105 md:h-70"
                                                   sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
                                              />
                                         </div>

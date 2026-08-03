@@ -171,7 +171,7 @@ export default function Blogs() {
                </section>
 
                {/* Featured Blogs Section */}
-               <div className="custom-width py-20">
+               <div className="custom-width py-10 md:py-20">
                     <h2 className="text-[28px] md:text-[40px] text-neutral font-medium font-playfair mb-4">
                          <span className="text-[#8F6A00] italic">{featuredStart}</span> {featuredEnd}
                     </h2>
@@ -189,8 +189,8 @@ export default function Blogs() {
                </div>
 
                {/* Explore More Blogs Section */}
-               <div className="custom-width pb-20">
-                    <h2 className="text-[28px] md:text-[40px] text-neutral font-medium font-playfair mb-4">
+               {/* <div className="custom-width pb-20"> */}
+                    {/* <h2 className="text-[28px] md:text-[40px] text-neutral font-medium font-playfair mb-4">
                          Explore <span className="text-[#8F6A00] italic">More</span> Blogs
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ">
@@ -201,12 +201,12 @@ export default function Blogs() {
                                    height="h-42.5 md:h-61"
                               />
                          ))}
-                    </div>
+                    </div> */}
 
                     {/* Professional Pagination */}
-                    {totalPages > 1 && (
+                    {/* {totalPages > 1 && (
                          <div className="flex items-center justify-center gap-3 mt-16">
-                              {/* Previous button */}
+                            
                               <button
                                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                                    aria-label="Previous Page"
@@ -219,7 +219,6 @@ export default function Blogs() {
                                    <FiChevronLeft className="text-lg" />
                               </button>
 
-                              {/* Page Numbers */}
                               {getPageNumbers().map((item, idx) => {
                                    if (item === "...") {
                                         return (
@@ -245,7 +244,6 @@ export default function Blogs() {
                                    );
                               })}
 
-                              {/* Next button */}
                               <button
                                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                                    aria-label="Next Page"
@@ -258,8 +256,8 @@ export default function Blogs() {
                                    <FiChevronRight className="text-lg" />
                               </button>
                          </div>
-                    )}
-               </div>
+                    )} */}
+               {/* </div> */}
 
                <Testimonials />
                <RelatedBlogs />

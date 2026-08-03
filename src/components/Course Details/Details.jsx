@@ -334,7 +334,7 @@ export default function Details({ data }) {
                <section className="bg-[#F8F6EE] py-12 lg:py-20 font-urbanist w-full">
                     <div className="custom-width px-4 sm:px-6 lg:px-16">
                          {/* New Custom Section with Left-side Info and Right-side Form/Banner */}
-                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
+                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start px-2">
 
                               {/* LEFT COLUMN: Content */}
                               <div className="space-y-8 lg:col-span-2">
@@ -342,7 +342,7 @@ export default function Details({ data }) {
                                         <h1 className="font-playfair text-[32px] md:text-[44px] font-extrabold leading-tight text-zinc-900">
                                              {displayTitle}
                                         </h1>
-                                        <div className="w-20 h-1.5 bg-official mt-4 rounded"></div>
+                                        <div className="w-20 h-1 md:h-1.5 bg-official mt-4 rounded"></div>
                                    </div>
 
                                    <div className="space-y-4 font-urbanist text-[16px] md:text-[17px] text-zinc-600 leading-relaxed">
@@ -450,7 +450,7 @@ export default function Details({ data }) {
                               <div className="space-y-6 lg:sticky lg:top-24">
 
                                    {/* Admission Form */}
-                                   <div className="bg-white rounded-3xl shadow-sm p-8 md:p-10 border border-zinc-150">
+                                   <div className="bg-white rounded-3xl shadow-sm p-6 md:p-10 border border-zinc-150">
                                         <h2 className="text-center text-[22px] md:text-[24px] font-bold text-neutral leading-9 mb-4">
                                              Admissions Close On 7th Oct
                                         </h2>
@@ -516,7 +516,7 @@ export default function Details({ data }) {
                </section>
 
                {/* Third Section: Short-term Courses Slider Banner */}
-               <section className="bg-official py-16 md:py-24 font-urbanist text-zinc-900 w-full">
+               <section className="bg-official px-2 py-8 md:py-24 font-urbanist text-zinc-900 w-full">
                     <div className="custom-width px-4 sm:px-6 lg:px-16">
                          <div className="relative overflow-hidden">
 
@@ -606,9 +606,9 @@ export default function Details({ data }) {
                </section>
 
                {/* Fourth Section: Student Case Studies Slider Section */}
-               <section className="bg-[#FAF9F5] py-16 md:py-24 font-urbanist w-full">
+               <section className="bg-[#FAF9F5] py-8 md:py-24 font-urbanist w-full">
                     <div className="custom-width px-4 sm:px-6 lg:px-16 overflow-hidden">
-                         <div className="text-center space-y-4 mb-12">
+                         <div className="text-center space-y-4 mb-5 md:mb-12">
                               <h2 className="font-playfair text-[32px] md:text-[42px] font-bold text-zinc-900 leading-tight">
                                    {displayCaseStudiesTitle}
                               </h2>
@@ -620,7 +620,7 @@ export default function Details({ data }) {
                          {/* Case Studies Carousel Layout */}
                          <div className="overflow-hidden relative w-full px-2">
                               <div
-                                   className="flex transition-transform duration-500 ease-in-out min-h-100"
+                                   className="flex transition-transform duration-500 ease-in-out min-h-50 md:min-h-100"
                                    style={{ transform: `translateX(-${caseStudyIndex * (100 / visibleCards)}%)` }}
                               >
                                    {caseStudiesItems.map((study, idx) => (
@@ -659,7 +659,7 @@ export default function Details({ data }) {
 
                          {/* Bottom Navigation controls */}
                          {caseStudiesItems.length > visibleCards && (
-                              <div className="flex items-center justify-center gap-6 mt-12">
+                              <div className="flex items-center justify-center gap-6 mt-5 md:mt-12">
                                    <button
                                         onClick={handleCaseStudyPrev}
                                         className="w-12 h-12 rounded-full border border-zinc-300 hover:border-official text-zinc-600 hover:text-official flex items-center justify-center transition cursor-pointer hover:shadow-md bg-white"
@@ -685,9 +685,9 @@ export default function Details({ data }) {
                </section>
 
                {/* Fifth Section: Explore More Career Domains Section */}
-               <section className="relative py-20 md:py-28 font-urbanist w-full overflow-hidden bg-[url('/images/hero-bg.webp')] bg-cover bg-center bg-no-repeat">
+               <section className="relative px-2 py-8 md:py-28 font-urbanist w-full overflow-hidden bg-[url('/images/hero-bg.webp')] bg-cover bg-center bg-no-repeat">
                     {/* Premium blurred glass overlay */}
-                    <div className="absolute inset-0 bg-[#FAF9F5]/93 backdrop-blur-[2px]"></div>
+                    <div className="absolute inset-0 bg-[#FAF9F5]/93 backdrop-blur-[2px] -mt-px"></div>
 
                     <div className="custom-width px-4 sm:px-6 lg:px-16 relative z-10">
                          {/* Section Title & Description */}
@@ -701,12 +701,12 @@ export default function Details({ data }) {
                          </div>
 
                          {/* Career Domains Flex Layout */}
-                         <div className="flex flex-wrap gap-4 justify-start">
+                         <div className="flex flex-wrap gap-2.5 sm:gap-4 justify-start">
                               {careerDomainsItems.map((item, idx) => (
                                    <a
                                         key={idx}
                                         href={item.link || "#"}
-                                        className="flex items-center gap-3 bg-white px-6 py-4 rounded-2xl border border-zinc-200/80 hover:shadow-md hover:scale-[1.01] transition-all duration-300 group shrink-0"
+                                        className="flex items-center gap-2 sm:gap-3 bg-white px-3.5 sm:px-6 py-2.5 sm:py-4 rounded-xl sm:rounded-2xl border border-zinc-200/80 hover:shadow-md hover:scale-[1.01] transition-all duration-300 group shrink-0"
                                         onMouseEnter={(e) => {
                                              if (item.color) e.currentTarget.style.borderColor = item.color;
                                         }}
@@ -714,11 +714,11 @@ export default function Details({ data }) {
                                              e.currentTarget.style.borderColor = "";
                                         }}
                                    >
-                                        <div className="shrink-0 transition-transform duration-300 group-hover:scale-110">
+                                        <div className="shrink-0 transition-transform duration-300 group-hover:scale-110 [&>svg]:w-4.5 [&>svg]:h-4.5 sm:[&>svg]:w-6 sm:[&>svg]:h-6">
                                              {getDomainIconSVG(item.iconName, item.color)}
                                         </div>
                                         <span
-                                             className="font-urbanist font-extrabold text-[15px] sm:text-[16px] transition-colors duration-300"
+                                             className="font-urbanist font-extrabold text-[12.5px] sm:text-[15px] md:text-[16px] transition-colors duration-300"
                                              style={{ color: item.color || "#18181b" }}
                                         >
                                              {item.name}

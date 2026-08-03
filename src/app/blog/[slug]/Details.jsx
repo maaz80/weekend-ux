@@ -110,7 +110,7 @@ export default function Details({ data }) {
             <section className="bg-[#F8F6EE] py-10 lg:py-16">
                  <div className="custom-width px-4 md:px-6 lg:px-8">
 
-                      <div className="grid grid-cols-1 lg:grid-cols-[350px_1fr] gap-8 lg:gap-10">
+                      <div className="grid grid-cols-1 lg:grid-cols-[350px_1fr] gap-8 lg:gap-10 px-1.5">
 
                            {/* ================= LEFT SIDEBAR ================= */}
 
@@ -214,7 +214,7 @@ export default function Details({ data }) {
                                      <OptimizedImage
                                           src={coverImage}
                                           alt={data?.alt || data?.title || "Blog Cover"}
-                                          className="w-full h-65 md:h-112.5 lg:h-137.5 object-cover"
+                                          className="w-full h-60 md:h-112.5 lg:h-127.5 object-fill"
                                           sizes="100vw"
                                           priority={true}
                                      />

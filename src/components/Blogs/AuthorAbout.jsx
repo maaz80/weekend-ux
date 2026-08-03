@@ -17,9 +17,9 @@ export default function AuthorAbout({ author = {} }) {
             <div className="flex flex-col sm:flex-row gap-4">
                 {/* Avatar */}
                 <div className="shrink-0 self-start">
-                    <div className="w-[72px] h-[72px] rounded-full ring-[2.5px] ring-[#E87400] ring-offset-2 ring-offset-[#FAF8F2] overflow-hidden bg-[#FFD6A0] flex items-center justify-center">
+                    <div className="w-18 h-18 rounded-full ring-[2.5px] ring-official ring-offset-2 ring-offset-[#FAF8F2] overflow-hidden bg-official/40 flex items-center justify-center">
                         <svg
-                            className="w-9 h-9 text-[#E87400]"
+                            className="w-9 h-9 text-official"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                         >
@@ -31,7 +31,7 @@ export default function AuthorAbout({ author = {} }) {
                 {/* Info + Socials row */}
                 <div className="flex-1 min-w-0 flex flex-col sm:flex-row sm:items-start gap-3">
                     <div className="flex-1 min-w-0">
-                        <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#007B7F] mb-0.5">
+                        <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-official mb-0.5">
                             About The Author
                         </p>
                         <h3 className="font-urbanist font-bold text-xl text-[#1C1C1C] leading-snug">

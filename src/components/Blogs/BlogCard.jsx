@@ -5,7 +5,7 @@ import OptimizedImage from '@/components/ui/OptimizedImage'
 
 const BlogCard = ({
      blog,
-     height = 'h-62.5 md:h-95',
+     height = 'h-55 md:h-95',
      priority = false,
      fetchPriority = undefined,
      titleColor = "text-neutral",

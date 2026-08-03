@@ -113,21 +113,40 @@ const Testimonials = ({ data }) => {
 
 
 
-     // ✅ Calculate maxIndex (responsive safe)
+     // ✅ Calculate maxIndex
      useEffect(() => {
-          const calculateAll = () => {
-               calculateCardWidth();
-               calculateVisibleCards();
-               setMaxIndex(
-                    Math.max(testimonialsList.length - visibleCardsRef.current, 0)
-               );
-          };
-
-          calculateAll();
-
-          window.addEventListener("resize", calculateAll);
-          return () => window.removeEventListener("resize", calculateAll);
+          setMaxIndex(Math.max(testimonialsList.length - 1, 0));
      }, [testimonialsList]);
+
+     const isProgrammaticScrollRef = useRef(false);
+     const scrollTimeoutRef = useRef(null);
+
+     // ✅ Scroll to exact card offset
+     const scrollToIndex = (index) => {
+          const slider = sliderRef.current;
+          if (!slider || !slider.children[index]) return;
+
+          const firstCard = slider.children[0];
+          const targetCard = slider.children[index];
+
+          if (firstCard && targetCard) {
+               const targetLeft = targetCard.offsetLeft - firstCard.offsetLeft;
+
+               isProgrammaticScrollRef.current = true;
+               setCurrentIndex(index);
+
+               if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+
+               slider.scrollTo({
+                    left: targetLeft,
+                    behavior: "smooth",
+               });
+
+               scrollTimeoutRef.current = setTimeout(() => {
+                    isProgrammaticScrollRef.current = false;
+               }, 450);
+          }
+     };
 
      // ✅ Arrow scroll
      const scroll = (direction) => {
@@ -136,15 +155,10 @@ const Testimonials = ({ data }) => {
                     ? Math.max(currentIndex - 1, 0)
                     : Math.min(currentIndex + 1, maxIndex);
 
-          setCurrentIndex(newIndex);
-
-          sliderRef.current.scrollTo({
-               left: newIndex * cardWidthRef.current,
-               behavior: "auto",
-          });
+          scrollToIndex(newIndex);
      };
 
-     // ✅ Sync scroll → dots
+     // ✅ Sync scroll → dots using exact element offset
      useEffect(() => {
           const slider = sliderRef.current;
           if (!slider) return;
@@ -152,24 +166,28 @@ const Testimonials = ({ data }) => {
           let ticking = false;
 
           const handleScroll = () => {
+               if (isProgrammaticScrollRef.current) return;
+
                if (!ticking) {
                     requestAnimationFrame(() => {
+                         if (!slider || !slider.children.length) return;
+
+                         const firstCardLeft = slider.children[0].offsetLeft;
                          const scrollLeft = slider.scrollLeft;
-                         const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
 
-                         let index;
-                         if (scrollLeft <= 10) {
-                              index = 0;
-                         } else if (scrollLeft >= maxScrollLeft - 10) {
-                              index = maxIndex;
-                         } else if (cardWidthRef.current > 0) {
-                              index = Math.round(scrollLeft / cardWidthRef.current);
-                         } else {
-                              index = 0;
-                         }
+                         let closestIndex = 0;
+                         let minDistance = Infinity;
 
-                         index = Math.max(0, Math.min(index, maxIndex));
-                         setCurrentIndex(index);
+                         Array.from(slider.children).forEach((child, idx) => {
+                              const childLeft = child.offsetLeft - firstCardLeft;
+                              const distance = Math.abs(scrollLeft - childLeft);
+                              if (distance < minDistance) {
+                                   minDistance = distance;
+                                   closestIndex = idx;
+                              }
+                         });
+
+                         setCurrentIndex(Math.max(0, Math.min(closestIndex, maxIndex)));
                          ticking = false;
                     });
                     ticking = true;
@@ -178,11 +196,14 @@ const Testimonials = ({ data }) => {
 
           slider.addEventListener("scroll", handleScroll);
 
-          return () => slider.removeEventListener("scroll", handleScroll);
+          return () => {
+               slider.removeEventListener("scroll", handleScroll);
+               if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+          };
      }, [maxIndex]);
 
      return (
-          <div className='relative min-h-215 md:min-h-200.25 mx-auto w-full px-4 sm:px-6 lg:px-10 pt-18 lg:pt-16 overflow-hidden'>
+          <div className='relative min-h-215 md:min-h-200.25 mx-auto w-full px-4 sm:px-6 lg:px-10 pt-10 lg:pt-16 pb-8 overflow-hidden'>
                <Image src={Map} alt="weekend-ux-testimonials-bg" fetchPriority='high' decoding="async" className='absolute top-0 inset-0 w-full min-h-[120vh] md:h-[110vh] z-10 object-cover' />
 
                {/* Heading */}
@@ -212,12 +233,12 @@ const Testimonials = ({ data }) => {
                     {/* Slider */}
                     <div
                          ref={sliderRef}
-                         className="flex gap-5 md:gap-11 overflow-x-auto scroll-smooth hide-scrollbar pt-20 pl-2 md:pl-9"
+                         className="flex gap-4 md:gap-11 overflow-x-auto scroll-smooth hide-scrollbar pt-8 md:pt-20 pl-0 md:pl-9"
                     >
                          {testimonialsList.map((item, i) => (
                               <div
                                    key={i}
-                                   className="relative min-w-80 md:min-w-100 max-w-80 md:max-w-100 rounded-[28px] border border-[#D9D6CE] bg-white/10 p-7 backdrop-blur-sm"
+                                   className="relative w-[89vw] sm:w-[340px] md:w-[400px] shrink-0 rounded-[28px] border border-[#D9D6CE] bg-white/10 p-5 md:p-7 backdrop-blur-sm shadow-2xs"
                               >
                                    {/* Stars */}
                                    <div className="flex items-center gap-1 mb-6">
@@ -256,49 +277,67 @@ const Testimonials = ({ data }) => {
                          ))}
                     </div>
 
-                    {/* Controls */}
-                    <div className="flex items-center justify-end gap-0.5 md:gap-3 mt-5 md:mt-8">
+                     {/* Controls */}
+                     <div className="flex items-center justify-between md:justify-end gap-3 mt-6 md:mt-8 px-2 md:px-0">
 
-                         {/* DOTS */}
-                         <div className="flex items-center gap-0">
-                              {Array.from({ length: maxIndex + 1 }).map((_, i) => (
-                                   <button
-                                        key={i}
-                                        onClick={() => {
-                                             setCurrentIndex(i);
-                                             sliderRef.current.scrollTo({
-                                                  left: i * cardWidthRef.current,
-                                                  behavior: "auto",
-                                             });
-                                        }}
-                                        aria-label={`Go to slide ${i + 1}`}
-                                        aria-current={currentIndex === i ? "true" : undefined}
-                                        className="w-11 h-11 flex items-center justify-center cursor-pointer"
-                                   >
-                                        <span className={`block rounded-full transition-all duration-300
-                    ${currentIndex === i ? "w-3 md:w-6 h-1 md:h-2 bg-gray-800" : "w-1 md:w-2 h-1 md:h-2 bg-gray-300"}`}
-                                        />
-                                   </button>
-                              ))}
-                         </div>
+                          {/* Slide Counter on Mobile */}
+                          <div className="text-xs font-bold text-neutral/70 md:hidden bg-white/60 backdrop-blur-md px-3 py-1 rounded-full border border-zinc-200/80 shadow-2xs">
+                               {currentIndex + 1} / {maxIndex + 1}
+                          </div>
 
-                         {/* Arrows */}
-                         <button
-                              onClick={() => scroll("left")}
-                              aria-label="Go to Previous Testimonial"
-                              className="w-8 h-8 rounded-full border flex items-center justify-center text-gray-600 hover:bg-gray-200 cursor-pointer"
-                         >
-                              <IoIosArrowBack />
-                         </button>
+                          {/* DOTS WINDOW (Fixed 5 Dots, Cyclic Highlight 1 -> 5 -> 1) */}
+                          <div className="flex items-center gap-1.5 bg-white/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-zinc-200/80 shadow-2xs">
+                               {Array.from({ length: Math.min(maxIndex + 1, 5) }).map((_, dotIdx) => {
+                                    const activeDotIdx = currentIndex % 5;
+                                    const isActive = activeDotIdx === dotIdx;
 
-                         <button
-                              onClick={() => scroll("right")}
-                              aria-label="Go to Next Testimonial"
-                              className="w-8 h-8 rounded-full border flex items-center justify-center text-gray-600 hover:bg-gray-200 cursor-pointer"
-                         >
-                              <IoIosArrowForward />
-                         </button>
-                    </div>
+                                    return (
+                                         <button
+                                              key={dotIdx}
+                                              onClick={() => {
+                                                   const currentGroup = Math.floor(currentIndex / 5);
+                                                   let targetIndex = (currentGroup * 5) + dotIdx;
+                                                   if (targetIndex > maxIndex) {
+                                                        targetIndex = dotIdx;
+                                                   }
+                                                   scrollToIndex(targetIndex);
+                                              }}
+                                              aria-label={`Go to slide ${dotIdx + 1}`}
+                                              aria-current={isActive ? "true" : undefined}
+                                              className="p-1 flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110"
+                                         >
+                                              <span className={`block rounded-full transition-all duration-300 ${
+                                                   isActive
+                                                        ? "w-5 md:w-6 h-1.5 md:h-2 bg-neutral"
+                                                        : "w-1.5 md:w-2 h-1.5 md:h-2 bg-zinc-300 hover:bg-zinc-500"
+                                              }`}
+                                              />
+                                         </button>
+                                    );
+                               })}
+                          </div>
+
+                          {/* Navigation Arrows */}
+                          <div className="flex items-center gap-2">
+                               <button
+                                    onClick={() => scroll("left")}
+                                    disabled={currentIndex === 0}
+                                    aria-label="Go to Previous Testimonial"
+                                    className="w-9 h-9 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-neutral hover:bg-neutral hover:text-white transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
+                               >
+                                    <IoIosArrowBack size={16} />
+                               </button>
+
+                               <button
+                                    onClick={() => scroll("right")}
+                                    disabled={currentIndex >= maxIndex}
+                                    aria-label="Go to Next Testimonial"
+                                    className="w-9 h-9 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-neutral hover:bg-neutral hover:text-white transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
+                               >
+                                    <IoIosArrowForward size={16} />
+                               </button>
+                          </div>
+                     </div>
                </div>
 
 

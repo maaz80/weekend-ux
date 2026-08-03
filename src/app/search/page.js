@@ -155,7 +155,7 @@ const SearchResultsContent = () => {
                                                        value={searchQuery}
                                                        onChange={(e) => setSearchQuery(e.target.value)}
                                                        placeholder="Search courses by keyword..."
-                                                       className="w-full h-11 pl-4 pr-11 rounded-xl border border-zinc-200 bg-zinc-50/50 outline-none text-xs text-neutral focus:bg-white focus:border-neutral/50 transition-all duration-200"
+                                                            className="w-full h-11 pl-4 pr-11 rounded-xl border border-[#EDE9DC] bg-zinc-50/50 outline-none text-xs text-neutral focus:bg-white focus:border-[#dad7ce] transition-all duration-200"
                                                   />
                                                   <button
                                                        type="submit"
@@ -214,7 +214,7 @@ const SearchResultsContent = () => {
                                                                  key={cat}
                                                                  type="button"
                                                                  onClick={() => selectCategory(cat)}
-                                                                 className="border border-zinc-250 bg-zinc-50 hover:bg-official hover:text-neutral text-zinc-800 transition-all text-xs font-bold px-3 py-1.5 rounded-xl cursor-pointer shadow-xs shrink-0"
+                                                                 className="border border-[#EDE9DC] bg-zinc-50 hover:bg-official hover:border-official hover:text-neutral/60 text-neutral/70 transition-all text-xs font-bold px-3 py-1.5 rounded-xl cursor-pointer shadow-xs shrink-0"
                                                             >
                                                                  {cat}
                                                             </button>
@@ -272,7 +272,7 @@ const SearchResultsContent = () => {
                                                                       </div>
 
                                                                       {/* Footer row */}
-                                                                      <div className="flex items-center justify-between mt-4 border-t border-zinc-150 pt-3">
+                                                                      <div className="flex items-center justify-between mt-4 border-t border-[#EDE9DC] pt-3">
                                                                            <span className="text-[11px] text-zinc-500 font-semibold flex items-center gap-1">
                                                                                 <FiCheckCircle className="text-emerald-600 text-sm" />
                                                                                 Industry Certificate Included
