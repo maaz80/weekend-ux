@@ -4,8 +4,8 @@ const http = require('http');
 const https = require('https');
 
 // Project Configuration
-const SITE_URL = 'https://weekendux.com'; // Default production domain name
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const SITE_URL = 'https://www.weekendux.com'; // Canonical main domain (www)
+const API_URL = (process.env.NEXT_PUBLIC_API_URL || 'https://weekend-backend.onrender.com/api').replace(/\/$/, '');
 
 // Helper to fetch JSON from API
 function fetchJson(url) {
@@ -50,17 +50,17 @@ async function generateAllSeoFiles() {
     staticPages.forEach(addUrl);
 
     // 3. Dynamic Routes Processing (Blogs & Courses)
-    if (blogsData && Array.isArray(blogsData.blogs)) {
-        blogsData.blogs.forEach(blog => {
-            if (blog.slug) addUrl(`/blog/${blog.slug}`);
-        });
-    }
+    // Blogs: API returns { blogs: [...] }
+    const blogsArray = blogsData?.blogs || blogsData?.data || (Array.isArray(blogsData) ? blogsData : []);
+    blogsArray.forEach(blog => {
+        if (blog.slug) addUrl(`/blog/${blog.slug}`);
+    });
 
-    if (coursesData && Array.isArray(coursesData.courses)) {
-        coursesData.courses.forEach(course => {
-            if (course.slug) addUrl(`/courses/${course.slug}`);
-        });
-    }
+    // Courses: API returns { coursesPage: { course: [...] } }
+    const coursesArray = coursesData?.coursesPage?.course || coursesData?.courses || (Array.isArray(coursesData) ? coursesData : []);
+    coursesArray.forEach(course => {
+        if (course.slug) addUrl(`/courses/${course.slug}`);
+    });
 
     const uniqueUrls = Array.from(urls);
     const publicDir = path.join(__dirname, 'public');
