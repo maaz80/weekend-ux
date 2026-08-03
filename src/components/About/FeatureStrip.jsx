@@ -84,7 +84,7 @@ export default function FeatureStrip({
           ];
 
      return (
-          <section className={`relative overflow-hidden ${bgColor}`}>
+          <section className={`relative overflow-hidden ${bgColor} px-3`}>
 
                <div className="mx-auto max-w-95 md:max-w-310 min-h-137.5 md:min-h-104 flex flex-col items-start justify-center">
                     {/* Intro Text */}

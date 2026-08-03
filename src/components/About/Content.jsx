@@ -3,7 +3,7 @@ import Image from "next/image";
 const Content = ({
      data,
      textColor = "text-neutral",
-     fontSize = "text-[32px] md:text-[40px]",
+     fontSize = "text-[18px] md:text-[40px]",
      showDiamond = true,
      diamondOpacity = "opacity-50"
 }) => {
@@ -18,7 +18,7 @@ const Content = ({
                     <Image
                          src='/images/weekend-ux-decorative-diamond.webp'
                          alt="weekend-ux-decorative-diamond"
-                         className={`w-24 md:w-50 h-auto absolute right-1 md:right-3 top-0 md:top-0 z-30 ${diamondOpacity}`}
+                         className={`w-24 md:w-50 h-auto absolute right-1 md:right-3 -top-13 md:top-0 z-30 ${diamondOpacity}`}
                          width={200}
                          height={200}
                          style={{ height: 'auto' }}

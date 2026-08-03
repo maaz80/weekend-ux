@@ -63,7 +63,7 @@ const TeamSection = ({
           : staticTeam;
 
      return (
-          <section className={`py-16 lg:py-24 ${bgColor}`}>
+          <section className={`py-10 lg:py-24 ${bgColor} px-2`}>
                <div className="custom-width px-4 sm:px-6 lg:px-8">
 
                     <div className="grid lg:grid-cols-[380px_1fr] gap-10 lg:gap-16 items-center">

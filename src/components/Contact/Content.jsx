@@ -64,7 +64,7 @@ const Content = ({
           : Map.src || Map;
 
      return (
-          <section className={`py-10 md:py-16 font-urbanist ${bgColor}`}>
+          <section className={`py-10 md:py-16 font-urbanist ${bgColor} px-2`}>
                <div className="custom-width px-4 md:px-6 lg:px-8">
 
                     {/* ================= TOP SECTION ================= */}
@@ -73,7 +73,7 @@ const Content = ({
 
                          {/* LEFT SIDE */}
 
-                         <div className="mr-5">
+                         <div className="mr-0 md:mr-5">
 
                               {/* Image */}
 
@@ -138,7 +138,7 @@ const Content = ({
 
                          {/* RIGHT SIDE */}
 
-                         <div className={`mt-10 md:mt-0 p-5 md:p-10 rounded-2xl ${formBgColor} ${formShadow}`}>
+                         <div className={`mt-10 md:mt-0 p-2 md:p-10 rounded-2xl ${formBgColor} ${formShadow}`}>
 
                               <h2 className={`font-playfair text-[26px] md:text-[40px] text-center mb-8 ${formHeadingColor}`}>
                                    Enquire Here!
@@ -157,7 +157,7 @@ const Content = ({
                               <OptimizedImage
                                    src={mapImageSrc}
                                    alt="weekend-ux-contact-map"
-                                   className={`w-full h-75 md:h-112.5 lg:h-150 object-cover ${mapRounded}`}
+                                   className={`w-full h-55 md:h-112.5 lg:h-150 object-cover ${mapRounded}`}
                                    sizes="100vw"
                               />
 
