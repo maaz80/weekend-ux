@@ -117,8 +117,8 @@ export default function LeadModal() {
      if (!isOpen) return null;
 
      return (
-          <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-zinc-950/70 backdrop-blur-md p-4 transition-all duration-300">
-               <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl relative border border-zinc-150 text-neutral text-center transform scale-100 transition-all duration-300 animate-in fade-in zoom-in-95 duration-200">
+          <div className="fixed inset-0 z-9999 flex items-center justify-center bg-zinc-950/70 backdrop-blur-md p-4 transition-all duration-300">
+               <div className="w-full max-w-md bg-white rounded-3xl p-8 shadow-2xl relative border border-zinc-150 text-neutral text-center transform scale-100 transition-all duration-300 animate-in fade-in zoom-in-95 ">
                     
                     {/* Close Button */}
                     <button
