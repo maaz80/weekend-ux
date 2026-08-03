@@ -21,20 +21,20 @@ export const dynamic = "force-dynamic";
 // Prefetch Navbar and Footer data on the server during SSR to drop HTTP overhead
 async function getLayoutInitialData() {
   try {
-       await connectDB();
-       const [navbarDoc, footerGlobalDoc, footerColumnsDocs] = await Promise.all([
-            NavbarModel.findOne().lean(),
-            FooterModel.findOne({ isGlobal: true }).lean(),
-            FooterModel.find({ isGlobal: { $ne: true } }).sort({ order: 1 }).lean()
-       ]);
-       return {
-            navbarData: navbarDoc ? JSON.parse(JSON.stringify(navbarDoc)) : null,
-            footerGlobalData: footerGlobalDoc ? JSON.parse(JSON.stringify(footerGlobalDoc)) : null,
-            footerColumnsData: footerColumnsDocs ? JSON.parse(JSON.stringify(footerColumnsDocs)) : null
-       };
+    await connectDB();
+    const [navbarDoc, footerGlobalDoc, footerColumnsDocs] = await Promise.all([
+      NavbarModel.findOne().lean(),
+      FooterModel.findOne({ isGlobal: true }).lean(),
+      FooterModel.find({ isGlobal: { $ne: true } }).sort({ order: 1 }).lean()
+    ]);
+    return {
+      navbarData: navbarDoc ? JSON.parse(JSON.stringify(navbarDoc)) : null,
+      footerGlobalData: footerGlobalDoc ? JSON.parse(JSON.stringify(footerGlobalDoc)) : null,
+      footerColumnsData: footerColumnsDocs ? JSON.parse(JSON.stringify(footerColumnsDocs)) : null
+    };
   } catch (e) {
-       console.error("Failed to prefetch layout data on server:", e);
-       return null;
+    console.error("Failed to prefetch layout data on server:", e);
+    return null;
   }
 }
 
@@ -104,7 +104,7 @@ export default async function RootLayout({ children }) {
                 "@type": "ContactPoint",
                 "contactType": "Admissions & Support",
                 "telephone": "+919599272764",
-                "email": "business@weekendux.com"
+                "email": "support@weekendux.in"
               },
               "knowsAbout": [
                 "UI Design",
@@ -132,7 +132,7 @@ export default async function RootLayout({ children }) {
           <StaticPageSchemaRenderer />
           <Navbar />
           <main className="grow">
-               {children}
+            {children}
           </main>
           <Chatbot />
           <LeadModal />

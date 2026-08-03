@@ -134,9 +134,9 @@ export default function LeadModal() {
                               <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-5 border border-emerald-200 animate-bounce">
                                    <CheckCircle2 size={32} />
                               </div>
-                              <h3 className="text-2xl font-bold font-playfair text-zinc-900 mb-2">Lessons Unlocked!</h3>
+                              <h3 className="text-2xl font-bold font-playfair text-zinc-900 mb-2">Syllabus Sent to Email!</h3>
                               <p className="text-sm text-zinc-500 font-urbanist leading-relaxed">
-                                   Thank you for sharing your details. You can now access all course materials.
+                                   Thank you for sharing your details. The complete course syllabus and curriculum details have been sent to your email address.
                               </p>
                          </div>
                     ) : (

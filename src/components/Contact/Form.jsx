@@ -223,7 +223,7 @@ const Form = ({
                                         name="fullName"
                                         value={formData.fullName}
                                         onChange={handleChange}
-                                        placeholder="Full Name"
+                                        placeholder="Enter your full name"
                                         className={`w-full h-10 border px-4 text-sm outline-none rounded-sm placeholder:text-neutral-400 transition-colors ${inputFocusColor} ${inputBgColor} ${errors.fullName ? "border-red-400" : inputBorderColor}`}
                                    />
                                    {errors.fullName && <p className="text-red-500 text-xs mt-1">{errors.fullName}</p>}
@@ -238,7 +238,7 @@ const Form = ({
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        placeholder="Email"
+                                        placeholder="Enter your email"
                                         className={`w-full h-10 border px-4 text-sm outline-none rounded-sm placeholder:text-neutral-400 transition-colors ${inputFocusColor} ${inputBgColor} ${errors.email ? "border-red-400" : inputBorderColor}`}
                                    />
                                    {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
@@ -253,7 +253,7 @@ const Form = ({
                                         name="phone"
                                         value={formData.phone}
                                         onChange={handleChange}
-                                        placeholder="Phone Number"
+                                        placeholder="Enter your phone number"
                                         className={`w-full h-10 border px-4 text-sm outline-none rounded-sm placeholder:text-neutral-400 transition-colors ${inputFocusColor} ${inputBgColor} ${errors.phone ? "border-red-400" : inputBorderColor}`}
                                    />
                                    {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
@@ -268,7 +268,7 @@ const Form = ({
                                         name="message"
                                         value={formData.message}
                                         onChange={handleChange}
-                                        placeholder="Description"
+                                        placeholder="Enter your description"
                                         className={`w-full border p-4 text-sm outline-none resize-none rounded-sm placeholder:text-neutral-400 ${inputBorderColor} ${inputFocusColor} ${inputBgColor}`}
                                    />
                               </div>

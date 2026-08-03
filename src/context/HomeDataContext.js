@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
 
 export const HomeDataContext = createContext({
      homeData: null,
@@ -26,7 +26,12 @@ export function HomeDataProvider({ children, initialData }) {
      const [loading, setLoading] = useState(!initialData);
      const [isChatbotOpen, setIsChatbotOpen] = useState(false);
 
+     const hasFetchedRef = useRef(false);
+
      useEffect(() => {
+          if (hasFetchedRef.current) return;
+          hasFetchedRef.current = true;
+
           let isMounted = true;
 
           async function fetchMissingData() {
@@ -93,7 +98,7 @@ export function HomeDataProvider({ children, initialData }) {
           return () => {
                isMounted = false;
           };
-     }, [initialData]);
+     }, []);
 
      return (
           <HomeDataContext.Provider value={{ homeData, faqData, coursesData, navbarData, footerGlobalData, footerColumnsData, testimonialsData, blogsData, loading, isChatbotOpen, setIsChatbotOpen }}>

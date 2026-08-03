@@ -1,6 +1,7 @@
 import { cache } from "react";
 import CourseDetailsView from "@/components/Course Details/Details";
 import FAQ from "@/components/FAQ";
+import Testimonials from "@/components/Home/Testimonials/Testimonials";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -13,10 +14,37 @@ import SchemaRenderer from "@/components/SchemaRenderer";
 const getCourseData = cache(async (slug) => {
      try {
           await connectDB();
-          const coursesPage = await Courses.findOne().select("course").lean();
-          if (coursesPage) {
-               const course = coursesPage.course.find(c => c.slug === slug);
-               if (course) return JSON.parse(JSON.stringify(course));
+          const coursesPage = await Courses.findOne().lean();
+          if (coursesPage && Array.isArray(coursesPage.course) && coursesPage.course.length > 0) {
+               // 1. Exact match by slug or _id
+               let course = coursesPage.course.find(c => c.slug === slug || (c._id && c._id.toString() === slug));
+
+               // 2. Loose match by slug substring or title
+               if (!course && slug) {
+                    const cleanSlug = slug.toLowerCase().replace(/[^a-z0-9]/g, "");
+                    course = coursesPage.course.find(c => {
+                         const cSlug = (c.slug || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+                         const cTitle = (c.title || "").toLowerCase().replace(/[^a-z0-9]/g, "");
+                         return (cSlug && (cSlug.includes(cleanSlug) || cleanSlug.includes(cSlug))) ||
+                                (cTitle && (cTitle.includes(cleanSlug) || cleanSlug.includes(cTitle)));
+                    });
+               }
+
+               // 3. Fallback to first course in database instead of 404
+               if (!course) {
+                    course = coursesPage.course[0];
+               }
+
+               if (course) {
+                    const resObj = JSON.parse(JSON.stringify(course));
+                    if (coursesPage.caseStudies && coursesPage.caseStudies.items && coursesPage.caseStudies.items.length > 0) {
+                         resObj.caseStudies = JSON.parse(JSON.stringify(coursesPage.caseStudies));
+                    }
+                    if (coursesPage.careerDomains && coursesPage.careerDomains.items && coursesPage.careerDomains.items.length > 0) {
+                         resObj.careerDomains = JSON.parse(JSON.stringify(coursesPage.careerDomains));
+                    }
+                    return resObj;
+               }
           }
      } catch (error) {
           console.error("Error in getCourseData fetching database:", error);
@@ -131,6 +159,7 @@ export default async function CourseSlugPage({ params }) {
                })}
 
                <CourseDetailsView data={data} />
+               <Testimonials />
                <RelatedBlogs />
                <FAQ faqData={(data?.faq?.items && data.faq.items.length > 0) ? {
                     faq: data.faq.items,

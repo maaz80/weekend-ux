@@ -5,8 +5,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Button from './ui/Button';
 import { useHomeData } from "@/context/HomeDataContext";
+import Logo from "@/app/assets/weekend-ux-logo.webp";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 import { CiYoutube } from "react-icons/ci";
 import { RiTwitterXLine, RiTwitterXFill } from "react-icons/ri";
+import { SiFacebook, SiYoutube } from "react-icons/si";
+import { FaXTwitter } from "react-icons/fa6";
 import { 
      FaInstagram, 
      FaFacebookF, 
@@ -25,6 +29,9 @@ import {
 } from "react-icons/fa6";
 
 const SOCIAL_ICON_MAP = {
+     SiFacebook,
+     SiYoutube,
+     FaXTwitter,
      CiYoutube,
      RiTwitterXLine,
      RiTwitterXFill,
@@ -44,15 +51,42 @@ const SOCIAL_ICON_MAP = {
      FaBehance
 };
 
-function getIconComponent(iconName) {
-     if (!iconName) return null;
-     const Icon = SOCIAL_ICON_MAP[iconName];
-     if (Icon) return Icon;
-     
-     const matchedKey = Object.keys(SOCIAL_ICON_MAP).find(k => k.toLowerCase() === iconName.toLowerCase());
-     if (matchedKey) return SOCIAL_ICON_MAP[matchedKey];
-     
-     return null;
+function getIconComponent(iconName, path = "") {
+     const name = (iconName || "").toLowerCase().trim();
+     const url = (path || "").toLowerCase().trim();
+
+     if (iconName && SOCIAL_ICON_MAP[iconName]) {
+          return SOCIAL_ICON_MAP[iconName];
+     }
+
+     if (name) {
+          const matchedKey = Object.keys(SOCIAL_ICON_MAP).find(k => k.toLowerCase() === name);
+          if (matchedKey) return SOCIAL_ICON_MAP[matchedKey];
+     }
+
+     if (name.includes("facebook") || name.includes("fb")) return SiFacebook;
+     if (name.includes("instagram") || name.includes("insta")) return FaInstagram;
+     if (name.includes("linkedin")) return FaLinkedinIn;
+     if (name.includes("youtube") || name.includes("yt")) return SiYoutube;
+     if (name.includes("twitter") || name.includes("x")) return FaXTwitter;
+     if (name.includes("github")) return FaGithub;
+     if (name.includes("whatsapp")) return FaWhatsapp;
+     if (name.includes("telegram")) return FaTelegram;
+     if (name.includes("pinterest")) return FaPinterest;
+     if (name.includes("tiktok")) return FaTiktok;
+     if (name.includes("dribbble")) return FaDribbble;
+     if (name.includes("behance")) return FaBehance;
+
+     if (url.includes("facebook.com")) return SiFacebook;
+     if (url.includes("instagram.com")) return FaInstagram;
+     if (url.includes("linkedin.com")) return FaLinkedinIn;
+     if (url.includes("youtube.com") || url.includes("youtu.be")) return SiYoutube;
+     if (url.includes("twitter.com") || url.includes("x.com")) return FaXTwitter;
+     if (url.includes("github.com")) return FaGithub;
+     if (url.includes("wa.me") || url.includes("whatsapp.com")) return FaWhatsapp;
+     if (url.includes("t.me") || url.includes("telegram.org")) return FaTelegram;
+
+     return FaInstagram;
 }
 
 const DEFAULT_SETTINGS = {
@@ -60,11 +94,11 @@ const DEFAULT_SETTINGS = {
      buttonname: "Refer & Earn",
      copyright: "© 2026 - Weekend UX All Rights Reserved.",
      socials: [
-          { icon: "FaFacebookF", path: "https://www.facebook.com/weekendux/" },
-          { icon: "RiTwitterXLine", path: "https://twitter.com" },
+          { icon: "SiFacebook", path: "https://www.facebook.com/weekendux/" },
           { icon: "FaInstagram", path: "https://www.instagram.com/weekendux1/" },
           { icon: "FaLinkedinIn", path: "https://www.linkedin.com/in/weekend-ux-7b03212a8/" },
-          { icon: "CiYoutube", path: "https://youtube.com" }
+          { icon: "SiYoutube", path: "https://www.youtube.com/" },
+          { icon: "FaXTwitter", path: "https://x.com/" }
      ],
      navigation: [
           { itemname: "Home", itempath: "/" },
@@ -100,7 +134,8 @@ export default function Footer({
      bannerBgImage = "/images/weekend-ux-footer-decorative-bg.webp",
      bannerTitleColor = "text-neutral"
 }) {
-     const { footerGlobalData, footerColumnsData } = useHomeData();
+     const { footerGlobalData, footerColumnsData, navbarData } = useHomeData();
+     const hasLogoImage = navbarData?.logo?.image && navbarData.logo.image.trim();
      const [locations, setLocations] = useState(DEFAULT_LOCATIONS);
 
      useEffect(() => {
@@ -191,47 +226,67 @@ export default function Footer({
           md:grid-cols-3
           2xl:grid-cols-5
         ">
+                          {/* Brand Logo & Social Icons */}
+                          <div className="order-1 md:order-3 2xl:order-1 flex flex-col items-center gap-5">
+                               <Link href="/" className="inline-block">
+                                    {hasLogoImage ? (
+                                         <OptimizedImage
+                                              src={navbarData.logo.image.trim()}
+                                              alt={navbarData?.logo?.alt && navbarData.logo.alt.trim() ? navbarData.logo.alt.trim() : "Logo"}
+                                              className="w-auto h-10 md:h-18 object-contain"
+                                              objectFit="contain"
+                                         />
+                                    ) : (
+                                         <Image
+                                              src={Logo}
+                                              alt="weekend-ux-logo"
+                                              width={160}
+                                              height={50}
+                                              className="w-auto h-10 md:h-18 object-contain"
+                                              priority
+                                         />
+                                    )}
+                               </Link>
 
-                         {/* Follow us */}
-                         <div className="order-1 md:order-3 2xl:order-1">
-                              <h3 className="text-[20px] mb-5">{settings?.buttontitle || "Follow us!"}</h3>
-
-                              {(settings?.buttonname || !settings) && (
-                                   <button className="w-43 h-11 border border-white/70 rounded-md text-[12px] text-[#8FA1B2] mb-5 hover:bg-white/5 transition">
-                                        {settings?.buttonname || "Refer & Earn"}
-                                   </button>
-                              )}
-
-                              <div className="flex gap-3">
-                                   {settings && settings.socials && settings.socials.length > 0 ? (
-                                        settings.socials.map((social, i) => {
-                                             const IconComponent = getIconComponent(social.icon);
-                                             if (!IconComponent) return null;
-                                             return (
-                                                  <a
-                                                       href={social.path}
-                                                       target="_blank"
-                                                       rel="noopener noreferrer"
-                                                       key={i}
-                                                       aria-label={social.icon ? social.icon.replace(/^(Fa|Ri|Ci|Fi)/, "").replace(/([A-Z])/g, " $1").trim() : "Social media"}
-                                                       className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-neutral hover:bg-official/80 transition-colors duration-200"
-                                                  >
-                                                       <IconComponent size={18} />
-                                                  </a>
-                                             );
-                                        })
-                                   ) : (
-                                        [FaFacebookF, RiTwitterXLine, FaInstagram, FaLinkedinIn, CiYoutube].map((Icon, i) => (
-                                             <div
-                                                  key={i}
-                                                  className="min-w-9 h-9 rounded-full bg-official flex items-center justify-center cursor-pointer text-neutral hover:bg-official/80 transition-colors duration-200"
-                                             >
-                                                  <Icon size={18} strokeWidth={1.2} />
-                                             </div>
-                                        ))
-                                   )}
-                              </div>
-                         </div>
+                               <div className="flex gap-3 items-center">
+                                    {settings && settings.socials && settings.socials.length > 0 ? (
+                                         settings.socials.map((social, i) => {
+                                              const IconComponent = getIconComponent(social.icon, social.path);
+                                              return (
+                                                   <a
+                                                        href={social.path || "#"}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        key={i}
+                                                        aria-label={social.icon ? social.icon.replace(/^(Fa|Ri|Ci|Fi|Si)/, "").replace(/([A-Z])/g, " $1").trim() : "Social media"}
+                                                        className="w-8 h-8 rounded-full bg-official flex items-center justify-center cursor-pointer text-neutral hover:bg-official/80 hover:-translate-y-0.5 transition-all duration-200 shrink-0"
+                                                   >
+                                                        <IconComponent size={16} />
+                                                   </a>
+                                              );
+                                         })
+                                    ) : (
+                                         [
+                                              { Icon: SiFacebook, path: "https://www.facebook.com/weekendux/", label: "Facebook" },
+                                              { Icon: FaInstagram, path: "https://www.instagram.com/weekendux1/", label: "Instagram" },
+                                              { Icon: FaLinkedinIn, path: "https://www.linkedin.com/in/weekend-ux-7b03212a8/", label: "LinkedIn" },
+                                              { Icon: SiYoutube, path: "https://www.youtube.com/", label: "YouTube" },
+                                              { Icon: FaXTwitter, path: "https://x.com/", label: "Twitter" }
+                                         ].map(({ Icon, path, label }, i) => (
+                                              <a
+                                                   key={i}
+                                                   href={path}
+                                                   target="_blank"
+                                                   rel="noopener noreferrer"
+                                                   aria-label={label}
+                                                   className="w-8 h-8 rounded-full bg-official flex items-center justify-center cursor-pointer text-neutral hover:bg-official/80 hover:-translate-y-0.5 transition-all duration-200 shrink-0"
+                                              >
+                                                   <Icon size={16} />
+                                              </a>
+                                         ))
+                                    )}
+                               </div>
+                          </div>
 
                          {/* Dynamic Footer Columns */}
                          {footerColumns.map((col, idx) => {

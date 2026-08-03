@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Testimonials from "@/components/Home/Testimonials/Testimonials";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import FAQ from "@/components/FAQ";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -70,6 +71,7 @@ export default async function PrivacyPolicy() {
                          dangerouslySetInnerHTML={{ __html: content || "" }}
                     />
                </div>
+               <Testimonials />
                <RelatedBlogs data={policyData?.relatedBlogs} />
                <FAQ/>
           </div>

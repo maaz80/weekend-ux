@@ -104,23 +104,40 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
           }
      };
 
+     const getCourseList = (data) => {
+          if (!data) return [];
+          if (Array.isArray(data)) return data;
+          if (Array.isArray(data.course)) return data.course;
+          if (Array.isArray(data.courses)) return data.courses;
+          if (Array.isArray(data.data)) return data.data;
+          return [];
+     };
+
      useEffect(() => {
           const query = searchQuery.trim().toLowerCase();
-          if (query.length >= 2 && coursesData?.course) {
+          const allCourses = getCourseList(coursesData);
+
+          if (query.length >= 1 && allCourses.length > 0) {
                // Direct Matches
-               const direct = coursesData.course.filter(course =>
+               const direct = allCourses.filter(course =>
                     course.title?.toLowerCase().includes(query) ||
+                    course.category?.toLowerCase().includes(query) ||
                     course.overview?.toLowerCase().includes(query) ||
-                    course.category?.toLowerCase().includes(query)
+                    course.slug?.toLowerCase().includes(query) ||
+                    course.seotitle?.toLowerCase().includes(query) ||
+                    (course.chapter && Array.isArray(course.chapter) && course.chapter.some(ch =>
+                         ch.chaptername?.toLowerCase().includes(query) ||
+                         (ch.lessons && Array.isArray(ch.lessons) && ch.lessons.some(les => les.lessonname?.toLowerCase().includes(query)))
+                    ))
                );
                setSearchResults(direct);
 
                // Related Matches (Same Category, but not in direct matches)
                const directCategories = [...new Set(direct.map(c => c.category).filter(Boolean))];
                if (directCategories.length > 0) {
-                    const related = coursesData.course.filter(course =>
+                    const related = allCourses.filter(course =>
                          directCategories.includes(course.category) &&
-                         !direct.some(d => d._id === course._id)
+                         !direct.some(d => (d._id && d._id === course._id) || (d.slug && d.slug === course.slug))
                     );
                     setSuggestedResults(related);
                } else {
@@ -251,9 +268,9 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                         <FaPhoneAlt size={12} className="md:w-3.5 md:h-3.5" aria-hidden="true" />
                                         <span>+91 9599272764</span>
                                    </a>
-                                   <a href="mailto:business@weekendux.com" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                                   <a href="mailto:support@weekendux.in" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                                         <FaEnvelope size={12} className="md:w-3.5 md:h-3.5" aria-hidden="true" />
-                                        <span className="">business@weekendux.com</span>
+                                        <span className="">support@weekendux.in</span>
                                    </a>
                               </div>
                               <div className="flex items-center gap-4 md:gap-5">
@@ -348,7 +365,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              </form>
 
                                              {/* Dropdown for search results with related suggestions */}
-                                             {searchQuery.trim().length >= 2 && (
+                                             {searchQuery.trim().length >= 1 && (
                                                   <>
                                                        <style dangerouslySetInnerHTML={{
                                                             __html: `
@@ -561,7 +578,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                    </div>
 
                                    {/* Dropdown for mobile search results */}
-                                   {searchQuery.trim().length >= 2 && (
+                                   {searchQuery.trim().length >= 1 && (
                                         <>
                                              <style dangerouslySetInnerHTML={{
                                                   __html: `

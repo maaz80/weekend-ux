@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Testimonials from "@/components/Home/Testimonials/Testimonials";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import Breadcrumb from "@/components/Breadcrumb";
 import FAQ from "@/components/FAQ";
@@ -260,7 +261,8 @@ export default function Blogs() {
                     )}
                </div>
 
-               {/* <RelatedBlogs /> */}
+               <Testimonials />
+               <RelatedBlogs />
                <FAQ />
           </div>
      );

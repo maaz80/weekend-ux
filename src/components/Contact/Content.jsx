@@ -27,7 +27,7 @@ const Content = ({
 
      const inquiriesEmail = leftSection?.inquiries?.email && leftSection.inquiries.email.trim()
           ? leftSection.inquiries.email.trim()
-          : "hello@weekendux.com";
+          : "support@weekendux.in";
 
      const inquiriesPhone = leftSection?.inquiries?.phone && leftSection.inquiries.phone.trim()
           ? leftSection.inquiries.phone.trim()

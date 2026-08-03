@@ -5,6 +5,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumb";
 import CourseCard from "@/components/Courses/CourseCard";
+import Testimonials from "@/components/Home/Testimonials/Testimonials";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import FAQ from "@/components/FAQ";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
@@ -347,7 +348,8 @@ export default function CoursesPage() {
                     </div>
                </section>
 
-               {/* Common Shared Components (RelatedBlogs, FAQ, Footer) */}
+               {/* Common Shared Components (Testimonials, RelatedBlogs, FAQ, Footer) */}
+               <Testimonials />
                <RelatedBlogs data={coursesData?.relatedBlogs} />
                <FAQ paddings="py-20" />
 

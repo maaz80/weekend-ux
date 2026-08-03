@@ -1,5 +1,6 @@
 import Hero from "@/components/About/Hero";
 import FeatureStrip from "@/components/About/FeatureStrip";
+import Testimonials from "@/components/Home/Testimonials/Testimonials";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import FAQ from "@/components/FAQ";
 import Content from "@/components/About/Content";
@@ -41,6 +42,7 @@ export default async function About() {
                <Content data={aboutData?.quote} />
                <Details data={aboutData?.why} />
                <TeamSection data={aboutData?.team} />
+               <Testimonials />
                <RelatedBlogs data={aboutData?.relatedBlogs} />
                <FAQ />
           </div>

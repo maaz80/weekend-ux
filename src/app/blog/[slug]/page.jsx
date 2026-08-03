@@ -1,6 +1,7 @@
 import { cache } from "react";
 import BlogDetailsView from "./Details";
 import FAQ from "@/components/FAQ";
+import Testimonials from "@/components/Home/Testimonials/Testimonials";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -134,6 +135,7 @@ export default async function BlogSlugPage({ params }) {
                 })}
 
                 <BlogDetailsView data={data} />
+                <Testimonials />
                 <RelatedBlogs />
                <FAQ faqData={(data?.faq?.items && data.faq.items.length > 0) ? {
                     faq: data.faq.items,

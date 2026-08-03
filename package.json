@@ -6,7 +6,7 @@
     "prebuild": "node generate_seo_files.js",
     "build": "npm run prebuild && next build",
     "clean": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\"",
-    "dev": "next dev",
+    "dev": "node --max-old-space-size=8192 node_modules/next/dist/bin/next dev",
     "start": "next start",
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",
