@@ -122,7 +122,7 @@ const FAQ = ({
           : "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs.";
 
      return (
-          <section className={` relative z-999 ${paddings} pt-15 pb-35 md:pb-70 ${bgColor}`}>
+          <section className={` relative z-999 ${paddings} pt-15 pb-35 md:pb-70 ${bgColor} px-2.5`}>
                {/* Background */}
                {bgImage && (
                     <div

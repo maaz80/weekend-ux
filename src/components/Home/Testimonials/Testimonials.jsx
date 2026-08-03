@@ -257,7 +257,7 @@ const Testimonials = ({ data }) => {
                     </div>
 
                     {/* Controls */}
-                    <div className="flex items-center justify-end gap-3 mt-8">
+                    <div className="flex items-center justify-end gap-0.5 md:gap-3 mt-5 md:mt-8">
 
                          {/* DOTS */}
                          <div className="flex items-center gap-0">
@@ -276,7 +276,7 @@ const Testimonials = ({ data }) => {
                                         className="w-11 h-11 flex items-center justify-center cursor-pointer"
                                    >
                                         <span className={`block rounded-full transition-all duration-300
-                    ${currentIndex === i ? "w-6 h-2 bg-gray-800" : "w-2 h-2 bg-gray-300"}`}
+                    ${currentIndex === i ? "w-3 md:w-6 h-1 md:h-2 bg-gray-800" : "w-1 md:w-2 h-1 md:h-2 bg-gray-300"}`}
                                         />
                                    </button>
                               ))}

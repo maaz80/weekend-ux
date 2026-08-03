@@ -206,9 +206,9 @@ export default function Footer({
 
      return (
           <footer className={`w-full -mt-10 relative z-1000 pb-16 ${bgColor} ${textColor}`}>
-               <div className="absolute -top-22.5 md:-top-45 left-0 right-0 mx-auto w-[90%] md:w-[80%] max-w-[80%] h-45 md:h-90 z-20 flex flex-col items-start justify-center px-2 md:px-10 lg:px-30">
+               <div className="absolute -top-22.5 md:-top-45 left-0 right-0 mx-auto w-[95%] md:w-[80%] max-w-[80%] h-45 md:h-90 z-20 flex flex-col items-start justify-center px-2 md:px-10 lg:px-30">
                     <Image src={bannerBgImage} alt="weekend-ux-footer-decorative-bg" fill priority className="bg-center object-contain " />
-                    <div className={`font-playfair text-[17px] md:text-[28px] lg:text-[56px] max-w-150 relative z-50 leading-9 md:leading-12 lg:leading-16 ${bannerTitleColor}`} >
+                    <div className={`font-playfair text-[17px] md:text-[28px] lg:text-[56px] max-w-160 relative z-50 leading-9 md:leading-12 lg:leading-16 ${bannerTitleColor}`} >
                          {cardTitle}
                     </div>
                     <Link href="/contact-us">
@@ -227,7 +227,7 @@ export default function Footer({
           2xl:grid-cols-5
         ">
                           {/* Brand Logo & Social Icons */}
-                          <div className="order-1 md:order-3 2xl:order-1 flex flex-col items-center gap-5">
+                          <div className="order-1 md:order-3 2xl:order-1 flex flex-col items-start md:items-center gap-5">
                                <Link href="/" className="inline-block">
                                     {hasLogoImage ? (
                                          <OptimizedImage
