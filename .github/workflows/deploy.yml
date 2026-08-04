@@ -23,18 +23,18 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm install --prefix user
+          npm install
 
       - name: Build static site
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
         run: |
-          npm run build --prefix user
+          npm run build
 
       - name: Check export folder
         run: |
-          if [ -d "user/out" ]; then echo "OUT_EXISTS=true"; else echo "OUT_EXISTS=false"; fi
-          ls -la user/out || true
+          if [ -d "out" ]; then echo "OUT_EXISTS=true"; else echo "OUT_EXISTS=false"; fi
+          ls -la out || true
 
       - name: Upload to Hostinger via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
