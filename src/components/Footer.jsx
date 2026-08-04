@@ -107,6 +107,7 @@ const DEFAULT_SETTINGS = {
           { itemname: "About us", itempath: "/about-us" },
           { itemname: "Disclaimer", itempath: "/disclaimer" },
           { itemname: "Privacy Policy", itempath: "/privacy-policy" },
+          { itemname: "Terms & Conditions", itempath: "/terms-and-conditions-enrolment" },
           { itemname: "Contact us", itempath: "/contact-us" }
      ]
 };
@@ -162,6 +163,7 @@ export default function Footer({
                     { label: "Courses", path: "/courses" },
                     { label: "Disclaimer", path: "/disclaimer" },
                     { label: "Privacy Policy", path: "/privacy-policy" },
+                    { label: "Terms & Conditions", path: "/terms-and-conditions-enrolment" },
                     { label: "Contact us", path: "/contact-us" },
                     { label: "Blogs", path: "/blog" },
                ]
@@ -339,6 +341,7 @@ export default function Footer({
                                              { to: '/about-us', title: 'About us' },
                                              { to: '/disclaimer', title: 'Disclaimer' },
                                              { to: '/privacy-policy', title: 'Privacy Policy' },
+                                             { to: '/terms-and-conditions-enrolment', title: 'Terms & Conditions' },
                                              { to: '/contact-us', title: 'Contact us' }
                                         ]
                               }
