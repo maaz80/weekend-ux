@@ -3,8 +3,21 @@ import LocationDetailsView from "@/components/Location/LocationDetailsView";
 import Location from "@/models/Location";
 import connectDB from "@/config/db";
 import { generatePageMetadata, getPageSEOData } from "@/utils/seo";
-import { headers } from "next/headers";
 import SchemaRenderer from "@/components/SchemaRenderer";
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+     try {
+          await connectDB();
+          const locationDoc = await Location.findOne().select("items.hero.slug").lean();
+          const slugs = locationDoc?.items?.flatMap((item) => item?.hero?.map((heroItem) => heroItem?.slug).filter(Boolean)) || [];
+          return slugs.map((slug) => ({ slug }));
+     } catch (error) {
+          console.error("Error generating location static params:", error);
+          return [];
+     }
+}
 
 // Fetch only location data
 const getLocationData = cache(async (slug) => {
@@ -31,11 +44,7 @@ export async function generateMetadata({ params }) {
      const title = data.hero?.[0]?.seotitle || data.title || "Location";
      const description = data.hero?.[0]?.seodescription || data.title;
      const imageUrl = data.image?.imageurl || "";
-
-     const headersList = await headers();
-     const host = headersList.get("x-forwarded-host") || headersList.get("host") || "";
-     const proto = headersList.get("x-forwarded-proto") || "https";
-     const baseUrl = host ? `${proto}://${host}` : (process.env.NEXT_PUBLIC_BASE_URL || "https://www.weekendux.com");
+     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.weekendux.com";
      const pageUrl = `${baseUrl}/location/${slug}`;
      const finalImageUrl = imageUrl || `${baseUrl}/images/weekend-ux-blogs-hero-bg.webp`;
 

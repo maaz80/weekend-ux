@@ -8,8 +8,21 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Blog from "@/models/Blog";
 import connectDB from "@/config/db";
 import { generatePageMetadata, getPageSEOData } from "@/utils/seo";
-import { headers } from "next/headers";
 import SchemaRenderer from "@/components/SchemaRenderer";
+
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+     try {
+          await connectDB();
+          const blogPage = await Blog.findOne().select("blogs.slug").lean();
+          const slugs = blogPage?.blogs?.map((blog) => blog?.slug).filter(Boolean) || [];
+          return slugs.map((slug) => ({ slug }));
+     } catch (error) {
+          console.error("Error generating blog static params:", error);
+          return [];
+     }
+}
 
 // Fetch only blog data
 const getBlogData = cache(async (slug) => {
@@ -36,11 +49,7 @@ export async function generateMetadata({ params }) {
      const title = data.seotitle || data.title || "Blog";
      const description = data.seodescription || data.title;
      const imageUrl = data.image || "";
-
-     const headersList = await headers();
-     const host = headersList.get("x-forwarded-host") || headersList.get("host") || "";
-     const proto = headersList.get("x-forwarded-proto") || "https";
-     const baseUrl = host ? `${proto}://${host}` : (process.env.NEXT_PUBLIC_BASE_URL || "https://www.weekendux.com");
+     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.weekendux.com";
      const pageUrl = `${baseUrl}/blog/${slug}`;
      const finalImageUrl = imageUrl || `${baseUrl}/images/weekend-ux-blogs-hero-bg.webp`;
 
