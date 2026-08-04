@@ -47,4 +47,4 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y lftp
-          lftp -e "set ssl:verify-certificate no; set ftp:ssl-force false; mirror -R --delete --verbose ./out/ /public_html/; bye" -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_SERVER"
+          lftp -e "set ssl:verify-certificate no; set ftp:ssl-force false; set ftp:passive-mode true; set net:timeout 20; set net:max-retries 2; set cmd:fail-exit true; mirror -R --delete --verbose ./out/ /public_html/; bye" -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_SERVER"
