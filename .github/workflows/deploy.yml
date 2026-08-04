@@ -8,6 +8,10 @@ on:
   repository_dispatch:
     types: [admin_content_update]
 
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
