@@ -40,12 +40,11 @@ jobs:
           ls -la out || true
 
       - name: Upload to Hostinger via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./out/
-          server-dir: /public_html/
-          state-name: .ftp-deploy-sync-state.json
-          dry-run: false
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER != '' && secrets.FTP_SERVER || 'weekendux.in' }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
+          lftp -e "set ssl:verify-certificate no; set ftp:ssl-force false; mirror -R --delete --verbose ./out/ /public_html/; bye" -u "$FTP_USERNAME","$FTP_PASSWORD" "$FTP_SERVER"
