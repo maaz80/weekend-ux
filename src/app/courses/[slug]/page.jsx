@@ -40,7 +40,7 @@ const getCourseData = cache(async (slug) => {
                          const cSlug = (c.slug || "").toLowerCase().replace(/[^a-z0-9]/g, "");
                          const cTitle = (c.title || "").toLowerCase().replace(/[^a-z0-9]/g, "");
                          return (cSlug && (cSlug.includes(cleanSlug) || cleanSlug.includes(cSlug))) ||
-                                (cTitle && (cTitle.includes(cleanSlug) || cleanSlug.includes(cTitle)));
+                              (cTitle && (cTitle.includes(cleanSlug) || cleanSlug.includes(cTitle)));
                     });
                }
 
@@ -153,7 +153,7 @@ export default async function CourseSlugPage({ params }) {
                     </h1>
                </section>
                <SchemaRenderer schemas={data?.schemas} />
-               
+
                {/* Server-rendered static JSON-LD fallback for No-JS/Control+U */}
                {data?.schemas && Array.isArray(data.schemas) && data.schemas.map((schemaStr, idx) => {
                     if (!schemaStr || !schemaStr.trim()) return null;
@@ -166,7 +166,7 @@ export default async function CourseSlugPage({ params }) {
                                    dangerouslySetInnerHTML={{ __html: cleanJson }}
                               />
                          );
-                    } catch(e) {
+                    } catch (e) {
                          return null;
                     }
                })}

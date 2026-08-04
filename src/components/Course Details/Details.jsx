@@ -685,7 +685,10 @@ export default function Details({ data }) {
                </section>
 
                {/* Fifth Section: Explore More Career Domains Section */}
-               <section className="relative px-2 py-8 md:py-28 font-urbanist w-full overflow-hidden bg-[url('/images/hero-bg.webp')] bg-cover bg-center bg-no-repeat">
+               <section
+                    className="relative px-2 py-8 md:py-28 font-urbanist w-full overflow-hidden bg-cover bg-center bg-no-repeat"
+                    style={{ backgroundImage: "url('/images/hero-bg.webp')" }}
+               >
                     {/* Premium blurred glass overlay */}
                     <div className="absolute inset-0 bg-[#FAF9F5]/93 backdrop-blur-[2px] -mt-px"></div>
 

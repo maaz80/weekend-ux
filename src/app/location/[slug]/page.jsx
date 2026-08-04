@@ -101,7 +101,7 @@ export default async function LocationSlugPage({ params }) {
      return (
           <>
                <SchemaRenderer schemas={data?.schemas} />
-               
+
                {/* Server-rendered static JSON-LD fallback for No-JS/Control+U */}
                {data?.schemas && Array.isArray(data.schemas) && data.schemas.map((schemaStr, idx) => {
                     if (!schemaStr || !schemaStr.trim()) return null;
@@ -114,7 +114,7 @@ export default async function LocationSlugPage({ params }) {
                                    dangerouslySetInnerHTML={{ __html: cleanJson }}
                               />
                          );
-                    } catch(e) {
+                    } catch (e) {
                          return null;
                     }
                })}
