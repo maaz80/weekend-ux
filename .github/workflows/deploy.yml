@@ -28,6 +28,7 @@ jobs:
       - name: Build static site
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          MONGO_URI: ${{ secrets.MONGO_URI }}
         run: |
           npm run build
 

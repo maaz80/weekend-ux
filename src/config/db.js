@@ -2,10 +2,6 @@ import mongoose from "mongoose";
 
 const MONGO_URI = process.env.MONGO_URI;
 
-if (!MONGO_URI) {
-     throw new Error("Please define the MONGO_URI environment variable inside .env");
-}
-
 let cached = global.mongoose;
 
 if (!cached) {
@@ -13,6 +9,11 @@ if (!cached) {
 }
 
 const connectDB = async () => {
+     if (!MONGO_URI) {
+          console.warn("MONGO_URI is not configured; skipping database connection for this build.");
+          return null;
+     }
+
      if (cached.conn) {
           return cached.conn;
      }
