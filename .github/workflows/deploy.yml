@@ -22,10 +22,12 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
+        working-directory: .
         run: |
           npm install
 
       - name: Build static site
+        working-directory: .
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           MONGO_URI: ${{ secrets.MONGO_URI }}
@@ -43,7 +45,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./user/out/
+          local-dir: ./out/
           server-dir: /public_html/
           state-name: .ftp-deploy-sync-state.json
           dry-run: false
