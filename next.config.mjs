@@ -7,8 +7,8 @@ const nextConfig = {
     return [
       {
         source: '/:path*',
-        has: [{ type: 'host', value: 'www.weekendux.in' }],
-        destination: 'https://weekendux.in/:path*',
+        has: [{ type: 'host', value: 'weekendux.in' }],
+        destination: 'https://www.weekendux.in/:path*',
         permanent: true,
       },
     ];

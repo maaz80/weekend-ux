@@ -4,7 +4,7 @@ const http = require('http');
 const https = require('https');
 
 const API_URL = (process.env.NEXT_PUBLIC_API_URL || 'https://weekend-backend.onrender.com/api').replace(/\/$/, '');
-const SITE_URL = (process.env.NEXT_PUBLIC_BASE_URL || 'https://weekendux.in').replace(/\/$/, '');
+const SITE_URL = (process.env.NEXT_PUBLIC_BASE_URL || 'https://www.weekendux.in').replace(/\/$/, '');
 
 function buildCanonicalUrl(pathname = '/') {
     if (!pathname || pathname === '/') return `${SITE_URL}`;
