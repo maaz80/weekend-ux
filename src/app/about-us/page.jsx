@@ -37,6 +37,7 @@ export default async function About() {
                {seoData?.schemas && Array.isArray(seoData.schemas) && seoData.schemas.map((schemaStr, idx) => (
                     <SchemaRenderer key={idx} schema={schemaStr} />
                ))}
+               
                <Hero data={aboutData?.hero?.[0]} />
                <FeatureStrip data={aboutData?.features} />
                <Content data={aboutData?.quote} />
