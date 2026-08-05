@@ -11,6 +11,7 @@ const Content = ({
           ? data.trim()
           : "“Design can't be learned by watching someone else design. Weekend UX exists because the only way to get better is to sit down, make something, and get honest feedback on it.”";
 
+          
      return (
           <div className="relative py-9 md:py-15 custom-width px-0 md:px-5">
                <div className={`text-center font-urbanist max-w-230 mx-auto ${fontSize} ${textColor}`}>{quote}</div>
