@@ -21,12 +21,12 @@ DirectorySlash Off
     RewriteCond %{HTTPS} off
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # 4. CANONICAL HOST REDIRECTS (www -> apex, legacy .com -> .in)
-    RewriteCond %{HTTP_HOST} ^www\.weekendux\.in$ [NC]
-    RewriteRule ^ https://weekendux.in%{REQUEST_URI} [R=301,L]
+    # 4. CANONICAL HOST REDIRECTS (apex -> www, legacy .com -> www.weekendux.in)
+    RewriteCond %{HTTP_HOST} ^weekendux\.in$ [NC]
+    RewriteRule ^ https://www.weekendux.in%{REQUEST_URI} [R=301,L]
 
     RewriteCond %{HTTP_HOST} ^(www\.)?weekendux\.com$ [NC]
-    RewriteRule ^ https://weekendux.in%{REQUEST_URI} [R=301,L]
+    RewriteRule ^ https://www.weekendux.in%{REQUEST_URI} [R=301,L]
 
     # 5. BLOCK BAD BOTS & EMPTY USER AGENTS
     RewriteCond %{HTTP_USER_AGENT} (curl|wget|python|nikto|sqlmap|masscan|zgrab|nmap|dirbuster|gobuster|wfuzz|hydra|metasploit) [NC,OR]

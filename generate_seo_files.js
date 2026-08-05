@@ -33,9 +33,10 @@ async function generateAllSeoFiles() {
 
     const siteRoot = buildCanonicalUrl('/');
 
-    const [blogsData, coursesData] = await Promise.all([
+    const [blogsData, coursesData, locationsData] = await Promise.all([
         fetchJson(`${API_URL}/blogs`),
-        fetchJson(`${API_URL}/courses`)
+        fetchJson(`${API_URL}/courses`),
+        fetchJson(`${API_URL}/locations`)
     ]);
 
     const urls = new Set();
@@ -47,6 +48,7 @@ async function generateAllSeoFiles() {
         '/',
         '/about-us',
         '/courses',
+        '/course-details',
         '/contact-us',
         '/blog',
         '/location',
@@ -61,9 +63,18 @@ async function generateAllSeoFiles() {
         if (blog.slug) addUrl(`/blog/${blog.slug}`);
     });
 
-    const coursesArray = coursesData?.coursesPage?.course || coursesData?.courses || (Array.isArray(coursesData) ? coursesData : []);
+    const coursesArray = coursesData?.course || coursesData?.coursesPage?.course || coursesData?.courses || (Array.isArray(coursesData) ? coursesData : []);
     coursesArray.forEach(course => {
         if (course.slug) addUrl(`/courses/${course.slug}`);
+    });
+
+    const locationsArray = Array.isArray(locationsData) ? locationsData : (locationsData?.locations || []);
+    locationsArray.forEach(group => {
+        const items = group.items || [];
+        items.forEach(item => {
+            const slug = item.hero?.[0]?.slug || item.hero?.slug || item.slug;
+            if (slug) addUrl(`/location/${slug}`);
+        });
     });
 
     const uniqueUrls = Array.from(urls);

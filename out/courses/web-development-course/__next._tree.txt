@@ -1,2 +1,2 @@
-:HL["/_next/static/chunks/1hx0eir3rktqa.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"courses","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"web-development-course","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"ktRwgw2Gsf7sjJ36va0E6"}
+:HL["/_next/static/chunks/1gd1qxzlhd2sh.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"courses","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"web-development-course","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"YkBtgqHMQ5t73Wzmq7oFZ"}

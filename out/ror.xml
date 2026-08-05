@@ -1,78 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:ror="http://rorweb.com/0.1/" version="2.0">
 <channel>
-  <title>ROR Sitemap for https://weekendux.in</title>
-  <link>https://weekendux.in</link>
+  <title>ROR Sitemap for https://www.weekendux.in</title>
+  <link>https://www.weekendux.in</link>
   <item>
-    <link>https://weekendux.in</link>
+    <link>https://www.weekendux.in</link>
     <title>Page 1</title>
     <ror:sortOrder>0</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
   <item>
-    <link>https://weekendux.in/about-us</link>
+    <link>https://www.weekendux.in/about-us</link>
     <title>Page 2</title>
     <ror:sortOrder>1</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
   <item>
-    <link>https://weekendux.in/courses</link>
+    <link>https://www.weekendux.in/courses</link>
     <title>Page 3</title>
     <ror:sortOrder>2</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
   <item>
-    <link>https://weekendux.in/contact-us</link>
+    <link>https://www.weekendux.in/course-details</link>
     <title>Page 4</title>
     <ror:sortOrder>3</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
   <item>
-    <link>https://weekendux.in/blog</link>
+    <link>https://www.weekendux.in/contact-us</link>
     <title>Page 5</title>
     <ror:sortOrder>4</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
   <item>
-    <link>https://weekendux.in/location</link>
+    <link>https://www.weekendux.in/blog</link>
     <title>Page 6</title>
     <ror:sortOrder>5</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
   <item>
-    <link>https://weekendux.in/privacy-policy</link>
+    <link>https://www.weekendux.in/location</link>
     <title>Page 7</title>
     <ror:sortOrder>6</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
   <item>
-    <link>https://weekendux.in/disclaimer</link>
+    <link>https://www.weekendux.in/privacy-policy</link>
     <title>Page 8</title>
     <ror:sortOrder>7</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
   <item>
-    <link>https://weekendux.in/terms-and-conditions-enrolment</link>
+    <link>https://www.weekendux.in/disclaimer</link>
     <title>Page 9</title>
     <ror:sortOrder>8</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
   <item>
-    <link>https://weekendux.in/blog/what-is-the-difference-between-ui-and-ux</link>
+    <link>https://www.weekendux.in/terms-and-conditions-enrolment</link>
     <title>Page 10</title>
     <ror:sortOrder>9</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
   <item>
-    <link>https://weekendux.in/blog/10-usability-heuristics-for-user-interface-design</link>
+    <link>https://www.weekendux.in/blog/what-is-the-difference-between-ui-and-ux</link>
     <title>Page 11</title>
     <ror:sortOrder>10</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
   <item>
-    <link>https://weekendux.in/blog/best-training-in-ui-ux-design-course</link>
+    <link>https://www.weekendux.in/blog/10-usability-heuristics-for-user-interface-design</link>
     <title>Page 12</title>
     <ror:sortOrder>11</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://www.weekendux.in/blog/best-training-in-ui-ux-design-course</link>
+    <title>Page 13</title>
+    <ror:sortOrder>12</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://www.weekendux.in/courses/figma-professional-training</link>
+    <title>Page 14</title>
+    <ror:sortOrder>13</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://www.weekendux.in/courses/web-development-course</link>
+    <title>Page 15</title>
+    <ror:sortOrder>14</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://www.weekendux.in/location/ui-ux-design-course-in-ahmedabad</link>
+    <title>Page 16</title>
+    <ror:sortOrder>15</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://www.weekendux.in/location/ui-ux-design-course-in-agra</link>
+    <title>Page 17</title>
+    <ror:sortOrder>16</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
 </channel>
