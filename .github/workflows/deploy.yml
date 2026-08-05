@@ -50,6 +50,6 @@ jobs:
           port: ${{ secrets.FTP_PORT || 21 }}
           protocol: ${{ secrets.FTP_PROTOCOL || 'ftp' }}
           local-dir: ./out/
-          server-dir: /home/u947813591/domains/weekendux.in/public_html/
+          server-dir: /
           state-name: .ftp-deploy-sync-state.json
           dry-run: false
