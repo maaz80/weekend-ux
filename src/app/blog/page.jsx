@@ -9,6 +9,8 @@ import FAQ from "@/components/FAQ";
 import BlogCard from "@/components/Blogs/BlogCard";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
+import { useHomeData } from "@/context/HomeDataContext";
+
 const staticFeaturedBlogs = [
      {
           id: "static-1",
@@ -64,31 +66,12 @@ const staticMoreBlogs = [
 ];
 
 export default function Blogs() {
-     const [blogsPageConfig, setBlogsPageConfig] = useState(null);
-     const [blogsList, setBlogsList] = useState([]);
-     const [loading, setLoading] = useState(true);
+     const { blogsData } = useHomeData();
      const [currentPage, setCurrentPage] = useState(1);
-     const blogsPerPage = 6; // Fits the 3-column layout nicely (2 rows of 3)
+     const blogsPerPage = 6;
 
-     useEffect(() => {
-          async function fetchBlogs() {
-               try {
-                    const res = await fetch("/api/blogs");
-                    if (res.ok) {
-                         const data = await res.json();
-                         setBlogsPageConfig(data);
-                         if (data?.blogs && Array.isArray(data.blogs)) {
-                              setBlogsList(data.blogs);
-                         }
-                    }
-               } catch (error) {
-                    console.error("Failed to fetch blog configuration / listings:", error);
-               } finally {
-                    setLoading(false);
-               }
-          }
-          fetchBlogs();
-     }, []);
+     const blogsPageConfig = blogsData;
+     const blogsList = blogsData?.blogs || [];
 
      const heroStart = blogsPageConfig?.hero?.starttitle && blogsPageConfig.hero.starttitle.trim()
           ? blogsPageConfig.hero.starttitle.trim()

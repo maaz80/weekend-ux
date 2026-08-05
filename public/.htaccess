@@ -16,10 +16,10 @@ DirectorySlash Off
     RewriteEngine On
     RewriteBase /
 
-    # 3. REDIRECT HTTP TO HTTPS (Cloudflare & Hostinger Reverse Proxy safe)
-    RewriteCond %{HTTPS} off
+    # 3. REDIRECT HTTP TO HTTPS (Hostinger CDN & Reverse Proxy safe)
+    # Hostinger CDN (cdn.hstgr.net) terminates SSL at edge and passes X-Forwarded-Proto: https
     RewriteCond %{HTTP:X-Forwarded-Proto} !https
-    RewriteCond %{HTTP:CF-Visitor} !{"scheme":"https"}
+    RewriteCond %{HTTPS} off
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
     # 4. CANONICAL HOST REDIRECTS (apex -> www, legacy .com -> www.weekendux.in)

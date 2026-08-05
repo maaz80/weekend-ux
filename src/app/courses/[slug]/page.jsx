@@ -18,10 +18,13 @@ export async function generateStaticParams() {
           await connectDB();
           const coursesPage = await Courses.findOne().select("course.slug").lean();
           const slugs = coursesPage?.course?.map((course) => course?.slug).filter(Boolean) || [];
+          if (slugs.length === 0) {
+               return [{ slug: "figma-professional-training" }];
+          }
           return slugs.map((slug) => ({ slug }));
      } catch (error) {
           console.error("Error generating course static params:", error);
-          return [];
+          return [{ slug: "figma-professional-training" }];
      }
 }
 

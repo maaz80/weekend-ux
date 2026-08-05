@@ -15,6 +15,9 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./user
 
     steps:
       - name: Checkout code
@@ -25,17 +28,17 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          cache-dependency-path: user/package-lock.json
 
       - name: Install dependencies
-        run: |
-          npm ci
+        run: npm install
 
       - name: Build static site
         env:
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL || 'https://www.weekendux.in' }}
           MONGO_URI: ${{ secrets.MONGO_URI }}
-        run: |
-          npm run build
+        run: npm run build
 
       - name: Check export folder
         run: |
@@ -48,7 +51,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./out/
-          server-dir: /home/u947813591/domains/weekendux.in/public_html/
+          local-dir: ./user/out/
+          server-dir: ${{ secrets.FTP_SERVER_DIR || '/public_html/' }}
           state-name: .ftp-deploy-sync-state.json
           dry-run: false

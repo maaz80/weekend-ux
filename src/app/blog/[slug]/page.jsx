@@ -18,10 +18,13 @@ export async function generateStaticParams() {
           await connectDB();
           const blogPage = await Blog.findOne().select("blogs.slug").lean();
           const slugs = blogPage?.blogs?.map((blog) => blog?.slug).filter(Boolean) || [];
+          if (slugs.length === 0) {
+               return [{ slug: "what-is-the-difference-between-ui-and-ux" }];
+          }
           return slugs.map((slug) => ({ slug }));
      } catch (error) {
           console.error("Error generating blog static params:", error);
-          return [];
+          return [{ slug: "what-is-the-difference-between-ui-and-ux" }];
      }
 }
 

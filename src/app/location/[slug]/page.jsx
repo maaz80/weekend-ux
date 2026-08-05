@@ -11,12 +11,25 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
      try {
           await connectDB();
-          const locationDoc = await Location.findOne().select("items.hero.slug").lean();
-          const slugs = locationDoc?.items?.flatMap((item) => item?.hero?.map((heroItem) => heroItem?.slug).filter(Boolean)) || [];
+          const locations = await Location.find().select("items.hero.slug").lean();
+          const slugs = [];
+          if (Array.isArray(locations)) {
+               locations.forEach((group) => {
+                    if (group.items && Array.isArray(group.items)) {
+                         group.items.forEach((item) => {
+                              const s = item.hero?.[0]?.slug || item.slug;
+                              if (s) slugs.push(s);
+                         });
+                    }
+               });
+          }
+          if (slugs.length === 0) {
+               return [{ slug: "ui-ux-design-course-in-delhi" }];
+          }
           return slugs.map((slug) => ({ slug }));
      } catch (error) {
           console.error("Error generating location static params:", error);
-          return [];
+          return [{ slug: "ui-ux-design-course-in-delhi" }];
      }
 }
 

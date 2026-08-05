@@ -16,7 +16,8 @@ DirectorySlash Off
     RewriteEngine On
     RewriteBase /
 
-    # 3. REDIRECT HTTP TO HTTPS (Cloudflare & Hostinger Reverse Proxy safe)
+    # 3. REDIRECT HTTP TO HTTPS (Hostinger CDN & Reverse Proxy safe)
+    # Hostinger CDN (cdn.hstgr.net) terminates SSL at edge and passes X-Forwarded-Proto: https
     RewriteCond %{HTTP:X-Forwarded-Proto} !https
     RewriteCond %{HTTPS} off
     RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
@@ -50,11 +51,13 @@ DirectorySlash Off
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
 
-    # B. Strip trailing slashes with 301 redirect ONLY if target .html or folder index.html exists
+    # B. Strip trailing slashes with 301 redirect ONLY if target .html or folder index.html exists (excluding root)
+    RewriteCond %{REQUEST_URI} !^/$
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteCond %{REQUEST_FILENAME}/index.html -f
     RewriteRule ^(.+)/$ /$1 [R=301,L]
 
+    RewriteCond %{REQUEST_URI} !^/$
     RewriteCond %{REQUEST_FILENAME}.html -f
     RewriteRule ^(.+)/$ /$1 [R=301,L]
 
