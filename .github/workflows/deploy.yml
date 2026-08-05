@@ -47,6 +47,8 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT || 21 }}
+          protocol: ${{ secrets.FTP_PROTOCOL || 'ftp' }}
           local-dir: ./out/
           server-dir: /home/u947813591/domains/weekendux.in/public_html/
           state-name: .ftp-deploy-sync-state.json
