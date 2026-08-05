@@ -15,9 +15,6 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./user
 
     steps:
       - name: Checkout code
@@ -50,7 +47,7 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./user/out/
-          server-dir: ${{ secrets.FTP_SERVER_DIR || '/public_html/' }}
+          local-dir: ./out/
+          server-dir: /home/u947813591/domains/weekendux.in/public_html/
           state-name: .ftp-deploy-sync-state.json
           dry-run: false
