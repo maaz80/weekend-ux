@@ -6,7 +6,7 @@ const Content = () => {
 
       <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-5 mb-5">
         <div className="w-full md:w-[50%]">
-          <h2 className="text-[24px] font-medium">Heading</h2>
+          <h2 className="text-[24px] font-medium">About This Location</h2>
           <p className="leading-6 mt-3 text-[#1C1C1C80]">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam repellendus a esse, neque earum quisquam, voluptatum quos necessitatibus architecto quae illo excepturi, rerum voluptatem aut officia! At reprehenderit suscipit odit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam repellendus a esse, neque earum quisquam, voluptatum quos necessitatibus architecto quae illo excepturi, rerum voluptatem aut officia! At reprehenderit suscipit odit.</p>
           <p className="leading-6 mt-3 text-[#1C1C1C80]">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam repellendus a esse, neque earum quisquam, voluptatum quos necessitatibus architecto quae illo excepturi, rerum voluptatem aut officia! At reprehenderit suscipit odit.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam repellendus a esse, neque earum quisquam, voluptatum quos necessitatibus architecto quae illo excepturi, rerum voluptatem aut officia! At reprehenderit suscipit odit.</p>
         </div>

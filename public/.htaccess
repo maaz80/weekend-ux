@@ -16,13 +16,17 @@ DirectorySlash Off
     RewriteEngine On
     RewriteBase /
 
-    # 3. REDIRECT HTTP TO HTTPS
+    # 3. REDIRECT HTTP TO HTTPS (Cloudflare & Hostinger Reverse Proxy safe)
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
     RewriteCond %{HTTPS} off
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-    # 4. CANONICAL REDIRECT (NON-WWW TO WWW)
-    RewriteCond %{HTTP_HOST} ^weekendux\.com$ [NC]
-    RewriteRule ^ https://www.weekendux.com%{REQUEST_URI} [R=301,L]
+    # 4. CANONICAL HOST REDIRECTS (www -> apex, legacy .com -> .in)
+    RewriteCond %{HTTP_HOST} ^www\.weekendux\.in$ [NC]
+    RewriteRule ^ https://weekendux.in%{REQUEST_URI} [R=301,L]
+
+    RewriteCond %{HTTP_HOST} ^(www\.)?weekendux\.com$ [NC]
+    RewriteRule ^ https://weekendux.in%{REQUEST_URI} [R=301,L]
 
     # 5. BLOCK BAD BOTS & EMPTY USER AGENTS
     RewriteCond %{HTTP_USER_AGENT} (curl|wget|python|nikto|sqlmap|masscan|zgrab|nmap|dirbuster|gobuster|wfuzz|hydra|metasploit) [NC,OR]
@@ -41,25 +45,32 @@ DirectorySlash Off
     RewriteCond %{QUERY_STRING} (\.\./|\.\.%2F|%2E%2E%2F) [NC]
     RewriteRule .* - [F,L]
 
-    # 8. HANDLE CLEAN URLS FOR NEXT.JS STATIC EXPORTS (PREVENT PING-PONG LOOP)
-    # If the request is a real file, serve it directly
+    # 8. HANDLE CLEAN URLS FOR NEXT.JS STATIC EXPORTS (PREVENT INFINITE LOOPS)
+    # A. If request is a real file (e.g. CSS, JS, image), serve directly
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
 
-    # Redirect trailing slash requests to clean URLs if target .html exists (e.g. /about-us/ -> 301 -> /about-us)
-    RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-    RewriteRule ^(.+)/$ /$1 [R=301,L]
-
-    # Serve static .html files directly for clean URLs (e.g. /about-us -> /about-us.html)
-    RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-    RewriteRule ^(.+)$ /$1.html [L]
-
-    # Serve directory index.html if request is a directory (e.g. /blog/ -> /blog/index.html)
+    # B. Strip trailing slashes with 301 redirect ONLY if target .html or folder index.html exists
     RewriteCond %{REQUEST_FILENAME} -d
     RewriteCond %{REQUEST_FILENAME}/index.html -f
-    RewriteRule ^(.*)$ /$1/index.html [L]
+    RewriteRule ^(.+)/$ /$1 [R=301,L]
 
-    # Fallback non-existent requests to custom 404.html page
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^(.+)/$ /$1 [R=301,L]
+
+    # C. Serve index.html for root /
+    RewriteRule ^$? /index.html [L]
+
+    # D. Internal rewrite: serve /about-us from /about-us.html
+    RewriteCond %{REQUEST_FILENAME}.html -f
+    RewriteRule ^(.+)$ /$1.html [L]
+
+    # E. Internal rewrite: serve subfolder index.html (e.g. /blog -> /blog/index.html)
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteCond %{REQUEST_FILENAME}/index.html -f
+    RewriteRule ^(.+)$ /$1/index.html [L]
+
+    # F. Fallback non-existent requests to custom 404 page
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^ /404.html [L]

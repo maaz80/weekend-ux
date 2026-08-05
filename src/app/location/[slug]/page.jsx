@@ -3,6 +3,7 @@ import LocationDetailsView from "@/components/Location/LocationDetailsView";
 import Location from "@/models/Location";
 import connectDB from "@/config/db";
 import { generatePageMetadata, getPageSEOData } from "@/utils/seo";
+import { buildCanonicalUrl, getSiteUrl } from "@/utils/siteUrl";
 import SchemaRenderer from "@/components/SchemaRenderer";
 
 export const dynamicParams = false;
@@ -44,8 +45,8 @@ export async function generateMetadata({ params }) {
      const title = data.hero?.[0]?.seotitle || data.title || "Location";
      const description = data.hero?.[0]?.seodescription || data.title;
      const imageUrl = data.image?.imageurl || "";
-     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.weekendux.com";
-     const pageUrl = `${baseUrl}/location/${slug}`;
+     const baseUrl = getSiteUrl();
+     const pageUrl = buildCanonicalUrl(`/location/${slug}`);
      const finalImageUrl = imageUrl || `${baseUrl}/images/weekend-ux-blogs-hero-bg.webp`;
 
      return {

@@ -140,7 +140,7 @@ const FAQ = ({
                               {title}
                          </span>
 
-                         <h3 className={`mt-4 font-playfair text-[38px] leading-[1.05] md:text-[58px] lg:text-[72px] ${titleColor}`}>
+                         <h2 className={`mt-4 font-playfair text-[38px] leading-[1.05] md:text-[58px] lg:text-[72px] ${titleColor}`}>
                               {startheading}{" "}
                               {midheading && (
                                    <span className={`italic ${titleHighlightColor}`}>
@@ -148,7 +148,7 @@ const FAQ = ({
                                    </span>
                               )}{" "}
                               {endheading}
-                         </h3>
+                         </h2>
 
                          <p className={`mx-auto mt-5 max-w-200 font-urbanist text-[15px] leading-5.5 md:leading-7 md:text-[17px] ${descriptionColor}`}>
                               {description}

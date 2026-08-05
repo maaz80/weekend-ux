@@ -166,7 +166,7 @@ export const DarkTheme = {
                     image: "/images/weekend-ux-contact-decorative-image.webp",
                     inquiries: {
                          title: "Contact Us",
-                         email: "support@weekendux.com",
+                         email: "info@weekendux.com",
                          phone: "+91 999 999 9999"
                     },
                     location: {

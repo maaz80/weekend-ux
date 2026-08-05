@@ -32,7 +32,7 @@ export default function CourseCard({
      const imageSrc = course?.image || CourseImage;
 
      return (
-          <div className={`w-full border rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 min-h-100 md:min-h-122.5 max-h-122.5 ${cardBgColor} ${cardBorderColor}`}>
+          <div className={`w-full border rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 min-h-100 md:min-h-112.5 max-h-122.5 ${cardBgColor} ${cardBorderColor}`}>
 
                {/* Course Image */}
                <div className="relative h-47.5 md:h-56.5 overflow-hidden bg-zinc-100">

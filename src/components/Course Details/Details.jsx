@@ -339,9 +339,9 @@ export default function Details({ data }) {
                               {/* LEFT COLUMN: Content */}
                               <div className="space-y-8 lg:col-span-2">
                                    <div>
-                                        <h1 className="font-playfair text-[32px] md:text-[44px] font-extrabold leading-tight text-zinc-900">
+                                        <h2 className="font-playfair text-[32px] md:text-[44px] font-extrabold leading-tight text-zinc-900">
                                              {displayTitle}
-                                        </h1>
+                                        </h2>
                                         <div className="w-20 h-1 md:h-1.5 bg-official mt-4 rounded"></div>
                                    </div>
 
@@ -529,7 +529,7 @@ export default function Details({ data }) {
                                    {/* Left Text details */}
                                    <div className="space-y-6 text-left flex flex-col justify-between h-full min-h-62.5">
                                         <div className="space-y-4">
-                                             <h2 className="font-playfair text-[32px] md:text-[42px] font-bold leading-tight">
+                                             <h2 className="font-playfair text-[32px] md:text-[42px] font-bold leading-tight font-neutral">
                                                   {data?.shortTerm?.title || "Short-term UX Design Courses"}
                                              </h2>
                                              <p className="font-urbanist text-[16px] md:text-[17px] text-zinc-700 leading-relaxed max-w-lg">
@@ -538,12 +538,12 @@ export default function Details({ data }) {
                                         </div>
 
                                         {/* Bottom Apply Now and Arrows Row */}
-                                        <div className="flex flex-wrap items-center justify-between gap-6 pt-6 border-t border-zinc-900/50 mt-4">
+                                        <div className="flex flex-wrap items-center justify-between gap-6 pt-6 border-t border-zinc-900/10 mt-4">
                                              <button
                                                   onClick={() => {
                                                        window.dispatchEvent(new CustomEvent("openLeadModal"));
                                                   }}
-                                                  className="font-urbanist text-[15px] font-extrabold uppercase tracking-widest text-zinc-900 hover:text-zinc-700 transition duration-300 border-b-2 border-zinc-900 hover:border-zinc-700 pb-1 cursor-pointer"
+                                                  className="h-12 px-8 bg-linear-to-r from-zinc-800 to-zinc-900 text-white shadow-sm rounded-md hover:from-zinc-800/90 hover:to-zinc-900/90 text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center font-urbanist"
                                              >
                                                   Apply Now
                                              </button>
@@ -588,9 +588,9 @@ export default function Details({ data }) {
                                                        {getIconBadge(shortTermItems[sliderIndex]?.iconText)}
                                                   </div>
                                                   <div className="text-left">
-                                                       <h4 className="font-urbanist text-[17px] md:text-[19px] font-bold text-zinc-900 leading-tight">
+                                                       <h3 className="font-urbanist text-[17px] md:text-[19px] font-bold text-zinc-900 leading-tight">
                                                             {shortTermItems[sliderIndex]?.title}
-                                                       </h4>
+                                                       </h3>
                                                        <p className="font-urbanist text-[11px] font-bold text-zinc-400 tracking-wider uppercase mt-1">
                                                             {shortTermItems[sliderIndex]?.duration}
                                                        </p>

@@ -12,5 +12,5 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://www.weekendux.com/sitemap.xml
-Sitemap: https://www.weekendux.com/ror.xml
+Sitemap: https://weekendux.in/sitemap.xml
+Sitemap: https://weekendux.in/ror.xml

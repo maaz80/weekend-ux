@@ -145,10 +145,10 @@ const SearchResultsContent = () => {
 
                                         {/* REFINE SEARCH WIDGET */}
                                         <div className="bg-white rounded-2xl border border-zinc-200/80 p-5 shadow-sm text-left">
-                                             <h3 className="text-xs font-extrabold text-neutral mb-3 flex items-center gap-2 uppercase tracking-wider">
+                                             <h2 className="text-xs font-extrabold text-neutral mb-3 flex items-center gap-2 uppercase tracking-wider">
                                                   <FiSearch className="text-official text-base" />
                                                   Refine Search
-                                             </h3>
+                                             </h2>
                                              <form onSubmit={handleSearchSubmit} className="relative">
                                                   <input
                                                        type="text"
@@ -168,10 +168,10 @@ const SearchResultsContent = () => {
 
                                         {/* CATEGORY FILTER CARD */}
                                         <div className="bg-white rounded-2xl border border-zinc-200/80 p-5 shadow-sm text-left">
-                                             <h3 className="text-xs font-extrabold text-neutral mb-3.5 flex items-center gap-2 uppercase tracking-wider">
+                                             <h2 className="text-xs font-extrabold text-neutral mb-3.5 flex items-center gap-2 uppercase tracking-wider">
                                                   <FiFilter className="text-official text-base" />
                                                   Filter by Category
-                                             </h3>
+                                             </h2>
                                              <div className="flex flex-col gap-2">
                                                   {categoriesList.map((cat) => {
                                                        const count = cat === "All"
@@ -203,10 +203,10 @@ const SearchResultsContent = () => {
                                         {/* CATEGORY SUGGESTIONS */}
                                         {suggestedCategories.length > 0 && (
                                              <div className="bg-white rounded-2xl border border-zinc-200/80 p-5 shadow-sm text-left">
-                                                  <h3 className="text-xs font-extrabold text-neutral mb-2 flex items-center gap-2 uppercase tracking-wider">
+                                                  <h2 className="text-xs font-extrabold text-neutral mb-2 flex items-center gap-2 uppercase tracking-wider">
                                                        <FiCompass className="text-official text-base" />
                                                        Suggested Categories
-                                                  </h3>
+                                                  </h2>
                                                   <p className="text-[11px] text-zinc-400 mb-3">Explore these matching fields:</p>
                                                   <div className="flex flex-wrap gap-2">
                                                        {suggestedCategories.map((cat) => (

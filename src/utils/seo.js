@@ -1,6 +1,7 @@
 import PageSEO from "@/models/PageSEO";
 import connectDB from "@/config/db";
 import { headers } from "next/headers";
+import { buildCanonicalUrl, getSiteUrl } from "@/utils/siteUrl";
 
 export async function getPageSEOData(pageId) {
      try {
@@ -12,17 +13,14 @@ export async function getPageSEOData(pageId) {
      }
 }
 
-// Dynamically detect current host from request headers
-// Works on Netlify, Hostinger, localhost — no hardcoded URL needed
 async function getBaseUrl() {
      try {
           const headersList = await headers();
           const host = headersList.get("x-forwarded-host") || headersList.get("host") || "";
           const proto = headersList.get("x-forwarded-proto") || "https";
-          if (host) return `${proto}://${host}`;
+          if (host) return `${proto}://${host}`.replace(/\/$/, "");
      } catch {}
-     // Fallback to env variable if headers not available
-     return process.env.NEXT_PUBLIC_BASE_URL || "https://www.weekendux.com";
+     return getSiteUrl();
 }
 
 export async function generatePageMetadata(pageId, defaultTitle, defaultDesc, pathname = "") {
@@ -33,9 +31,7 @@ export async function generatePageMetadata(pageId, defaultTitle, defaultDesc, pa
 
      const title = seo?.title || defaultTitle || "Weekend UX";
      const description = seo?.description || defaultDesc || "Weekend UX learning platform";
-     const pageUrl = `${baseUrl}${pathname}`;
-
-     // Default decorative fallback image from public folder
+     const pageUrl = buildCanonicalUrl(pathname || "/", baseUrl);
      const imageUrl = `${baseUrl}/images/weekend-ux-blogs-hero-bg.webp`;
 
      return {

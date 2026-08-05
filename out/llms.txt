@@ -1,16 +1,18 @@
-# https://www.weekendux.com Site Summary for AI Crawlers
+# https://weekendux.in Site Summary for AI Crawlers
 
-> Generated on 2026-08-04T07:57:33.434Z
+> Generated on 2026-08-05T04:59:32.872Z
 
 ## Primary Pages
 
-- [https://www.weekendux.com/](https://www.weekendux.com/)
-- [https://www.weekendux.com/about-us](https://www.weekendux.com/about-us)
-- [https://www.weekendux.com/courses](https://www.weekendux.com/courses)
-- [https://www.weekendux.com/contact-us](https://www.weekendux.com/contact-us)
-- [https://www.weekendux.com/blog](https://www.weekendux.com/blog)
-- [https://www.weekendux.com/privacy-policy](https://www.weekendux.com/privacy-policy)
-- [https://www.weekendux.com/disclaimer](https://www.weekendux.com/disclaimer)
-- [https://www.weekendux.com/blog/what-is-the-difference-between-ui-and-ux](https://www.weekendux.com/blog/what-is-the-difference-between-ui-and-ux)
-- [https://www.weekendux.com/blog/10-usability-heuristics-for-user-interface-design](https://www.weekendux.com/blog/10-usability-heuristics-for-user-interface-design)
-- [https://www.weekendux.com/blog/best-training-in-ui-ux-design-course](https://www.weekendux.com/blog/best-training-in-ui-ux-design-course)
+- [https://weekendux.in](https://weekendux.in)
+- [https://weekendux.in/about-us](https://weekendux.in/about-us)
+- [https://weekendux.in/courses](https://weekendux.in/courses)
+- [https://weekendux.in/contact-us](https://weekendux.in/contact-us)
+- [https://weekendux.in/blog](https://weekendux.in/blog)
+- [https://weekendux.in/location](https://weekendux.in/location)
+- [https://weekendux.in/privacy-policy](https://weekendux.in/privacy-policy)
+- [https://weekendux.in/disclaimer](https://weekendux.in/disclaimer)
+- [https://weekendux.in/terms-and-conditions-enrolment](https://weekendux.in/terms-and-conditions-enrolment)
+- [https://weekendux.in/blog/what-is-the-difference-between-ui-and-ux](https://weekendux.in/blog/what-is-the-difference-between-ui-and-ux)
+- [https://weekendux.in/blog/10-usability-heuristics-for-user-interface-design](https://weekendux.in/blog/10-usability-heuristics-for-user-interface-design)
+- [https://weekendux.in/blog/best-training-in-ui-ux-design-course](https://weekendux.in/blog/best-training-in-ui-ux-design-course)

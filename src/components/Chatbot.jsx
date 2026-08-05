@@ -484,8 +484,8 @@ export default function Chatbot({
      return (
           <div
                className={`fixed right-4 md:right-10 z-99998 w-[calc(100%-2rem)] sm:w-100 h-135 max-h-[calc(100vh-120px)] ${chatBgColor} rounded-lg shadow-2xl flex flex-col overflow-hidden transition-all duration-500 ease-in-out select-none border border-zinc-200/80 ${isChatbotOpen
-                         ? "bottom-14 translate-y-0 opacity-100 pointer-events-auto"
-                         : "bottom-0 translate-y-[calc(100%+56px)] opacity-0 pointer-events-none"
+                    ? "bottom-14 translate-y-0 opacity-100 pointer-events-auto"
+                    : "bottom-0 translate-y-[calc(100%+56px)] opacity-0 pointer-events-none"
                     }`}
           >
                {/* HEADER */}
@@ -575,7 +575,7 @@ export default function Chatbot({
                                                        <div className="flex items-center gap-2">
                                                             <Mail size={13} className="text-neutral shrink-0" />
                                                             <span>Email: </span>
-                                                            <a href="mailto:support@weekendux.in" className="font-semibold underline hover:text-official transition-colors">support@weekendux.in</a>
+                                                            <a href="mailto:info@weekendux.in" className="font-semibold underline hover:text-official transition-colors">info@weekendux.in</a>
                                                        </div>
                                                   </div>
                                              </div>
@@ -591,7 +591,7 @@ export default function Chatbot({
                                                             Restart Chat
                                                        </button>
                                                        <a
-                                                            href="mailto:support@weekendux.in?subject=Inquiry from Chatbot"
+                                                            href="mailto:info@weekendux.in?subject=Inquiry from Chatbot"
                                                             className="bg-white hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-zinc-800 text-center shadow-xs flex items-center justify-center gap-1.5"
                                                        >
                                                             <Calendar size={13} />
@@ -619,8 +619,8 @@ export default function Chatbot({
                                         /* Regular Message Bubble */
                                         <div
                                              className={`p-3 rounded-lg text-[13px] leading-relaxed max-w-[85%] text-left ${m.isBot
-                                                       ? `${botBubbleClass} shadow-xs`
-                                                       : `${userBubbleClass} shadow-xs self-end ml-auto`
+                                                  ? `${botBubbleClass} shadow-xs`
+                                                  : `${userBubbleClass} shadow-xs self-end ml-auto`
                                                   }`}
                                              style={{ whiteSpace: "pre-line" }}
                                         >
@@ -655,8 +655,8 @@ export default function Chatbot({
                                                             type="button"
                                                             onClick={() => handleMultiOptionToggle(opt)}
                                                             className={`transition-all duration-200 text-[11px] font-semibold px-3 py-1.5 rounded-full cursor-pointer shadow-xs border inline-flex items-center gap-1 hover:scale-[1.02] ${isSelected
-                                                                      ? "bg-linear-to-r from-zinc-800 to-zinc-900 text-white border-zinc-800"
-                                                                      : "bg-white text-neutral border-zinc-200 hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white hover:border-zinc-800"
+                                                                 ? "bg-linear-to-r from-zinc-800 to-zinc-900 text-white border-zinc-800"
+                                                                 : "bg-white text-neutral border-zinc-200 hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white hover:border-zinc-800"
                                                                  }`}
                                                        >
                                                             <span>{opt}</span>
@@ -673,8 +673,8 @@ export default function Chatbot({
                                                        }}
                                                        disabled={tempSelections.length === 0}
                                                        className={`px-3 py-1.5 rounded-full text-[11px] font-bold transition-all shadow-sm cursor-pointer text-center ${tempSelections.length > 0
-                                                                 ? "bg-official text-neutral hover:brightness-95"
-                                                                 : "bg-zinc-200 text-zinc-400 cursor-not-allowed"
+                                                            ? "bg-official text-neutral hover:brightness-95"
+                                                            : "bg-zinc-200 text-zinc-400 cursor-not-allowed"
                                                             }`}
                                                   >
                                                        Confirm Selections ({tempSelections.length})
@@ -768,8 +768,8 @@ export default function Chatbot({
                               type="submit"
                               disabled={isInputDisabled || !input.trim()}
                               className={`ml-2 transition-all p-1 rounded-md ${isInputDisabled || !input.trim()
-                                        ? "text-zinc-300 cursor-not-allowed"
-                                        : `${sendButtonColor} cursor-pointer hover:scale-105`
+                                   ? "text-zinc-300 cursor-not-allowed"
+                                   : `${sendButtonColor} cursor-pointer hover:scale-105`
                                    }`}
                               aria-label="Send Message"
                          >

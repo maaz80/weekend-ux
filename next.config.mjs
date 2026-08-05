@@ -1,20 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  trailingSlash: true,
+  trailingSlash: false,
 
   async redirects() {
     return [
       {
-        // Redirect non-www → www (canonical main domain is www.weekendux.com)
         source: '/:path*',
-        has: [
-          {
-            type: 'host',
-            value: 'weekendux.com',
-          },
-        ],
-        destination: 'https://www.weekendux.com/:path*',
+        has: [{ type: 'host', value: 'www.weekendux.in' }],
+        destination: 'https://weekendux.in/:path*',
         permanent: true,
       },
     ];
@@ -29,6 +23,7 @@ const nextConfig = {
     ];
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',

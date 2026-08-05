@@ -20,9 +20,9 @@ const staticTeam = [
 const TeamSection = ({
      data,
      bgColor = "bg-[#F8F6EE]",
-     tagColor = "text-[#8F6A00]",
+     tagColor = "text-official",
      headingColor = "text-[#2C2A28]",
-     midHeadingColor = "text-[#8F6A00]",
+     midHeadingColor = "text-official",
      descriptionColor = "text-[#5A5652]",
      cardNameColor = "text-white",
      cardRoleColor = "text-official"

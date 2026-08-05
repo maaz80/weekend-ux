@@ -27,7 +27,7 @@ const Content = ({
 
      const inquiriesEmail = leftSection?.inquiries?.email && leftSection.inquiries.email.trim()
           ? leftSection.inquiries.email.trim()
-          : "support@weekendux.in";
+          : "info@weekendux.in";
 
      const inquiriesPhone = leftSection?.inquiries?.phone && leftSection.inquiries.phone.trim()
           ? leftSection.inquiries.phone.trim()
@@ -138,26 +138,26 @@ const Content = ({
 
                          {/* RIGHT SIDE */}
 
-                         <div className={`mt-10 md:mt-0 p-2 md:p-10 rounded-2xl ${formBgColor} ${formShadow}`}>
+                         <div className={`mt-10 mb-5 md:mt-0 p-2 md:p-10 rounded-2xl ${formBgColor} ${formShadow}`}>
 
                               <h2 className={`font-playfair text-[26px] md:text-[40px] text-center mb-8 ${formHeadingColor}`}>
                                    Enquire Here!
                               </h2>
 
-                               <Form />
+                              <Form />
                          </div>
                     </div>
 
                     {/* ================= MAP SECTION ================= */}
 
-                    <div className="pt-8 md:pmt-10 overflow-hidden ">
+                    <div className="pt-8 md:pt-10 overflow-hidden ">
 
                          <div className="relative">
 
                               <OptimizedImage
                                    src={mapImageSrc}
                                    alt="weekend-ux-contact-map"
-                                   className={`w-full h-55 md:h-112.5 lg:h-150 object-cover ${mapRounded}`}
+                                   className={`w-full h-55 md:h-112.5 lg:h-180 object-fill ${mapRounded}`}
                                    sizes="100vw"
                               />
 

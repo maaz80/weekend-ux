@@ -8,6 +8,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import Blog from "@/models/Blog";
 import connectDB from "@/config/db";
 import { generatePageMetadata, getPageSEOData } from "@/utils/seo";
+import { buildCanonicalUrl, getSiteUrl } from "@/utils/siteUrl";
 import SchemaRenderer from "@/components/SchemaRenderer";
 
 export const dynamicParams = false;
@@ -49,8 +50,8 @@ export async function generateMetadata({ params }) {
      const title = data.seotitle || data.title || "Blog";
      const description = data.seodescription || data.title;
      const imageUrl = data.image || "";
-     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "https://www.weekendux.com";
-     const pageUrl = `${baseUrl}/blog/${slug}`;
+     const baseUrl = getSiteUrl();
+     const pageUrl = buildCanonicalUrl(`/blog/${slug}`);
      const finalImageUrl = imageUrl || `${baseUrl}/images/weekend-ux-blogs-hero-bg.webp`;
 
      return {
