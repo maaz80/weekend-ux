@@ -19,6 +19,7 @@ const AuthModal = dynamic(
 );
 import { useHomeData } from "@/context/HomeDataContext";
 import { getCurrentUser, logoutUser, getUserToken } from "@/utils/auth.js";
+import ObfuscatedEmail from "@/components/ui/ObfuscatedEmail";
 import { FaEnvelope, FaInstagram, FaLinkedinIn, FaPhoneAlt } from "react-icons/fa";
 import { SiFacebook, SiYoutube } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
@@ -268,10 +269,10 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                         <FaPhoneAlt size={12} className="md:w-3.5 md:h-3.5" aria-hidden="true" />
                                         <span>+91 9599272764</span>
                                    </a>
-                                   <a href="mailto:info@weekendux.in" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                                   <ObfuscatedEmail email="info@weekendux.in" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                                         <FaEnvelope size={12} className="md:w-3.5 md:h-3.5" aria-hidden="true" />
-                                        <span className="">info@weekendux.in</span>
-                                   </a>
+                                        <span>info@weekendux.in</span>
+                                   </ObfuscatedEmail>
                               </div>
                               <div className="flex items-center gap-4 md:gap-5">
                                    <a href="https://www.facebook.com/weekendux/" target="_blank" rel="noopener noreferrer"

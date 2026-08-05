@@ -129,13 +129,23 @@ export default function Hero({
                                              {slide.tagline}
                                         </p>
 
-                                        <h1
-                                             className={`font-playfair text-[37px] leading-13 md:leading-16 md:text-[56px] transition-all duration-700 transform delay-300 ${titleColor} ${index === currentSlide
-                                                  ? "translate-y-0 opacity-100"
-                                                  : "translate-y-8 opacity-0"
-                                                  }`}
-                                             dangerouslySetInnerHTML={{ __html: slide.titleHtml }}
-                                        />
+                                        {index === 0 ? (
+                                             <h1
+                                                  className={`font-playfair text-[37px] leading-13 md:leading-16 md:text-[56px] transition-all duration-700 transform delay-300 ${titleColor} ${index === currentSlide
+                                                       ? "translate-y-0 opacity-100"
+                                                       : "translate-y-8 opacity-0"
+                                                       }`}
+                                                  dangerouslySetInnerHTML={{ __html: slide.titleHtml }}
+                                             />
+                                        ) : (
+                                             <h2
+                                                  className={`font-playfair text-[37px] leading-13 md:leading-16 md:text-[56px] transition-all duration-700 transform delay-300 ${titleColor} ${index === currentSlide
+                                                       ? "translate-y-0 opacity-100"
+                                                       : "translate-y-8 opacity-0"
+                                                       }`}
+                                                  dangerouslySetInnerHTML={{ __html: slide.titleHtml }}
+                                             />
+                                        )}
 
                                         <ul
                                              className={`mt-8 max-w-140 text-base leading-7 font-urbanist transition-all duration-700 transform delay-500 space-y-2 list-none ${pointsColor} ${index === currentSlide

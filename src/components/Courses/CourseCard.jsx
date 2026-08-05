@@ -32,14 +32,17 @@ export default function CourseCard({
      const imageSrc = course?.image || CourseImage;
 
      return (
-          <div className={`w-full border rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 min-h-100 md:min-h-112.5 max-h-122.5 ${cardBgColor} ${cardBorderColor}`}>
+          <div
+               onClick={handleClick}
+               className={`w-full border rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 min-h-100 md:min-h-102.5 max-h-122.5 cursor-pointer group ${cardBgColor} ${cardBorderColor}`}
+          >
 
                {/* Course Image */}
                <div className="relative h-47.5 md:h-56.5 overflow-hidden bg-zinc-100">
                     <OptimizedImage
                          src={imageSrc}
                          alt={course?.alt || "weekend-ux-program-image-template"}
-                         className="w-full h-full object-fill"
+                         className="w-full h-full object-fill group-hover:scale-105 transition-transform duration-500"
                          sizes="(max-width: 768px) 100vw, 400px"
                          priority={priority}
                          fetchPriority={fetchPriority}
@@ -47,41 +50,24 @@ export default function CourseCard({
                </div>
 
                {/* Content */}
-               <div className="p-4">
+               <div className="p-4 flex flex-col justify-between h-[calc(100%-12rem)] md:h-[calc(100%-14rem)]">
+                    <div>
+                         {/* Title */}
+                         <h2 className={`font-urbanist pb-2 text-[18px] md:text-[24px] font-bold leading-8 line-clamp-1 group-hover:text-amber-600 transition-colors ${cardTitleColor}`}>
+                              {course?.title}
+                         </h2>
 
-                    {/* Title */}
-                    <h2 className={`font-urbanist pb-2 text-[18px] md:text-[24px] font-bold leading-8 line-clamp-1 ${cardTitleColor}`}>
-                         {course?.title}
-                    </h2>
-
-                    {/* Author */}
-                    {/* <p className={`text-[16px] mt-1 font-urbanist ${cardSubTitleColor}`}>
-                         by {course?.instructor || course?.author || "Determined-Polliras"}
-                    </p> */}
+                         <div className="w-full line-clamp-3 text-xs md:text-sm text-zinc-600">{course?.overview}</div>
+                    </div>
 
                     {/* Bottom Section */}
-                    <div className={`flex flex-col items-end justify-between gap-3 pt-2 border-t ${dividerColor}`}>
-                         <div className="w-full line-clamp-3">{course?.overview}</div>
-                         <div className="flex items-center justify-between w-full mt-3">
-                              <div className="flex-1">
-                                   <p className={`text-[12px] md:text-[13px] ${statTextColor}`}>
-                                        <span className="font-semibold">
-                                             Starts:
-                                        </span>{" "}
-                                        {course?.startdate || course?.deadline || "10th Dec, 26"}
-                                   </p>
-                              </div>
-
-                              <button
-                                   onClick={handleClick}
-                                   className={`h-10 px-4 rounded-md border text-sm md:text-base font-medium flex items-center gap-2 whitespace-nowrap hover:bg-zinc-50/10 transition-all duration-300 cursor-pointer ${buttonBgColor} ${buttonTextColor} ${buttonBorderColor}`}
-                              >
-                                   {/* <FiDownload size={14} /> */}
-                                   Course Syllablus
-                                   <GoArrowRight />
-                              </button>
-                         </div>
-
+                    <div className={`flex items-center justify-between w-full pt-3 border-t ${dividerColor} mt-4`}>
+                         <p className={`text-[12px] md:text-[13px] ${statTextColor}`}>
+                              <span className="font-semibold">
+                                   Starts:
+                              </span>{" "}
+                              {course?.startdate || course?.deadline || "10th Dec, 26"}
+                         </p>
                     </div>
                </div>
           </div>

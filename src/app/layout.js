@@ -97,37 +97,62 @@ export default async function RootLayout({ children }) {
             })
           }}
         />
-        {/* Global Organization Schema */}
+        {/* Global LocalBusiness & EducationalOrganization Schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Organization",
+              "@type": ["LocalBusiness", "EducationalOrganization"],
               "name": "Weekend UX",
-              "alternateName": "WeekendUX",
+              "alternateName": "Weekend UX UI/UX Design Academy",
               "url": "https://www.weekendux.in/",
               "logo": "https://www.weekendux.in/logo.png",
-              "description": "Leading design education platform providing UI/UX Design Course, Figma Design Course, Product Design Course, and Web Development training.",
-              "sameAs": [
-                "https://www.linkedin.com/in/weekend-ux-7b03212a8/",
-                "https://www.instagram.com/weekendux1/",
-                "https://www.facebook.com/weekendux/"
-              ],
+              "image": "https://www.weekendux.in/images/weekend-ux-hero-bg-template.webp",
+              "description": "Leading design education platform providing UI/UX Design Course, Figma Design Course, Product Design Course, and Web Development training with 1-on-1 placement support.",
+              "telephone": "+919599272764",
+              "email": "info@weekendux.in",
+              "priceRange": "₹₹",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Weekend UX Training Center",
+                "streetAddress": "424 Madison Avenue, Connaught Place",
                 "addressLocality": "New Delhi",
                 "addressRegion": "Delhi",
                 "postalCode": "110001",
                 "addressCountry": "IN"
               },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 28.6139,
+                "longitude": 77.2090
+              },
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday"
+                  ],
+                  "opens": "09:00",
+                  "closes": "20:00"
+                }
+              ],
               "contactPoint": {
                 "@type": "ContactPoint",
                 "contactType": "Admissions & Support",
                 "telephone": "+919599272764",
                 "email": "info@weekendux.in"
               },
+              "sameAs": [
+                "https://www.linkedin.com/in/weekend-ux-7b03212a8/",
+                "https://www.instagram.com/weekendux1/",
+                "https://www.facebook.com/weekendux/"
+              ],
               "knowsAbout": [
                 "UI Design",
                 "UX Design",
@@ -140,7 +165,7 @@ export default async function RootLayout({ children }) {
               "aggregateRating": {
                 "@type": "AggregateRating",
                 "ratingValue": "4.9",
-                "reviewCount": "520",
+                "reviewCount": "2520",
                 "bestRating": "5",
                 "worstRating": "1"
               }

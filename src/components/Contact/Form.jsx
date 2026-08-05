@@ -287,8 +287,8 @@ const Form = ({
                                         </>
                                    ) : (
                                         <>
-                                            Submit
-                                             <span>↗</span>
+                                           Enquire Now
+                                             {/* <span>↗</span> */}
                                         </>
                                    )}
                               </Button>

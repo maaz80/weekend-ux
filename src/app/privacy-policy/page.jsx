@@ -16,7 +16,7 @@ async function getPolicyData() {
                // Return fallback if database document is not initialized yet
                return {
                     title: "Privacy Policy",
-                    content: "We value your privacy and are committed to protecting your personal information. We collect limited data—such as your name, contact details, and property preferences—to provide personalized real estate solutions and improve our services. Your data may be shared with trusted partners (like builders, legal advisors, or financial institutions) only for service-related purposes. We never sell or misuse your information. All data is stored securely and used in compliance with applicable privacy laws. By engaging with us, you consent to our data practices. For any queries or to manage your data, please contact us at info@dhswellness.com",
+                    content: "We value your privacy and are committed to protecting your personal information. We collect limited data—such as your name, contact details, and learning preferences—to provide personalized educational solutions and improve our services. Your data may be shared with trusted partners only for service-related purposes. We never sell or misuse your information. All data is stored securely and used in compliance with applicable privacy laws. By engaging with us, you consent to our data practices. For any queries or to manage your data, please contact us at info@weekendux.in",
                     relatedBlogs: {
                          title: "Related Blogs",
                          startheading: "Our",

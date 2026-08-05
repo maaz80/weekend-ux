@@ -178,6 +178,9 @@ const Form = ({
                if (response.ok) {
                     setStatus("success");
                     setSuccessMessage("Admissions booking submitted successfully!");
+                    localStorage.setItem("leadSubmitted", "true");
+                    localStorage.setItem("leadUser", JSON.stringify({ name: formData.fullName, email: formData.email, phone: formData.phone }));
+                    window.dispatchEvent(new CustomEvent("leadSubmitted"));
                     setFormData({ fullName: "", phone: "", email: "", otp: "" });
                     setOtpStep(false);
                     setErrors({});

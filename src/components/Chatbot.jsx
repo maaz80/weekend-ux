@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Logo from "@/app/assets/weekend-ux-logo.webp";
 import { useHomeData } from "@/context/HomeDataContext";
+import ObfuscatedEmail from "@/components/ui/ObfuscatedEmail";
 
 // Classify primary welcome selection into core categories
 const getPrimaryCategory = (serviceText) => {
@@ -20,125 +21,83 @@ const getPrimaryCategory = (serviceText) => {
      return "Courses";
 };
 
-// Compile dynamic question queue based on selected welcome service
+// Compile dynamic question queue tailored for Online Learning Platform
 const compileFullQueue = (currentAnswers) => {
-     const category = getPrimaryCategory(currentAnswers.welcome_service);
-
      let fullQueue = [
           {
-               id: "objective",
-               question: "Step 1 — What is your primary objective?",
-               type: "single",
-               options: category === "Agency Services"
-                    ? [
-                         "Redesign Outdated Site/App",
-                         "Build New Website / Web App",
-                         "Create Mobile App (iOS/Android)",
-                         "Improve Product UX & Conversion",
-                         "Other"
-                    ]
-                    : category === "Mentorship & Career"
-                         ? [
-                              "Switch Career to UX Design",
-                              "Get Portfolio Reviewed by Experts",
-                              "1-on-1 Industry Mentorship",
-                              "Prepare for Job Interviews"
-                         ]
-                         : [
-                              "Learn UI/UX Design from Scratch",
-                              "Switch Career to UX Design",
-                              "Master AI Design Tools",
-                              "Build an Industry Portfolio",
-                              "Other"
-                         ]
-          },
-          {
-               id: "profile_type",
-               question: "Step 2 — Tell us about yourself or your organization:",
+               id: "learning_goal",
+               question: "Step 1 — What is your primary learning goal?",
                type: "single",
                options: [
-                    "Student / Fresh Graduate",
-                    "Working Professional / Designer",
-                    "Startup Founder",
-                    "Small / Medium Business",
-                    "Enterprise / Corporate"
+                    "Start a new career as a UI/UX Designer",
+                    "Master Figma & AI Design Tools from scratch",
+                    "Build 3+ industry-ready portfolio projects",
+                    "Get 1-on-1 Placement & Interview Guidance",
+                    "Learn Web Development & React"
                ]
           },
           {
-               id: "add_ons",
-               question: "Step 3 — Select any add-on topics or services you are interested in: (Select all that apply)",
-               type: "multi",
+               id: "experience_level",
+               question: "Step 2 — What is your current background / experience level?",
+               type: "single",
                options: [
-                    "1-on-1 Mentorship",
-                    "Placement Assistance",
-                    "Figma & AI Masterclass",
-                    "Design System Creation",
-                    "Frontend Development (React/Next)",
-                    "None"
+                    "Complete Beginner (No prior design experience)",
+                    "Self-Taught / Basic knowledge of Figma",
+                    "Graphic Designer switching to UI/UX",
+                    "Software Developer / Product Manager",
+                    "Student / Recent Graduate"
+               ]
+          },
+          {
+               id: "preferred_batch",
+               question: "Step 3 — Which batch schedule works best for you?",
+               type: "single",
+               options: [
+                    "Weekend Live Online Batches (Sat & Sun)",
+                    "Weekday Evening Live Batches (Mon-Fri)",
+                    "1-on-1 Live Mentorship (Flexible Timings)",
+                    "Self-Paced Learning + Live Doubt Resolution"
+               ]
+          },
+          {
+               id: "timeline",
+               question: "Step 4 — When are you planning to start your course?",
+               type: "single",
+               options: [
+                    "Immediate Upcoming Batch",
+                    "Next Month",
+                    "Within 3 Months",
+                    "Just Exploring Syllabus & Fees"
+               ]
+          },
+          {
+               id: "contact_name",
+               question: "Step 5 — What's your full name?",
+               type: "text",
+               placeholder: "Enter Your Full Name"
+          },
+          {
+               id: "contact_email",
+               question: "Step 6 — What's your email address?",
+               type: "email",
+               placeholder: "name@example.com"
+          },
+          {
+               id: "contact_phone",
+               question: "Step 7 — What's your 10-digit WhatsApp / Phone number?",
+               type: "tel",
+               placeholder: "10-digit mobile number"
+          },
+          {
+               id: "consultation",
+               question: "Would you like to book a FREE 1-on-1 Counseling Session with a Senior UX Instructor?",
+               type: "single",
+               options: [
+                    "Yes, Book Free Counseling Session",
+                    "No, Just email syllabus & fee details"
                ]
           }
      ];
-
-     // Dynamic Follow-ups based on Category
-     if (category === "Agency Services") {
-          fullQueue.push({
-               id: "has_website",
-               question: "Do you currently have an existing website or mobile app?",
-               type: "single",
-               options: ["Yes", "No", "Under Development"]
-          });
-
-          fullQueue.push({
-               id: "project_budget",
-               question: "What is your estimated project budget?",
-               type: "single",
-               options: ["Under ₹50,000", "₹50,000 – ₹1.5 Lakhs", "₹1.5 – ₹3 Lakhs", "₹3 Lakhs+"]
-          });
-     } else {
-          fullQueue.push({
-               id: "learning_mode",
-               question: "What is your preferred mode of learning?",
-               type: "single",
-               options: ["Weekend Live Online Batches", "Self-Paced with Mentor Support", "Classroom / Offline Bootcamps"]
-          });
-
-          fullQueue.push({
-               id: "start_timeline",
-               question: "When do you plan to start your learning journey?",
-               type: "single",
-               options: ["Immediate Batch", "Next Month", "Within 3 Months", "Just Exploring"]
-          });
-     }
-
-     // Contact Info Collection
-     fullQueue.push({
-          id: "contact_name",
-          question: "What's your full name?",
-          type: "text",
-          placeholder: "Your Full Name"
-     });
-
-     fullQueue.push({
-          id: "contact_email",
-          question: "What's your email address?",
-          type: "email",
-          placeholder: "name@company.com"
-     });
-
-     fullQueue.push({
-          id: "contact_phone",
-          question: "What's your phone number?",
-          type: "tel",
-          placeholder: "10-digit mobile number"
-     });
-
-     // Free Consultation Call
-     fullQueue.push({
-          id: "consultation",
-          question: "Would you like to schedule a FREE 1-on-1 consultation call with a UX Expert?",
-          type: "single",
-          options: ["Yes, Schedule Call", "No, Just Send Details"]
-     });
 
      return fullQueue;
 };
@@ -167,18 +126,17 @@ export default function Chatbot({
 
      const initialWelcomeMessage = {
           id: "welcome",
-          text: "👋 Welcome to Weekend UX!\n\nWe offer industry-leading UI/UX Design Courses, Mentorship & Agency Design Solutions. How can we help you today?",
+          text: "👋 Welcome to Weekend UX!\n\nWe are India's premier online learning platform for UI/UX Design, Figma, AI Design Tools & Career Acceleration. How can we guide your learning journey today?",
           isBot: true,
           senderName: "Weekend UX Bot",
           timestamp: "Just now",
           options: [
-               "🎓 UI/UX Design Course",
-               "💻 Product Design & AI",
-               "🌐 Website Design & Dev",
-               "📱 Mobile App Design & Dev",
-               "✨ Brand Identity & Audit",
-               "🎯 Career Mentorship",
-               "🤝 Talk to UX Advisor"
+               "🎓 UI/UX Design Masterclass",
+               "⚡ Figma & AI Tools Bootcamp",
+               "🚀 Career Switch to Product Design",
+               "💻 Web Design & Frontend Dev",
+               "🎯 1-on-1 Portfolio & Interview Prep",
+               "🤝 Talk to a UX Learning Advisor"
           ],
           isWelcomeCard: true
      };
@@ -198,12 +156,14 @@ export default function Chatbot({
 
      const sendLeadData = async (leadAnswers) => {
           try {
-               await fetch("/api/lead", {
+               await fetch("/api/leads", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
-                         name: leadAnswers.contact_name || "Chatbot Lead",
+                         name: leadAnswers.contact_name || "Chatbot Visitor",
                          email: leadAnswers.contact_email || "no-email@provided.com",
+                         phone: leadAnswers.contact_phone || "",
+                         source: "Chatbot Inquiry",
                          answers: leadAnswers
                     })
                });
@@ -575,7 +535,7 @@ export default function Chatbot({
                                                        <div className="flex items-center gap-2">
                                                             <Mail size={13} className="text-neutral shrink-0" />
                                                             <span>Email: </span>
-                                                            <a href="mailto:info@weekendux.in" className="font-semibold underline hover:text-official transition-colors">info@weekendux.in</a>
+                                                            <ObfuscatedEmail email="info@weekendux.in" className="font-semibold underline hover:text-official transition-colors">info@weekendux.in</ObfuscatedEmail>
                                                        </div>
                                                   </div>
                                              </div>
@@ -590,13 +550,14 @@ export default function Chatbot({
                                                             <RotateCcw size={13} />
                                                             Restart Chat
                                                        </button>
-                                                       <a
-                                                            href="mailto:info@weekendux.in?subject=Inquiry from Chatbot"
+                                                       <ObfuscatedEmail
+                                                            email="info@weekendux.in"
+                                                            subject="Inquiry from Chatbot"
                                                             className="bg-white hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-zinc-800 text-center shadow-xs flex items-center justify-center gap-1.5"
                                                        >
                                                             <Calendar size={13} />
                                                             Book Call
-                                                       </a>
+                                                       </ObfuscatedEmail>
                                                        <Link
                                                             href="/courses"
                                                             className="bg-white hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-zinc-800 text-center shadow-xs flex items-center justify-center gap-1.5"

@@ -378,7 +378,7 @@ export default function Details({ data }) {
                                                        href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
                                                        target="_blank"
                                                        rel="noopener noreferrer"
-                                                       className="w-10 h-10 rounded-full bg-official/10 text-official hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
+                                                       className="w-10 h-10 rounded-full bg-neutral/10 text-neutral hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
                                                        aria-label="Share on Facebook"
                                                   >
                                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -390,7 +390,7 @@ export default function Details({ data }) {
                                                        href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
                                                        target="_blank"
                                                        rel="noopener noreferrer"
-                                                       className="w-10 h-10 rounded-full bg-official/10 text-official hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
+                                                       className="w-10 h-10 rounded-full bg-neutral/10 text-neutral hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
                                                        aria-label="Share on LinkedIn"
                                                   >
                                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -402,7 +402,7 @@ export default function Details({ data }) {
                                                        href={`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(shareUrl)}&description=${encodeURIComponent("Check out the " + (data?.title || "UI/UX Design") + " course at Weekend UX!")}`}
                                                        target="_blank"
                                                        rel="noopener noreferrer"
-                                                       className="w-10 h-10 rounded-full bg-official/10 text-official hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
+                                                       className="w-10 h-10 rounded-full bg-neutral/10 text-neutral hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
                                                        aria-label="Share on Pinterest"
                                                   >
                                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -414,7 +414,7 @@ export default function Details({ data }) {
                                                        href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent("Check out the " + (data?.title || "UI/UX Design") + " course at Weekend UX!")}`}
                                                        target="_blank"
                                                        rel="noopener noreferrer"
-                                                       className="w-10 h-10 rounded-full bg-official/10 text-official hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
+                                                       className="w-10 h-10 rounded-full bg-neutral/10 text-neutral hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
                                                        aria-label="Share on Twitter"
                                                   >
                                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -424,7 +424,7 @@ export default function Details({ data }) {
                                                   {/* Email Share */}
                                                   <a
                                                        href={`mailto:?subject=${encodeURIComponent("Check out the " + (data?.title || "UI/UX Design") + " course")}&body=${encodeURIComponent("I found this amazing course on Weekend UX: " + shareUrl)}`}
-                                                       className="w-10 h-10 rounded-full bg-official/10 text-official hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
+                                                       className="w-10 h-10 rounded-full bg-neutral/10 text-neutral hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
                                                        aria-label="Share via Email"
                                                   >
                                                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -545,7 +545,7 @@ export default function Details({ data }) {
                                                   }}
                                                   className="h-12 px-8 bg-linear-to-r from-zinc-800 to-zinc-900 text-white shadow-sm rounded-md hover:from-zinc-800/90 hover:to-zinc-900/90 text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center font-urbanist"
                                              >
-                                                  Apply Now
+                                                 Enquire Now
                                              </button>
 
                                              {/* Slider Controls */}
@@ -585,7 +585,21 @@ export default function Details({ data }) {
 
                                              <div className="flex items-center gap-4 border-t border-zinc-100 pt-5 mt-auto">
                                                   <div className="shrink-0">
-                                                       {getIconBadge(shortTermItems[sliderIndex]?.iconText)}
+                                                       {shortTermItems[sliderIndex]?.image ? (
+                                                            <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center border border-zinc-200 bg-white shrink-0 shadow-sm">
+                                                                 <img
+                                                                      src={shortTermItems[sliderIndex].image}
+                                                                      alt={shortTermItems[sliderIndex]?.alt || shortTermItems[sliderIndex]?.title || "Course Image"}
+                                                                      className="w-full h-full object-cover"
+                                                                      onError={(e) => {
+                                                                           e.target.onerror = null;
+                                                                           e.target.style.display = "none";
+                                                                      }}
+                                                                 />
+                                                            </div>
+                                                       ) : (
+                                                            getIconBadge(shortTermItems[sliderIndex]?.iconText)
+                                                       )}
                                                   </div>
                                                   <div className="text-left">
                                                        <h3 className="font-urbanist text-[17px] md:text-[19px] font-bold text-zinc-900 leading-tight">

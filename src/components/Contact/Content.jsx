@@ -2,6 +2,7 @@ import DecorativeImage from "@/app/assets/weekend-ux-contact-decorative-image.we
 import Map from "@/app/assets/weekend-ux-contact-map.webp";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import Form from "./Form";
+import ObfuscatedEmail from "@/components/ui/ObfuscatedEmail";
 
 const Content = ({
      data,
@@ -100,7 +101,7 @@ const Content = ({
                                         </h2>
 
                                         <div className={`text-sm md:text-[16px] ${infoTextColor}`}>
-                                             <p>{inquiriesEmail}</p>
+                                             <p><ObfuscatedEmail email={inquiriesEmail} /></p>
                                              <p>{inquiriesPhone}</p>
                                         </div>
                                    </div>

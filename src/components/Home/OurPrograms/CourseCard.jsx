@@ -17,13 +17,16 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
 
 
      return (
-          <div className="w-73.5 md:w-full rounded-2xl border min-h-100 md:min-h-125 border-zinc-100 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col">
+          <div 
+               onClick={handleClick}
+               className="w-73.5 md:w-full rounded-2xl border min-h-100 md:min-h-114 border-zinc-100 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col cursor-pointer group"
+          >
                {/* Image section */}
                <div className="relative rounded-xl overflow-hidden h-50 md:h-65.5 w-full bg-zinc-100">
                     <OptimizedImage
                          src={imageSrc}
                          alt={course?.alt || "weekend-ux-program-image-template"}
-                         className="w-full h-full object-fill"
+                         className="w-full h-full object-fill group-hover:scale-105 transition-transform duration-500"
                          sizes="(max-width: 768px) 100vw, 320px"
                          priority={priority}
                          fetchPriority={fetchPriority}
@@ -31,33 +34,25 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                </div>
 
                {/* Content */}
-               <div className="p-2 md:p-3 flex flex-col grow">
-                    {/* Title */}
-                    <h2 className="font-urbanist text-[18px] md:text-[23px] 2xl:text-[24px] font-bold leading-8 md:leading-9 text-zinc-900 min-h-14 flex items-center ">
-                         {course?.title}
-                    </h2>
+               <div className="p-2 md:p-3 flex flex-col grow justify-between">
+                    <div>
+                         {/* Title */}
+                         <h2 className="font-urbanist text-[18px] md:text-[23px] 2xl:text-[24px] font-bold leading-8 md:leading-9 text-zinc-900 min-h-14 flex items-center group-hover:text-official transition-colors">
+                              {course?.title}
+                         </h2>
 
-                    {/* Description */}
-                    <p className="mt-2 text-xs md:text-[16px] text-zinc-500 font-urbanist line-clamp-2 leading-6">
-                         {course?.description || course?.overview || "AWS provides services for every domain such as computing, data storage, data analytics, robotics, and"}
-                    </p>
+                         {/* Description */}
+                         <p className="mt-2 text-xs md:text-[16px] text-zinc-500 font-urbanist line-clamp-2 leading-6">
+                              {course?.description || course?.overview || "AWS provides services for every domain such as computing, data storage, data analytics, robotics, and"}
+                         </p>
+                    </div>
 
                     {/* Metadata */}
-                    <div className="flex items-center justify-between text-[13px] md:text-[16px] text-zinc-800 font-bold font-urbanist mt-5 mb-5 border-t border-zinc-50 pt-4">
+                    <div className="flex items-center justify-between text-[13px] md:text-[16px] text-zinc-800 font-bold font-urbanist mt-auto pt-4 border-t border-zinc-50">
                          <p>
                               <span className="text-zinc-500 font-normal">Starts:</span> {course?.deadline}
                          </p>
                     </div>
-
-                    {/* CTA button */}
-                    <button
-                         onClick={handleClick}
-                         className="w-full h-12 rounded-xl text-zinc-800 text-[16px] font-medium flex items-center justify-center gap-2 border border-zinc-200 hover:border-none cursor-pointer hover:bg-linear-to-r from-zinc-800 to-zinc-900 hover:text-white hover:border-transparent transition-all duration-300 ease-in-out mt-auto"
-                    >
-                         {/* <FiDownload className="text-base" /> */}
-                         Course Syllablus
-                         <GoArrowRight />
-                    </button>
                </div>
           </div>
      );

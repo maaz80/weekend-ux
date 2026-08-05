@@ -159,21 +159,47 @@ export default async function CourseSlugPage({ params }) {
                <SchemaRenderer schemas={data?.schemas} />
 
                {/* Server-rendered static JSON-LD fallback for No-JS/Control+U */}
-               {data?.schemas && Array.isArray(data.schemas) && data.schemas.map((schemaStr, idx) => {
-                    if (!schemaStr || !schemaStr.trim()) return null;
-                    try {
-                         const cleanJson = JSON.stringify(JSON.parse(schemaStr));
-                         return (
-                              <script
-                                   key={idx}
-                                   type="application/ld+json"
-                                   dangerouslySetInnerHTML={{ __html: cleanJson }}
-                              />
-                         );
-                    } catch (e) {
-                         return null;
-                    }
-               })}
+               {data?.schemas && Array.isArray(data.schemas) && data.schemas.length > 0 ? (
+                    data.schemas.map((schemaStr, idx) => {
+                         if (!schemaStr || !schemaStr.trim()) return null;
+                         try {
+                              const cleanJson = JSON.stringify(JSON.parse(schemaStr));
+                              return (
+                                   <script
+                                        key={idx}
+                                        type="application/ld+json"
+                                        dangerouslySetInnerHTML={{ __html: cleanJson }}
+                                   />
+                              );
+                         } catch (e) {
+                              return null;
+                         }
+                    })
+               ) : (
+                    <script
+                         type="application/ld+json"
+                         dangerouslySetInnerHTML={{
+                              __html: JSON.stringify({
+                                   "@context": "https://schema.org",
+                                   "@type": "Course",
+                                   "name": heroTitle,
+                                   "description": data?.seodescription || `${heroTitle} by Weekend UX`,
+                                   "provider": {
+                                        "@type": "Organization",
+                                        "name": "Weekend UX",
+                                        "url": "https://www.weekendux.in/"
+                                   },
+                                   "aggregateRating": {
+                                        "@type": "AggregateRating",
+                                        "ratingValue": "4.9",
+                                        "reviewCount": "520",
+                                        "bestRating": "5",
+                                        "worstRating": "1"
+                                   }
+                              })
+                         }}
+                    />
+               )}
 
                <CourseDetailsView data={data} />
                <Testimonials />

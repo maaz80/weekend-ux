@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Lock, CheckCircle2 } from "lucide-react";
+import { X, Lock, CheckCircle2, Send } from "lucide-react";
 
 export default function LeadModal() {
      const [isOpen, setIsOpen] = useState(false);
@@ -11,48 +11,85 @@ export default function LeadModal() {
      const [error, setError] = useState("");
      const [loading, setLoading] = useState(false);
      const [success, setSuccess] = useState(false);
+     const [toast, setToast] = useState(null);
+
+     const showToastNotification = (msg, type = "success") => {
+          setToast({ message: msg, type });
+          setTimeout(() => {
+               setToast(null);
+          }, 4500);
+     };
 
      useEffect(() => {
           if (typeof window === "undefined") return;
 
-          // 1. Check if already submitted
-          const isSubmitted = localStorage.getItem("leadSubmitted") === "true";
-          if (isSubmitted) return;
+          // Event listener for manual trigger ("Get Brochure", "Book a Call", "Apply Now", blurred lesson click)
+          const handleOpen = async (e) => {
+               const cId = e?.detail?.courseId || window.__currentCourseId || "";
+               
+               // Check if user already filled form previously
+               let savedUser = null;
+               try {
+                    const raw = localStorage.getItem("leadUser");
+                    if (raw) savedUser = JSON.parse(raw);
+               } catch (err) {}
 
-          // 2. Set up event listener for manual trigger (clicked blurred lesson)
-          const handleOpen = (e) => {
+               if (savedUser && savedUser.email) {
+                    // DIRECT SEND TO EMAIL! User already filled form previously
+                    showToastNotification(`Sending course details to ${savedUser.email}...`, "info");
+                    try {
+                         const response = await fetch("/api/leads", {
+                              method: "POST",
+                              headers: { "Content-Type": "application/json" },
+                              body: JSON.stringify({
+                                   name: savedUser.name || "Returning Student",
+                                   email: savedUser.email,
+                                   phone: savedUser.phone || "",
+                                   courseId: cId,
+                                   source: "Course Page Brochure Request"
+                              })
+                         });
+                         if (response.ok) {
+                              showToastNotification(`✅ Syllabus email sent to ${savedUser.email}! Check your inbox.`, "success");
+                              window.dispatchEvent(new CustomEvent("leadSubmitted"));
+                         } else {
+                              showToastNotification("⚠️ Could not send email. Please try again.", "error");
+                         }
+                    } catch (fetchErr) {
+                         showToastNotification("⚠️ Error sending email. Please check connection.", "error");
+                    }
+                    return;
+               }
+
+               // First time user: open modal form
                setError("");
                setSuccess(false);
                setIsOpen(true);
-               const cId = e?.detail?.courseId || window.__currentCourseId || "";
                setCourseId(cId);
           };
 
           window.addEventListener("openLeadModal", handleOpen);
 
-          // 3. Set up auto popup (10 seconds delay) if not shown today
+          // Auto popup (10 seconds delay) if not submitted & not shown today
           const lastShown = localStorage.getItem("leadModalLastShown");
           const now = Date.now();
           const oneDayMs = 24 * 60 * 60 * 1000;
+          const isSubmitted = localStorage.getItem("leadSubmitted") === "true";
 
-          if (!lastShown || now - Number(lastShown) > oneDayMs) {
-               const timer = setTimeout(() => {
-                    // Double check submission state before opening automatically
+          let timer = null;
+          if (!isSubmitted && (!lastShown || now - Number(lastShown) > oneDayMs)) {
+               timer = setTimeout(() => {
                     if (localStorage.getItem("leadSubmitted") !== "true") {
                          setIsOpen(true);
                          const cId = window.__currentCourseId || "";
                          setCourseId(cId);
                          localStorage.setItem("leadModalLastShown", now.toString());
                     }
-               }, 10000); // 10 seconds
-
-               return () => {
-                    clearTimeout(timer);
-                    window.removeEventListener("openLeadModal", handleOpen);
-               };
+               }, 10000);
           }
 
           return () => {
+               if (timer) clearTimeout(timer);
                window.removeEventListener("openLeadModal", handleOpen);
           };
      }, []);
@@ -84,7 +121,7 @@ export default function LeadModal() {
                     headers: {
                          "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ name, email, courseId })
+                    body: JSON.stringify({ name, email, courseId, source: "Course Page Brochure Request" })
                });
 
                const data = await response.json();
@@ -93,7 +130,10 @@ export default function LeadModal() {
                     throw new Error(data.error || "Something went wrong. Please try again.");
                }
 
+               // Save lead user for future direct sends!
                localStorage.setItem("leadSubmitted", "true");
+               localStorage.setItem("leadUser", JSON.stringify({ name, email }));
+
                setSuccess(true);
                setLoading(false);
 
@@ -114,86 +154,100 @@ export default function LeadModal() {
           }
      };
 
-     if (!isOpen) return null;
-
      return (
-          <div className="fixed inset-0 z-9999 flex items-center justify-center bg-zinc-950/70 backdrop-blur-md p-2 md:p-4 transition-all duration-300">
-               <div className="w-full max-w-md bg-white rounded-3xl p-5 md:p-8 shadow-2xl relative border border-zinc-150 text-neutral text-center transform scale-100 transition-all duration-300 animate-in fade-in zoom-in-95 ">
-                    
-                    {/* Close Button */}
-                    <button
-                         onClick={() => setIsOpen(false)}
-                         className="absolute top-5 right-5 text-zinc-400 hover:text-zinc-700 transition cursor-pointer"
-                         aria-label="Close"
-                    >
-                         <X size={20} />
-                    </button>
+          <>
+               {/* Toast Notification */}
+               {toast && (
+                    <div className="fixed top-20 right-4 md:right-8 z-99999 flex items-center gap-3 bg-zinc-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-zinc-700 animate-in fade-in slide-in-from-top-4 duration-300 font-urbanist text-xs md:text-sm font-semibold max-w-sm">
+                         <Send className="w-5 h-5 text-official shrink-0 animate-pulse" />
+                         <span>{toast.message}</span>
+                         <button onClick={() => setToast(null)} className="text-zinc-400 hover:text-white ml-auto cursor-pointer">
+                              <X size={16} />
+                         </button>
+                    </div>
+               )}
 
-                    {success ? (
-                         <div className="py-6 flex flex-col items-center">
-                              <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-5 border border-emerald-200 animate-bounce">
-                                   <CheckCircle2 size={32} />
-                              </div>
-                              <h3 className="text-2xl font-bold font-playfair text-zinc-900 mb-2">Syllabus Sent to Email!</h3>
-                              <p className="text-sm text-zinc-500 font-urbanist leading-relaxed">
-                                   Thank you for sharing your details. The complete course syllabus and curriculum details have been sent to your email address.
-                              </p>
-                         </div>
-                    ) : (
-                         <>
-                              {/* Lock Icon */}
-                              <div className="w-14 h-14 bg-official/10 text-official rounded-full flex items-center justify-center mx-auto mb-1 md:mb-6 border border-official/20">
-                                   <Lock size={24} />
-                              </div>
-
-                              <h3 className="text-2xl font-bold font-playfair text-zinc-900 mb-2">
-                                   Unlock Curriculum
-                              </h3>
+               {/* Modal Popup */}
+               {isOpen && (
+                    <div className="fixed inset-0 z-9999 flex items-center justify-center bg-zinc-950/70 backdrop-blur-md p-2 md:p-4 transition-all duration-300">
+                         <div className="w-full max-w-md bg-white rounded-3xl p-5 md:p-8 shadow-2xl relative border border-zinc-150 text-neutral text-center transform scale-100 transition-all duration-300 animate-in fade-in zoom-in-95">
                               
-                              <p className="text-sm text-zinc-500 font-urbanist mb-6 leading-relaxed">
-                                   Enter your details below to instantly unlock all chapters, lessons, and topics for our courses.
-                              </p>
+                              {/* Close Button */}
+                              <button
+                                   onClick={() => setIsOpen(false)}
+                                   className="absolute top-5 right-5 text-zinc-400 hover:text-zinc-700 transition cursor-pointer"
+                                   aria-label="Close"
+                              >
+                                   <X size={20} />
+                              </button>
 
-                              <form onSubmit={handleSubmit} className="text-left space-y-4">
-                                   <div className="space-y-1">
-                                        <label className="text-xs font-semibold text-zinc-600 font-urbanist">Name</label>
-                                        <input
-                                             type="text"
-                                             value={name}
-                                             onChange={(e) => setName(e.target.value)}
-                                             placeholder="Your full name"
-                                             className="w-full h-11 px-4 rounded-xl border border-zinc-200 focus:border-official focus:outline-none text-sm transition font-urbanist bg-zinc-50/50"
-                                        />
-                                   </div>
-
-                                   <div className="space-y-1">
-                                        <label className="text-xs font-semibold text-zinc-600 font-urbanist">Email Address</label>
-                                        <input
-                                             type="email"
-                                             value={email}
-                                             onChange={(e) => setEmail(e.target.value)}
-                                             placeholder="name@example.com"
-                                             className="w-full h-11 px-4 rounded-xl border border-zinc-200 focus:border-official focus:outline-none text-sm transition font-urbanist bg-zinc-50/50"
-                                        />
-                                   </div>
-
-                                   {error && (
-                                        <p className="text-xs font-medium text-red-500 mt-1 bg-red-50 p-2 rounded-lg border border-red-100 font-urbanist">
-                                             {error}
+                              {success ? (
+                                   <div className="py-6 flex flex-col items-center">
+                                        <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-5 border border-emerald-200 animate-bounce">
+                                             <CheckCircle2 size={32} />
+                                        </div>
+                                        <h3 className="text-2xl font-bold font-playfair text-zinc-900 mb-2">Syllabus Sent to Email!</h3>
+                                        <p className="text-sm text-zinc-500 font-urbanist leading-relaxed">
+                                             Thank you for sharing your details. The complete course syllabus and curriculum details have been sent to your email address.
                                         </p>
-                                   )}
+                                   </div>
+                              ) : (
+                                   <>
+                                        {/* Lock Icon */}
+                                        <div className="w-14 h-14 bg-official/10 text-official rounded-full flex items-center justify-center mx-auto mb-1 md:mb-6 border border-official/20">
+                                             <Lock size={24} />
+                                        </div>
 
-                                   <button
-                                        type="submit"
-                                        disabled={loading}
-                                        className="w-full h-12 bg-official text-black rounded-xl text-sm font-semibold cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 font-urbanist mt-6 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90"
-                                   >
-                                        {loading ? "Unlocking..." : "Submit & Unlock"}
-                                   </button>
-                              </form>
-                         </>
-                    )}
-               </div>
-          </div>
+                                        <h3 className="text-2xl font-bold font-playfair text-zinc-900 mb-2">
+                                             Unlock Curriculum
+                                        </h3>
+                                        
+                                        <p className="text-sm text-zinc-500 font-urbanist mb-6 leading-relaxed">
+                                             Enter your details below to instantly unlock all chapters, lessons, and topics for our courses.
+                                        </p>
+
+                                        <form onSubmit={handleSubmit} className="text-left space-y-4">
+                                             <div className="space-y-1">
+                                                  <label className="text-xs font-semibold text-zinc-600 font-urbanist">Name</label>
+                                                  <input
+                                                       type="text"
+                                                       value={name}
+                                                       onChange={(e) => setName(e.target.value)}
+                                                       placeholder="Your full name"
+                                                       className="w-full h-11 px-4 rounded-xl border border-zinc-200 focus:border-official focus:outline-none text-sm transition font-urbanist bg-zinc-50/50"
+                                                  />
+                                             </div>
+
+                                             <div className="space-y-1">
+                                                  <label className="text-xs font-semibold text-zinc-600 font-urbanist">Email Address</label>
+                                                  <input
+                                                       type="email"
+                                                       value={email}
+                                                       onChange={(e) => setEmail(e.target.value)}
+                                                       placeholder="name@example.com"
+                                                       className="w-full h-11 px-4 rounded-xl border border-zinc-200 focus:border-official focus:outline-none text-sm transition font-urbanist bg-zinc-50/50"
+                                                  />
+                                             </div>
+
+                                             {error && (
+                                                  <p className="text-xs font-medium text-red-500 mt-1 bg-red-50 p-2 rounded-lg border border-red-100 font-urbanist">
+                                                       {error}
+                                                  </p>
+                                             )}
+
+                                             <button
+                                                  type="submit"
+                                                  disabled={loading}
+                                                  className="w-full h-12 bg-official text-black rounded-xl text-sm font-semibold cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 font-urbanist mt-6 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90"
+                                             >
+                                                  {loading ? "Unlocking..." : "Submit & Unlock"}
+                                             </button>
+                                        </form>
+                                   </>
+                              )}
+                         </div>
+                    </div>
+               )}
+          </>
      );
 }

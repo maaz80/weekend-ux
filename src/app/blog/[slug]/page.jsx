@@ -135,21 +135,49 @@ export default async function BlogSlugPage({ params }) {
                <SchemaRenderer schemas={data?.schemas} />
 
                {/* Server-rendered static JSON-LD fallback for No-JS/Control+U */}
-               {data?.schemas && Array.isArray(data.schemas) && data.schemas.map((schemaStr, idx) => {
-                    if (!schemaStr || !schemaStr.trim()) return null;
-                    try {
-                         const cleanJson = JSON.stringify(JSON.parse(schemaStr));
-                         return (
-                              <script
-                                   key={idx}
-                                   type="application/ld+json"
-                                   dangerouslySetInnerHTML={{ __html: cleanJson }}
-                              />
-                         );
-                    } catch (e) {
-                         return null;
-                    }
-               })}
+               {data?.schemas && Array.isArray(data.schemas) && data.schemas.length > 0 ? (
+                    data.schemas.map((schemaStr, idx) => {
+                         if (!schemaStr || !schemaStr.trim()) return null;
+                         try {
+                              const cleanJson = JSON.stringify(JSON.parse(schemaStr));
+                              return (
+                                   <script
+                                        key={idx}
+                                        type="application/ld+json"
+                                        dangerouslySetInnerHTML={{ __html: cleanJson }}
+                                   />
+                              );
+                         } catch (e) {
+                              return null;
+                         }
+                    })
+               ) : (
+                    <script
+                         type="application/ld+json"
+                         dangerouslySetInnerHTML={{
+                              __html: JSON.stringify({
+                                   "@context": "https://schema.org",
+                                   "@type": "BlogPosting",
+                                   "headline": heroTitle,
+                                   "image": data?.image ? [data.image] : ["https://www.weekendux.in/images/weekend-ux-blogs-hero-bg.webp"],
+                                   "datePublished": data?.date || "2026-01-01",
+                                   "author": {
+                                        "@type": "Person",
+                                        "name": data?.author?.name || "Weekend UX Team"
+                                   },
+                                   "publisher": {
+                                        "@type": "Organization",
+                                        "name": "Weekend UX",
+                                        "logo": {
+                                             "@type": "ImageObject",
+                                             "url": "https://www.weekendux.in/logo.png"
+                                        }
+                                   },
+                                   "description": data?.seodescription || heroTitle
+                              })
+                         }}
+                    />
+               )}
 
                <BlogDetailsView data={data} />
                <Testimonials />

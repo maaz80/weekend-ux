@@ -141,7 +141,7 @@ const SearchResultsContent = () => {
                               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
                                    {/* LEFT SIDEBAR - FILTERS & SEARCH */}
-                                   <div className="lg:col-span-4 flex flex-col gap-6">
+                                   <div className="lg:col-span-3 flex flex-col gap-6">
 
                                         {/* REFINE SEARCH WIDGET */}
                                         <div className="bg-white rounded-2xl border border-zinc-200/80 p-5 shadow-sm text-left">
@@ -226,7 +226,7 @@ const SearchResultsContent = () => {
                                    </div>
 
                                    {/* RIGHT MAIN - COURSE CARDS */}
-                                   <div className="lg:col-span-8 flex flex-col gap-6">
+                                   <div className="lg:col-span-9 flex flex-col gap-6">
 
                                         {/* DIRECT MATCHES SECTION */}
                                         <div>
@@ -240,9 +240,10 @@ const SearchResultsContent = () => {
                                              {directMatches.length > 0 ? (
                                                   <div className="flex flex-col gap-5">
                                                        {directMatches.map((course) => (
-                                                            <div
+                                                            <Link
                                                                  key={course._id || course.slug}
-                                                                 className="group bg-white rounded-2xl border border-zinc-200/80 p-4 md:p-5 flex flex-col md:flex-row gap-5 shadow-sm hover:shadow-md hover:border-zinc-300 transition-all duration-300 text-left"
+                                                                 href={`/courses/${course.slug || course._id}`}
+                                                                 className="group bg-white rounded-2xl border border-zinc-200/80 p-4 md:p-5 flex flex-col md:flex-row gap-5 shadow-sm hover:shadow-md hover:border-zinc-300 transition-all duration-300 text-left cursor-pointer"
                                                             >
                                                                  {/* Course Image */}
                                                                  {course.image && (
@@ -277,16 +278,12 @@ const SearchResultsContent = () => {
                                                                                 <FiCheckCircle className="text-emerald-600 text-sm" />
                                                                                 Industry Certificate Included
                                                                            </span>
-                                                                           <Link
-                                                                                href={`/courses/${course.slug || course._id}`}
-                                                                                className="bg-neutral hover:bg-official hover:text-neutral text-white text-xs font-extrabold px-4.5 py-2 rounded-xl transition-all duration-300 flex items-center gap-1.5 cursor-pointer shadow-xs"
-                                                                           >
-                                                                                <span>Explore Course</span>
-                                                                                <FiArrowRight className="text-xs" />
-                                                                           </Link>
+                                                                           <span className="text-xs font-extrabold text-neutral group-hover:text-amber-600 transition-colors flex items-center gap-1">
+                                                                                View Details <FiArrowRight className="text-xs" />
+                                                                           </span>
                                                                       </div>
                                                                  </div>
-                                                            </div>
+                                                            </Link>
                                                        ))}
                                                   </div>
                                              ) : (
@@ -313,9 +310,10 @@ const SearchResultsContent = () => {
                                                   </div>
                                                   <div className="flex flex-col gap-5">
                                                        {relatedSuggestions.slice(0, 5).map((course) => (
-                                                            <div
+                                                            <Link
                                                                  key={course._id || course.slug}
-                                                                 className="group bg-white rounded-2xl border border-zinc-200/80 p-4 md:p-5 flex flex-col md:flex-row gap-5 shadow-sm hover:shadow-md hover:border-zinc-300 transition-all duration-300 text-left opacity-95 hover:opacity-100"
+                                                                 href={`/courses/${course.slug || course._id}`}
+                                                                 className="group bg-white rounded-2xl border border-zinc-200/80 p-4 md:p-5 flex flex-col md:flex-row gap-5 shadow-sm hover:shadow-md hover:border-zinc-300 transition-all duration-300 text-left opacity-95 hover:opacity-100 cursor-pointer"
                                                             >
                                                                  {/* Course Image */}
                                                                  {course.image && (
@@ -349,16 +347,12 @@ const SearchResultsContent = () => {
                                                                            <span className="text-[11px] text-zinc-400 font-semibold">
                                                                                 Suggested course in same category
                                                                            </span>
-                                                                           <Link
-                                                                                href={`/courses/${course.slug || course._id}`}
-                                                                                className="bg-neutral hover:bg-official hover:text-neutral text-white text-xs font-extrabold px-4.5 py-2 rounded-xl transition-all duration-300 flex items-center gap-1.5 cursor-pointer shadow-xs"
-                                                                           >
-                                                                                <span>Explore Course</span>
-                                                                                <FiArrowRight className="text-xs" />
-                                                                           </Link>
+                                                                           <span className="text-xs font-extrabold text-neutral group-hover:text-amber-600 transition-colors flex items-center gap-1">
+                                                                                View Details <FiArrowRight className="text-xs" />
+                                                                           </span>
                                                                       </div>
                                                                  </div>
-                                                            </div>
+                                                            </Link>
                                                        ))}
                                                   </div>
                                              </div>
