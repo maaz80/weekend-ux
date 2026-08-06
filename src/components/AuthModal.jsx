@@ -6,6 +6,7 @@ import { Mail, User, X, KeyRound, Phone } from "lucide-react";
 import { signupUser, loginUser, sendAuthOTP } from "@/utils/auth.js";
 import Button from "@/components/ui/Button";
 import { useHomeData } from "@/context/HomeDataContext";
+import { useUserAuth } from "@/context/UserAuthContext";
 
 const AuthModal = ({
      isOpen,
@@ -27,6 +28,7 @@ const AuthModal = ({
      agreeTermsColor = "accent-official cursor-pointer",
 }) => {
      const { navbarData } = useHomeData();
+     const { refreshUser } = useUserAuth();
      const authDecorativeImage = navbarData?.authDecorativeImage || loginImage;
      const [authMode, setAuthMode] = useState("login"); // "login", "signup"
      const [loading, setLoading] = useState(false);
@@ -213,6 +215,7 @@ const AuthModal = ({
                     }
 
                     await signupUser(formData.name.trim(), formData.email.trim(), formData.phone.replace(/\D/g, ""), formData.otp);
+                    await refreshUser();
 
                     // Success
                     setFormData({
@@ -235,6 +238,7 @@ const AuthModal = ({
                     }
 
                     await loginUser(formData.email, formData.otp);
+                    await refreshUser();
 
                     // Success
                     setFormData({

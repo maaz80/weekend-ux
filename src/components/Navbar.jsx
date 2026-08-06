@@ -18,6 +18,7 @@ const AuthModal = dynamic(
      { ssr: false }
 );
 import { useHomeData } from "@/context/HomeDataContext";
+import { useUserAuth } from "@/context/UserAuthContext";
 import { getCurrentUser, logoutUser, getUserToken } from "@/utils/auth.js";
 import ObfuscatedEmail from "@/components/ui/ObfuscatedEmail";
 import { FaEnvelope, FaInstagram, FaLinkedinIn, FaPhoneAlt } from "react-icons/fa";
@@ -88,12 +89,13 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
           return () => document.removeEventListener("click", closeDropdown);
      }, [isUserDropdownOpen]);
 
-     const handleAuthSuccess = () => {
-          getCurrentUser().then((userData) => {
-               if (userData) {
-                    setUser(userData);
-               }
-          });
+     const { refreshUser } = useUserAuth();
+
+     const handleAuthSuccess = async () => {
+          const userData = await refreshUser();
+          if (userData) {
+               setUser(userData);
+          }
      };
 
      const handleSearchSubmit = (e) => {
