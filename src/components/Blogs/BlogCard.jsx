@@ -26,7 +26,7 @@ const BlogCard = ({
                               <OptimizedImage
                                    src={imageSrc}
                                    alt={blog?.alt || ""}
-                                   className={`w-full object-fill transition duration-700 group-hover:scale-105 ${height}`}
+                                   className={`w-full object-cover transition duration-700 group-hover:scale-105 ${height}`}
                                    sizes="(max-width: 768px) 100vw, 50vw"
                                    priority={priority}
                                    fetchPriority={fetchPriority}

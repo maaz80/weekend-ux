@@ -158,7 +158,7 @@ const Content = ({
                               <OptimizedImage
                                    src={mapImageSrc}
                                    alt="weekend-ux-contact-map"
-                                   className={`w-full h-55 md:h-112.5 lg:h-180 object-fill ${mapRounded}`}
+                                   className={`w-full h-55 md:h-112.5 lg:h-180 object-cover ${mapRounded}`}
                                    sizes="100vw"
                               />
 

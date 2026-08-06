@@ -108,7 +108,7 @@ export default function Hero({
                               <OptimizedImage
                                    src={slide.bgImage}
                                    alt={slide.tagline || "weekend-ux-hero-bg-template"}
-                                   className="absolute inset-0 w-full h-full"
+                                   className="absolute inset-0 w-full h-full object-cover"
                                    priority={index === 0}
                                    fetchPriority={index === 0 ? "high" : undefined}
                                    objectFit="cover"

@@ -10,6 +10,8 @@ import RelatedBlogs from "@/components/RelatedBlogs";
 import FAQ from "@/components/FAQ";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useHomeData } from "@/context/HomeDataContext";
+import { useUserAuth } from "@/context/UserAuthContext";
+import { GraduationCap, BookOpen, Lock, Unlock, LayoutGrid } from "lucide-react";
 
 const staticCourses = [
      {
@@ -148,9 +150,11 @@ const staticCourses = [
 
 export default function CoursesPage() {
      const { coursesData } = useHomeData();
+     const { user, isLoggedIn, isCourseUnlocked } = useUserAuth();
 
      const [searchQuery, setSearchQuery] = useState("");
      const [activeCategory, setActiveCategory] = useState("All");
+     const [viewFilter, setViewFilter] = useState("all"); // "all", "my-courses"
      const [currentPage, setCurrentPage] = useState(1);
      const coursesPerPage = 6;
 
@@ -158,6 +162,8 @@ export default function CoursesPage() {
      const coursesList = coursesData?.course && coursesData.course.length > 0
           ? coursesData.course
           : staticCourses;
+
+     const unlockedCount = coursesList.filter(c => isCourseUnlocked(c)).length;
 
      const hero = coursesData?.hero?.[0] || {};
      const heroStart = hero.startheading && hero.startheading.trim() ? hero.startheading.trim() : "Explore Our";
@@ -181,7 +187,9 @@ export default function CoursesPage() {
                (course.title || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
                (course.overview || course.description || course.seodescription || "").toLowerCase().includes(searchQuery.toLowerCase());
           const matchesCategory = activeCategory === "All" || course.category === activeCategory;
-          return matchesSearch && matchesCategory;
+          const matchesViewFilter = viewFilter === "all" || (viewFilter === "my-courses" && isCourseUnlocked(course));
+
+          return matchesSearch && matchesCategory && matchesViewFilter;
      });
 
      const totalPages = Math.ceil(filteredCourses.length / coursesPerPage);
@@ -238,14 +246,73 @@ export default function CoursesPage() {
                     </h1>
                </section>
 
-               {/* Courses Section with warm light background */}
-               <section
-                    className="py-7 md:py-14 bg-[#FCFBF7] bg-cover bg-center border-b border-zinc-100"
+                {/* Courses Section with warm light background */}
+                <section className="py-7 md:py-14 bg-[#FCFBF7] bg-cover bg-center border-b border-zinc-100">
+                     <div className="custom-width px-4 sm:px-6 lg:px-10">
 
-               >
-                    <div className="custom-width px-4 sm:px-6 lg:px-10">
-                         {/* Search & Category Filter Header */}
-                         <div className="flex justify-start mb-5 md:mb-14">
+                          {/* Logged-in User Dashboard Banner */}
+                          {isLoggedIn && (
+                               <div className="bg-white border border-zinc-200/80 rounded-2xl p-5 md:p-6 mb-8 shadow-sm text-neutral flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                                    <div className="space-y-1">
+                                         <div className="flex items-center gap-2">
+                                              <h2 className="text-xl md:text-2xl font-bold text-zinc-900">
+                                                   Welcome back, <span className="text-official">{user?.name || "Student"}</span>!
+                                              </h2>
+                                         </div>
+                                         <p className="text-xs md:text-sm text-zinc-500 font-medium">
+                                              {user?.email ? `Logged in as ${user.email}` : "Manage your unlocked courses and explore new programs."}
+                                         </p>
+                                    </div>
+
+                                    {/* Stats Counters */}
+                                    <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                                         <div className="bg-official/50 border border-official/50 px-4 py-2.5 rounded-xl text-left">
+                                              <p className="text-[11px] font-bold text-neutral uppercase tracking-wider">Unlocked Courses</p>
+                                              <p className="text-lg font-extrabold text-neutral flex items-center gap-1.5 mt-0.5">
+                                                   <GraduationCap size={18} /> {unlockedCount} Purchased
+                                              </p>
+                                         </div>
+
+                                         <div className="bg-zinc-50 border border-zinc-200 px-4 py-2.5 rounded-xl text-left">
+                                              <p className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">Total Catalog</p>
+                                              <p className="text-lg font-extrabold text-zinc-800 flex items-center gap-1.5 mt-0.5">
+                                                   <BookOpen size={18} /> {coursesList.length} Courses
+                                              </p>
+                                         </div>
+                                    </div>
+                               </div>
+                          )}
+
+                          {/* View Filter Toggle (All Courses vs My Unlocked Courses) */}
+                          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-zinc-200/60">
+                               <div className="inline-flex bg-zinc-200/60 p-1 rounded-xl text-xs font-bold text-zinc-600">
+                                    <button
+                                         onClick={() => { setViewFilter("all"); setCurrentPage(1); }}
+                                         className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 cursor-pointer ${
+                                              viewFilter === "all" ? "bg-white text-zinc-900 shadow-sm" : "hover:text-zinc-900"
+                                         }`}
+                                    >
+                                         <LayoutGrid size={15} /> All Courses ({coursesList.length})
+                                    </button>
+                                    {isLoggedIn && (
+                                         <button
+                                              onClick={() => { setViewFilter("my-courses"); setCurrentPage(1); }}
+                                              className={`px-4 py-2 rounded-lg transition-all flex items-center gap-2 cursor-pointer ${
+                                                   viewFilter === "my-courses" ? "bg-official text-neutral shadow-sm" : "hover:text-zinc-900"
+                                              }`}
+                                         >
+                                              <Unlock size={15} /> My Unlocked Courses ({unlockedCount})
+                                         </button>
+                                    )}
+                               </div>
+
+                               <div className="text-xs text-zinc-500 font-semibold">
+                                    Showing <span className="text-zinc-900 font-bold">{filteredCourses.length}</span> course{filteredCourses.length !== 1 ? 's' : ''}
+                               </div>
+                          </div>
+
+                          {/* Search & Category Filter Header */}
+                          <div className="flex justify-start mb-5 md:mb-14">
                               <div className="flex flex-wrap justify-start gap-1 md:gap-3 ">
                                    {categories.map((category) => (
                                         <button
@@ -334,17 +401,33 @@ export default function CoursesPage() {
                                         </div>
                                    )}
                               </div>
-                         ) : (
-                              <div className="text-center py-20">
-                                   <p className="text-zinc-500 text-lg">No courses found matching your criteria.</p>
-                                   <button
-                                        onClick={() => { setSearchQuery(""); setActiveCategory("All"); }}
-                                        className="mt-4 text-official font-medium hover:underline cursor-pointer"
-                                   >
-                                        Reset Filters
-                                   </button>
-                              </div>
-                         )}
+                          ) : viewFilter === "my-courses" ? (
+                               <div className="bg-white border border-zinc-200 rounded-2xl p-10 text-center max-w-lg mx-auto space-y-4 my-8 shadow-sm">
+                                    <div className="w-16 h-16 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto border border-amber-200">
+                                         <Lock size={28} />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-zinc-900 font-playfair">No Unlocked Courses Yet</h3>
+                                    <p className="text-xs md:text-sm text-zinc-600 leading-relaxed">
+                                         You haven't unlocked any courses yet. Explore our full catalog and click "Enquire Now" to purchase and get instant access!
+                                    </p>
+                                    <button
+                                         onClick={() => { setViewFilter("all"); setActiveCategory("All"); setSearchQuery(""); }}
+                                         className="px-6 py-3 bg-zinc-900 text-white text-xs font-bold rounded-xl hover:bg-zinc-800 transition cursor-pointer shadow-md"
+                                    >
+                                         Explore All Courses
+                                    </button>
+                               </div>
+                          ) : (
+                               <div className="text-center py-20">
+                                    <p className="text-zinc-500 text-lg">No courses found matching your criteria.</p>
+                                    <button
+                                         onClick={() => { setSearchQuery(""); setActiveCategory("All"); setViewFilter("all"); }}
+                                         className="mt-4 text-official font-medium hover:underline cursor-pointer"
+                                    >
+                                         Reset Filters
+                                    </button>
+                               </div>
+                          )}
                     </div>
                </section>
 

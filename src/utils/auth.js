@@ -95,20 +95,24 @@ export const loginUser = async (email, otp) => {
 };
 
 // Send Auth OTP
-export const sendAuthOTP = async (email) => {
+export const sendAuthOTP = async (email, mode = "login") => {
      try {
           const res = await fetch(`${API}/auth/send-otp`, {
                method: "POST",
                headers: {
                     "Content-Type": "application/json",
                },
-               body: JSON.stringify({ email }),
+               body: JSON.stringify({ email, mode }),
           });
 
           const data = await res.json();
 
           if (!res.ok) {
-               throw new Error(data.error || "Failed to send OTP");
+               const errorObj = new Error(data.error || "Failed to send OTP");
+               errorObj.shouldSignup = data.shouldSignup;
+               errorObj.shouldLogin = data.shouldLogin;
+               errorObj.status = res.status;
+               throw errorObj;
           }
 
           return data;

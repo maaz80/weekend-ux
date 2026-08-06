@@ -156,12 +156,20 @@ const AuthModal = ({
           setSuccessMessage("");
 
           try {
-               await sendAuthOTP(formData.email);
+               await sendAuthOTP(formData.email, authMode);
                setOtpSent(true);
                setSuccessMessage("Verification OTP code has been sent to your email");
                startResendTimer();
           } catch (err) {
-               setError(err.message || "Failed to send verification OTP");
+               if (err.shouldSignup || err.status === 404) {
+                    setAuthMode("signup");
+                    setError(err.message || "Account not found. Please sign up first.");
+               } else if (err.shouldLogin) {
+                    setAuthMode("login");
+                    setError(err.message || "Account already exists. Please log in instead.");
+               } else {
+                    setError(err.message || "Failed to send verification OTP");
+               }
           } finally {
                setOtpSending(false);
           }
@@ -243,7 +251,13 @@ const AuthModal = ({
                     onAuthSuccess?.();
                }
           } catch (err) {
-               setError(err.message || "An error occurred");
+               if (err.message && (err.message.toLowerCase().includes("sign up first") || err.message.toLowerCase().includes("not found"))) {
+                    setAuthMode("signup");
+                    setOtpSent(false);
+                    setError(err.message || "Account not found with this email. Please sign up first.");
+               } else {
+                    setError(err.message || "An error occurred");
+               }
           } finally {
                setLoading(false);
           }
@@ -256,17 +270,17 @@ const AuthModal = ({
                </h2>
 
                {/* Modal container */}
-               <div className={`w-[90%] max-w-4xl ${modalBgColor} rounded-2xl shadow-2xl relative overflow-hidden p-6 md:p-10 text-neutral`}>
-                    <div className="flex flex-col md:flex-row h-auto md:h-125">
+               <div className={`w-[92%] max-w-4xl ${modalBgColor} rounded-2xl shadow-2xl relative overflow-hidden p-4 md:p-8 text-neutral max-h-[92vh] flex flex-col`}>
+                    <div className="flex flex-col md:flex-row h-full max-h-[85vh] md:max-h-[580px] overflow-hidden">
 
                          {/* LEFT PANEL - ILLUSTRATION */}
-                         <div className="w-full md:w-1/2 flex items-center justify-center rounded-xl md:rounded-none">
+                         <div className="w-full md:w-1/2 hidden md:flex items-center justify-center rounded-xl overflow-hidden bg-zinc-50">
                               <img
                                    src={authDecorativeImage}
                                    alt="weekend-ux-login-decorative-image"
                                    width={363}
                                    height={1012}
-                                   className="w-full h-auto object-cover"
+                                   className="w-full h-full object-cover"
                               />
                          </div>
 
@@ -274,9 +288,9 @@ const AuthModal = ({
                          <div className="hidden md:block w-px bg-zinc-200"></div>
 
                          {/* RIGHT PANEL - FORM */}
-                         <div className="w-full md:w-1/2 flex flex-col justify-center px-4 md:px-12 py-6 md:py-0">
+                         <div className="w-full md:w-1/2 flex flex-col justify-start md:justify-center px-3 md:px-10 py-4 md:py-2 overflow-y-auto max-h-[80vh] md:max-h-[580px]">
 
-                              <h3 className={`${titleTextSize} font-bold ${titleColor} mb-6`}>
+                              <h3 className={`${titleTextSize} font-bold ${titleColor} mb-4 md:mb-5`}>
                                    {authMode === "signup" ? "Create Account" : "Welcome Back"}
                               </h3>
 

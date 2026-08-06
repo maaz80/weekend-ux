@@ -1,16 +1,24 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
+import { Lock } from "lucide-react";
+import { useUserAuth } from "@/context/UserAuthContext";
 import CardBg from '@/app/assets/weekend-ux-course-details-call-card-bg.webp';
 import Form from "./Form";
 import CallCard from "./CallCard";
 import Curriculum from "./Curriculum";
+
 export default function Details({ data }) {
+     const router = useRouter();
+     const { isCourseUnlocked, loading: authLoading } = useUserAuth();
      const [openChapter, setOpenChapter] = useState(1);
      const [sliderIndex, setSliderIndex] = useState(0);
      const [caseStudyIndex, setCaseStudyIndex] = useState(0);
      const [visibleCards, setVisibleCards] = useState(3);
      const [shareUrl, setShareUrl] = useState("");
+
+     const unlocked = isCourseUnlocked(data);
 
      useEffect(() => {
           if (typeof window !== "undefined") {
@@ -41,6 +49,46 @@ export default function Details({ data }) {
                };
           }
      }, [data?._id]);
+
+     if (authLoading) {
+          return (
+               <div className="py-24 text-center text-zinc-400 font-medium">
+                    Checking course access permission...
+               </div>
+          );
+     }
+
+     if (!unlocked) {
+          return (
+               <div className="py-16 md:py-24 px-4 flex flex-col items-center justify-center text-center max-w-2xl mx-auto space-y-6">
+                    <div className="w-20 h-20 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center border border-amber-500/20 shadow-lg">
+                         <Lock size={40} />
+                    </div>
+                    <div className="space-y-2">
+                         <h2 className="text-2xl md:text-3xl font-bold font-playfair text-white">
+                              Course Access Restricted 🔒
+                         </h2>
+                         <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
+                              This course (<span className="text-amber-400 font-semibold">{data?.title || "Figma Professional Training"}</span>) is locked for your account. You must purchase and unlock this course to view curriculum, modules, and lessons.
+                         </p>
+                    </div>
+                    <div className="flex flex-col sm:flex-row gap-4 w-full justify-center pt-2">
+                         <button
+                              onClick={() => router.push("/contact-us")}
+                              className="px-8 py-3.5 bg-official text-neutral font-bold rounded-xl hover:opacity-90 transition shadow-lg text-sm cursor-pointer"
+                         >
+                              Enquire Now
+                         </button>
+                         <button
+                              onClick={() => router.push("/courses")}
+                              className="px-8 py-3.5 bg-zinc-800 text-zinc-200 font-bold rounded-xl hover:bg-zinc-700 transition border border-zinc-700 text-sm cursor-pointer"
+                         >
+                              Browse All Courses
+                         </button>
+                    </div>
+               </div>
+          );
+     }
 
      const curriculum = Array.isArray(data?.chapter) && data.chapter.length > 0
           ? data.chapter.map((ch, index) => ({
@@ -909,7 +957,7 @@ function getIconBadge(text) {
                <img
                     src="/images/Figma.webp"
                     alt={text || "Figma Icon"}
-                    className="w-full h-full object-fill"
+                    className="w-full h-full object-cover"
                />
           </div>
      );

@@ -533,10 +533,10 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                        e.stopPropagation();
                                                        setIsUserDropdownOpen(!isUserDropdownOpen);
                                                   }}
-                                                  className="flex items-center gap-2 text-sm text-neutral hover:text-official/80 transition cursor-pointer font-medium"
+                                                  className={`flex items-center gap-2 text-sm hover:text-official/80 transition-colors duration-300 cursor-pointer font-medium ${isMoreButtonLight ? "text-white" : "text-neutral"}`}
                                              >
                                                   <span>{user.name}</span>
-                                                  <FiChevronDown className={`text-base transition-transform duration-300 ${isUserDropdownOpen ? "rotate-180" : ""}`} />
+                                                  <FiChevronDown className={`text-base transition-all duration-300 ${isUserDropdownOpen ? "rotate-180" : ""} ${isMoreButtonLight ? "text-white" : "text-neutral"}`} />
                                              </button>
                                              {isUserDropdownOpen && (
                                                   <div className="absolute right-0 mt-2 w-48 rounded-md bg-zinc-900 shadow-2xl p-2 border border-zinc-800 z-99999 flex flex-col">

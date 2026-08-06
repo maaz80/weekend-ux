@@ -214,7 +214,7 @@ export default function Details({ data }) {
                                      <OptimizedImage
                                           src={coverImage}
                                           alt={data?.alt || data?.title || "Blog Cover"}
-                                          className="w-full h-60 md:h-112.5 lg:h-127.5 object-fill"
+                                          className="w-full h-60 md:h-112.5 lg:h-127.5 object-cover"
                                           sizes="100vw"
                                           priority={true}
                                      />
