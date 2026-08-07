@@ -39,9 +39,20 @@ const getEmbedUrl = (url) => {
           return cleanUrl.includes("?") ? `${cleanUrl}&autoplay=1` : `${cleanUrl}?autoplay=1`;
      }
 
-     // Google Drive view links
+     // Google Drive links
      if (cleanUrl.includes("drive.google.com")) {
-          return cleanUrl.replace("/view", "/preview");
+          if (cleanUrl.includes("/view")) {
+               return cleanUrl.replace("/view", "/preview");
+          }
+          if (!cleanUrl.includes("/preview")) {
+               return `${cleanUrl.split("?")[0]}/preview`;
+          }
+     }
+
+     // Loom links
+     if (cleanUrl.includes("loom.com/share/")) {
+          const videoId = cleanUrl.split("loom.com/share/")[1]?.split("?")[0];
+          if (videoId) return `https://www.loom.com/embed/${videoId}`;
      }
 
      // Vimeo links
@@ -56,7 +67,7 @@ const getEmbedUrl = (url) => {
 const isIframeVideo = (url) => {
      if (!url) return false;
      const u = url.toLowerCase();
-     return u.includes("youtube.com") || u.includes("youtu.be") || u.includes("vimeo.com") || u.includes("drive.google.com");
+     return u.includes("youtube.com") || u.includes("youtu.be") || u.includes("vimeo.com") || u.includes("drive.google.com") || u.includes("loom.com");
 };
 
 export default function StudentDashboardPage() {
@@ -442,12 +453,15 @@ export default function StudentDashboardPage() {
                                              />
                                         ) : (
                                              <video
+                                                  key={selectedVideo.videoUrl}
                                                   controls
                                                   autoPlay
-                                                  src={selectedVideo.videoUrl}
+                                                  playsInline
+                                                  preload="metadata"
                                                   className="w-full h-full object-contain"
                                                   style={{ width: "100%", height: "100%" }}
                                              >
+                                                  <source src={selectedVideo.videoUrl} />
                                                   Your browser does not support the video tag.
                                              </video>
                                         )

@@ -1,2 +1,2 @@
-:HL["/_next/static/chunks/3oj_vmcb8qy_d.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"location","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"ui-ux-design-course-in-indore","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"ny2WShv4NoEgyawQk8W7i"}
+:HL["/_next/static/chunks/0qkxhxtz8nmct.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"location","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"ui-ux-design-course-in-indore","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"f5Dd5Kcr7w3FwjQDrXRc2"}
