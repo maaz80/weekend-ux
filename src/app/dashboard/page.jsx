@@ -131,8 +131,9 @@ export default function StudentDashboardPage() {
      const unlockedCourses = allCourses.filter((c) => isCourseUnlocked(c));
      const lockedCourses = allCourses.filter((c) => !isCourseUnlocked(c));
 
-     // Target courses for recordings: ONLY unlocked/purchased courses
-     const recordingCourses = unlockedCourses;
+     // Target courses for recordings: unlocked courses if available with videos, else all courses with videos
+     const baseRecordings = unlockedCourses.some(c => c.videos && c.videos.length > 0) ? unlockedCourses : allCourses;
+     const recordingCourses = baseRecordings.filter(c => c.videos && c.videos.length > 0);
      const totalVideosCount = recordingCourses.reduce((sum, c) => sum + (c.videos?.length || 0), 0);
 
      return (
