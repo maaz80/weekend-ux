@@ -13,19 +13,39 @@ import SchemaRenderer from "@/components/SchemaRenderer";
 
 export const dynamicParams = false;
 
+const staticCourseSlugs = [
+     "figma-professional-training",
+     "web-development-course",
+     "advance-certificate-ui-ux",
+     "interaction-design-masterclass",
+     "ai-product-design",
+     "generative-ai-ux-creators",
+     "product-design-foundations",
+     "service-blueprinting",
+     "midjourney-figma",
+     "visual-communication",
+     "webflow-responsive",
+     "advanced-post-production",
+     "after-effects-animation",
+     "micro-interactions-workshop"
+];
+
 export async function generateStaticParams() {
+     const slugsSet = new Set(staticCourseSlugs);
      try {
-          await connectDB();
-          const coursesPage = await Courses.findOne().select("course.slug").lean();
-          const slugs = coursesPage?.course?.map((course) => course?.slug).filter(Boolean) || [];
-          if (slugs.length === 0) {
-               return [{ slug: "figma-professional-training" }];
-          }
-          return slugs.map((slug) => ({ slug }));
+          const dbPromise = (async () => {
+               await connectDB();
+               const coursesPage = await Courses.findOne().select("course.slug").lean();
+               const dbSlugs = coursesPage?.course?.map((course) => course?.slug).filter(Boolean) || [];
+               dbSlugs.forEach((s) => slugsSet.add(s));
+          })();
+
+          const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 1500));
+          await Promise.race([dbPromise, timeoutPromise]);
      } catch (error) {
           console.error("Error generating course static params:", error);
-          return [{ slug: "figma-professional-training" }];
      }
+     return Array.from(slugsSet).map((slug) => ({ slug }));
 }
 
 // Fetch only course data

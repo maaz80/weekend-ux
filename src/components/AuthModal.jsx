@@ -47,8 +47,8 @@ const AuthModal = ({
           password: "",
           confirmPassword: "",
           otp: "",
-          agreeTerms: false,
-          keepSigned: false,
+          agreeTerms: true,
+          keepSigned: true,
      });
 
      const startResendTimer = () => {
@@ -96,8 +96,8 @@ const AuthModal = ({
                     password: "",
                     confirmPassword: "",
                     otp: "",
-                    agreeTerms: false,
-                    keepSigned: false,
+                    agreeTerms: true,
+                    keepSigned: true,
                });
           }
 
@@ -225,8 +225,8 @@ const AuthModal = ({
                          password: "",
                          confirmPassword: "",
                          otp: "",
-                         agreeTerms: false,
-                         keepSigned: false,
+                         agreeTerms: true,
+                         keepSigned: true,
                     });
                     onClose();
                     onAuthSuccess?.();
@@ -248,8 +248,8 @@ const AuthModal = ({
                          password: "",
                          confirmPassword: "",
                          otp: "",
-                         agreeTerms: false,
-                         keepSigned: false,
+                         agreeTerms: true,
+                         keepSigned: true,
                     });
                     onClose();
                     onAuthSuccess?.();
@@ -325,7 +325,7 @@ const AuthModal = ({
                                                             name="name"
                                                             value={formData.name}
                                                             onChange={handleChange}
-                                                            placeholder="John Doe"
+                                                            placeholder="Enter your full name"
                                                             className={`w-full pl-10 pr-4 h-11 border ${inputBorderColor} rounded-lg text-sm outline-none ${inputFocusColor} ${inputBgColor} ${inputTextColor}`}
                                                             required
                                                        />
@@ -341,7 +341,7 @@ const AuthModal = ({
                                                             name="phone"
                                                             value={formData.phone}
                                                             onChange={handleChange}
-                                                            placeholder="9876543210"
+                                                            placeholder="Enter you number"
                                                             maxLength={10}
                                                             className={`w-full pl-10 pr-4 h-11 border ${inputBorderColor} rounded-lg text-sm outline-none ${inputFocusColor} ${inputBgColor} ${inputTextColor}`}
                                                             required
@@ -361,7 +361,7 @@ const AuthModal = ({
                                                   name="email"
                                                   value={formData.email}
                                                   onChange={handleChange}
-                                                  placeholder="example@email.com"
+                                                  placeholder="Enter your email address"
                                                   className={`w-full pl-10 pr-4 h-11 border ${inputBorderColor} rounded-lg text-sm outline-none ${inputFocusColor} ${inputBgColor} ${inputTextColor}`}
                                                   required
                                              />
@@ -417,7 +417,7 @@ const AuthModal = ({
                                                        onChange={handleChange}
                                                        className={`${agreeTermsColor}`}
                                                   />
-                                                  I agree to the Terms & Conditions
+                                                  I agree to the Terms & Conditions, Privacy Policy, and Disclaimer
                                              </label>
                                         </div>
                                    )}

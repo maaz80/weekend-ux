@@ -13,19 +13,28 @@ import SchemaRenderer from "@/components/SchemaRenderer";
 
 export const dynamicParams = false;
 
+const staticBlogSlugs = [
+     "what-is-the-difference-between-ui-and-ux",
+     "10-usability-heuristics-for-user-interface-design",
+     "best-training-in-ui-ux-design-course"
+];
+
 export async function generateStaticParams() {
+     const slugsSet = new Set(staticBlogSlugs);
      try {
-          await connectDB();
-          const blogPage = await Blog.findOne().select("blogs.slug").lean();
-          const slugs = blogPage?.blogs?.map((blog) => blog?.slug).filter(Boolean) || [];
-          if (slugs.length === 0) {
-               return [{ slug: "what-is-the-difference-between-ui-and-ux" }];
-          }
-          return slugs.map((slug) => ({ slug }));
+          const dbPromise = (async () => {
+               await connectDB();
+               const blogPage = await Blog.findOne().select("blogs.slug").lean();
+               const dbSlugs = blogPage?.blogs?.map((blog) => blog?.slug).filter(Boolean) || [];
+               dbSlugs.forEach((s) => slugsSet.add(s));
+          })();
+
+          const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 1500));
+          await Promise.race([dbPromise, timeoutPromise]);
      } catch (error) {
           console.error("Error generating blog static params:", error);
-          return [{ slug: "what-is-the-difference-between-ui-and-ux" }];
      }
+     return Array.from(slugsSet).map((slug) => ({ slug }));
 }
 
 // Fetch only blog data

@@ -2,12 +2,55 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { Lock } from "lucide-react";
+import { Lock, Unlock, Play, X, Film, ArrowRight } from "lucide-react";
 import { useUserAuth } from "@/context/UserAuthContext";
 import CardBg from '@/app/assets/weekend-ux-course-details-call-card-bg.webp';
+import OptimizedImage from "@/components/ui/OptimizedImage";
 import Form from "./Form";
 import CallCard from "./CallCard";
 import Curriculum from "./Curriculum";
+
+const getEmbedUrl = (url) => {
+     if (!url) return "";
+     const cleanUrl = url.trim();
+
+     if (cleanUrl.includes("youtu.be/")) {
+          const videoId = cleanUrl.split("youtu.be/")[1]?.split("?")[0]?.split("&")[0];
+          if (videoId) return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+     }
+
+     if (cleanUrl.includes("youtube.com/shorts/")) {
+          const videoId = cleanUrl.split("youtube.com/shorts/")[1]?.split("?")[0]?.split("&")[0];
+          if (videoId) return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+     }
+
+     if (cleanUrl.includes("youtube.com/watch")) {
+          const urlParams = new URLSearchParams(cleanUrl.split("?")[1] || "");
+          const videoId = urlParams.get("v");
+          if (videoId) return `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+     }
+
+     if (cleanUrl.includes("youtube.com/embed/")) {
+          return cleanUrl.includes("?") ? `${cleanUrl}&autoplay=1` : `${cleanUrl}?autoplay=1`;
+     }
+
+     if (cleanUrl.includes("drive.google.com")) {
+          return cleanUrl.replace("/view", "/preview");
+     }
+
+     if (cleanUrl.includes("vimeo.com/") && !cleanUrl.includes("player.vimeo.com")) {
+          const videoId = cleanUrl.split("vimeo.com/")[1]?.split("?")[0];
+          if (videoId) return `https://player.vimeo.com/video/${videoId}?autoplay=1`;
+     }
+
+     return cleanUrl;
+};
+
+const isIframeVideo = (url) => {
+     if (!url) return false;
+     const u = url.toLowerCase();
+     return u.includes("youtube.com") || u.includes("youtu.be") || u.includes("vimeo.com") || u.includes("drive.google.com");
+};
 
 export default function Details({ data }) {
      const router = useRouter();
@@ -17,6 +60,7 @@ export default function Details({ data }) {
      const [caseStudyIndex, setCaseStudyIndex] = useState(0);
      const [visibleCards, setVisibleCards] = useState(3);
      const [shareUrl, setShareUrl] = useState("");
+     const [selectedVideo, setSelectedVideo] = useState(null);
 
      const unlocked = isCourseUnlocked(data);
 
@@ -49,46 +93,6 @@ export default function Details({ data }) {
                };
           }
      }, [data?._id]);
-
-     if (authLoading) {
-          return (
-               <div className="py-24 text-center text-zinc-400 font-medium">
-                    Checking course access permission...
-               </div>
-          );
-     }
-
-     if (!unlocked) {
-          return (
-               <div className="py-16 md:py-24 px-4 flex flex-col items-center justify-center text-center max-w-2xl mx-auto space-y-6">
-                    <div className="w-20 h-20 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center border border-amber-500/20 shadow-lg">
-                         <Lock size={40} />
-                    </div>
-                    <div className="space-y-2">
-                         <h2 className="text-2xl md:text-3xl font-bold font-playfair text-white">
-                              Course Access Restricted 🔒
-                         </h2>
-                         <p className="text-zinc-400 text-sm md:text-base leading-relaxed">
-                              This course (<span className="text-amber-400 font-semibold">{data?.title || "Figma Professional Training"}</span>) is locked for your account. You must purchase and unlock this course to view curriculum, modules, and lessons.
-                         </p>
-                    </div>
-                    <div className="flex flex-col sm:flex-row gap-4 w-full justify-center pt-2">
-                         <button
-                              onClick={() => router.push("/contact-us")}
-                              className="px-8 py-3.5 bg-official text-neutral font-bold rounded-xl hover:opacity-90 transition shadow-lg text-sm cursor-pointer"
-                         >
-                              Enquire Now
-                         </button>
-                         <button
-                              onClick={() => router.push("/courses")}
-                              className="px-8 py-3.5 bg-zinc-800 text-zinc-200 font-bold rounded-xl hover:bg-zinc-700 transition border border-zinc-700 text-sm cursor-pointer"
-                         >
-                              Browse All Courses
-                         </button>
-                    </div>
-               </div>
-          );
-     }
 
      const curriculum = Array.isArray(data?.chapter) && data.chapter.length > 0
           ? data.chapter.map((ch, index) => ({

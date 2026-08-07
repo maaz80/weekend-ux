@@ -408,7 +408,7 @@ export default function CoursesPage() {
                                     </div>
                                     <h3 className="text-xl font-bold text-zinc-900 font-playfair">No Unlocked Courses Yet</h3>
                                     <p className="text-xs md:text-sm text-zinc-600 leading-relaxed">
-                                         You haven't unlocked any courses yet. Explore our full catalog and click "Enquire Now" to purchase and get instant access!
+                                         You haven't unlocked any courses yet. Explore our full catalog and view course details to get instant access!
                                     </p>
                                     <button
                                          onClick={() => { setViewFilter("all"); setActiveCategory("All"); setSearchQuery(""); }}

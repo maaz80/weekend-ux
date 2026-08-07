@@ -207,11 +207,7 @@ const Testimonials = ({ data }) => {
                <Image src={Map} alt="weekend-ux-testimonials-bg" fetchPriority='high' decoding="async" className='absolute top-0 inset-0 w-full min-h-[120vh] md:h-[110vh] z-10 object-cover' />
 
                {/* Heading */}
-               {isLocation ? (
-                    <h2 className="plus-jakarta-sans text-[38px] md:text-[58px] xl:text-[72px] font-bold leading-10 md:leading-15 max-w-140 text-primary text-center z-20 relative mx-auto">
-                         What our students say about us
-                    </h2>
-               ) : (
+               
                     <h2 className="text-[38px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 font-medium text-center w-[99%] md:w-[60%] mx-auto z-20 relative font-playfair text-neutral">
                          {startTitle}{" "}
                          <span className="relative inline-block text-official italic">
@@ -220,8 +216,6 @@ const Testimonials = ({ data }) => {
                          </span>{' '}
                          {endTitle}
                     </h2>
-               )
-               }
                {/* Description */}
                <p className={`text-[14px] 2xl:text-[16px] text-neutral/60 leading-6 md:leading-7 text-center ${isLocation ? 'max-w-3xl' : 'max-w-4xl'}  mx-auto mt-6 z-20 relative`}>
                     {isLocation ? "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs." : testimonialsDescription}

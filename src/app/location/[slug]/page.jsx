@@ -8,44 +8,97 @@ import SchemaRenderer from "@/components/SchemaRenderer";
 
 export const dynamicParams = false;
 
+const staticLocationSlugs = [
+     "ui-ux-design-course-in-bangalore",
+     "ui-ux-design-course-in-mumbai",
+     "ui-ux-design-course-in-delhi",
+     "ui-ux-design-course-in-pune",
+     "ui-ux-design-course-in-hyderabad",
+     "ui-ux-design-course-in-ahmedabad",
+     "ui-ux-design-course-in-agra",
+     "ui-ux-design-course-in-noida",
+     "ui-ux-design-course-in-gurgaon",
+     "ui-ux-design-course-in-kolkata",
+     "ui-ux-design-course-in-jaipur",
+     "ui-ux-design-course-in-chandigarh",
+     "ui-ux-design-course-in-chennai",
+     "ui-ux-design-course-in-indore",
+     "ui-ux-design-course-in-lucknow"
+];
+
+function getDefaultLocationData(slug) {
+     const rawCity = (slug || "").replace("ui-ux-design-course-in-", "").replace(/-/g, " ");
+     const city = rawCity ? rawCity.replace(/\b\w/g, c => c.toUpperCase()) : "India";
+
+     return {
+          slug,
+          title: `UI UX Design Course in ${city}`,
+          hero: [
+               {
+                    heading: `UI UX Design Course in ${city}`,
+                    seotitle: `UI UX Design Course in ${city} | Weekend UX`,
+                    seodescription: `Master UI UX design with hands-on projects, industry mentors, and portfolio guidance in ${city}.`,
+                    buttonName: "Explore Programs",
+                    slug,
+                    cityname: city
+               }
+          ]
+     };
+}
+
 export async function generateStaticParams() {
+     const slugsSet = new Set(staticLocationSlugs);
      try {
-          await connectDB();
-          const locations = await Location.find().select("items.hero.slug").lean();
-          const slugs = [];
-          if (Array.isArray(locations)) {
-               locations.forEach((group) => {
-                    if (group.items && Array.isArray(group.items)) {
-                         group.items.forEach((item) => {
-                              const s = item.hero?.[0]?.slug || item.slug;
-                              if (s) slugs.push(s);
-                         });
-                    }
-               });
-          }
-          if (slugs.length === 0) {
-               return [{ slug: "ui-ux-design-course-in-delhi" }];
-          }
-          return slugs.map((slug) => ({ slug }));
+          const dbPromise = (async () => {
+               await connectDB();
+               const locations = await Location.find().select("items.hero.slug items.slug").lean();
+               if (Array.isArray(locations)) {
+                    locations.forEach((group) => {
+                         if (group.items && Array.isArray(group.items)) {
+                              group.items.forEach((item) => {
+                                   const s = item.hero?.[0]?.slug || item.slug;
+                                   if (s) slugsSet.add(s);
+                              });
+                         }
+                    });
+               }
+          })();
+
+          const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 1500));
+          await Promise.race([dbPromise, timeoutPromise]);
      } catch (error) {
           console.error("Error generating location static params:", error);
-          return [{ slug: "ui-ux-design-course-in-delhi" }];
      }
+     return Array.from(slugsSet).map((slug) => ({ slug }));
 }
 
 // Fetch only location data
 const getLocationData = cache(async (slug) => {
      try {
-          await connectDB();
-          const locationDoc = await Location.findOne({ "items.hero.slug": slug }).select("items").lean();
-          if (locationDoc) {
-               const item = locationDoc.items.find(it => it.hero?.[0]?.slug === slug);
-               if (item) return JSON.parse(JSON.stringify(item));
-          }
+          const dbPromise = (async () => {
+               await connectDB();
+               const locationDoc = await Location.findOne({
+                    $or: [
+                         { "items.hero.slug": slug },
+                         { "items.slug": slug }
+                    ]
+               }).select("items").lean();
+
+               if (locationDoc && Array.isArray(locationDoc.items)) {
+                    const item = locationDoc.items.find(it => (it.hero?.[0]?.slug === slug || it.slug === slug));
+                    if (item) return JSON.parse(JSON.stringify(item));
+               }
+               return null;
+          })();
+
+          const timeoutPromise = new Promise((resolve) => setTimeout(() => resolve(null), 1500));
+          const dbResult = await Promise.race([dbPromise, timeoutPromise]);
+          if (dbResult) return dbResult;
      } catch (error) {
           console.error("Error in getLocationData fetching database:", error);
      }
-     return null;
+
+     return getDefaultLocationData(slug);
 });
 
 export async function generateMetadata({ params }) {

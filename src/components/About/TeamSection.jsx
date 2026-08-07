@@ -100,12 +100,12 @@ const TeamSection = ({
                                         <OptimizedImage
                                              src={member.image}
                                              alt={member.name}
-                                             className={`${idx === 1 ? 'h-110' : 'h-142.5'}  w-full object-cover transition duration-700 group-hover:scale-105`}
+                                             className={`${idx === 1 ? 'h-110' : 'h-142.5'} w-full object-cover transition duration-700 filter blur-md scale-105`}
                                              sizes="(max-width: 640px) 100vw, 50vw"
                                         />
 
                                         {/* Content */}
-                                        <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+                                        <div className="absolute bottom-0 left-0 right-0 p-6 z-10 filter blur-sm select-none pointer-events-none">
                                              <h3 className={`font-urbanist text-[28px] font-medium ${cardNameColor}`}>
                                                   {member.name}
                                              </h3>
