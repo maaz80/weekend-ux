@@ -400,7 +400,7 @@ export default function StudentDashboardPage() {
                                    </div>
 
                                    {/* Call Banner */}
-                                   <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm">
+                                   {/* <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm">
                                         <CallCard
                                              title="Design is more than just being creative!"
                                              subtitle="Learn how to make design that sells"
@@ -410,7 +410,7 @@ export default function StudentDashboardPage() {
                                                   window.dispatchEvent(new CustomEvent("openLeadModal"));
                                              }}
                                         />
-                                   </div>
+                                   </div> */}
                               </div>
 
                          </div>
