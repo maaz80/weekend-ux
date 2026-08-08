@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import Chatbot from "@/components/Chatbot";
 import LeadModal from "@/components/LeadModal";
 import QuickAccessBar from "@/components/QuickAccessBar";
-import ClientFetchConfig from "@/components/ClientFetchConfig";
 import { HomeDataProvider } from "@/context/HomeDataContext";
 import { UserAuthProvider } from "@/context/UserAuthContext";
 import connectDB from "@/config/db";
@@ -177,7 +176,6 @@ export default async function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         <HomeDataProvider initialData={initialData}>
           <UserAuthProvider>
-            <ClientFetchConfig />
             <StaticPageSchemaRenderer />
             <Navbar />
             <main className="grow">

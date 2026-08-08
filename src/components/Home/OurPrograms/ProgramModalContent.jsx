@@ -186,7 +186,7 @@ const ProgramModalContent = ({ setIsModal }) => {
                          </div>
 
                          {/* Course Cards Grid */}
-                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-[70%] xl:w-[75%] max-h-[75vh] overflow-y-auto pr-2 hide-scrollbar">
+                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-[70%] xl:w-[75%] max-h-[75vh] overflow-y-auto pr-2 hide-scrollbar pb-4">
                               {filteredCourses.map((course) => (
                                    <CourseCard key={course._id} course={course} setIsModal={setIsModal} />
                               ))}

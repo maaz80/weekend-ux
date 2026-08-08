@@ -13,7 +13,7 @@ export default function CourseCard({
      priority = false,
      fetchPriority = undefined,
      cardBgColor = "bg-white",
-     cardBorderColor = "border-[#DCD7CC]",
+     cardBorderColor = "border-[#B8B0A2]",
      cardTitleColor = "text-zinc-900",
      cardSubTitleColor = "text-zinc-500",
      statIconColor = "text-[#F4C430]",
@@ -43,7 +43,7 @@ export default function CourseCard({
      return (
           <div
                onClick={handleClick}
-               className={`w-full border rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] transition-all duration-300 min-h-100 md:min-h-102.5 max-h-122.5 cursor-pointer group relative ${cardBgColor} ${cardBorderColor}`}
+               className={`w-full border-2 rounded-xl overflow-hidden shadow-[0_4px_24px_rgba(0,0,0,0.13)] hover:shadow-[0_12px_36px_rgba(0,0,0,0.18)] transition-all duration-300 min-h-100 md:min-h-102.5 max-h-122.5 cursor-pointer group relative ${cardBgColor} ${cardBorderColor}`}
           >
                {/* Course Image */}
                <div className="relative h-47.5 md:h-56.5 overflow-hidden bg-zinc-100">

@@ -1,2 +1,2 @@
-:HL["/_next/static/chunks/1_pgki8vpw4vo.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"courses","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"webflow-responsive","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"4D0bPeKlPs0q1t0xoxhwB"}
+:HL["/_next/static/chunks/3q8d88yyziiwz.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"courses","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"webflow-responsive","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"g6Lzw4HGpVsCuI-UHDvtf"}

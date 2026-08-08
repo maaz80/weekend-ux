@@ -28,7 +28,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
      return (
           <div
                onClick={handleClick}
-               className="w-73.5 md:w-full rounded-2xl border min-h-100 md:min-h-114 border-zinc-100 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col cursor-pointer group relative"
+               className="w-73.5 md:w-full rounded-2xl border min-h-100 md:min-h-114 border-zinc-200 bg-white shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col cursor-pointer group relative"
           >
                {/* Image section */}
                <div className="relative rounded-t-2xl rounded-b-none overflow-hidden h-50 md:h-60.5 w-full bg-zinc-100">
