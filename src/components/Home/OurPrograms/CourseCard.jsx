@@ -36,6 +36,8 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                          fetchPriority={fetchPriority}
                     />
 
+
+
                     {/* Status Badge — sirf logged-in user ko dikhega */}
                     {isLoggedIn && (
                          <div className="absolute top-3 right-3 z-10">
