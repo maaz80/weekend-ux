@@ -377,13 +377,13 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              {/* SEARCH */}
                                              <div ref={desktopSearchRef} className="relative">
                                                   <form onSubmit={handleSearchSubmit} className="relative group">
-                                                       <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl pointer-events-none group-hover:placeholder:text-neutral-800 placeholder:transition-all placeholder:duration-300" />
+                                                       <FiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-xl pointer-events-none transition-colors duration-300 group-hover:text-neutral" />
                                                        <input
                                                             type="text"
                                                             value={searchQuery}
                                                             onChange={(e) => setSearchQuery(e.target.value)}
                                                             placeholder={searchPlaceholderLabel}
-                                                            className="w-70 h-11 pl-11 pr-4 rounded-md bg-white outline-none text-sm text-neutral border border-transparent focus:border-official transition-all duration-300 placeholder:text-lg group-hover:placeholder:text-neutral-800 placeholder:transition-all placeholder:duration-300"
+                                                            className="w-70 h-11 pl-11 pr-4 rounded-md bg-white outline-none text-sm text-neutral border border-transparent group-hover:border-neutral/40 focus:border-official transition-all duration-300 placeholder:text-lg group-hover:placeholder:text-neutral-800 placeholder:transition-all placeholder:duration-300"
                                                        />
                                                   </form>
 
