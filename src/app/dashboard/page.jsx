@@ -389,7 +389,7 @@ export default function StudentDashboardPage() {
                                    {/* Admission Form */}
                                    <div className="bg-white rounded-2xl sm:rounded-3xl shadow-sm p-5 sm:p-6 md:p-8 border border-zinc-200">
                                         <h2 className="text-center text-xl sm:text-[22px] md:text-[24px] font-bold text-neutral leading-snug mb-2 sm:mb-3">
-                                             Admissions Close On 7th Oct
+                                             Admissions Close On 1st Oct
                                         </h2>
                                         <p className="text-center text-xs md:text-sm text-zinc-600 leading-relaxed mb-5 sm:mb-6 font-urbanist">
                                              Not sure yet? Before you pass up the opportunity to sign up for the course, speak with our counselor and get your questions answered.

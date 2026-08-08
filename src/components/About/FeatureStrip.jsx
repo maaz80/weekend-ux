@@ -1,15 +1,17 @@
 import { HiLightBulb } from "react-icons/hi";
 import { TbChartBubbleFilled } from "react-icons/tb";
 import { FaBolt, FaStar, FaRegLightbulb } from "react-icons/fa";
-import { BsThreeDots } from "react-icons/bs";
-
+import { BsThreeDots, BsPersonWorkspace } from "react-icons/bs";
+import { MdOutlineMapsHomeWork } from "react-icons/md";
 const ICON_MAP = {
      HiLightBulb,
      TbChartBubbleFilled,
      FaBolt,
      FaStar,
      FaRegLightbulb,
-     BsThreeDots
+     BsThreeDots,
+     MdOutlineMapsHomeWork,
+     BsPersonWorkspace
 };
 
 function getIconComponent(iconName, defaultIcon) {
@@ -72,12 +74,12 @@ export default function FeatureStrip({
                     subtitle: "Class Learning",
                },
                {
-                    icon: <BsThreeDots size={42} />,
+                    icon: <MdOutlineMapsHomeWork size={42} />,
                     title: "100% Placement",
                     subtitle: "Assistance",
                },
                {
-                    icon: <BsThreeDots size={42} />,
+                    icon: <BsPersonWorkspace size={42} />,
                     title: "Study On-Campus",
                     subtitle: "or Online",
                },

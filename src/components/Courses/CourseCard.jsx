@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import OptimizedImage from "@/components/ui/OptimizedImage";
-import { Lock, Unlock } from "lucide-react";
+import { Unlock } from "lucide-react";
 import { useUserAuth } from "@/context/UserAuthContext";
 
 const CourseImage = "/images/weekend-ux-program-image-template.webp";
@@ -24,9 +24,9 @@ export default function CourseCard({
      buttonBorderColor = "border-zinc-300"
 }) {
      const router = useRouter();
-     const { isCourseUnlocked } = useUserAuth();
+     const { isLoggedIn, isCourseUnlocked } = useUserAuth();
 
-     const unlocked = isCourseUnlocked(course);
+     const unlocked = isLoggedIn && isCourseUnlocked(course);
 
      const handleClick = (e) => {
           e.stopPropagation();
@@ -56,18 +56,16 @@ export default function CourseCard({
                          fetchPriority={fetchPriority}
                     />
 
-                    {/* Status Badge */}
-                    <div className="absolute top-3 left-3 z-10">
-                         {unlocked ? (
-                              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500 text-white shadow-md">
-                                   <Unlock size={13} /> Unlocked
-                              </span>
-                         ) : (
-                              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-white shadow-md">
-                                   <Lock size={13} /> Locked
-                              </span>
-                         )}
-                    </div>
+                    {/* Status Badge — sirf logged-in users ke liye */}
+                    {isLoggedIn && (
+                         <div className="absolute top-3 left-3 z-10">
+                              {unlocked ? (
+                                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500 text-white shadow-md">
+                                        <Unlock size={13} /> Unlocked
+                                   </span>
+                              ) : null}
+                         </div>
+                    )}
                </div>
 
                {/* Content */}
@@ -90,7 +88,11 @@ export default function CourseCard({
                               {course?.startdate || course?.deadline || "10th Dec, 26"}
                          </p>
 
-                         <span className={`text-xs font-bold px-2.5 py-1 rounded-lg border transition ${unlocked ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}>
+                         <span className={`text-xs font-bold px-2.5 py-1 rounded-lg border transition ${
+                              unlocked
+                                   ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                                   : "bg-zinc-50 text-zinc-700 border-zinc-200"
+                         }`}>
                               {unlocked ? "View Course →" : "View Details →"}
                          </span>
                     </div>

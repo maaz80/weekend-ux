@@ -72,11 +72,11 @@ export const Default = {
                          text: "Experience World\nClass Learning"
                     },
                     {
-                         icon: "BsThreeDots",
+                         icon: "MdOutlineMapsHomeWork ",
                          text: "100% Placement\nAssistance"
                     },
                     {
-                         icon: "BsThreeDots",
+                         icon: "BsPersonWorkspace",
                          text: "Study On-Campus\nor Online"
                     }
                ]

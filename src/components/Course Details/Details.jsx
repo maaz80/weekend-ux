@@ -504,7 +504,7 @@ export default function Details({ data }) {
                                    {/* Admission Form */}
                                    <div className="bg-white rounded-3xl shadow-sm p-6 md:p-10 border border-zinc-150">
                                         <h2 className="text-center text-[22px] md:text-[24px] font-bold text-neutral leading-9 mb-4">
-                                             Admissions Close On 7th Oct
+                                             Admissions Close On 1st Oct
                                         </h2>
                                         <p className="text-center text-sm text-neutral leading-relaxed mb-6">
                                              Not sure yet? Before you pass up the opportunity to sign up for the course, speak with our counselor and get your questions answered.
