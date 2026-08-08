@@ -222,8 +222,8 @@ export default function Footer({
                                               alt={navbarData?.logo?.alt && navbarData.logo.alt.trim() ? navbarData.logo.alt.trim() : "Logo"}
                                               className="w-auto h-10 md:h-18 object-contain"
                                               objectFit="contain"
-                                              sizes="250px"
-                                              width={220}
+                                              sizes="180px"
+                                              width={180}
                                               height={72}
                                          />
                                     ) : (

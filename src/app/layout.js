@@ -15,6 +15,28 @@ import CoursesModel from "@/models/Courses";
 import TestimonialModel from "@/models/Testimonial";
 import FaqModel from "@/models/Faq";
 import LocationModel from "@/models/Location";
+import { Urbanist, Playfair_Display, Inter } from "next/font/google";
+
+const urbanist = Urbanist({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-urbanist",
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-playfair",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export const metadata = {
   metadataBase: new URL("https://www.weekendux.in"),
@@ -72,9 +94,11 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className="h-full antialiased"
+      className={`${urbanist.variable} ${playfair.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
+        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         {/* Global WebSite Schema */}
         <script
           type="application/ld+json"

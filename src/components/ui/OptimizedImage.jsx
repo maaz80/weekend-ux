@@ -34,7 +34,7 @@ export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto:
  *
  * Performance Features:
  * - Ultra-lightweight Cloudinary delivery using f_auto,q_auto:good
- * - Responsive srcset starting at 320px for cards & small components
+ * - Adaptive srcSet breakpoints for logos (90-320px) & general images (160-1600px)
  * - Priority LCP support: auto fetchPriority="high", loading="eager", decoding="async"
  * - Non-priority lazy loading: loading="lazy", decoding="async"
  * - Explicit width & height props to prevent Cumulative Layout Shift (CLS)
@@ -73,14 +73,17 @@ export default function OptimizedImage({
           );
      }
 
-     // Generate a granular responsive srcSet using Cloudinary widths
-     const srcsetWidths = [160, 320, 480, 640, 800, 1024, 1280, 1600, 1920];
+     const isSmallImage = width && width <= 320;
+     const srcsetWidths = isSmallImage
+          ? [90, 120, 150, 180, 220, 260, 320]
+          : [160, 320, 480, 600, 800, 1024, 1280, 1600];
+
      const srcSet = srcsetWidths
           .map((w) => `${getOptimizedCloudinaryUrl(imageSrc, { width: w, quality: "auto:good", format: "auto" })} ${w}w`)
           .join(", ");
 
      // Default fallback width based on component size hint
-     const defaultWidth = width ? Math.min(width * 2, 1920) : 800;
+     const defaultWidth = width ? width : 480;
      const defaultSrc = getOptimizedCloudinaryUrl(imageSrc, { width: defaultWidth, quality: "auto:good", format: "auto" });
 
      return (

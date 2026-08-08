@@ -31,9 +31,9 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                          src={imageSrc}
                          alt={course?.alt || "weekend-ux-program-image-template"}
                          className="w-full h-full object-fill group-hover:scale-105 transition-transform duration-500"
-                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-                         width={600}
-                         height={375}
+                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
+                         width={480}
+                         height={300}
                          priority={priority}
                          fetchPriority={fetchPriority}
                     />
