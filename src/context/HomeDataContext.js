@@ -11,6 +11,7 @@ export const HomeDataContext = createContext({
      footerColumnsData: null,
      testimonialsData: null,
      blogsData: null,
+     locationsData: null,
      loading: false,
 });
 
@@ -40,6 +41,7 @@ export function HomeDataProvider({ children, initialData }) {
                     footerColumnsData: initialData?.footerColumnsData || null,
                     testimonialsData: initialData?.testimonialsData || null,
                     blogsData: initialData?.blogsData || null,
+                    locationsData: initialData?.locationsData || null,
                     loading: false,
                     isChatbotOpen,
                     setIsChatbotOpen,

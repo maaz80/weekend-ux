@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Button from './ui/Button';
@@ -135,26 +135,11 @@ export default function Footer({
      bannerBgImage = "/images/weekend-ux-footer-decorative-bg.webp",
      bannerTitleColor = "text-neutral"
 }) {
-     const { footerGlobalData, footerColumnsData, navbarData } = useHomeData();
+     const { footerGlobalData, footerColumnsData, navbarData, locationsData } = useHomeData();
      const hasLogoImage = navbarData?.logo?.image && navbarData.logo.image.trim();
-     const [locations, setLocations] = useState(DEFAULT_LOCATIONS);
 
-     useEffect(() => {
-          async function fetchLocations() {
-               try {
-                    const res = await fetch("/api/locations");
-                    if (res.ok) {
-                         const data = await res.json();
-                         if (Array.isArray(data) && data.length > 0) {
-                              setLocations(data);
-                         }
-                    }
-               } catch (error) {
-                    console.error("Failed to fetch locations for footer:", error);
-               }
-          }
-          fetchLocations();
-     }, []);
+     // locationsData is fetched at BUILD TIME via layout.js — no runtime API call needed
+     const locations = (locationsData && locationsData.length > 0) ? locationsData : DEFAULT_LOCATIONS;
      const defaultColumns = [
           {
                title: "Company",

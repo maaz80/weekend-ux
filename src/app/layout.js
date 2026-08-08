@@ -14,6 +14,7 @@ import BlogModel from "@/models/Blog";
 import CoursesModel from "@/models/Courses";
 import TestimonialModel from "@/models/Testimonial";
 import FaqModel from "@/models/Faq";
+import LocationModel from "@/models/Location";
 
 export const metadata = {
   metadataBase: new URL("https://www.weekendux.in"),
@@ -33,7 +34,8 @@ async function getLayoutInitialData() {
       blogDoc,
       coursesDoc,
       testimonialDocs,
-      faqDoc
+      faqDoc,
+      locationDocs
     ] = await Promise.all([
       NavbarModel.findOne().lean(),
       FooterModel.findOne({ isGlobal: true }).lean(),
@@ -42,7 +44,8 @@ async function getLayoutInitialData() {
       BlogModel.findOne().lean(),
       CoursesModel.findOne().lean(),
       TestimonialModel.find().lean(),
-      FaqModel.findOne({ pageSlug: "home" }).lean()
+      FaqModel.findOne({ pageSlug: "home" }).lean(),
+      LocationModel.find().lean()
     ]);
     return {
       navbarData: navbarDoc ? JSON.parse(JSON.stringify(navbarDoc)) : null,
@@ -53,6 +56,7 @@ async function getLayoutInitialData() {
       coursesData: coursesDoc ? JSON.parse(JSON.stringify(coursesDoc)) : null,
       testimonialsData: testimonialDocs ? JSON.parse(JSON.stringify(testimonialDocs)) : null,
       faqData: faqDoc ? JSON.parse(JSON.stringify(faqDoc)) : null,
+      locationsData: locationDocs ? JSON.parse(JSON.stringify(locationDocs)) : null,
     };
   } catch (e) {
     console.error("Failed to prefetch layout data on server:", e);
