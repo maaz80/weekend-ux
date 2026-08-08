@@ -310,7 +310,7 @@ export default function CoursesPageClient({ coursesData }) {
                               <div>
                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                                         {displayedCourses.map((course, idx) => (
-                                             <div key={course._id} className="w-full text-neutral">
+                                             <div key={course._id} className="w-full max-w-sm text-neutral">
                                                   <CourseCard
                                                        course={course}
                                                        priority={idx < 3 && currentPage === 1}

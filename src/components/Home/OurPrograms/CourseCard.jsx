@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import OptimizedImage from "@/components/ui/OptimizedImage";
-import { Lock, Unlock } from "lucide-react";
+import { Unlock } from "lucide-react";
 import { useUserAuth } from "@/context/UserAuthContext";
 
 const CourseImage = '/images/weekend-ux-program-image-template.webp';
@@ -23,14 +23,14 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
           <Link
                href={targetHref}
                onClick={handleClick}
-               className="w-full rounded-2xl border min-h-100 md:min-h-114 border-zinc-200 bg-white shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col cursor-pointer group relative block"
+               className="w-73.5 md:w-full rounded-2xl border min-h-100 md:min-h-114 border-zinc-200 bg-white shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col cursor-pointer group relative block"
           >
                {/* Image section */}
-               <div className="relative rounded-t-2xl rounded-b-none overflow-hidden aspect-[16/10] w-full bg-zinc-100">
+               <div className="relative rounded-t-2xl rounded-b-none overflow-hidden h-50 md:h-60.5 w-full bg-zinc-100">
                     <OptimizedImage
                          src={imageSrc}
                          alt={course?.alt || "weekend-ux-program-image-template"}
-                         className="w-full h-full object-fill group-hover:scale-105 transition-transform duration-500"
+                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
                          width={480}
                          height={300}
@@ -38,20 +38,12 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                          fetchPriority={fetchPriority}
                     />
 
-
-
-                    {/* Status Badge — sirf logged-in user ko dikhega */}
-                    {isLoggedIn && (
+                    {/* Status Badge — sirf unlocked course par 'Unlocked' dikhega */}
+                    {unlocked && (
                          <div className="absolute top-3 right-3 z-10">
-                              {unlocked ? (
-                                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500 text-white shadow-md">
-                                        <Unlock size={13} /> Unlocked
-                                   </span>
-                              ) : (
-                                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-white shadow-md">
-                                        <Lock size={13} /> Locked
-                                   </span>
-                              )}
+                              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500 text-white shadow-md">
+                                   <Unlock size={13} /> Unlocked
+                              </span>
                          </div>
                     )}
                </div>

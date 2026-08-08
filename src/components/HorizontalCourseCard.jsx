@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import OptimizedImage from "@/components/ui/OptimizedImage";
-import { Lock, Unlock, Clock, Calendar, ArrowRight, Sparkles } from "lucide-react";
+import { Unlock, Clock, Calendar, ArrowRight, Sparkles } from "lucide-react";
 
 const CourseImage = '/images/weekend-ux-program-image-template.webp';
 
@@ -31,18 +31,14 @@ export default function HorizontalCourseCard({ course, unlocked }) {
                          sizes="(max-width: 768px) 100vw, 320px"
                     />
 
-                    {/* Status Badge over Image */}
-                    <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-10">
-                         {unlocked ? (
+                    {/* Status Badge over Image — sirf unlocked course par 'Unlocked' dikhega */}
+                    {unlocked && (
+                         <div className="absolute top-2.5 left-2.5 sm:top-3 sm:left-3 z-10">
                               <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 bg-emerald-600/90 backdrop-blur-md text-white text-[11px] sm:text-xs font-bold rounded-lg shadow-md">
                                    <Unlock size={12} className="sm:w-3.5 sm:h-3.5" /> Unlocked
                               </span>
-                         ) : (
-                              <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 bg-amber-500/95 backdrop-blur-md text-zinc-950 text-[11px] sm:text-xs font-bold rounded-lg shadow-md">
-                                   <Lock size={12} className="sm:w-3.5 sm:h-3.5" /> Locked
-                              </span>
-                         )}
-                    </div>
+                         </div>
+                    )}
                </div>
 
                {/* CONTENT CONTAINER (Right) */}
