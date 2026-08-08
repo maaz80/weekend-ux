@@ -137,7 +137,7 @@ export default function StudentDashboardPage() {
      const totalVideosCount = recordingCourses.reduce((sum, c) => sum + (c.videos?.length || 0), 0);
 
      return (
-          <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-22 sm:pt-28 md:pt-36 pb-30">
+          <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-22 sm:pt-28 md:pt-30 pb-30 md:pb-50">
                {/* MAIN BODY CONTENT */}
                <main className="grow pt-14 sm:pt-16 md:pt-18 pb-34 sm:pb-28 md:pb-32">
                     <div className="custom-width px-3.5 sm:px-6 lg:px-10">
