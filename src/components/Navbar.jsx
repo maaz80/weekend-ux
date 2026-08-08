@@ -421,6 +421,10 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                                                               <img
                                                                                                                    src={course.image}
                                                                                                                    alt="course-image"
+                                                                                                                   width={36}
+                                                                                                                   height={36}
+                                                                                                                   loading="lazy"
+                                                                                                                   decoding="async"
                                                                                                                    className="w-9 h-9 object-cover rounded-md bg-zinc-100 shrink-0"
                                                                                                               />
                                                                                                          )}
@@ -458,6 +462,10 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                                                               <img
                                                                                                                    src={course.image}
                                                                                                                    alt="course-image"
+                                                                                                                   width={36}
+                                                                                                                   height={36}
+                                                                                                                   loading="lazy"
+                                                                                                                   decoding="async"
                                                                                                                    className="w-9 h-9 object-cover rounded-md bg-zinc-100 shrink-0"
                                                                                                               />
                                                                                                          )}
@@ -706,6 +714,10 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                                                <img
                                                                                                     src={course.image}
                                                                                                     alt="course-image"
+                                                                                                    width={32}
+                                                                                                    height={32}
+                                                                                                    loading="lazy"
+                                                                                                    decoding="async"
                                                                                                     className="w-8 h-8 object-cover rounded-md bg-zinc-800 shrink-0"
                                                                                                />
                                                                                           )}

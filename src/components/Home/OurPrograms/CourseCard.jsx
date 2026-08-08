@@ -26,7 +26,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                className="w-full rounded-2xl border min-h-100 md:min-h-114 border-zinc-200 bg-white shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col cursor-pointer group relative block"
           >
                {/* Image section */}
-               <div className="relative rounded-t-2xl rounded-b-none overflow-hidden h-50 md:h-60.5 w-full bg-zinc-100">
+               <div className="relative rounded-t-2xl rounded-b-none overflow-hidden aspect-[16/10] w-full bg-zinc-100">
                     <OptimizedImage
                          src={imageSrc}
                          alt={course?.alt || "weekend-ux-program-image-template"}

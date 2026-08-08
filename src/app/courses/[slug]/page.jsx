@@ -167,6 +167,7 @@ export default async function CourseSlugPage({ params }) {
                          src="/images/weekend-ux-course-details-hero-bg.webp"
                          alt="weekend-ux-course-details-hero-bg"
                          fill
+                         sizes="100vw"
                          priority
                          fetchPriority="high"
                          className="object-cover object-center opacity-60 z-0"

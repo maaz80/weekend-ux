@@ -221,6 +221,7 @@ export default function CoursesPageClient({ coursesData }) {
                          src="/images/weekend-ux-courses-hero-bg.webp"
                          alt="weekend-ux-courses-hero-bg"
                          fill
+                         sizes="100vw"
                          priority
                          fetchPriority="high"
                          className="object-cover object-center opacity-60 z-0"
@@ -309,7 +310,7 @@ export default function CoursesPageClient({ coursesData }) {
                               <div>
                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                                         {displayedCourses.map((course, idx) => (
-                                             <div key={course._id} className="w-full max-w-sm text-neutral">
+                                             <div key={course._id} className="w-full text-neutral">
                                                   <CourseCard
                                                        course={course}
                                                        priority={idx < 3 && currentPage === 1}

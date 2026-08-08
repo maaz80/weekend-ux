@@ -38,6 +38,7 @@ export default async function Blogs() {
                          src="/images/weekend-ux-blogs-hero-bg.webp"
                          alt="weekend-ux-policy-hero-bg"
                          fill
+                         sizes="100vw"
                          priority
                          fetchPriority="high"
                          className="object-cover object-center opacity-60 z-0"

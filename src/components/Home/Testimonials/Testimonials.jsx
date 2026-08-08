@@ -204,7 +204,7 @@ const Testimonials = ({ data }) => {
 
      return (
           <div className='relative min-h-215 md:min-h-200.25 mx-auto w-full px-4 sm:px-6 lg:px-10 pt-10 lg:pt-16 pb-8 overflow-hidden'>
-               <Image src={Map} alt="weekend-ux-testimonials-bg" fetchPriority='high' decoding="async" className='absolute top-0 inset-0 w-full min-h-[120vh] md:h-[110vh] z-10 object-cover' />
+               <Image src={Map} alt="weekend-ux-testimonials-bg" loading="lazy" decoding="async" className='absolute top-0 inset-0 w-full min-h-[120vh] md:h-[110vh] z-10 object-cover' />
 
                {/* Heading */}
                

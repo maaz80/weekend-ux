@@ -31,6 +31,11 @@ export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto"
 /**
  * OptimizedImage component for highly optimized responsive images.
  * Ideal for dynamic Cloudinary images, falling back to static local images seamlessly.
+ *
+ * Performance Features:
+ * - Priority LCP support: auto fetchPriority="high", loading="eager", decoding="async"
+ * - Non-priority lazy loading: loading="lazy", decoding="async"
+ * - Responsive srcset for Cloudinary assets
  */
 export default function OptimizedImage({
      src,
@@ -45,15 +50,19 @@ export default function OptimizedImage({
      const imageSrc = src || fallbackSrc;
      const isCloudinary = imageSrc.includes("cloudinary.com");
 
+     const finalFetchPriority = fetchPriority || (priority ? "high" : undefined);
+     const loadingMode = priority ? "eager" : "lazy";
+
      if (!isCloudinary) {
           return (
                <img
                     src={imageSrc}
                     alt={alt}
                     className={`${className}`}
-                    loading={priority ? "eager" : "lazy"}
+                    loading={loadingMode}
+                    decoding="async"
                     style={{ objectFit }}
-                    fetchPriority={fetchPriority}
+                    fetchPriority={finalFetchPriority}
                />
           );
      }
@@ -75,9 +84,10 @@ export default function OptimizedImage({
                sizes={sizes}
                alt={alt}
                className={`${className}`}
-               loading={priority ? "eager" : "lazy"}
+               loading={loadingMode}
+               decoding="async"
                style={{ objectFit }}
-               fetchPriority={fetchPriority}
+               fetchPriority={finalFetchPriority}
           />
      );
 }

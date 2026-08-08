@@ -14,7 +14,9 @@ export default function Hero() {
                              src='/images/weekend-ux-location-hero-bg.webp'
                              alt="weekend-ux-policy-hero-bg"
                              fill
+                             sizes="100vw"
                              priority
+                             fetchPriority="high"
                              className="object-cover object-center opacity-60 z-0"
                         />
                         {/* Content */}
