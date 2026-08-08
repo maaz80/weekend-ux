@@ -27,8 +27,6 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
           >
                {/* Image section */}
                <div className="relative rounded-t-2xl rounded-b-none overflow-hidden aspect-[16/10] w-full bg-zinc-100">
-
-               
                     <OptimizedImage
                          src={imageSrc}
                          alt={course?.alt || "weekend-ux-program-image-template"}
