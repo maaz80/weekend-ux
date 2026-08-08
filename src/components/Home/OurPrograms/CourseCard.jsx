@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import { Lock, Unlock } from "lucide-react";
 import { useUserAuth } from "@/context/UserAuthContext";
@@ -8,27 +8,22 @@ import { useUserAuth } from "@/context/UserAuthContext";
 const CourseImage = '/images/weekend-ux-program-image-template.webp';
 
 export default function CourseCard({ course, setIsModal = false, priority = false, fetchPriority = undefined }) {
-     const router = useRouter();
-     const { isCourseUnlocked } = useUserAuth();
+     const { isLoggedIn, isCourseUnlocked } = useUserAuth();
 
-     const unlocked = isCourseUnlocked(course);
+     const unlocked = isLoggedIn && isCourseUnlocked(course);
+     const targetHref = unlocked ? "/dashboard" : `/courses/${course?.slug || course?._id}`;
 
      const handleClick = (e) => {
-          e.stopPropagation();
           if (setIsModal) setIsModal(false);
-          if (unlocked) {
-               router.push("/dashboard");
-          } else {
-               router.push(`/courses/${course?.slug || course?._id}`);
-          }
      };
 
      const imageSrc = course?.image || CourseImage;
 
      return (
-          <div
+          <Link
+               href={targetHref}
                onClick={handleClick}
-               className="w-73.5 md:w-full rounded-2xl border min-h-100 md:min-h-114 border-zinc-200 bg-white shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col cursor-pointer group relative"
+               className="w-full rounded-2xl border min-h-100 md:min-h-114 border-zinc-200 bg-white shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col cursor-pointer group relative block"
           >
                {/* Image section */}
                <div className="relative rounded-t-2xl rounded-b-none overflow-hidden h-50 md:h-60.5 w-full bg-zinc-100">
@@ -41,22 +36,24 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                          fetchPriority={fetchPriority}
                     />
 
-                    {/* Status Badge */}
-                    <div className="absolute top-3 right-3 z-10">
-                         {unlocked ? (
-                              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500 text-white shadow-md">
-                                   <Unlock size={13} /> Unlocked
-                              </span>
-                         ) : (
-                              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-white shadow-md">
-                                   <Lock size={13} /> Locked
-                              </span>
-                         )}
-                    </div>
+                    {/* Status Badge — sirf logged-in user ko dikhega */}
+                    {isLoggedIn && (
+                         <div className="absolute top-3 right-3 z-10">
+                              {unlocked ? (
+                                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-500 text-white shadow-md">
+                                        <Unlock size={13} /> Unlocked
+                                   </span>
+                              ) : (
+                                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500 text-white shadow-md">
+                                        <Lock size={13} /> Locked
+                                   </span>
+                              )}
+                         </div>
+                    )}
                </div>
 
                {/* Content */}
-               <div className="p-2 md:p-3 flex flex-col grow justify-between">
+               <div className="p-3 md:p-4 flex flex-col grow justify-between">
                     <div>
                          {/* Title */}
                          <h2 className="font-urbanist text-[18px] md:text-[23px] 2xl:text-[24px] font-bold leading-8 md:leading-9 text-zinc-900 min-h-14 flex items-center group-hover:text-official transition-colors">
@@ -64,22 +61,22 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                          </h2>
 
                          {/* Description */}
-                         <p className="mt-2 text-xs md:text-[16px] text-zinc-500 font-urbanist line-clamp-2 leading-6">
+                         <p className="mt-2 text-xs md:text-[15px] text-zinc-500 font-urbanist line-clamp-2 leading-6">
                               {course?.description || course?.overview || "AWS provides services for every domain such as computing, data storage, data analytics, robotics, and"}
                          </p>
                     </div>
 
                     {/* Metadata */}
-                    <div className="flex items-center justify-between text-[13px] md:text-[16px] text-zinc-800 font-bold font-urbanist mt-auto pt-4 border-t border-zinc-50">
+                    <div className="flex items-center justify-between text-[13px] md:text-[15px] text-zinc-800 font-bold font-urbanist mt-auto pt-4 border-t border-zinc-100">
                          <p>
-                              <span className="text-zinc-500 font-normal">Starts:</span> {course?.deadline || "10th Dec, 26"}
+                              <span className="text-zinc-500 font-normal">Starts:</span> {course?.startdate || course?.deadline || "10th Dec, 26"}
                          </p>
 
-                         <span className={`text-xs font-bold px-2.5 py-1 rounded-lg border transition ${unlocked ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}>
+                         <span className={`text-xs font-bold px-2.5 py-1 rounded-lg border transition ${unlocked ? 'bg-emerald-50 text-emerald-700 border-emerald-200' : 'bg-zinc-50 text-zinc-700 border-zinc-200'}`}>
                               {unlocked ? "View Course →" : "View Details →"}
                          </span>
                     </div>
                </div>
-          </div>
+          </Link>
      );
 }

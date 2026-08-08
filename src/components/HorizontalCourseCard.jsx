@@ -1,14 +1,12 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import { Lock, Unlock, Clock, Calendar, ArrowRight, Sparkles } from "lucide-react";
 
 const CourseImage = '/images/weekend-ux-program-image-template.webp';
 
 export default function HorizontalCourseCard({ course, unlocked }) {
-     const router = useRouter();
-
      const imageSrc = course?.image || CourseImage;
      const title = course?.title || "Course Program";
      const category = course?.category || "UI/UX Design";
@@ -16,18 +14,12 @@ export default function HorizontalCourseCard({ course, unlocked }) {
      const courseLength = course?.courselength || course?.duration || course?.courseLength || "6 Months";
      const deadline = course?.startdate || course?.deadline || "Enrollment Open";
 
-     const handleCardClick = () => {
-          if (unlocked) {
-               router.push("/dashboard");
-          } else {
-               router.push(`/courses/${course?.slug || course?._id}`);
-          }
-     };
+     const targetHref = unlocked ? "/dashboard" : `/courses/${course?.slug || course?._id}`;
 
      return (
-          <div
-               onClick={handleCardClick}
-               className={`w-full rounded-2xl border transition-all duration-300 flex flex-col md:flex-row overflow-hidden cursor-pointer group bg-white shadow-sm hover:shadow-md ${unlocked ? "border-emerald-200 hover:border-emerald-400" : "border-zinc-200/90 hover:border-zinc-300"
+          <Link
+               href={targetHref}
+               className={`w-full rounded-2xl border transition-all duration-300 flex flex-col md:flex-row overflow-hidden cursor-pointer group bg-white shadow-sm hover:shadow-md block ${unlocked ? "border-emerald-200 hover:border-emerald-400" : "border-zinc-200/90 hover:border-zinc-300"
                     }`}
           >
                {/* IMAGE CONTAINER (Left) */}
@@ -88,30 +80,22 @@ export default function HorizontalCourseCard({ course, unlocked }) {
                          </div>
 
                          {unlocked ? (
-                              <button
-                                   onClick={(e) => {
-                                        e.stopPropagation();
-                                        router.push("/dashboard");
-                                   }}
+                              <span
                                    className="w-full sm:w-auto px-4 sm:px-5 py-2.5 bg-official text-neutral font-bold rounded-xl text-xs hover:opacity-90 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                               >
                                    <span>Continue Learning</span>
                                    <ArrowRight size={14} />
-                              </button>
+                              </span>
                          ) : (
-                              <button
-                                   onClick={(e) => {
-                                        e.stopPropagation();
-                                        router.push(`/courses/${course.slug || course._id}`);
-                                   }}
+                              <span
                                    className="w-full sm:w-auto px-4 sm:px-5 py-2.5 bg-zinc-900 text-white font-bold rounded-xl text-xs hover:bg-zinc-800 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                               >
                                    <span>View Details</span>
                                    <ArrowRight size={14} />
-                              </button>
+                              </span>
                          )}
                     </div>
                </div>
-          </div>
+          </Link>
      );
 }

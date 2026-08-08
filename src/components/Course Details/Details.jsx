@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Lock, Unlock, Play, X, Film, ArrowRight } from "lucide-react";
 import { useUserAuth } from "@/context/UserAuthContext";
+import Link from "next/link";
 import CardBg from '@/app/assets/weekend-ux-course-details-call-card-bg.webp';
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import Form from "./Form";
@@ -695,7 +696,7 @@ export default function Details({ data }) {
                                              className="shrink-0 px-3 transition-all duration-300"
                                              style={{ width: `${100 / visibleCards}%` }}
                                         >
-                                             <a
+                                             <Link
                                                   href={study.link || "#"}
                                                   className="group block bg-white rounded-3xl overflow-hidden border border-zinc-200 hover:border-official shadow-sm hover:shadow-lg transition-all duration-300 transform hover:scale-[1.01]"
                                              >
@@ -717,7 +718,7 @@ export default function Details({ data }) {
                                                             {study.alt || `Case Study ${idx + 1}`}
                                                        </p>
                                                   </div>
-                                             </a>
+                                             </Link>
                                         </div>
                                    ))}
                               </div>
@@ -772,7 +773,7 @@ export default function Details({ data }) {
                          {/* Career Domains Flex Layout */}
                          <div className="flex flex-wrap gap-2.5 sm:gap-4 justify-start">
                               {careerDomainsItems.map((item, idx) => (
-                                   <a
+                                   <Link
                                         key={idx}
                                         href={item.link || "#"}
                                         className="flex items-center gap-2 sm:gap-3 bg-white px-3.5 sm:px-6 py-2.5 sm:py-4 rounded-xl sm:rounded-2xl border border-zinc-200/80 hover:shadow-md hover:scale-[1.01] transition-all duration-300 group shrink-0"
@@ -792,7 +793,7 @@ export default function Details({ data }) {
                                         >
                                              {item.name}
                                         </span>
-                                   </a>
+                                   </Link>
                               ))}
                          </div>
 

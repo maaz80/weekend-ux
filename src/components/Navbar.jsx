@@ -528,24 +528,24 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                       </h3>
                                                                       <div className="flex flex-col gap-2">
                                                                            {cat.items && cat.items.map((subItem, subIdx) => (
-                                                                                <a
+                                                                                <Link
                                                                                      key={subIdx}
                                                                                      href={subItem.link || "#"}
                                                                                      className="text-[16px] text-zinc-600 hover:text-official transition-colors font-medium"
                                                                                 >
                                                                                      {subItem.name}
-                                                                                </a>
+                                                                                </Link>
                                                                            ))}
                                                                       </div>
                                                                  </div>
                                                             ))
                                                        ) : (
-                                                            <a
+                                                            <Link
                                                                  href="/courses"
                                                                  className="col-span-4 flex items-center justify-center h-12 text-sm text-neutral font-semibold hover:text-official/80 transition"
                                                             >
                                                                  All Courses
-                                                            </a>
+                                                            </Link>
                                                        )}
                                                   </div>
                                              </div>
@@ -783,13 +783,14 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                             {cat.title}
                                                        </span>
                                                        {cat.items && cat.items.map((subItem, subIdx) => (
-                                                            <a
+                                                            <Link
                                                                  key={subIdx}
                                                                  href={subItem.link || "#"}
                                                                  className="text-sm text-zinc-300 hover:text-official/80 transition pl-2"
+                                                                 onClick={() => setIsMenuOpen(false)}
                                                             >
                                                                  {subItem.name}
-                                                            </a>
+                                                            </Link>
                                                        ))}
                                                   </div>
                                              ))}
