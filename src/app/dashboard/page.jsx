@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Footer from "@/components/Footer";
 import HorizontalCourseCard from "@/components/HorizontalCourseCard";
 import Form from "@/components/Course Details/Form";
 import CallCard from "@/components/Course Details/CallCard";
@@ -98,8 +97,8 @@ export default function StudentDashboardPage() {
      // Auth Gate: Require login to view dashboard
      if (!isLoggedIn) {
           return (
-               <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between py-22 md:py-26">
-                    <main className="grow py-37">
+               <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-22 md:pt-26 pb-44 md:pb-64 lg:pb-80">
+                    <main className="grow py-24 md:py-32">
                          <div className="custom-width px-4 max-w-md mx-auto text-center space-y-6 bg-white p-8 md:p-10 rounded-3xl border border-zinc-200 shadow-sm">
                               <div className="w-16 h-16 bg-amber-500/10 text-official rounded-2xl flex items-center justify-center mx-auto border border-amber-500/20">
                                    <BookOpen size={32} />
@@ -118,7 +117,6 @@ export default function StudentDashboardPage() {
                               </button>
                          </div>
                     </main>
-                    <Footer />
                </div>
           );
      }
@@ -137,9 +135,9 @@ export default function StudentDashboardPage() {
      const totalVideosCount = recordingCourses.reduce((sum, c) => sum + (c.videos?.length || 0), 0);
 
      return (
-          <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-22 sm:pt-28 md:pt-25 pb-30 md:pb-70">
+          <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-26 pb-50">
                {/* MAIN BODY CONTENT */}
-               <main className="grow pt-14 sm:pt-16 md:pt-18 pb-34 sm:pb-28 md:pb-32">
+               <main className="grow">
                     <div className="custom-width px-3.5 sm:px-6 lg:px-10">
 
                          {/* GREETING BANNER */}
@@ -386,7 +384,7 @@ export default function StudentDashboardPage() {
                                    )}
                               </div>
 
-                              {/* RIGHT COLUMN: ADMISSIONS FORM & CALLCARD (Matching Course Details Page) */}
+                              {/* RIGHT COLUMN: ADMISSIONS FORM & CALLCARD */}
                               <div className="lg:col-span-1 lg:sticky lg:top-28 space-y-6">
                                    {/* Admission Form */}
                                    <div className="bg-white rounded-2xl sm:rounded-3xl shadow-sm p-5 sm:p-6 md:p-8 border border-zinc-200">
@@ -398,19 +396,6 @@ export default function StudentDashboardPage() {
                                         </p>
                                         <Form />
                                    </div>
-
-                                   {/* Call Banner */}
-                                   {/* <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-sm">
-                                        <CallCard
-                                             title="Design is more than just being creative!"
-                                             subtitle="Learn how to make design that sells"
-                                             buttonText="Book a Call"
-                                             bgImage={CardBg.src}
-                                             onButtonClick={() => {
-                                                  window.dispatchEvent(new CustomEvent("openLeadModal"));
-                                             }}
-                                        />
-                                   </div> */}
                               </div>
 
                          </div>
@@ -476,9 +461,6 @@ export default function StudentDashboardPage() {
                          </div>
                     </div>
                )}
-
-               {/* FOOTER */}
-               <Footer />
           </div>
      );
 }
