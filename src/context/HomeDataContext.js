@@ -34,30 +34,28 @@ export function HomeDataProvider({ children, initialData }) {
 
           let isMounted = true;
 
-          async function fetchMissingData() {
-               const promises = [];
-               const keys = [];
-
-               if (!homeData) { promises.push(fetch("/api/home")); keys.push("home"); }
-               if (!faqData) { promises.push(fetch("/api/pages/home/faq")); keys.push("faq"); }
-               if (!coursesData) { promises.push(fetch("/api/courses")); keys.push("courses"); }
-               if (!navbarData) { promises.push(fetch("/api/navbar")); keys.push("navbar"); }
-               if (!footerGlobalData) { promises.push(fetch("/api/footer-columns/global")); keys.push("footerGlobal"); }
-               if (!footerColumnsData) { promises.push(fetch("/api/footer-columns")); keys.push("footerColumns"); }
-               if (!testimonialsData) { promises.push(fetch("/api/testimonials")); keys.push("testimonials"); }
-               if (!blogsData) { promises.push(fetch("/api/blogs")); keys.push("blogs"); }
-
-               if (promises.length === 0) {
-                    if (isMounted) setLoading(false);
-                    return;
-               }
+          async function fetchAllData() {
+               // Always fetch all data fresh from the API so admin changes always reflect.
+               // initialData is only used for the initial paint — we re-fetch everything on mount.
+               const endpoints = [
+                    { key: "home",         url: "/api/home" },
+                    { key: "faq",          url: "/api/pages/home/faq" },
+                    { key: "courses",      url: "/api/courses" },
+                    { key: "navbar",       url: "/api/navbar" },
+                    { key: "footerGlobal", url: "/api/footer-columns/global" },
+                    { key: "footerColumns",url: "/api/footer-columns" },
+                    { key: "testimonials", url: "/api/testimonials" },
+                    { key: "blogs",        url: "/api/blogs" },
+               ];
 
                try {
-                    const results = await Promise.allSettled(promises);
+                    const results = await Promise.allSettled(
+                         endpoints.map(e => fetch(e.url, { cache: "no-store" }))
+                    );
 
                     for (let i = 0; i < results.length; i++) {
                          const result = results[i];
-                         const key = keys[i];
+                         const key = endpoints[i].key;
 
                          if (result.status === "fulfilled") {
                               const res = result.value;
@@ -66,26 +64,26 @@ export function HomeDataProvider({ children, initialData }) {
                                         const data = await res.json();
                                         if (!isMounted) return;
 
-                                        if (key === "home") setHomeData(data);
-                                        else if (key === "faq") setFaqData(data);
-                                        else if (key === "courses") setCoursesData(data);
-                                        else if (key === "navbar") setNavbarData(data);
-                                        else if (key === "footerGlobal") setFooterGlobalData(data);
+                                        if (key === "home")          setHomeData(data);
+                                        else if (key === "faq")      setFaqData(data);
+                                        else if (key === "courses")   setCoursesData(data);
+                                        else if (key === "navbar")    setNavbarData(data);
+                                        else if (key === "footerGlobal")  setFooterGlobalData(data);
                                         else if (key === "footerColumns") setFooterColumnsData(data);
-                                        else if (key === "testimonials") setTestimonialsData(data);
-                                        else if (key === "blogs") setBlogsData(data);
+                                        else if (key === "testimonials")  setTestimonialsData(data);
+                                        else if (key === "blogs")    setBlogsData(data);
                                    } catch (jsonErr) {
                                         console.error(`Failed to parse JSON for key: ${key}`, jsonErr);
                                    }
                               } else {
-                                   console.warn(`Failed to fetch missing context data for: ${key}, status: ${res.status}`);
+                                   console.warn(`Failed to fetch data for: ${key}, status: ${res.status}`);
                               }
                          } else {
-                              console.error(`Network error fetching missing context data for: ${key}:`, result.reason);
+                              console.error(`Network error fetching data for: ${key}:`, result.reason);
                          }
                     }
                } catch (error) {
-                    console.error("Error in fetching missing homepage config data batch:", error);
+                    console.error("Error in fetching homepage config data batch:", error);
                } finally {
                     if (isMounted) {
                          setLoading(false);
@@ -93,7 +91,7 @@ export function HomeDataProvider({ children, initialData }) {
                }
           }
 
-          fetchMissingData();
+          fetchAllData();
 
           return () => {
                isMounted = false;

@@ -4,3 +4,29 @@
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
+
+# Prevent browsers from caching HTML pages — forces fresh fetch after every deploy
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+    Pragma = "no-cache"
+
+# Root page also no-cache
+[[headers]]
+  for = "/"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+    Pragma = "no-cache"
+
+# Long-term cache for fingerprinted static assets (JS/CSS bundles have content hashes)
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# No-cache for API routes
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"

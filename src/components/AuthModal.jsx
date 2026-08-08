@@ -275,7 +275,7 @@ const AuthModal = ({
 
                {/* Modal container */}
                <div className={`w-[92%] max-w-4xl ${modalBgColor} rounded-2xl shadow-2xl relative overflow-hidden p-4 md:p-8 text-neutral max-h-[92vh] flex flex-col`}>
-                    <div className="flex flex-col md:flex-row h-full max-h-[85vh] md:max-h-[580px] overflow-hidden">
+                    <div className="flex flex-col md:flex-row h-full max-h-[85vh] md:max-h-145 overflow-hidden">
 
                          {/* LEFT PANEL - ILLUSTRATION */}
                          <div className="w-full md:w-1/2 hidden md:flex items-center justify-center rounded-xl overflow-hidden bg-zinc-50">
@@ -292,7 +292,7 @@ const AuthModal = ({
                          <div className="hidden md:block w-px bg-zinc-200"></div>
 
                          {/* RIGHT PANEL - FORM */}
-                         <div className="w-full md:w-1/2 flex flex-col justify-start md:justify-center px-3 md:px-10 py-4 md:py-2 overflow-y-auto max-h-[80vh] md:max-h-[580px]">
+                         <div className="w-full md:w-1/2 flex flex-col justify-start md:justify-center px-3 md:px-10 py-4 md:py-2 overflow-y-auto max-h-[80vh] md:max-h-145">
 
                               <h3 className={`${titleTextSize} font-bold ${titleColor} mb-4 md:mb-5`}>
                                    {authMode === "signup" ? "Create Account" : "Welcome Back"}
@@ -341,7 +341,7 @@ const AuthModal = ({
                                                             name="phone"
                                                             value={formData.phone}
                                                             onChange={handleChange}
-                                                            placeholder="Enter you number"
+                                                            placeholder="Enter your mobile number"
                                                             maxLength={10}
                                                             className={`w-full pl-10 pr-4 h-11 border ${inputBorderColor} rounded-lg text-sm outline-none ${inputFocusColor} ${inputBgColor} ${inputTextColor}`}
                                                             required

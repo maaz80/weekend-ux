@@ -248,7 +248,7 @@ const Form = ({
                                              name="email"
                                              value={formData.email}
                                              onChange={handleChange}
-                                             placeholder="Enter your email"
+                                             placeholder="Enter your email address"
                                              className={`w-full h-10 border rounded-lg pl-10 pr-4 outline-none text-neutral placeholder:text-neutral-500 text-[14px] transition-colors ${inputFocusColor} ${inputBgColor} ${errors.email ? "border-red-400 focus:border-red-400" : inputBorderColor}`}
                                         />
                                    </div>

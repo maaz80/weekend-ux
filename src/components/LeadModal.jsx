@@ -213,7 +213,7 @@ export default function LeadModal() {
                                                        type="text"
                                                        value={name}
                                                        onChange={(e) => setName(e.target.value)}
-                                                       placeholder="Your full name"
+                                                       placeholder="Enter your full name"
                                                        className="w-full h-11 px-4 rounded-xl border border-zinc-200 focus:border-official focus:outline-none text-sm transition font-urbanist bg-zinc-50/50"
                                                   />
                                              </div>
@@ -224,7 +224,7 @@ export default function LeadModal() {
                                                        type="email"
                                                        value={email}
                                                        onChange={(e) => setEmail(e.target.value)}
-                                                       placeholder="name@example.com"
+                                                       placeholder="Enter your email address"
                                                        className="w-full h-11 px-4 rounded-xl border border-zinc-200 focus:border-official focus:outline-none text-sm transition font-urbanist bg-zinc-50/50"
                                                   />
                                              </div>
@@ -240,7 +240,7 @@ export default function LeadModal() {
                                                   disabled={loading}
                                                   className="w-full h-12 bg-official text-black rounded-xl text-sm font-semibold cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 font-urbanist mt-6 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90"
                                              >
-                                                  {loading ? "Unlocking..." : "Submit & Unlock"}
+                                                  {loading ? "Enquiring..." : "Enquire Now"}
                                              </button>
                                         </form>
                                    </>
