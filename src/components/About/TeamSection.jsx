@@ -17,6 +17,7 @@ const staticTeam = [
      },
 ];
 
+
 const TeamSection = ({
      data,
      bgColor = "bg-[#F8F6EE]",
