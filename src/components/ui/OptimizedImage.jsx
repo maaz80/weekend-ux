@@ -5,7 +5,7 @@ import React from "react";
 /**
  * Utility function to dynamically insert transformation parameters into a Cloudinary URL.
  */
-export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto", format = "auto", crop = "fill" } = {}) {
+export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto:good", format = "auto", crop = "fill" } = {}) {
      if (!url) return "";
      if (!url.includes("cloudinary.com")) return url;
 
@@ -33,19 +33,23 @@ export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto"
  * Ideal for dynamic Cloudinary images, falling back to static local images seamlessly.
  *
  * Performance Features:
+ * - Ultra-lightweight Cloudinary delivery using f_auto,q_auto:good
+ * - Responsive srcset starting at 320px for cards & small components
  * - Priority LCP support: auto fetchPriority="high", loading="eager", decoding="async"
  * - Non-priority lazy loading: loading="lazy", decoding="async"
- * - Responsive srcset for Cloudinary assets
+ * - Explicit width & height props to prevent Cumulative Layout Shift (CLS)
  */
 export default function OptimizedImage({
      src,
      alt = "",
      className = "",
      priority = false, // Set to true if this image appears above the fold (e.g. Hero banner)
-     sizes = "100vw",
+     sizes = "(max-width: 768px) 100vw, 50vw",
      objectFit = "cover",
      fallbackSrc = "/images/weekend-ux-hero-bg-template.webp",
-     fetchPriority = undefined // Optional fetch priority attribute
+     fetchPriority = undefined, // Optional fetch priority attribute
+     width = undefined,
+     height = undefined
 }) {
      const imageSrc = src || fallbackSrc;
      const isCloudinary = imageSrc.includes("cloudinary.com");
@@ -58,6 +62,8 @@ export default function OptimizedImage({
                <img
                     src={imageSrc}
                     alt={alt}
+                    width={width}
+                    height={height}
                     className={`${className}`}
                     loading={loadingMode}
                     decoding="async"
@@ -67,15 +73,15 @@ export default function OptimizedImage({
           );
      }
 
-     // Generate a responsive srcSet using Cloudinary widths
-     const srcSet = [
-          `${getOptimizedCloudinaryUrl(imageSrc, { width: 640, quality: "auto" })} 640w`,
-          `${getOptimizedCloudinaryUrl(imageSrc, { width: 1024, quality: "auto" })} 1024w`,
-          `${getOptimizedCloudinaryUrl(imageSrc, { width: 1920, quality: "auto" })} 1920w`,
-          `${getOptimizedCloudinaryUrl(imageSrc, { width: 2560, quality: "auto" })} 2560w`
-     ].join(", ");
+     // Generate a granular responsive srcSet using Cloudinary widths
+     const srcsetWidths = [160, 320, 480, 640, 800, 1024, 1280, 1600, 1920];
+     const srcSet = srcsetWidths
+          .map((w) => `${getOptimizedCloudinaryUrl(imageSrc, { width: w, quality: "auto:good", format: "auto" })} ${w}w`)
+          .join(", ");
 
-     const defaultSrc = getOptimizedCloudinaryUrl(imageSrc, { width: 1920, quality: "auto" });
+     // Default fallback width based on component size hint
+     const defaultWidth = width ? Math.min(width * 2, 1920) : 800;
+     const defaultSrc = getOptimizedCloudinaryUrl(imageSrc, { width: defaultWidth, quality: "auto:good", format: "auto" });
 
      return (
           <img
@@ -83,6 +89,8 @@ export default function OptimizedImage({
                srcSet={srcSet}
                sizes={sizes}
                alt={alt}
+               width={width}
+               height={height}
                className={`${className}`}
                loading={loadingMode}
                decoding="async"

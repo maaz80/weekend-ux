@@ -348,6 +348,10 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                   alt={navbarData.logo.alt && navbarData.logo.alt.trim() ? navbarData.logo.alt.trim() : "Logo"}
                                                   className="w-auto h-9 md:h-11 object-contain"
                                                   objectFit="contain"
+                                                  sizes="200px"
+                                                  width={180}
+                                                  height={44}
+                                                  priority={true}
                                              />
                                         ) : (
                                              <Image

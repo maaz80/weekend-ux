@@ -45,6 +45,10 @@ export default function StudentNavbar() {
                                    alt={navbarData.logo.alt || "Weekend UX Logo"}
                                    className="w-auto h-9 md:h-11 object-contain"
                                    objectFit="contain"
+                                   sizes="200px"
+                                   width={180}
+                                   height={44}
+                                   priority={true}
                               />
                          ) : (
                               <Image
