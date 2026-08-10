@@ -48,10 +48,10 @@
     "vitest": "^4.1.8"
   },
   "browserslist": [
-    "chrome >= 90",
-    "safari >= 15",
-    "edge >= 90",
-    "firefox >= 88",
+    "chrome >= 96",
+    "safari >= 15.4",
+    "edge >= 96",
+    "firefox >= 94",
     "not dead"
   ]
 }
