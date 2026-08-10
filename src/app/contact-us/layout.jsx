@@ -5,5 +5,10 @@ export async function generateMetadata() {
 }
 
 export default function ContactLayout({ children }) {
-     return <>{children}</>;
+     return (
+          <>
+               <link rel="preload" as="image" href="/images/weekend-ux-contact-hero-bg.webp" fetchPriority="high" />
+               {children}
+          </>
+     );
 }

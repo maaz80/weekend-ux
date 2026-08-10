@@ -298,7 +298,7 @@ const Testimonials = ({ data }) => {
                                               }}
                                               aria-label={`Go to slide ${dotIdx + 1}`}
                                               aria-current={isActive ? "true" : undefined}
-                                              className="p-1 flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110"
+                                              className="p-2.5 min-w-8 min-h-8 flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110"
                                          >
                                               <span className={`block rounded-full transition-all duration-300 ${
                                                    isActive

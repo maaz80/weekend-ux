@@ -18,9 +18,11 @@ export default function StaticPageSchemaRenderer() {
                pageSlug = pathname.substring(1);
           }
 
-          // Skip dynamic route pages (they are handled locally in their page.jsx files)
-          const skipSlugs = ["blog/", "courses/", "location/"];
-          if (skipSlugs.some(slug => pageSlug.startsWith(slug))) {
+          // Skip routes that handle their own schemas server-side or don't use dynamic page SEO endpoints
+          const skipSlugs = ["blog", "courses", "location", "dashboard", "search", "contact-us", "about-us", "privacy-policy", "disclaimer", "terms-and-conditions-enrolment"];
+          const baseSlug = pageSlug.split("/")[0];
+
+          if (skipSlugs.includes(baseSlug) || skipSlugs.includes(pageSlug)) {
                return;
           }
 
@@ -32,7 +34,7 @@ export default function StaticPageSchemaRenderer() {
                          setSchemas(data.schemas || []);
                     }
                } catch (e) {
-                    console.error("Error fetching page schemas:", e);
+                    // Suppress network error logging to prevent browser console clutter
                }
           }
 
@@ -56,7 +58,7 @@ export default function StaticPageSchemaRenderer() {
                     script.text = JSON.stringify(parsed);
                     document.head.appendChild(script);
                } catch (e) {
-                    console.error("Invalid static JSON-LD script:", schemaStr, e);
+                    // Invalid JSON-LD script string
                }
           });
 

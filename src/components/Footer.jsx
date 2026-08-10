@@ -240,28 +240,31 @@ export default function Footer({
 
                                <div className="flex gap-3 items-center">
                                     {settings && settings.socials && settings.socials.length > 0 ? (
-                                         settings.socials.map((social, i) => {
-                                              const IconComponent = getIconComponent(social.icon, social.path);
-                                              return (
-                                                   <a
-                                                        href={social.path || "#"}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        key={i}
-                                                        aria-label={social.icon ? social.icon.replace(/^(Fa|Ri|Ci|Fi|Si)/, "").replace(/([A-Z])/g, " $1").trim() : "Social media"}
-                                                        className="w-8 h-8 rounded-full bg-official flex items-center justify-center cursor-pointer text-neutral hover:bg-official/80 hover:-translate-y-0.5 transition-all duration-200 shrink-0"
-                                                   >
-                                                        <IconComponent size={16} />
-                                                   </a>
-                                              );
-                                         })
+                                         settings.socials
+                                              .filter(social => social.path && social.path.trim() && social.path !== "#")
+                                              .map((social, i) => {
+                                                   const IconComponent = getIconComponent(social.icon, social.path);
+                                                   const iconName = social.icon ? social.icon.replace(/^(Fa|Ri|Ci|Fi|Si)/, "").replace(/([A-Z])/g, " $1").trim() : "Social media";
+                                                   return (
+                                                        <a
+                                                             href={social.path}
+                                                             target="_blank"
+                                                             rel="noopener noreferrer"
+                                                             key={i}
+                                                             aria-label={`Weekend UX on ${iconName}`}
+                                                             className="w-8 h-8 rounded-full bg-official flex items-center justify-center cursor-pointer text-neutral hover:bg-official/80 hover:-translate-y-0.5 transition-all duration-200 shrink-0"
+                                                        >
+                                                             <IconComponent size={16} aria-hidden="true" />
+                                                        </a>
+                                                   );
+                                              })
                                     ) : (
                                          [
-                                              { Icon: SiFacebook, path: "https://www.facebook.com/weekendux/", label: "Facebook" },
-                                              { Icon: FaInstagram, path: "https://www.instagram.com/weekendux1/", label: "Instagram" },
-                                              { Icon: FaLinkedinIn, path: "https://www.linkedin.com/in/weekend-ux-7b03212a8/", label: "LinkedIn" },
-                                              { Icon: SiYoutube, path: "https://www.youtube.com/", label: "YouTube" },
-                                              { Icon: FaXTwitter, path: "https://x.com/", label: "Twitter" }
+                                              { Icon: SiFacebook, path: "https://www.facebook.com/weekendux/", label: "Weekend UX on Facebook" },
+                                              { Icon: FaInstagram, path: "https://www.instagram.com/weekendux1/", label: "Weekend UX on Instagram" },
+                                              { Icon: FaLinkedinIn, path: "https://www.linkedin.com/in/weekend-ux-7b03212a8/", label: "Weekend UX on LinkedIn" },
+                                              { Icon: SiYoutube, path: "https://www.youtube.com/", label: "Weekend UX on YouTube" },
+                                              { Icon: FaXTwitter, path: "https://x.com/", label: "Weekend UX on Twitter" }
                                          ].map(({ Icon, path, label }, i) => (
                                               <a
                                                    key={i}
@@ -271,7 +274,7 @@ export default function Footer({
                                                    aria-label={label}
                                                    className="w-8 h-8 rounded-full bg-official flex items-center justify-center cursor-pointer text-neutral hover:bg-official/80 hover:-translate-y-0.5 transition-all duration-200 shrink-0"
                                               >
-                                                   <Icon size={16} />
+                                                   <Icon size={16} aria-hidden="true" />
                                               </a>
                                          ))
                                     )}

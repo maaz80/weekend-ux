@@ -48,11 +48,11 @@ export default async function ContactUs() {
                          src='/images/weekend-ux-decorative-diamond.webp' 
                          alt="weekend-ux-decorative-diamond" 
                          className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-99999" 
-                         width={200} 
-                         height={200} 
+                         width={160} 
+                         height={160} 
                          style={{ height: 'auto' }} 
-                         priority={true}
-                         fetchPriority="high"
+                         loading="lazy"
+                         decoding="async"
                      />
                </section>
                <Content data={contactData} />
