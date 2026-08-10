@@ -653,9 +653,9 @@ export default function Details({ data }) {
                                                        )}
                                                   </div>
                                                   <div className="text-left">
-                                                       <h3 className="font-urbanist text-[17px] md:text-[19px] font-bold text-zinc-900 leading-tight">
+                                                       <p className="font-urbanist text-[17px] md:text-[19px] font-bold text-zinc-900 leading-tight">
                                                             {shortTermItems[sliderIndex]?.title}
-                                                       </h3>
+                                                       </p>
                                                        <p className="font-urbanist text-[11px] font-bold text-zinc-400 tracking-wider uppercase mt-1">
                                                             {shortTermItems[sliderIndex]?.duration}
                                                        </p>

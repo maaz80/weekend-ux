@@ -19,6 +19,13 @@
     Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
     Pragma = "no-cache"
 
+# Course pages no-cache HTML to prevent stale chunk hash references after re-deployments
+[[headers]]
+  for = "/courses/*"
+  [headers.values]
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+    Pragma = "no-cache"
+
 # Long-term cache for fingerprinted static assets (JS/CSS bundles have content hashes)
 [[headers]]
   for = "/_next/static/*"

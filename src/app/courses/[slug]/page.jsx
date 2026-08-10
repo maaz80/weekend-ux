@@ -160,6 +160,7 @@ export default async function CourseSlugPage({ params }) {
 
      return (
           <div className="min-h-screen bg-neutral text-white font-urbanist flex flex-col relative">
+               <link rel="preload" as="image" href="/images/weekend-ux-course-details-hero-bg.webp" fetchPriority="high" />
                <Breadcrumb />
                {/* Hero Header Section */}
                <section className="relative h-65.5 md:h-114 w-full flex md:items-center items-end pb-7 md:pb-0 justify-center bg-zinc-950 overflow-hidden" data-navbar-light="true" id='course-details-hero'>
