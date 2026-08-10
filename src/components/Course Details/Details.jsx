@@ -507,6 +507,7 @@ export default function Details({ data }) {
                                         <h2 className="text-center text-[22px] md:text-[24px] font-bold text-neutral leading-9 mb-4">
                                              Send Us Your Training Requirement
                                         </h2>
+                                        
                                         <p className="text-center text-sm text-neutral leading-relaxed mb-6">
                                              Not sure yet? Before you pass up the opportunity to sign up for the course, speak with our counselor and get your questions answered.
                                         </p>
