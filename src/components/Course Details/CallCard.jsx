@@ -5,7 +5,7 @@ import CardBg from '@/app/assets/weekend-ux-course-details-call-card-bg.webp';
 export default function CallCard({
      title = "Design is more than just being creative!",
      subtitle = "Learn how to make design that sells",
-     buttonText = "Book a Call",
+     buttonText = "Enquire Now",
      bgImage = CardBg.src,
      titleColor = "text-white",
      subtitleColor = "text-white/90",

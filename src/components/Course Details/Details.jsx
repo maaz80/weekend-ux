@@ -518,7 +518,7 @@ export default function Details({ data }) {
                                         <CallCard
                                              title="Design is more than just being creative!"
                                              subtitle="Learn how to make design that sells"
-                                             buttonText="Book a Call"
+                                             buttonText="Enquire Now"
                                              bgImage={CardBg.src}
                                              onButtonClick={() => {
                                                   window.dispatchEvent(new CustomEvent("openLeadModal"));
@@ -592,14 +592,12 @@ export default function Details({ data }) {
 
                                         {/* Bottom Apply Now and Arrows Row */}
                                         <div className="flex flex-wrap items-center justify-between gap-6 pt-6 border-t border-zinc-900/10 mt-4">
-                                             <button
-                                                  onClick={() => {
-                                                       window.dispatchEvent(new CustomEvent("openLeadModal"));
-                                                  }}
+                                             <Link
+                                                  href="/contact-us"
                                                   className="h-12 px-8 bg-linear-to-r from-zinc-800 to-zinc-900 text-white shadow-sm rounded-md hover:from-zinc-800/90 hover:to-zinc-900/90 text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center font-urbanist"
                                              >
-                                                 Enquire Now
-                                             </button>
+                                                  Enquire Now
+                                             </Link>
 
                                              {/* Slider Controls */}
                                              {shortTermItems.length > 1 && (

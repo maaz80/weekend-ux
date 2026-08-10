@@ -48,6 +48,10 @@
     "vitest": "^4.1.8"
   },
   "browserslist": [
-    "defaults and supports es6-module"
+    "chrome >= 90",
+    "safari >= 15",
+    "edge >= 90",
+    "firefox >= 88",
+    "not dead"
   ]
 }

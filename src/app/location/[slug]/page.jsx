@@ -64,7 +64,7 @@ export async function generateStaticParams() {
                }
           })();
 
-          const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 1500));
+          const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 10000));
           await Promise.race([dbPromise, timeoutPromise]);
      } catch (error) {
           console.error("Error generating location static params:", error);
@@ -91,7 +91,7 @@ const getLocationData = cache(async (slug) => {
                return null;
           })();
 
-          const timeoutPromise = new Promise((resolve) => setTimeout(() => resolve(null), 1500));
+          const timeoutPromise = new Promise((resolve) => setTimeout(() => resolve(null), 15000));
           const dbResult = await Promise.race([dbPromise, timeoutPromise]);
           if (dbResult) return dbResult;
      } catch (error) {

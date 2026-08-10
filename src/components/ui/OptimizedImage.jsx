@@ -4,8 +4,9 @@ import React from "react";
 
 /**
  * Utility function to dynamically insert transformation parameters into a Cloudinary URL.
+ * Defaults to f_auto,q_auto:eco for maximum compression and minimal bandwidth usage.
  */
-export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto:good", format = "auto", crop = "fill" } = {}) {
+export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto:eco", format = "auto", crop = "fill" } = {}) {
      if (!url) return "";
      if (!url.includes("cloudinary.com")) return url;
 
@@ -17,34 +18,28 @@ export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto:
      const remainingUrl = url.substring(uploadIndex + 8);
 
      const transforms = [];
-     if (width) transforms.push(`w_${width}`);
-     if (height) transforms.push(`h_${height}`);
-     if (crop && (width || height)) transforms.push(`c_${crop}`);
-     if (quality) transforms.push(`q_${quality}`);
      if (format) transforms.push(`f_${format}`);
-     transforms.push("dpr_auto"); // Automatically adjust image density for retina/high-res displays
+     if (quality) transforms.push(`q_${quality}`);
+     if (width) transforms.push(`w_${Math.round(width)}`);
+     if (height) transforms.push(`h_${Math.round(height)}`);
+     if (crop && (width || height)) transforms.push(`c_${crop},g_auto`);
+     transforms.push("dpr_auto"); // Automatically adjust image density for high-DPI displays
 
      const transformString = transforms.join(",");
      return `${baseUrl}${transformString}/${remainingUrl}`;
 }
 
 /**
- * OptimizedImage component for highly optimized responsive images.
- * Ideal for dynamic Cloudinary images, falling back to static local images seamlessly.
- *
- * Performance Features:
- * - Ultra-lightweight Cloudinary delivery using f_auto,q_auto:good
- * - Adaptive srcSet breakpoints for logos (90-320px) & general images (160-1600px)
- * - Priority LCP support: auto fetchPriority="high", loading="eager", decoding="async"
- * - Non-priority lazy loading: loading="lazy", decoding="async"
- * - Explicit width & height props to prevent Cumulative Layout Shift (CLS)
+ * OptimizedImage component for ultra-high-performance responsive images.
+ * Implements Cloudinary auto-format (f_auto), aggressive auto-quality (q_auto:eco),
+ * exact aspect-ratio cropping, adaptive srcSet, and LCP fetchPriority.
  */
 export default function OptimizedImage({
      src,
      alt = "",
      className = "",
      priority = false, // Set to true if this image appears above the fold (e.g. Hero banner)
-     sizes = "(max-width: 768px) 100vw, 50vw",
+     sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px",
      objectFit = "cover",
      fallbackSrc = "/images/weekend-ux-hero-bg-template.webp",
      fetchPriority = undefined, // Optional fetch priority attribute
@@ -76,15 +71,35 @@ export default function OptimizedImage({
      const isSmallImage = width && width <= 320;
      const srcsetWidths = isSmallImage
           ? [90, 120, 150, 180, 220, 260, 320]
-          : [160, 320, 480, 600, 800, 1024, 1280, 1600];
+          : [160, 280, 360, 480, 640, 800, 1024];
+
+     // Calculate aspect ratio if width & height are provided
+     const aspectRatio = (width && height) ? height / width : null;
 
      const srcSet = srcsetWidths
-          .map((w) => `${getOptimizedCloudinaryUrl(imageSrc, { width: w, quality: "auto:good", format: "auto" })} ${w}w`)
+          .map((w) => {
+               const calculatedHeight = aspectRatio ? Math.round(w * aspectRatio) : undefined;
+               const transformUrl = getOptimizedCloudinaryUrl(imageSrc, {
+                    width: w,
+                    height: calculatedHeight,
+                    quality: "auto:eco",
+                    format: "auto",
+                    crop: "fill"
+               });
+               return `${transformUrl} ${w}w`;
+          })
           .join(", ");
 
      // Default fallback width based on component size hint
      const defaultWidth = width ? width : 480;
-     const defaultSrc = getOptimizedCloudinaryUrl(imageSrc, { width: defaultWidth, quality: "auto:good", format: "auto" });
+     const defaultHeight = aspectRatio ? Math.round(defaultWidth * aspectRatio) : height;
+     const defaultSrc = getOptimizedCloudinaryUrl(imageSrc, {
+          width: defaultWidth,
+          height: defaultHeight,
+          quality: "auto:eco",
+          format: "auto",
+          crop: "fill"
+     });
 
      return (
           <img

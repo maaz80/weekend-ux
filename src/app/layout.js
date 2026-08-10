@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Chatbot from "@/components/Chatbot";
 import LeadModal from "@/components/LeadModal";
 import QuickAccessBar from "@/components/QuickAccessBar";
+import CookieBanner from "@/components/CookieBanner";
 import { HomeDataProvider } from "@/context/HomeDataContext";
 import { UserAuthProvider } from "@/context/UserAuthContext";
 import connectDB from "@/config/db";
@@ -97,7 +98,7 @@ export default async function RootLayout({ children }) {
       className={`${urbanist.variable} ${playfair.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
-        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         {/* Global WebSite Schema */}
         <script
@@ -212,6 +213,7 @@ export default async function RootLayout({ children }) {
             <Chatbot />
             <LeadModal />
             <QuickAccessBar />
+            <CookieBanner />
             <Footer />
           </UserAuthProvider>
         </HomeDataProvider>

@@ -7,6 +7,7 @@ export default function LeadModal() {
      const [isOpen, setIsOpen] = useState(false);
      const [name, setName] = useState("");
      const [email, setEmail] = useState("");
+     const [phone, setPhone] = useState("");
      const [courseId, setCourseId] = useState("");
      const [error, setError] = useState("");
      const [loading, setLoading] = useState(false);
@@ -103,6 +104,17 @@ export default function LeadModal() {
                return;
           }
 
+          const cleanPhone = phone.replace(/\D/g, "");
+          if (!cleanPhone) {
+               setError("Please enter your mobile number.");
+               return;
+          }
+
+          if (!/^[0-9]{10}$/.test(cleanPhone)) {
+               setError("Please enter a valid 10-digit mobile number.");
+               return;
+          }
+
           if (!email.trim()) {
                setError("Please enter your email.");
                return;
@@ -121,7 +133,7 @@ export default function LeadModal() {
                     headers: {
                          "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ name, email, courseId, source: "Course Page Brochure Request" })
+                    body: JSON.stringify({ name: name.trim(), email: email.trim(), phone: cleanPhone, courseId, source: "Course Page Brochure Request" })
                });
 
                const data = await response.json();
@@ -132,7 +144,7 @@ export default function LeadModal() {
 
                // Save lead user for future direct sends!
                localStorage.setItem("leadSubmitted", "true");
-               localStorage.setItem("leadUser", JSON.stringify({ name, email }));
+               localStorage.setItem("leadUser", JSON.stringify({ name: name.trim(), email: email.trim(), phone: cleanPhone }));
 
                setSuccess(true);
                setLoading(false);
@@ -145,6 +157,7 @@ export default function LeadModal() {
                     setIsOpen(false);
                     setName("");
                     setEmail("");
+                    setPhone("");
                     setCourseId("");
                }, 1500);
 
@@ -158,7 +171,7 @@ export default function LeadModal() {
           <>
                {/* Toast Notification */}
                {toast && (
-                    <div className="fixed top-20 right-4 md:right-8 z-99999 flex items-center gap-3 bg-zinc-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-zinc-700 animate-in fade-in slide-in-from-top-4 duration-300 font-urbanist text-xs md:text-sm font-semibold max-w-sm">
+                    <div className="fixed top-20 right-4 md:right-8 z-[9999999] flex items-center gap-3 bg-zinc-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-zinc-700 animate-in fade-in slide-in-from-top-4 duration-300 font-urbanist text-xs md:text-sm font-semibold max-w-sm">
                          <Send className="w-5 h-5 text-official shrink-0 animate-pulse" />
                          <span>{toast.message}</span>
                          <button onClick={() => setToast(null)} className="text-zinc-400 hover:text-white ml-auto cursor-pointer">
@@ -169,63 +182,75 @@ export default function LeadModal() {
 
                {/* Modal Popup */}
                {isOpen && (
-                    <div className="fixed inset-0 z-9999 flex items-center justify-center bg-zinc-950/70 backdrop-blur-md p-2 md:p-4 transition-all duration-300">
-                         <div className="w-full max-w-md bg-white rounded-3xl p-5 md:p-8 shadow-2xl relative border border-zinc-150 text-neutral text-center transform scale-100 transition-all duration-300 animate-in fade-in zoom-in-95">
+                    <div className="fixed inset-0 z-[999999] flex items-center justify-center bg-zinc-950/70 backdrop-blur-md p-3 transition-all duration-300">
+                         <div className="w-full max-w-[390px] sm:max-w-md max-h-[85vh] overflow-y-auto bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl relative border border-zinc-150 text-neutral text-center transform scale-100 transition-all duration-300 animate-in fade-in zoom-in-95">
                               
                               {/* Close Button */}
                               <button
                                    onClick={() => setIsOpen(false)}
-                                   className="absolute top-5 right-5 text-zinc-400 hover:text-zinc-700 transition cursor-pointer"
+                                   className="absolute top-4 right-4 text-zinc-400 hover:text-zinc-700 transition cursor-pointer p-1 rounded-full hover:bg-zinc-100"
                                    aria-label="Close"
                               >
-                                   <X size={20} />
+                                   <X size={18} />
                               </button>
 
                               {success ? (
-                                   <div className="py-6 flex flex-col items-center">
-                                        <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-5 border border-emerald-200 animate-bounce">
-                                             <CheckCircle2 size={32} />
+                                   <div className="py-4 flex flex-col items-center">
+                                        <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4 border border-emerald-200 animate-bounce">
+                                             <CheckCircle2 size={28} />
                                         </div>
-                                        <h3 className="text-2xl font-bold font-playfair text-zinc-900 mb-2">Syllabus Sent to Email!</h3>
-                                        <p className="text-sm text-zinc-500 font-urbanist leading-relaxed">
+                                        <h3 className="text-xl sm:text-2xl font-bold font-playfair text-zinc-900 mb-2">Syllabus Sent to Email!</h3>
+                                        <p className="text-xs sm:text-sm text-zinc-500 font-urbanist leading-relaxed">
                                              Thank you for sharing your details. The complete course syllabus and curriculum details have been sent to your email address.
                                         </p>
                                    </div>
                               ) : (
                                    <>
                                         {/* Lock Icon */}
-                                        <div className="w-14 h-14 bg-official/10 text-official rounded-full flex items-center justify-center mx-auto mb-1 md:mb-6 border border-official/20">
-                                             <Lock size={24} />
+                                        <div className="w-11 h-11 bg-official/10 text-official rounded-full flex items-center justify-center mx-auto mb-2 border border-official/20">
+                                             <Lock size={20} />
                                         </div>
 
-                                        <h3 className="text-2xl font-bold font-playfair text-zinc-900 mb-2">
+                                        <h3 className="text-xl sm:text-2xl font-bold font-playfair text-zinc-900 mb-1">
                                              Unlock Curriculum
                                         </h3>
                                         
-                                        <p className="text-sm text-zinc-500 font-urbanist mb-6 leading-relaxed">
-                                             Enter your details below to instantly unlock all chapters, lessons, and topics for our courses.
+                                        <p className="text-xs sm:text-sm text-zinc-500 font-urbanist mb-3 leading-snug">
+                                             Enter your details below to instantly unlock all chapters, lessons, and topics.
                                         </p>
 
-                                        <form onSubmit={handleSubmit} className="text-left space-y-4">
+                                        <form onSubmit={handleSubmit} className="text-left space-y-2.5">
                                              <div className="space-y-1">
-                                                  <label className="text-xs font-semibold text-zinc-600 font-urbanist">Name</label>
+                                                  <label className="text-[11px] sm:text-xs font-semibold text-zinc-600 font-urbanist">Name</label>
                                                   <input
                                                        type="text"
                                                        value={name}
                                                        onChange={(e) => setName(e.target.value)}
                                                        placeholder="Enter your full name"
-                                                       className="w-full h-11 px-4 rounded-xl border border-zinc-200 focus:border-official focus:outline-none text-sm transition font-urbanist bg-zinc-50/50"
+                                                       className="w-full h-10 px-3.5 rounded-xl border border-zinc-200 focus:border-official focus:ring-1 focus:ring-official outline-none text-xs sm:text-sm transition font-urbanist bg-zinc-50/50"
                                                   />
                                              </div>
 
                                              <div className="space-y-1">
-                                                  <label className="text-xs font-semibold text-zinc-600 font-urbanist">Email Address</label>
+                                                  <label className="text-[11px] sm:text-xs font-semibold text-zinc-600 font-urbanist">Email Address</label>
                                                   <input
                                                        type="email"
                                                        value={email}
                                                        onChange={(e) => setEmail(e.target.value)}
                                                        placeholder="Enter your email address"
-                                                       className="w-full h-11 px-4 rounded-xl border border-zinc-200 focus:border-official focus:outline-none text-sm transition font-urbanist bg-zinc-50/50"
+                                                       className="w-full h-10 px-3.5 rounded-xl border border-zinc-200 focus:border-official focus:ring-1 focus:ring-official outline-none text-xs sm:text-sm transition font-urbanist bg-zinc-50/50"
+                                                  />
+                                             </div>
+
+                                             <div className="space-y-1">
+                                                  <label className="text-[11px] sm:text-xs font-semibold text-zinc-600 font-urbanist">Mobile Number</label>
+                                                  <input
+                                                       type="tel"
+                                                       value={phone}
+                                                       onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
+                                                       placeholder="Enter 10-digit mobile number"
+                                                       maxLength={10}
+                                                       className="w-full h-10 px-3.5 rounded-xl border border-zinc-200 focus:border-official focus:ring-1 focus:ring-official outline-none text-xs sm:text-sm transition font-urbanist bg-zinc-50/50"
                                                   />
                                              </div>
 
@@ -235,10 +260,21 @@ export default function LeadModal() {
                                                   </p>
                                              )}
 
+                                             <label className="flex items-start gap-2 text-[11px] sm:text-xs text-zinc-500 select-none font-urbanist pt-1">
+                                                  <input
+                                                       type="checkbox"
+                                                       defaultChecked
+                                                       className="mt-0.5 accent-official shrink-0"
+                                                  />
+                                                  <span>
+                                                       You accept our Terms of Use, Description & Privacy Policy by entering your contact information.
+                                                  </span>
+                                             </label>
+
                                              <button
                                                   type="submit"
                                                   disabled={loading}
-                                                  className="w-full h-12 bg-official text-black rounded-xl text-sm font-semibold cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 font-urbanist mt-6 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90"
+                                                  className="w-full h-10.5 bg-official text-black rounded-xl text-xs sm:text-sm font-semibold cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 font-urbanist mt-3 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 shadow-xs"
                                              >
                                                   {loading ? "Enquiring..." : "Enquire Now"}
                                              </button>

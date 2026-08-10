@@ -1,13 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
-import {
-     FaFacebookF,
-     FaInstagram,
-     FaYoutube,
-} from "react-icons/fa";
 import CardBg from '@/app/assets/weekend-ux-course-details-call-card-bg.webp';
-import { CiShare2 } from "react-icons/ci";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import Image from "next/image";
 import AuthorWrittenBy from '@/components/Blogs/AuthorWrittenBy';
@@ -59,6 +53,11 @@ export default function Details({ data }) {
      }, [htmlContent]);
 
      const [activeId, setActiveId] = useState("");
+     const [shareUrl, setShareUrl] = useState("");
+
+     useEffect(() => {
+          setShareUrl(window.location.href);
+     }, []);
 
      // Set initial active heading
      useEffect(() => {
@@ -124,24 +123,55 @@ export default function Details({ data }) {
                                 </div>
 
                                 {/* Social */}
-                                <div className="flex items-center gap-3 mt-5">
-
-                                     <button aria-label="Share this article" className="w-9 h-9 rounded-full border border-neutral-400 flex items-center justify-center text-neutral">
-                                          <CiShare2 size={16} />
-                                     </button>
-
-                                     <button aria-label="Share on Facebook" className="w-9 h-9 rounded-full bg-neutral-500 text-white flex items-center justify-center">
-                                          <FaFacebookF size={15} />
-                                     </button>
-
-                                     <button aria-label="Share on Instagram" className="w-9 h-9 rounded-full bg-neutral-500 text-white flex items-center justify-center">
-                                          <FaInstagram size={15} />
-                                     </button>
-
-                                     <button aria-label="Share on YouTube" className="w-9 h-9 rounded-full bg-neutral-500 text-white flex items-center justify-center">
-                                          <FaYoutube size={15} />
-                                     </button>
-
+                                <div className="flex items-center gap-3.5 mt-5">
+                                     {/* Facebook Share */}
+                                     <a
+                                          href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="w-10 h-10 rounded-full bg-neutral/10 text-neutral hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
+                                          aria-label="Share on Facebook"
+                                     >
+                                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                               <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z" />
+                                          </svg>
+                                     </a>
+                                     {/* LinkedIn Share */}
+                                     <a
+                                          href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="w-10 h-10 rounded-full bg-neutral/10 text-neutral hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
+                                          aria-label="Share on LinkedIn"
+                                     >
+                                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                               <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                                          </svg>
+                                     </a>
+                                     {/* Pinterest Share */}
+                                     <a
+                                          href={`https://pinterest.com/pin/create/button/?url=${encodeURIComponent(shareUrl)}&description=${encodeURIComponent("Check out this blog post on Weekend UX!")}`}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="w-10 h-10 rounded-full bg-neutral/10 text-neutral hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
+                                          aria-label="Share on Pinterest"
+                                     >
+                                          <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                               <path d="M12 2C6.48 2 2 6.48 2 12c0 4.23 2.63 7.85 6.39 9.39-.1-.79-.19-2-.04-2.87l1.17-4.96s-.3-.6-.3-1.48c0-1.39.8-2.43 1.81-2.43.85 0 1.27.64 1.27 1.41 0 .86-.55 2.14-.83 3.33-.24 1.01.5 1.84 1.5 1.84 1.8 0 3.19-1.9 3.19-4.64 0-2.42-1.74-4.12-4.22-4.12-2.88 0-4.57 2.16-4.57 4.39 0 .87.34 1.8 0.76 2.3a.35.35 0 0 1 .08.33l-.29 1.18a.31.31 0 0 1-.44.22c-1.28-.6-2.08-2.46-2.08-3.96 0-3.23 2.35-6.2 6.77-6.2 3.55 0 6.32 2.53 6.32 5.92 0 3.53-2.22 6.38-5.31 6.38-1.04 0-2.01-.54-2.35-1.18l-.64 2.43c-.23.89-.86 2.01-1.28 2.69 1 .31 2.05.47 3.14.47 5.52 0 10-4.48 10-10S17.52 2 12 2z" />
+                                          </svg>
+                                     </a>
+                                     {/* Twitter/X Share */}
+                                     <a
+                                          href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent("Check out this blog post on Weekend UX!")}`}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="w-10 h-10 rounded-full bg-neutral/10 text-neutral hover:bg-official hover:text-white flex items-center justify-center transition duration-300 cursor-pointer"
+                                          aria-label="Share on Twitter"
+                                     >
+                                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                               <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                          </svg>
+                                     </a>
                                 </div>
 
                                 {/* TOC */}

@@ -406,21 +406,19 @@ const AuthModal = ({
                                         </div>
                                    )}
 
-                                   {/* Signup Terms checkbox */}
-                                   {authMode === "signup" && (
-                                        <div className={`flex items-center text-[12px] ${toggleTextColor} py-1 text-left`}>
-                                             <label className="flex items-center gap-2 cursor-pointer">
-                                                  <input
-                                                       type="checkbox"
-                                                       name="agreeTerms"
-                                                       checked={formData.agreeTerms}
-                                                       onChange={handleChange}
-                                                       className={`${agreeTermsColor}`}
-                                                  />
-                                                  I agree to the Terms & Conditions, Privacy Policy, and Disclaimer
-                                             </label>
-                                        </div>
-                                   )}
+                                   {/* Terms checkbox */}
+                                   <div className={`flex items-start text-[12px] ${toggleTextColor} py-1 text-left`}>
+                                        <label className="flex items-start gap-2 cursor-pointer">
+                                             <input
+                                                  type="checkbox"
+                                                  name="agreeTerms"
+                                                  checked={formData.agreeTerms}
+                                                  onChange={handleChange}
+                                                  className={`mt-0.5 shrink-0 ${agreeTermsColor}`}
+                                             />
+                                             You accept our Terms of Use, Description & Privacy Policy by entering your contact information.
+                                        </label>
+                                   </div>
 
                                     {/* Submit Button */}
                                     <Button

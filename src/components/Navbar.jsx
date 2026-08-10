@@ -334,7 +334,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                   }
                                              }}
                                              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                                             className={`md:hidden ${isMoreButtonLight ? "text-white" : "text-neutral"} hover:text-official/80 text-2xl transition cursor-pointer flex items-center`}
+                                             className={`md:hidden ${isMoreButtonLight ? "text-white" : "text-neutral"} hover:text-official/80 text-2xl transition-opacity duration-200 cursor-pointer flex items-center`}
                                         >
                                              {isMenuOpen ? <FiX /> : <FiMenu />}
                                         </button>
@@ -513,7 +513,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                   }
                                              }}
                                              aria-label={isSearchOpen ? "Close search" : "Open search"}
-                                             className={`md:hidden ${isMoreButtonLight ? "text-white" : "text-neutral"} hover:text-official/80 text-xl transition cursor-pointer flex items-center`}
+                                             className={`md:hidden ${isMoreButtonLight ? "text-white" : "text-neutral"} hover:text-official/80 text-xl transition-opacity duration-200 cursor-pointer flex items-center`}
                                         >
                                              {isSearchOpen ? <FiX className="text-lg" /> : <FiSearch />}
                                         </button>
