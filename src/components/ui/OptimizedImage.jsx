@@ -4,7 +4,7 @@ import React from "react";
 
 /**
  * Utility function to dynamically insert transformation parameters into a Cloudinary URL.
- * Uses f_auto,q_auto:eco for maximum compression and exact pixel dimension delivery.
+ * Uses f_auto,q_auto:eco for maximum compression and respects crop mode (fill vs fit/contain).
  */
 export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto:eco", format = "auto", crop = "fill" } = {}) {
      if (!url) return "";
@@ -21,8 +21,18 @@ export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto:
      if (format) transforms.push(`f_${format}`);
      if (quality) transforms.push(`q_${quality}`);
      if (width) transforms.push(`w_${Math.round(width)}`);
-     if (height) transforms.push(`h_${Math.round(height)}`);
-     if (crop && (width || height)) transforms.push(`c_${crop},g_auto`);
+     if (height && crop !== "fit" && crop !== "contain") {
+          transforms.push(`h_${Math.round(height)}`);
+     }
+     if (crop && (width || height)) {
+          if (crop === "contain" || crop === "fit") {
+               transforms.push("c_fit");
+          } else if (crop === "limit") {
+               transforms.push("c_limit");
+          } else {
+               transforms.push(`c_${crop},g_auto`);
+          }
+     }
 
      const transformString = transforms.join(",");
      return `${baseUrl}${transformString}/${remainingUrl}`;
@@ -43,7 +53,8 @@ export default function OptimizedImage({
      fallbackSrc = "/images/weekend-ux-hero-bg-template.webp",
      fetchPriority = undefined, // Optional fetch priority attribute
      width = undefined,
-     height = undefined
+     height = undefined,
+     crop = undefined
 }) {
      const imageSrc = src || fallbackSrc;
      const isCloudinary = imageSrc.includes("cloudinary.com");
@@ -74,16 +85,17 @@ export default function OptimizedImage({
 
      // Calculate aspect ratio if width & height are provided
      const aspectRatio = (width && height) ? height / width : null;
+     const selectedCrop = crop || (objectFit === "contain" ? "fit" : "fill");
 
      const srcSet = srcsetWidths
           .map((w) => {
-               const calculatedHeight = aspectRatio ? Math.round(w * aspectRatio) : undefined;
+               const calculatedHeight = (aspectRatio && selectedCrop !== "fit" && selectedCrop !== "contain") ? Math.round(w * aspectRatio) : undefined;
                const transformUrl = getOptimizedCloudinaryUrl(imageSrc, {
                     width: w,
                     height: calculatedHeight,
                     quality: "auto:eco",
                     format: "auto",
-                    crop: "fill"
+                    crop: selectedCrop
                });
                return `${transformUrl} ${w}w`;
           })
@@ -91,13 +103,13 @@ export default function OptimizedImage({
 
      // Default fallback width based on component size hint
      const defaultWidth = width ? width : 420;
-     const defaultHeight = aspectRatio ? Math.round(defaultWidth * aspectRatio) : height;
+     const defaultHeight = (aspectRatio && selectedCrop !== "fit" && selectedCrop !== "contain") ? Math.round(defaultWidth * aspectRatio) : undefined;
      const defaultSrc = getOptimizedCloudinaryUrl(imageSrc, {
           width: defaultWidth,
           height: defaultHeight,
           quality: "auto:eco",
           format: "auto",
-          crop: "fill"
+          crop: selectedCrop
      });
 
      return (

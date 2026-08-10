@@ -280,7 +280,7 @@ const Form = ({
                                         className="mt-1 accent-official shrink-0"
                                    />
                                    <span>
-                                        You accept our Terms & Consition, Disclaimer & Privacy Policy by entering your contact information.
+                                        You accept our Terms & Condition, Disclaimer & Privacy Policy by entering your contact information.
                                    </span>
                               </label>
 

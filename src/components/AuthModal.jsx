@@ -416,7 +416,7 @@ const AuthModal = ({
                                                   onChange={handleChange}
                                                   className={`mt-0.5 shrink-0 ${agreeTermsColor}`}
                                              />
-                                             You accept our Terms & Consition, Disclaimer & Privacy Policy by entering your contact information.
+                                             You accept our Terms & Condition, Disclaimer & Privacy Policy by entering your contact information.
 
                                         </label>
                                    </div>

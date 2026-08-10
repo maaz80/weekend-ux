@@ -37,16 +37,16 @@ const CookieBanner = () => {
 
      return (
           <div
-               className="fixed bottom-0 left-0 z-100000 w-full border-t border-zinc-200 bg-white/98 backdrop-blur-md shadow-[0_-4px_25px_rgba(0,0,0,0.12)] font-urbanist animate-in fade-in slide-in-from-bottom-5 duration-300"
+               className="fixed bottom-0 left-0 z-100000 w-full border-t border-zinc-200 bg-white/98 backdrop-blur-md shadow-[0_-6px_30px_rgba(0,0,0,0.14)] font-urbanist animate-in fade-in slide-in-from-bottom-5 duration-300"
                role="dialog"
                aria-live="polite"
                aria-label="Cookie Consent Banner"
           >
-               <div className="mx-auto flex flex-col md:flex-row items-center justify-between gap-3 max-w-7xl px-4 md:px-8 py-3.5 md:py-2.5 min-h-14">
+               <div className="mx-auto flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 max-w-7xl px-4 sm:px-6 md:px-1 py-4 md:py-5 min-h-16 md:min-h-20">
                     
                     {/* Text Section */}
-                    <div className="flex items-center gap-2.5 text-center md:text-left">
-                         <p className="text-xs md:text-sm text-neutral font-medium leading-normal">
+                    <div className="flex items-center gap-3 text-center md:text-left flex-1">
+                         <p className="text-xs sm:text-sm md:text-[15px] lg:text-[18px] text-neutral font-medium leading-relaxed md:leading-normal">
                               We use cookies to personalize content, enhance browsing experience, and analyze traffic. Read our{" "}
                               <Link
                                    href="/privacy-policy"
@@ -59,11 +59,11 @@ const CookieBanner = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex items-center gap-3 shrink-0 w-full md:w-auto justify-end">
+                    <div className="flex items-center gap-4 sm:gap-6 md:gap-8 shrink-0 w-full md:w-auto justify-center md:justify-end">
                          <button
                               type="button"
                               onClick={declineCookies}
-                              className="flex-1 md:flex-none h-9 px-5 rounded-lg border border-zinc-300 text-zinc-700 hover:bg-zinc-100 font-semibold text-xs transition-all duration-200 cursor-pointer"
+                              className="flex-1 md:flex-none h-10 sm:h-11 md:h-12 px-6 sm:px-8 rounded-xl border border-zinc-300 text-zinc-700 hover:bg-zinc-100 font-bold text-xs sm:text-sm md:text-base transition-all duration-200 cursor-pointer"
                          >
                               Decline
                          </button>
@@ -71,7 +71,7 @@ const CookieBanner = () => {
                          <button
                               type="button"
                               onClick={acceptCookies}
-                              className="flex-1 md:flex-none h-9 px-6 rounded-lg bg-official text-neutral hover:bg-official/90 font-bold text-xs transition-all duration-200 cursor-pointer shadow-xs"
+                              className="flex-1 md:flex-none h-10 sm:h-11 md:h-12 px-7 sm:px-9 rounded-xl bg-official text-neutral hover:bg-official/90 font-bold text-xs sm:text-sm md:text-base transition-all duration-200 cursor-pointer shadow-sm hover:shadow-md"
                          >
                               Accept
                          </button>
