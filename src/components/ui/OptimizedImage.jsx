@@ -4,7 +4,7 @@ import React from "react";
 
 /**
  * Utility function to dynamically insert transformation parameters into a Cloudinary URL.
- * Defaults to f_auto,q_auto:eco for maximum compression and minimal bandwidth usage.
+ * Uses f_auto,q_auto:eco for maximum compression and exact pixel dimension delivery.
  */
 export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto:eco", format = "auto", crop = "fill" } = {}) {
      if (!url) return "";
@@ -23,7 +23,6 @@ export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto:
      if (width) transforms.push(`w_${Math.round(width)}`);
      if (height) transforms.push(`h_${Math.round(height)}`);
      if (crop && (width || height)) transforms.push(`c_${crop},g_auto`);
-     transforms.push("dpr_auto"); // Automatically adjust image density for high-DPI displays
 
      const transformString = transforms.join(",");
      return `${baseUrl}${transformString}/${remainingUrl}`;
@@ -71,7 +70,7 @@ export default function OptimizedImage({
      const isSmallImage = width && width <= 320;
      const srcsetWidths = isSmallImage
           ? [90, 120, 150, 180, 220, 260, 320]
-          : [160, 280, 360, 480, 640, 800, 1024];
+          : [160, 240, 320, 420, 480, 560, 640, 768];
 
      // Calculate aspect ratio if width & height are provided
      const aspectRatio = (width && height) ? height / width : null;
@@ -91,7 +90,7 @@ export default function OptimizedImage({
           .join(", ");
 
      // Default fallback width based on component size hint
-     const defaultWidth = width ? width : 480;
+     const defaultWidth = width ? width : 420;
      const defaultHeight = aspectRatio ? Math.round(defaultWidth * aspectRatio) : height;
      const defaultSrc = getOptimizedCloudinaryUrl(imageSrc, {
           width: defaultWidth,

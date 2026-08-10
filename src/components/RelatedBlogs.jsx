@@ -120,9 +120,9 @@ export default function RelatedBlogs({
                                                   src={imageSrc}
                                                   alt={blog.alt || ""}
                                                   className="h-55.5 w-full object-cover transition duration-700 group-hover:scale-105 md:h-70"
-                                                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                                                  width={600}
-                                                  height={350}
+                                                  sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 360px"
+                                                  width={420}
+                                                  height={245}
                                              />
                                         </div>
 

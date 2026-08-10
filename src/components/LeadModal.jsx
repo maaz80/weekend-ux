@@ -27,13 +27,13 @@ export default function LeadModal() {
           // Event listener for manual trigger ("Get Brochure", "Book a Call", "Apply Now", blurred lesson click)
           const handleOpen = async (e) => {
                const cId = e?.detail?.courseId || window.__currentCourseId || "";
-               
+
                // Check if user already filled form previously
                let savedUser = null;
                try {
                     const raw = localStorage.getItem("leadUser");
                     if (raw) savedUser = JSON.parse(raw);
-               } catch (err) {}
+               } catch (err) { }
 
                if (savedUser && savedUser.email) {
                     // DIRECT SEND TO EMAIL! User already filled form previously
@@ -184,7 +184,7 @@ export default function LeadModal() {
                {isOpen && (
                     <div className="fixed inset-0 z-[999999] flex items-center justify-center bg-zinc-950/70 backdrop-blur-md p-3 transition-all duration-300">
                          <div className="w-full max-w-[390px] sm:max-w-md max-h-[85vh] overflow-y-auto bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl relative border border-zinc-150 text-neutral text-center transform scale-100 transition-all duration-300 animate-in fade-in zoom-in-95">
-                              
+
                               {/* Close Button */}
                               <button
                                    onClick={() => setIsOpen(false)}
@@ -214,7 +214,7 @@ export default function LeadModal() {
                                         <h3 className="text-xl sm:text-2xl font-bold font-playfair text-zinc-900 mb-1">
                                              Unlock Curriculum
                                         </h3>
-                                        
+
                                         <p className="text-xs sm:text-sm text-zinc-500 font-urbanist mb-3 leading-snug">
                                              Enter your details below to instantly unlock all chapters, lessons, and topics.
                                         </p>
@@ -267,7 +267,7 @@ export default function LeadModal() {
                                                        className="mt-0.5 accent-official shrink-0"
                                                   />
                                                   <span>
-                                                       You accept our Terms of Use, Description & Privacy Policy by entering your contact information.
+                                                       You accept our Terms & Consition, Disclaimer & Privacy Policy by entering your contact information.
                                                   </span>
                                              </label>
 

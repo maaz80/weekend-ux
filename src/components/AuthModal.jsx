@@ -416,27 +416,28 @@ const AuthModal = ({
                                                   onChange={handleChange}
                                                   className={`mt-0.5 shrink-0 ${agreeTermsColor}`}
                                              />
-                                             You accept our Terms of Use, Description & Privacy Policy by entering your contact information.
+                                             You accept our Terms & Consition, Disclaimer & Privacy Policy by entering your contact information.
+
                                         </label>
                                    </div>
 
-                                    {/* Submit Button */}
-                                    <Button
-                                         type="submit"
-                                         disabled={loading || otpSending || (otpSent && !formData.otp)}
-                                         variant="primary"
-                                         size="h11"
-                                         className={`w-full text-sm font-bold ${submitButtonClass} ${loading || otpSending || (otpSent && !formData.otp) ? "opacity-70 cursor-not-allowed bg-official/50 text-neutral-500" : ""}`}
-                                    >
-                                         {loading || otpSending ? (
-                                              <>
-                                                   <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                                                   <span>{otpSending ? "Sending OTP..." : "Processing..."}</span>
-                                              </>
-                                         ) : (
-                                              otpSent ? (authMode === "signup" ? "Verify & Sign Up" : "Verify & Login") : "Get OTP"
-                                         )}
-                                    </Button>
+                                   {/* Submit Button */}
+                                   <Button
+                                        type="submit"
+                                        disabled={loading || otpSending || (otpSent && !formData.otp)}
+                                        variant="primary"
+                                        size="h11"
+                                        className={`w-full text-sm font-bold ${submitButtonClass} ${loading || otpSending || (otpSent && !formData.otp) ? "opacity-70 cursor-not-allowed bg-official/50 text-neutral-500" : ""}`}
+                                   >
+                                        {loading || otpSending ? (
+                                             <>
+                                                  <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                                                  <span>{otpSending ? "Sending OTP..." : "Processing..."}</span>
+                                             </>
+                                        ) : (
+                                             otpSent ? (authMode === "signup" ? "Verify & Sign Up" : "Verify & Login") : "Get OTP"
+                                        )}
+                                   </Button>
 
                                    {/* Keep Signed checkbox */}
                                    {authMode === "login" && (
@@ -465,7 +466,7 @@ const AuthModal = ({
                                         >
                                              Sign up
                                         </span>
-                                    )}
+                                   )}
                                    {authMode === "signup" && (
                                         <span
                                              onClick={() => { setAuthMode("login"); setError(""); setSuccessMessage(""); setOtpSent(false); }}
@@ -473,7 +474,7 @@ const AuthModal = ({
                                         >
                                              Login
                                         </span>
-                                    )}
+                                   )}
                               </p>
                               {authMode === "signup" && (
                                    <p className="text-[11px] text-center mt-2 text-red-600">
