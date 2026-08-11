@@ -94,15 +94,21 @@
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
   <item>
-    <link>https://www.weekendux.in/location/ui-ux-design-course-in-ahmedabad</link>
+    <link>https://www.weekendux.in/courses/ui-ux-design-with-agentic-ai-and-gen-ai-course</link>
     <title>Page 16</title>
     <ror:sortOrder>15</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
   <item>
-    <link>https://www.weekendux.in/location/ui-ux-design-course-in-agra</link>
+    <link>https://www.weekendux.in/location/ui-ux-design-course-in-ahmedabad</link>
     <title>Page 17</title>
     <ror:sortOrder>16</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+  <item>
+    <link>https://www.weekendux.in/location/ui-ux-design-course-in-agra</link>
+    <title>Page 18</title>
+    <ror:sortOrder>17</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
   </item>
 </channel>

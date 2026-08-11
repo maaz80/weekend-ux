@@ -440,7 +440,7 @@ const AuthModal = ({
                                    </Button>
 
                                    {/* Keep Signed checkbox */}
-                                   {authMode === "login" && (
+                                   {/* {authMode === "login" && (
                                         <div className={`flex items-center text-[12px] ${toggleTextColor} py-1 text-left`}>
                                              <label className="flex items-center gap-2 cursor-pointer">
                                                   <input
@@ -453,7 +453,7 @@ const AuthModal = ({
                                                   Keep me signed in
                                              </label>
                                         </div>
-                                   )}
+                                   )} */}
                               </form>
 
                               {/* Toggle Mode */}

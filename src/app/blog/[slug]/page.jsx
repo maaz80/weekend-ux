@@ -22,15 +22,10 @@ const staticBlogSlugs = [
 export async function generateStaticParams() {
      const slugsSet = new Set(staticBlogSlugs);
      try {
-          const dbPromise = (async () => {
-               await connectDB();
-               const blogPage = await Blog.findOne().select("blogs.slug").lean();
-               const dbSlugs = blogPage?.blogs?.map((blog) => blog?.slug).filter(Boolean) || [];
-               dbSlugs.forEach((s) => slugsSet.add(s));
-          })();
-
-          const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 1500));
-          await Promise.race([dbPromise, timeoutPromise]);
+          await connectDB();
+          const blogPage = await Blog.findOne().select("blogs.slug").lean();
+          const dbSlugs = blogPage?.blogs?.map((blog) => blog?.slug).filter(Boolean) || [];
+          dbSlugs.forEach((s) => slugsSet.add(s));
      } catch (error) {
           console.error("Error generating blog static params:", error);
      }

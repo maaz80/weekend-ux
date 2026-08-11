@@ -49,7 +49,7 @@ export default function OptimizedImage({
      className = "",
      priority = false, // Set to true if this image appears above the fold (e.g. Hero banner)
      sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px",
-     objectFit = "cover",
+     objectFit = "fill",
      fallbackSrc = "/images/weekend-ux-hero-bg-template.webp",
      fetchPriority = undefined, // Optional fetch priority attribute
      width = undefined,

@@ -33,15 +33,10 @@ const staticCourseSlugs = [
 export async function generateStaticParams() {
      const slugsSet = new Set(staticCourseSlugs);
      try {
-          const dbPromise = (async () => {
-               await connectDB();
-               const coursesPage = await Courses.findOne().select("course.slug").lean();
-               const dbSlugs = coursesPage?.course?.map((course) => course?.slug).filter(Boolean) || [];
-               dbSlugs.forEach((s) => slugsSet.add(s));
-          })();
-
-          const timeoutPromise = new Promise((resolve) => setTimeout(resolve, 1500));
-          await Promise.race([dbPromise, timeoutPromise]);
+          await connectDB();
+          const coursesPage = await Courses.findOne().select("course.slug").lean();
+          const dbSlugs = coursesPage?.course?.map((course) => course?.slug).filter(Boolean) || [];
+          dbSlugs.forEach((s) => slugsSet.add(s));
      } catch (error) {
           console.error("Error generating course static params:", error);
      }

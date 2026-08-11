@@ -227,7 +227,7 @@ export default function Details({ data }) {
                                           </div>
 
                                           <button className="h-12 rounded-lg bg-[#F7C600] text-neutral font-medium cursor-pointer">
-                                               Book a Call
+                                               Enquire Now
                                           </button>
 
                                      </div>
@@ -244,7 +244,7 @@ export default function Details({ data }) {
                                      <OptimizedImage
                                           src={coverImage}
                                           alt={data?.alt || data?.title || "Blog Cover"}
-                                          className="w-full h-60 md:h-112.5 lg:h-127.5 object-cover"
+                                          className="w-full h-60 md:h-112.5 lg:h-127.5 object-fill"
                                           sizes="100vw"
                                           priority={true}
                                      />

@@ -1,6 +1,6 @@
 # https://www.weekendux.in Site Summary for AI Crawlers
 
-> Generated on 2026-08-10T08:14:16.123Z
+> Generated on 2026-08-11T16:59:14.307Z
 
 ## Primary Pages
 
@@ -19,5 +19,6 @@
 - [https://www.weekendux.in/blog/best-training-in-ui-ux-design-course](https://www.weekendux.in/blog/best-training-in-ui-ux-design-course)
 - [https://www.weekendux.in/courses/figma-professional-training](https://www.weekendux.in/courses/figma-professional-training)
 - [https://www.weekendux.in/courses/web-development-course](https://www.weekendux.in/courses/web-development-course)
+- [https://www.weekendux.in/courses/ui-ux-design-with-agentic-ai-and-gen-ai-course](https://www.weekendux.in/courses/ui-ux-design-with-agentic-ai-and-gen-ai-course)
 - [https://www.weekendux.in/location/ui-ux-design-course-in-ahmedabad](https://www.weekendux.in/location/ui-ux-design-course-in-ahmedabad)
 - [https://www.weekendux.in/location/ui-ux-design-course-in-agra](https://www.weekendux.in/location/ui-ux-design-course-in-agra)

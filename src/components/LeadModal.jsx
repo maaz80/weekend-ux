@@ -171,7 +171,7 @@ export default function LeadModal() {
           <>
                {/* Toast Notification */}
                {toast && (
-                    <div className="fixed top-20 right-4 md:right-8 z-[9999999] flex items-center gap-3 bg-zinc-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-zinc-700 animate-in fade-in slide-in-from-top-4 duration-300 font-urbanist text-xs md:text-sm font-semibold max-w-sm">
+                    <div className="fixed top-20 right-4 md:right-8 z-9999999 flex items-center gap-3 bg-zinc-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-zinc-700 animate-in fade-in slide-in-from-top-4 duration-300 font-urbanist text-xs md:text-sm font-semibold max-w-sm">
                          <Send className="w-5 h-5 text-official shrink-0 animate-pulse" />
                          <span>{toast.message}</span>
                          <button onClick={() => setToast(null)} className="text-zinc-400 hover:text-white ml-auto cursor-pointer">
@@ -182,8 +182,8 @@ export default function LeadModal() {
 
                {/* Modal Popup */}
                {isOpen && (
-                    <div className="fixed inset-0 z-[999999] flex items-center justify-center bg-zinc-950/70 backdrop-blur-md p-3 transition-all duration-300">
-                         <div className="w-full max-w-[390px] sm:max-w-md max-h-[85vh] overflow-y-auto bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl relative border border-zinc-150 text-neutral text-center transform scale-100 transition-all duration-300 animate-in fade-in zoom-in-95">
+                    <div className="fixed inset-0 z-999999 flex items-center justify-center bg-zinc-950/70 backdrop-blur-md p-3 transition-all duration-300">
+                         <div className="w-full max-w-97.5 sm:max-w-md max-h-[85vh] overflow-y-auto bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xl relative border border-zinc-150 text-neutral text-center transform scale-100 transition-all duration-300 animate-in fade-in zoom-in-95">
 
                               {/* Close Button */}
                               <button

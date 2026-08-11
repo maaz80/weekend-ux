@@ -64,7 +64,7 @@ export const Default = {
      args: {
           title: "Design is more than just being creative!",
           subtitle: "Learn how to make design that sells",
-          buttonText: "Book a Call",
+          buttonText: "Enquire Now",
           titleColor: "text-white",
           subtitleColor: "text-white/90",
           overlayOpacity: "bg-neutral/25"
