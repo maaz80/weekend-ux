@@ -2,7 +2,9 @@ import Details from "@/components/Home/Details/Details";
 import Hero from "@/components/Home/Hero/Hero";
 import OurPrograms from "@/components/Home/OurPrograms/OurPrograms";
 import Philosophy from "@/components/Home/Philosophy/Philosophy";
-import HomeSecondaryWidgets from "@/components/Home/HomeSecondaryWidgets";
+import Testimonials from "@/components/Home/Testimonials/Testimonials";
+import RelatedBlogs from "@/components/RelatedBlogs";
+import FAQ from "@/components/FAQ";
 
 import { generatePageMetadata } from "@/utils/seo";
 
@@ -17,7 +19,9 @@ export default function Home() {
       <OurPrograms />
       <Details />
       <Philosophy />
-      <HomeSecondaryWidgets />
+      <Testimonials />
+      <RelatedBlogs />
+      <FAQ />
     </main>
   );
 }
