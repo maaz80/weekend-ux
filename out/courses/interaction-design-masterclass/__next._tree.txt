@@ -9,4 +9,4 @@
 :HL["/images/weekend-ux-location-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-blogs-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-about-properties-bg.webp","image",{"fetchPriority":"high"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"courses","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"interaction-design-masterclass","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"FIiS4SETOhQnEOjqE1bGH"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"courses","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"interaction-design-masterclass","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"ohDzBFg9JUgwem1N8i_C3"}
