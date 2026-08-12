@@ -118,6 +118,7 @@ export default async function RootLayout({ children }) {
         <link rel="preload" as="image" href="/images/weekend-ux-location-hero-bg.webp" fetchPriority="high" />
         <link rel="preload" as="image" href="/images/weekend-ux-blogs-hero-bg.webp" fetchPriority="high" />
         <link rel="preload" as="image" href="/images/weekend-ux-about-properties-bg.webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/weekend-ux-policy-hero-bg.webp" fetchPriority="high" />
         {/* Inline Critical CSS for 0ms Render-Blocking & Zero FOUC */}
         <style id="critical-css" dangerouslySetInnerHTML={{ __html: `
           :root { --background:#ffffff; --neutral:#1C1C1C; --foreground:#1C1C1C; }
