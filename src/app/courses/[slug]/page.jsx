@@ -220,6 +220,7 @@ export default async function CourseSlugPage({ params }) {
 
                <CourseDetailsView data={data} />
                <Testimonials />
+               
                <RelatedBlogs />
                <FAQ faqData={(data?.faq?.items && data.faq.items.length > 0) ? {
                     faq: data.faq.items,
