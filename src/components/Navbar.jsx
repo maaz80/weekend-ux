@@ -204,9 +204,13 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                ? ["home-hero", "home-philosophy"]
                : pathname === "/about-us"
                     ? ["about-hero"]
-                    : pathname === "/courses"
+                    : pathname === "/courses" || pathname.startsWith("/courses/")
                          ? ["courses-hero"]
-                         : [];
+                         : pathname === "/blog" || pathname.startsWith("/blog/")
+                              ? ["blog-hero"]
+                              : pathname === "/location" || pathname.startsWith("/location/")
+                                   ? ["location-hero"]
+                                   : [];
 
           const explicitSections = Array.from(
                document.querySelectorAll("[data-navbar-light='true'], [data-navbar-light-section='true']")
@@ -282,7 +286,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                <div className="font-urbanist fixed w-full top-0 z-99999">
                     {/* Top Bar */}
                     <div className="w-full bg-official text-neutral py-1.5 md:py-2 text-[11px] md:text-[13px] font-semibold border-b border-zinc-950/10 relative z-50">
-                         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 flex-col md:flex-row px-3 md:px-6 pb-0.5 md:pb-0">
+                         <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 flex-row px-3 md:px-6 py-0.5">
                               <div className="flex items-center gap-4 md:gap-6">
                                    <a href="tel:+919599272764" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                                         <FaPhoneAlt size={12} className="md:w-3.5 md:h-3.5" aria-hidden="true" />
@@ -334,7 +338,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                   }
                                              }}
                                              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                                             className={`md:hidden ${isMoreButtonLight ? "text-white" : "text-neutral"} hover:text-official/80 text-2xl transition-opacity duration-200 cursor-pointer flex items-center`}
+                                             className={`hidden max-md:flex items-center ${isMoreButtonLight ? "text-white" : "text-neutral"} hover:text-official/80 text-2xl transition-opacity duration-200 cursor-pointer`}
                                         >
                                              {isMenuOpen ? <FiX /> : <FiMenu />}
                                         </button>
@@ -617,14 +621,17 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              )}
                                         </div>
                                    ) : (
-                                        <Button variant="empty" className="inline-flex" onClick={() => setIsAuthModalOpen(true)}>
+                                        <Button
+                                             variant="empty"
+                                             className={`inline-flex ${isMoreButtonLight ? "!text-white !border-white hover:!bg-white hover:!text-neutral" : "text-official border-official hover:bg-official hover:text-neutral"}`}
+                                             onClick={() => setIsAuthModalOpen(true)}
+                                        >
                                              {loginLabel}
                                         </Button>
                                    )}
                               </div>
                          </div>
 
-                         {/* MOBILE SEARCH DROPDOWN */}
                          {isSearchOpen && (
                               <div ref={mobileSearchRef} className="md:hidden border-t border-official/10 bg-neutral/95 px-4 py-4 relative">
                                    <div className="relative">
