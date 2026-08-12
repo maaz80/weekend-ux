@@ -96,7 +96,7 @@ export default function OptimizedImage({
                height={renderHeight}
                className={`${className}`}
                loading={loadingMode}
-               decoding="async"
+               decoding={priority ? "sync" : "async"}
                style={inlineStyle}
                fetchPriority={finalFetchPriority}
           />
