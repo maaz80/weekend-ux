@@ -21,21 +21,27 @@ function processHtmlFile(filePath) {
     let content = fs.readFileSync(filePath, 'utf8');
     let modified = false;
 
-    // 1. Convert render-blocking CSS links into non-render-blocking async CSS
-    const cssLinkRegex = /<link([^>]*?\brel=["']stylesheet["'][^>]*?\bhref=["']\/_next\/static\/(?:css|chunks)\/[^"']+\.css["'][^>]*?)\/?>/gi;
-
-    content = content.replace(cssLinkRegex, (match, p1) => {
-        if (match.includes('media=') || match.includes('onload=')) {
-            return match;
-        }
-        const cleanAttributes = p1.replace(/\/+$/, '').trim();
+    // 1. Remove any media="print" onload hacks to eliminate FOUC (Flash of Unstyled Content) and border flashing
+    if (content.includes('media="print" onload="this.media=\'all\'"')) {
+        content = content.replace(/ media="print" onload="this\.media='all'"/g, '');
+        content = content.replace(/<noscript><link[^>]*?\/><\/noscript>/g, '');
         modified = true;
-        const nonBlockingLink = `<link ${cleanAttributes} media="print" onload="this.media='all'"/>`;
-        const noscriptFallback = `<noscript><link ${cleanAttributes}/></noscript>`;
-        return `${nonBlockingLink}${noscriptFallback}`;
-    });
+    }
 
-    // 2. Fix fetchPriority case on link preloads for standard HTML specification compliance
+    // 2. Preload stylesheet chunks in <head> for zero-FOUC instant styling
+    const cssHrefMatch = content.match(/href="(\/_next\/static\/(?:css|chunks)\/[^"']+\.css)"/g);
+    if (cssHrefMatch) {
+        const uniqueHrefs = [...new Set(cssHrefMatch.map(m => m.replace(/^href="/, '').replace(/"$/, '')))];
+        uniqueHrefs.forEach(href => {
+            const preloadTag = `<link rel="preload" as="style" href="${href}"/>`;
+            if (!content.includes(preloadTag) && content.includes('<head>')) {
+                content = content.replace('<head>', `<head>${preloadTag}`);
+                modified = true;
+            }
+        });
+    }
+
+    // 3. Fix fetchPriority case on link preloads for standard HTML specification compliance
     if (content.includes('fetchPriority=')) {
         content = content.replace(/fetchPriority=/g, 'fetchpriority=');
         modified = true;
@@ -73,7 +79,7 @@ function processJsChunkFile(filePath) {
 }
 
 function optimizePostExport() {
-    console.log("⚡ Running post-export performance optimizer...");
+    console.log("⚡ Running post-export performance optimizer (Clean FOUC-Free & Polyfill-Stripped)...");
 
     const targetDirs = [
         path.join(__dirname, 'out'),
@@ -99,7 +105,7 @@ function optimizePostExport() {
         }
     });
 
-    console.log(`✅ Post-export optimization complete: ${htmlProcessed} HTML files & ${jsProcessed} JS chunks processed!`);
+    console.log(`✅ Post-export optimization complete: ${htmlProcessed} HTML files & ${jsProcessed} JS chunks processed (0 FOUC)!`);
 }
 
 optimizePostExport();

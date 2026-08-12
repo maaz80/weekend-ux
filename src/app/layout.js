@@ -20,8 +20,6 @@ const urbanist = Urbanist({
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-urbanist",
   display: "swap",
-  preload: true,
-  adjustFontFallback: true,
 });
 
 const playfair = Playfair_Display({
@@ -29,8 +27,6 @@ const playfair = Playfair_Display({
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-playfair",
   display: "swap",
-  preload: true,
-  adjustFontFallback: true,
 });
 
 const inter = Inter({
@@ -38,8 +34,6 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
   variable: "--font-inter",
   display: "swap",
-  preload: true,
-  adjustFontFallback: true,
 });
 
 export const metadata = {
