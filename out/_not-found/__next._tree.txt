@@ -1,8 +1,8 @@
-:HL["/_next/static/chunks/0omtynmnggxam.css","style"]
+:HL["/_next/static/chunks/1btukwqb2eorg.css","style"]
 :HL["/_next/static/chunks/18f5n_0gsxqph.css","style"]
 :HL["https://res.cloudinary.com/dlek2xgkd/image/upload/f_auto,q_auto:low,w_768,c_fill,g_auto/v1783500860/home/hero-section.png","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-courses-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-location-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-blogs-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-about-properties-bg.webp","image",{"fetchPriority":"high"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"WZx3ORTVAGDDsVxytUyCT"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"WttxHHj1OGrcsm7G3QBdb"}

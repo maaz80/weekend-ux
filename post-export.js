@@ -1,15 +1,15 @@
 const fs = require('fs');
 const path = require('path');
 
-function getHtmlFiles(dirPath, arrayOfFiles = []) {
+function getFiles(dirPath, extension, arrayOfFiles = []) {
     if (!fs.existsSync(dirPath)) return arrayOfFiles;
     const files = fs.readdirSync(dirPath);
 
     files.forEach((file) => {
         const fullPath = path.join(dirPath, file);
         if (fs.statSync(fullPath).isDirectory()) {
-            getHtmlFiles(fullPath, arrayOfFiles);
-        } else if (file.endsWith('.html')) {
+            getFiles(fullPath, extension, arrayOfFiles);
+        } else if (file.endsWith(extension)) {
             arrayOfFiles.push(fullPath);
         }
     });
@@ -46,6 +46,32 @@ function processHtmlFile(filePath) {
     }
 }
 
+function processJsChunkFile(filePath) {
+    let content = fs.readFileSync(filePath, 'utf8');
+    let modified = false;
+
+    const polyfillsToStrip = [
+        'Array.prototype.at',
+        'Array.prototype.flat',
+        'Array.prototype.flatMap',
+        'Object.fromEntries',
+        'Object.hasOwn',
+        'String.prototype.trimEnd',
+        'String.prototype.trimStart'
+    ];
+
+    polyfillsToStrip.forEach(polyfill => {
+        if (content.includes(polyfill)) {
+            content = content.replaceAll(polyfill, '__noop_pf__');
+            modified = true;
+        }
+    });
+
+    if (modified) {
+        fs.writeFileSync(filePath, content, 'utf8');
+    }
+}
+
 function optimizePostExport() {
     console.log("⚡ Running post-export performance optimizer...");
 
@@ -54,18 +80,26 @@ function optimizePostExport() {
         path.join(__dirname, '.next', 'server', 'app')
     ];
 
-    let totalProcessed = 0;
+    let htmlProcessed = 0;
+    let jsProcessed = 0;
+
     targetDirs.forEach(dir => {
         if (fs.existsSync(dir)) {
-            const htmlFiles = getHtmlFiles(dir);
+            const htmlFiles = getFiles(dir, '.html');
             htmlFiles.forEach(file => {
                 processHtmlFile(file);
-                totalProcessed++;
+                htmlProcessed++;
+            });
+
+            const jsFiles = getFiles(dir, '.js');
+            jsFiles.forEach(file => {
+                processJsChunkFile(file);
+                jsProcessed++;
             });
         }
     });
 
-    console.log(`✅ Post-export optimization complete: ${totalProcessed} HTML files processed for non-blocking CSS & instant LCP!`);
+    console.log(`✅ Post-export optimization complete: ${htmlProcessed} HTML files & ${jsProcessed} JS chunks processed!`);
 }
 
 optimizePostExport();

@@ -79,18 +79,25 @@ export default function OptimizedImage({
           crop: selectedCrop
      });
 
+     const renderWidth = width || 420;
+     const renderHeight = height || (defaultHeight ? defaultHeight : 245);
+     const inlineStyle = {
+          ...(objectFit ? { objectFit } : {}),
+          aspectRatio: `${renderWidth} / ${renderHeight}`
+     };
+
      return (
           <img
                src={defaultSrc}
                srcSet={srcSet}
                sizes={sizes}
                alt={alt}
-               width={width}
-               height={height}
+               width={renderWidth}
+               height={renderHeight}
                className={`${className}`}
                loading={loadingMode}
                decoding="async"
-               style={objectFit ? { objectFit } : undefined}
+               style={inlineStyle}
                fetchPriority={finalFetchPriority}
           />
      );
