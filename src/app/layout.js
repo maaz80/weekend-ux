@@ -1,10 +1,7 @@
 import Footer from "@/components/Footer";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
-import Chatbot from "@/components/Chatbot";
-import LeadModal from "@/components/LeadModal";
-import QuickAccessBar from "@/components/QuickAccessBar";
-import CookieBanner from "@/components/CookieBanner";
+import ClientWidgetsWrapper from "@/components/ClientWidgetsWrapper";
 import { HomeDataProvider } from "@/context/HomeDataContext";
 import { UserAuthProvider } from "@/context/UserAuthContext";
 import connectDB from "@/config/db";
@@ -109,11 +106,15 @@ export default async function RootLayout({ children }) {
       className={`${urbanist.variable} ${playfair.variable} ${inter.variable} h-full antialiased`}
     >
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link rel="preload" as="image" href={heroPreloadUrl} fetchPriority="high" />
         <link rel="preload" as="image" href="/images/weekend-ux-courses-hero-bg.webp" fetchPriority="high" />
         <link rel="preload" as="image" href="/images/weekend-ux-location-hero-bg.webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/weekend-ux-blogs-hero-bg.webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/weekend-ux-about-properties-bg.webp" fetchPriority="high" />
         {/* Global WebSite Schema */}
         <script
           type="application/ld+json"
@@ -224,10 +225,7 @@ export default async function RootLayout({ children }) {
             <main className="grow">
               {children}
             </main>
-            <Chatbot />
-            <LeadModal />
-            <QuickAccessBar />
-            <CookieBanner />
+            <ClientWidgetsWrapper />
             <Footer />
           </UserAuthProvider>
         </HomeDataProvider>
