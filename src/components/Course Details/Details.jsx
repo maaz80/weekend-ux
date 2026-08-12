@@ -385,7 +385,7 @@ export default function Details({ data }) {
           <>
                {/* First Section: Promo Content and Admissions Form */}
                <section className="bg-[#F8F6EE] py-12 lg:py-20 font-urbanist w-full">
-                    <div className="custom-width px-4 sm:px-6 lg:px-16">
+                    <div className="custom-width px-4 sm:px-6 lg:px-10">
                          {/* New Custom Section with Left-side Info and Right-side Form/Banner */}
                          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
 
