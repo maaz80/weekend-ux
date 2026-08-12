@@ -60,7 +60,7 @@ export default function OptimizedImage({
                const transformUrl = getOptimizedCloudinaryUrl(imageSrc, {
                     width: w,
                     height: calculatedHeight,
-                    quality: "auto:eco",
+                    quality: "auto:low",
                     format: "auto",
                     crop: selectedCrop
                });
@@ -74,7 +74,7 @@ export default function OptimizedImage({
      const defaultSrc = getOptimizedCloudinaryUrl(imageSrc, {
           width: defaultWidth,
           height: defaultHeight,
-          quality: "auto:eco",
+          quality: "auto:low",
           format: "auto",
           crop: selectedCrop
      });

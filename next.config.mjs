@@ -17,6 +17,9 @@ const nextConfig = {
     optimizePackageImports: [
       'react-icons',
       'lucide-react',
+      'framer-motion',
+      'swiper',
+      'canvas-confetti',
     ],
   },
   compiler: {

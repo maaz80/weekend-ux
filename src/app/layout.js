@@ -100,7 +100,7 @@ export default async function RootLayout({ children }) {
   const initialData = await getLayoutInitialData();
   const rawHeroImg = initialData?.homeData?.hero?.[0]?.bgImage || "/images/weekend-ux-hero-bg-template.webp";
   const heroPreloadUrl = rawHeroImg.includes("cloudinary.com")
-    ? getOptimizedCloudinaryUrl(rawHeroImg, { width: 768, quality: "auto:eco", format: "auto", crop: "fill" })
+    ? getOptimizedCloudinaryUrl(rawHeroImg, { width: 768, quality: "auto:low", format: "auto", crop: "fill" })
     : rawHeroImg;
 
   return (
