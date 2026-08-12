@@ -112,6 +112,8 @@ export default async function RootLayout({ children }) {
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         <link rel="preload" as="image" href={heroPreloadUrl} fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/weekend-ux-courses-hero-bg.webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/weekend-ux-location-hero-bg.webp" fetchPriority="high" />
         {/* Global WebSite Schema */}
         <script
           type="application/ld+json"
