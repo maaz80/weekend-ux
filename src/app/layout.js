@@ -93,6 +93,11 @@ export default async function RootLayout({ children }) {
   const heroPreloadUrl = rawHeroImg.includes("cloudinary.com")
     ? getOptimizedCloudinaryUrl(rawHeroImg, { width: 768, quality: "50", format: "auto", crop: "fill" })
     : rawHeroImg;
+  const heroSrcSet = rawHeroImg.includes("cloudinary.com")
+    ? [160, 240, 320, 380, 420, 480, 540, 600, 680, 768, 900, 1080, 1280]
+        .map((w) => `${getOptimizedCloudinaryUrl(rawHeroImg, { width: w, height: Math.round(w * 0.5625), quality: "50", format: "auto", crop: "fill" })} ${w}w`)
+        .join(", ")
+    : null;
 
   return (
     <html
@@ -104,7 +109,11 @@ export default async function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
-        <link rel="preload" as="image" href={heroPreloadUrl} fetchPriority="high" />
+        {heroSrcSet ? (
+          <link rel="preload" as="image" imageSrcSet={heroSrcSet} imageSizes="100vw" fetchPriority="high" />
+        ) : (
+          <link rel="preload" as="image" href={heroPreloadUrl} fetchPriority="high" />
+        )}
         <link rel="preload" as="image" href="/images/weekend-ux-courses-hero-bg.webp" fetchPriority="high" />
         <link rel="preload" as="image" href="/images/weekend-ux-location-hero-bg.webp" fetchPriority="high" />
         <link rel="preload" as="image" href="/images/weekend-ux-blogs-hero-bg.webp" fetchPriority="high" />

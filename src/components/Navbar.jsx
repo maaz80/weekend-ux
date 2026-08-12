@@ -226,12 +226,18 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                return;
           }
 
+          let rafId = null;
           const updateLightState = () => {
                const isVisible = sections.some((section) => {
                     const rect = section.getBoundingClientRect();
-                    return rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+                    return rect.top <= 100 && rect.bottom >= 80;
                });
                setIsMoreButtonLight(isVisible);
+          };
+
+          const handleScroll = () => {
+               if (rafId) cancelAnimationFrame(rafId);
+               rafId = requestAnimationFrame(updateLightState);
           };
 
           updateLightState();
@@ -243,13 +249,14 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
 
           sections.forEach((section) => observer.observe(section));
 
-          window.addEventListener("scroll", updateLightState, { passive: true });
-          window.addEventListener("resize", updateLightState);
+          window.addEventListener("scroll", handleScroll, { passive: true });
+          window.addEventListener("resize", handleScroll);
 
           return () => {
+               if (rafId) cancelAnimationFrame(rafId);
                observer.disconnect();
-               window.removeEventListener("scroll", updateLightState);
-               window.removeEventListener("resize", updateLightState);
+               window.removeEventListener("scroll", handleScroll);
+               window.removeEventListener("resize", handleScroll);
           };
      }, [pathname]);
 
@@ -288,11 +295,11 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                     <div className="w-full bg-official text-neutral py-1.5 md:py-2 text-[11px] md:text-[13px] font-semibold border-b border-zinc-950/10 relative z-50">
                          <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 flex-row px-3 md:px-6 py-0.5">
                               <div className="flex items-center gap-4 md:gap-6">
-                                   <a href="tel:+919599272764" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                                   <a href="tel:+919599272764" className={`flex items-center gap-2 hover:opacity-80 transition-colors duration-300 ${isMoreButtonLight ? "!text-neutral font-bold" : "text-neutral"}`}>
                                         <FaPhoneAlt size={12} className="md:w-3.5 md:h-3.5" aria-hidden="true" />
                                         <span>+91 9599272764</span>
                                    </a>
-                                   <ObfuscatedEmail email="info@weekendux.in" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                                   <ObfuscatedEmail email="info@weekendux.in" className={`flex items-center gap-2 hover:opacity-80 transition-colors duration-300 ${isMoreButtonLight ? "!text-neutral font-bold" : "text-neutral"}`}>
                                         <FaEnvelope size={12} className="md:w-3.5 md:h-3.5" aria-hidden="true" />
                                         <span>info@weekendux.in</span>
                                    </ObfuscatedEmail>
@@ -376,7 +383,10 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              <Button
                                                   variant="primary"
                                                   onClick={() => setIsCoursesModalOpen(true)}
-                                                  onMouseEnter={clearCloseTimeout}
+                                                  onMouseEnter={() => {
+                                                       clearCloseTimeout();
+                                                       setIsCoursesModalOpen(true);
+                                                  }}
                                                   onMouseLeave={startCloseTimeout}
                                              >
                                                   {dropdownLabel}
