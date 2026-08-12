@@ -21,20 +21,28 @@ function processHtmlFile(filePath) {
     let content = fs.readFileSync(filePath, 'utf8');
     let modified = false;
 
-    // 1. Transform blocking stylesheet links into non-render-blocking preload + onload swap pattern
-    const cssLinkRegex = /<link([^>]*?\brel=["']stylesheet["'][^>]*?\bhref=["'](\/_next\/static\/(?:css|chunks)\/[^"']+\.css)["'][^>]*?)\/?>/gi;
-
-    content = content.replace(cssLinkRegex, (match, p1, href) => {
-        if (match.includes('onload=') || match.includes('rel="preload"')) {
-            return match;
-        }
+    // 1. Clean up any async onload hacks that cause FOUC (Flash of Unstyled Content) or border flashes
+    if (content.includes('onload="this.onload=null;this.rel=\'stylesheet\'"') || content.includes('media="print" onload="this.media=\'all\'"')) {
+        content = content.replace(/<link rel="preload" href="([^"']+)" as="style" onload="this\.onload=null;this\.rel='stylesheet'"\/>/g, '<link rel="stylesheet" href="$1" data-precedence="next"/>');
+        content = content.replace(/<noscript><link rel="stylesheet" href="[^"']+"\/><\/noscript>/g, '');
+        content = content.replace(/ media="print" onload="this\.media='all'"/g, '');
         modified = true;
-        const asyncPreloadLink = `<link rel="preload" href="${href}" as="style" onload="this.onload=null;this.rel='stylesheet'"/>`;
-        const noscriptFallback = `<noscript><link rel="stylesheet" href="${href}"/></noscript>`;
-        return `${asyncPreloadLink}${noscriptFallback}`;
-    });
+    }
 
-    // 2. Fix fetchPriority case on link preloads for standard HTML specification compliance
+    // 2. Preload stylesheet URLs in <head> for zero-FOUC instant high-priority network fetching
+    const cssHrefMatches = content.match(/href="(\/_next\/static\/(?:css|chunks)\/[^"']+\.css)"/g);
+    if (cssHrefMatches) {
+        const uniqueHrefs = [...new Set(cssHrefMatches.map(m => m.replace(/^href="/, '').replace(/"$/, '')))];
+        uniqueHrefs.forEach(href => {
+            const preloadTag = `<link rel="preload" href="${href}" as="style"/>`;
+            if (!content.includes(preloadTag) && content.includes('<head>')) {
+                content = content.replace('<head>', `<head>${preloadTag}`);
+                modified = true;
+            }
+        });
+    }
+
+    // 3. Fix fetchPriority case on link preloads for standard HTML specification compliance
     if (content.includes('fetchPriority=')) {
         content = content.replace(/fetchPriority=/g, 'fetchpriority=');
         modified = true;
@@ -72,7 +80,7 @@ function processJsChunkFile(filePath) {
 }
 
 function optimizePostExport() {
-    console.log("⚡ Running post-export performance optimizer (Turbopack Non-Render-Blocking Critical CSS)...");
+    console.log("⚡ Running post-export performance optimizer (Clean Zero-FOUC & Polyfill-Stripped)...");
 
     const targetDirs = [
         path.join(__dirname, 'out'),
@@ -98,7 +106,7 @@ function optimizePostExport() {
         }
     });
 
-    console.log(`✅ Post-export optimization complete: ${htmlProcessed} HTML files & ${jsProcessed} JS chunks processed (0ms Render-Blocking CSS)!`);
+    console.log(`✅ Post-export optimization complete: ${htmlProcessed} HTML files & ${jsProcessed} JS chunks processed (Zero-FOUC Guaranteed)!`);
 }
 
 optimizePostExport();
