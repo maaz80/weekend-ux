@@ -194,7 +194,7 @@ export default function Footer({
      return (
           <footer className={`w-full -mt-10 relative z-1000 pb-16 ${bgColor} ${textColor}`}>
                <div className="absolute -top-22.5 md:-top-45 left-0 right-0 mx-auto w-[95%] md:w-[80%] max-w-[86%] h-45 md:h-90 z-20 flex flex-col items-start justify-center px-2 md:px-10 lg:px-30">
-                    <Image src={bannerBgImage} alt="weekend-ux-footer-decorative-bg" fill loading="lazy" sizes="(max-width: 768px) 95vw, 80vw" className="bg-center object-contain " />
+                    <Image src={bannerBgImage} alt="weekend-ux-footer-decorative-bg" fill loading="lazy" sizes="(max-width: 640px) 95vw, (max-width: 1024px) 700px, 620px" className="bg-center object-contain " />
                     <div className={`font-playfair text-[17px] md:text-[28px] lg:text-[56px] max-w-160 relative z-50 leading-9 md:leading-12 lg:leading-16 ${bannerTitleColor}`} >
                          {cardTitle}
                     </div>
