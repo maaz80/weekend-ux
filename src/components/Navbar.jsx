@@ -630,6 +630,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                         </Button>
                                    )}
                               </div>
+                              
                          </div>
 
                          {/* MOBILE SEARCH DROPDOWN */}
