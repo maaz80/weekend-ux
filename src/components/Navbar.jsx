@@ -349,7 +349,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                   className="w-auto h-9 md:h-11 object-contain"
                                                   objectFit="contain"
                                                   sizes="140px"
-                                                  width={140}
+                                                  width={60}
                                                   height={44}
                                              />
                                         ) : (
@@ -528,20 +528,30 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                   <FiChevronDown className={`text-base transition-all duration-300 group-hover:rotate-180 ${isMoreButtonLight ? "text-white group-hover:text-neutral" : "text-neutral group-hover:text-neutral"}`} />
                                              </button>
                                              {/* DROPDOWN */}
-                                             <div className="absolute top-12 right-0 w-245 p-6 bg-white border border-zinc-100 opacity-0 invisible -translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-99999 rounded-b-md before:absolute before:-top-2 before:left-0 before:w-full before:h-2">
-                                                  <div className="grid grid-cols-4 gap-6 text-left">
+                                             <div className="absolute top-12 right-0 w-[900px] max-w-[88vw] p-6 bg-white border border-zinc-100/90 shadow-2xl opacity-0 invisible -translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-99999 rounded-xl before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
+                                                  <div
+                                                       className={`grid gap-6 text-left ${
+                                                            moreItemsDropdownList.length === 1
+                                                                 ? "grid-cols-1"
+                                                                 : moreItemsDropdownList.length === 2
+                                                                 ? "grid-cols-2"
+                                                                 : moreItemsDropdownList.length === 3
+                                                                 ? "grid-cols-3"
+                                                                 : "grid-cols-4"
+                                                       }`}
+                                                  >
                                                        {moreItemsDropdownList && moreItemsDropdownList.length > 0 ? (
                                                             moreItemsDropdownList.map((cat, catIdx) => (
-                                                                 <div key={catIdx} className="flex flex-col">
-                                                                      <h3 className="text-[14px] font-bold uppercase tracking-wider text-neutral border-b border-zinc-100 pb-2 mb-3">
+                                                                 <div key={catIdx} className="flex flex-col min-w-0">
+                                                                      <h3 className="text-[14px] font-bold uppercase tracking-wider text-neutral border-b border-zinc-100 pb-2 mb-3 truncate">
                                                                            {cat.title}
                                                                       </h3>
-                                                                      <div className="flex flex-col gap-2">
+                                                                      <div className="flex flex-col gap-2.5">
                                                                            {cat.items && cat.items.map((subItem, subIdx) => (
                                                                                 <Link
                                                                                      key={subIdx}
                                                                                      href={subItem.link || "#"}
-                                                                                     className="text-[16px] text-zinc-600 hover:text-official transition-colors font-medium"
+                                                                                     className="text-[15px] text-zinc-600 hover:text-official transition-colors font-medium leading-snug"
                                                                                 >
                                                                                      {subItem.name}
                                                                                 </Link>
@@ -552,7 +562,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                        ) : (
                                                             <Link
                                                                  href="/courses"
-                                                                 className="col-span-4 flex items-center justify-center h-12 text-sm text-neutral font-semibold hover:text-official/80 transition"
+                                                                 className="col-span-full flex items-center justify-center h-12 text-sm text-neutral font-semibold hover:text-official/80 transition"
                                                             >
                                                                  All Courses
                                                             </Link>
