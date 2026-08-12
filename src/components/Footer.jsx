@@ -236,7 +236,6 @@ export default function Footer({
                                               width={160}
                                               height={50}
                                               className="w-auto h-10 md:h-18 object-contain"
-                                              priority
                                          />
                                     )}
                                </Link>

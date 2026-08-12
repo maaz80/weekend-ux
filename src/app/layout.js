@@ -110,15 +110,15 @@ export default async function RootLayout({ children }) {
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         {heroSrcSet ? (
-          <link rel="preload" as="image" imageSrcSet={heroSrcSet} imageSizes="100vw" fetchPriority="high" />
+          <link rel="preload" as="image" imageSrcSet={heroSrcSet} imageSizes="100vw" fetchPriority="high" suppressHydrationWarning />
         ) : (
-          <link rel="preload" as="image" href={heroPreloadUrl} fetchPriority="high" />
+          <link rel="preload" as="image" href={heroPreloadUrl} fetchPriority="high" suppressHydrationWarning />
         )}
-        <link rel="preload" as="image" href="/images/weekend-ux-courses-hero-bg.webp" fetchPriority="high" />
-        <link rel="preload" as="image" href="/images/weekend-ux-location-hero-bg.webp" fetchPriority="high" />
-        <link rel="preload" as="image" href="/images/weekend-ux-blogs-hero-bg.webp" fetchPriority="high" />
-        <link rel="preload" as="image" href="/images/weekend-ux-about-properties-bg.webp" fetchPriority="high" />
-        <link rel="preload" as="image" href="/images/weekend-ux-policy-hero-bg.webp" fetchPriority="high" />
+        <link rel="preload" as="image" href="/images/weekend-ux-courses-hero-bg.webp" fetchPriority="high" suppressHydrationWarning />
+        <link rel="preload" as="image" href="/images/weekend-ux-location-hero-bg.webp" fetchPriority="high" suppressHydrationWarning />
+        <link rel="preload" as="image" href="/images/weekend-ux-blogs-hero-bg.webp" fetchPriority="high" suppressHydrationWarning />
+        <link rel="preload" as="image" href="/images/weekend-ux-about-properties-bg.webp" fetchPriority="high" suppressHydrationWarning />
+        <link rel="preload" as="image" href="/images/weekend-ux-policy-hero-bg.webp" fetchPriority="high" suppressHydrationWarning />
         {/* Inline Critical CSS for 0ms Render-Blocking & Zero FOUC */}
         <style id="critical-css" dangerouslySetInnerHTML={{ __html: `
           :root { --background:#ffffff; --neutral:#1C1C1C; --foreground:#1C1C1C; }

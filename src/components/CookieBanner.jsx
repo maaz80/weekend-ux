@@ -43,7 +43,7 @@ const CookieBanner = () => {
                aria-live="polite"
                aria-label="Cookie Consent Banner"
           >
-               <div className="mx-auto flex flex-col md:flex-row items-center justify-between gap-4 md:gap-8 max-w-7xl px-4 sm:px-6 md:px-1 py-4 md:py-5 min-h-16 md:min-h-20">
+               <div className="mx-auto flex flex-row max-md:flex-col items-center justify-between gap-4 md:gap-8 max-w-7xl px-4 sm:px-6 md:px-1 py-4 md:py-5 min-h-16 md:min-h-20">
                     
                     {/* Text Section */}
                     <div className="flex items-center gap-3 text-center md:text-left flex-1">
@@ -60,7 +60,7 @@ const CookieBanner = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex items-center gap-4 sm:gap-6 md:gap-8 shrink-0 w-full md:w-auto justify-center md:justify-end">
+                    <div className="flex items-center gap-4 sm:gap-6 md:gap-8 shrink-0 max-md:w-full w-auto max-md:justify-center justify-end">
                          <button
                               type="button"
                               onClick={declineCookies}
