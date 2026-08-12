@@ -8,4 +8,4 @@
 :HL["/images/weekend-ux-location-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-blogs-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-about-properties-bg.webp","image",{"fetchPriority":"high"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"location","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"ui-ux-design-course-in-agra","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"AxP65mqdVNNd8-we-of8L"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"location","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"ui-ux-design-course-in-agra","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"XrYbGKOdzhXOTgmzlR6gS"}

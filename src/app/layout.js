@@ -109,6 +109,26 @@ export default async function RootLayout({ children }) {
         <link rel="preload" as="image" href="/images/weekend-ux-location-hero-bg.webp" fetchPriority="high" />
         <link rel="preload" as="image" href="/images/weekend-ux-blogs-hero-bg.webp" fetchPriority="high" />
         <link rel="preload" as="image" href="/images/weekend-ux-about-properties-bg.webp" fetchPriority="high" />
+        {/* Inline Critical CSS for 0ms Render-Blocking & Zero FOUC */}
+        <style id="critical-css" dangerouslySetInnerHTML={{ __html: `
+          :root { --background:#ffffff; --neutral:#1C1C1C; --foreground:#1C1C1C; }
+          html,body { height:100%; background-color:#1C1C1C; color:#ffffff; margin:0; padding:0; -webkit-font-smoothing:antialiased; }
+          .bg-neutral { background-color:#1C1C1C; }
+          .text-white { color:#ffffff; }
+          .relative { position:relative; }
+          .absolute { position:absolute; }
+          .inset-0 { top:0; right:0; bottom:0; left:0; }
+          .w-full { width:100%; }
+          .h-full { height:100%; }
+          .flex { display:flex; }
+          .flex-col { flex-direction:column; }
+          .items-center { align-items:center; }
+          .justify-center { justify-content:center; }
+          .object-cover { object-fit:cover; }
+          .overflow-hidden { overflow:hidden; }
+          .grow { flex-grow:1; }
+          .min-h-full { min-height:100%; }
+        `}} />
         {/* Global WebSite Schema */}
         <script
           type="application/ld+json"
