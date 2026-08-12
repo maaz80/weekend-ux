@@ -28,7 +28,7 @@ export default function HorizontalCourseCard({ course, unlocked }) {
                          src={imageSrc}
                          alt={course?.alt || title}
                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                         sizes="(max-width: 768px) 100vw, 320px"
+                         sizes="(max-width: 768px) 340px, 320px"
                     />
 
                     {/* Status Badge over Image — sirf unlocked course par 'Unlocked' dikhega */}

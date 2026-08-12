@@ -1,3 +1,4 @@
-:HL["/_next/static/chunks/1c7jl1jjpq1pm.css","style"]
+:HL["/_next/static/chunks/1f0_83j-whf6g.css","style"]
 :HL["/_next/static/chunks/2pke0mh53gr1u.css","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"LaBXxyHvFTxGdzV_9d1M3"}
+:HL["https://res.cloudinary.com/dlek2xgkd/image/upload/f_auto,q_auto:eco,w_768,c_fill,g_auto/v1783500860/home/hero-section.png","image",{"fetchPriority":"high"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"m43S3e2dJTgd3hQCxTJ7Y"}

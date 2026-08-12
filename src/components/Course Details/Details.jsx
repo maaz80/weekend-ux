@@ -387,7 +387,7 @@ export default function Details({ data }) {
                <section className="bg-[#F8F6EE] py-12 lg:py-20 font-urbanist w-full">
                     <div className="custom-width px-4 sm:px-6 lg:px-16">
                          {/* New Custom Section with Left-side Info and Right-side Form/Banner */}
-                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start px-2">
+                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
 
                               {/* LEFT COLUMN: Content */}
                               <div className="space-y-8 lg:col-span-2">
@@ -492,7 +492,7 @@ export default function Details({ data }) {
                                    {data?.promoSocialBottomContent && (
                                         <div className="pt-6 border-t border-zinc-200">
                                              <div
-                                                  className="prose prose-zinc max-w-none font-urbanist text-[16px] md:text-[17px] text-zinc-700 leading-relaxed space-y-4 [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:text-zinc-900 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-zinc-900 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-zinc-900 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_a]:text-official [&_a]:underline"
+                                                  className="prose prose-zinc max-w-none font-urbanist text-[16px] md:text-[17px] text-zinc-700 leading-relaxed space-y-4 [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:text-zinc-900 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-zinc-900 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-zinc-900 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_a]:text-[#0080a5] [&_a]:font-bold [&_a]:no-underline hover:[&_a]:underline blog-content course-content"
                                                   dangerouslySetInnerHTML={{ __html: data.promoSocialBottomContent }}
                                              />
                                         </div>
@@ -504,11 +504,11 @@ export default function Details({ data }) {
 
                                    {/* Admission Form */}
                                    <div className="bg-white rounded-3xl shadow-sm p-6 md:p-10 border border-zinc-150">
-                                        <h2 className="text-center text-[22px] md:text-[24px] font-bold text-neutral leading-9 mb-4">
+                                        <h2 className="text-start text-[22px] md:text-[24px] font-bold text-neutral leading-9 mb-4">
                                              Send Us Your Training Requirement
                                         </h2>
                                         
-                                        <p className="text-center text-sm text-neutral leading-relaxed mb-6">
+                                        <p className="text-start text-sm text-neutral leading-relaxed mb-6">
                                              Not sure yet? Before you pass up the opportunity to sign up for the course, speak with our counselor and get your questions answered.
                                         </p>
                                         <Form />

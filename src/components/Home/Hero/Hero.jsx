@@ -111,6 +111,7 @@ export default function Hero({
                                    className="absolute inset-0 w-full h-full object-cover"
                                    priority={index === 0}
                                    fetchPriority={index === 0 ? "high" : undefined}
+                                   sizes="100vw"
                                    objectFit="cover"
                                    fallbackSrc="/images/weekend-ux-hero-bg-template.webp"
                               />

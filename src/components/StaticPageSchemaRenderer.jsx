@@ -19,7 +19,7 @@ export default function StaticPageSchemaRenderer() {
           }
 
           // Skip routes that handle their own schemas server-side or don't use dynamic page SEO endpoints
-          const skipSlugs = ["blog", "courses", "location", "dashboard", "search", "contact-us", "about-us", "privacy-policy", "disclaimer", "terms-and-conditions-enrolment"];
+          const skipSlugs = ["home", "", "blog", "courses", "location", "dashboard", "search", "contact-us", "about-us", "privacy-policy", "disclaimer", "terms-and-conditions-enrolment"];
           const baseSlug = pageSlug.split("/")[0];
 
           if (skipSlugs.includes(baseSlug) || skipSlugs.includes(pageSlug)) {
@@ -28,6 +28,8 @@ export default function StaticPageSchemaRenderer() {
 
           async function fetchSEO() {
                try {
+                    const rawApiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+                    const API_URL = rawApiUrl.endsWith("/api") ? rawApiUrl : `${rawApiUrl.replace(/\/$/, "")}/api`;
                     const res = await fetch(`${API_URL}/pages/${pageSlug}/seo`);
                     if (res.ok) {
                          const data = await res.json();

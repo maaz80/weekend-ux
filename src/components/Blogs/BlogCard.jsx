@@ -27,7 +27,7 @@ const BlogCard = ({
                                    src={imageSrc}
                                    alt={blog?.alt || ""}
                                    className={`w-full object-cover transition duration-700 group-hover:scale-105 ${height}`}
-                                   sizes="(max-width: 768px) 100vw, 50vw"
+                                   sizes="(max-width: 768px) 340px, (max-width: 1280px) 420px, 360px"
                                    priority={priority}
                                    fetchPriority={fetchPriority}
                               />

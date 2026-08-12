@@ -1,42 +1,9 @@
 "use client";
 
 import React from "react";
+import { getOptimizedCloudinaryUrl } from "@/utils/cloudinary";
 
-/**
- * Utility function to dynamically insert transformation parameters into a Cloudinary URL.
- * Uses f_auto,q_auto:eco for maximum compression and respects crop mode (fill vs fit/contain).
- */
-export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto:eco", format = "auto", crop = "fill" } = {}) {
-     if (!url) return "";
-     if (!url.includes("cloudinary.com")) return url;
-
-     // Locate the /upload/ section of the Cloudinary URL
-     const uploadIndex = url.indexOf("/upload/");
-     if (uploadIndex === -1) return url;
-
-     const baseUrl = url.substring(0, uploadIndex + 8);
-     const remainingUrl = url.substring(uploadIndex + 8);
-
-     const transforms = [];
-     if (format) transforms.push(`f_${format}`);
-     if (quality) transforms.push(`q_${quality}`);
-     if (width) transforms.push(`w_${Math.round(width)}`);
-     if (height && crop !== "fit" && crop !== "contain") {
-          transforms.push(`h_${Math.round(height)}`);
-     }
-     if (crop && (width || height)) {
-          if (crop === "contain" || crop === "fit") {
-               transforms.push("c_fit");
-          } else if (crop === "limit") {
-               transforms.push("c_limit");
-          } else {
-               transforms.push(`c_${crop},g_auto`);
-          }
-     }
-
-     const transformString = transforms.join(",");
-     return `${baseUrl}${transformString}/${remainingUrl}`;
-}
+export { getOptimizedCloudinaryUrl };
 
 /**
  * OptimizedImage component for ultra-high-performance responsive images.
@@ -49,7 +16,7 @@ export default function OptimizedImage({
      className = "",
      priority = false, // Set to true if this image appears above the fold (e.g. Hero banner)
      sizes = "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px",
-     objectFit = "fill",
+     objectFit = undefined,
      fallbackSrc = "/images/weekend-ux-hero-bg-template.webp",
      fetchPriority = undefined, // Optional fetch priority attribute
      width = undefined,
@@ -72,7 +39,7 @@ export default function OptimizedImage({
                     className={`${className}`}
                     loading={loadingMode}
                     decoding="async"
-                    style={{ objectFit }}
+                    style={objectFit ? { objectFit } : undefined}
                     fetchPriority={finalFetchPriority}
                />
           );
@@ -81,7 +48,7 @@ export default function OptimizedImage({
      const isSmallImage = width && width <= 320;
      const srcsetWidths = isSmallImage
           ? [90, 120, 150, 180, 220, 260, 320]
-          : [160, 240, 320, 420, 480, 560, 640, 768];
+          : [160, 240, 320, 380, 420, 480, 540, 600, 680, 768, 900, 1080, 1280];
 
      // Calculate aspect ratio if width & height are provided
      const aspectRatio = (width && height) ? height / width : null;
@@ -123,7 +90,7 @@ export default function OptimizedImage({
                className={`${className}`}
                loading={loadingMode}
                decoding="async"
-               style={{ objectFit }}
+               style={objectFit ? { objectFit } : undefined}
                fetchPriority={finalFetchPriority}
           />
      );

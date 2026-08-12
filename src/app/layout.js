@@ -88,9 +88,14 @@ async function getLayoutInitialData() {
 }
 
 import StaticPageSchemaRenderer from "@/components/StaticPageSchemaRenderer";
+import { getOptimizedCloudinaryUrl } from "@/utils/cloudinary";
 
 export default async function RootLayout({ children }) {
   const initialData = await getLayoutInitialData();
+  const rawHeroImg = initialData?.homeData?.hero?.[0]?.bgImage || "/images/weekend-ux-hero-bg-template.webp";
+  const heroPreloadUrl = rawHeroImg.includes("cloudinary.com")
+    ? getOptimizedCloudinaryUrl(rawHeroImg, { width: 768, quality: "auto:eco", format: "auto", crop: "fill" })
+    : rawHeroImg;
 
   return (
     <html
@@ -100,6 +105,7 @@ export default async function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
+        <link rel="preload" as="image" href={heroPreloadUrl} fetchPriority="high" />
         {/* Global WebSite Schema */}
         <script
           type="application/ld+json"

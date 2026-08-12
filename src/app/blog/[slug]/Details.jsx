@@ -107,7 +107,7 @@ export default function Details({ data }) {
 
        return (
             <section className="bg-[#F8F6EE] py-10 lg:py-16">
-                 <div className="custom-width px-4 md:px-6 lg:px-8">
+                 <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-4">
 
                       <div className="grid grid-cols-1 lg:grid-cols-[350px_1fr] gap-8 lg:gap-10 px-1.5">
 

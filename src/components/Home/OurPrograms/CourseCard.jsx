@@ -31,7 +31,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                          src={imageSrc}
                          alt={course?.alt || "weekend-ux-program-image-template"}
                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
+                         sizes="(max-width: 640px) 340px, (max-width: 1024px) 420px, 360px"
                          width={420}
                          height={245}
                          priority={priority}

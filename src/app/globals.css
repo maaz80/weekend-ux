@@ -210,10 +210,10 @@ body {
 
 @media (min-width: 1280px) {
   .custom-width {
-    max-width: 1320px;
+    max-width: 1280px;
     /* PC */
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 46px;
+    padding-right: 46px;
   }
 }
 
@@ -238,18 +238,24 @@ body {
 
 .blog-content a,
 .blog-content .editor-link,
+.course-content a,
+.location-content a,
 a.editor-link {
-  color: var(--color-official, #FFD400);
+  color: #0080a5;
   font-weight: 700;
   text-decoration: none;
   text-underline-offset: 3px;
-  transition: opacity 0.2s ease, color 0.2s ease;
+  transition: opacity 0.2s ease, color 0.2s ease, text-decoration 0.2s ease;
 }
 
 .blog-content a:hover,
 .blog-content .editor-link:hover,
+.course-content a:hover,
+.location-content a:hover,
 a.editor-link:hover {
-  opacity: 0.85;
+  text-decoration: underline;
+  color: #0080a5;
+  opacity: 0.9;
 }
 
 .blog-content h1 {

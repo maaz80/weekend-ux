@@ -57,7 +57,7 @@ export default function Breadcrumb({
 
      return (
           <nav className={navBackground}>
-               <div className={`mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10 flex items-center gap-1.5 md:gap-2 ${textSize} font-medium ${fontFamily}`}>
+               <div className={`mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-6 flex items-center gap-1.5 md:gap-2 ${textSize} font-medium ${fontFamily}`}>
                     <Link href="/" className={`${linkColor} transition-colors duration-200 shrink-0`}>
                          Home
                     </Link>

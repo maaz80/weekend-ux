@@ -2,26 +2,6 @@
 const nextConfig = {
   output: 'export',
   trailingSlash: false,
-
-  async redirects() {
-    return [
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'weekendux.in' }],
-        destination: 'https://www.weekendux.in/:path*',
-        permanent: true,
-      },
-    ];
-  },
-  async rewrites() {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
-    return [
-      {
-        source: '/api/:path*',
-        destination: `${apiUrl.replace(/\/$/, '')}/api/:path*`,
-      },
-    ];
-  },
   images: {
     unoptimized: true,
     remotePatterns: [

@@ -5,35 +5,33 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Prevent browsers from caching HTML pages — forces fresh fetch after every deploy
+# Prevent browsers & CDNs from caching HTML pages — forces fresh document fetch after every deployment
 [[headers]]
-  for = "/*.html"
+  for = "/*"
   [headers.values]
-    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0, s-maxage=0"
     Pragma = "no-cache"
 
-# Root page also no-cache
-[[headers]]
-  for = "/"
-  [headers.values]
-    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
-    Pragma = "no-cache"
-
-# Course pages no-cache HTML to prevent stale chunk hash references after re-deployments
-[[headers]]
-  for = "/courses/*"
-  [headers.values]
-    Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
-    Pragma = "no-cache"
-
-# Long-term cache for fingerprinted static assets (JS/CSS bundles have content hashes)
+# Long-term cache for fingerprinted static assets (JS/CSS bundles with unique content hashes)
 [[headers]]
   for = "/_next/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"
 
 # No-cache for API routes
 [[headers]]
   for = "/api/*"
   [headers.values]
     Cache-Control = "no-store, no-cache, must-revalidate, max-age=0"
+
+# Missing static chunk handling to prevent MIME type fallback errors
+[[redirects]]
+  from = "/_next/static/*"
+  to = "/404.html"
+  status = 404
+

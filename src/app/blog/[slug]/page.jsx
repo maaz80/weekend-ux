@@ -119,7 +119,7 @@ export default async function BlogSlugPage({ params }) {
           <div className="min-h-screen bg-white text-white font-urbanist flex flex-col relative pt-15 md:pt-8">
                <Breadcrumb />
                {/* Hero Header Section */}
-               <section className="relative h-61.5 md:h-114 w-full flex md:items-center items-end pb-12 md:pb-0 justify-center bg-zinc-950 " data-navbar-light="true" id='blog-details-hero'>
+               <section className="relative h-61.5 md:h-114 w-full flex md:items-center items-end pb-12 md:pb-0 justify-start bg-zinc-950 " data-navbar-light="true" id='blog-details-hero'>
                     <Image
                          src="/images/weekend-ux-blogs-hero-bg.webp"
                          alt="weekend-ux-policy-hero-bg"
@@ -131,7 +131,7 @@ export default async function BlogSlugPage({ params }) {
                     />
 
                     {/* Content */}
-                    <h1 className="custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-8 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair px-4">
+                    <h1 className=" text-[22px] md:text-[38px] 2xl:text-[56px] leading-8 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair px-4 md:px-6 w-7xl text-left mx-auto">
                          {heroTitle}
                     </h1>
                     <Image src="/images/weekend-ux-decorative-diamond.webp" alt="weekend-ux-decorative-diamond" className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-30" width={200} height={200} style={{ height: "auto" }} />
