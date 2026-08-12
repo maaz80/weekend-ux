@@ -37,7 +37,8 @@ const CookieBanner = () => {
 
      return (
           <div
-               className="fixed bottom-0 left-0 z-100000 w-full border-t border-zinc-200 bg-white/98 backdrop-blur-md shadow-[0_-6px_30px_rgba(0,0,0,0.14)] font-urbanist animate-in fade-in slide-in-from-bottom-5 duration-300"
+               className="fixed bottom-0 left-0 w-full border-t border-zinc-200 bg-white/98 backdrop-blur-md shadow-[0_-6px_30px_rgba(0,0,0,0.14)] font-urbanist animate-in fade-in slide-in-from-bottom-5 duration-300"
+               style={{ zIndex: 10000 }}
                role="dialog"
                aria-live="polite"
                aria-label="Cookie Consent Banner"

@@ -42,7 +42,13 @@ function processHtmlFile(filePath) {
         });
     }
 
-    // 3. Fix fetchPriority case on link preloads for standard HTML specification compliance
+    // 3. Defer non-critical JavaScript chunks to reduce unused JS execution on initial render
+    if (content.includes('async=""')) {
+        content = content.replace(/<script src="(\/_next\/static\/chunks\/[^"']+\.js)" async=""/g, '<script src="$1" defer=""');
+        modified = true;
+    }
+
+    // 4. Fix fetchPriority case on link preloads for standard HTML specification compliance
     if (content.includes('fetchPriority=')) {
         content = content.replace(/fetchPriority=/g, 'fetchpriority=');
         modified = true;
@@ -80,7 +86,7 @@ function processJsChunkFile(filePath) {
 }
 
 function optimizePostExport() {
-    console.log("⚡ Running post-export performance optimizer (Clean Zero-FOUC & Polyfill-Stripped)...");
+    console.log("⚡ Running post-export performance optimizer (Zero-FOUC & Tree-Shaked Deferred JS)...");
 
     const targetDirs = [
         path.join(__dirname, 'out'),
@@ -106,7 +112,7 @@ function optimizePostExport() {
         }
     });
 
-    console.log(`✅ Post-export optimization complete: ${htmlProcessed} HTML files & ${jsProcessed} JS chunks processed (Zero-FOUC Guaranteed)!`);
+    console.log(`✅ Post-export optimization complete: ${htmlProcessed} HTML files & ${jsProcessed} JS chunks processed (Deferred JS Optimized)!`);
 }
 
 optimizePostExport();

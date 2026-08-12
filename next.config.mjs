@@ -15,6 +15,12 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: [
       'react-icons',
+      'react-icons/fi',
+      'react-icons/fa',
+      'react-icons/si',
+      'react-icons/io',
+      'react-icons/io5',
+      'react-icons/fa6',
       'lucide-react',
       'framer-motion',
       'swiper',
