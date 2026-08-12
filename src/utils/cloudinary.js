@@ -3,7 +3,7 @@
  * Uses f_auto,q_auto:eco for maximum compression and respects crop mode (fill vs fit/contain).
  * Safe for use in both Server Components and Client Components.
  */
-export function getOptimizedCloudinaryUrl(url, { width, height, quality = "auto:low", format = "auto", crop = "fill" } = {}) {
+export function getOptimizedCloudinaryUrl(url, { width, height, quality = "50", format = "auto", crop = "fill" } = {}) {
      if (!url) return "";
      if (!url.includes("cloudinary.com")) return url;
 

@@ -1,11 +1,11 @@
-:HL["/_next/static/chunks/0o66zk0aa3yv_.css","style"]
+:HL["/_next/static/chunks/2uhfwcw3-tvh4.css","style"]
 :HL["/_next/static/chunks/2pke0mh53gr1u.css","style"]
 :HL["/_next/static/media/2a65768255d6b625-s.p.3u4lli0-axodc.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/5c8bbc89ca099f34-s.p.2qijkc4_gtkq0.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/83afe278b6a6bb3c-s.p.2bn3s6zvc0dyp.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["https://res.cloudinary.com/dlek2xgkd/image/upload/f_auto,q_auto:low,w_768,c_fill,g_auto/v1783500860/home/hero-section.png","image",{"fetchPriority":"high"}]
+:HL["https://res.cloudinary.com/dlek2xgkd/image/upload/f_auto,q_50,w_768,c_fill,g_auto/v1783500860/home/hero-section.png","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-courses-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-location-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-blogs-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-about-properties-bg.webp","image",{"fetchPriority":"high"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"disclaimer","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"LcApY8aqX4x-GckjNlA-E"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"disclaimer","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"6n2QmjG9E4eZK2a3yoUvK"}
