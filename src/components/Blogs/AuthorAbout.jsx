@@ -34,9 +34,9 @@ export default function AuthorAbout({ author = {} }) {
                         <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-official mb-0.5">
                             About The Author
                         </p>
-                        <h3 className="font-urbanist font-bold text-xl text-[#1C1C1C] leading-snug">
+                        <h2 className="font-urbanist font-bold text-xl text-[#1C1C1C] leading-snug">
                             {name}
-                        </h3>
+                        </h2>
                     </div>
 
                     {/* Social Icons */}
