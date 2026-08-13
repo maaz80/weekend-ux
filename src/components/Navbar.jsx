@@ -829,12 +829,12 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                {/* ALL COURSES MODAL */}
                <div
                     onClick={() => setIsCoursesModalOpen(false)}
-                    className={`w-full fixed left-0 right-0 bottom-0 top-0 md:top-12 z-9999 bg-neutral/20 backdrop-blur-lg flex items-center justify-center p-4 md:p-6 transition-all duration-400 hide-scrollbar ease-in-out ${isCoursesModalOpen ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-full pointer-events-none"
+                    className={`w-full fixed left-0 right-0 bottom-0 top-0 md:top-12 z-9999 bg-neutral/20 backdrop-blur-lg flex items-center justify-center p-4 md:p-6 transition-all duration-400 ease-in-out ${isCoursesModalOpen ? "translate-y-0 opacity-100 pointer-events-auto" : "-translate-y-full pointer-events-none"
                          }`}
                >
                     {/* Modal Content container */}
                     <div
-                         className="bg-[#FCFBF7] w-full h-full max-h-[88vh] md:max-h-[85vh] shadow-2xl relative flex flex-col overflow-hidden hide-scrollbar"
+                         className="bg-[#FCFBF7] w-full h-full max-h-[88vh] md:max-h-[85vh] shadow-2xl relative flex flex-col overflow-hidden rounded-2xl border border-zinc-200/60"
                          onClick={(e) => e.stopPropagation()}
                          onMouseEnter={clearCloseTimeout}
                          onMouseLeave={startCloseTimeout}
@@ -849,7 +849,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                          </button>
 
                          {/* Modal Body */}
-                         <div className="w-full h-full overflow-y-auto">
+                         <div className="w-full h-full overflow-y-auto hide-scrollbar overscroll-contain">
                               {isCoursesModalOpen && <ProgramModalContent setIsModal={setIsCoursesModalOpen} />}
                          </div>
                     </div>

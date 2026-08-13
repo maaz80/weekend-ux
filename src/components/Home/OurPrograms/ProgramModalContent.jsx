@@ -170,7 +170,7 @@ const ProgramModalContent = ({ setIsModal }) => {
                     {/* DESKTOP VIEW */}
                     <div className="hidden md:flex mt-4 items-start justify-between gap-10">
                          {/* Categories Sidebar */}
-                         <div className="space-y-1.5 w-[28%] xl:w-[22%]">
+                         <div className="space-y-1.5 w-[28%] xl:w-[22%] shrink-0 sticky top-0">
                               {/* Static Heading */}
                               <div className="w-full text-[13px] font-bold uppercase tracking-wider text-zinc-400 border-b border-zinc-100 pb-2 mb-3 text-left pl-4 select-none">
                                    Categories
@@ -186,7 +186,7 @@ const ProgramModalContent = ({ setIsModal }) => {
                          </div>
 
                          {/* Course Cards Grid */}
-                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-[70%] xl:w-[75%] max-h-[75vh] overflow-y-auto pr-2 hide-scrollbar pb-4">
+                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-[70%] xl:w-[75%] pb-4">
                               {filteredCourses.map((course) => (
                                    <CourseCard key={course._id} course={course} setIsModal={setIsModal} />
                               ))}

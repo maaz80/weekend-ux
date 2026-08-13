@@ -278,7 +278,7 @@ const AuthModal = ({
                     <div className="flex flex-col md:flex-row h-full max-h-[85vh] md:max-h-145 overflow-hidden">
 
                          {/* LEFT PANEL - ILLUSTRATION */}
-                         <div className="w-full md:w-1/2 hidden md:flex items-center justify-center rounded-xl overflow-hidden bg-zinc-50 relative self-stretch">
+                         <div className="w-full md:w-1/2 hidden md:flex items-center justify-center rounded-xl overflow-hidden relative self-stretch">
                               <img
                                    src={authDecorativeImage}
                                    alt="weekend-ux-login-decorative-image"
