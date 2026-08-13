@@ -284,7 +284,7 @@ const AuthModal = ({
                                    alt="weekend-ux-login-decorative-image"
                                    width={363}
                                    height={1012}
-                                   className="w-full h-full object-cover object-center rounded-xl"
+                                   className="w-full h-full object-contain object-center rounded-xl"
                               />
                          </div>
 
