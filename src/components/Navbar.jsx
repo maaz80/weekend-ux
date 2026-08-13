@@ -523,12 +523,12 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              onMouseEnter={() => setIsMenuOpen(false)}
                                         >
                                              {/* BUTTON */}
-                                             <button className={`h-14 px-5 rounded-t-md flex items-center gap-2 text-sm transition-all duration-300 cursor-pointer ${isMoreButtonLight ? "text-white" : "text-neutral"} group-hover:bg-white group-hover:text-neutral!`}>
+                                             <button className={`h-16.5 px-5 rounded-t-md flex items-center gap-2 text-sm transition-all duration-300 cursor-pointer ${isMoreButtonLight ? "text-white" : "text-neutral"} group-hover:bg-white group-hover:text-neutral!`}>
                                                   {moreTitle}
                                                   <FiChevronDown className={`text-base transition-all duration-300 group-hover:rotate-180 ${isMoreButtonLight ? "text-white" : "text-neutral"} group-hover:text-neutral!`} />
                                              </button>
                                              {/* DROPDOWN */}
-                                             <div className="absolute top-16 right-0 w-250 max-w-[88vw] p-6 bg-white border border-zinc-100/90 shadow-2xl opacity-0 invisible -translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-99999 rounded-b-xl before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
+                                             <div className="absolute top-16.5 right-0 w-250 max-w-[88vw] p-6 bg-white border border-zinc-100/90 shadow-2xl opacity-0 invisible -translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-99999 rounded-b-xl before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
                                                   <div
                                                        className={`grid gap-6 text-left ${
                                                             moreItemsDropdownList.length === 1
