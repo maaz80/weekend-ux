@@ -193,21 +193,21 @@ export default function Footer({
 
      return (
           <footer className={`w-full -mt-10 relative z-1000 pb-16 ${bgColor} ${textColor}`}>
-               <div className="absolute -top-22.5 md:-top-45 left-0 right-0 mx-auto w-[95%] md:w-[80%] max-w-[86%] h-45 md:h-90 z-20 flex flex-col items-start justify-center px-2 md:px-10 lg:px-30">
+               <div className="absolute -top-20 sm:-top-28 md:-top-36 lg:-top-44 left-0 right-0 mx-auto w-[92%] sm:w-[88%] md:w-[85%] lg:w-[80%] max-w-6xl h-44 sm:h-56 md:h-72 lg:h-80 xl:h-88 z-20 flex flex-col items-start justify-center px-6 sm:px-10 md:px-14 lg:px-20 rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
                     {/* Desktop Footer Decorative Background Image */}
-                    <Image src={bannerBgImage} alt="weekend-ux-footer-decorative-bg" fill loading="lazy" sizes="(max-width: 1024px) 700px, 620px" className="hidden md:block bg-center object-contain" />
+                    <Image src={bannerBgImage} alt="weekend-ux-footer-decorative-bg" fill loading="lazy" sizes="(max-width: 1024px) 100vw, 1200px" className="hidden md:block object-fill rounded-2xl md:rounded-3xl" />
                     {/* Mobile Footer Decorative Background Image */}
-                    <Image src="/images/weekend-ux-footer-decorative-bg-mobile.webp" alt="weekend-ux-footer-decorative-bg-mobile" fill loading="lazy" sizes="95vw" className="md:hidden bg-center object-contain" />
-                    <div className={`font-playfair text-[17px] md:text-[28px] lg:text-[56px] max-w-160 relative z-50 leading-9 md:leading-12 lg:leading-16 ${bannerTitleColor}`} >
+                    <Image src="/images/weekend-ux-footer-decorative-bg-mobile.webp" alt="weekend-ux-footer-decorative-bg-mobile" fill loading="lazy" sizes="100vw" className="md:hidden object-cover rounded-2xl" />
+                    <div className={`font-playfair text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-[46px] max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl relative z-50 leading-snug md:leading-tight lg:leading-tight font-medium ${bannerTitleColor}`} >
                          {cardTitle}
                     </div>
                     <Link href="/contact-us">
-                         <Button variant="dark" className="mt-0 md:mt-4 lg:mt-10 hover:scale-105 relative z-50">
+                         <Button variant="dark" className="mt-2 sm:mt-3 md:mt-5 lg:mt-7 hover:scale-105 relative z-50">
                               {cardButtonName}
                          </Button>
                     </Link>
                </div>
-               <div className="mx-auto max-w-330 px-6 md:px-9 2xl:px-10 pt-32 md:pt-44 2xl:pt-56 pb-5">
+               <div className="mx-auto max-w-330 px-6 md:px-9 2xl:px-10 pt-28 sm:pt-36 md:pt-48 lg:pt-56 pb-5">
 
                     {/* TOP GRID */}
                     <div className="
@@ -371,7 +371,9 @@ function AppButton({ icon, text }) {
                          <path d="M17.6 9.48l1.43-2.49-.83-.48-1.46 2.54A7.93 7.93 0 0012 7.5c-1.68 0-3.24.52-4.53 1.41L6 6.37l-.83.48 1.43 2.49A7.92 7.92 0 004 15v5h2v-5h1v5h2v-5h6v5h2v-5h1v5h2v-5c0-2.25-.94-4.28-2.4-5.52zM8.5 13A1.5 1.5 0 1110 11.5 1.5 1.5 0 018.5 13zm7 0a1.5 1.5 0 111.5-1.5A1.5 1.5 0 0115.5 13z" />
                     </svg>
                ) : (
-                    <AirVent size={18} fill="currentColor" />
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                         <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.87c.61-.74 1.02-1.77.91-2.8-.88.04-1.95.59-2.58 1.33-.56.65-.96 1.71-.83 2.73 1 .08 2-.51 2.5-1.26z" />
+                    </svg>
                )}
                {text}
           </button>
