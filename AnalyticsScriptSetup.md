@@ -55,29 +55,31 @@ Yeh document explain karta hai ki humne **Google Analytics (gtag.js)**, **Meta (
   ```html
   <link rel="preconnect" href="https://www.googletagmanager.com" />
   <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-  <link rel="preconnect" href="https://connect.facebook.net" />
-  <link rel="dns-prefetch" href="https://connect.facebook.net" />
+  <link rel="preconnect" href="https://www.clarity.ms" />
+  <link rel="dns-prefetch" href="https://www.clarity.ms" />
+  <link rel="preconnect" href="https://app.secureprivacy.ai" />
+  <link rel="dns-prefetch" href="https://app.secureprivacy.ai" />
   ```
 - **Fayda**: Network handshakes aur DNS resolution pehle se tayyar rehte hain, jisse jab script trigger ho toh load time fast mile.
 
 ---
 
-### 5. Multi-Tracking Integration (Dynamic Script Injection)
+### 5. Multi-Tracking & Privacy Integration (Dynamic Script Injection)
 
-Component ek hi baar me teenon major analytical tool scripts load karta hai:
+Component dynamic injection se major tracking/privacy scripts load karta hai:
 
 1. **Google Analytics (`gtag.js`)**:
-   - `GA_MEASUREMENT_ID = 'G-MP3DK6CMKD'`
+   - `GA_MEASUREMENT_ID = 'G-ZSHJ4HRVPB'`
    - Dynamically script tag create karke `async = true` ke sath head me attach karta hai.
    - `dataLayer` aur `gtag('config')` initialize karta hai.
 
-2. **Meta (Facebook) Pixel**:
-   - `FB_PIXEL_ID = '1659893741690531'`
-   - Standard `fbq` function queue setup aur `PageView` tracking triggering.
-
-3. **Microsoft Clarity**:
-   - `CLARITY_PROJECT_ID = 'xrhwmc6caf'`
+2. **Microsoft Clarity**:
+   - `CLARITY_PROJECT_ID = 'y24yn4jl2t'`
    - Session recording aur heatmaps load karta hai without blocking page render.
+
+3. **Secure Privacy**:
+   - `SECURE_PRIVACY_URL = 'https://app.secureprivacy.ai/script/6a7edc956907d90b3befa1fc.js'`
+   - CMP & Cookie consent management script optimized dynamic loading.
 
 ---
 

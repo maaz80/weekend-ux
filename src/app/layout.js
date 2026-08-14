@@ -117,6 +117,8 @@ export default async function RootLayout({ children }) {
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://www.clarity.ms" />
         <link rel="dns-prefetch" href="https://www.clarity.ms" />
+        <link rel="preconnect" href="https://app.secureprivacy.ai" />
+        <link rel="dns-prefetch" href="https://app.secureprivacy.ai" />
         {heroSrcSet ? (
           <link rel="preload" as="image" imageSrcSet={heroSrcSet} imageSizes="100vw" fetchPriority="high" suppressHydrationWarning />
         ) : (

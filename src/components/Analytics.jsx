@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 const GA_MEASUREMENT_ID = 'G-ZSHJ4HRVPB';
 const CLARITY_PROJECT_ID = 'y24yn4jl2t';
+const SECURE_PRIVACY_URL = 'https://app.secureprivacy.ai/script/6a7edc956907d90b3befa1fc.js';
 
 export default function Analytics() {
   useEffect(() => {
@@ -58,6 +59,15 @@ export default function Analytics() {
             y = l.getElementsByTagName(r)[0];
             y.parentNode.insertBefore(t, y);
           })(window, document, 'clarity', 'script', CLARITY_PROJECT_ID);
+        }
+
+        // --- 3. Secure Privacy ---
+        if (SECURE_PRIVACY_URL && !document.getElementById('secure-privacy-script')) {
+          const spScript = document.createElement('script');
+          spScript.id = 'secure-privacy-script';
+          spScript.async = true;
+          spScript.src = SECURE_PRIVACY_URL;
+          document.head.appendChild(spScript);
         }
       };
 
