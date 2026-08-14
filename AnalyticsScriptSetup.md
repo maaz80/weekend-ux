@@ -59,6 +59,8 @@ Yeh document explain karta hai ki humne **Google Analytics (gtag.js)**, **Meta (
   <link rel="dns-prefetch" href="https://www.clarity.ms" />
   <link rel="preconnect" href="https://app.secureprivacy.ai" />
   <link rel="dns-prefetch" href="https://app.secureprivacy.ai" />
+  <link rel="preconnect" href="https://connect.facebook.net" />
+  <link rel="dns-prefetch" href="https://connect.facebook.net" />
   ```
 - **Fayda**: Network handshakes aur DNS resolution pehle se tayyar rehte hain, jisse jab script trigger ho toh load time fast mile.
 
@@ -80,6 +82,25 @@ Component dynamic injection se major tracking/privacy scripts load karta hai:
 3. **Secure Privacy**:
    - `SECURE_PRIVACY_URL = 'https://app.secureprivacy.ai/script/6a7edc956907d90b3befa1fc.js'`
    - CMP & Cookie consent management script optimized dynamic loading.
+
+4. **Meta (Facebook) Pixel**:
+   - `FB_PIXEL_ID = '1792046818462398'`
+   - Standard `fbq` function queue setup aur `PageView` tracking triggering.
+
+5. **Google Tag Manager (GTM)**:
+   - `GTM_CONTAINER_ID = 'GTM-KJVMHZR3'`
+   - Dynamically initializes `dataLayer` and loads GTM container without render blocking.
+
+---
+
+### 6. Meta Conversions API (CAPI) Server Architecture
+- **API Endpoint**: `src/app/api/meta-capi/route.js`
+- **Client Helper**: `src/utils/metaCapi.js` (`trackMetaEvent`)
+- **Deduplication**: Har event me unique `eventID` (UUID) browser (Pixel) aur server (CAPI) dono jagah same pass hota hai taaki Meta double counting na kare.
+- **SHA-256 Hashing**: User email/phone ko server-side automatically SHA-256 standard hash kiya jata hai privacy aur Meta compliance ke liye.
+- **Environment Variables**:
+  - `META_PIXEL_ID=1792046818462398`
+  - `META_CAPI_ACCESS_TOKEN=YOUR_META_CAPI_ACCESS_TOKEN_HERE`
 
 ---
 

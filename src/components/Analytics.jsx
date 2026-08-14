@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 const GA_MEASUREMENT_ID = 'G-ZSHJ4HRVPB';
 const CLARITY_PROJECT_ID = 'y24yn4jl2t';
 const SECURE_PRIVACY_URL = 'https://app.secureprivacy.ai/script/6a7edc956907d90b3befa1fc.js';
+const FB_PIXEL_ID = '1792046818462398';
+const GTM_CONTAINER_ID = 'GTM-KJVMHZR3';
 
 export default function Analytics() {
   useEffect(() => {
@@ -68,6 +70,45 @@ export default function Analytics() {
           spScript.async = true;
           spScript.src = SECURE_PRIVACY_URL;
           document.head.appendChild(spScript);
+        }
+
+        // --- 4. Meta (Facebook) Pixel ---
+        if (FB_PIXEL_ID && !document.getElementById('fb-pixel-script')) {
+          (function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+              n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.id = 'fb-pixel-script';
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s);
+          })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+          window.fbq('init', FB_PIXEL_ID);
+          window.fbq('track', 'PageView');
+        }
+
+        // --- 5. Google Tag Manager (GTM) ---
+        if (GTM_CONTAINER_ID && !document.getElementById('gtm-container-script')) {
+          (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s),
+              dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.id = 'gtm-container-script';
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+          })(window, document, 'script', 'dataLayer', GTM_CONTAINER_ID);
         }
       };
 

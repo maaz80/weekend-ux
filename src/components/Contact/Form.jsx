@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
+import { trackMetaEvent } from "@/utils/metaCapi";
 
 const Form = ({
      inputBgColor = "bg-transparent",
@@ -178,6 +179,11 @@ const Form = ({
                const result = await response.json();
 
                if (response.ok) {
+                    trackMetaEvent(
+                         "Lead",
+                         { em: formData.email, ph: formData.phone, fn: formData.fullName },
+                         { content_name: "Contact Form Booking", message: formData.message }
+                    );
                     setStatus("success");
                     setSuccessMessage("Enquiry submitted successfully! We'll contact you soon.");
                     setFormData({ fullName: "", phone: "", email: "", message: "", otp: "" });

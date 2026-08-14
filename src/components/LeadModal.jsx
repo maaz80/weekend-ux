@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { X, Lock, CheckCircle2, Send } from "lucide-react";
+import { trackMetaEvent } from "@/utils/metaCapi";
 
 export default function LeadModal() {
      const [isOpen, setIsOpen] = useState(false);
@@ -145,6 +146,13 @@ export default function LeadModal() {
                // Save lead user for future direct sends!
                localStorage.setItem("leadSubmitted", "true");
                localStorage.setItem("leadUser", JSON.stringify({ name: name.trim(), email: email.trim(), phone: cleanPhone }));
+
+               // Trigger Meta Pixel + CAPI Lead Event (with deduplication)
+               trackMetaEvent(
+                    "Lead",
+                    { em: email.trim(), ph: cleanPhone, fn: name.trim() },
+                    { content_name: courseId || "Brochure Request", source: "Course Page Brochure Request" }
+               );
 
                setSuccess(true);
                setLoading(false);
