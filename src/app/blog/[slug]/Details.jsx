@@ -226,7 +226,7 @@ export default function Details({ data }) {
                                                </p>
                                           </div>
 
-                                          <button className="h-12 rounded-lg bg-[#F7C600] text-neutral font-medium cursor-pointer">
+                                          <button className="h-12 rounded-lg bg-[#F7C600] text-neutral font-bold text-sm cursor-pointer">
                                                Enquire Now
                                           </button>
 

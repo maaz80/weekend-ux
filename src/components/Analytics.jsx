@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 const GA_MEASUREMENT_ID = 'G-ZSHJ4HRVPB';
 const CLARITY_PROJECT_ID = 'y24yn4jl2t';
-const SECURE_PRIVACY_URL = 'https://app.secureprivacy.ai/script/6a7edc956907d90b3befa1fc.js';
+const SECURE_PRIVACY_URL = '';
 const FB_PIXEL_ID = '1792046818462398';
 const GTM_CONTAINER_ID = 'GTM-KJVMHZR3';
 

@@ -282,7 +282,7 @@ export default function LeadModal() {
                                              <button
                                                   type="submit"
                                                   disabled={loading}
-                                                  className="w-full h-10.5 bg-official text-black rounded-xl text-xs sm:text-sm font-semibold cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 font-urbanist mt-3 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 shadow-xs"
+                                                  className="w-full h-10.5 bg-official text-black rounded-xl text-sm font-bold cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 font-urbanist mt-3 disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 shadow-xs"
                                              >
                                                   {loading ? "Enquiring..." : "Enquire Now"}
                                              </button>
