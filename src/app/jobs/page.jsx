@@ -624,7 +624,7 @@ export default function JobsPage() {
                                 }}
                               />
                             ) : (
-                              <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 text-neutral font-extrabold text-base flex items-center justify-center shrink-0 shadow-2xs uppercase">
+                              <div className="w-11 h-11 rounded-xl bg-linear-to-br from-amber-400 to-amber-600 text-neutral font-extrabold text-base flex items-center justify-center shrink-0 shadow-2xs uppercase">
                                 {companyName.charAt(0)}
                               </div>
                             )}
@@ -834,11 +834,11 @@ export default function JobsPage() {
         );
 
         return (
-          <div className="fixed inset-0 z-[99999] bg-black/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fadeIn font-urbanist">
+          <div className="fixed inset-0 z-99999 bg-black/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fadeIn font-urbanist">
             <div className="bg-white rounded-3xl border border-zinc-200 max-w-3xl w-full shadow-2xl relative my-auto max-h-[92vh] flex flex-col overflow-hidden">
               
               {/* Top Amber Accent Bar */}
-              <div className="h-2 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 w-full shrink-0" />
+              <div className="h-2 bg-linear-to-r from-amber-400 via-amber-500 to-amber-600 w-full shrink-0" />
 
               {/* Modal Header */}
               <div className="p-5 sm:p-7 border-b border-zinc-100 bg-white shrink-0">
@@ -855,7 +855,7 @@ export default function JobsPage() {
                         }}
                       />
                     ) : (
-                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 text-neutral font-extrabold text-2xl flex items-center justify-center shrink-0 shadow-md uppercase">
+                      <div className="w-14 h-14 rounded-2xl bg-linear-to-br from-amber-400 to-amber-600 text-neutral font-extrabold text-2xl flex items-center justify-center shrink-0 shadow-md uppercase">
                         {companyName.charAt(0)}
                       </div>
                     )}
@@ -965,7 +965,7 @@ export default function JobsPage() {
                 {/* Additional Payload Metadata (If Present) */}
                 {extraKeys.length > 0 && (
                   <div className="bg-white p-5 rounded-2xl border border-zinc-200/90 shadow-2xs space-y-3">
-                    <h4 className="font-extrabold text-zinc-900 text-xs uppercase tracking-wider text-amber-600 flex items-center gap-1.5">
+                    <h4 className="font-extrabold text-xs uppercase tracking-wider text-amber-600 flex items-center gap-1.5">
                       <Sparkles size={14} /> Additional Information & Attributes
                     </h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
@@ -993,7 +993,7 @@ export default function JobsPage() {
                                 <ExternalLink size={12} />
                               </a>
                             ) : (
-                              <span className="text-zinc-900 font-bold break-words">
+                              <span className="text-zinc-900 font-bold wrap-break-word">
                                 {formatValue(val)}
                               </span>
                             )}

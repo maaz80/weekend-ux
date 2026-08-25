@@ -75,21 +75,36 @@ export default function HorizontalCourseCard({ course, unlocked }) {
                               </span>
                          </div>
 
-                         {unlocked ? (
-                              <span
-                                   className="w-full sm:w-auto px-4 sm:px-5 py-2.5 bg-official text-neutral font-bold rounded-xl text-xs hover:opacity-90 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
-                              >
-                                   <span>Continue Learning</span>
-                                   <ArrowRight size={14} />
-                              </span>
-                         ) : (
-                              <span
-                                   className="w-full sm:w-auto px-4 sm:px-5 py-2.5 bg-zinc-900 text-white font-bold rounded-xl text-xs hover:bg-zinc-800 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
-                              >
-                                   <span>View Details</span>
-                                   <ArrowRight size={14} />
-                              </span>
-                         )}
+                         <div className="flex flex-wrap items-center justify-end gap-2">
+                              {course?.liveClass?.active && course?.liveClass?.meetUrl && (
+                                   <a
+                                        href={course.liveClass.meetUrl}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        onClick={(e) => e.stopPropagation()}
+                                        className="w-full sm:w-auto px-4 py-2.5 bg-red-600 hover:bg-red-700 text-white font-extrabold rounded-xl text-xs transition flex items-center justify-center gap-2 cursor-pointer shadow-md animate-pulse z-10"
+                                   >
+                                        <span className="w-2 h-2 rounded-full bg-white animate-ping shrink-0" />
+                                        <span>🔴 Join Live Meet ({course.liveClass.scheduledAt || "Live Now"})</span>
+                                   </a>
+                              )}
+
+                              {unlocked ? (
+                                   <span
+                                        className="w-full sm:w-auto px-4 sm:px-5 py-2.5 bg-official text-neutral font-bold rounded-xl text-xs hover:opacity-90 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                                   >
+                                        <span>Continue Learning</span>
+                                        <ArrowRight size={14} />
+                                   </span>
+                              ) : (
+                                   <span
+                                        className="w-full sm:w-auto px-4 sm:px-5 py-2.5 bg-zinc-900 text-white font-bold rounded-xl text-xs hover:bg-zinc-800 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                                   >
+                                        <span>View Details</span>
+                                        <ArrowRight size={14} />
+                                   </span>
+                              )}
+                         </div>
                     </div>
                </div>
           </Link>
