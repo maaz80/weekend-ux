@@ -6,9 +6,10 @@ import Form from "@/components/Course Details/Form";
 import CallCard from "@/components/Course Details/CallCard";
 import CardBg from "@/app/assets/weekend-ux-course-details-call-card-bg.webp";
 import OptimizedImage from "@/components/ui/OptimizedImage";
+import Link from "next/link";
 import { useHomeData } from "@/context/HomeDataContext";
 import { useUserAuth } from "@/context/UserAuthContext";
-import { BookOpen, Video, CheckCircle2, Sparkles, AlertCircle, Play, X, Film } from "lucide-react";
+import { BookOpen, Video, CheckCircle2, Sparkles, AlertCircle, Play, X, Film, Briefcase, Lock, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 const getEmbedUrl = (url) => {
      if (!url) return "";
@@ -74,6 +75,32 @@ export default function StudentDashboardPage() {
      const { user, isLoggedIn, loading: authLoading, isCourseUnlocked } = useUserAuth();
      const [activeTab, setActiveTab] = useState("my-courses"); // "my-courses" | "session-recordings"
      const [selectedVideo, setSelectedVideo] = useState(null); // { videoUrl, title, alt }
+
+     // Pagination States
+     const [unlockedPage, setUnlockedPage] = useState(1);
+     const [lockedPage, setLockedPage] = useState(1);
+     const [recordingsPage, setRecordingsPage] = useState(1);
+
+     const itemsPerPage = 4;
+     const recordingsPerPage = 3;
+
+     const getPaginationWindow = (current, total) => {
+          const pages = [];
+          if (total <= 4) {
+               for (let i = 1; i <= total; i++) pages.push(i);
+               return pages;
+          }
+          const start = Math.max(1, Math.min(current, total - 2));
+          const actualStart = current < 3 ? 1 : start;
+          const end = Math.min(total, actualStart + (current < 3 ? 2 : 2));
+          for (let i = actualStart; i <= end; i++) pages.push(i);
+          const lastPageInWindow = pages[pages.length - 1];
+          if (lastPageInWindow < total) {
+               if (total - lastPageInWindow > 1) pages.push("...");
+               pages.push(total);
+          }
+          return pages;
+     };
 
      // Auto-trigger auth modal if user lands on dashboard without login
      useEffect(() => {
@@ -153,8 +180,8 @@ export default function StudentDashboardPage() {
                               </p>
                          </div>
 
-                         {/* TOP SUMMARY STAT CARDS (2 CARDS) */}
-                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 mb-6 sm:mb-10">
+                         {/* TOP SUMMARY STAT CARDS (3 CARDS) */}
+                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-6 sm:mb-10">
                               {/* Card 1: Course To do */}
                               <div className="bg-white border border-zinc-200/90 rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md transition flex items-start justify-between gap-3 relative overflow-hidden group">
                                    <div className="space-y-1.5 sm:space-y-2 z-10">
@@ -190,6 +217,34 @@ export default function StudentDashboardPage() {
                                         <Video className="w-5 h-5 sm:w-7 sm:h-7" />
                                    </div>
                               </div>
+
+                              {/* Card 3: Exclusive Job Portal */}
+                              <Link
+                                   href="/jobs"
+                                   className="bg-white border border-zinc-200/90 rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md hover:border-amber-400 transition flex items-start justify-between gap-3 relative overflow-hidden group cursor-pointer"
+                              >
+                                   <div className="space-y-1.5 sm:space-y-2 z-10">
+                                        <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-amber-800 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200">
+                                             <Briefcase size={12} className="sm:w-3.5 sm:h-3.5 text-amber-600" />
+                                             {unlockedCourses.length > 0 ? "Unlocked Portal" : "Student Exclusive"}
+                                        </span>
+                                        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900 flex items-center gap-1.5">
+                                             Job Board <ArrowRight size={18} className="text-amber-500 group-hover:translate-x-1 transition-transform" />
+                                        </h2>
+                                        <p className="text-xs text-zinc-500 font-medium">
+                                             {unlockedCourses.length > 0
+                                                  ? "Curated UX/UI & tech jobs from Make.com."
+                                                  : "🔒 Exclusive for enrolled students."}
+                                        </p>
+                                   </div>
+                                   <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0 border border-amber-500/20 group-hover:scale-110 transition-transform">
+                                        {unlockedCourses.length > 0 ? (
+                                             <Briefcase className="w-5 h-5 sm:w-7 sm:h-7" />
+                                        ) : (
+                                             <Lock className="w-5 h-5 sm:w-7 sm:h-7 text-amber-600" />
+                                        )}
+                                   </div>
+                              </Link>
                          </div>
 
                          {/* MAIN NAVIGATION TOGGLE TABS */}
@@ -221,6 +276,17 @@ export default function StudentDashboardPage() {
                                         {totalVideosCount}
                                    </span>
                               </button>
+
+                              <Link
+                                   href="/jobs"
+                                   className="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl text-xs md:text-sm font-bold transition-all flex items-center gap-2 cursor-pointer shrink-0 whitespace-nowrap bg-white border border-zinc-200 text-zinc-700 hover:text-zinc-900 hover:bg-zinc-50 hover:border-amber-400"
+                              >
+                                   <Briefcase size={15} className="sm:w-4 sm:h-4 text-amber-500" />
+                                   <span>Job Board</span>
+                                   <span className="px-2 py-0.5 rounded-md text-[10px] font-extrabold bg-amber-100 text-amber-800">
+                                        PRO
+                                   </span>
+                              </Link>
                          </div>
 
                          {/* MAIN BODY GRID: TAB CONTENT (LEFT 2 COLS) + FORM SIDEBAR (RIGHT 1 COL) */}
@@ -229,159 +295,319 @@ export default function StudentDashboardPage() {
                               {/* LEFT COLUMN: ACTIVE TAB CONTENT */}
                               <div className="lg:col-span-2 space-y-6 sm:space-y-8">
                                    {/* TAB 1: MY COURSE VIEW */}
-                                   {activeTab === "my-courses" && (
-                                        <div className="space-y-8 sm:space-y-10 animate-fadeIn">
-                                             {/* SECTION A: ENROLLED / PURCHASED COURSES */}
-                                             <div>
-                                                  <div className="flex items-center justify-between gap-3 mb-4 sm:mb-6">
-                                                       <div className="flex items-center gap-2">
-                                                            <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500" />
-                                                            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900">
-                                                                 Enrolled Courses (Unlocked)
-                                                            </h2>
+                                   {activeTab === "my-courses" && (() => {
+                                        const unlockedTotalPages = Math.ceil(unlockedCourses.length / itemsPerPage);
+                                        const displayedUnlocked = unlockedCourses.slice((unlockedPage - 1) * itemsPerPage, unlockedPage * itemsPerPage);
+
+                                        const lockedTotalPages = Math.ceil(lockedCourses.length / itemsPerPage);
+                                        const displayedLocked = lockedCourses.slice((lockedPage - 1) * itemsPerPage, lockedPage * itemsPerPage);
+
+                                        return (
+                                             <div className="space-y-8 sm:space-y-10 animate-fadeIn">
+                                                  {/* SECTION A: ENROLLED / PURCHASED COURSES */}
+                                                  <div>
+                                                       <div className="flex items-center justify-between gap-3 mb-4 sm:mb-6">
+                                                            <div className="flex items-center gap-2">
+                                                                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500" />
+                                                                 <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900">
+                                                                      Enrolled Courses (Unlocked)
+                                                                 </h2>
+                                                            </div>
+                                                            <span className="text-xs text-zinc-500 font-semibold shrink-0">
+                                                                 {unlockedCourses.length} Purchased
+                                                            </span>
                                                        </div>
-                                                       <span className="text-xs text-zinc-500 font-semibold shrink-0">
-                                                            {unlockedCourses.length} Purchased
-                                                       </span>
+
+                                                       {unlockedCourses.length > 0 ? (
+                                                            <div>
+                                                                 <div className="flex flex-col gap-4 sm:gap-5">
+                                                                      {displayedUnlocked.map((course) => (
+                                                                           <HorizontalCourseCard
+                                                                                key={course._id || course.slug}
+                                                                                course={course}
+                                                                                unlocked={true}
+                                                                           />
+                                                                      ))}
+                                                                 </div>
+
+                                                                 {/* Unlocked Courses Pagination */}
+                                                                 {unlockedTotalPages > 1 && (
+                                                                      <div className="flex items-center justify-center gap-2 mt-6">
+                                                                           <button
+                                                                                onClick={() => setUnlockedPage((prev) => Math.max(prev - 1, 1))}
+                                                                                disabled={unlockedPage === 1}
+                                                                                className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${
+                                                                                     unlockedPage === 1
+                                                                                          ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                                          : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                }`}
+                                                                           >
+                                                                                <ChevronLeft size={16} />
+                                                                           </button>
+                                                                           {getPaginationWindow(unlockedPage, unlockedTotalPages).map((item, idx) =>
+                                                                                item === "..." ? (
+                                                                                     <span key={`u-ell-${idx}`} className="w-9 h-9 flex items-center justify-center text-xs text-zinc-400">
+                                                                                          ...
+                                                                                     </span>
+                                                                                ) : (
+                                                                                     <button
+                                                                                          key={`u-page-${item}`}
+                                                                                          onClick={() => setUnlockedPage(item)}
+                                                                                          className={`w-9 h-9 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                                                                                               unlockedPage === item
+                                                                                                    ? "bg-official text-neutral border-transparent shadow-sm"
+                                                                                                    : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                          }`}
+                                                                                     >
+                                                                                          {item}
+                                                                                     </button>
+                                                                                )
+                                                                           )}
+                                                                           <button
+                                                                                onClick={() => setUnlockedPage((prev) => Math.min(prev + 1, unlockedTotalPages))}
+                                                                                disabled={unlockedPage === unlockedTotalPages}
+                                                                                className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${
+                                                                                     unlockedPage === unlockedTotalPages
+                                                                                          ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                                          : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                }`}
+                                                                           >
+                                                                                <ChevronRight size={16} />
+                                                                           </button>
+                                                                      </div>
+                                                                 )}
+                                                            </div>
+                                                       ) : (
+                                                            <div className="bg-white border border-zinc-200/90 rounded-2xl p-6 sm:p-8 text-center max-w-lg mx-auto my-4 space-y-3">
+                                                                 <div className="w-10 h-10 sm:w-12 sm:h-12 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto border border-amber-200">
+                                                                      <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+                                                                 </div>
+                                                                 <h3 className="text-sm sm:text-base font-bold text-zinc-900">No Enrolled Courses Yet</h3>
+                                                                 <p className="text-xs text-zinc-500 leading-relaxed">
+                                                                      You haven't purchased or unlocked any courses yet. Browse the remaining courses below and view course details to get access!
+                                                                 </p>
+                                                            </div>
+                                                       )}
                                                   </div>
 
-                                                  {unlockedCourses.length > 0 ? (
-                                                       <div className="flex flex-col gap-4 sm:gap-5">
-                                                            {unlockedCourses.map((course) => (
-                                                                 <HorizontalCourseCard
-                                                                      key={course._id || course.slug}
-                                                                      course={course}
-                                                                      unlocked={true}
-                                                                 />
-                                                            ))}
+                                                  {/* SECTION B: REMAINING LOCKED COURSES */}
+                                                  {lockedCourses.length > 0 && (
+                                                       <div className="pt-6 border-t border-zinc-200">
+                                                            <div className="flex items-center justify-between gap-3 mb-4 sm:mb-6">
+                                                                 <div className="flex items-center gap-2">
+                                                                      <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500" />
+                                                                      <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900">
+                                                                           Remaining Courses (Locked)
+                                                                      </h2>
+                                                                 </div>
+                                                                 <span className="text-xs text-zinc-500 font-semibold shrink-0">
+                                                                      {lockedCourses.length} Available
+                                                                 </span>
+                                                            </div>
+
+                                                            <div className="flex flex-col gap-4 sm:gap-5">
+                                                                 {displayedLocked.map((course) => (
+                                                                      <HorizontalCourseCard
+                                                                           key={course._id || course.slug}
+                                                                           course={course}
+                                                                           unlocked={false}
+                                                                      />
+                                                                 ))}
+                                                            </div>
+
+                                                            {/* Locked Courses Pagination */}
+                                                            {lockedTotalPages > 1 && (
+                                                                 <div className="flex items-center justify-center gap-2 mt-6">
+                                                                      <button
+                                                                           onClick={() => setLockedPage((prev) => Math.max(prev - 1, 1))}
+                                                                           disabled={lockedPage === 1}
+                                                                           className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${
+                                                                                lockedPage === 1
+                                                                                     ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                                     : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                           }`}
+                                                                      >
+                                                                           <ChevronLeft size={16} />
+                                                                      </button>
+                                                                      {getPaginationWindow(lockedPage, lockedTotalPages).map((item, idx) =>
+                                                                           item === "..." ? (
+                                                                                <span key={`l-ell-${idx}`} className="w-9 h-9 flex items-center justify-center text-xs text-zinc-400">
+                                                                                     ...
+                                                                                </span>
+                                                                           ) : (
+                                                                                <button
+                                                                                     key={`l-page-${item}`}
+                                                                                     onClick={() => setLockedPage(item)}
+                                                                                     className={`w-9 h-9 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                                                                                          lockedPage === item
+                                                                                               ? "bg-official text-neutral border-transparent shadow-sm"
+                                                                                               : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                     }`}
+                                                                                >
+                                                                                     {item}
+                                                                                </button>
+                                                                           )
+                                                                      )}
+                                                                      <button
+                                                                           onClick={() => setLockedPage((prev) => Math.min(prev + 1, lockedTotalPages))}
+                                                                           disabled={lockedPage === lockedTotalPages}
+                                                                           className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${
+                                                                                lockedPage === lockedTotalPages
+                                                                                     ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                                     : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                           }`}
+                                                                      >
+                                                                           <ChevronRight size={16} />
+                                                                      </button>
+                                                                 </div>
+                                                            )}
+                                                       </div>
+                                                  )}
+                                             </div>
+                                        );
+                                   })()}
+
+                                   {/* TAB 2: SESSION RECORDINGS VIEW (Grouped by Course) */}
+                                   {activeTab === "session-recordings" && (() => {
+                                        const recTotalPages = Math.ceil(recordingCourses.length / recordingsPerPage);
+                                        const displayedRecordings = recordingCourses.slice((recordingsPage - 1) * recordingsPerPage, recordingsPage * recordingsPerPage);
+
+                                        return (
+                                             <div className="space-y-8 sm:space-y-10 animate-fadeIn">
+                                                  {recordingCourses.length > 0 ? (
+                                                       <div>
+                                                            <div className="space-y-8">
+                                                                 {displayedRecordings.map((course, cIdx) => {
+                                                                      const courseVideos = course.videos || [];
+                                                                      return (
+                                                                           <div key={course._id || course.slug || cIdx} className="bg-white border border-zinc-200 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-sm space-y-4 sm:space-y-6">
+                                                                                {/* Course Recording Header */}
+                                                                                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-3 border-b border-zinc-100 pb-3 sm:pb-4">
+                                                                                     <div>
+                                                                                          <span className="text-[10px] font-bold uppercase tracking-wider text-official bg-amber-500/10 px-2.5 py-0.5 rounded-md border border-amber-500/20">
+                                                                                               {course.category || "Design Track"}
+                                                                                          </span>
+                                                                                          <h3 className="text-base sm:text-lg md:text-xl font-bold text-zinc-900 mt-1">
+                                                                                               {course.title}
+                                                                                          </h3>
+                                                                                     </div>
+                                                                                     <span className="text-xs font-semibold text-purple-700 bg-purple-50 px-2.5 sm:px-3 py-1 rounded-lg border border-purple-200 flex items-center gap-1.5 shrink-0">
+                                                                                          <Film size={13} className="sm:w-3.5 sm:h-3.5" /> {courseVideos.length} Video{courseVideos.length !== 1 ? 's' : ''}
+                                                                                     </span>
+                                                                                </div>
+
+                                                                                {/* Course Videos Grid */}
+                                                                                {courseVideos.length > 0 ? (
+                                                                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+                                                                                          {courseVideos.map((v, vIdx) => {
+                                                                                               const thumbSrc = v.thumbnail || course.image || "/images/weekend-ux-program-image-template.webp";
+                                                                                               return (
+                                                                                                    <div
+                                                                                                         key={vIdx}
+                                                                                                         onClick={() => setSelectedVideo({ videoUrl: v.video, title: v.title || `${course.title} - Session #${vIdx + 1}`, alt: v.alt })}
+                                                                                                         className="group bg-zinc-50 rounded-2xl border border-zinc-200/80 overflow-hidden hover:border-amber-400 hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col justify-between"
+                                                                                                    >
+                                                                                                         {/* THUMBNAIL WITH PLAY OVERLAY */}
+                                                                                                         <div className="relative aspect-video bg-zinc-900 overflow-hidden">
+                                                                                                              <OptimizedImage
+                                                                                                                   src={thumbSrc}
+                                                                                                                   alt={v.alt || v.title || course.title}
+                                                                                                                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                                                                                                                   sizes="(max-width: 768px) 100vw, 400px"
+                                                                                                              />
+                                                                                                              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                                                                                                                   <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-official text-neutral flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                                                                                                                        <Play size={18} className="fill-neutral ml-0.5 sm:w-5 sm:h-5" />
+                                                                                                                   </div>
+                                                                                                              </div>
+                                                                                                         </div>
+
+                                                                                                         {/* VIDEO INFO */}
+                                                                                                         <div className="p-3.5 sm:p-4 space-y-1 bg-white">
+                                                                                                              <h4 className="font-bold text-xs sm:text-sm text-zinc-900 group-hover:text-amber-600 transition-colors line-clamp-1">
+                                                                                                                   {v.title || `Session Video #${vIdx + 1}`}
+                                                                                                              </h4>
+                                                                                                              {v.alt && (
+                                                                                                                   <p className="text-[11px] sm:text-xs text-zinc-500 line-clamp-1 font-medium">
+                                                                                                                        {v.alt}
+                                                                                                                   </p>
+                                                                                                              )}
+                                                                                                         </div>
+                                                                                                    </div>
+                                                                                               );
+                                                                                          })}
+                                                                                     </div>
+                                                                                ) : (
+                                                                                     <div className="bg-zinc-50 border border-dashed border-zinc-200 rounded-2xl p-5 text-center space-y-1">
+                                                                                          <p className="text-xs text-zinc-500 font-medium">No session recordings uploaded for this course yet.</p>
+                                                                                     </div>
+                                                                                )}
+                                                                           </div>
+                                                                      );
+                                                                 })}
+                                                            </div>
+
+                                                            {/* Session Recordings Pagination */}
+                                                            {recTotalPages > 1 && (
+                                                                 <div className="flex items-center justify-center gap-2 mt-6">
+                                                                      <button
+                                                                           onClick={() => setRecordingsPage((prev) => Math.max(prev - 1, 1))}
+                                                                           disabled={recordingsPage === 1}
+                                                                           className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${
+                                                                                recordingsPage === 1
+                                                                                     ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                                     : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                           }`}
+                                                                      >
+                                                                           <ChevronLeft size={16} />
+                                                                      </button>
+                                                                      {getPaginationWindow(recordingsPage, recTotalPages).map((item, idx) =>
+                                                                           item === "..." ? (
+                                                                                <span key={`r-ell-${idx}`} className="w-9 h-9 flex items-center justify-center text-xs text-zinc-400">
+                                                                                     ...
+                                                                                </span>
+                                                                           ) : (
+                                                                                <button
+                                                                                     key={`r-page-${item}`}
+                                                                                     onClick={() => setRecordingsPage(item)}
+                                                                                     className={`w-9 h-9 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                                                                                          recordingsPage === item
+                                                                                               ? "bg-official text-neutral border-transparent shadow-sm"
+                                                                                               : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                     }`}
+                                                                                >
+                                                                                     {item}
+                                                                                </button>
+                                                                           )
+                                                                      )}
+                                                                      <button
+                                                                           onClick={() => setRecordingsPage((prev) => Math.min(prev + 1, recTotalPages))}
+                                                                           disabled={recordingsPage === recTotalPages}
+                                                                           className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${
+                                                                                recordingsPage === recTotalPages
+                                                                                     ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                                     : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                           }`}
+                                                                      >
+                                                                           <ChevronRight size={16} />
+                                                                      </button>
+                                                                 </div>
+                                                            )}
                                                        </div>
                                                   ) : (
                                                        <div className="bg-white border border-zinc-200/90 rounded-2xl p-6 sm:p-8 text-center max-w-lg mx-auto my-4 space-y-3">
-                                                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center mx-auto border border-amber-200">
-                                                                 <AlertCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+                                                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mx-auto border border-purple-200">
+                                                                 <Video className="w-5 h-5 sm:w-6 sm:h-6" />
                                                             </div>
-                                                            <h3 className="text-sm sm:text-base font-bold text-zinc-900">No Enrolled Courses Yet</h3>
+                                                            <h3 className="text-sm sm:text-base font-bold text-zinc-900">No Session Recordings Available</h3>
                                                             <p className="text-xs text-zinc-500 leading-relaxed">
-                                                                 You haven't purchased or unlocked any courses yet. Browse the remaining courses below and view course details to get access!
+                                                                 You haven't unlocked any courses yet. Once a course is unlocked for your account by admin, session recordings will appear here.
                                                             </p>
                                                        </div>
                                                   )}
                                              </div>
-
-                                             {/* SECTION B: REMAINING LOCKED COURSES */}
-                                             {lockedCourses.length > 0 && (
-                                                  <div className="pt-6 border-t border-zinc-200">
-                                                       <div className="flex items-center justify-between gap-3 mb-4 sm:mb-6">
-                                                            <div className="flex items-center gap-2">
-                                                                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500" />
-                                                                 <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900">
-                                                                      Remaining Courses (Locked)
-                                                                 </h2>
-                                                            </div>
-                                                            <span className="text-xs text-zinc-500 font-semibold shrink-0">
-                                                                 {lockedCourses.length} Available
-                                                            </span>
-                                                       </div>
-
-                                                       <div className="flex flex-col gap-4 sm:gap-5">
-                                                            {lockedCourses.map((course) => (
-                                                                 <HorizontalCourseCard
-                                                                      key={course._id || course.slug}
-                                                                      course={course}
-                                                                      unlocked={false}
-                                                                 />
-                                                            ))}
-                                                       </div>
-                                                  </div>
-                                             )}
-                                        </div>
-                                   )}
-
-                                   {/* TAB 2: SESSION RECORDINGS VIEW (Grouped by Course) */}
-                                   {activeTab === "session-recordings" && (
-                                        <div className="space-y-8 sm:space-y-10 animate-fadeIn">
-                                             {recordingCourses.length > 0 ? (
-                                                  recordingCourses.map((course, cIdx) => {
-                                                       const courseVideos = course.videos || [];
-                                                       return (
-                                                            <div key={course._id || course.slug || cIdx} className="bg-white border border-zinc-200 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-sm space-y-4 sm:space-y-6">
-                                                                 {/* Course Recording Header */}
-                                                                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-3 border-b border-zinc-100 pb-3 sm:pb-4">
-                                                                      <div>
-                                                                           <span className="text-[10px] font-bold uppercase tracking-wider text-official bg-amber-500/10 px-2.5 py-0.5 rounded-md border border-amber-500/20">
-                                                                                {course.category || "Design Track"}
-                                                                           </span>
-                                                                           <h3 className="text-base sm:text-lg md:text-xl font-bold text-zinc-900 mt-1">
-                                                                                {course.title}
-                                                                           </h3>
-                                                                      </div>
-                                                                      <span className="text-xs font-semibold text-purple-700 bg-purple-50 px-2.5 sm:px-3 py-1 rounded-lg border border-purple-200 flex items-center gap-1.5 shrink-0">
-                                                                           <Film size={13} className="sm:w-3.5 sm:h-3.5" /> {courseVideos.length} Video{courseVideos.length !== 1 ? 's' : ''}
-                                                                      </span>
-                                                                 </div>
-
-                                                                 {/* Course Videos Grid */}
-                                                                 {courseVideos.length > 0 ? (
-                                                                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-                                                                           {courseVideos.map((v, vIdx) => {
-                                                                                const thumbSrc = v.thumbnail || course.image || "/images/weekend-ux-program-image-template.webp";
-                                                                                return (
-                                                                                     <div
-                                                                                          key={vIdx}
-                                                                                          onClick={() => setSelectedVideo({ videoUrl: v.video, title: v.title || `${course.title} - Session #${vIdx + 1}`, alt: v.alt })}
-                                                                                          className="group bg-zinc-50 rounded-2xl border border-zinc-200/80 overflow-hidden hover:border-amber-400 hover:shadow-md transition-all duration-300 cursor-pointer flex flex-col justify-between"
-                                                                                     >
-                                                                                          {/* THUMBNAIL WITH PLAY OVERLAY */}
-                                                                                          <div className="relative aspect-video bg-zinc-900 overflow-hidden">
-                                                                                               <OptimizedImage
-                                                                                                    src={thumbSrc}
-                                                                                                    alt={v.alt || v.title || course.title}
-                                                                                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
-                                                                                                    sizes="(max-width: 768px) 100vw, 400px"
-                                                                                               />
-                                                                                               <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                                                                                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-official text-neutral flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                                                                                                         <Play size={18} className="fill-neutral ml-0.5 sm:w-5 sm:h-5" />
-                                                                                                    </div>
-                                                                                               </div>
-                                                                                          </div>
-
-                                                                                          {/* VIDEO INFO */}
-                                                                                          <div className="p-3.5 sm:p-4 space-y-1 bg-white">
-                                                                                               <h4 className="font-bold text-xs sm:text-sm text-zinc-900 group-hover:text-amber-600 transition-colors line-clamp-1">
-                                                                                                    {v.title || `Session Video #${vIdx + 1}`}
-                                                                                               </h4>
-                                                                                               {v.alt && (
-                                                                                                    <p className="text-[11px] sm:text-xs text-zinc-500 line-clamp-1 font-medium">
-                                                                                                         {v.alt}
-                                                                                                    </p>
-                                                                                               )}
-                                                                                          </div>
-                                                                                     </div>
-                                                                                );
-                                                                           })}
-                                                                      </div>
-                                                                 ) : (
-                                                                      <div className="bg-zinc-50 border border-dashed border-zinc-200 rounded-2xl p-5 text-center space-y-1">
-                                                                           <p className="text-xs text-zinc-500 font-medium">No session recordings uploaded for this course yet.</p>
-                                                                      </div>
-                                                                 )}
-                                                            </div>
-                                                       );
-                                                  })
-                                             ) : (
-                                                  <div className="bg-white border border-zinc-200/90 rounded-2xl p-6 sm:p-8 text-center max-w-lg mx-auto my-4 space-y-3">
-                                                       <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center mx-auto border border-purple-200">
-                                                            <Video className="w-5 h-5 sm:w-6 sm:h-6" />
-                                                       </div>
-                                                       <h3 className="text-sm sm:text-base font-bold text-zinc-900">No Session Recordings Available</h3>
-                                                       <p className="text-xs text-zinc-500 leading-relaxed">
-                                                            You haven't unlocked any courses yet. Once a course is unlocked for your account by admin, session recordings will appear here.
-                                                       </p>
-                                                  </div>
-                                             )}
-                                        </div>
-                                   )}
+                                        );
+                                   })()}
                               </div>
 
                               {/* RIGHT COLUMN: ADMISSIONS FORM & CALLCARD */}
