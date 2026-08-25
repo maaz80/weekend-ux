@@ -8,4 +8,4 @@
 :HL["/images/weekend-ux-blogs-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-about-properties-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-policy-hero-bg.webp","image",{"fetchPriority":"high"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"location","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"ui-ux-design-course-in-kolkata","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"6OBnBqD3puovMoeNEQ2h9"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"location","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"ui-ux-design-course-in-kolkata","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"tmEZsUXD3GOR8-RbXoaa1"}
