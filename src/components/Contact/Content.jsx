@@ -137,6 +137,7 @@ const Content = ({
                               </div>
                          </div>
 
+
                          {/* RIGHT SIDE */}
 
                          <div className={`mt-10 mb-5 md:mt-0 p-2 md:p-10 rounded-2xl ${formBgColor} ${formShadow}`}>
