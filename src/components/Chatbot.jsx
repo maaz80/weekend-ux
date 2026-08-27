@@ -131,11 +131,13 @@ export default function Chatbot({
           senderName: "Weekend UX Bot",
           timestamp: "Just now",
           options: [
-               "🎓 UI/UX Design Masterclass",
-               "⚡ Figma & AI Tools Bootcamp",
-               "🚀 Career Switch to Product Design",
-               "💻 Web Design & Frontend Dev",
-               "🎯 1-on-1 Portfolio & Interview Prep",
+               "🎨 UI/UX Design Course",
+               "📦 Product Design Program",
+               "⚡ Figma Master Course",
+               "🤖 Agentic AI & Gen AI Development",
+               "⚙️ AI Automation using Make",
+               "💻 Full-Stack & Front-End Development",
+               "🎬 Video Editing Course",
                "🤝 Talk to a UX Learning Advisor"
           ],
           isWelcomeCard: true

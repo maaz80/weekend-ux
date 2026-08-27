@@ -152,7 +152,7 @@ export default function StudentDashboardPage() {
      // Loading state while checking authentication
      if (authLoading) {
           return (
-               <div className="min-h-screen bg-[#FCFBF7] flex items-center justify-center pt-28">
+               <div className="min-h-screen bg-[#FCFBF7] flex items-center justify-center pt-24 md:pt-32" style={{ paddingTop: '100px' }}>
                     <div className="text-center space-y-3">
                          <div className="w-8 h-8 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto" />
                          <p className="text-xs text-zinc-500 font-semibold">Loading student dashboard...</p>
@@ -164,7 +164,7 @@ export default function StudentDashboardPage() {
      // Auth Gate: Require login to view dashboard
      if (!isLoggedIn) {
           return (
-               <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-22 md:pt-26 pb-44 md:pb-64 lg:pb-80">
+               <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-24 md:pt-32 pb-44 md:pb-64 lg:pb-80" style={{ paddingTop: '100px' }}>
                     <main className="grow py-24 md:py-32">
                          <div className="custom-width px-4 max-w-md mx-auto text-center space-y-6 bg-white p-8 md:p-10 rounded-3xl border border-zinc-200 shadow-sm">
                               <div className="w-16 h-16 bg-amber-500/10 text-official rounded-2xl flex items-center justify-center mx-auto border border-amber-500/20">
@@ -206,10 +206,10 @@ export default function StudentDashboardPage() {
      const activeLiveCourse = allCourses.find(c => c?.liveClass?.active && c?.liveClass?.meetUrl);
 
      return (
-          <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-24 sm:pt-28 pb-20 md:pb-24">
+          <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-24 md:pt-32 pb-20 md:pb-24" style={{ paddingTop: '100px' , paddingBottom: '80px'}}>
                {/* MAIN BODY CONTENT */}
                <main className="grow">
-                    <div className="custom-width px-3.5 sm:px-6 lg:px-10 pt-20 md:pt-28">
+                    <div className="custom-width px-3.5 sm:px-6 lg:px-10 ">
 
                          {/* GREETING BANNER */}
                          <div className="mb-6 sm:mb-8">
