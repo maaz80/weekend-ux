@@ -1,4 +1,4 @@
-:HL["/_next/static/chunks/2ezgb4ytz1du9.css","style"]
+:HL["/_next/static/chunks/14zv8g5ksp1e-.css","style"]
 :HL["/_next/static/chunks/2pke0mh53gr1u.css","style"]
 :HL["/_next/static/media/2a65768255d6b625-s.p.3u4lli0-axodc.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
 :HL["/_next/static/media/5c8bbc89ca099f34-s.p.2qijkc4_gtkq0.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
@@ -9,4 +9,4 @@
 :HL["/images/weekend-ux-blogs-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-about-properties-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-policy-hero-bg.webp","image",{"fetchPriority":"high"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"courses","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"advanced-post-production","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"tmEZsUXD3GOR8-RbXoaa1"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"courses","param":null,"prefetchHints":0,"slots":{"children":{"name":"slug","param":{"type":"d","key":"advanced-post-production","siblings":null},"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}}}},"staleTime":300,"buildId":"ZZskH4Fxj0NIcW_18uNnX"}

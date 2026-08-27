@@ -25,15 +25,15 @@ export default function CourseLockedModal({ isOpen, onClose, course }) {
                          <X size={20} />
                     </button>
 
-                    <div className="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto shadow-inner">
+                    <div className="w-16 h-16 bg-official/20 text-official rounded-full flex items-center justify-center mx-auto border border-official/30 shadow-inner">
                          <Lock size={32} />
                     </div>
 
                     <div className="space-y-2">
                          <h3 className="text-xl font-bold text-zinc-900">
-                              Course Locked 🔒
+                              Course Locked
                          </h3>
-                         <p className="text-xs font-semibold text-amber-700 bg-amber-50 px-3 py-1 rounded-full inline-block">
+                         <p className="text-xs font-semibold text-zinc-900 bg-official/20 px-3 py-1 rounded-full inline-block border border-official/30">
                               {courseTitle}
                          </p>
                          <p className="text-sm text-zinc-600 leading-relaxed pt-2">
@@ -44,7 +44,7 @@ export default function CourseLockedModal({ isOpen, onClose, course }) {
                     <div className="pt-2">
                          <button
                               onClick={handleEnquire}
-                              className="w-full py-3.5 bg-zinc-900 hover:bg-zinc-800 text-white font-bold text-sm rounded-xl flex items-center justify-center gap-2 shadow-md transition cursor-pointer"
+                              className="w-full py-3.5 bg-official hover:bg-official/90 text-zinc-950 font-bold text-sm rounded-xl flex items-center justify-center gap-2 shadow-md transition cursor-pointer"
                          >
                               Enquire Now
                          </button>

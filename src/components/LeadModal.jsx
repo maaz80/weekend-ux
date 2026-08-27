@@ -52,13 +52,13 @@ export default function LeadModal() {
                               })
                          });
                          if (response.ok) {
-                              showToastNotification(`✅ Syllabus email sent to ${savedUser.email}! Check your inbox.`, "success");
+                              showToastNotification(`Syllabus email sent to ${savedUser.email}! Check your inbox.`, "success");
                               window.dispatchEvent(new CustomEvent("leadSubmitted"));
                          } else {
-                              showToastNotification("⚠️ Could not send email. Please try again.", "error");
+                              showToastNotification("Could not send email. Please try again.", "error");
                          }
                     } catch (fetchErr) {
-                         showToastNotification("⚠️ Error sending email. Please check connection.", "error");
+                         showToastNotification("Error sending email. Please check connection.", "error");
                     }
                     return;
                }

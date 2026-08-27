@@ -561,7 +561,7 @@ export default function Details({ data }) {
                                         onClick={() => {
                                              window.dispatchEvent(new CustomEvent("openLeadModal"));
                                         }}
-                                        className="h-12 px-8 bg-linear-to-r from-zinc-800 to-zinc-900 text-white shadow-sm rounded-md hover:from-zinc-800/70 hover:to-zinc-900/70 text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center font-urbanist"
+                                        className="h-12 px-8 bg-gradient-to-r from-zinc-800 to-zinc-900 text-white shadow-sm rounded-md hover:from-zinc-800/70 hover:to-zinc-900/70 text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center font-urbanist"
                                    >
                                         Get Brochure
                                    </button>
@@ -596,7 +596,7 @@ export default function Details({ data }) {
                                         <div className="flex flex-wrap items-center justify-between gap-6 pt-6 border-t border-zinc-900/10 mt-4">
                                              <Link
                                                   href="/contact-us"
-                                                  className="h-12 px-8 bg-linear-to-r from-zinc-800 to-zinc-900 text-white shadow-sm rounded-md hover:from-zinc-800/90 hover:to-zinc-900/90 text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center font-urbanist"
+                                                  className="h-12 px-8 bg-gradient-to-r from-zinc-800 to-zinc-900 text-white shadow-sm rounded-md hover:from-zinc-800/90 hover:to-zinc-900/90 text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center font-urbanist"
                                              >
                                                   Enquire Now
                                              </Link>

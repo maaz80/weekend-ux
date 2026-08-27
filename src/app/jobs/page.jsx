@@ -837,8 +837,8 @@ export default function JobsPage() {
           <div className="fixed inset-0 z-99999 bg-black/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fadeIn font-urbanist">
             <div className="bg-white rounded-3xl border border-zinc-200 max-w-3xl w-full shadow-2xl relative my-auto max-h-[92vh] flex flex-col overflow-hidden">
               
-              {/* Top Amber Accent Bar */}
-              <div className="h-2 bg-linear-to-r from-amber-400 via-amber-500 to-amber-600 w-full shrink-0" />
+              {/* Top Accent Bar */}
+              <div className="h-2 bg-gradient-to-r from-official via-amber-400 to-amber-500 w-full shrink-0" />
 
               {/* Modal Header */}
               <div className="p-5 sm:p-7 border-b border-zinc-100 bg-white shrink-0">

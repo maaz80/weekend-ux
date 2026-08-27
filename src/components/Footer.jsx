@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import Button from './ui/Button';
 import { useHomeData } from "@/context/HomeDataContext";
 import Logo from "@/app/assets/weekend-ux-logo.webp";
@@ -135,6 +136,11 @@ export default function Footer({
      bannerBgImage = "/images/weekend-ux-footer-decorative-bg.webp",
      bannerTitleColor = "text-neutral"
 }) {
+     const pathname = usePathname();
+     if (pathname && (pathname === "/dashboard" || pathname.startsWith("/dashboard/"))) {
+          return null;
+     }
+
      const { footerGlobalData, footerColumnsData, navbarData, locationsData } = useHomeData();
      const hasLogoImage = navbarData?.logo?.image && navbarData.logo.image.trim();
 

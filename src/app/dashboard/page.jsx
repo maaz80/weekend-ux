@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import HorizontalCourseCard from "@/components/HorizontalCourseCard";
+import ZoomMeetingModal from "@/components/ZoomMeetingModal";
 import Form from "@/components/Course Details/Form";
 import CallCard from "@/components/Course Details/CallCard";
 import CardBg from "@/app/assets/weekend-ux-course-details-call-card-bg.webp";
@@ -9,7 +10,8 @@ import OptimizedImage from "@/components/ui/OptimizedImage";
 import Link from "next/link";
 import { useHomeData } from "@/context/HomeDataContext";
 import { useUserAuth } from "@/context/UserAuthContext";
-import { BookOpen, Video, CheckCircle2, Sparkles, AlertCircle, Play, X, Film, Briefcase, Lock, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { logoutUser } from "@/utils/auth";
+import { BookOpen, Video, CheckCircle2, Sparkles, AlertCircle, Play, X, Film, Briefcase, Lock, ArrowRight, ChevronLeft, ChevronRight, Radio, LogOut, Home } from "lucide-react";
 
 const getEmbedUrl = (url) => {
      if (!url) return "";
@@ -75,6 +77,8 @@ export default function StudentDashboardPage() {
      const { user, isLoggedIn, loading: authLoading, isCourseUnlocked } = useUserAuth();
      const [activeTab, setActiveTab] = useState("my-courses"); // "my-courses" | "session-recordings"
      const [selectedVideo, setSelectedVideo] = useState(null); // { videoUrl, title, alt }
+     const [dashboardLiveModalCourse, setDashboardLiveModalCourse] = useState(null);
+     const [liveCoursesData, setLiveCoursesData] = useState(null);
 
      // Pagination States
      const [unlockedPage, setUnlockedPage] = useState(1);
@@ -102,12 +106,48 @@ export default function StudentDashboardPage() {
           return pages;
      };
 
+     // Poll live class status every 4 seconds so student view auto-updates when admin ends meeting
+     useEffect(() => {
+          let isMounted = true;
+          const pollLiveState = async () => {
+               try {
+                    const API_BASE = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000/api";
+                    const res = await fetch(`${API_BASE}/courses`);
+                    if (res.ok) {
+                         const data = await res.json();
+                         if (isMounted && data) {
+                              setLiveCoursesData(data);
+                         }
+                    }
+               } catch (e) { }
+          };
+
+          pollLiveState();
+          const interval = setInterval(pollLiveState, 4000);
+          return () => {
+               isMounted = false;
+               clearInterval(interval);
+          };
+     }, []);
+
      // Auto-trigger auth modal if user lands on dashboard without login
      useEffect(() => {
           if (!authLoading && !isLoggedIn) {
                window.dispatchEvent(new CustomEvent("openAuthModal"));
           }
      }, [authLoading, isLoggedIn]);
+
+     // Auto-close open live modal if host ends the class
+     useEffect(() => {
+          if (dashboardLiveModalCourse) {
+               const activeData = liveCoursesData || coursesData;
+               const allC = Array.isArray(activeData) ? activeData : (activeData?.course || []);
+               const liveC = allC.find(c => c?.liveClass?.active && c?.liveClass?.meetUrl);
+               if (!liveC || !liveC.liveClass?.active) {
+                    setDashboardLiveModalCourse(null);
+               }
+          }
+     }, [coursesData, liveCoursesData, dashboardLiveModalCourse]);
 
      // Loading state while checking authentication
      if (authLoading) {
@@ -148,24 +188,28 @@ export default function StudentDashboardPage() {
           );
      }
 
-     const allCourses = coursesData?.course && coursesData.course.length > 0
-          ? coursesData.course
-          : [];
+     const activeSourceData = liveCoursesData || coursesData;
+     const allCourses = Array.isArray(activeSourceData)
+          ? activeSourceData
+          : (activeSourceData?.course || []);
 
      // Split courses into Unlocked (My Courses) vs Locked (Remaining Courses)
      const unlockedCourses = allCourses.filter((c) => isCourseUnlocked(c));
      const lockedCourses = allCourses.filter((c) => !isCourseUnlocked(c));
 
-     // Target courses for recordings: unlocked courses if available with videos, else all courses with videos
-     const baseRecordings = unlockedCourses.some(c => c.videos && c.videos.length > 0) ? unlockedCourses : allCourses;
-     const recordingCourses = baseRecordings.filter(c => c.videos && c.videos.length > 0);
-     const totalVideosCount = recordingCourses.reduce((sum, c) => sum + (c.videos?.length || 0), 0);
+     // Target courses for recordings: unlocked courses if available with videos/recordings, else all courses
+     const hasVideosOrRecordings = (c) => (c.videos && c.videos.length > 0) || (c.recordings && c.recordings.length > 0);
+     const baseRecordings = unlockedCourses.some(hasVideosOrRecordings) ? unlockedCourses : allCourses;
+     const recordingCourses = baseRecordings.filter(hasVideosOrRecordings);
+     const totalVideosCount = recordingCourses.reduce((sum, c) => sum + (c.videos?.length || 0) + (c.recordings?.length || 0), 0);
+
+     const activeLiveCourse = allCourses.find(c => c?.liveClass?.active && c?.liveClass?.meetUrl);
 
      return (
-          <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-32 md:pt-26 pb-45 md:pb-50">
+          <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-24 sm:pt-28 pb-20 md:pb-24">
                {/* MAIN BODY CONTENT */}
                <main className="grow">
-                    <div className="custom-width px-3.5 sm:px-6 lg:px-10">
+                    <div className="custom-width px-3.5 sm:px-6 lg:px-10 pt-20 md:pt-28">
 
                          {/* GREETING BANNER */}
                          <div className="mb-6 sm:mb-8">
@@ -179,6 +223,34 @@ export default function StudentDashboardPage() {
                                    Welcome back, {user?.name || "Student"}! Access your enrolled course materials and explore new tracks.
                               </p>
                          </div>
+
+                         {/* ACTIVE LIVE ZOOM SESSION FEATURE BANNER */}
+                         {/* {activeLiveCourse && (
+                              <div className="mb-6 sm:mb-8 bg-linear-to-r from-official via-zinc-900 to-zinc-950 rounded-2xl sm:rounded-3xl p-5 sm:p-7 border border-official shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 text-white animate-fadeIn">
+                                   <div className="space-y-1.5">
+                                        <div className="flex items-center gap-2">
+                                             <span className="w-2.5 h-2.5 rounded-full bg-official/60 animate-ping" />
+                                             <span className="text-xs font-extrabold uppercase tracking-wider text-official">
+                                                  LIVE ZOOM SESSION ACTIVE NOW
+                                             </span>
+                                        </div>
+                                        <h3 className="text-lg sm:text-xl font-bold text-white">
+                                             {activeLiveCourse.liveClass?.title || activeLiveCourse.title}
+                                        </h3>
+                                        <p className="text-xs text-zinc-300 font-medium">
+                                             Scheduled: <strong className="text-official/80">{activeLiveCourse.liveClass?.scheduledAt || "Live Now"}</strong> • {activeLiveCourse.title}
+                                        </p>
+                                   </div>
+
+                                   <button
+                                        onClick={() => setDashboardLiveModalCourse(activeLiveCourse)}
+                                        className="w-full sm:w-auto px-6 py-3.5 bg-official hover:bg-official/90 text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-lg shadow-official/30 transition flex items-center justify-center gap-2 cursor-pointer shrink-0"
+                                   >
+                                        <Radio size={16} className="animate-pulse" />
+                                        <span>Enter Zoom Live Class</span>
+                                   </button>
+                              </div>
+                         )} */}
 
                          {/* TOP SUMMARY STAT CARDS (3 CARDS) */}
                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-6 sm:mb-10">
@@ -290,7 +362,7 @@ export default function StudentDashboardPage() {
                          </div>
 
                          {/* MAIN BODY GRID: TAB CONTENT (LEFT 2 COLS) + FORM SIDEBAR (RIGHT 1 COL) */}
-                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-start">
+                         <div className=" gap-6 sm:gap-8 items-start">
 
                               {/* LEFT COLUMN: ACTIVE TAB CONTENT */}
                               <div className="lg:col-span-2 space-y-6 sm:space-y-8">
@@ -336,11 +408,10 @@ export default function StudentDashboardPage() {
                                                                            <button
                                                                                 onClick={() => setUnlockedPage((prev) => Math.max(prev - 1, 1))}
                                                                                 disabled={unlockedPage === 1}
-                                                                                className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${
-                                                                                     unlockedPage === 1
-                                                                                          ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                                                          : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
-                                                                                }`}
+                                                                                className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${unlockedPage === 1
+                                                                                     ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                                     : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                     }`}
                                                                            >
                                                                                 <ChevronLeft size={16} />
                                                                            </button>
@@ -353,11 +424,10 @@ export default function StudentDashboardPage() {
                                                                                      <button
                                                                                           key={`u-page-${item}`}
                                                                                           onClick={() => setUnlockedPage(item)}
-                                                                                          className={`w-9 h-9 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
-                                                                                               unlockedPage === item
-                                                                                                    ? "bg-official text-neutral border-transparent shadow-sm"
-                                                                                                    : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
-                                                                                          }`}
+                                                                                          className={`w-9 h-9 rounded-xl border text-xs font-bold transition-all cursor-pointer ${unlockedPage === item
+                                                                                               ? "bg-official text-neutral border-transparent shadow-sm"
+                                                                                               : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                               }`}
                                                                                      >
                                                                                           {item}
                                                                                      </button>
@@ -366,11 +436,10 @@ export default function StudentDashboardPage() {
                                                                            <button
                                                                                 onClick={() => setUnlockedPage((prev) => Math.min(prev + 1, unlockedTotalPages))}
                                                                                 disabled={unlockedPage === unlockedTotalPages}
-                                                                                className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${
-                                                                                     unlockedPage === unlockedTotalPages
-                                                                                          ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                                                          : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
-                                                                                }`}
+                                                                                className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${unlockedPage === unlockedTotalPages
+                                                                                     ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                                     : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                     }`}
                                                                            >
                                                                                 <ChevronRight size={16} />
                                                                            </button>
@@ -421,11 +490,10 @@ export default function StudentDashboardPage() {
                                                                       <button
                                                                            onClick={() => setLockedPage((prev) => Math.max(prev - 1, 1))}
                                                                            disabled={lockedPage === 1}
-                                                                           className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${
-                                                                                lockedPage === 1
-                                                                                     ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                                                     : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
-                                                                           }`}
+                                                                           className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${lockedPage === 1
+                                                                                ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                                : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                }`}
                                                                       >
                                                                            <ChevronLeft size={16} />
                                                                       </button>
@@ -438,11 +506,10 @@ export default function StudentDashboardPage() {
                                                                                 <button
                                                                                      key={`l-page-${item}`}
                                                                                      onClick={() => setLockedPage(item)}
-                                                                                     className={`w-9 h-9 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
-                                                                                          lockedPage === item
-                                                                                               ? "bg-official text-neutral border-transparent shadow-sm"
-                                                                                               : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
-                                                                                     }`}
+                                                                                     className={`w-9 h-9 rounded-xl border text-xs font-bold transition-all cursor-pointer ${lockedPage === item
+                                                                                          ? "bg-official text-neutral border-transparent shadow-sm"
+                                                                                          : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                          }`}
                                                                                 >
                                                                                      {item}
                                                                                 </button>
@@ -451,11 +518,10 @@ export default function StudentDashboardPage() {
                                                                       <button
                                                                            onClick={() => setLockedPage((prev) => Math.min(prev + 1, lockedTotalPages))}
                                                                            disabled={lockedPage === lockedTotalPages}
-                                                                           className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${
-                                                                                lockedPage === lockedTotalPages
-                                                                                     ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                                                     : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
-                                                                           }`}
+                                                                           className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${lockedPage === lockedTotalPages
+                                                                                ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                                : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                }`}
                                                                       >
                                                                            <ChevronRight size={16} />
                                                                       </button>
@@ -478,7 +544,14 @@ export default function StudentDashboardPage() {
                                                        <div>
                                                             <div className="space-y-8">
                                                                  {displayedRecordings.map((course, cIdx) => {
-                                                                      const courseVideos = course.videos || [];
+                                                                      const courseVideos = [
+                                                                           ...(course.videos || []),
+                                                                           ...(course.recordings || []).map(r => ({
+                                                                                video: r.videoUrl || r.downloadUrl,
+                                                                                title: r.title || `${course.title} - Live Class Recording`,
+                                                                                alt: `Zoom Cloud Recording (${r.duration || 'Session'}) - ${r.createdAt ? new Date(r.createdAt).toLocaleDateString() : 'Recent'}`
+                                                                           }))
+                                                                      ];
                                                                       return (
                                                                            <div key={course._id || course.slug || cIdx} className="bg-white border border-zinc-200 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-sm space-y-4 sm:space-y-6">
                                                                                 {/* Course Recording Header */}
@@ -553,11 +626,10 @@ export default function StudentDashboardPage() {
                                                                       <button
                                                                            onClick={() => setRecordingsPage((prev) => Math.max(prev - 1, 1))}
                                                                            disabled={recordingsPage === 1}
-                                                                           className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${
-                                                                                recordingsPage === 1
-                                                                                     ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                                                     : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
-                                                                           }`}
+                                                                           className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${recordingsPage === 1
+                                                                                ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                                : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                }`}
                                                                       >
                                                                            <ChevronLeft size={16} />
                                                                       </button>
@@ -570,11 +642,10 @@ export default function StudentDashboardPage() {
                                                                                 <button
                                                                                      key={`r-page-${item}`}
                                                                                      onClick={() => setRecordingsPage(item)}
-                                                                                     className={`w-9 h-9 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
-                                                                                          recordingsPage === item
-                                                                                               ? "bg-official text-neutral border-transparent shadow-sm"
-                                                                                               : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
-                                                                                     }`}
+                                                                                     className={`w-9 h-9 rounded-xl border text-xs font-bold transition-all cursor-pointer ${recordingsPage === item
+                                                                                          ? "bg-official text-neutral border-transparent shadow-sm"
+                                                                                          : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                          }`}
                                                                                 >
                                                                                      {item}
                                                                                 </button>
@@ -583,11 +654,10 @@ export default function StudentDashboardPage() {
                                                                       <button
                                                                            onClick={() => setRecordingsPage((prev) => Math.min(prev + 1, recTotalPages))}
                                                                            disabled={recordingsPage === recTotalPages}
-                                                                           className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${
-                                                                                recordingsPage === recTotalPages
-                                                                                     ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
-                                                                                     : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
-                                                                           }`}
+                                                                           className={`w-9 h-9 rounded-xl border flex items-center justify-center text-xs font-semibold transition-all cursor-pointer ${recordingsPage === recTotalPages
+                                                                                ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                                : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50"
+                                                                                }`}
                                                                       >
                                                                            <ChevronRight size={16} />
                                                                       </button>
@@ -610,19 +680,7 @@ export default function StudentDashboardPage() {
                                    })()}
                               </div>
 
-                              {/* RIGHT COLUMN: ADMISSIONS FORM & CALLCARD */}
-                              <div className="lg:col-span-1 lg:sticky lg:top-28 space-y-6">
-                                   {/* Admission Form */}
-                                   <div className="bg-white rounded-2xl sm:rounded-3xl shadow-sm p-5 sm:p-6 md:p-8 border border-zinc-200">
-                                        <h2 className="text-center text-xl sm:text-[22px] md:text-[24px] font-bold text-neutral leading-snug mb-2 sm:mb-3">
-                                             Admissions Close On 1st Oct
-                                        </h2>
-                                        <p className="text-center text-xs md:text-sm text-zinc-600 leading-relaxed mb-5 sm:mb-6 font-urbanist">
-                                             Not sure yet? Before you pass up the opportunity to sign up for the course, speak with our counselor and get your questions answered.
-                                        </p>
-                                        <Form />
-                                   </div>
-                              </div>
+
 
                          </div>
 
@@ -686,6 +744,15 @@ export default function StudentDashboardPage() {
                               </div>
                          </div>
                     </div>
+               )}
+
+               {/* DASHBOARD ZOOM LIVE CLASS MODAL OVERLAY */}
+               {dashboardLiveModalCourse && (
+                    <ZoomMeetingModal
+                         liveClass={dashboardLiveModalCourse.liveClass}
+                         courseTitle={dashboardLiveModalCourse.title}
+                         onClose={() => setDashboardLiveModalCourse(null)}
+                    />
                )}
           </div>
      );
