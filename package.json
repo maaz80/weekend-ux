@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "prebuild": "node generate_seo_files.js",
-    "build": "npm run prebuild && next build && node post-export.js",
+   "build": "npm run build-storybook -- -o public/storybook && npm run prebuild && next build && node post-export.js",
     "clean": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\"",
     "dev": "node --max-old-space-size=8192 node_modules/next/dist/bin/next dev",
     "start": "next start",
