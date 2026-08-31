@@ -4,6 +4,7 @@ import FAQ from "@/components/FAQ";
 import Testimonials from "@/components/Home/Testimonials/Testimonials";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import Image from "next/image";
+import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import Courses from "@/models/Courses";
 import connectDB from "@/config/db";
@@ -126,6 +127,8 @@ export async function generateMetadata({ params }) {
      };
 }
 
+import CourseHero from "@/components/Course Details/CourseHero";
+
 export default async function CourseSlugPage({ params }) {
      const { slug } = await params;
      const data = await getCourseData(slug);
@@ -142,9 +145,9 @@ export default async function CourseSlugPage({ params }) {
                     <p className="text-zinc-400 max-w-md mb-6">
                          {displayDesc}
                     </p>
-                    <a href="/" className="px-6 py-3 bg-official text-neutral rounded-lg font-medium hover:opacity-90 transition-all">
+                    <Link href="/" className="px-6 py-3 bg-official text-neutral rounded-lg font-medium hover:opacity-90 transition-all">
                          Go to Homepage
-                    </a>
+                    </Link>
                </div>
           );
      }
@@ -158,21 +161,7 @@ export default async function CourseSlugPage({ params }) {
                <link rel="preload" as="image" href="/images/weekend-ux-course-details-hero-bg.webp" fetchPriority="high" />
                <Breadcrumb />
                {/* Hero Header Section */}
-               <section className="relative h-65.5 md:h-114 w-full flex md:items-center items-end pt-5 md:pt-10 pb-7 md:pb-0 justify-start bg-zinc-950 overflow-hidden" data-navbar-light="true" id='course-details-hero'>
-                    <Image
-                         src="/images/weekend-ux-course-details-hero-bg.webp"
-                         alt="weekend-ux-course-details-hero-bg"
-                         fill
-                         sizes="100vw"
-                         priority
-                         fetchPriority="high"
-                         className="object-cover object-center opacity-60 z-0"
-                    />
-                    {/* Content */}
-                    <h1 className="text-[22px] md:text-[38px] 2xl:text-[56px] leading-8 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair px-4 md:px-5.5 w-7xl text-left mx-auto">
-                         {heroTitle}
-                    </h1>
-               </section>
+               <CourseHero data={data} heroTitle={heroTitle} />
                <SchemaRenderer schemas={data?.schemas} />
 
                {/* Server-rendered static JSON-LD fallback for No-JS/Control+U */}

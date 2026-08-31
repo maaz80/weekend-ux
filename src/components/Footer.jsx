@@ -137,7 +137,7 @@ export default function Footer({
      bannerTitleColor = "text-neutral"
 }) {
      const pathname = usePathname();
-     if (pathname && (pathname === "/dashboard" || pathname.startsWith("/dashboard/"))) {
+     if (pathname && (pathname === "/dashboard" || pathname.startsWith("/dashboard/") || pathname === "/jobs" || pathname.startsWith("/jobs/"))) {
           return null;
      }
 

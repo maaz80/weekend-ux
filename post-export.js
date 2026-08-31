@@ -67,7 +67,11 @@ function processHtmlFile(filePath) {
     }
 
     if (modified) {
-        fs.writeFileSync(filePath, content, 'utf8');
+        try {
+            fs.writeFileSync(filePath, content, 'utf8');
+        } catch (err) {
+            console.warn(`⚠️ Warning: Could not write file lock on ${filePath}: ${err.message}`);
+        }
     }
 }
 

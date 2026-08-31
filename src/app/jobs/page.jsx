@@ -390,7 +390,7 @@ export default function JobsPage() {
 
   // 4. Main Job Board Page (Enrolled Students)
   return (
-    <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-32 sm:pt-32 pb-66">
+    <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-24 md:pt-32 pb-20 md:pb-24" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
       <main className="grow">
         <div className="custom-width px-3.5 sm:px-6 lg:px-10 max-w-7xl mx-auto">
           

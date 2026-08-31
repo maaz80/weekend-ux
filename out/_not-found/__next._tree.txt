@@ -1,8 +1,8 @@
-:HL["/_next/static/chunks/1dkmtsscysidd.css","style"]
+:HL["/_next/static/chunks/3338y1q1w5j9p.css","style"]
 :HL["/_next/static/chunks/2pke0mh53gr1u.css","style"]
 :HL["/images/weekend-ux-courses-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-location-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-blogs-hero-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-about-properties-bg.webp","image",{"fetchPriority":"high"}]
 :HL["/images/weekend-ux-policy-hero-bg.webp","image",{"fetchPriority":"high"}]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"R7Tjth90sPJEAnScJTs17"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"agFtFAHYs9JRzGKbSuMyx"}

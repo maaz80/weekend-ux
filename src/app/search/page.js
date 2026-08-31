@@ -3,13 +3,14 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { FiSearch, FiBookOpen, FiFilter, FiCompass, FiArrowRight, FiCheckCircle } from "react-icons/fi";
+import { FiSearch, FiBookOpen, FiFilter, FiCompass, FiArrowRight, FiCheckCircle, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useHomeData } from "@/context/HomeDataContext";
 import Testimonials from "@/components/Home/Testimonials/Testimonials";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import FAQ from "@/components/FAQ";
 import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumb";
+import OptimizedImage from "@/components/ui/OptimizedImage";
 
 const SearchResultsContent = () => {
      const searchParams = useSearchParams();
@@ -20,12 +21,17 @@ const SearchResultsContent = () => {
      const [searchQuery, setSearchQuery] = useState(initialQuery);
      const [selectedCategory, setSelectedCategory] = useState("All");
 
+     // Pagination state
+     const [currentPage, setCurrentPage] = useState(1);
+     const coursesPerPage = 3;
+
      // Sync search query and category with URL search params
      useEffect(() => {
           const q = searchParams.get("q") || "";
           const cat = searchParams.get("category") || "All";
           setSearchQuery(q);
           setSelectedCategory(cat);
+          setCurrentPage(1);
      }, [searchParams]);
 
      const getCourseList = (data) => {
@@ -59,6 +65,36 @@ const SearchResultsContent = () => {
 
           return matchesText && matchesCategory;
      });
+
+     // Reset page when searchQuery or selectedCategory changes
+     useEffect(() => {
+          setCurrentPage(1);
+     }, [searchQuery, selectedCategory]);
+
+     const totalPages = Math.ceil(directMatches.length / coursesPerPage);
+
+     const getPageNumbers = () => {
+          const pages = [];
+          if (totalPages <= 4) {
+               for (let i = 1; i <= totalPages; i++) pages.push(i);
+               return pages;
+          }
+          const start = Math.max(1, Math.min(currentPage, totalPages - 2));
+          const actualStart = currentPage < 3 ? 1 : start;
+          const end = Math.min(totalPages, actualStart + (currentPage < 3 ? 2 : 2));
+          for (let i = actualStart; i <= end; i++) pages.push(i);
+          const lastPageInWindow = pages[pages.length - 1];
+          if (lastPageInWindow < totalPages) {
+               if (totalPages - lastPageInWindow > 1) pages.push("...");
+               pages.push(totalPages);
+          }
+          return pages;
+     };
+
+     const paginatedMatches = directMatches.slice(
+          (currentPage - 1) * coursesPerPage,
+          currentPage * coursesPerPage
+     );
 
      // Find all categories in the database for the filter list
      const categoriesList = ["All", ...new Set(courses.map((c) => c.category).filter(Boolean))];
@@ -238,54 +274,109 @@ const SearchResultsContent = () => {
                                              </div>
 
                                              {directMatches.length > 0 ? (
-                                                  <div className="flex flex-col gap-5">
-                                                       {directMatches.map((course) => (
-                                                            <Link
-                                                                 key={course._id || course.slug}
-                                                                 href={`/courses/${course.slug || course._id}`}
-                                                                 className="group bg-white rounded-2xl border border-zinc-200/80 p-4 md:p-5 flex flex-col md:flex-row gap-5 shadow-sm hover:shadow-md hover:border-zinc-300 transition-all duration-300 text-left cursor-pointer"
-                                                            >
-                                                                 {/* Course Image */}
-                                                                 {course.image && (
-                                                                      <div className="w-full md:w-70 h-40 shrink-0 overflow-hidden rounded-xl bg-zinc-100 relative shadow-xs border border-zinc-150">
-                                                                           <img
-                                                                                src={course.image}
-                                                                                alt={course.title}
-                                                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                                                           />
-                                                                      </div>
-                                                                 )}
+                                                  <>
+                                                       <div className="flex flex-col gap-5">
+                                                            {paginatedMatches.map((course) => (
+                                                                 <Link
+                                                                      key={course._id || course.slug}
+                                                                      href={`/courses/${course.slug || course._id}`}
+                                                                      className="group bg-white rounded-2xl border border-zinc-200/80 p-4 md:p-5 flex flex-col md:flex-row gap-5 shadow-sm hover:shadow-md hover:border-zinc-300 transition-all duration-300 text-left cursor-pointer"
+                                                                 >
+                                                                      {/* Course Image */}
+                                                                      {course.image && (
+                                                                           <div className="w-full md:w-70 h-40 shrink-0 overflow-hidden rounded-xl bg-zinc-100 relative shadow-xs border border-zinc-150">
+                                                                                <OptimizedImage
+                                                                                     src={course.image}
+                                                                                     alt={course.title}
+                                                                                     width={280}
+                                                                                     height={160}
+                                                                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                                                />
+                                                                           </div>
+                                                                      )}
 
-                                                                 {/* Course Details */}
-                                                                 <div className="flex-1 flex flex-col justify-between min-w-0">
-                                                                      <div>
-                                                                           <div className="flex flex-wrap items-center gap-2 mb-2">
-                                                                                <span className="bg-official/20 text-neutral border border-official/40 text-[10px] font-extrabold px-3 py-0.5 rounded-full uppercase tracking-wider">
-                                                                                     {course.category || "Design"}
+                                                                      {/* Course Details */}
+                                                                      <div className="flex-1 flex flex-col justify-between min-w-0">
+                                                                           <div>
+                                                                                <div className="flex flex-wrap items-center gap-2 mb-2">
+                                                                                     <span className="bg-official/20 text-neutral border border-official/40 text-[10px] font-extrabold px-3 py-0.5 rounded-full uppercase tracking-wider">
+                                                                                          {course.category || "Design"}
+                                                                                     </span>
+                                                                                </div>
+                                                                                <h3 className="text-base md:text-lg font-extrabold text-neutral mb-1.5 group-hover:text-amber-600 transition-colors leading-snug">
+                                                                                     {course.title}
+                                                                                </h3>
+                                                                                <p className="text-zinc-600 text-xs md:text-sm line-clamp-2 leading-relaxed">
+                                                                                     {course.overview || "Explore professional curriculum in UI/UX Design and develop real world portfolio projects."}
+                                                                                </p>
+                                                                           </div>
+
+                                                                           {/* Footer row */}
+                                                                           <div className="flex items-center justify-between mt-4 border-t border-[#EDE9DC] pt-3">
+                                                                                <span className="text-[11px] text-zinc-500 font-semibold flex items-center gap-1">
+                                                                                     <FiCheckCircle className="text-emerald-600 text-sm" />
+                                                                                     Industry Certificate Included
+                                                                                </span>
+                                                                                <span className="text-xs font-extrabold text-neutral group-hover:text-amber-600 transition-colors flex items-center gap-1">
+                                                                                     View Details <FiArrowRight className="text-xs" />
                                                                                 </span>
                                                                            </div>
-                                                                           <h3 className="text-base md:text-lg font-extrabold text-neutral mb-1.5 group-hover:text-amber-600 transition-colors leading-snug">
-                                                                                {course.title}
-                                                                           </h3>
-                                                                           <p className="text-zinc-600 text-xs md:text-sm line-clamp-2 leading-relaxed">
-                                                                                {course.overview || "Explore professional curriculum in UI/UX Design and develop real world portfolio projects."}
-                                                                           </p>
                                                                       </div>
+                                                                 </Link>
+                                                            ))}
+                                                       </div>
 
-                                                                      {/* Footer row */}
-                                                                      <div className="flex items-center justify-between mt-4 border-t border-[#EDE9DC] pt-3">
-                                                                           <span className="text-[11px] text-zinc-500 font-semibold flex items-center gap-1">
-                                                                                <FiCheckCircle className="text-emerald-600 text-sm" />
-                                                                                Industry Certificate Included
-                                                                           </span>
-                                                                           <span className="text-xs font-extrabold text-neutral group-hover:text-amber-600 transition-colors flex items-center gap-1">
-                                                                                View Details <FiArrowRight className="text-xs" />
-                                                                           </span>
-                                                                      </div>
-                                                                 </div>
-                                                            </Link>
-                                                       ))}
-                                                  </div>
+                                                       {/* Pagination Controls */}
+                                                       {totalPages > 1 && (
+                                                            <div className="flex items-center justify-center gap-3 mt-8">
+                                                                 <button
+                                                                      onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                                                      aria-label="Previous Page"
+                                                                      disabled={currentPage === 1}
+                                                                      className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === 1
+                                                                           ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                           : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-neutral"
+                                                                           }`}
+                                                                 >
+                                                                      <FiChevronLeft className="text-lg" />
+                                                                 </button>
+
+                                                                 {getPageNumbers().map((item, idx) => {
+                                                                      if (item === "...") {
+                                                                           return (
+                                                                                <span key={`ellipsis-${idx}`} className="w-10 h-10 flex items-center justify-center text-sm font-semibold text-zinc-400 select-none">
+                                                                                     ...
+                                                                                </span>
+                                                                           );
+                                                                      }
+                                                                      return (
+                                                                           <button
+                                                                                key={`page-${item}`}
+                                                                                onClick={() => setCurrentPage(item)}
+                                                                                className={`w-10 h-10 rounded-xl border text-sm font-semibold transition-all cursor-pointer ${currentPage === item
+                                                                                     ? "bg-official text-neutral border-transparent shadow-sm"
+                                                                                     : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-neutral"
+                                                                                     }`}
+                                                                           >
+                                                                                {item}
+                                                                           </button>
+                                                                      );
+                                                                 })}
+
+                                                                 <button
+                                                                      onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                                                      aria-label="Next Page"
+                                                                      disabled={currentPage === totalPages}
+                                                                      className={`w-10 h-10 rounded-xl border flex items-center justify-center text-sm font-semibold transition-all cursor-pointer ${currentPage === totalPages
+                                                                           ? "border-zinc-200 text-zinc-300 bg-zinc-50 cursor-not-allowed"
+                                                                           : "border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-50 hover:text-neutral"
+                                                                           }`}
+                                                                 >
+                                                                      <FiChevronRight className="text-lg" />
+                                                                 </button>
+                                                            </div>
+                                                       )}
+                                                  </>
                                              ) : (
                                                   <div className="bg-white rounded-2xl border border-zinc-200 py-14 px-6 text-center shadow-sm">
                                                        <div className="w-14 h-14 bg-zinc-100 text-zinc-400 rounded-2xl flex items-center justify-center mx-auto mb-3">

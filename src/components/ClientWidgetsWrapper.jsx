@@ -12,7 +12,7 @@ const LeadModal = dynamic(() => import("@/components/LeadModal"), { ssr: false }
 
 export default function ClientWidgetsWrapper() {
   const pathname = usePathname();
-  const isDashboard = pathname?.startsWith("/dashboard");
+  const isDashboard = pathname?.startsWith("/dashboard") || pathname?.startsWith("/jobs");
 
   return (
     <>

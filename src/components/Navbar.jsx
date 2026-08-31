@@ -106,7 +106,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
      }, [authUser]);
 
      const currentUser = user || authUser;
-     const isDashboard = pathname?.startsWith("/dashboard");
+     const isDashboard = pathname?.startsWith("/dashboard") || pathname?.startsWith("/jobs");
 
      const handleAuthSuccess = async () => {
           const userData = await refreshUser();

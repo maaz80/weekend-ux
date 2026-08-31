@@ -272,15 +272,15 @@ const Testimonials = ({ data }) => {
                     </div>
 
                      {/* Controls */}
-                     <div className="flex items-center justify-between md:justify-end gap-3 mt-6 md:mt-8 px-2 md:px-0">
+                     <div className="flex items-center justify-between md:justify-end gap-1.5 sm:gap-3 mt-6 md:mt-8 px-1 sm:px-2 md:px-0 max-w-full overflow-hidden shrink-0">
 
                           {/* Slide Counter on Mobile */}
-                          <div className="text-xs font-bold text-neutral/70 md:hidden bg-white/60 backdrop-blur-md px-3 py-1 rounded-full border border-zinc-200/80 shadow-2xs">
+                          <div className="text-[11px] sm:text-xs font-bold text-neutral/70 md:hidden bg-white/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-zinc-200/80 shadow-2xs shrink-0">
                                {currentIndex + 1} / {maxIndex + 1}
                           </div>
 
                           {/* DOTS WINDOW (Fixed 5 Dots, Cyclic Highlight 1 -> 5 -> 1) */}
-                          <div className="flex items-center gap-1.5 bg-white/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-zinc-200/80 shadow-2xs">
+                          <div className="flex items-center gap-0.5 sm:gap-1.5 bg-white/70 backdrop-blur-md px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-zinc-200/80 shadow-2xs shrink-0 overflow-hidden">
                                {Array.from({ length: Math.min(maxIndex + 1, 5) }).map((_, dotIdx) => {
                                     const activeDotIdx = currentIndex % 5;
                                     const isActive = activeDotIdx === dotIdx;
@@ -298,11 +298,11 @@ const Testimonials = ({ data }) => {
                                               }}
                                               aria-label={`Go to slide ${dotIdx + 1}`}
                                               aria-current={isActive ? "true" : undefined}
-                                              className="p-2.5 min-w-8 min-h-8 flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110"
+                                              className="p-1 sm:p-2 min-w-5 sm:min-w-7 min-h-5 sm:min-h-7 flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110"
                                          >
                                               <span className={`block rounded-full transition-all duration-300 ${
                                                    isActive
-                                                        ? "w-5 md:w-6 h-1.5 md:h-2 bg-neutral"
+                                                        ? "w-4 sm:w-5 md:w-6 h-1.5 md:h-2 bg-neutral"
                                                         : "w-1.5 md:w-2 h-1.5 md:h-2 bg-zinc-300 hover:bg-zinc-500"
                                               }`}
                                               />
@@ -312,23 +312,23 @@ const Testimonials = ({ data }) => {
                           </div>
 
                           {/* Navigation Arrows */}
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
                                <button
                                     onClick={() => scroll("left")}
                                     disabled={currentIndex === 0}
                                     aria-label="Go to Previous Testimonial"
-                                    className="w-9 h-9 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-neutral hover:bg-neutral hover:text-white transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
+                                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-neutral hover:bg-neutral hover:text-white transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
                                >
-                                    <IoIosArrowBack size={16} />
+                                    <IoIosArrowBack size={15} />
                                </button>
 
                                <button
                                     onClick={() => scroll("right")}
                                     disabled={currentIndex >= maxIndex}
                                     aria-label="Go to Next Testimonial"
-                                    className="w-9 h-9 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-neutral hover:bg-neutral hover:text-white transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
+                                    className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-neutral hover:bg-neutral hover:text-white transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
                                >
-                                    <IoIosArrowForward size={16} />
+                                    <IoIosArrowForward size={15} />
                                </button>
                           </div>
                      </div>

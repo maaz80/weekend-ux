@@ -239,47 +239,69 @@ const Testimonials = ({ data }) => {
                     </div>
 
                     {/* Controls */}
-                    <div className="flex items-center justify-end gap-3 mt-8">
+                    <div className="flex items-center justify-between md:justify-end gap-1.5 sm:gap-3 mt-6 md:mt-8 px-1 sm:px-2 md:px-0 max-w-full overflow-hidden shrink-0">
 
-                         {/* DOTS */}
-                         <div className="flex items-center gap-0">
-                              {Array.from({ length: maxIndex + 1 }).map((_, i) => (
-                                   <button
-                                        key={i}
-                                        onClick={() => {
-                                             setCurrentIndex(i);
-                                             sliderRef.current.scrollTo({
-                                                  left: i * cardWidthRef.current,
-                                                  behavior: "auto",
-                                             });
-                                        }}
-                                        aria-label={`Go to slide ${i + 1}`}
-                                        aria-current={currentIndex === i ? "true" : undefined}
-                                        className="w-11 h-11 flex items-center justify-center cursor-pointer"
-                                   >
-                                        <span className={`block rounded-full transition-all duration-300
-                    ${currentIndex === i ? "w-6 h-2 bg-gray-800" : "w-2 h-2 bg-gray-300"}`}
-                                        />
-                                   </button>
-                              ))}
+                         {/* Slide Counter on Mobile */}
+                         <div className="text-[11px] sm:text-xs font-bold text-neutral/70 md:hidden bg-white/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-zinc-200/80 shadow-2xs shrink-0">
+                              {currentIndex + 1} / {maxIndex + 1}
+                         </div>
+
+                         {/* DOTS WINDOW (Fixed Max 5 Dots) */}
+                         <div className="flex items-center gap-0.5 sm:gap-1 bg-white/70 backdrop-blur-md px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-zinc-200/80 shadow-2xs shrink-0 overflow-hidden">
+                              {Array.from({ length: Math.min(maxIndex + 1, 5) }).map((_, dotIdx) => {
+                                   const activeDotIdx = currentIndex % 5;
+                                   const isActive = activeDotIdx === dotIdx;
+
+                                   return (
+                                        <button
+                                             key={dotIdx}
+                                             onClick={() => {
+                                                  const currentGroup = Math.floor(currentIndex / 5);
+                                                  let targetIndex = (currentGroup * 5) + dotIdx;
+                                                  if (targetIndex > maxIndex) {
+                                                       targetIndex = dotIdx;
+                                                  }
+                                                  setCurrentIndex(targetIndex);
+                                                  sliderRef.current.scrollTo({
+                                                       left: targetIndex * cardWidthRef.current,
+                                                       behavior: "smooth",
+                                                  });
+                                             }}
+                                             aria-label={`Go to slide ${dotIdx + 1}`}
+                                             aria-current={isActive ? "true" : undefined}
+                                             className="p-1 sm:p-2 min-w-5 sm:min-w-7 min-h-5 sm:min-h-7 flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110"
+                                        >
+                                             <span className={`block rounded-full transition-all duration-300 ${
+                                                  isActive
+                                                       ? "w-4 sm:w-5 md:w-6 h-1.5 md:h-2 bg-gray-800"
+                                                       : "w-1.5 md:w-2 h-1.5 md:h-2 bg-gray-300 hover:bg-gray-500"
+                                             }`}
+                                             />
+                                        </button>
+                                   );
+                              })}
                          </div>
 
                          {/* Arrows */}
-                         <button
-                              onClick={() => scroll("left")}
-                              aria-label="Go to Previous Testimonial"
-                              className="w-8 h-8 rounded-full border flex items-center justify-center text-gray-600 hover:bg-gray-200 cursor-pointer"
-                         >
-                              <IoIosArrowBack />
-                         </button>
+                         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                              <button
+                                   onClick={() => scroll("left")}
+                                   disabled={currentIndex === 0}
+                                   aria-label="Go to Previous Testimonial"
+                                   className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
+                              >
+                                   <IoIosArrowBack />
+                              </button>
 
-                         <button
-                              onClick={() => scroll("right")}
-                              aria-label="Go to Next Testimonial"
-                              className="w-8 h-8 rounded-full border flex items-center justify-center text-gray-600 hover:bg-gray-200 cursor-pointer"
-                         >
-                              <IoIosArrowForward />
-                         </button>
+                              <button
+                                   onClick={() => scroll("right")}
+                                   disabled={currentIndex >= maxIndex}
+                                   aria-label="Go to Next Testimonial"
+                                   className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
+                              >
+                                   <IoIosArrowForward />
+                              </button>
+                         </div>
                     </div>
                </div>
 
