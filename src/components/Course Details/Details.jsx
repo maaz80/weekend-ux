@@ -640,14 +640,12 @@ export default function Details({ data }) {
                                                   <div className="shrink-0">
                                                        {shortTermItems[sliderIndex]?.image ? (
                                                             <div className="w-12 h-12 rounded-full overflow-hidden flex items-center justify-center border border-zinc-200 bg-white shrink-0 shadow-sm">
-                                                                 <img
+                                                                 <OptimizedImage
                                                                       src={shortTermItems[sliderIndex].image}
                                                                       alt={shortTermItems[sliderIndex]?.alt || shortTermItems[sliderIndex]?.title || "Course Image"}
+                                                                      width={60}
+                                                                      height={60}
                                                                       className="w-full h-full object-cover"
-                                                                      onError={(e) => {
-                                                                           e.target.onerror = null;
-                                                                           e.target.style.display = "none";
-                                                                      }}
                                                                  />
                                                             </div>
                                                        ) : (
@@ -702,9 +700,12 @@ export default function Details({ data }) {
                                              >
                                                   <div className="aspect-4/3 bg-zinc-100 overflow-hidden relative">
                                                        {study.image ? (
-                                                            <img
+                                                            <OptimizedImage
                                                                  src={study.image}
                                                                  alt={study.alt || "Student work mockup"}
+                                                                 width={420}
+                                                                 height={315}
+                                                                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
                                                                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                                                             />
                                                        ) : (
