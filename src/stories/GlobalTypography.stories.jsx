@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FiCopy, FiCheck, FiSliders, FiSun, FiMoon, FiSmartphone, FiTablet, FiMonitor, FiType, FiCode } from "react-icons/fi";
+import { FiCopy, FiCheck, FiSun, FiType, FiCode, FiCheckCircle, FiXCircle, FiGrid, FiLayers } from "react-icons/fi";
 
 export default {
      title: "Ant Design System / Typography",
@@ -7,7 +7,7 @@ export default {
           layout: "fullscreen",
           docs: {
                description: {
-                    component: "Ultra-precise Ant Design Specification & Interactive Design Tokens Portal for Weekend UX Typography."
+                    component: "Official Ant Design Typography Architecture, Font Hierarchy, Responsive Scale Tokens, and Usage Guidelines for Weekend UX."
                }
           }
      }
@@ -16,14 +16,22 @@ export default {
 const TypographyDoc = () => {
      const [copiedToken, setCopiedToken] = useState(null);
      const [customText, setCustomText] = useState("Design Skills That Actually Get You Hired.");
-     const [previewBg, setPreviewBg] = useState("light"); // light, dark, cream
-     const [activeTab, setActiveTab] = useState("all"); // all, headings, body, badges
+     const [previewBg, setPreviewBg] = useState("light");
+     const [activeTab, setActiveTab] = useState("all");
 
      const copyToClipboard = (text) => {
-          navigator.clipboard.writeText(text);
+          if (navigator.clipboard) {
+               navigator.clipboard.writeText(text);
+          }
           setCopiedToken(text);
           setTimeout(() => setCopiedToken(null), 2000);
      };
+
+     const fontFamilies = [
+          { name: "Playfair Display", type: "Editorial Display Headings", usage: "H1 Hero Titles, H2 Section Display Titles", sample: "Playfair Display Serif", fontClass: "font-playfair font-bold text-2xl" },
+          { name: "Urbanist", type: "Primary UI & Body Sans-Serif", usage: "Sub-taglines, Card Headers, Paragraphs, Buttons", sample: "Urbanist Clean Sans", fontClass: "font-urbanist font-bold text-2xl" },
+          { name: "Inter", type: "Technical UI & Form Inputs", usage: "Form Inputs, Data Tables, Code Snippets, Badges", sample: "Inter Technical Sans", fontClass: "font-inter font-semibold text-2xl" }
+     ];
 
      const typographyData = [
           {
@@ -35,11 +43,12 @@ const TypographyDoc = () => {
                fontFamily: "Urbanist, sans-serif",
                mobileSize: "11px",
                desktopSize: "13px",
+               lineHeight: "1rem (16px)",
                weight: "700 (Bold)",
                letterSpacing: "0.45em (7.2px)",
                colorToken: "var(--color-official) / #FFD400",
                sample: "EXPLORE OUR COURSES & PROGRAMS",
-               description: "Top category badge positioned directly above H1/H2 titles.",
+               description: "Uppercase category tagline positioned directly above H1 or H2 titles.",
                cssCode: `.eyebrow-tagline {\n  font-family: var(--font-urbanist), sans-serif;\n  font-size: 11px;\n  font-weight: 700;\n  text-transform: uppercase;\n  letter-spacing: 0.45em;\n  color: var(--color-official);\n  margin-bottom: 0.5rem;\n}`
           },
           {
@@ -51,11 +60,12 @@ const TypographyDoc = () => {
                fontFamily: "Playfair Display, serif",
                mobileSize: "22px (leading 40px)",
                desktopSize: "56px (leading 80px)",
-               weight: "400 (Regular) / 700 (Bold)",
+               lineHeight: "1.2 - 1.45",
+               weight: "700 (Bold)",
                letterSpacing: "Normal",
                colorToken: "#FFFFFF (Dark BG) / #1C1C1C (Light BG)",
                sample: customText || "Design Skills That Actually Get You Hired.",
-               description: "Main top-level page Hero section H1 title across major landing pages.",
+               description: "Top-level Hero section H1 header across primary landing pages.",
                cssCode: `.h1-hero-title {\n  font-family: var(--font-playfair), serif;\n  font-size: 22px;\n  line-height: 2.5rem;\n  color: #ffffff;\n  position: relative;\n  z-index: 50;\n}\n@media (min-width: 768px) { .h1-hero-title { font-size: 38px; line-height: 3.75rem; } }\n@media (min-width: 1536px) { .h1-hero-title { font-size: 56px; line-height: 5rem; } }`
           },
           {
@@ -63,15 +73,16 @@ const TypographyDoc = () => {
                category: "headings",
                class: "h2-section-title-lg",
                tag: "H2",
-               name: "Large Section Display Title",
+               name: "Large Display Section Title",
                fontFamily: "Playfair Display, serif",
                mobileSize: "38px (leading 1.05)",
                desktopSize: "72px (leading 1.05)",
+               lineHeight: "1.05 (Tight Display)",
                weight: "500 (Medium)",
                letterSpacing: "Tight (-0.02em)",
                colorToken: "var(--neutral) / #1C1C1C",
                sample: "All You Need To Know",
-               description: "High-impact section headers for FAQ, Testimonials, and Related Blogs.",
+               description: "High-impact editorial display title used for FAQ, Testimonials, and Related Blogs.",
                cssCode: `.h2-section-title-lg {\n  font-family: var(--font-playfair), serif;\n  font-size: 38px;\n  line-height: 1.05;\n  color: var(--neutral);\n  text-align: center;\n}\n@media (min-width: 768px) { .h2-section-title-lg { font-size: 58px; } }\n@media (min-width: 1024px) { .h2-section-title-lg { font-size: 72px; } }`
           },
           {
@@ -83,11 +94,12 @@ const TypographyDoc = () => {
                fontFamily: "Playfair Display, serif",
                mobileSize: "32px (leading 1.2)",
                desktopSize: "42px (leading 1.2)",
+               lineHeight: "1.2 (Standard)",
                weight: "700 (Bold)",
                letterSpacing: "Tight",
                colorToken: "#18181B (text-zinc-900)",
                sample: "UX Case Studies by Our Students",
-               description: "Standard page section headers used across Course Details, Case Studies, and Programs.",
+               description: "Standard section header used across Course Details, Programs, and Case Studies.",
                cssCode: `.h2-section-title {\n  font-family: var(--font-playfair), serif;\n  font-size: 32px;\n  line-height: 1.2;\n  font-weight: 700;\n  color: #18181b;\n}\n@media (min-width: 768px) { .h2-section-title { font-size: 42px; } }`
           },
           {
@@ -95,10 +107,11 @@ const TypographyDoc = () => {
                category: "headings",
                class: "h3-card-title",
                tag: "H3",
-               name: "Card & Sub-Section Title",
+               name: "Card & Feature Title",
                fontFamily: "Urbanist, sans-serif",
                mobileSize: "18px (leading 1.35)",
                desktopSize: "24px (leading 1.35)",
+               lineHeight: "1.35",
                weight: "700 (Bold)",
                letterSpacing: "Normal",
                colorToken: "#18181B (text-zinc-900)",
@@ -115,6 +128,7 @@ const TypographyDoc = () => {
                fontFamily: "Urbanist, sans-serif",
                mobileSize: "15px (leading 22px)",
                desktopSize: "17px (leading 28px)",
+               lineHeight: "1.375rem - 1.75rem",
                weight: "500 (Medium)",
                letterSpacing: "Normal",
                colorToken: "rgba(28, 28, 28, 0.8)",
@@ -127,10 +141,11 @@ const TypographyDoc = () => {
                category: "body",
                class: "body-text",
                tag: "P",
-               name: "Standard Body Text",
+               name: "Standard Body Copy",
                fontFamily: "Urbanist, sans-serif",
                mobileSize: "14px (leading 26px)",
                desktopSize: "16px (leading 26px)",
+               lineHeight: "1.625 (Relaxed)",
                weight: "400 (Regular)",
                letterSpacing: "Normal",
                colorToken: "#71717A (text-zinc-500)",
@@ -140,31 +155,46 @@ const TypographyDoc = () => {
           }
      ];
 
+     const dosAndDonts = [
+          {
+               title: "Heading Font Family Pairing",
+               doText: "Use Playfair Display for editorial section titles (H1/H2) paired with Urbanist for body paragraphs.",
+               dontText: "Don't use Playfair Display for small body paragraphs, buttons, or technical UI inputs.",
+               doSample: "Playfair Display H2 + Urbanist Body Copy",
+               dontSample: "Playfair Display used for small 12px input labels"
+          },
+          {
+               title: "Sub-Tagline Letter Spacing",
+               doText: "Apply uppercase text-transform and 0.45em wide letter-spacing on sub-tagline eyebrow badges.",
+               dontText: "Don't compress letter-spacing or use lowercase for top sub-tagline badges.",
+               doSample: "EXPLORE OUR COURSES",
+               dontSample: "explore our courses"
+          }
+     ];
+
      const filteredItems = typographyData.filter(item => activeTab === "all" || item.category === activeTab);
 
      return (
           <div className="bg-[#F8F9FA] text-[#1C1C1C] min-h-screen p-4 sm:p-8 lg:p-12 text-left font-urbanist antialiased">
-               <div className="max-w-7xl mx-auto space-y-8">
+               <div className="max-w-7xl mx-auto space-y-10">
 
-                    {/* TOP BRAND HERO BANNER */}
+                    {/* TOP HERO BANNER */}
                     <div className="bg-white rounded-3xl p-6 sm:p-10 border border-zinc-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] relative overflow-hidden">
-                         <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-yellow-200/30 via-amber-100/10 to-transparent rounded-full blur-3xl pointer-events-none" />
-
                          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10">
                               <div>
                                    <div className="flex items-center gap-2 mb-3">
                                         <span className="bg-neutral text-white font-mono text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-xs">
-                                             Ant Design Portal
+                                             Ant Design System
                                         </span>
                                         <span className="bg-official/20 text-neutral border border-official/40 text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
                                              Typography Specification
                                         </span>
                                    </div>
                                    <h1 className="font-playfair text-3xl sm:text-5xl font-bold text-neutral tracking-tight mb-3">
-                                        Global Typography Tokens
+                                        Typography Scale & Font Hierarchy
                                    </h1>
-                                   <p className="text-zinc-500 text-sm sm:text-base max-w-2xl leading-relaxed">
-                                        Official typography design specs, live interactive text playground, and copyable CSS declarations powering Weekend UX.
+                                   <p className="text-zinc-500 text-sm sm:text-base max-w-3xl leading-relaxed">
+                                        Official typographic scale, font family pairing principles, responsive breakpoint tokens, and copyable CSS class declarations powering Weekend UX.
                                    </p>
                               </div>
 
@@ -172,7 +202,7 @@ const TypographyDoc = () => {
                               <div className="flex flex-col gap-3 bg-zinc-50/80 p-4 rounded-2xl border border-zinc-200 shrink-0 min-w-72">
                                    <div className="flex items-center justify-between">
                                         <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-500 flex items-center gap-1.5">
-                                             <FiSun /> Background Mode
+                                             <FiSun /> Background Canvas
                                         </span>
                                         <div className="flex items-center gap-1 bg-white p-1 rounded-xl border border-zinc-200">
                                              <button
@@ -198,7 +228,7 @@ const TypographyDoc = () => {
 
                                    {/* Live Custom Text Tester */}
                                    <div className="flex flex-col gap-1 mt-1">
-                                        <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Test Custom Text</span>
+                                        <span className="text-[10px] font-bold uppercase tracking-wider text-zinc-400">Live Custom Text Tester</span>
                                         <input
                                              type="text"
                                              value={customText}
@@ -213,10 +243,10 @@ const TypographyDoc = () => {
                          {/* CATEGORY FILTER TABS */}
                          <div className="flex items-center gap-2 mt-8 pt-6 border-t border-zinc-150 overflow-x-auto">
                               {[
-                                   { id: "all", label: "All Tokens (7)" },
+                                   { id: "all", label: "All Typography Tokens (7)" },
                                    { id: "headings", label: "Headings (H1, H2, H3)" },
-                                   { id: "body", label: "Body Copy & Paragraphs" },
-                                   { id: "badges", label: "Sub-Taglines & Badges" }
+                                   { id: "body", label: "Body Copy & Subtitles" },
+                                   { id: "badges", label: "Sub-Taglines & Eyebrows" }
                               ].map(tab => (
                                    <button
                                         key={tab.id}
@@ -230,6 +260,23 @@ const TypographyDoc = () => {
                                    </button>
                               ))}
                          </div>
+                    </div>
+
+                    {/* FONT FAMILY SUMMARY CARDS */}
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                         {fontFamilies.map((font, fIdx) => (
+                              <div key={fIdx} className="bg-white rounded-3xl p-6 border border-zinc-200/90 shadow-2xs space-y-3">
+                                   <div className="flex justify-between items-start">
+                                        <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200">
+                                             Font Family
+                                        </span>
+                                        <span className="text-xs text-zinc-400 font-mono">var(--font-{font.name.toLowerCase().split(' ')[0]})</span>
+                                   </div>
+                                   <h3 className="font-bold text-lg text-neutral">{font.name}</h3>
+                                   <p className="text-xs text-zinc-500">{font.type}</p>
+                                   <p className="text-[11px] text-zinc-600 border-t border-zinc-100 pt-2">{font.usage}</p>
+                              </div>
+                         ))}
                     </div>
 
                     {/* TYPOGRAPHY CARDS LIST */}
@@ -278,7 +325,7 @@ const TypographyDoc = () => {
                                         </div>
                                    </div>
 
-                                   {/* ANT DESIGN SPECIFICATION MATRIX TABLE */}
+                                   {/* SPECIFICATION MATRIX & CSS DECLARATION */}
                                    <div className="p-6 bg-white grid grid-cols-1 lg:grid-cols-12 gap-6 text-xs">
 
                                         {/* Spec Grid Table */}
@@ -331,23 +378,50 @@ const TypographyDoc = () => {
                          ))}
                     </div>
 
+                    {/* SECTION: DO'S AND DON'TS GUIDELINES */}
+                    <div className="bg-white rounded-3xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-6">
+                         <div className="border-b border-zinc-150 pb-4">
+                              <h3 className="font-bold text-xl text-neutral mb-1">Typography Usage Guidelines (Do&apos;s &amp; Don&apos;ts)</h3>
+                              <p className="text-xs text-zinc-500">Strict rules for heading font pairings, uppercase taglines, and line heights.</p>
+                         </div>
+
+                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                              {dosAndDonts.map((item, idx) => (
+                                   <div key={idx} className="space-y-4">
+                                        <h4 className="font-bold text-sm text-neutral">{item.title}</h4>
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                             {/* DO BOX */}
+                                             <div className="border-2 border-emerald-500/30 rounded-2xl p-4 bg-emerald-50/20 space-y-2">
+                                                  <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-700">
+                                                       <FiCheckCircle className="text-emerald-600" /> DO THIS
+                                                  </div>
+                                                  <div className="p-3 bg-white rounded-xl border border-emerald-200 text-xs font-semibold text-neutral">
+                                                       {item.doSample}
+                                                  </div>
+                                                  <p className="text-[11px] text-zinc-600 leading-snug">{item.doText}</p>
+                                             </div>
+
+                                             {/* DONT BOX */}
+                                             <div className="border-2 border-red-500/30 rounded-2xl p-4 bg-red-50/20 space-y-2">
+                                                  <div className="flex items-center gap-1.5 text-xs font-bold text-red-700">
+                                                       <FiXCircle className="text-red-600" /> DON&apos;T DO THIS
+                                                  </div>
+                                                  <div className="p-3 bg-white rounded-xl border border-red-200 text-xs font-semibold text-neutral">
+                                                       {item.dontSample}
+                                                  </div>
+                                                  <p className="text-[11px] text-zinc-600 leading-snug">{item.dontText}</p>
+                                             </div>
+                                        </div>
+                                   </div>
+                              ))}
+                         </div>
+                    </div>
+
                </div>
           </div>
      );
 };
 
-export const Default = {
-     render: () => <TypographyDoc />
-};
-
-export const TypographySpecification = {
-     render: () => <TypographyDoc />
-};
-
-export const InteractiveSpecification = {
-     render: () => <TypographyDoc />
-};
-
-export const LiveDocumentation = {
+export const Specification = {
      render: () => <TypographyDoc />
 };
