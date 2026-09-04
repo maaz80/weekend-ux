@@ -1,0 +1,1 @@
+import{i as e}from"./preload-helper-DID7B_--.js";import{n as t,t as n}from"./CourseCard-2ut7WYna.js";var r,i=e((()=>{t(),r=n}));export{i as n,r as t};

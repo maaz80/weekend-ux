@@ -2,6 +2,9 @@ import { cache } from "react";
 import CourseDetailsView from "@/components/Course Details/Details";
 import FAQ from "@/components/FAQ";
 import Testimonials from "@/components/Home/Testimonials/Testimonials";
+import WhyChooseUs from "@/components/Course Details/WhyChooseUs";
+import ReadyToStartJourney from "@/components/Course Details/ReadyToStartJourney";
+import RelatedCourses from "@/components/Course Details/RelatedCourses";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import Image from "next/image";
 import Link from "next/link";
@@ -128,6 +131,7 @@ export async function generateMetadata({ params }) {
 }
 
 import CourseHero from "@/components/Course Details/CourseHero";
+import SocialProofBar from "@/components/Course Details/SocialProofBar";
 
 export default async function CourseSlugPage({ params }) {
      const { slug } = await params;
@@ -162,6 +166,8 @@ export default async function CourseSlugPage({ params }) {
                <Breadcrumb />
                {/* Hero Header Section */}
                <CourseHero data={data} heroTitle={heroTitle} />
+               {/* Social Proof Bar Section right below Hero */}
+               <SocialProofBar items={data?.socialProof} />
                <SchemaRenderer schemas={data?.schemas} />
 
                {/* Server-rendered static JSON-LD fallback for No-JS/Control+U */}
@@ -209,7 +215,9 @@ export default async function CourseSlugPage({ params }) {
 
                <CourseDetailsView data={data} />
                <Testimonials />
-               
+               <WhyChooseUs data={data} />
+               <ReadyToStartJourney data={data} />
+               <RelatedCourses currentSlug={slug} />
                <RelatedBlogs />
                <FAQ faqData={(data?.faq?.items && data.faq.items.length > 0) ? {
                     faq: data.faq.items,

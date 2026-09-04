@@ -10,6 +10,16 @@ import OptimizedImage from "@/components/ui/OptimizedImage";
 import Form from "./Form";
 import CallCard from "./CallCard";
 import Curriculum from "./Curriculum";
+import SkillsYouWillLearn from "./SkillsYouWillLearn";
+import WhoShouldEnroll from "./WhoShouldEnroll";
+import TrustedByLearners from "./TrustedByLearners";
+import MeetTheTrainer from "./MeetTheTrainer";
+import DemoClass from "./DemoClass";
+import CourseCertification from "./CourseCertification";
+import CourseBenefits from "./CourseBenefits";
+import JobRoles from "./JobRoles";
+import HiringPartners from "./HiringPartners";
+import ChooseYourLearning from "./ChooseYourLearning";
 
 const getEmbedUrl = (url) => {
      if (!url) return "";
@@ -388,7 +398,7 @@ export default function Details({ data }) {
                     <div className="custom-width px-4 sm:px-6 lg:px-10">
                          
                          {/* New Custom Section with Left-side Info and Right-side Form/Banner */}
-                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16 items-start">
+                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
 
                               {/* LEFT COLUMN: Content */}
                               <div className="space-y-8 lg:col-span-2">
@@ -498,13 +508,32 @@ export default function Details({ data }) {
                                              />
                                         </div>
                                    )}
+
+                                   {/* Course Syllabus / Curriculum Section */}
+                                   <div id="curriculum" className="pt-8 border-t border-zinc-200 space-y-5">
+                                        <div>
+                                             <span className="text-xs font-bold uppercase tracking-widest text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200/60 inline-block mb-2 font-urbanist">
+                                                  Course Modules
+                                             </span>
+                                             <h3 className="font-playfair text-[26px] md:text-[34px] font-extrabold text-zinc-900 leading-tight">
+                                                  Course Syllabus & Curriculum
+                                             </h3>
+                                             <p className="font-urbanist text-[15px] md:text-[16px] text-zinc-500 mt-1.5 font-medium">
+                                                  Comprehensive chapter-wise breakdown of topics and practical projects taught in this program.
+                                             </p>
+                                        </div>
+
+                                        <div className="pt-1">
+                                             <Curriculum curriculum={curriculum} courseId={data?._id} />
+                                        </div>
+                                   </div>
                               </div>
 
                               {/* RIGHT COLUMN: Sidebar Form and CallCard Card */}
-                              <div className="space-y-6 lg:sticky lg:top-24">
+                              <div className="space-y-6 lg:sticky lg:top-28 self-start">
 
                                    {/* Admission Form */}
-                                   <div className="bg-white rounded-3xl shadow-sm p-6 md:p-10 border border-zinc-150">
+                                   <div className="bg-white rounded-3xl shadow-sm p-6 lg:p-7 xl:p-8 border border-zinc-150">
                                         <h2 className="text-start text-[22px] md:text-[24px] font-bold text-neutral leading-9 mb-4">
                                              Send Us Your Training Requirement
                                         </h2>
@@ -570,6 +599,36 @@ export default function Details({ data }) {
                     </div>
                </section>
 
+               {/* Skills You Will Learn Section */}
+               <SkillsYouWillLearn data={data} />
+
+               {/* Who Should Enroll Section */}
+               <WhoShouldEnroll />
+
+               {/* Trusted By Learners Section */}
+               <TrustedByLearners />
+
+               {/* Meet The Trainer Section */}
+               <MeetTheTrainer data={data} />
+
+               {/* Free Demo Class Section */}
+               <DemoClass data={data} />
+
+               {/* Course Certification Section */}
+               <CourseCertification data={data} />
+
+               {/* Course Benefits Section */}
+               <CourseBenefits data={data} />
+
+               {/* Job Roles Section */}
+               <JobRoles data={data} />
+
+               {/* Hiring Partners Section */}
+               <HiringPartners data={data} />
+
+               {/* Choose Your Learning Section */}
+               <ChooseYourLearning data={data} />
+
                {/* Third Section: Short-term Courses Slider Banner */}
                <section className="bg-official px-2 py-8 md:py-24 font-urbanist text-zinc-900 w-full">
                     <div className="custom-width px-4 sm:px-6 lg:px-16">
@@ -628,11 +687,11 @@ export default function Details({ data }) {
 
                                    </div>
 
-                                   {/* Right Card display */}
+                                    {/* Right Card display */}
                                    <div className="w-full min-h-65">
-                                        <div className="bg-white text-zinc-900 rounded-3xl p-8 shadow-lg border border-blue-100 min-h-55 flex flex-col justify-between transition-all duration-500 transform hover:scale-[1.01]">
+                                        <div className="bg-[#ffffff] text-[#18181b] rounded-3xl p-8 shadow-lg border border-blue-100 min-h-55 flex flex-col justify-between transition-all duration-500 transform hover:scale-[1.01]">
 
-                                             <p className="font-urbanist text-[15px] md:text-[16px] text-zinc-650 leading-relaxed text-left mb-6 font-medium">
+                                             <p className="font-urbanist text-[15px] md:text-[16px] text-[#4b5563] leading-relaxed text-left mb-6 font-medium">
                                                   {shortTermItems[sliderIndex]?.description}
                                              </p>
 
@@ -653,10 +712,10 @@ export default function Details({ data }) {
                                                        )}
                                                   </div>
                                                   <div className="text-left">
-                                                       <p className="font-urbanist text-[17px] md:text-[19px] font-bold text-zinc-900 leading-tight">
+                                                       <p className="font-urbanist text-[17px] md:text-[19px] font-bold text-[#18181b] leading-tight">
                                                             {shortTermItems[sliderIndex]?.title}
                                                        </p>
-                                                       <p className="font-urbanist text-[11px] font-bold text-zinc-400 tracking-wider uppercase mt-1">
+                                                       <p className="font-urbanist text-[11px] font-bold text-[#6b7280] tracking-wider uppercase mt-1">
                                                             {shortTermItems[sliderIndex]?.duration}
                                                        </p>
                                                   </div>

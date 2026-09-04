@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, BookOpen, Clock, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Clock, Monitor, Sparkles, Users } from "lucide-react";
 
 export default function CourseHero({ data, heroTitle }) {
   const overviewText =
@@ -11,7 +11,9 @@ export default function CourseHero({ data, heroTitle }) {
     "Master industry-standard design tools, user research, wireframing, prototyping, and AI workflows with hands-on live project training.";
 
   const category = data?.category || "Design & Tech Track";
-  const duration = data?.courselength || "12 Weeks";
+  const duration = data?.duration || data?.courselength;
+  const mode = data?.mode;
+  const batchSize = data?.batchSize || data?.batchsize;
 
   const titleText = heroTitle || data?.title || "Advance Certificate in AI for UI UX";
 
@@ -47,20 +49,37 @@ export default function CourseHero({ data, heroTitle }) {
       <div className="custom-width px-4 sm:px-0 md:px-0 lg:px-0 mx-auto w-full relative z-20">
         <div className="max-w-7xl space-y-4 md:space-y-6 text-left">
           
-          {/* Top Category / Pill Badges */}
-          {/* <div className="flex flex-wrap items-center gap-2.5">
-            <span className="inline-flex items-center gap-1.5 text-xs md:text-sm font-bold uppercase tracking-wider text-amber-400 bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/30 backdrop-blur-md">
-              <Sparkles size={14} className="text-amber-400" />
-              {category}
-            </span>
+          {/* Top Meta Badges (Duration, Mode, Batch Size) */}
+          {(duration || mode || batchSize) && (
+            <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pb-1">
+              {duration && (
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/15 backdrop-blur-md shadow-xs">
+                  <Clock size={15} className="text-amber-400 shrink-0" />
+                  <span>
+                    <span className="text-zinc-400 font-medium">Duration:</span> {duration}
+                  </span>
+                </span>
+              )}
 
-            {duration && (
-              <span className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-zinc-300 bg-white/10 px-3.5 py-1.5 rounded-full backdrop-blur-md border border-white/10">
-                <Clock size={14} className="text-zinc-400" />
-                {duration}
-              </span>
-            )}
-          </div> */}
+              {mode && (
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/15 backdrop-blur-md shadow-xs">
+                  <Monitor size={15} className="text-amber-400 shrink-0" />
+                  <span>
+                    <span className="text-zinc-400 font-medium">Mode:</span> {mode}
+                  </span>
+                </span>
+              )}
+
+              {batchSize && (
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/15 backdrop-blur-md shadow-xs">
+                  <Users size={15} className="text-amber-400 shrink-0" />
+                  <span>
+                    <span className="text-zinc-400 font-medium">Batch Size:</span> {batchSize}
+                  </span>
+                </span>
+              )}
+            </div>
+          )}
 
           {/* Title */}
           <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight md:leading-tight lg:leading-tight font-playfair tracking-tight">
