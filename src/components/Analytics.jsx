@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import { GOOGLE_ADS_ID, gtag_report_conversion } from '@/utils/googleAds';
 
 const GA_MEASUREMENT_ID = 'G-ZSHJ4HRVPB';
 const CLARITY_PROJECT_ID = 'y24yn4jl2t';
@@ -16,6 +17,11 @@ export default function Analytics() {
       /SearchBot|Googlebot|Chrome-Lighthouse|Lighthouse/i.test(navigator.userAgent);
     if (isBot) return;
 
+    // Attach gtag_report_conversion globally to window
+    if (typeof window !== 'undefined') {
+      window.gtag_report_conversion = gtag_report_conversion;
+    }
+
     let loaded = false;
     let fallbackTimer = null;
     let delayTimer = null;
@@ -29,20 +35,21 @@ export default function Analytics() {
       removeInteractionListeners();
 
       const executeInjection = () => {
-        // --- 1. Google Analytics (gtag.js) ---
-        if (GA_MEASUREMENT_ID && !document.getElementById('gtag-script')) {
+        // --- 1. Google Tag (gtag.js) for Analytics & Ads ---
+        if ((GA_MEASUREMENT_ID || GOOGLE_ADS_ID) && !document.getElementById('gtag-script')) {
           window.dataLayer = window.dataLayer || [];
           function gtag() {
             window.dataLayer.push(arguments);
           }
           window.gtag = gtag;
           gtag('js', new Date());
-          gtag('config', GA_MEASUREMENT_ID);
+          if (GA_MEASUREMENT_ID) gtag('config', GA_MEASUREMENT_ID);
+          if (GOOGLE_ADS_ID) gtag('config', GOOGLE_ADS_ID);
 
           const gaScript = document.createElement('script');
           gaScript.id = 'gtag-script';
           gaScript.async = true;
-          gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`;
+          gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID || GA_MEASUREMENT_ID}`;
           document.head.appendChild(gaScript);
         }
 

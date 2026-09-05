@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { X, Lock, CheckCircle2, Send } from "lucide-react";
 import { trackMetaEvent } from "@/utils/metaCapi";
+import { gtag_report_conversion } from "@/utils/googleAds";
 
 export default function LeadModal() {
      const [isOpen, setIsOpen] = useState(false);
@@ -147,7 +148,8 @@ export default function LeadModal() {
                localStorage.setItem("leadSubmitted", "true");
                localStorage.setItem("leadUser", JSON.stringify({ name: name.trim(), email: email.trim(), phone: cleanPhone }));
 
-               // Trigger Meta Pixel + CAPI Lead Event (with deduplication)
+               // Trigger Google Ads & Meta Lead Events
+               gtag_report_conversion();
                trackMetaEvent(
                     "Lead",
                     { em: email.trim(), ph: cleanPhone, fn: name.trim() },

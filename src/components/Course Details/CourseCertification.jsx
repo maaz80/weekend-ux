@@ -45,10 +45,10 @@ export default function CourseCertification({ data }) {
                {/* <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div> */}
 
                <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 lg:gap-14 items-center">
 
                          {/* Left Side: Student Image holding Certificate */}
-                         <div className="lg:col-span-5 w-full flex justify-center relative">
+                         <div className="w-full flex justify-center relative">
                               
                               {/* Background Decorative Outline */}
                               <div className="absolute -top-6 -left-6 w-32 h-32 border border-white/10 rounded-2xl rotate-45 pointer-events-none hidden sm:block"></div>
@@ -81,7 +81,7 @@ export default function CourseCertification({ data }) {
                          </div>
 
                          {/* Right Side: Heading, Subtitle and Bullet Points */}
-                         <div className="lg:col-span-7 space-y-6 text-left min-w-0">
+                         <div className="space-y-6 text-left min-w-0">
 
                               {/* Title */}
                               <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-official leading-tight">

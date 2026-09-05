@@ -28,7 +28,7 @@ export default function SkillsYouWillLearn({ data }) {
 
   return (
     <section className="w-full bg-white py-10 sm:py-12 border-b border-zinc-100 font-urbanist">
-      <div className="custom-width px-4 sm:px-6 lg:px-16">
+      <div className="custom-width px-6 sm:px-6 lg:px-16">
         <div className="space-y-6 text-left">
           <h2 className="font-playfair text-2xl sm:text-3xl md:text-[34px] font-extrabold text-zinc-900 leading-tight">
             {title}
@@ -38,7 +38,7 @@ export default function SkillsYouWillLearn({ data }) {
             {visibleSkills.map((skill, idx) => (
               <span
                 key={idx}
-                className="inline-block px-4 py-2.5 sm:px-5 sm:py-3 bg-[#EFF4FA] text-black border border-official font-bold text-[11px] sm:text-xs tracking-wider uppercase rounded-md shadow-lg shadow-amber-400 hover:border-amber-400 hover:bg-amber-50 hover:text-amber-950 transition-all duration-200"
+                className="inline-block px-4 py-2.5 sm:px-5 sm:py-3 bg-official/20 text-black border border-official font-bold text-[11px] sm:text-xs tracking-wider uppercase rounded-md shadow-sm shadow-official hover:border-amber-400 hover:bg-amber-50 hover:text-official transition-all duration-200"
               >
                 {skill}
               </span>
@@ -50,7 +50,7 @@ export default function SkillsYouWillLearn({ data }) {
               <button
                 type="button"
                 onClick={() => setShowAll(!showAll)}
-                className="text-xs sm:text-sm font-extrabold text-[#2563EB] hover:text-amber-600 uppercase tracking-wider flex items-center gap-1 cursor-pointer transition-colors"
+                className="text-xs sm:text-sm font-extrabold text-official hover:text-amber-600 uppercase tracking-wider flex items-center gap-1 cursor-pointer transition-colors"
               >
                 {showAll ? "VIEW LESS ▲" : "VIEW MORE ▼"}
               </button>

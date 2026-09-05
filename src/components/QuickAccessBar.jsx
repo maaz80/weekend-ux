@@ -2,6 +2,7 @@
 import React from "react";
 import { FiPhoneCall, FiPhone, FiMessageSquare } from "react-icons/fi";
 import { useHomeData } from "@/context/HomeDataContext";
+import { gtag_report_conversion } from "@/utils/googleAds";
 
 const QuickAccessBar = ({
      barBackground = "fixed bottom-0 left-0 w-full border-t border-zinc-200 bg-white/95 backdrop-blur-md shadow-[0_-4px_20px_rgba(0,0,0,0.08)]",
@@ -22,6 +23,7 @@ const QuickAccessBar = ({
                          target="_blank"
                          rel="noopener noreferrer"
                          className={linkClass}
+                         onClick={() => gtag_report_conversion()}
                     >
                          <FiPhoneCall className={iconColor} />
                          <span className="hidden sm:inline">
@@ -36,6 +38,7 @@ const QuickAccessBar = ({
                     <a
                          href="tel:9195992 72764"
                          className={linkClass}
+                         onClick={() => gtag_report_conversion()}
                     >
                          <FiPhone className={iconColor} />
                          <span className="hidden md:inline">

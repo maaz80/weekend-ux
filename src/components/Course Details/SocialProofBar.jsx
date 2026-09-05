@@ -59,11 +59,10 @@ export default function SocialProofBar({ items }) {
               <div
                 key={idx}
                 className="
-                  group flex items-center
+                  group flex flex-wrap flex-col md:flex-row items-center
                   gap-2 sm:gap-3
                   px-2.5 py-2.5 sm:px-4 sm:py-3
                   rounded-xl sm:rounded-2xl
-                  bg-red-700/50
                   border border-white/10
                   backdrop-blur-sm
                   shadow-sm

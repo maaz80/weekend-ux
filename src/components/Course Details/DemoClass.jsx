@@ -3,11 +3,18 @@
 import { useState, useEffect, useRef } from "react";
 import { Users, BookOpen, ShieldCheck, GraduationCap, ArrowRight, Check, ChevronDown } from "lucide-react";
 import { FiUser, FiMail, FiPhone, FiLock, FiBookOpen } from "react-icons/fi";
+import { trackMetaEvent } from "@/utils/metaCapi";
+import { gtag_report_conversion } from "@/utils/googleAds";
 
 export default function DemoClass({ data }) {
      const [status, setStatus] = useState("idle");
      const [otpStep, setOtpStep] = useState(false);
      const [selectedCourse, setSelectedCourse] = useState(data?.title || "UI/UX Design Master Course");
+     const [prevTitle, setPrevTitle] = useState(data?.title);
+     if (data?.title && data.title !== prevTitle) {
+          setPrevTitle(data.title);
+          setSelectedCourse(data.title);
+     }
      const [isDropdownOpen, setIsDropdownOpen] = useState(false);
      const dropdownRef = useRef(null);
 
@@ -62,12 +69,6 @@ export default function DemoClass({ data }) {
           }
           loadAllCourses();
      }, []);
-
-     useEffect(() => {
-          if (data?.title) {
-               setSelectedCourse(data.title);
-          }
-     }, [data?.title]);
 
      useEffect(() => {
           const handleClickOutside = (event) => {
@@ -234,6 +235,12 @@ export default function DemoClass({ data }) {
                const result = await response.json();
 
                if (response.ok) {
+                    gtag_report_conversion();
+                    trackMetaEvent(
+                         "Lead",
+                         { em: formData.email, ph: formData.phone, fn: formData.fullName },
+                         { content_name: `Free Demo Class - ${selectedCourse}` }
+                    );
                     setStatus("success");
                     setSuccessMessage("Free Demo Class booked successfully!");
                     localStorage.setItem("leadSubmitted", "true");
@@ -283,10 +290,10 @@ export default function DemoClass({ data }) {
      return (
           <section className="w-full bg-white py-12 sm:py-16 md:py-20 font-urbanist border-b border-zinc-200/80 relative z-1 overflow-hidden px-2">
                <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 lg:gap-12 items-center">
 
                          {/* Left Side Content */}
-                         <div className="lg:col-span-7 space-y-6 text-left min-w-0">
+                         <div className=" space-y-6 text-left min-w-0">
 
                               {/* Badge Tag */}
                               <div>
@@ -328,7 +335,7 @@ export default function DemoClass({ data }) {
                          </div>
 
                          {/* Right Side Form Card */}
-                         <div className="lg:col-span-5 w-full min-w-0">
+                         <div className="w-full min-w-0">
                               <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-zinc-200/90 transition-all duration-300">
 
                                    {/* Card Header Bar */}

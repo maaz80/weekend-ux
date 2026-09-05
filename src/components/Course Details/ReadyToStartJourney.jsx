@@ -34,20 +34,20 @@ export default function ReadyToStartJourney({ data }) {
                <div className="pointer-events-none absolute -bottom-24 -right-24 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: "rgba(255, 212, 0, 0.15)" }} />
 
                {/* Left Decorative Badge (Desktop) */}
-               <div className="hidden lg:flex absolute left-8 xl:left-16 top-1/2 -translate-y-1/2 flex-col items-center justify-center p-5 rounded-3xl backdrop-blur-md border shadow-2xl transition-transform duration-300 hover:scale-105" style={{ backgroundColor: "rgba(255, 212, 0, 0.08)", borderColor: "rgba(255, 212, 0, 0.25)" }}>
+               {/* <div className="hidden lg:flex absolute left-8 xl:left-16 top-1/2 -translate-y-1/2 flex-col items-center justify-center p-5 rounded-3xl backdrop-blur-md border shadow-2xl transition-transform duration-300 hover:scale-105" style={{ backgroundColor: "rgba(255, 212, 0, 0.08)", borderColor: "rgba(255, 212, 0, 0.25)" }}>
                     <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-2 shadow-inner" style={{ backgroundColor: "rgba(255, 212, 0, 0.15)" }}>
                          <GraduationCap className="w-9 h-9 stroke-[2.2]" style={{ color: "#FFD400" }} />
                     </div>
                     <FileCheck className="w-8 h-8 opacity-80" style={{ color: "#FFD400" }} />
-               </div>
+               </div> */}
 
                {/* Right Decorative Badge (Desktop) */}
-               <div className="hidden lg:flex absolute right-8 xl:right-16 top-1/2 -translate-y-1/2 flex-col items-center justify-center p-5 rounded-3xl backdrop-blur-md border shadow-2xl transition-transform duration-300 hover:scale-105" style={{ backgroundColor: "rgba(255, 212, 0, 0.08)", borderColor: "rgba(255, 212, 0, 0.25)" }}>
+               {/* <div className="hidden lg:flex absolute right-8 xl:right-16 top-1/2 -translate-y-1/2 flex-col items-center justify-center p-5 rounded-3xl backdrop-blur-md border shadow-2xl transition-transform duration-300 hover:scale-105" style={{ backgroundColor: "rgba(255, 212, 0, 0.08)", borderColor: "rgba(255, 212, 0, 0.25)" }}>
                     <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-2 shadow-inner" style={{ backgroundColor: "rgba(255, 212, 0, 0.15)" }}>
                          <Lightbulb className="w-9 h-9 stroke-[2.2]" style={{ color: "#FFD400" }} />
                     </div>
                     <BookOpen className="w-8 h-8 opacity-80" style={{ color: "#FFD400" }} />
-               </div>
+               </div> */}
 
                {/* Center Content Box */}
                <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto relative z-10 text-center">

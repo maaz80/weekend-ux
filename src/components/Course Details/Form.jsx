@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { FiUser, FiMail, FiPhone, FiLock } from "react-icons/fi";
 import Button from "@/components/ui/Button";
+import { trackMetaEvent } from "@/utils/metaCapi";
+import { gtag_report_conversion } from "@/utils/googleAds";
 
 const Form = ({
      inputBgColor = "bg-transparent",
@@ -176,6 +178,12 @@ const Form = ({
                const result = await response.json();
 
                if (response.ok) {
+                    gtag_report_conversion();
+                    trackMetaEvent(
+                         "Lead",
+                         { em: formData.email, ph: formData.phone, fn: formData.fullName },
+                         { content_name: "Course Advisor Call Booking" }
+                    );
                     setStatus("success");
                     setSuccessMessage("Admissions booking submitted successfully!");
                     localStorage.setItem("leadSubmitted", "true");
