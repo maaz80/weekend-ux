@@ -45,12 +45,5 @@
     "tailwindcss": "^4",
     "vite": "^8.0.16",
     "vitest": "^4.1.8"
-  },
-  "browserslist": [
-    "chrome >= 109",
-    "safari >= 16.4",
-    "edge >= 109",
-    "firefox >= 109",
-    "not dead"
-  ]
+  }
 }

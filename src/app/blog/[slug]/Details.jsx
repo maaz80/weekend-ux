@@ -70,28 +70,40 @@ export default function Details({ data }) {
      useEffect(() => {
           if (!headingsList.length) return;
 
+          let ticking = false;
+          let rafId = null;
+
           const handleScroll = () => {
-               const headerOffset = 160; // Pixel threshold below fixed header
-               let currentActiveId = headingsList[0]?.id || "";
+               if (!ticking) {
+                    ticking = true;
+                    rafId = requestAnimationFrame(() => {
+                         const headerOffset = 160; // Pixel threshold below fixed header
+                         let currentActiveId = headingsList[0]?.id || "";
 
-               for (let i = 0; i < headingsList.length; i++) {
-                    const el = document.getElementById(headingsList[i].id);
-                    if (el) {
-                         const rect = el.getBoundingClientRect();
-                         if (rect.top <= headerOffset) {
-                              currentActiveId = headingsList[i].id;
-                         } else {
-                              break;
+                         for (let i = 0; i < headingsList.length; i++) {
+                              const el = document.getElementById(headingsList[i].id);
+                              if (el) {
+                                   const rect = el.getBoundingClientRect();
+                                   if (rect.top <= headerOffset) {
+                                        currentActiveId = headingsList[i].id;
+                                   } else {
+                                        break;
+                                   }
+                              }
                          }
-                    }
-               }
 
-               setActiveId(currentActiveId);
+                         setActiveId(currentActiveId);
+                         ticking = false;
+                    });
+               }
           };
 
           handleScroll();
           window.addEventListener("scroll", handleScroll, { passive: true });
-          return () => window.removeEventListener("scroll", handleScroll);
+          return () => {
+               if (rafId) cancelAnimationFrame(rafId);
+               window.removeEventListener("scroll", handleScroll);
+          };
      }, [headingsList]);
 
        const handleScroll = (id) => {

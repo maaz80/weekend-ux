@@ -42,19 +42,7 @@ function processHtmlFile(filePath) {
         });
     }
 
-    // 3. Auto-detect and preload page hero background images for 0ms LCP resource load delay on every page
-    const heroImageRegex = /src="(\/images\/weekend-ux-[^"']+-hero-bg[^"']*\.webp)"/g;
-    let heroMatch;
-    while ((heroMatch = heroImageRegex.exec(content)) !== null) {
-        const heroUrl = heroMatch[1];
-        const preloadHeroTag = `<link rel="preload" as="image" href="${heroUrl}" fetchpriority="high"/>`;
-        if (!content.includes(preloadHeroTag) && content.includes('<head>')) {
-            content = content.replace('<head>', `<head>${preloadHeroTag}`);
-            modified = true;
-        }
-    }
-
-    // 4. Defer non-critical JavaScript chunks to reduce unused JS execution on initial render
+    // 3. Defer non-critical JavaScript chunks to reduce unused JS execution on initial render
     if (content.includes('async=""')) {
         content = content.replace(/<script src="(\/_next\/static\/chunks\/[^"']+\.js)" async=""/g, '<script src="$1" defer=""');
         modified = true;

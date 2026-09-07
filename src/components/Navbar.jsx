@@ -222,12 +222,21 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                return;
           }
 
+          let ticking = false;
+          let rafId = null;
+
           const updateLightState = () => {
-               const isVisible = sections.some((section) => {
-                    const rect = section.getBoundingClientRect();
-                    return rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
-               });
-               setIsMoreButtonLight(isVisible);
+               if (!ticking) {
+                    ticking = true;
+                    rafId = requestAnimationFrame(() => {
+                         const isVisible = sections.some((section) => {
+                              const rect = section.getBoundingClientRect();
+                              return rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+                         });
+                         setIsMoreButtonLight(isVisible);
+                         ticking = false;
+                    });
+               }
           };
 
           updateLightState();
@@ -243,6 +252,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
           window.addEventListener("resize", updateLightState);
 
           return () => {
+               if (rafId) cancelAnimationFrame(rafId);
                observer.disconnect();
                window.removeEventListener("scroll", updateLightState);
                window.removeEventListener("resize", updateLightState);
