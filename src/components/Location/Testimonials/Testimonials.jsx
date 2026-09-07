@@ -276,7 +276,7 @@ const Testimonials = ({ data }) => {
                                              }}
                                              aria-label={`Go to slide ${dotIdx + 1}`}
                                              aria-current={isActive ? "true" : undefined}
-                                             className="p-1 sm:p-2 min-w-5 sm:min-w-7 min-h-5 sm:min-h-7 flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110"
+                                             className="min-w-11 min-h-11 w-11 h-11 flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110 p-0"
                                         >
                                              <span className={`block rounded-full transition-all duration-300 ${
                                                   isActive
@@ -295,7 +295,7 @@ const Testimonials = ({ data }) => {
                                    onClick={() => scroll("left")}
                                    disabled={currentIndex === 0}
                                    aria-label="Go to Previous Testimonial"
-                                   className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
+                                   className="min-w-11 min-h-11 w-11 h-11 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
                               >
                                    <IoIosArrowBack />
                               </button>
@@ -304,7 +304,7 @@ const Testimonials = ({ data }) => {
                                    onClick={() => scroll("right")}
                                    disabled={currentIndex >= maxIndex}
                                    aria-label="Go to Next Testimonial"
-                                   className="w-8 h-8 sm:w-9 sm:h-9 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
+                                   className="min-w-11 min-h-11 w-11 h-11 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
                               >
                                    <IoIosArrowForward />
                               </button>

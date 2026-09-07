@@ -30,7 +30,7 @@ export default function HorizontalCourseCard({ course, unlocked }) {
                     <div className="relative w-full md:w-80 lg:w-110 h-40 sm:h-48 md:h-auto shrink-0 bg-zinc-100 overflow-hidden">
                          <OptimizedImage
                               src={imageSrc}
-                              alt={course?.alt || title}
+                              alt={course?.alt && course.alt.trim() !== title.trim() ? course.alt : ""}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                               sizes="(max-width: 768px) 340px, 320px"
                          />

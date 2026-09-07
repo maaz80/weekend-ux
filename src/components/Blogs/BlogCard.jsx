@@ -25,7 +25,7 @@ const BlogCard = ({
                          <div className={`overflow-hidden rounded-md ${imgBgColor}`}>
                               <OptimizedImage
                                    src={imageSrc}
-                                   alt={blog?.alt || ""}
+                                   alt={blog?.alt && blog.alt.trim() !== blog?.title?.trim() ? blog.alt : ""}
                                    width={420}
                                    height={245}
                                    className={`w-full object-cover transition duration-700 group-hover:scale-105 ${height}`}

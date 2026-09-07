@@ -29,7 +29,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                <div className="relative rounded-t-2xl rounded-b-none overflow-hidden h-50 md:h-60.5 w-full bg-zinc-100">
                     <OptimizedImage
                          src={imageSrc}
-                         alt={course?.alt || "weekend-ux-program-image-template"}
+                         alt={course?.alt && course.alt.trim() !== course?.title?.trim() ? course.alt : ""}
                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                          sizes="(max-width: 640px) 340px, (max-width: 1024px) 420px, 360px"
                          width={420}
