@@ -11,49 +11,43 @@ const GTM_CONTAINER_ID = 'GTM-KJVMHZR3';
 
 export default function Analytics() {
   useEffect(() => {
-    // 1. Bot & Lighthouse Detection (Zero Performance Impact on Audits)
-    const isBot =
-      typeof navigator !== 'undefined' &&
-      /SearchBot|Googlebot|Chrome-Lighthouse|Lighthouse/i.test(navigator.userAgent);
-    if (isBot) return;
-
-    // Attach gtag_report_conversion globally to window
+    // Attach gtag_report_conversion globally to window immediately on mount
     if (typeof window !== 'undefined') {
       window.gtag_report_conversion = gtag_report_conversion;
     }
 
-    let loaded = false;
+    // --- 1. Immediate Google Tag (gtag.js) Injection for Google Ads & Analytics Tag Verification ---
+    const tagId = GOOGLE_ADS_ID || GA_MEASUREMENT_ID;
+    if (tagId && typeof document !== 'undefined' && !document.getElementById('gtag-script')) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      if (GOOGLE_ADS_ID) gtag('config', GOOGLE_ADS_ID);
+      if (GA_MEASUREMENT_ID) gtag('config', GA_MEASUREMENT_ID);
+
+      const gaScript = document.createElement('script');
+      gaScript.id = 'gtag-script';
+      gaScript.async = true;
+      gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${tagId}`;
+      document.head.appendChild(gaScript);
+    }
+
+    // --- 2. Lazy Load Secondary Third-Party Analytics (Clarity, Meta Pixel, GTM) ---
+    let secondaryLoaded = false;
     let fallbackTimer = null;
-    let delayTimer = null;
 
-    const injectScripts = () => {
-      if (loaded) return;
-      loaded = true;
+    const injectSecondaryScripts = () => {
+      if (secondaryLoaded) return;
+      secondaryLoaded = true;
 
-      // Clean up fallback timer & listeners
       if (fallbackTimer) clearTimeout(fallbackTimer);
-      removeInteractionListeners();
+      removeListeners();
 
-      const executeInjection = () => {
-        // --- 1. Google Tag (gtag.js) for Analytics & Ads ---
-        if ((GA_MEASUREMENT_ID || GOOGLE_ADS_ID) && !document.getElementById('gtag-script')) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            window.dataLayer.push(arguments);
-          }
-          window.gtag = gtag;
-          gtag('js', new Date());
-          if (GA_MEASUREMENT_ID) gtag('config', GA_MEASUREMENT_ID);
-          if (GOOGLE_ADS_ID) gtag('config', GOOGLE_ADS_ID);
-
-          const gaScript = document.createElement('script');
-          gaScript.id = 'gtag-script';
-          gaScript.async = true;
-          gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ADS_ID || GA_MEASUREMENT_ID}`;
-          document.head.appendChild(gaScript);
-        }
-
-        // --- 2. Microsoft Clarity ---
+      const executeSecondary = () => {
+        // Microsoft Clarity
         if (CLARITY_PROJECT_ID && !document.getElementById('clarity-script')) {
           (function (c, l, a, r, i, t, y) {
             c[a] =
@@ -70,16 +64,7 @@ export default function Analytics() {
           })(window, document, 'clarity', 'script', CLARITY_PROJECT_ID);
         }
 
-        // --- 3. Secure Privacy ---
-        if (SECURE_PRIVACY_URL && !document.getElementById('secure-privacy-script')) {
-          const spScript = document.createElement('script');
-          spScript.id = 'secure-privacy-script';
-          spScript.async = true;
-          spScript.src = SECURE_PRIVACY_URL;
-          document.head.appendChild(spScript);
-        }
-
-        // --- 4. Meta (Facebook) Pixel ---
+        // Meta (Facebook) Pixel
         if (FB_PIXEL_ID && !document.getElementById('fb-pixel-script')) {
           (function (f, b, e, v, n, t, s) {
             if (f.fbq) return;
@@ -103,7 +88,7 @@ export default function Analytics() {
           window.fbq('track', 'PageView');
         }
 
-        // --- 5. Google Tag Manager (GTM) ---
+        // Google Tag Manager (GTM)
         if (GTM_CONTAINER_ID && !document.getElementById('gtm-container-script')) {
           (function (w, d, s, l, i) {
             w[l] = w[l] || [];
@@ -119,47 +104,35 @@ export default function Analytics() {
         }
       };
 
-      // 3. Non-Blocking Main Thread Execution (requestIdleCallback)
       if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(executeInjection, { timeout: 3000 });
+        window.requestIdleCallback(executeSecondary, { timeout: 2000 });
       } else {
-        setTimeout(executeInjection, 500);
+        setTimeout(executeSecondary, 500);
       }
-    };
-
-    const handleUserInteraction = () => {
-      injectScripts();
     };
 
     const interactionEvents = ['scroll', 'touchstart', 'keydown', 'click', 'pointerdown'];
 
-    const addInteractionListeners = () => {
+    const addListeners = () => {
       interactionEvents.forEach((event) => {
-        window.addEventListener(event, handleUserInteraction, { passive: true, once: true });
+        window.addEventListener(event, injectSecondaryScripts, { passive: true, once: true });
       });
     };
 
-    const removeInteractionListeners = () => {
+    const removeListeners = () => {
       interactionEvents.forEach((event) => {
-        window.removeEventListener(event, handleUserInteraction);
+        window.removeEventListener(event, injectSecondaryScripts);
       });
     };
 
-    // 2. Delayed & Interaction-Based Lazy Loading
-    // 4 seconds delay before setting up listeners for 100/100 Core Web Vitals
-    delayTimer = setTimeout(() => {
-      addInteractionListeners();
-    }, 4000);
+    addListeners();
 
-    // 15 seconds fallback timer if no user interaction occurs
-    fallbackTimer = setTimeout(() => {
-      injectScripts();
-    }, 15000);
+    // 4 seconds fallback for secondary scripts if no user interaction
+    fallbackTimer = setTimeout(injectSecondaryScripts, 4000);
 
     return () => {
-      if (delayTimer) clearTimeout(delayTimer);
       if (fallbackTimer) clearTimeout(fallbackTimer);
-      removeInteractionListeners();
+      removeListeners();
     };
   }, []);
 

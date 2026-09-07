@@ -7,6 +7,7 @@ import Link from "next/link";
 import Logo from "@/app/assets/weekend-ux-logo.webp";
 import { useHomeData } from "@/context/HomeDataContext";
 import ObfuscatedEmail from "@/components/ui/ObfuscatedEmail";
+import { gtag_report_conversion } from "@/utils/googleAds";
 
 // Classify primary welcome selection into core categories
 const getPrimaryCategory = (serviceText) => {
@@ -169,6 +170,9 @@ export default function Chatbot({
                          answers: leadAnswers
                     })
                });
+               if (typeof window !== "undefined" && typeof window.gtag_report_conversion === "function") {
+                    window.gtag_report_conversion();
+               }
           } catch (error) {
                console.error("Error submitting chatbot lead:", error);
           }
