@@ -1,6 +1,12 @@
-# ====================================================================
-# Hostinger Production Optimization - Weekend UX
-# ====================================================================
+# 0. Explicit MIME Types (Prevents 'Refused to execute script MIME type text/html' errors)
+<IfModule mod_mime.c>
+    AddType application/javascript .js
+    AddType text/css .css
+    AddType font/woff2 .woff2
+    AddType image/webp .webp
+    AddType image/svg+xml .svg
+    AddType application/json .json
+</IfModule>
 
 # 1. Enable GZIP / Brotli Compression for CSS, JS, HTML, Fonts & Images
 <IfModule mod_deflate.c>
@@ -64,6 +70,11 @@
     RewriteEngine On
     RewriteBase /
     
+    # If a requested JS or CSS chunk file does NOT exist (old deleted chunk from previous build), return 204 No Content instead of 404 HTML page (Fixes MIME type text/html error)
+    RewriteCond %{REQUEST_URI} \.(js|css)$
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ - [R=204,L]
+
     # If the request is for a real file or directory, serve it directly
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
