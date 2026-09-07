@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { GOOGLE_ADS_ID, gtag_report_conversion } from '@/utils/googleAds';
+import { trackMetaEvent } from '@/utils/metaCapi';
 
 const GA_MEASUREMENT_ID = 'G-ZSHJ4HRVPB';
 const CLARITY_PROJECT_ID = 'y24yn4jl2t';
@@ -64,29 +65,8 @@ export default function Analytics() {
           })(window, document, 'clarity', 'script', CLARITY_PROJECT_ID);
         }
 
-        // Meta (Facebook) Pixel
-        if (FB_PIXEL_ID && !document.getElementById('fb-pixel-script')) {
-          (function (f, b, e, v, n, t, s) {
-            if (f.fbq) return;
-            n = f.fbq = function () {
-              n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
-            };
-            if (!f._fbq) f._fbq = n;
-            n.push = n;
-            n.loaded = !0;
-            n.version = '2.0';
-            n.queue = [];
-            t = b.createElement(e);
-            t.async = !0;
-            t.id = 'fb-pixel-script';
-            t.src = v;
-            s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s);
-          })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-
-          window.fbq('init', FB_PIXEL_ID);
-          window.fbq('track', 'PageView');
-        }
+        // Meta (Facebook) CAPI PageView (Pure Server-Side Tracking - No Heavy Client JS)
+        trackMetaEvent('PageView');
 
         // Google Tag Manager (GTM)
         if (GTM_CONTAINER_ID && !document.getElementById('gtm-container-script')) {
