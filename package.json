@@ -2,6 +2,12 @@
   "name": "weekend-ux",
   "version": "0.1.0",
   "private": true,
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11"
+  ],
   "scripts": {
     "prebuild": "node generate_seo_files.js",
     "build": "npm run prebuild && next build && node post-export.js && storybook build -o out/storybook",
