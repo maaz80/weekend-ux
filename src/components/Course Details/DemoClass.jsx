@@ -336,7 +336,7 @@ export default function DemoClass({ data }) {
 
                          {/* Right Side Form Card */}
                          <div className="w-full min-w-0 flex justify-center sm:justify-end">
-                              <div className="w-full max-w-[365px] bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-zinc-200/90 hover:-translate-y-1 transition-all duration-300">
+                              <div className="w-full max-w-91.25 bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-zinc-200/90 hover:-translate-y-1 transition-all duration-300">
 
                                    {/* Card Header Bar */}
                                    <div className="bg-official p-6 text-black flex items-center gap-3.5 shadow-sm">
