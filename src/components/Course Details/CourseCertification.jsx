@@ -45,7 +45,7 @@ export default function CourseCertification({ data }) {
                {/* <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div> */}
 
                <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto relative z-10">
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 lg:gap-0 items-center">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 lg:gap-15 items-center">
 
                          {/* Left Side: Student Image holding Certificate */}
                          <div className="md:col-span-1 w-full flex justify-center lg:justify-start relative">
