@@ -42,7 +42,7 @@ export default function CourseHero({ data, heroTitle }) {
       />
 
       {/* Dark Overlay Gradients for Legibility */}
-      <div className="absolute inset-0 bg-linear-to-r from-zinc-950 via-zinc-950/85 to-transparent z-10 pointer-events-none" />
+      {/* <div className="absolute inset-0 bg-linear-to-r from-zinc-950 via-zinc-950/85 to-transparent z-10 pointer-events-none" /> */}
       {/* <div className="absolute inset-0 bg-linear-to-t from-zinc-950 via-transparent to-zinc-950/50 z-10 pointer-events-none" /> */}
 
       {/* Hero Content Wrapper */}
