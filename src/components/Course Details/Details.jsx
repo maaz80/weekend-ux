@@ -530,7 +530,7 @@ export default function Details({ data }) {
                               </div>
 
                               {/* RIGHT COLUMN: Sidebar Form and CallCard Card */}
-                              <div className="space-y-6 lg:sticky lg:top-28 self-start">
+                              <div className="space-y-6 lg:sticky lg:top-29 self-start">
 
                                    {/* Admission Form */}
                                    <div className="bg-white rounded-3xl shadow-sm p-6 lg:p-7 xl:p-8 border border-zinc-150">
@@ -630,17 +630,12 @@ export default function Details({ data }) {
                <ChooseYourLearning data={data} />
 
                {/* Third Section: Short-term Courses Slider Banner */}
-               <section className="bg-official px-2 py-8 md:py-24 font-urbanist text-zinc-900 w-full">
+               {/* <section className="bg-official px-2 py-8 md:py-24 font-urbanist text-zinc-900 w-full">
                     <div className="custom-width px-4 sm:px-6 lg:px-16">
                          <div className="relative overflow-hidden">
 
-                              {/* Optional background abstract circles */}
-                              {/* <div className="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-black/5 pointer-events-none"></div> */}
-                              {/* <div className="absolute -bottom-32 -right-32 w-80 h-80 rounded-full bg-black/5 pointer-events-none"></div> */}
-
                               <div className="grid grid-cols-1 lg:grid-cols-[1fr_450px] xl:grid-cols-[1fr_520px] gap-12 items-center relative z-10">
 
-                                   {/* Left Text details */}
                                    <div className="space-y-6 text-left flex flex-col justify-between h-full min-h-62.5">
                                         <div className="space-y-4">
                                              <h2 className="font-playfair text-[32px] md:text-[42px] font-bold leading-tight font-neutral">
@@ -651,7 +646,6 @@ export default function Details({ data }) {
                                              </p>
                                         </div>
 
-                                        {/* Bottom Apply Now and Arrows Row */}
                                         <div className="flex flex-wrap items-center justify-between gap-6 pt-6 border-t border-zinc-900/10 mt-4">
                                              <Link
                                                   href="/contact-us"
@@ -660,7 +654,6 @@ export default function Details({ data }) {
                                                   Enquire Now
                                              </Link>
 
-                                             {/* Slider Controls */}
                                              {shortTermItems.length > 1 && (
                                                   <div className="flex items-center gap-4">
                                                        <button
@@ -687,7 +680,6 @@ export default function Details({ data }) {
 
                                    </div>
 
-                                    {/* Right Card display */}
                                    <div className="w-full min-h-65">
                                         <div className="bg-[#ffffff] text-[#18181b] rounded-3xl p-8 shadow-lg border border-blue-100 min-h-55 flex flex-col justify-between transition-all duration-500 transform hover:scale-[1.01]">
 
@@ -727,7 +719,7 @@ export default function Details({ data }) {
                               </div>
                          </div>
                     </div>
-               </section>
+               </section> */}
 
                {/* Fourth Section: Student Case Studies Slider Section */}
                <section className="bg-[#FAF9F5] py-8 md:py-24 font-urbanist w-full">
@@ -812,15 +804,13 @@ export default function Details({ data }) {
                </section>
 
                {/* Fifth Section: Explore More Career Domains Section */}
-               <section
+               {/* <section
                     className="relative px-2 py-8 md:py-28 font-urbanist w-full overflow-hidden bg-cover bg-center bg-no-repeat"
                     style={{ backgroundImage: "url('/images/hero-bg.webp')" }}
                >
-                    {/* Premium blurred glass overlay */}
                     <div className="absolute inset-0 bg-[#FAF9F5]/93 backdrop-blur-[2px] -mt-px"></div>
 
                     <div className="custom-width px-4 sm:px-6 lg:px-16 relative z-10">
-                         {/* Section Title & Description */}
                          <div className="text-left space-y-4 mb-12">
                               <h2 className="font-playfair text-[32px] md:text-[42px] font-bold text-zinc-900 leading-tight">
                                    {displayCareerDomainsTitle}
@@ -830,7 +820,6 @@ export default function Details({ data }) {
                               </p>
                          </div>
 
-                         {/* Career Domains Flex Layout */}
                          <div className="flex flex-wrap gap-2.5 sm:gap-4 justify-start">
                               {careerDomainsItems.map((item, idx) => (
                                    <Link
@@ -858,7 +847,7 @@ export default function Details({ data }) {
                          </div>
 
                     </div>
-               </section>
+               </section> */}
           </>
      );
 }

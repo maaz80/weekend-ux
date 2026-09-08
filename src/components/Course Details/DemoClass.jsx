@@ -335,16 +335,16 @@ export default function DemoClass({ data }) {
                          </div>
 
                          {/* Right Side Form Card */}
-                         <div className="w-full min-w-0">
-                              <div className="bg-white rounded-3xl overflow-hidden shadow-xl border border-zinc-200/90 transition-all duration-300">
+                         <div className="w-full min-w-0 flex justify-center sm:justify-end">
+                              <div className="w-full max-w-md bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-zinc-200/90 hover:-translate-y-1 transition-all duration-300">
 
                                    {/* Card Header Bar */}
-                                   <div className="bg-official p-6 text-white flex items-center gap-3.5 shadow-sm">
-                                        <div className="w-11 h-11 rounded-full bg-white/20 border border-white/60 flex items-center justify-center text-white shrink-0 shadow-inner">
+                                   <div className="bg-official p-6 text-black flex items-center gap-3.5 shadow-sm">
+                                        <div className="w-11 h-11 rounded-full bg-white/20 border border-white/60 flex items-center justify-center text-black shrink-0 shadow-inner">
                                              <GraduationCap size={24} />
                                         </div>
                                         <div>
-                                             <h3 className="font-playfair text-xl sm:text-2xl font-bold text-white leading-snug">
+                                             <h3 className="text-xl sm:text-2xl font-bold text-black leading-snug">
                                                   Book Your Free Demo Class
                                              </h3>
                                         </div>

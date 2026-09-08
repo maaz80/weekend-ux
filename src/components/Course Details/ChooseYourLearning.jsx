@@ -108,23 +108,19 @@ export default function ChooseYourLearning({ data }) {
                          
                          {/* CARD 1: EMI OPTION */}
                          <div
-                              className="group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl border-2 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:border-official"
-                              style={{ backgroundColor: "#ffffff", color: "#18181b", borderColor: "transparent" }}
+                              className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl flex flex-col justify-between hover:-translate-y-1 transition-all duration-300"
                          >
                               <div>
-                                   {/* Dark Header Band with Official Yellow Accent */}
-                                   <div
-                                        className="p-6 flex items-center gap-4 transition-colors"
-                                        style={{ backgroundColor: "#18181b", color: "#ffffff", borderBottom: "2px solid #FFD400" }}
-                                   >
-                                        <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105" style={{ backgroundColor: "rgba(255, 212, 0, 0.15)", border: "1px solid rgba(255, 212, 0, 0.3)" }}>
-                                             <CreditCard className="w-6 h-6" style={{ color: "#FFD400" }} />
+                                   {/* Official Yellow Header Band */}
+                                   <div className="bg-official p-5 sm:p-6 flex items-center gap-3.5 text-black">
+                                        <div className="w-9 h-9 rounded-xl bg-black/10 flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 border">
+                                             <CreditCard className="w-4.5 h-4.5 text-zinc-900" />
                                         </div>
                                         <div>
-                                             <h3 className="font-urbanist font-extrabold text-lg sm:text-xl tracking-wide uppercase leading-tight" style={{ color: "#ffffff" }}>
+                                             <h3 className="font-urbanist font-black text-lg sm:text-xl tracking-wide uppercase leading-tight text-zinc-900">
                                                   {emi.title}
                                              </h3>
-                                             <p className="font-urbanist text-xs sm:text-sm font-semibold mt-0.5" style={{ color: "#FFD400" }}>
+                                             <p className="font-urbanist text-xs sm:text-sm font-extrabold text-zinc-800/90 mt-0.5">
                                                   {emi.subtitle}
                                              </p>
                                         </div>
@@ -166,23 +162,19 @@ export default function ChooseYourLearning({ data }) {
 
                          {/* CARD 2: SCHOLARSHIP */}
                          <div
-                              className="group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl border-2 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:border-official"
-                              style={{ backgroundColor: "#ffffff", color: "#18181b", borderColor: "transparent" }}
+                              className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl flex flex-col justify-between hover:-translate-y-1 transition-all duration-300"
                          >
                               <div>
-                                   {/* Dark Header Band */}
-                                   <div
-                                        className="p-6 flex items-center gap-4 transition-colors"
-                                        style={{ backgroundColor: "#18181b", color: "#ffffff", borderBottom: "2px solid #FFD400" }}
-                                   >
-                                        <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105" style={{ backgroundColor: "rgba(255, 212, 0, 0.15)", border: "1px solid rgba(255, 212, 0, 0.3)" }}>
-                                             <GraduationCap className="w-6 h-6" style={{ color: "#FFD400" }} />
+                                   {/* Official Yellow Header Band */}
+                                   <div className="bg-official p-5 sm:p-6 flex items-center gap-3.5 text-black">
+                                        <div className="w-9 h-9 rounded-xl bg-black/10 flex items-center justify-center shrink-0 transition-transform group-hover:scale-105">
+                                             <GraduationCap className="w-4.5 h-4.5 text-zinc-900" />
                                         </div>
                                         <div>
-                                             <h3 className="font-urbanist font-extrabold text-lg sm:text-xl tracking-wide uppercase leading-tight" style={{ color: "#ffffff" }}>
+                                             <h3 className="font-urbanist font-black text-lg sm:text-xl tracking-wide uppercase leading-tight text-zinc-900">
                                                   {scholarship.title}
                                              </h3>
-                                             <p className="font-urbanist text-xs sm:text-sm font-semibold mt-0.5" style={{ color: "#FFD400" }}>
+                                             <p className="font-urbanist text-xs sm:text-sm font-extrabold text-zinc-800/90 mt-0.5">
                                                   {scholarship.subtitle}
                                              </p>
                                         </div>
@@ -242,23 +234,19 @@ export default function ChooseYourLearning({ data }) {
 
                          {/* CARD 3: COMING BATCHES */}
                          <div
-                              className="group rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl border-2 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 hover:border-official"
-                              style={{ backgroundColor: "#ffffff", color: "#18181b", borderColor: "transparent" }}
+                              className="group bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl flex flex-col justify-between hover:-translate-y-1 transition-all duration-300"
                          >
                               <div>
-                                   {/* Dark Header Band */}
-                                   <div
-                                        className="p-6 flex items-center gap-4 transition-colors"
-                                        style={{ backgroundColor: "#18181b", color: "#ffffff", borderBottom: "2px solid #FFD400" }}
-                                   >
-                                        <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105" style={{ backgroundColor: "rgba(255, 212, 0, 0.15)", border: "1px solid rgba(255, 212, 0, 0.3)" }}>
-                                             <Calendar className="w-6 h-6" style={{ color: "#FFD400" }} />
+                                   {/* Official Yellow Header Band */}
+                                   <div className="bg-official p-5 sm:p-6 flex items-center gap-3.5 text-black">
+                                        <div className="w-9 h-9 rounded-xl bg-black/10 flex items-center justify-center shrink-0 transition-transform group-hover:scale-105">
+                                             <Calendar className="w-4.5 h-4.5 text-zinc-900" />
                                         </div>
                                         <div>
-                                             <h3 className="font-urbanist font-extrabold text-lg sm:text-xl tracking-wide uppercase leading-tight" style={{ color: "#ffffff" }}>
+                                             <h3 className="font-urbanist font-black text-lg sm:text-xl tracking-wide uppercase leading-tight text-zinc-900">
                                                   {batches.title}
                                              </h3>
-                                             <p className="font-urbanist text-xs sm:text-sm font-semibold mt-0.5" style={{ color: "#FFD400" }}>
+                                             <p className="font-urbanist text-xs sm:text-sm font-extrabold text-zinc-800/90 mt-0.5">
                                                   {batches.subtitle}
                                              </p>
                                         </div>

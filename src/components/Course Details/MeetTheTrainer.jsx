@@ -70,7 +70,7 @@ export default function MeetTheTrainer({ data }) {
                 <img
                   src={getOptimizedCloudinaryUrl(trainer.image, { width: 500, quality: "50", format: "auto", crop: "fill" }) || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"}
                   alt={trainer.name || "Trainer"}
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 blur-xl scale-110 select-none pointer-events-none"
                 />
               </div>
 
@@ -79,7 +79,7 @@ export default function MeetTheTrainer({ data }) {
                 <div>
                   {/* Name + LinkedIn Icon */}
                   <div className="flex items-center justify-between gap-2 mb-1.5">
-                    <h3 className="font-playfair font-bold text-xl sm:text-2xl text-zinc-900 group-hover:text-official transition-colors">
+                    <h3 className="font-playfair font-bold text-xl sm:text-2xl text-zinc-900 group-hover:text-official transition-colors blur-md select-none">
                       {trainer.name || "Trainer Name"}
                     </h3>
                     {trainer.linkedin && (
@@ -87,7 +87,7 @@ export default function MeetTheTrainer({ data }) {
                         href={trainer.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-8 h-8 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center hover:bg-official hover:text-zinc-950 transition-colors shrink-0"
+                        className="w-8 h-8 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center hover:bg-official hover:text-zinc-950 transition-colors shrink-0 blur-md pointer-events-none select-none"
                         aria-label={`${trainer.name} LinkedIn Profile`}
                       >
                         <FaLinkedinIn size={14} />
@@ -96,7 +96,7 @@ export default function MeetTheTrainer({ data }) {
                   </div>
 
                   {/* Role Tag */}
-                  <p className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-official font-urbanist mb-2.5">
+                  <p className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-official font-urbanist mb-2.5 blur-md select-none">
                     {trainer.role || "MENTOR"}
                   </p>
 

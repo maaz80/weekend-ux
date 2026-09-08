@@ -33,7 +33,7 @@ export default function CourseCertification({ data }) {
           ? data.certificationBullets
           : defaultBullets;
 
-     const imageSrc = data?.certificationImage || "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80";
+     const imageSrc = data?.certificationImage || "/images/certification.webp";
 
      return (
           <section className="w-full bg-[#051329] py-14 sm:py-18 md:py-24 font-urbanist relative overflow-hidden text-white border-b border-zinc-800/80 px-2">
@@ -48,12 +48,12 @@ export default function CourseCertification({ data }) {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 lg:gap-14 items-center">
 
                          {/* Left Side: Student Image holding Certificate */}
-                         <div className="w-full flex justify-center relative">
+                         <div className="w-full flex justify-center lg:justify-start relative">
                               
                               {/* Background Decorative Outline */}
                               <div className="absolute -top-6 -left-6 w-32 h-32 border border-white/10 rounded-2xl rotate-45 pointer-events-none hidden sm:block"></div>
 
-                              <div className="relative w-full max-w-md lg:max-w-none rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-zinc-900/50 backdrop-blur-xs group">
+                              <div className="relative w-full max-w-md rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-white/20 bg-zinc-900/50 backdrop-blur-xs group hover:-translate-y-1 transition-all duration-300">
                                    
                                    {/* Student Photo */}
                                    <div className="aspect-4/5 sm:aspect-3/4 lg:aspect-5/5 w-full relative overflow-hidden bg-linear-to-b from-transparent to-black/60">
