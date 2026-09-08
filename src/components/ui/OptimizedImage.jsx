@@ -69,7 +69,7 @@ export default function OptimizedImage({
           .join(", ");
 
      // Default fallback width based on component size hint
-     const defaultWidth = width ? width : 420;
+     const defaultWidth = width ? Math.min(width, 1080) : 420;
      const defaultHeight = (aspectRatio && selectedCrop !== "fit" && selectedCrop !== "contain") ? Math.round(defaultWidth * aspectRatio) : undefined;
      const defaultSrc = getOptimizedCloudinaryUrl(imageSrc, {
           width: defaultWidth,

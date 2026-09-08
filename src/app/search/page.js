@@ -409,11 +409,14 @@ const SearchResultsContent = () => {
                                                                  {/* Course Image */}
                                                                  {course.image && (
                                                                       <div className="w-full md:w-60 h-40 shrink-0 overflow-hidden rounded-xl bg-zinc-100 relative shadow-xs border border-zinc-150">
-                                                                           <img
-                                                                                src={course.image}
-                                                                                alt={course.title}
-                                                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                                                           />
+                                                                                <OptimizedImage
+                                                                                     src={course.image}
+                                                                                     alt={course.title}
+                                                                                     width={240}
+                                                                                     height={160}
+                                                                                     sizes="(max-width: 768px) 340px, 240px"
+                                                                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                                                                />
                                                                       </div>
                                                                  )}
 

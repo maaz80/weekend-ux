@@ -2,6 +2,7 @@
 
 import { Star, ArrowRight } from "lucide-react";
 import { FaLinkedinIn } from "react-icons/fa";
+import { getOptimizedCloudinaryUrl } from "@/utils/cloudinary";
 
 export default function MeetTheTrainer({ data }) {
   const defaultTrainers = [
@@ -67,7 +68,7 @@ export default function MeetTheTrainer({ data }) {
               {/* Trainer Photo Header */}
               <div className="relative w-full h-64 sm:h-72 bg-zinc-100 overflow-hidden">
                 <img
-                  src={trainer.image || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"}
+                  src={getOptimizedCloudinaryUrl(trainer.image, { width: 500, quality: "50", format: "auto", crop: "fill" }) || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"}
                   alt={trainer.name || "Trainer"}
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                 />

@@ -11,7 +11,7 @@ const ProgramModalContent = dynamic(
 );
 import Link from "next/link";
 import Button from "./ui/Button";
-import OptimizedImage from "@/components/ui/OptimizedImage";
+import OptimizedImage, { getOptimizedCloudinaryUrl } from "@/components/ui/OptimizedImage";
 import Logo from "@/app/assets/weekend-ux-logo.webp";
 const AuthModal = dynamic(
      () => import("./AuthModal"),
@@ -433,7 +433,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                                                     <div className="flex items-center gap-3">
                                                                                                          {course.image && (
                                                                                                               <img
-                                                                                                                   src={course.image}
+                                                                                                                   src={getOptimizedCloudinaryUrl(course.image, { width: 72, height: 72, quality: "50", format: "auto", crop: "fill" })}
                                                                                                                    alt="course-image"
                                                                                                                    width={36}
                                                                                                                    height={36}
@@ -474,7 +474,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                                                     <div className="flex items-center gap-3">
                                                                                                          {course.image && (
                                                                                                               <img
-                                                                                                                   src={course.image}
+                                                                                                                   src={getOptimizedCloudinaryUrl(course.image, { width: 72, height: 72, quality: "50", format: "auto", crop: "fill" })}
                                                                                                                    alt="course-image"
                                                                                                                    width={36}
                                                                                                                    height={36}
