@@ -81,7 +81,7 @@ export default function CourseCertification({ data }) {
                          </div>
 
                          {/* Right Side: Heading, Subtitle and Bullet Points */}
-                         <div className="md:col-span-2space-y-6 text-left min-w-0">
+                         <div className="md:col-span-2 space-y-6 text-left min-w-0">
 
                               {/* Title */}
                               <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-official leading-tight">
