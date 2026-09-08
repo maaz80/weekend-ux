@@ -53,7 +53,7 @@ export default function CourseCertification({ data }) {
                               {/* Background Decorative Outline */}
                               <div className="absolute -top-6 -left-6 w-32 h-32 border border-white/10 rounded-2xl rotate-45 pointer-events-none hidden sm:block"></div>
 
-                              <div className="relative w-full max-w-md rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-white/20 bg-zinc-900/50 backdrop-blur-xs group hover:-translate-y-1 transition-all duration-300">
+                              <div className="relative w-full max-w-[365px] rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-white/20 bg-zinc-900/50 backdrop-blur-xs group hover:-translate-y-1 transition-all duration-300">
                                    
                                    {/* Student Photo */}
                                    <div className="aspect-4/5 sm:aspect-3/4 lg:aspect-5/5 w-full relative overflow-hidden bg-linear-to-b from-transparent to-black/60">

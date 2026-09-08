@@ -113,7 +113,7 @@ export default function ChooseYourLearning({ data }) {
                               <div>
                                    {/* Official Yellow Header Band */}
                                    <div className="bg-official p-5 sm:p-6 flex items-center gap-3.5 text-black">
-                                        <div className="w-9 h-9 rounded-xl bg-black/10 flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 border">
+                                        <div className="w-9 h-9 rounded-xl bg-black/10 flex items-center justify-center shrink-0 transition-transform group-hover:scale-105">
                                              <CreditCard className="w-4.5 h-4.5 text-zinc-900" />
                                         </div>
                                         <div>
