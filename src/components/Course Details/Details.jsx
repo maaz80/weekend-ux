@@ -987,6 +987,8 @@ function getIconBadge(text) {
                     <img
                          src={text}
                          alt="Course Icon"
+                         width="48"
+                         height="48"
                          className="w-full h-full object-cover"
                          onError={(e) => {
                               e.target.onerror = null;
@@ -1011,6 +1013,8 @@ function getIconBadge(text) {
                <img
                     src="/images/Figma.webp"
                     alt={text || "Figma Icon"}
+                    width="48"
+                    height="48"
                     className="w-full h-full object-cover"
                />
           </div>

@@ -59,6 +59,8 @@ export default function TrustedByLearners() {
                 <img
                   src={item.image}
                   alt={item.alt}
+                  width="120"
+                  height="24"
                   className={`w-auto ${item.heightClass} object-contain max-w-[110px] sm:max-w-[130px]`}
                 />
               </div>

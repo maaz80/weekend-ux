@@ -93,6 +93,8 @@ export default function HiringPartners({ data }) {
                                         <img
                                              src={partner.image}
                                              alt="Hiring Partner Logo"
+                                             width="130"
+                                             height="40"
                                              className="h-8 sm:h-10 w-auto max-w-[130px] sm:max-w-[160px] object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
                                         />
                                    </div>
@@ -109,6 +111,8 @@ export default function HiringPartners({ data }) {
                                         <img
                                              src={partner.image}
                                              alt="Hiring Partner Logo"
+                                             width="130"
+                                             height="40"
                                              className="h-8 sm:h-10 w-auto max-w-[130px] sm:max-w-[160px] object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
                                         />
                                    </div>

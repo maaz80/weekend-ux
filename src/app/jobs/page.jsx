@@ -618,6 +618,8 @@ export default function JobsPage() {
                               <img
                                 src={logoUrl}
                                 alt={companyName}
+                                width="44"
+                                height="44"
                                 className="w-11 h-11 object-contain rounded-xl bg-white p-1 border border-zinc-200 shadow-2xs shrink-0"
                                 onError={(e) => {
                                   e.currentTarget.style.display = "none";
@@ -849,6 +851,8 @@ export default function JobsPage() {
                       <img
                         src={logoUrl}
                         alt={companyName}
+                        width="56"
+                        height="56"
                         className="w-14 h-14 object-contain rounded-2xl bg-white p-1.5 border border-zinc-200 shadow-2xs shrink-0"
                         onError={(e) => {
                           e.currentTarget.style.display = "none";

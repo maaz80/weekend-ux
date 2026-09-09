@@ -462,6 +462,8 @@ export default function Chatbot({
                                    <img
                                         src={navbarData.logo.image.trim()}
                                         alt="Logo"
+                                        width={36}
+                                        height={36}
                                         className="w-full h-full object-contain"
                                    />
                               ) : (
@@ -513,7 +515,7 @@ export default function Chatbot({
                                         <div className="flex items-center gap-2 mb-1">
                                              <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center p-1.5 shrink-0 shadow-xs border border-zinc-200 overflow-hidden">
                                                   {hasLogoImage ? (
-                                                       <img src={navbarData.logo.image.trim()} alt="Logo" className="w-full h-full object-contain" />
+                                                       <img src={navbarData.logo.image.trim()} alt="Logo" width={24} height={24} className="w-full h-full object-contain" />
                                                   ) : (
                                                        <Image src={Logo} alt="Logo" className="w-full h-full object-contain" />
                                                   )}
@@ -690,7 +692,7 @@ export default function Chatbot({
                          <div className="flex items-start gap-2.5 w-full max-w-[85%] self-start mr-auto">
                               <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center p-0.5 shrink-0 shadow-xs border border-zinc-200 overflow-hidden">
                                    {hasLogoImage ? (
-                                        <img src={navbarData.logo.image.trim()} alt="Logo" className="w-full h-full object-contain" />
+                                        <img src={navbarData.logo.image.trim()} alt="Logo" width={24} height={24} className="w-full h-full object-contain" />
                                    ) : (
                                         <Image src={Logo} alt="Logo" className="w-full h-full object-contain" />
                                    )}

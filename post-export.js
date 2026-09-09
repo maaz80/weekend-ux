@@ -48,6 +48,44 @@ function processHtmlFile(filePath) {
         modified = true;
     }
 
+    // 4. Ensure explicit width and height attributes on all <img> elements to prevent Cumulative Layout Shift (CLS)
+    if (content.includes('<img')) {
+        const updatedContent = content.replace(/<img\s+([^>]*?)>/gi, (match, attrs) => {
+            const hasWidth = /\bwidth=["'\d]/i.test(attrs);
+            const hasHeight = /\bheight=["'\d]/i.test(attrs);
+            if (hasWidth && hasHeight) return match;
+
+            let newAttrs = attrs;
+            if (!hasWidth) {
+                let defaultW = "130";
+                if (/google-logo-icon/i.test(attrs) || /max-w-\[110px\]/i.test(attrs)) defaultW = "120";
+                else if (/\bw-11\b/i.test(attrs)) defaultW = "44";
+                else if (/\bw-14\b/i.test(attrs)) defaultW = "56";
+                else if (/\bw-8\b/i.test(attrs)) defaultW = "32";
+                else if (/\bw-9\b/i.test(attrs)) defaultW = "36";
+                else if (/\bw-12\b/i.test(attrs)) defaultW = "48";
+                else if (/\bwhatsapp\b/i.test(attrs)) defaultW = "80";
+                newAttrs += ` width="${defaultW}"`;
+            }
+            if (!hasHeight) {
+                let defaultH = "40";
+                if (/google-logo-icon/i.test(attrs) || /max-w-\[110px\]/i.test(attrs)) defaultH = "24";
+                else if (/\bw-11\b/i.test(attrs)) defaultH = "44";
+                else if (/\bw-14\b/i.test(attrs)) defaultH = "56";
+                else if (/\bw-8\b/i.test(attrs)) defaultH = "32";
+                else if (/\bw-9\b/i.test(attrs)) defaultH = "36";
+                else if (/\bw-12\b/i.test(attrs)) defaultH = "48";
+                else if (/\bwhatsapp\b/i.test(attrs)) defaultH = "80";
+                newAttrs += ` height="${defaultH}"`;
+            }
+            return `<img ${newAttrs}>`;
+        });
+        if (updatedContent !== content) {
+            content = updatedContent;
+            modified = true;
+        }
+    }
+
     // 5. Fix fetchPriority case on link preloads for standard HTML specification compliance
     if (content.includes('fetchPriority=')) {
         content = content.replace(/fetchPriority=/g, 'fetchpriority=');

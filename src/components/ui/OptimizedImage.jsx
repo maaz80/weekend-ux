@@ -30,12 +30,14 @@ export default function OptimizedImage({
      const loadingMode = priority ? "eager" : "lazy";
 
      if (!isCloudinary) {
+          const fallbackW = width || 420;
+          const fallbackH = height || 245;
           return (
                <img
                     src={imageSrc}
                     alt={alt}
-                    width={width}
-                    height={height}
+                    width={fallbackW}
+                    height={fallbackH}
                     className={`${className}`}
                     loading={loadingMode}
                     decoding="async"

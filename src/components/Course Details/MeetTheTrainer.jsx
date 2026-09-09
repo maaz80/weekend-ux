@@ -70,6 +70,8 @@ export default function MeetTheTrainer({ data }) {
                 <img
                   src={getOptimizedCloudinaryUrl(trainer.image, { width: 500, quality: "50", format: "auto", crop: "fill" }) || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"}
                   alt={trainer.name || "Trainer"}
+                  width="365"
+                  height="288"
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 blur-xl scale-110 select-none pointer-events-none"
                 />
               </div>
