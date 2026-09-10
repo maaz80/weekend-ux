@@ -550,7 +550,7 @@ export default function DemoClass({ data }) {
                                    </div>
 
                                    {/* Card Footer Bar */}
-                                   <div className="bg-zinc-50/80 border-t border-zinc-150 py-3.5 px-6 text-center text-xs font-bold text-zinc-500 flex items-center justify-center gap-2 select-none">
+                                   <div className="bg-zinc-50/80 border-t border-zinc-100 py-3.5 px-6 text-center text-xs font-bold text-zinc-500 flex items-center justify-center gap-2 select-none">
                                         <ShieldCheck size={16} className="text-green-600 shrink-0" />
                                         <span>100% Free • No Credit Card Required</span>
                                    </div>
