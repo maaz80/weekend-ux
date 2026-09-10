@@ -96,7 +96,7 @@ const TeamSection = ({
                               {teamMembers.map((member, idx) => (
                                    <article
                                         key={member.id}
-                                        className={`group relative overflow-hidden rounded-3xl ${idx === 1 ? 'h-110 mt-5' : 'h-142.5'}`}
+                                        className={`group relative overflow-hidden rounded-2xl ${idx === 1 ? 'h-110 mt-5' : 'h-142.5'}`}
                                    >
                                         <OptimizedImage
                                              src={member.image}

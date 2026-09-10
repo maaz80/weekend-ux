@@ -40,7 +40,7 @@ export default function HiringPartners({ data }) {
      const ticker2 = Array(repeatCount2).fill(row2.length ? row2 : row1).flat();
 
      return (
-          <section className="w-full bg-[#EEF2F6] py-14 sm:py-18 md:py-24 font-urbanist border-b border-zinc-200/80 relative z-1 overflow-hidden">
+          <section className="w-full bg-[#EEF2F6] py-7 sm:py-18 md:py-24 font-urbanist relative z-1 overflow-hidden">
                <style jsx>{`
                     @keyframes marquee-left {
                          0% { transform: translateX(0%); }
@@ -88,14 +88,14 @@ export default function HiringPartners({ data }) {
                               {ticker1.map((partner, idx) => (
                                    <div
                                         key={`r1-${idx}`}
-                                        className="w-44 sm:w-56 h-20 sm:h-22 bg-white rounded-xl sm:rounded-2xl shadow-xs border border-zinc-200/80 px-6 py-4 flex items-center justify-center shrink-0 hover:shadow-md hover:border-blue-300 transition-all duration-300 group cursor-pointer"
+                                        className="w-30 sm:w-56 h-10 sm:h-22 bg-white rounded-xl sm:rounded-2xl shadow-xs border border-zinc-200/80 px-6 py-4 flex items-center justify-center shrink-0 hover:shadow-md hover:border-blue-300 transition-all duration-300 group cursor-pointer"
                                    >
                                         <img
                                              src={partner.image}
                                              alt="Hiring Partner Logo"
                                              width="130"
                                              height="40"
-                                             className="h-8 sm:h-10 w-auto max-w-[130px] sm:max-w-[160px] object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
+                                             className="h-6 sm:h-10 w-auto max-w-[130px] sm:max-w-[160px] object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
                                         />
                                    </div>
                               ))}
@@ -106,14 +106,14 @@ export default function HiringPartners({ data }) {
                               {ticker2.map((partner, idx) => (
                                    <div
                                         key={`r2-${idx}`}
-                                        className="w-44 sm:w-56 h-20 sm:h-22 bg-white rounded-xl sm:rounded-2xl shadow-xs border border-zinc-200/80 px-6 py-4 flex items-center justify-center shrink-0 hover:shadow-md hover:border-blue-300 transition-all duration-300 group cursor-pointer"
+                                        className="w-30 sm:w-56 h-10 sm:h-22 bg-white rounded-xl sm:rounded-2xl shadow-xs border border-zinc-200/80 px-6 py-4 flex items-center justify-center shrink-0 hover:shadow-md hover:border-blue-300 transition-all duration-300 group cursor-pointer"
                                    >
                                         <img
                                              src={partner.image}
                                              alt="Hiring Partner Logo"
                                              width="130"
                                              height="40"
-                                             className="h-8 sm:h-10 w-auto max-w-[130px] sm:max-w-[160px] object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
+                                             className="h-6 sm:h-10 w-auto max-w-[130px] sm:max-w-[160px] object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
                                         />
                                    </div>
                               ))}

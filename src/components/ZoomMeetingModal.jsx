@@ -74,7 +74,7 @@ export default function ZoomMeetingModal({ liveClass, courseTitle, onClose }) {
      return (
           <div className="fixed inset-0 z-999999 bg-black/65 backdrop-blur-md sm:backdrop-blur-xl flex items-center justify-center p-3 font-urbanist animate-fadeIn">
 
-               <div className="bg-zinc-950 text-white border border-zinc-800 shadow-2xl rounded-2xl sm:rounded-3xl w-full max-w-lg max-h-[92dvh] overflow-y-auto flex flex-col relative p-4 sm:p-6 space-y-5">
+               <div className="bg-zinc-950 text-white border border-zinc-800 shadow-2xl rounded-2xl sm:rounded-2xl w-full max-w-lg max-h-[92dvh] overflow-y-auto flex flex-col relative p-4 sm:p-6 space-y-5">
 
                     {/* TOP HEADER */}
                     <div className="flex items-start justify-between gap-3 border-b border-zinc-800 pb-4">

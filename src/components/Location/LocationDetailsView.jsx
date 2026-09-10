@@ -49,7 +49,7 @@ export default function LocationDetailsView({ data }) {
                               {heroDescription}
                          </span> */}
 
-                         <h1 className="custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-8 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair px-4">
+                         <h1 className="pt-10 custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-8 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair px-4">
                               {heroTitle}
                          </h1>
 

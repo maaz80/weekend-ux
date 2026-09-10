@@ -115,7 +115,7 @@ export default function RelatedBlogs({
                                         className="group block cursor-pointer"
                                    >
                                         {/* Image */}
-                                        <div className="overflow-hidden rounded-md bg-zinc-100">
+                                        <div className="overflow-hidden rounded-2xl bg-zinc-100">
                                              <OptimizedImage
                                                   src={imageSrc}
                                                   alt={blog.alt && blog.alt.trim() !== blog.title?.trim() ? blog.alt : ""}
@@ -128,7 +128,7 @@ export default function RelatedBlogs({
 
                                         {/* Title */}
                                         <div className="mt-2 md:mt-5 flex items-start justify-between gap-4">
-                                             <h2 className={`font-urbanist text-[20px] md:text-[26px] leading-[1.35] line-clamp-2 ${blogTitleColor}`}>
+                                             <h2 className={`font-urbanist text-[20px] md:text-[26px] lg:text-[32px] leading-[1.35] line-clamp-2 ${blogTitleColor}`}>
                                                   {blog.title}
                                              </h2>
 

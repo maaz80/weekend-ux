@@ -304,9 +304,9 @@ export default function JobsPage() {
   // 2. Auth Gate: Must be logged in
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-32 pb-44">
+      <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between py-38">
         <main className="grow py-16">
-          <div className="custom-width px-4 max-w-md mx-auto text-center space-y-6 bg-white p-8 md:p-10 rounded-3xl border border-zinc-200 shadow-sm">
+          <div className="custom-width px-4 max-w-md mx-auto text-center space-y-6 bg-white p-8 md:p-10 rounded-2xl border border-zinc-200 shadow-sm">
             <div className="w-16 h-16 bg-amber-500/10 text-amber-600 rounded-2xl flex items-center justify-center mx-auto border border-amber-500/20">
               <Briefcase size={32} />
             </div>
@@ -337,14 +337,14 @@ export default function JobsPage() {
   // 3. Course Lock Gate: Must have enrolled in at least 1 course
   if (!isEnrolledStudent) {
     return (
-      <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-28 pb-44">
+      <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between py-32">
         <main className="grow py-12 sm:py-16">
-          <div className="custom-width px-4 max-w-lg mx-auto text-center space-y-6 bg-white p-8 sm:p-10 rounded-3xl border border-zinc-200 shadow-md relative overflow-hidden">
+          <div className="custom-width px-4 max-w-lg mx-auto text-center space-y-6 bg-white p-8 sm:p-10 rounded-2xl border border-zinc-200 shadow-md relative overflow-hidden">
             <div className="absolute top-0 right-0 bg-amber-500 text-neutral font-extrabold text-[10px] uppercase px-4 py-1.5 rounded-bl-xl tracking-wider">
               Student Exclusive
             </div>
 
-            <div className="w-20 h-20 bg-amber-500/10 text-amber-600 rounded-3xl flex items-center justify-center mx-auto border border-amber-500/20 shadow-inner">
+            <div className="w-20 h-20 bg-amber-500/10 text-amber-600 rounded-2xl flex items-center justify-center mx-auto border border-amber-500/20 shadow-inner">
               <Lock size={38} />
             </div>
 
@@ -390,7 +390,7 @@ export default function JobsPage() {
 
   // 4. Main Job Board Page (Enrolled Students)
   return (
-    <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-24 md:pt-32 pb-20 md:pb-24" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
+    <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between py-24 md:py-32" style={{ paddingTop: '100px', paddingBottom: '80px' }}>
       <main className="grow">
         <div className="custom-width px-3.5 sm:px-6 lg:px-10 max-w-7xl mx-auto">
           
@@ -406,11 +406,10 @@ export default function JobsPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-2xl">💼</span>
                   <h1 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 tracking-tight">
                     Exclusive Job Portal
                   </h1>
-                  <span className="bg-emerald-100 text-emerald-800 text-[10px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
+                  <span className="bg-emerald-100 text-emerald-800 text-[10px] sm:text-xs font-bold min-w-20  justify-center py-0.5 rounded-full border border-emerald-200 flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" /> Live Feed
                   </span>
                 </div>
@@ -568,7 +567,7 @@ export default function JobsPage() {
             </div>
           ) : filteredJobs.length === 0 ? (
             // Empty State
-            <div className="bg-white border border-zinc-200/90 rounded-3xl p-12 text-center space-y-4 shadow-2xs">
+            <div className="bg-white border border-zinc-200/90 rounded-2xl p-12 text-center space-y-4 shadow-2xs">
               <div className="w-16 h-16 bg-amber-500/10 text-amber-600 rounded-2xl flex items-center justify-center mx-auto border border-amber-500/20">
                 <Briefcase size={32} />
               </div>
@@ -837,10 +836,10 @@ export default function JobsPage() {
 
         return (
           <div className="fixed inset-0 z-99999 bg-black/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto animate-fadeIn font-urbanist">
-            <div className="bg-white rounded-3xl border border-zinc-200 max-w-3xl w-full shadow-2xl relative my-auto max-h-[92vh] flex flex-col overflow-hidden">
+            <div className="bg-white rounded-2xl border border-zinc-200 max-w-3xl w-full shadow-2xl relative my-auto max-h-[92vh] flex flex-col overflow-hidden">
               
               {/* Top Accent Bar */}
-              <div className="h-2 bg-gradient-to-r from-official via-amber-400 to-amber-500 w-full shrink-0" />
+              <div className="h-2 bg-linear-to-r from-official via-amber-400 to-amber-500 w-full shrink-0" />
 
               {/* Modal Header */}
               <div className="p-5 sm:p-7 border-b border-zinc-100 bg-white shrink-0">

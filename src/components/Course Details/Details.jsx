@@ -398,12 +398,12 @@ export default function Details({ data }) {
                     <div className="custom-width px-4 sm:px-6 lg:px-10">
                          
                          {/* New Custom Section with Left-side Info and Right-side Form/Banner */}
-                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
+                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-16">
 
                               {/* LEFT COLUMN: Content */}
                               <div className="space-y-8 lg:col-span-2">
                                    <div>
-                                        <h2 className="font-playfair text-[32px] md:text-[44px] font-extrabold leading-tight text-zinc-900">
+                                        <h2 className="font-playfair text-[32px] md:text-[36px] font-extrabold leading-tight text-zinc-900">
                                              {displayTitle}
                                         </h2>
                                         <div className="w-20 h-1 md:h-1.5 bg-official mt-4 rounded"></div>
@@ -533,7 +533,7 @@ export default function Details({ data }) {
                               <div className="space-y-6 lg:sticky lg:top-29 self-start">
 
                                    {/* Admission Form */}
-                                   <div className="bg-white rounded-3xl shadow-sm p-6 lg:p-7 xl:p-8 border border-zinc-150">
+                                   <div className="bg-white rounded-2xl shadow-sm p-6 lg:p-7 xl:p-8 border border-zinc-150">
                                         <h2 className="text-start text-[22px] md:text-[24px] font-bold text-neutral leading-9 mb-4">
                                              Send Us Your Training Requirement
                                         </h2>
@@ -545,7 +545,7 @@ export default function Details({ data }) {
                                    </div>
 
                                    {/* Banner */}
-                                   <div className="rounded-3xl overflow-hidden">
+                                   <div className="rounded-2xl overflow-hidden">
                                         <CallCard
                                              title="Design is more than just being creative!"
                                              subtitle="Learn how to make design that sells"
@@ -567,7 +567,7 @@ export default function Details({ data }) {
                <section className="bg-white py-12 font-urbanist w-full border-t border-b border-zinc-100">
                     <div className="custom-width px-4 sm:px-6 lg:px-16">
                          <div
-                              className="relative overflow-hidden bg-white border border-zinc-200 rounded-3xl p-8 md:p-12 flex flex-col md:flex-row justify-between items-center gap-8 shadow-sm"
+                              className="relative overflow-hidden bg-white border border-zinc-200 rounded-2xl p-8 md:p-12 flex flex-col md:flex-row justify-between items-center gap-8 shadow-sm"
                               style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54 48c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3zm-48 0c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3zm0-36c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3zm48 0c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3zm-24 18c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3z' fill='%23E85B24' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E")` }}
                          >
                               {/* Content info */}
@@ -638,7 +638,7 @@ export default function Details({ data }) {
 
                                    <div className="space-y-6 text-left flex flex-col justify-between h-full min-h-62.5">
                                         <div className="space-y-4">
-                                             <h2 className="font-playfair text-[32px] md:text-[42px] font-bold leading-tight font-neutral">
+                                             <h2 className="font-playfair text-[32px] md:text-[36px] font-bold leading-tight font-neutral">
                                                   {data?.shortTerm?.title || "Short-term UX Design Courses"}
                                              </h2>
                                              <p className="font-urbanist text-[16px] md:text-[17px] text-zinc-700 leading-relaxed max-w-lg">
@@ -681,7 +681,7 @@ export default function Details({ data }) {
                                    </div>
 
                                    <div className="w-full min-h-65">
-                                        <div className="bg-[#ffffff] text-[#18181b] rounded-3xl p-8 shadow-lg border border-blue-100 min-h-55 flex flex-col justify-between transition-all duration-500 transform hover:scale-[1.01]">
+                                        <div className="bg-[#ffffff] text-[#18181b] rounded-2xl p-8 shadow-lg border border-blue-100 min-h-55 flex flex-col justify-between transition-all duration-500 transform hover:scale-[1.01]">
 
                                              <p className="font-urbanist text-[15px] md:text-[16px] text-[#4b5563] leading-relaxed text-left mb-6 font-medium">
                                                   {shortTermItems[sliderIndex]?.description}
@@ -725,7 +725,7 @@ export default function Details({ data }) {
                <section className="bg-[#FAF9F5] py-8 md:py-24 font-urbanist w-full">
                     <div className="custom-width px-4 sm:px-6 lg:px-16 overflow-hidden">
                          <div className="text-center space-y-4 mb-5 md:mb-12">
-                              <h2 className="font-playfair text-[32px] md:text-[42px] font-bold text-zinc-900 leading-tight">
+                              <h2 className="font-playfair text-[32px] md:text-[36px] font-bold text-zinc-900 leading-tight">
                                    {displayCaseStudiesTitle}
                               </h2>
                               <p className="font-urbanist text-[16px] md:text-[17px] text-zinc-500 max-w-2xl mx-auto leading-relaxed">
@@ -747,7 +747,7 @@ export default function Details({ data }) {
                                         >
                                              <Link
                                                   href={study.link || "#"}
-                                                  className="group block bg-white rounded-3xl overflow-hidden border border-zinc-200 hover:border-official shadow-sm hover:shadow-lg transition-all duration-300 transform hover:scale-[1.01]"
+                                                  className="group block bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-official shadow-sm hover:shadow-lg transition-all duration-300 transform hover:scale-[1.01]"
                                              >
                                                   <div className="aspect-4/3 bg-zinc-100 overflow-hidden relative">
                                                        {study.image ? (
@@ -805,6 +805,7 @@ export default function Details({ data }) {
 
                {/* Fifth Section: Explore More Career Domains Section */}
                {/* <section
+               <section
                     className="relative px-2 py-8 md:py-28 font-urbanist w-full overflow-hidden bg-cover bg-center bg-no-repeat"
                     style={{ backgroundImage: "url('/images/hero-bg.webp')" }}
                >
@@ -812,7 +813,7 @@ export default function Details({ data }) {
 
                     <div className="custom-width px-4 sm:px-6 lg:px-16 relative z-10">
                          <div className="text-left space-y-4 mb-12">
-                              <h2 className="font-playfair text-[32px] md:text-[42px] font-bold text-zinc-900 leading-tight">
+                              <h2 className="font-playfair text-[32px] md:text-[36px] font-bold text-zinc-900 leading-tight">
                                    {displayCareerDomainsTitle}
                               </h2>
                               <p className="font-urbanist text-[16px] md:text-[17px] text-zinc-500 max-w-3xl leading-relaxed">

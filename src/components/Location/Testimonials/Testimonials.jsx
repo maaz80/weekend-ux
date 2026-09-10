@@ -206,7 +206,7 @@ const Testimonials = ({ data }) => {
                          {testimonialsList.map((item, i) => (
                               <div
                                    key={i}
-                                   className="relative min-w-80 md:min-w-100 max-w-80 md:max-w-100 rounded-[28px] border border-[#D9D6CE] bg-white/10 p-7 backdrop-blur-sm"
+                                   className="relative min-w-80 md:min-w-100 max-w-80 md:max-w-100 rounded-2xl border border-[#D9D6CE] bg-white/10 p-7 backdrop-blur-sm"
                               >
                                    {/* Stars */}
                                    <div className="flex items-center gap-1 mb-6">

@@ -63,7 +63,7 @@ export default function MeetTheTrainer({ data }) {
           {trainersList.map((trainer, idx) => (
             <div
               key={idx}
-              className="w-full max-w-[365px] mx-auto bg-white rounded-3xl overflow-hidden border border-zinc-200/90 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+              className="w-full max-w-91.25 mx-auto bg-white rounded-2xl overflow-hidden border border-zinc-200/90 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
             >
               {/* Trainer Photo Header */}
               <div className="relative w-full h-64 sm:h-72 bg-zinc-100 overflow-hidden">

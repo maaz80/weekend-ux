@@ -92,7 +92,7 @@ export default function WhyChooseUs({ data }) {
                          {items.map((card, idx) => (
                               <div
                                    key={idx}
-                                   className="group rounded-3xl p-6 sm:p-8 flex flex-col justify-start text-left shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 border hover:border-[#18181b]"
+                                   className="group rounded-2xl p-6 sm:p-8 flex flex-col justify-start text-left shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1.5 border hover:border-[#18181b]"
                                    style={{ backgroundColor: "#ffffff", color: "#18181b", borderColor: "rgba(24, 24, 27, 0.1)" }}
                               >
                                    {/* Icon Container */}

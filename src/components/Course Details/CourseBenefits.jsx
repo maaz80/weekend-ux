@@ -94,7 +94,7 @@ export default function CourseBenefits({ data }) {
                               return (
                                    <div
                                         key={idx}
-                                        className="group rounded-3xl p-7 sm:p-8 flex flex-col justify-between text-left transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 border bg-white text-zinc-900 border-zinc-200/90 hover:bg-official hover:text-zinc-950 hover:border-amber-400"
+                                        className="group rounded-2xl p-7 sm:p-8 flex flex-col justify-between text-left transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 border bg-white text-zinc-900 border-zinc-200/90 hover:bg-official hover:text-zinc-950 hover:border-amber-400"
                                    >
                                         <div>
                                              {/* Icon Container */}

@@ -152,7 +152,7 @@ const SearchResultsContent = () => {
                          <span className="bg-official/20 text-official border border-official/40 text-[11px] font-extrabold tracking-widest uppercase px-3.5 py-1 rounded-full inline-block">
                               Search Explorer
                          </span>
-                         <h1 className="text-2xl md:text-5xl font-light tracking-wide text-white leading-tight">
+                         <h1 className="pt-10 text-2xl md:text-5xl font-light tracking-wide text-white leading-tight">
                               Showing results for: <span className="text-official font-extrabold italic">"{initialQuery || "All Courses"}"</span>
                          </h1>
                          <p className="text-zinc-400 text-xs md:text-sm font-medium max-w-2xl mx-auto">

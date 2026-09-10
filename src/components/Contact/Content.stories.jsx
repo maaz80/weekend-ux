@@ -69,7 +69,7 @@ export default {
           mapRounded: {
                control: "select",
                options: [
-                    "rounded-3xl",
+                    "rounded-2xl",
                     "rounded-2xl",
                     "rounded-xl",
                     "rounded-none",
@@ -120,7 +120,7 @@ export const Default = {
           inquiriesTitleColor: "text-neutral",
           locationTitleColor: "text-neutral",
           socialTitleColor: "text-neutral",
-          mapRounded: "rounded-3xl",
+          mapRounded: "rounded-2xl",
           formBgColor: "bg-white",
           formHeadingColor: "text-neutral",
           formShadow: "shadow-[0_8px_24px_rgba(156,163,175,0.15)]",

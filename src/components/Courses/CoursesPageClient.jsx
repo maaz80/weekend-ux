@@ -226,7 +226,7 @@ export default function CoursesPageClient({ coursesData }) {
                          fetchPriority="high"
                          className="object-cover object-center opacity-60 z-0"
                     />
-                    <h1 className="text-[28px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">
+                    <h1 className="pt-10 text-[28px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">
                          {heroStart} <span className="text-official italic">{heroEnd}</span>
                     </h1>
                </section>
@@ -236,7 +236,7 @@ export default function CoursesPageClient({ coursesData }) {
 
                          {/* Logged-in User Dashboard Banner */}
                          {isLoggedIn && (
-                              <div className="bg-white border border-zinc-200/80 rounded-2xl p-5 md:p-6 mb-8 shadow-sm text-neutral flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                              <div className="bg-white border border-zinc-200/80 rounded-2xl p-3 md:p-6 mb-8 shadow-sm text-neutral flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                                    <div className="space-y-1">
                                         <div className="flex items-center gap-2">
                                              <h2 className="text-xl md:text-2xl font-bold text-zinc-900">
@@ -247,7 +247,7 @@ export default function CoursesPageClient({ coursesData }) {
                                              {user?.email ? `Logged in as ${user.email}` : "Manage your unlocked courses and explore new programs."}
                                         </p>
                                    </div>
-                                   <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                                   <div className="flex flex-wrap items-center gap-1 md:gap-3 w-full md:w-auto">
                                         <div className="bg-official/50 border border-official/50 px-4 py-2.5 rounded-xl text-left">
                                              <p className="text-[11px] font-bold text-neutral uppercase tracking-wider">Unlocked Courses</p>
                                              <p className="text-lg font-extrabold text-neutral flex items-center gap-1.5 mt-0.5">
@@ -313,6 +313,7 @@ export default function CoursesPageClient({ coursesData }) {
                                              <div key={course._id} className="w-full max-w-sm text-neutral">
                                                   <CourseCard
                                                        course={course}
+                                                       widthClass="w-auto md:w-full"
                                                        priority={idx < 3 && currentPage === 1}
                                                        fetchPriority={idx === 0 && currentPage === 1 ? "high" : undefined}
                                                   />

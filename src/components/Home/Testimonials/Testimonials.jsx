@@ -203,7 +203,7 @@ const Testimonials = ({ data }) => {
      }, [maxIndex]);
 
      return (
-          <div className='relative min-h-215 md:min-h-200.25 mx-auto w-full px-4 sm:px-6 lg:px-10 pt-10 lg:pt-16 pb-8 overflow-hidden'>
+          <div className='relative min-h-185 md:min-h-200.25 mx-auto w-full px-4 sm:px-6 lg:px-10 pt-10 lg:pt-16 pb-8 overflow-hidden'>
                <Image src={Map} alt="weekend-ux-testimonials-bg" loading="lazy" decoding="async" className='absolute top-0 inset-0 w-full min-h-[120vh] md:h-[110vh] z-10 object-cover' />
 
                {/* Heading */}
@@ -232,7 +232,7 @@ const Testimonials = ({ data }) => {
                          {testimonialsList.map((item, i) => (
                               <div
                                    key={i}
-                                   className="relative w-[89vw] sm:w-85 md:w-100 shrink-0 rounded-[28px] border border-[#D9D6CE] bg-white/10 p-5 md:p-7 backdrop-blur-sm shadow-2xs"
+                                   className="relative w-[89vw] sm:w-85 md:w-100 shrink-0 rounded-2xl border border-[#D9D6CE] bg-white/10 p-5 md:p-7 backdrop-blur-sm shadow-2xs"
                               >
                                    {/* Stars */}
                                    <div className="flex items-center gap-1 mb-6">
@@ -275,12 +275,12 @@ const Testimonials = ({ data }) => {
                      <div className="flex items-center justify-between md:justify-end gap-1.5 sm:gap-3 mt-6 md:mt-8 px-1 sm:px-2 md:px-0 max-w-full overflow-hidden shrink-0">
 
                           {/* Slide Counter on Mobile */}
-                          <div className="text-[11px] sm:text-xs font-bold text-neutral/70 md:hidden bg-white/70 backdrop-blur-md px-2.5 py-1 rounded-full border border-zinc-200/80 shadow-2xs shrink-0">
+                          <div className="text-[14px] sm:text-xs font-bold text-neutral/70 md:hidden bg-white/70 backdrop-blur-md px-2.5 py-3 md:py-1 rounded-full border border-zinc-200/80 shadow-2xs shrink-0">
                                {currentIndex + 1} / {maxIndex + 1}
                           </div>
 
                           {/* DOTS WINDOW (Fixed 5 Dots, Cyclic Highlight 1 -> 5 -> 1) */}
-                          <div className="flex items-center gap-0.5 sm:gap-1.5 bg-white/70 backdrop-blur-md px-2 sm:px-3 py-1 sm:py-1.5 rounded-full border border-zinc-200/80 shadow-2xs shrink-0 overflow-hidden">
+                          <div className="flex items-center gap-0 sm:gap-1.5 bg-white/70 backdrop-blur-md px-2 sm:px-3 py-0 sm:py-1.5 rounded-full border border-zinc-200/80 shadow-2xs shrink-0 overflow-hidden">
                                {Array.from({ length: Math.min(maxIndex + 1, 5) }).map((_, dotIdx) => {
                                     const activeDotIdx = currentIndex % 5;
                                     const isActive = activeDotIdx === dotIdx;
@@ -298,7 +298,7 @@ const Testimonials = ({ data }) => {
                                               }}
                                               aria-label={`Go to slide ${dotIdx + 1}`}
                                               aria-current={isActive ? "true" : undefined}
-                                              className="min-w-11 min-h-11 w-11 h-11 flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110 p-0"
+                                              className=" min-h-11 w-7 md:w-11 h-11 flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110 p-0"
                                          >
                                               <span className={`block rounded-full transition-all duration-300 ${
                                                    isActive

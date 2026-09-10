@@ -47,7 +47,7 @@ export default function WhoShouldEnroll() {
             return (
               <div
                 key={idx}
-                className="bg-[#ffffff] text-[#18181b] rounded-3xl p-6 sm:p-8 flex flex-col items-center text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                className="bg-[#ffffff] text-[#18181b] rounded-2xl p-6 sm:p-8 flex flex-col items-center text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group min-h-60"
               >
                 {/* Icon Container */}
                 <div className="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/25 text-[#18181b] flex items-center justify-center mb-5 shrink-0 group-hover:scale-110 group-hover:bg-amber-500/20 transition-all duration-300 shadow-2xs">
@@ -55,7 +55,7 @@ export default function WhoShouldEnroll() {
                 </div>
 
                 {/* Card Title */}
-                <h3 className="font-urbanist font-extrabold text-sm sm:text-base tracking-wider uppercase text-[#18181b] leading-snug">
+                <h3 className="font-urbanist font-extrabold text-base sm:text-base tracking-wider uppercase text-[#18181b] leading-snug">
                   {card.title}
                 </h3>
 
@@ -63,7 +63,7 @@ export default function WhoShouldEnroll() {
                 <div className="w-8 h-0.5 bg-official my-3.5 rounded-full group-hover:w-12 transition-all duration-300" />
 
                 {/* Description */}
-                <p className="font-urbanist text-xs sm:text-sm font-medium text-[#4b5563] leading-relaxed">
+                <p className="font-urbanist text-sm font-medium text-[#4b5563] leading-relaxed">
                   {card.description}
                 </p>
               </div>

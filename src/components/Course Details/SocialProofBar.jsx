@@ -51,7 +51,7 @@ export default function SocialProofBar({ items }) {
   return (
     <section className="w-full bg-official text-black relative z-20 py-3 sm:py-4">
       <div className="custom-width px-3 sm:px-5 lg:px-8 mx-auto">
-        <div className="grid grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
           {displayItems.slice(0, 4).map((item, idx) => {
             const IconComponent = getIconForItem(item, idx);
 
@@ -59,8 +59,8 @@ export default function SocialProofBar({ items }) {
               <div
                 key={idx}
                 className="
-                  group flex flex-wrap flex-col md:flex-row items-center
-                  gap-2 sm:gap-3
+                  group flex flex-wrap flex-col md:flex-row items-start md:items-center
+                  gap-0 sm:gap-3
                   px-2.5 py-2.5 sm:px-4 sm:py-3
                   rounded-xl sm:rounded-2xl
                   backdrop-blur-sm
@@ -90,7 +90,7 @@ export default function SocialProofBar({ items }) {
                   <IconComponent
                     size={17}
                     strokeWidth={2}
-                    className="sm:w-5 sm:h-5"
+                    className="w-5 h-5"
                   />
                 </div>
 
@@ -98,7 +98,7 @@ export default function SocialProofBar({ items }) {
                 <div className="min-w-0 flex flex-col">
                   <span
                     className="
-                      text-sm sm:text-lg lg:text-xl
+                      text-lg lg:text-xl
                       font-extrabold
                       leading-none
                       tracking-tight
@@ -112,7 +112,7 @@ export default function SocialProofBar({ items }) {
                   <span
                     className="
                       mt-1
-                      text-[8px] sm:text-[10px] lg:text-xs
+                      text-[10px] lg:text-xs
                       font-semibold
                       uppercase
                       tracking-[0.08em]

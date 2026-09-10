@@ -32,7 +32,7 @@ export default function Hero({
                          {title}
                     </span>
 
-                    <h1 className={`custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-10 md:leading-15 2xl:leading-20 relative z-50 font-playfair ${headingColor}`}>
+                    <h1 className={`pt-10 custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-10 md:leading-15 2xl:leading-20 relative z-50 font-playfair ${headingColor}`}>
                          {heading}
                     </h1>
 

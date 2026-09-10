@@ -62,7 +62,7 @@ export default function BlogListingClient({ blogsList, featuredStart, featuredEn
           <>
                {/* Featured Blogs Section */}
                <div className="custom-width py-10 md:py-20">
-                    <h2 className="text-[28px] md:text-[40px] text-neutral font-medium font-playfair mb-4">
+                    <h2 className="text-[28px] md:text-[36px] text-neutral font-medium font-playfair mb-4">
                          <span className="text-[#8F6A00] italic">{featuredStart}</span> {featuredEnd}
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

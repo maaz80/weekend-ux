@@ -7,7 +7,7 @@ import { useUserAuth } from "@/context/UserAuthContext";
 
 const CourseImage = '/images/weekend-ux-program-image-template.webp';
 
-export default function CourseCard({ course, setIsModal = false, priority = false, fetchPriority = undefined }) {
+export default function CourseCard({ course, setIsModal = false, priority = false, fetchPriority = undefined, className = "", widthClass = "w-75 md:w-full" }) {
      const { isLoggedIn, isCourseUnlocked } = useUserAuth();
 
      const unlocked = isLoggedIn && isCourseUnlocked(course);
@@ -23,7 +23,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
           <Link
                href={targetHref}
                onClick={handleClick}
-               className="w-73.5 md:w-full rounded-2xl border min-h-100 md:min-h-114 border-zinc-200 bg-white shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col cursor-pointer group relative block"
+               className={`${widthClass} rounded-2xl border min-h-100 md:min-h-114 border-zinc-200 bg-white shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col cursor-pointer group relative block ${className}`}
           >
                {/* Image section */}
                <div className="relative rounded-t-2xl rounded-b-none overflow-hidden h-50 md:h-60.5 w-full bg-zinc-100">
@@ -52,7 +52,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                <div className="p-3 md:p-4 flex flex-col grow justify-between">
                     <div>
                          {/* Title */}
-                         <h2 className="font-urbanist text-[18px] md:text-[23px] 2xl:text-[24px] font-bold leading-8 md:leading-9 text-zinc-900 min-h-14 flex items-center group-hover:text-official transition-colors">
+                         <h2 className="font-urbanist text-[18px] md:text-[23px] lg:text-[26px] 2xl:text-[32px] font-bold leading-8 md:leading-9 text-zinc-900 min-h-14 flex items-center group-hover:text-official transition-colors">
                               {course?.title}
                          </h2>
 

@@ -164,9 +164,9 @@ export default function StudentDashboardPage() {
      // Auth Gate: Require login to view dashboard
      if (!isLoggedIn) {
           return (
-               <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-24 md:pt-32 pb-44 md:pb-64 lg:pb-80" style={{ paddingTop: '100px' }}>
+               <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between py-24 md:py-32 lg:py-44 ">
                     <main className="grow py-24 md:py-32">
-                         <div className="custom-width px-4 max-w-md mx-auto text-center space-y-6 bg-white p-8 md:p-10 rounded-3xl border border-zinc-200 shadow-sm">
+                         <div className="custom-width px-4 max-w-md mx-auto text-center space-y-6 bg-white p-8 md:p-10 rounded-2xl border border-zinc-200 shadow-sm">
                               <div className="w-16 h-16 bg-amber-500/10 text-official rounded-2xl flex items-center justify-center mx-auto border border-amber-500/20">
                                    <BookOpen size={32} />
                               </div>
@@ -206,7 +206,7 @@ export default function StudentDashboardPage() {
      const activeLiveCourse = allCourses.find(c => c?.liveClass?.active && c?.liveClass?.meetUrl);
 
      return (
-          <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between pt-24 md:pt-32 pb-20 md:pb-24" style={{ paddingTop: '100px' , paddingBottom: '80px'}}>
+          <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between py-24 md:py-32 " >
                {/* MAIN BODY CONTENT */}
                <main className="grow">
                     <div className="custom-width px-3.5 sm:px-6 lg:px-10 ">
@@ -214,7 +214,7 @@ export default function StudentDashboardPage() {
                          {/* GREETING BANNER */}
                          <div className="mb-6 sm:mb-8">
                               <div className="flex items-center gap-2 mb-1">
-                                   <span className="text-xl sm:text-2xl">🎓</span>
+                                   {/* <span className="text-xl sm:text-2xl">🎓</span> */}
                                    <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-900">
                                         Student Dashboard
                                    </h1>
@@ -226,7 +226,7 @@ export default function StudentDashboardPage() {
 
                          {/* ACTIVE LIVE ZOOM SESSION FEATURE BANNER */}
                          {/* {activeLiveCourse && (
-                              <div className="mb-6 sm:mb-8 bg-linear-to-r from-official via-zinc-900 to-zinc-950 rounded-2xl sm:rounded-3xl p-5 sm:p-7 border border-official shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 text-white animate-fadeIn">
+                              <div className="mb-6 sm:mb-8 bg-linear-to-r from-official via-zinc-900 to-zinc-950 rounded-2xl sm:rounded-2xl p-5 sm:p-7 border border-official shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 text-white animate-fadeIn">
                                    <div className="space-y-1.5">
                                         <div className="flex items-center gap-2">
                                              <span className="w-2.5 h-2.5 rounded-full bg-official/60 animate-ping" />
@@ -253,7 +253,7 @@ export default function StudentDashboardPage() {
                          )} */}
 
                          {/* TOP SUMMARY STAT CARDS (3 CARDS) */}
-                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-6 sm:mb-10">
+                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-10 sm:mb-10">
                               {/* Card 1: Course To do */}
                               <div className="bg-white border border-zinc-200/90 rounded-2xl p-4 sm:p-6 shadow-sm hover:shadow-md transition flex items-start justify-between gap-3 relative overflow-hidden group">
                                    <div className="space-y-1.5 sm:space-y-2 z-10">
@@ -553,7 +553,7 @@ export default function StudentDashboardPage() {
                                                                            }))
                                                                       ];
                                                                       return (
-                                                                           <div key={course._id || course.slug || cIdx} className="bg-white border border-zinc-200 rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-sm space-y-4 sm:space-y-6">
+                                                                           <div key={course._id || course.slug || cIdx} className="bg-white border border-zinc-200 rounded-2xl sm:rounded-2xl p-4 sm:p-6 md:p-8 shadow-sm space-y-4 sm:space-y-6">
                                                                                 {/* Course Recording Header */}
                                                                                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-3 border-b border-zinc-100 pb-3 sm:pb-4">
                                                                                      <div>
@@ -691,7 +691,7 @@ export default function StudentDashboardPage() {
                {selectedVideo && (
                     <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-99999 flex items-center justify-center p-2.5 sm:p-4">
                          <div
-                              className="bg-zinc-900 text-white w-full max-w-5xl rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-zinc-800 flex flex-col"
+                              className="bg-zinc-900 text-white w-full max-w-5xl rounded-2xl sm:rounded-2xl overflow-hidden shadow-2xl border border-zinc-800 flex flex-col"
                               style={{ height: "80vh", maxHeight: "800px" }}
                          >
                               {/* Header */}

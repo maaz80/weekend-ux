@@ -72,12 +72,12 @@ export default function JobRoles({ data }) {
      };
 
      return (
-          <section className="w-full bg-[#F8F6EE] py-14 sm:py-18 md:py-24 font-urbanist border-b border-zinc-200/80 relative z-1">
+          <section className="w-full bg-[#F8F6EE] py-14 sm:py-18 md:py-24 font-urbanist relative z-1">
                <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto">
-                    
+
                     {/* Header Section */}
                     <div className="space-y-3 max-w-3xl mb-12 md:mb-16 text-left">
-                         
+
                          {/* Badge Tag */}
                          <div>
                               <span className="inline-block bg-amber-500/10 text-amber-800 font-extrabold text-[11px] sm:text-xs px-4 py-1.5 rounded-full uppercase tracking-wider border border-amber-500/20 shadow-2xs font-urbanist">
@@ -105,7 +105,7 @@ export default function JobRoles({ data }) {
                               return (
                                    <div
                                         key={idx}
-                                        className="group relative bg-white rounded-3xl p-7 sm:p-8 border border-zinc-200/90 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden border-l-4 border-l-amber-400 hover:border-amber-400"
+                                        className="group relative bg-white rounded-2xl p-7 sm:p-8 border border-zinc-200/90 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between overflow-hidden border-l-4 border-l-amber-400 hover:border-amber-400"
                                    >
                                         <div>
                                              {/* Top Row: Icon Badge & Step Number */}

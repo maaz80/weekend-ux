@@ -199,9 +199,9 @@ export default function Footer({
 
      return (
           <footer className={`w-full -mt-10 relative z-1000 pb-16 ${bgColor} ${textColor}`}>
-               <div className="absolute -top-20 sm:-top-28 md:-top-36 lg:-top-44 left-0 right-0 mx-auto w-[92%] sm:w-[88%] md:w-[85%] lg:w-[80%] max-w-6xl h-44 sm:h-56 md:h-72 lg:h-80 xl:h-88 z-20 flex flex-col items-start justify-center px-6 sm:px-10 md:px-14 lg:px-20 rounded-2xl md:rounded-3xl overflow-hidden shadow-xl">
+               <div className="absolute -top-20 sm:-top-28 md:-top-36 lg:-top-44 left-0 right-0 mx-auto w-[92%] sm:w-[88%] md:w-[85%] lg:w-[80%] max-w-6xl h-44 sm:h-56 md:h-72 lg:h-80 xl:h-88 z-20 flex flex-col items-start justify-center px-6 sm:px-10 md:px-14 lg:px-20 rounded-2xl md:rounded-2xl overflow-hidden shadow-xl">
                     {/* Desktop Footer Decorative Background Image */}
-                    <Image src={bannerBgImage} alt="weekend-ux-footer-decorative-bg" fill loading="lazy" sizes="(max-width: 1024px) 100vw, 1200px" className="hidden md:block object-fill rounded-2xl md:rounded-3xl" />
+                    <Image src={bannerBgImage} alt="weekend-ux-footer-decorative-bg" fill loading="lazy" sizes="(max-width: 1024px) 100vw, 1200px" className="hidden md:block object-fill rounded-2xl md:rounded-2xl" />
                     {/* Mobile Footer Decorative Background Image */}
                     <Image src="/images/weekend-ux-footer-decorative-bg-mobile.webp" alt="weekend-ux-footer-decorative-bg-mobile" fill loading="lazy" sizes="100vw" className="md:hidden object-cover rounded-2xl" />
                     <div className={`font-playfair text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-[46px] max-w-xs sm:max-w-md md:max-w-xl lg:max-w-2xl relative z-50 leading-snug md:leading-tight lg:leading-tight font-medium ${bannerTitleColor}`} >

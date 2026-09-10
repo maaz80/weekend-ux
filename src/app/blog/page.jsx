@@ -44,7 +44,7 @@ export default async function Blogs() {
                          className="object-cover object-center opacity-60 z-0"
                     />
                     {/* Content */}
-                    <h1 className="text-[22px] md:text-[38px] 2xl:text-[56px] leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">
+                    <h1 className="pt-10 text-[22px] md:text-[38px] 2xl:text-[56px] leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">
                          {heroStart} <span className="text-official italic">{heroEnd}</span>
                     </h1>
                     <Image src="/images/weekend-ux-decorative-diamond.webp" alt="weekend-ux-decorative-diamond" className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-30" width={200} height={200} style={{ height: "auto" }} />

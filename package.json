@@ -3,17 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "browserslist": [
-    "last 2 Chrome versions",
-    "last 2 Firefox versions",
-    "last 2 Safari versions",
-    "last 2 Edge versions",
-    "not dead"
+    "> 0.2%",
+    "not dead",
+    "not op_mini all",
+    "not ie <= 11"
   ],
   "scripts": {
     "prebuild": "node generate_seo_files.js",
     "build": "npm run prebuild && next build && node post-export.js && storybook build -o out/storybook",
     "clean": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\"",
-    "dev": "node --max-old-space-size=8192 node_modules/next/dist/bin/next dev",
+    "dev": "node --max-old-space-size=8192 node_modules/next/dist/bin/next dev -H 0.0.0.0",
     "start": "next start",
     "lint": "eslint",
     "storybook": "storybook dev -p 6006",

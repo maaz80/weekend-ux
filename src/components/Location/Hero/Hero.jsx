@@ -24,7 +24,7 @@ export default function Hero() {
                              Learn as you desire
                         </span>
 
-                        <h1 className="custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">Best Design Academy in Delhi that teacher you actual skills in person</h1>
+                        <h1 className="pt-10 custom-width text-[22px] md:text-[38px] 2xl:text-[56px] text-center leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">Best Design Academy in Delhi that teacher you actual skills in person</h1>
     
                         <Link href="/courses">
                              <Button

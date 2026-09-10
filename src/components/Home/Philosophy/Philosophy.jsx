@@ -31,7 +31,7 @@ const Philosophy = ({
                          }}
                     />
                )}
-               <div className='relative z-20 flex flex-col md:flex-row gap-5 items-start md:items-center justify-between custom-width w-full py-12 md:py-16'>
+               <div className='relative z-20 flex flex-col md:flex-row gap-5 items-start md:items-center justify-between custom-width w-full py-12 md:py-16 px-4'>
                     <h2 className={`font-playfair font-medium text-[28px] md:text-[48px] ${titleColor} w-[98%] md:w-[30%]`}>{title}</h2>
                     <p className={`font-urbanist text-[16px] md:text-[24px] leading-8 md:leading-9 italic w-[98%] md:w-[70%] ${textColor}`}>{description}</p>
                </div>

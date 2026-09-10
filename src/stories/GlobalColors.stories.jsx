@@ -95,7 +95,7 @@ const ColorPaletteDoc = () => {
                <div className="max-w-7xl mx-auto space-y-10">
 
                     {/* HERO HEADER */}
-                    <div className="bg-white rounded-3xl p-6 sm:p-10 border border-zinc-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] relative overflow-hidden">
+                    <div className="bg-white rounded-2xl p-6 sm:p-10 border border-zinc-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] relative overflow-hidden">
                          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
                               <div>
                                    <div className="flex items-center gap-2 mb-3">
@@ -152,7 +152,7 @@ const ColorPaletteDoc = () => {
 
                     {/* SECTION: SYSTEM PRINCIPLES & WCAG RULES */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                         <div className="bg-white rounded-3xl p-6 border border-zinc-200/90 shadow-2xs space-y-2">
+                         <div className="bg-white rounded-2xl p-6 border border-zinc-200/90 shadow-2xs space-y-2">
                               <div className="w-10 h-10 rounded-2xl bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold">
                                    <FiShield className="text-xl" />
                               </div>
@@ -162,7 +162,7 @@ const ColorPaletteDoc = () => {
                               </p>
                          </div>
 
-                         <div className="bg-white rounded-3xl p-6 border border-zinc-200/90 shadow-2xs space-y-2">
+                         <div className="bg-white rounded-2xl p-6 border border-zinc-200/90 shadow-2xs space-y-2">
                               <div className="w-10 h-10 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center font-bold">
                                    <FiCheckCircle className="text-xl" />
                               </div>
@@ -172,7 +172,7 @@ const ColorPaletteDoc = () => {
                               </p>
                          </div>
 
-                         <div className="bg-white rounded-3xl p-6 border border-zinc-200/90 shadow-2xs space-y-2">
+                         <div className="bg-white rounded-2xl p-6 border border-zinc-200/90 shadow-2xs space-y-2">
                               <div className="w-10 h-10 rounded-2xl bg-purple-500/10 text-purple-600 flex items-center justify-center font-bold">
                                    <FiBookOpen className="text-xl" />
                               </div>
@@ -195,7 +195,7 @@ const ColorPaletteDoc = () => {
                               if (filteredColors.length === 0) return null;
 
                               return (
-                                   <div key={gIdx} className="bg-white rounded-3xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
+                                   <div key={gIdx} className="bg-white rounded-2xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
                                         <div className="border-b border-zinc-150 pb-4 mb-6">
                                              <h3 className="font-bold text-xl text-neutral mb-1">{group.title}</h3>
                                              <p className="text-xs text-zinc-500">{group.description}</p>
@@ -249,7 +249,7 @@ const ColorPaletteDoc = () => {
                     </div>
 
                     {/* SECTION: DO'S AND DON'TS VISUAL GUIDELINES */}
-                    <div className="bg-white rounded-3xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-6">
+                    <div className="bg-white rounded-2xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-6">
                          <div className="border-b border-zinc-150 pb-4">
                               <h3 className="font-bold text-xl text-neutral mb-1">Color Pairing Guidelines (Do&apos;s &amp; Don&apos;ts)</h3>
                               <p className="text-xs text-zinc-500">Strict pairing rules to prevent low-contrast text and inconsistent background usage.</p>

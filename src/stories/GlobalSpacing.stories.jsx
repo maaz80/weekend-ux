@@ -81,7 +81,7 @@ const SpacingLayoutDoc = () => {
                <div className="max-w-7xl mx-auto space-y-10">
 
                     {/* HERO HEADER */}
-                    <div className="bg-white rounded-3xl p-6 sm:p-10 border border-zinc-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] relative overflow-hidden">
+                    <div className="bg-white rounded-2xl p-6 sm:p-10 border border-zinc-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] relative overflow-hidden">
                          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10">
                               <div>
                                    <div className="flex items-center gap-2 mb-3">
@@ -128,7 +128,7 @@ const SpacingLayoutDoc = () => {
                     </div>
 
                     {/* LIVE VIEWPORT SIMULATION CONTAINER */}
-                    <div className="bg-white rounded-3xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-4">
+                    <div className="bg-white rounded-2xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-4">
                          <div className="flex justify-between items-center border-b border-zinc-150 pb-3 text-xs">
                               <span className="font-bold text-neutral flex items-center gap-2">
                                    <FiMaximize2 className="text-amber-600" /> Container Visualizer: <span className="font-mono text-amber-700">{simulatedDevice.toUpperCase()}</span>
@@ -161,7 +161,7 @@ const SpacingLayoutDoc = () => {
 
                          <div className="grid grid-cols-1 gap-6">
                               {layoutTokens.map((item, idx) => (
-                                   <div key={idx} className="bg-white rounded-3xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
+                                   <div key={idx} className="bg-white rounded-2xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
                                         <div className="flex flex-wrap items-center justify-between gap-3 border-b border-zinc-150 pb-4 mb-4">
                                              <div className="flex items-center gap-3">
                                                   <button
@@ -200,7 +200,7 @@ const SpacingLayoutDoc = () => {
                     </div>
 
                     {/* SPACING SCALE TABLE */}
-                    <div className="bg-white rounded-3xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
+                    <div className="bg-white rounded-2xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)]">
                          <div className="border-b border-zinc-150 pb-4 mb-6">
                               <h3 className="font-bold text-xl text-neutral flex items-center gap-2 mb-1">
                                    <FiGrid className="text-amber-600" /> Spacing & Padding Scale
@@ -237,7 +237,7 @@ const SpacingLayoutDoc = () => {
                     </div>
 
                     {/* DO'S AND DON'TS GUIDELINES */}
-                    <div className="bg-white rounded-3xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-6">
+                    <div className="bg-white rounded-2xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-6">
                          <div className="border-b border-zinc-150 pb-4">
                               <h3 className="font-bold text-xl text-neutral mb-1">Layout Spacing Guidelines (Do&apos;s &amp; Don&apos;ts)</h3>
                               <p className="text-xs text-zinc-500">Rules for container wrapping, margin rhythm, and vertical section paddings.</p>

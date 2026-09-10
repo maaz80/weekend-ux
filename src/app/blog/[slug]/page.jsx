@@ -131,7 +131,7 @@ export default async function BlogSlugPage({ params }) {
                     />
 
                     {/* Content */}
-                    <h1 className=" text-[22px] md:text-[38px] 2xl:text-[56px] leading-8 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair px-4 md:px-6 w-7xl text-left mx-auto">
+                    <h1 className="pt-10 text-[22px] md:text-[38px] 2xl:text-[56px] leading-8 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair px-4 md:px-6 w-7xl text-left mx-auto">
                          {heroTitle}
                     </h1>
                     <Image src="/images/weekend-ux-decorative-diamond.webp" alt="weekend-ux-decorative-diamond" className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-30" width={200} height={200} style={{ height: "auto" }} />

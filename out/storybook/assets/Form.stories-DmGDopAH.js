@@ -1,0 +1,15 @@
+import{i as e}from"./preload-helper-DID7B_--.js";import{n as t,t as n}from"./Form-CvHBLfh5.js";function r(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function i(e){for(var t=1;t<arguments.length;t++){var n=arguments[t]==null?{}:arguments[t],i=Object.keys(n);typeof Object.getOwnPropertySymbols==`function`&&(i=i.concat(Object.getOwnPropertySymbols(n).filter(function(e){return Object.getOwnPropertyDescriptor(n,e).enumerable}))),i.forEach(function(t){r(e,t,n[t])})}return e}function a(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter(function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable})),n.push.apply(n,r)}return n}function o(e,t){return t??={},Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(t)):a(Object(t)).forEach(function(n){Object.defineProperty(e,n,Object.getOwnPropertyDescriptor(t,n))}),e}var s,c,l,u;e((()=>{t(),s={title:`Contact/Form`,component:n,parameters:{layout:`padded`},argTypes:{inputBgColor:{control:`select`,options:[`bg-transparent`,`bg-white`,`bg-bg-gray-soft`,`bg-bg-cream`,`bg-zinc-100`],description:`Background color of input fields`},inputBorderColor:{control:`select`,options:[`border-[#E5E0D6]`,`border-neutral-300`,`border-neutral-400`,`border-official`,`border-transparent`],description:`Border color of input fields (when active/no error)`},inputFocusColor:{control:`select`,options:[`focus:border-official`,`focus:border-fg-blue`,`focus:border-fg-green`,`focus:border-neutral`,`focus:border-zinc-800`],description:`Border color of input fields when focused`},buttonSize:{control:`select`,options:[`w-full h-12 rounded-md font-bold text-sm`,`w-full h-10 rounded-sm font-medium text-xs`,`w-full h-14 rounded-xl font-black text-base`],description:`Tailwind sizing and roundness classes for the submit button`}}},c={args:{inputBgColor:`bg-transparent`,inputBorderColor:`border-[#E5E0D6]`,inputFocusColor:`focus:border-official`,buttonSize:`w-full h-12 rounded-md font-bold text-sm`}},l={args:{inputBgColor:`bg-bg-gray-soft`,inputBorderColor:`border-transparent`,inputFocusColor:`focus:border-fg-blue`,buttonSize:`w-full h-14 rounded-xl font-black text-base`}},c.parameters=o(i({},c.parameters),{docs:o(i({},c.parameters?.docs),{source:i({originalSource:`{
+  args: {
+    inputBgColor: "bg-transparent",
+    inputBorderColor: "border-[#E5E0D6]",
+    inputFocusColor: "focus:border-official",
+    buttonSize: "w-full h-12 rounded-md font-bold text-sm"
+  }
+}`},c.parameters?.docs?.source)})}),l.parameters=o(i({},l.parameters),{docs:o(i({},l.parameters?.docs),{source:i({originalSource:`{
+  args: {
+    inputBgColor: "bg-bg-gray-soft",
+    inputBorderColor: "border-transparent",
+    inputFocusColor: "focus:border-fg-blue",
+    buttonSize: "w-full h-14 rounded-xl font-black text-base"
+  }
+}`},l.parameters?.docs?.source)})}),u=[`Default`,`CustomStyle`]}))();export{l as CustomStyle,c as Default,u as __namedExportsOrder,s as default};

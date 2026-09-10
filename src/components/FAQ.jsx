@@ -122,7 +122,7 @@ const FAQ = ({
           : "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs.";
 
      return (
-          <section className={` relative z-999 ${paddings} pt-10 md:pt-15 pb-35 md:pb-70 ${bgColor} px-2.5`}>
+          <section className={` relative z-999 ${paddings} pt-10 md:pt-15 pb-35 md:pb-70 ${bgColor} px-5 md:px-2.5`}>
                {/* Background */}
                {bgImage && (
                     <div
@@ -172,7 +172,7 @@ const FAQ = ({
 
                                         <button
                                              onClick={() => toggleFaq(index)}
-                                             className="w-full flex justify-between items-center text-left"
+                                             className="w-full flex justify-between items-start text-left gap-4"
                                         >
 
                                              <span
@@ -182,7 +182,7 @@ const FAQ = ({
                                                   {faq.question || faq.ques}
                                              </span>
 
-                                             <span className="relative text-lg md:text-xl w-5 h-5 inline-block">
+                                             <span className="relative text-lg md:text-xl w-5 h-5 inline-block shrink-0 mt-1 md:mt-1.5">
 
                                                   <HiPlus
                                                        className={`absolute inset-0 cursor-pointer transition-all duration-300 ${isOpen ? "opacity-0 rotate-180 " : "opacity-100 rotate-0"

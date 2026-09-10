@@ -38,7 +38,7 @@ export default function CourseCertification({ data }) {
      return (
           <section className="w-full bg-[#051329] py-14 sm:py-18 md:py-24 font-urbanist relative overflow-hidden text-white border-b border-zinc-800/80 px-2">
                {/* Background Decorative Abstract Triangles */}
-               {/* <div className="absolute top-12 left-6 w-48 h-48 border-2 border-white/5 rounded-3xl rotate-12 pointer-events-none hidden sm:block"></div>
+               {/* <div className="absolute top-12 left-6 w-48 h-48 border-2 border-white/5 rounded-2xl rotate-12 pointer-events-none hidden sm:block"></div>
                <div className="absolute bottom-10 right-10 w-64 h-64 border border-amber-500/10 rounded-full pointer-events-none hidden md:block"></div> */}
 
                {/* Soft Background Radial Glow */}
@@ -53,7 +53,7 @@ export default function CourseCertification({ data }) {
                               {/* Background Decorative Outline */}
                               <div className="absolute -top-6 -left-6 w-32 h-32 border border-white/10 rounded-2xl rotate-45 pointer-events-none hidden sm:block"></div>
 
-                              <div className="relative w-full max-w-91.25 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-white/20 bg-zinc-900/50 backdrop-blur-xs group hover:-translate-y-1 transition-all duration-300">
+                              <div className="relative w-full max-w-91.25 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl border border-white/20 bg-zinc-900/50 backdrop-blur-xs group hover:-translate-y-1 transition-all duration-300">
                                    
                                    {/* Student Photo */}
                                    <div className="aspect-4/5 sm:aspect-3/4 lg:aspect-5/5 w-full relative overflow-hidden bg-linear-to-b from-transparent to-black/60">

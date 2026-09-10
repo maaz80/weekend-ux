@@ -431,9 +431,10 @@ const AuthModal = ({
                                    >
                                         {loading || otpSending ? (
                                              <>
-                                                  <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+                                                  <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin ml-2" />
                                                   <span>{otpSending ? "Sending OTP..." : "Processing..."}</span>
                                              </>
+
                                         ) : (
                                              otpSent ? (authMode === "signup" ? "Verify & Sign Up" : "Verify & Login") : "Get OTP"
                                         )}

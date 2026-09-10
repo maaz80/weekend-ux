@@ -11,7 +11,7 @@ const Content = ({
      inquiriesTitleColor = "text-neutral",
      locationTitleColor = "text-neutral",
      socialTitleColor = "text-neutral",
-     mapRounded = "rounded-3xl",
+     mapRounded = "rounded-2xl",
      formBgColor = "bg-white",
      formHeadingColor = "text-neutral",
      formShadow = "shadow-[0_8px_24px_rgba(156,163,175,0.15)]"
@@ -140,9 +140,9 @@ const Content = ({
 
                          {/* RIGHT SIDE */}
 
-                         <div className={`mt-10 mb-5 md:mt-0 p-2 md:p-10 rounded-2xl ${formBgColor} ${formShadow}`}>
+                         <div className={`mt-10 mb-5 md:mt-0 p-5 md:p-10 rounded-2xl ${formBgColor} ${formShadow}`}>
 
-                              <h2 className={`font-playfair text-[26px] md:text-[40px] text-center mb-8 ${formHeadingColor}`}>
+                              <h2 className={`font-playfair text-[26px] md:text-[36px] text-center mb-8 ${formHeadingColor}`}>
                                    Enquire Here!
                               </h2>
 

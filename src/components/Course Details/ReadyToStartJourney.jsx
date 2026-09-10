@@ -34,7 +34,7 @@ export default function ReadyToStartJourney({ data }) {
                <div className="pointer-events-none absolute -bottom-24 -right-24 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: "rgba(255, 212, 0, 0.15)" }} />
 
                {/* Left Decorative Badge (Desktop) */}
-               {/* <div className="hidden lg:flex absolute left-8 xl:left-16 top-1/2 -translate-y-1/2 flex-col items-center justify-center p-5 rounded-3xl backdrop-blur-md border shadow-2xl transition-transform duration-300 hover:scale-105" style={{ backgroundColor: "rgba(255, 212, 0, 0.08)", borderColor: "rgba(255, 212, 0, 0.25)" }}>
+               {/* <div className="hidden lg:flex absolute left-8 xl:left-16 top-1/2 -translate-y-1/2 flex-col items-center justify-center p-5 rounded-2xl backdrop-blur-md border shadow-2xl transition-transform duration-300 hover:scale-105" style={{ backgroundColor: "rgba(255, 212, 0, 0.08)", borderColor: "rgba(255, 212, 0, 0.25)" }}>
                     <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-2 shadow-inner" style={{ backgroundColor: "rgba(255, 212, 0, 0.15)" }}>
                          <GraduationCap className="w-9 h-9 stroke-[2.2]" style={{ color: "#FFD400" }} />
                     </div>
@@ -42,7 +42,7 @@ export default function ReadyToStartJourney({ data }) {
                </div> */}
 
                {/* Right Decorative Badge (Desktop) */}
-               {/* <div className="hidden lg:flex absolute right-8 xl:right-16 top-1/2 -translate-y-1/2 flex-col items-center justify-center p-5 rounded-3xl backdrop-blur-md border shadow-2xl transition-transform duration-300 hover:scale-105" style={{ backgroundColor: "rgba(255, 212, 0, 0.08)", borderColor: "rgba(255, 212, 0, 0.25)" }}>
+               {/* <div className="hidden lg:flex absolute right-8 xl:right-16 top-1/2 -translate-y-1/2 flex-col items-center justify-center p-5 rounded-2xl backdrop-blur-md border shadow-2xl transition-transform duration-300 hover:scale-105" style={{ backgroundColor: "rgba(255, 212, 0, 0.08)", borderColor: "rgba(255, 212, 0, 0.25)" }}>
                     <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-2 shadow-inner" style={{ backgroundColor: "rgba(255, 212, 0, 0.15)" }}>
                          <Lightbulb className="w-9 h-9 stroke-[2.2]" style={{ color: "#FFD400" }} />
                     </div>
@@ -80,7 +80,7 @@ export default function ReadyToStartJourney({ data }) {
                          {/* Button 1: Contact Us (Official Brand Yellow Button) */}
                          <Link
                               href={button1Link}
-                              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 font-urbanist font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer min-w-[170px]"
+                              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 font-urbanist font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer min-w-42.5"
                               style={{ backgroundColor: "#FFD400", color: "#18181b" }}
                          >
                               <UserCheck className="w-4.5 h-4.5 stroke-[2.5]" style={{ color: "#18181b" }} />
@@ -91,7 +91,7 @@ export default function ReadyToStartJourney({ data }) {
                          <Link
                               href={button2Link}
                               onClick={handleDemoClick}
-                              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 font-urbanist font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer min-w-[170px]"
+                              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 font-urbanist font-extrabold text-sm sm:text-base px-8 py-3.5 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer min-w-42.5"
                               style={{ backgroundColor: "transparent", color: "#ffffff", border: "2px solid #FFD400" }}
                          >
                               <span>{button2Text}</span>

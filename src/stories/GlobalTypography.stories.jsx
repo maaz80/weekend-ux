@@ -179,7 +179,7 @@ const TypographyDoc = () => {
                <div className="max-w-7xl mx-auto space-y-10">
 
                     {/* TOP HERO BANNER */}
-                    <div className="bg-white rounded-3xl p-6 sm:p-10 border border-zinc-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] relative overflow-hidden">
+                    <div className="bg-white rounded-2xl p-6 sm:p-10 border border-zinc-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.03)] relative overflow-hidden">
                          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 relative z-10">
                               <div>
                                    <div className="flex items-center gap-2 mb-3">
@@ -265,7 +265,7 @@ const TypographyDoc = () => {
                     {/* FONT FAMILY SUMMARY CARDS */}
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                          {fontFamilies.map((font, fIdx) => (
-                              <div key={fIdx} className="bg-white rounded-3xl p-6 border border-zinc-200/90 shadow-2xs space-y-3">
+                              <div key={fIdx} className="bg-white rounded-2xl p-6 border border-zinc-200/90 shadow-2xs space-y-3">
                                    <div className="flex justify-between items-start">
                                         <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 bg-amber-50 px-2.5 py-1 rounded-md border border-amber-200">
                                              Font Family
@@ -282,7 +282,7 @@ const TypographyDoc = () => {
                     {/* TYPOGRAPHY CARDS LIST */}
                     <div className="space-y-8">
                          {filteredItems.map((item) => (
-                              <div key={item.id} className="bg-white rounded-3xl border border-zinc-200/90 overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-md hover:border-zinc-300 transition-all duration-300">
+                              <div key={item.id} className="bg-white rounded-2xl border border-zinc-200/90 overflow-hidden shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:shadow-md hover:border-zinc-300 transition-all duration-300">
 
                                    {/* TOP SPEC HEADER BAR */}
                                    <div className="p-5 sm:p-6 bg-zinc-50/70 border-b border-zinc-200/80 flex flex-wrap items-center justify-between gap-4">
@@ -379,7 +379,7 @@ const TypographyDoc = () => {
                     </div>
 
                     {/* SECTION: DO'S AND DON'TS GUIDELINES */}
-                    <div className="bg-white rounded-3xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-6">
+                    <div className="bg-white rounded-2xl border border-zinc-200/90 p-6 sm:p-8 shadow-[0_2px_12px_rgba(0,0,0,0.02)] space-y-6">
                          <div className="border-b border-zinc-150 pb-4">
                               <h3 className="font-bold text-xl text-neutral mb-1">Typography Usage Guidelines (Do&apos;s &amp; Don&apos;ts)</h3>
                               <p className="text-xs text-zinc-500">Strict rules for heading font pairings, uppercase taglines, and line heights.</p>
