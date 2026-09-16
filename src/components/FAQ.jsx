@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useHomeData } from "@/context/HomeDataContext";
 import { HiMinus, HiPlus } from "react-icons/hi";
+import { getApiUrl } from "@/utils/api";
 
 const defaultFaqs = [
      {
@@ -76,7 +77,7 @@ const FAQ = ({
           let isMounted = true;
           async function fetchPageFaq() {
                try {
-                    const res = await fetch(`/api/pages/${slug}/faq`);
+                    const res = await fetch(getApiUrl(`/api/pages/${slug}/faq`));
                     if (res.ok) {
                          const data = await res.json();
                          faqCache[slug] = data; // Cache the response

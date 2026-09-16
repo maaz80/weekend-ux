@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { X, Lock, CheckCircle2, Send } from "lucide-react";
 import { trackMetaEvent } from "@/utils/metaCapi";
 import { gtag_report_conversion } from "@/utils/googleAds";
+import { getApiUrl } from "@/utils/api";
 
 export default function LeadModal() {
      const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +42,7 @@ export default function LeadModal() {
                     // DIRECT SEND TO EMAIL! User already filled form previously
                     showToastNotification(`Sending course details to ${savedUser.email}...`, "info");
                     try {
-                         const response = await fetch("/api/leads", {
+                         const response = await fetch(getApiUrl("/api/leads"), {
                               method: "POST",
                               headers: { "Content-Type": "application/json" },
                               body: JSON.stringify({
@@ -130,7 +131,7 @@ export default function LeadModal() {
 
           setLoading(true);
           try {
-               const response = await fetch("/api/leads", {
+               const response = await fetch(getApiUrl("/api/leads"), {
                     method: "POST",
                     headers: {
                          "Content-Type": "application/json"

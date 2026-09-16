@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
 import { trackMetaEvent } from "@/utils/metaCapi";
 import { gtag_report_conversion } from "@/utils/googleAds";
+import { getApiUrl } from "@/utils/api";
 
 const Form = ({
      inputBgColor = "bg-transparent",
@@ -91,7 +92,7 @@ const Form = ({
           const timeoutId = setTimeout(() => controller.abort(), 10000);
 
           try {
-               const response = await fetch("/api/send-otp", {
+               const response = await fetch(getApiUrl("/api/send-otp"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -124,7 +125,7 @@ const Form = ({
           setLoading(true);
 
           try {
-               const response = await fetch("/api/send-otp", {
+               const response = await fetch(getApiUrl("/api/send-otp"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -163,7 +164,7 @@ const Form = ({
           const timeoutId = setTimeout(() => controller.abort(), 30000);
 
           try {
-               const response = await fetch("/api/submit-booking", {
+               const response = await fetch(getApiUrl("/api/submit-booking"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({

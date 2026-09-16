@@ -8,6 +8,7 @@ import Logo from "@/app/assets/weekend-ux-logo.webp";
 import { useHomeData } from "@/context/HomeDataContext";
 import ObfuscatedEmail from "@/components/ui/ObfuscatedEmail";
 import { gtag_report_conversion } from "@/utils/googleAds";
+import { getApiUrl } from "@/utils/api";
 
 // Classify primary welcome selection into core categories
 const getPrimaryCategory = (serviceText) => {
@@ -159,7 +160,7 @@ export default function Chatbot({
 
      const sendLeadData = async (leadAnswers) => {
           try {
-               await fetch("/api/leads", {
+               await fetch(getApiUrl("/api/leads"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({

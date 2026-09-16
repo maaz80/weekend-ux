@@ -89,7 +89,9 @@ const Form = ({
           const timeoutId = setTimeout(() => controller.abort(), 10000);
 
           try {
-               const response = await fetch("/api/send-otp", {
+               const apiBase = (process.env.NEXT_PUBLIC_API_URL || "https://api.weekendux.in").replace(/\/$/, "");
+               const apiUrl = apiBase.endsWith("/api") ? `${apiBase}/send-otp` : `${apiBase}/api/send-otp`;
+               const response = await fetch(apiUrl, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -122,7 +124,9 @@ const Form = ({
           setLoading(true);
 
           try {
-               const response = await fetch("/api/send-otp", {
+               const apiBase = (process.env.NEXT_PUBLIC_API_URL || "https://api.weekendux.in").replace(/\/$/, "");
+               const apiUrl = apiBase.endsWith("/api") ? `${apiBase}/send-otp` : `${apiBase}/api/send-otp`;
+               const response = await fetch(apiUrl, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -161,7 +165,9 @@ const Form = ({
           const timeoutId = setTimeout(() => controller.abort(), 30000);
 
           try {
-               const response = await fetch("/api/submit-booking", {
+               const apiBase = (process.env.NEXT_PUBLIC_API_URL || "https://api.weekendux.in").replace(/\/$/, "");
+               const apiUrl = apiBase.endsWith("/api") ? `${apiBase}/submit-booking` : `${apiBase}/api/submit-booking`;
+               const response = await fetch(apiUrl, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
