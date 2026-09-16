@@ -3,8 +3,11 @@ import { FiUser, FiMail, FiPhone, FiLock } from "react-icons/fi";
 import Button from "@/components/ui/Button";
 import { trackMetaEvent } from "@/utils/metaCapi";
 import { gtag_report_conversion } from "@/utils/googleAds";
+import { getApiUrl } from "@/utils/api";
 
 const Form = ({
+     courseId,
+     courseTitle,
      inputBgColor = "bg-transparent",
      inputBorderColor = "border-neutral-200",
      inputFocusColor = "focus:border-official",
@@ -89,9 +92,7 @@ const Form = ({
           const timeoutId = setTimeout(() => controller.abort(), 10000);
 
           try {
-               const apiBase = (process.env.NEXT_PUBLIC_API_URL || "https://api.weekendux.in").replace(/\/$/, "");
-               const apiUrl = apiBase.endsWith("/api") ? `${apiBase}/send-otp` : `${apiBase}/api/send-otp`;
-               const response = await fetch(apiUrl, {
+               const response = await fetch(getApiUrl("/api/send-otp"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -124,9 +125,7 @@ const Form = ({
           setLoading(true);
 
           try {
-               const apiBase = (process.env.NEXT_PUBLIC_API_URL || "https://api.weekendux.in").replace(/\/$/, "");
-               const apiUrl = apiBase.endsWith("/api") ? `${apiBase}/send-otp` : `${apiBase}/api/send-otp`;
-               const response = await fetch(apiUrl, {
+               const response = await fetch(getApiUrl("/api/send-otp"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -164,10 +163,11 @@ const Form = ({
           const controller = new AbortController();
           const timeoutId = setTimeout(() => controller.abort(), 30000);
 
+          const activeCourseId = courseId || (typeof window !== "undefined" ? window.__currentCourseId : "") || "";
+          const activeCourseTitle = courseTitle || "";
+
           try {
-               const apiBase = (process.env.NEXT_PUBLIC_API_URL || "https://api.weekendux.in").replace(/\/$/, "");
-               const apiUrl = apiBase.endsWith("/api") ? `${apiBase}/submit-booking` : `${apiBase}/api/submit-booking`;
-               const response = await fetch(apiUrl, {
+               const response = await fetch(getApiUrl("/api/submit-booking"), {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({
@@ -175,7 +175,10 @@ const Form = ({
                          phone: formData.phone,
                          email: formData.email,
                          otp: formData.otp,
-                         message: "Course Advisor Call Booking"
+                         courseId: activeCourseId,
+                         course: activeCourseTitle,
+                         source: "Course Details Form (Verified)",
+                         message: `Course Training Requirement Request ${activeCourseTitle ? `for ${activeCourseTitle}` : ""}`
                     }),
                     signal: controller.signal
                });
@@ -184,11 +187,24 @@ const Form = ({
                const result = await response.json();
 
                if (response.ok) {
+                    // Send syllabus / lead to lead Controller as well
+                    fetch(getApiUrl("/api/leads"), {
+                         method: "POST",
+                         headers: { "Content-Type": "application/json" },
+                         body: JSON.stringify({
+                              name: formData.fullName,
+                              email: formData.email,
+                              phone: formData.phone,
+                              courseId: activeCourseId,
+                              source: "Course Details Form (Verified)"
+                         })
+                    }).catch((leadErr) => console.error("Lead push error:", leadErr));
+
                     gtag_report_conversion();
                     trackMetaEvent(
                          "Lead",
                          { em: formData.email, ph: formData.phone, fn: formData.fullName },
-                         { content_name: "Course Advisor Call Booking" }
+                         { content_name: activeCourseTitle || "Course Details Form" }
                     );
                     setStatus("success");
                     setSuccessMessage("Admissions booking submitted successfully!");

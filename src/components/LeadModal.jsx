@@ -12,6 +12,7 @@ export default function LeadModal() {
      const [email, setEmail] = useState("");
      const [phone, setPhone] = useState("");
      const [courseId, setCourseId] = useState("");
+     const [leadSource, setLeadSource] = useState("Website Popup Lead");
      const [error, setError] = useState("");
      const [loading, setLoading] = useState(false);
      const [success, setSuccess] = useState(false);
@@ -30,6 +31,8 @@ export default function LeadModal() {
           // Event listener for manual trigger ("Get Brochure", "Book a Call", "Apply Now", blurred lesson click)
           const handleOpen = async (e) => {
                const cId = e?.detail?.courseId || window.__currentCourseId || "";
+               const src = e?.detail?.source || (cId ? "Course Page Brochure Request" : "Website Brochure Request");
+               setLeadSource(src);
 
                // Check if user already filled form previously
                let savedUser = null;
@@ -50,7 +53,7 @@ export default function LeadModal() {
                                    email: savedUser.email,
                                    phone: savedUser.phone || "",
                                    courseId: cId,
-                                   source: "Course Page Brochure Request"
+                                   source: src
                               })
                          });
                          if (response.ok) {
@@ -87,6 +90,8 @@ export default function LeadModal() {
                          setIsOpen(true);
                          const cId = window.__currentCourseId || "";
                          setCourseId(cId);
+                         const autoSrc = window.location.pathname.includes("/courses/") ? "Auto Popup Lead (Course Page)" : "Auto Popup Lead (Homepage)";
+                         setLeadSource(autoSrc);
                          localStorage.setItem("leadModalLastShown", now.toString());
                     }
                }, 10000);
@@ -136,7 +141,7 @@ export default function LeadModal() {
                     headers: {
                          "Content-Type": "application/json"
                     },
-                    body: JSON.stringify({ name: name.trim(), email: email.trim(), phone: cleanPhone, courseId, source: "Course Page Brochure Request" })
+                    body: JSON.stringify({ name: name.trim(), email: email.trim(), phone: cleanPhone, courseId, source: leadSource })
                });
 
                const data = await response.json();

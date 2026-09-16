@@ -541,7 +541,7 @@ export default function Details({ data }) {
                                         <p className="text-start text-sm text-neutral leading-relaxed mb-6">
                                              Not sure yet? Before you pass up the opportunity to sign up for the course, speak with our counselor and get your questions answered.
                                         </p>
-                                        <Form />
+                                        <Form courseId={data?._id} courseTitle={data?.title} />
                                    </div>
 
                                    {/* Banner */}
