@@ -26,7 +26,10 @@ export async function trackMetaEvent(eventName = 'Lead', userData = {}, customDa
 
   // 2. Server-Side Meta Conversions API (CAPI) Tracking
   try {
-    const backendBaseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://weekend-backend.onrender.com';
+    let backendBaseUrl = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL || 'https://api.weekendux.in';
+    if (backendBaseUrl.includes("localhost") || backendBaseUrl.includes("127.0.0.1") || backendBaseUrl.includes("onrender.com")) {
+      backendBaseUrl = "https://api.weekendux.in";
+    }
     const capiEndpoint = `${backendBaseUrl.replace(/\/$/, '')}/api/meta-capi`;
 
     fetch(capiEndpoint, {

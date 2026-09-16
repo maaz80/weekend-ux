@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://api.weekendux.in/api";
 
 export default function StaticPageSchemaRenderer() {
      const pathname = usePathname();
@@ -28,11 +28,9 @@ export default function StaticPageSchemaRenderer() {
 
           async function fetchSEO() {
                try {
-                    let rawApiUrl = process.env.NEXT_PUBLIC_API_URL || "";
-                    if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
-                         if (!rawApiUrl || rawApiUrl.includes("localhost") || rawApiUrl.includes("127.0.0.1")) {
-                              rawApiUrl = "https://weekend-backend.onrender.com";
-                         }
+                    let rawApiUrl = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL || "https://api.weekendux.in";
+                    if (rawApiUrl.includes("localhost") || rawApiUrl.includes("127.0.0.1") || rawApiUrl.includes("onrender.com")) {
+                         rawApiUrl = "https://api.weekendux.in";
                     }
                     const API_URL = rawApiUrl.endsWith("/api") ? rawApiUrl : `${rawApiUrl.replace(/\/$/, "")}/api`;
                     const res = await fetch(`${API_URL}/pages/${pageSlug}/seo`);

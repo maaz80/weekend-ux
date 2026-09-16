@@ -111,7 +111,13 @@ export default function StudentDashboardPage() {
           let isMounted = true;
           const pollLiveState = async () => {
                try {
-                    const API_BASE = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000/api";
+                    let API_BASE = process.env.NEXT_PUBLIC_BACKEND_URL || process.env.NEXT_PUBLIC_API_URL || "https://api.weekendux.in/api";
+                    if (API_BASE.includes("localhost:5000")) {
+                         API_BASE = "https://api.weekendux.in/api";
+                    }
+                    if (!API_BASE.endsWith("/api") && !API_BASE.endsWith("/api/")) {
+                         API_BASE = `${API_BASE.replace(/\/$/, "")}/api`;
+                    }
                     const res = await fetch(`${API_BASE}/courses`);
                     if (res.ok) {
                          const data = await res.json();
