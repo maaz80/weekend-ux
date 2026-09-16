@@ -1,42 +1,45 @@
 "use client";
 
 import { Star, ArrowRight } from "lucide-react";
-import { FaLinkedinIn } from "react-icons/fa";
+import { FaLinkedinIn, FaGithub } from "react-icons/fa";
 import { getOptimizedCloudinaryUrl } from "@/utils/cloudinary";
 
 export default function MeetTheTrainer({ data }) {
   const defaultTrainers = [
     {
-      name: "Mr. Manoj Pandey",
-      role: "SENIOR ENGINEER @ GOOGLE",
-      bio: "UI/UX & Design Systems lead with 10+ years experience. Expert in AI Workflows and Product Strategy.",
+      name: "Pyush Anand",
+      role: "Principal Product & UX Design Manager",
+      bio: "Principal Product & UX Design Manager with 15 yrs experience. Expert in AI Workflows, Product Strategy, and Enterprise UX Design.",
       rating: "4.9/5",
       students: "400+ Students",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80",
+      image: "/images/Trainer1.webp",
+      github: "https://github.com",
       linkedin: "https://linkedin.com"
     },
     {
-      name: "Ms. Amrit Raj",
-      role: "DATA SCIENTIST @ MICROSOFT",
-      bio: "Ex-Adobe | PhD Statistics. Specialist in User Research, Predictive Analytics & Interaction Design.",
+      name: "Kumar Skand",
+      role: "Lead UX Designer",
+      bio: "Lead UX Designer with 10 yrs experience. Specialist in User Research, Predictive Analytics, and Interaction Design.",
       rating: "5.0/5",
       students: "250+ Students",
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80",
+      image: "/images/Trainer2.webp",
+      github: "https://github.com",
       linkedin: "https://linkedin.com"
     },
     {
-      name: "Mr. Sudheer Sharma",
-      role: "PRODUCT MANAGER @ AMAZON",
-      bio: "Ex-Flipkart | MBA. Mentoring on Agile Delivery, Marketplace Dynamics & High-Fidelity Figma Prototyping.",
+      name: "Hrishabh Data",
+      role: "Lead UI Designer",
+      bio: "Lead UI Designer with 5 yrs experience. Mentoring on High-Fidelity Figma Prototyping, UI Micro-Interactions, and Modern Design Systems.",
       rating: "4.8/5",
       students: "180+ Students",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+      github: "https://github.com",
       linkedin: "https://linkedin.com"
     }
   ];
 
   const title = data?.trainers?.title || "Meet The Trainers";
-  const subtitle = data?.trainers?.subtitle || "Get 1-on-1 mentorship and practical insights from active design leads and engineers at top companies.";
+  const subtitle = data?.trainers?.subtitle || "Get 1-on-1 mentorship and practical insights from active design leads and managers at top companies.";
   const trainersList = (Array.isArray(data?.trainers?.items) && data.trainers.items.length > 0)
     ? data.trainers.items
     : defaultTrainers;
@@ -65,40 +68,40 @@ export default function MeetTheTrainer({ data }) {
               key={idx}
               className="w-full max-w-91.25 mx-auto bg-white rounded-2xl overflow-hidden border border-zinc-200/90 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
             >
-              {/* Trainer Photo Header */}
+              {/* Trainer Photo Header (Blurred) */}
               <div className="relative w-full h-64 sm:h-72 bg-zinc-100 overflow-hidden">
                 <img
-                  src={getOptimizedCloudinaryUrl(trainer.image, { width: 500, quality: "50", format: "auto", crop: "fill" }) || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80"}
+                  src={getOptimizedCloudinaryUrl(trainer.image, { width: 500, quality: "50", format: "auto", crop: "fill" }) || "/images/Trainer1.webp"}
                   alt={trainer.name || "Trainer"}
                   width="365"
                   height="288"
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500 blur-xl scale-110 select-none pointer-events-none"
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500  scale-110 select-none pointer-events-none"
                 />
               </div>
 
               {/* Card Body */}
               <div className="p-6 sm:p-7 flex flex-col justify-between flex-1 space-y-4 text-left">
                 <div>
-                  {/* Name + LinkedIn Icon */}
+                  {/* Name + GitHub/LinkedIn Icon (GitHub / LinkedIn icon blurred) */}
                   <div className="flex items-center justify-between gap-2 mb-1.5">
-                    <h3 className="font-playfair font-bold text-xl sm:text-2xl text-zinc-900 group-hover:text-official transition-colors blur-md select-none">
+                    <h3 className="font-playfair font-bold text-xl sm:text-2xl text-zinc-900 group-hover:text-official transition-colors">
                       {trainer.name || "Trainer Name"}
                     </h3>
-                    {trainer.linkedin && (
+                    {(trainer.github || trainer.linkedin) && (
                       <a
-                        href={trainer.linkedin}
+                        href={trainer.github || trainer.linkedin || "#"}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-8 h-8 rounded-full bg-zinc-100 text-zinc-700 flex items-center justify-center hover:bg-official hover:text-zinc-950 transition-colors shrink-0 blur-md pointer-events-none select-none"
-                        aria-label={`${trainer.name} LinkedIn Profile`}
+                        aria-label={`${trainer.name} Profile`}
                       >
-                        <FaLinkedinIn size={14} />
+                        {trainer.github ? <FaGithub size={14} /> : <FaLinkedinIn size={14} />}
                       </a>
                     )}
                   </div>
 
                   {/* Role Tag */}
-                  <p className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-official font-urbanist mb-2.5 blur-md select-none">
+                  <p className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-official font-urbanist mb-2.5">
                     {trainer.role || "MENTOR"}
                   </p>
 
