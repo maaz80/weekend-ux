@@ -28,7 +28,12 @@ export default function StaticPageSchemaRenderer() {
 
           async function fetchSEO() {
                try {
-                    const rawApiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+                    let rawApiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+                    if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+                         if (!rawApiUrl || rawApiUrl.includes("localhost") || rawApiUrl.includes("127.0.0.1")) {
+                              rawApiUrl = "https://weekend-backend.onrender.com";
+                         }
+                    }
                     const API_URL = rawApiUrl.endsWith("/api") ? rawApiUrl : `${rawApiUrl.replace(/\/$/, "")}/api`;
                     const res = await fetch(`${API_URL}/pages/${pageSlug}/seo`);
                     if (res.ok) {
