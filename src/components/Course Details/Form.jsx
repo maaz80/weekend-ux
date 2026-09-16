@@ -187,19 +187,6 @@ const Form = ({
                const result = await response.json();
 
                if (response.ok) {
-                    // Send syllabus / lead to lead Controller as well
-                    fetch(getApiUrl("/api/leads"), {
-                         method: "POST",
-                         headers: { "Content-Type": "application/json" },
-                         body: JSON.stringify({
-                              name: formData.fullName,
-                              email: formData.email,
-                              phone: formData.phone,
-                              courseId: activeCourseId,
-                              source: "Course Details Form (Verified)"
-                         })
-                    }).catch((leadErr) => console.error("Lead push error:", leadErr));
-
                     gtag_report_conversion();
                     trackMetaEvent(
                          "Lead",
