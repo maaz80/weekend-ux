@@ -208,7 +208,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                     ? ["about-hero"]
                     : pathname === "/courses"
                          ? ["courses-hero"]
-                         : [];
+                         : ["coming-soon-hero", "not-found-hero"];
 
           const explicitSections = Array.from(
                document.querySelectorAll("[data-navbar-light='true'], [data-navbar-light-section='true']")
@@ -235,11 +235,16 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                if (!ticking) {
                     ticking = true;
                     rafId = requestAnimationFrame(() => {
+                         const hasDarkSection = Boolean(
+                              document.getElementById("not-found-hero") || 
+                              document.getElementById("coming-soon-hero") ||
+                              isDarkThemePage
+                         );
                          const isVisible = sections.some((section) => {
                               const rect = section.getBoundingClientRect();
                               return rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
                          });
-                         setIsMoreButtonLight(isVisible);
+                         setIsMoreButtonLight(hasDarkSection || isVisible);
                          ticking = false;
                     });
                }
@@ -248,8 +253,13 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
           updateLightState();
 
           const observer = new IntersectionObserver((entries) => {
+               const hasDarkSection = Boolean(
+                    document.getElementById("not-found-hero") || 
+                    document.getElementById("coming-soon-hero") ||
+                    isDarkThemePage
+               );
                const isVisible = entries.some((entry) => entry.isIntersecting);
-               setIsMoreButtonLight(isVisible);
+               setIsMoreButtonLight(hasDarkSection || isVisible);
           }, { threshold: 0.2 });
 
           sections.forEach((section) => observer.observe(section));

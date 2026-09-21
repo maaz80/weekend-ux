@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function NotFound() {
      return (
-          <main data-navbar-light="true" className="relative min-h-screen overflow-hidden bg-[#191917] text-white flex items-center justify-center px-5 py-40 font-urbanist">
+          <main id="not-found-hero" data-navbar-light="true" className="relative min-h-screen overflow-hidden bg-[#191917] text-white flex items-center justify-center px-5 py-40 font-urbanist">
 
                {/* Background Golden / Olive Glow */}
                <div className="absolute inset-0 pointer-events-none">
