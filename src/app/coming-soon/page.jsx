@@ -42,6 +42,7 @@ export default function ComingSoonPage() {
      return (
           <main data-navbar-light="true" className="relative min-h-screen overflow-hidden bg-[#191917] text-white flex items-center justify-center px-4 sm:px-6 py-40 md:py-38 font-urbanist">
 
+
                {/* Background Golden / Ambient Glow Effects (Identical to 404) */}
                <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(100,90,25,0.28),transparent_55%)]" />

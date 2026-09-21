@@ -1,0 +1,1 @@
+import{i as e}from"./preload-helper-DID7B_--.js";var t,n=e((()=>{t=``+new URL(`weekend-ux-logo-BjtxLpYe.webp?ignore`,import.meta.url).href})),r,i=e((()=>{n(),r={src:t,height:178,width:200,blurDataURL:t}}));export{i as n,r as t};
