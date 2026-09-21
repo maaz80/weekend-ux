@@ -200,6 +200,8 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
      const moreItemsDropdownList = navbarData?.moreItems?.dropdown_items || [];
 
      useEffect(() => {
+          const isDarkThemePage = pathname === "/coming-soon" || pathname === "/studio";
+
           const routeSectionIds = pathname === "/"
                ? ["home-hero", "home-philosophy"]
                : pathname === "/about-us"
@@ -217,7 +219,11 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                .map((id) => document.getElementById(id))
                .filter(Boolean);
 
-          if (sections.length === 0) {
+          if (isDarkThemePage || explicitSections.length > 0) {
+               setIsMoreButtonLight(true);
+          }
+
+          if (sections.length === 0 && !isDarkThemePage && explicitSections.length === 0) {
                setIsMoreButtonLight(false);
                return;
           }

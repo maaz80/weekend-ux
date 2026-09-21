@@ -9,12 +9,13 @@ export const metadata = {
 
 export default function NotFound() {
      return (
-          <main className="relative min-h-screen overflow-hidden bg-[#191917] text-white flex items-center justify-center px-5 py-40 font-urbanist">
+          <main data-navbar-light="true" className="relative min-h-screen overflow-hidden bg-[#191917] text-white flex items-center justify-center px-5 py-40 font-urbanist">
 
                {/* Background Golden / Olive Glow */}
                <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(100,90,25,0.28),transparent_55%)]" />
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_30%,rgba(255,212,0,0.10),transparent_25%)]" />
+                    <div className="absolute inset-0 bg-linear-to-t from-official/30 to-transparent opacity-80" />
                     <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.05),rgba(0,0,0,0.18))]" />
                </div>
 
@@ -22,7 +23,7 @@ export default function NotFound() {
                <div className="absolute z-1 top-[13%] right-[-12%] w-5 sm:w-20 md:w-37.5 lg:w-47.5 xl:right-[7%] xl:top-[5%] pointer-events-none select-none opacity-90">
                     <img
                          src={diamondImg.src}
-                         alt=""
+                         alt="Decorative diamond cube"
                          aria-hidden="true"
                          className="w-full h-auto drop-shadow-[0_0_55px_rgba(255,212,0,0.35)]"
                     />

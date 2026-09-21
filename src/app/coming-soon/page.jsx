@@ -40,20 +40,21 @@ export default function ComingSoonPage() {
      };
 
      return (
-          <main className="relative min-h-screen overflow-hidden bg-[#191917] text-white flex items-center justify-center px-4 sm:px-6 py-40 md:py-38 font-urbanist">
+          <main data-navbar-light="true" className="relative min-h-screen overflow-hidden bg-[#191917] text-white flex items-center justify-center px-4 sm:px-6 py-40 md:py-38 font-urbanist">
 
                {/* Background Golden / Ambient Glow Effects (Identical to 404) */}
                <div className="absolute inset-0 pointer-events-none">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(100,90,25,0.28),transparent_55%)]" />
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_30%,rgba(255,212,0,0.10),transparent_25%)]" />
+                    <div className="absolute inset-0 bg-linear-to-t from-official/30 to-transparent opacity-80" />
                     <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.05),rgba(0,0,0,0.18))]" />
                </div>
 
                {/* Floating 3D Glowing Cube (Top Right) */}
-               <div className="absolute z-1 top-[22%] right-[-10%] sm:top-[3%] sm:right-[-5%] md:top-[5%] md:right-[3%] lg:right-[8%] w-25 sm:w-40 md:w-35 lg:w-97.5 pointer-events-none select-none opacity-90">
+               <div className="absolute z-1 top-[22%] right-[-10%] sm:top-[3%] sm:right-[-5%] md:top-[5%] md:right-[3%] lg:right-[8%] w-5 sm:w-20 md:w-37.5 lg:w-47.5 pointer-events-none select-none opacity-90">
                     <img
                          src={diamondImg.src}
-                         alt=""
+                         alt="Decorative diamond cube"
                          aria-hidden="true"
                          className="w-full h-auto drop-shadow-[0_0_55px_rgba(255,212,0,0.38)]"
                     />
