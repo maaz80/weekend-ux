@@ -232,14 +232,14 @@ const OurPrograms = ({ data }) => {
      return (
           <section
                id="courses"
-               className="w-full bg-[#FCFBF7] bg-cover bg-center py-5 md:py-20 border-t border-zinc-100"
+               className="w-full bg-[#FCFBF7] bg-cover bg-center py-14 md:py-[40px] border-t border-zinc-100"
                style={{ backgroundImage: "url('/images/weekend-ux-programs-bg.webp')" }}
           >
-               <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
+               <div className="mx-auto w-full max-w-7xl px-3 md:px-[24px]">
 
                     {/* Heading Area */}
-                    <div className="text-center mb-16">
-                         <p className="text-[12px] font-semibold tracking-[0.25em] text-official uppercase font-inter mb-3">
+                    <div className="text-center mb-10 md:mb-12">
+                         <p className="text-[12px] font-semibold tracking-[0.25em] text-official uppercase font-inter mb-1.5 md:mb-2">
                               {title}
                          </p>
                          <h2 className="font-playfair text-[38px] md:text-[56px] leading-tight text-zinc-900 font-medium">

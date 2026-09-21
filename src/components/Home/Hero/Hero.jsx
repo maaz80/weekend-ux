@@ -134,7 +134,7 @@ export default function Hero({
 
                                         {index === 0 ? (
                                              <h1
-                                                  className={`font-playfair text-[37px] leading-13 md:leading-16 md:text-[56px] transition-all duration-700 transform delay-300 ${titleColor} ${index === currentSlide
+                                                  className={`font-playfair text-[37px] leading-[145%] md:leading-16 md:text-[56px] transition-all duration-700 transform delay-300 ${titleColor} ${index === currentSlide
                                                        ? "translate-y-0 opacity-100"
                                                        : "translate-y-8 opacity-0"
                                                        }`}
@@ -142,7 +142,7 @@ export default function Hero({
                                              />
                                         ) : (
                                              <h2
-                                                  className={`font-playfair text-[37px] leading-13 md:leading-16 md:text-[56px] transition-all duration-700 transform delay-300 ${titleColor} ${index === currentSlide
+                                                       className={`font-playfair text-[37px] leading-[145%] md:leading-16 md:text-[56px] transition-all duration-700 transform delay-300 ${titleColor} ${index === currentSlide
                                                        ? "translate-y-0 opacity-100"
                                                        : "translate-y-8 opacity-0"
                                                        }`}

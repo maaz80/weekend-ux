@@ -26,14 +26,18 @@
     "jsonwebtoken": "^9.0.3",
     "lucide-react": "^1.21.0",
     "mongoose": "^9.7.1",
-    "multer": "^2.2.0",
+    "multer": "^2.3.0",
     "multer-storage-cloudinary": "^4.0.0",
     "next": "16.2.7",
-    "nodemailer": "^9.0.1",
+    "nodemailer": "^9.1.1",
     "otp-generator": "^4.0.1",
+    "qs": "^6.16.0",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-icons": "^5.6.0"
+  },
+  "overrides": {
+    "qs": "$qs"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",

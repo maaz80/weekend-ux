@@ -19,7 +19,7 @@ import CourseCertification from "./CourseCertification";
 import CourseBenefits from "./CourseBenefits";
 import JobRoles from "./JobRoles";
 import HiringPartners from "./HiringPartners";
-import ChooseYourLearning from "./ChooseYourLearning";
+// import ChooseYourLearning from "./ChooseYourLearning";
 
 const getEmbedUrl = (url) => {
      if (!url) return "";
@@ -627,7 +627,7 @@ export default function Details({ data }) {
                <HiringPartners data={data} />
 
                {/* Choose Your Learning Section */}
-               <ChooseYourLearning data={data} />
+               {/* <ChooseYourLearning data={data} /> */}
 
                {/* Third Section: Short-term Courses Slider Banner */}
                {/* <section className="bg-official px-2 py-8 md:py-24 font-urbanist text-zinc-900 w-full">

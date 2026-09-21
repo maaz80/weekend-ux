@@ -562,7 +562,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                                            {cat.items && cat.items.map((subItem, subIdx) => (
                                                                                 <Link
                                                                                      key={subIdx}
-                                                                                     href={subItem.link || "#"}
+                                                                                     href="/coming-soon"
                                                                                      className="text-[15px] text-zinc-600 hover:text-official transition-colors font-medium leading-snug"
                                                                                 >
                                                                                      {subItem.name}
@@ -824,7 +824,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                        {cat.items && cat.items.map((subItem, subIdx) => (
                                                             <Link
                                                                  key={subIdx}
-                                                                 href={subItem.link || "#"}
+                                                                 href="/coming-soon"
                                                                  className="text-sm text-zinc-300 hover:text-official/80 transition pl-2"
                                                                  onClick={() => setIsMenuOpen(false)}
                                                             >

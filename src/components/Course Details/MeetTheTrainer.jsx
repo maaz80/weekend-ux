@@ -12,7 +12,7 @@ export default function MeetTheTrainer({ data }) {
       bio: "Principal Product & UX Design Manager with 15 yrs experience. Expert in AI Workflows, Product Strategy, and Enterprise UX Design.",
       rating: "4.9/5",
       students: "400+ Students",
-      image: "/images/Trainer1.webp",
+      image: "/images/pyush-anand.webp",
       github: "https://github.com",
       linkedin: "https://linkedin.com"
     },
@@ -20,9 +20,9 @@ export default function MeetTheTrainer({ data }) {
       name: "Kumar Skand",
       role: "Lead UX Designer",
       bio: "Lead UX Designer with 10 yrs experience. Specialist in User Research, Predictive Analytics, and Interaction Design.",
-      rating: "5.0/5",
+      rating: "4.9/5",
       students: "250+ Students",
-      image: "/images/Trainer2.webp",
+      image: "/images/kumar-skand.webp",
       github: "https://github.com",
       linkedin: "https://linkedin.com"
     },
@@ -30,9 +30,9 @@ export default function MeetTheTrainer({ data }) {
       name: "Hrishabh Data",
       role: "Lead UI Designer",
       bio: "Lead UI Designer with 5 yrs experience. Mentoring on High-Fidelity Figma Prototyping, UI Micro-Interactions, and Modern Design Systems.",
-      rating: "4.8/5",
+      rating: "4.9/5",
       students: "180+ Students",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80",
+      image: "/images/hrishabh-data.webp",
       github: "https://github.com",
       linkedin: "https://linkedin.com"
     }
@@ -84,7 +84,7 @@ export default function MeetTheTrainer({ data }) {
                 <div>
                   {/* Name + GitHub/LinkedIn Icon (GitHub / LinkedIn icon blurred) */}
                   <div className="flex items-center justify-between gap-2 mb-1.5">
-                    <h3 className="font-playfair font-bold text-xl sm:text-2xl text-zinc-900 group-hover:text-official transition-colors">
+                    <h3 className="font-playfair font-bold text-xl sm:text-2xl text-black group-hover:text-official transition-colors">
                       {trainer.name || "Trainer Name"}
                     </h3>
                     {(trainer.github || trainer.linkedin) && (
@@ -101,7 +101,7 @@ export default function MeetTheTrainer({ data }) {
                   </div>
 
                   {/* Role Tag */}
-                  <p className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-official font-urbanist mb-2.5">
+                  <p className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-black font-urbanist mb-2.5">
                     {trainer.role || "MENTOR"}
                   </p>
 
@@ -121,13 +121,13 @@ export default function MeetTheTrainer({ data }) {
                     )}
                   </div>
 
-                  <a
+                  {/* <a
                     href="#course-details-hero"
                     className="font-extrabold text-official hover:text-official/80 flex items-center gap-1 transition-colors cursor-pointer"
                   >
                     <span>View Profile</span>
                     <ArrowRight size={14} />
-                  </a>
+                  </a> */}
                 </div>
 
               </div>
