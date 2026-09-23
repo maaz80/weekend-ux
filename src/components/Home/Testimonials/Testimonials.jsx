@@ -203,21 +203,21 @@ const Testimonials = ({ data }) => {
      }, [maxIndex]);
 
      return (
-          <div className='relative min-h-185 md:min-h-200.25 mx-auto w-full px-4 sm:px-6 lg:px-10 pt-10 lg:pt-16 pb-8 overflow-hidden'>
+          <div className='button-neutral relative min-h-185 md:min-h-200.25 mx-auto w-full px-4 sm:px-6 lg:px-10 pt-10 lg:pt-16 pb-8 overflow-hidden'>
                <Image src={Map} alt="weekend-ux-testimonials-bg" loading="lazy" decoding="async" className='absolute top-0 inset-0 w-full min-h-[120vh] md:h-[110vh] z-10 object-cover' />
 
                {/* Heading */}
-               
-                    <h2 className="text-[38px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 font-medium text-center w-[99%] md:w-[60%] mx-auto z-20 relative font-playfair text-neutral">
-                         {startTitle}{" "}
-                         <span className="relative inline-block text-official italic">
-                              {midTitle}
 
-                         </span>{' '}
-                         {endTitle}
-                    </h2>
+               <h2 className="text-[38px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 font-medium text-center w-[99%] md:w-[60%] mx-auto z-20 relative font-playfair text-neutral">
+                    {startTitle}{" "}
+                    <span className="relative inline-block text-[#f36600] italic font-semibold">
+                         {midTitle}
+
+                    </span>{' '}
+                    {endTitle}
+               </h2>
                {/* Description */}
-               <p className={`text-[14px] 2xl:text-[16px] text-neutral/60 leading-6 md:leading-7 text-center ${isLocation ? 'max-w-3xl' : 'max-w-4xl'}  mx-auto mt-6 z-20 relative`}>
+               <p className={`text-[14px] 2xl:text-[18px] text-neutral leading-6 md:leading-7 text-center ${isLocation ? 'max-w-3xl' : 'max-w-4xl'}  mx-auto mt-6 z-20 relative`}>
                     {isLocation ? "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs." : testimonialsDescription}
                </p>
 
@@ -251,7 +251,7 @@ const Testimonials = ({ data }) => {
                                    />
 
                                    {/* Testimonial */}
-                                   <p className="text-[16px] leading-6 text-[#454545] mb-8 max-w-[95%]">
+                                   <p className="text-[16px] leading-6 2xl:text-[18px] text-neutral mb-8 max-w-[95%]">
                                         {item.text}
                                    </p>
 
@@ -271,67 +271,66 @@ const Testimonials = ({ data }) => {
                          ))}
                     </div>
 
-                     {/* Controls */}
-                     <div className="flex items-center justify-between md:justify-end gap-1.5 sm:gap-3 mt-6 md:mt-8 px-1 sm:px-2 md:px-0 max-w-full overflow-hidden shrink-0">
+                    {/* Controls */}
+                    <div className="flex items-center justify-between md:justify-end gap-1.5 sm:gap-3 mt-6 md:mt-8 px-1 sm:px-2 md:px-0 max-w-full overflow-hidden shrink-0">
 
-                          {/* Slide Counter on Mobile */}
-                          <div className="text-[14px] sm:text-xs font-bold text-neutral/70 md:hidden bg-white/70 backdrop-blur-md px-2.5 py-3 md:py-1 rounded-full border border-zinc-200/80 shadow-2xs shrink-0">
-                               {currentIndex + 1} / {maxIndex + 1}
-                          </div>
+                         {/* Slide Counter on Mobile */}
+                         <div className="text-[14px] sm:text-xs font-bold text-neutral/70 md:hidden bg-white/70 backdrop-blur-md px-2.5 py-3 md:py-1 rounded-full border border-zinc-200/80 shadow-2xs shrink-0">
+                              {currentIndex + 1} / {maxIndex + 1}
+                         </div>
 
-                          {/* DOTS WINDOW (Fixed 5 Dots, Cyclic Highlight 1 -> 5 -> 1) */}
-                          <div className="flex items-center gap-0 sm:gap-1.5 bg-white/70 backdrop-blur-md px-2 sm:px-3 py-0 sm:py-1.5 rounded-full border border-zinc-200/80 shadow-2xs shrink-0 overflow-hidden">
-                               {Array.from({ length: Math.min(maxIndex + 1, 5) }).map((_, dotIdx) => {
-                                    const activeDotIdx = currentIndex % 5;
-                                    const isActive = activeDotIdx === dotIdx;
+                         {/* DOTS WINDOW (Fixed 5 Dots, Cyclic Highlight 1 -> 5 -> 1) */}
+                         <div className="flex items-center gap-0 sm:gap-1.5 bg-white/70 backdrop-blur-md px-2 sm:px-3 py-0 sm:py-1.5 rounded-full border border-zinc-200/80 shadow-2xs shrink-0 overflow-hidden">
+                              {Array.from({ length: Math.min(maxIndex + 1, 5) }).map((_, dotIdx) => {
+                                   const activeDotIdx = currentIndex % 5;
+                                   const isActive = activeDotIdx === dotIdx;
 
-                                    return (
-                                         <button
-                                              key={dotIdx}
-                                              onClick={() => {
-                                                   const currentGroup = Math.floor(currentIndex / 5);
-                                                   let targetIndex = (currentGroup * 5) + dotIdx;
-                                                   if (targetIndex > maxIndex) {
-                                                        targetIndex = dotIdx;
-                                                   }
-                                                   scrollToIndex(targetIndex);
-                                              }}
-                                              aria-label={`Go to slide ${dotIdx + 1}`}
-                                              aria-current={isActive ? "true" : undefined}
-                                              className=" min-h-11 w-7 md:w-11 h-11 flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110 p-0"
-                                         >
-                                              <span className={`block rounded-full transition-all duration-300 ${
-                                                   isActive
-                                                        ? "w-4 sm:w-5 md:w-6 h-1.5 md:h-2 bg-neutral"
-                                                        : "w-1.5 md:w-2 h-1.5 md:h-2 bg-zinc-300 hover:bg-zinc-500"
-                                              }`}
-                                              />
-                                         </button>
-                                    );
-                               })}
-                          </div>
+                                   return (
+                                        <button
+                                             key={dotIdx}
+                                             onClick={() => {
+                                                  const currentGroup = Math.floor(currentIndex / 5);
+                                                  let targetIndex = (currentGroup * 5) + dotIdx;
+                                                  if (targetIndex > maxIndex) {
+                                                       targetIndex = dotIdx;
+                                                  }
+                                                  scrollToIndex(targetIndex);
+                                             }}
+                                             aria-label={`Go to slide ${dotIdx + 1}`}
+                                             aria-current={isActive ? "true" : undefined}
+                                             className=" min-h-11 w-7 md:w-11 h-11 flex items-center justify-center cursor-pointer transition-transform duration-200 hover:scale-110 p-0"
+                                        >
+                                             <span className={`block rounded-full transition-all duration-300 ${isActive
+                                                       ? "w-4 sm:w-5 md:w-6 h-1.5 md:h-2 bg-neutral"
+                                                       : "w-1.5 md:w-2 h-1.5 md:h-2 bg-zinc-300 hover:bg-zinc-500"
+                                                  }`}
+                                             />
+                                        </button>
+                                   );
+                              })}
+                         </div>
 
-                          {/* Navigation Arrows */}
-                          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-                               <button
-                                    onClick={() => scroll("left")}
-                                    disabled={currentIndex === 0}
-                                    aria-label="Go to Previous Testimonial"
-                                    className="min-w-11 min-h-11 w-11 h-11 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-neutral hover:bg-neutral hover:text-white transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
-                               >
-                                    <IoIosArrowBack size={15} />
-                               </button>
+                         {/* Navigation Arrows */}
+                         <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                              <button
+                                   onClick={() => scroll("left")}
+                                   disabled={currentIndex === 0}
+                                   aria-label="Go to Previous Testimonial"
+                                   className="min-w-11 min-h-11 w-11 h-11 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-neutral hover:bg-neutral hover:text-white transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
+                              >
+                                   <IoIosArrowBack size={15} />
+                              </button>
 
-                               <button
-                                    onClick={() => scroll("right")}
-                                    disabled={currentIndex >= maxIndex}
-                                    aria-label="Go to Next Testimonial"
-                                    className="min-w-11 min-h-11 w-11 h-11 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-neutral hover:bg-neutral hover:text-white transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
-                               >
-                                    <IoIosArrowForward size={15} />
-                               </button>
-                          </div>
-                     </div>
+                              <button
+                                   onClick={() => scroll("right")}
+                                   disabled={currentIndex >= maxIndex}
+                                   aria-label="Go to Next Testimonial"
+                                   className="min-w-11 min-h-11 w-11 h-11 rounded-full border border-zinc-200/80 bg-white/80 flex items-center justify-center text-neutral hover:bg-neutral hover:text-white transition-all duration-200 cursor-pointer shadow-2xs disabled:opacity-30 disabled:cursor-not-allowed"
+                              >
+                                   <IoIosArrowForward size={15} />
+                              </button>
+                         </div>
+                    </div>
                </div>
 
 

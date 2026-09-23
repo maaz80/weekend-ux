@@ -183,7 +183,7 @@ const Testimonials = ({ data }) => {
 
                     <h2 className="text-[38px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 font-medium text-center w-[99%] md:w-[60%] mx-auto z-20 relative font-playfair text-neutral">
                          {data?.startTitle || "What Our"}{" "}
-                         <span className="relative inline-block text-official italic">
+                         <span className="relative inline-block text-official italic font-semibold">
                               {data?.midTitle || "Students"}
                          
                          </span>{' '}
@@ -225,7 +225,7 @@ const Testimonials = ({ data }) => {
                                    />
 
                                    {/* Testimonial */}
-                                   <p className="text-[16px] leading-6 text-[#454545] mb-8 max-w-[95%]">
+                                   <p className="text-[16px] leading-6 2xl:text-[18px] text-neutral/90 mb-8 max-w-[95%]">
                                         {item.text}
                                    </p>
 

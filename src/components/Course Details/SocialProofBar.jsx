@@ -40,9 +40,9 @@ function getIconForItem(item, idx) {
 export default function SocialProofBar({ items }) {
   const defaultItems = [
     { value: "5 / 5", name: "Google Rating" },
-    { value: "1,000+", name: "Alumni Trained" },
+    { value: "100+", name: "Alumni Trained" },
     { value: "99%", name: "Placement Rate" },
-    { value: "500+", name: "Hiring Partners" },
+    { value: "50+", name: "Hiring Partners" },
   ];
 
   const displayItems =

@@ -6,6 +6,7 @@
 :root {
   --background: #ffffff;
   --neutral: #1C1C1C;
+  --orange: #f36600;
   --foreground: var(--neutral);
   --yellow-primary: #FFD400;
   
@@ -96,6 +97,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-yellow: var(--yellow-primary);
+  --color-orange: var(--orange);
   --color-neutral: var(--neutral);
 
   /* Foregrounds */

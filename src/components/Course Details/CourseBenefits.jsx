@@ -56,12 +56,12 @@ export default function CourseBenefits({ data }) {
      const hasKeyword = title.toLowerCase().startsWith("benefits of");
      const displayTitle = hasKeyword ? (
           <>
-               Benefits of <span className="text-official">{title.substring(12)}</span>
+               Benefits of <span className="text-[#f36600]">{title.substring(12)}</span>
           </>
      ) : title;
 
      return (
-          <section className="w-full bg-[#F8F6EE] py-14 sm:py-18 md:py-24 font-urbanist border-b border-zinc-200/80 relative z-1">
+          <section className="button-neutral w-full bg-[#F8F6EE] py-14 sm:py-18 md:py-24 font-urbanist border-b border-zinc-200/80 relative z-1">
                <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto">
                     
                     {/* Header Section */}

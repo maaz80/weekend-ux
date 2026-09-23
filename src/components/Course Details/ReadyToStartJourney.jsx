@@ -26,6 +26,7 @@ export default function ReadyToStartJourney({ data }) {
 
      return (
           <section
+               data-navbar-light="true"
                className="w-full py-14 sm:py-18 md:py-20 font-urbanist relative z-1 overflow-hidden"
                style={{ backgroundColor: "#18181b", color: "#ffffff" }}
           >

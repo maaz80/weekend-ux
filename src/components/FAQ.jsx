@@ -39,12 +39,12 @@ const FAQ = ({
      faqData: initialFaqData,
      bgImage = "/images/weekend-ux-faq-bg.webp",
      bgColor = "bg-white",
-     taglineColor = "text-official",
+     taglineColor = "text-[#f36600]",
      titleColor = "text-neutral",
-     titleHighlightColor = "text-official",
+     titleHighlightColor = "text-[#f36600]",
      descriptionColor = "text-neutral/80",
      questionClosedColor = "text-neutral",
-     questionOpenColor = "text-official",
+     questionOpenColor = "text-[#f36600]",
      answerColor = "text-neutral",
      dividerColor = "border-gray-300"
 }) => {
@@ -123,7 +123,7 @@ const FAQ = ({
           : "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs.";
 
      return (
-          <section className={` relative z-999 ${paddings} pt-10 md:pt-15 pb-35 md:pb-70 ${bgColor} px-5 md:px-2.5`}>
+          <section className={`button-neutral relative z-999 ${paddings} pt-10 md:pt-15 pb-35 md:pb-70 ${bgColor} px-5 md:px-2.5`}>
                {/* Background */}
                {bgImage && (
                     <div

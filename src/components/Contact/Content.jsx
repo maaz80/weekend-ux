@@ -65,7 +65,7 @@ const Content = ({
           : Map.src || Map;
 
      return (
-          <section className={`py-10 md:py-16 font-urbanist ${bgColor} px-2`}>
+          <section className={`py-10 md:py-16 font-urbanist ${bgColor} px-2 button-neutral`}>
                <div className="custom-width px-4 md:px-6 lg:px-8">
 
                     {/* ================= TOP SECTION ================= */}

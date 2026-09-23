@@ -64,7 +64,7 @@ export default function JobRoles({ data }) {
                const parts = title.split(/after/i);
                return (
                     <>
-                         {parts[0]} <span className="font-playfair text-zinc-900 font-extrabold">After</span> <span className="text-official font-extrabold">{parts.slice(1).join("After")}</span>
+                         {parts[0]} <span className="font-playfair text-zinc-900 font-extrabold">After</span> <span className="text-[#f36600] font-extrabold">{parts.slice(1).join("After")}</span>
                     </>
                );
           }
@@ -72,7 +72,7 @@ export default function JobRoles({ data }) {
      };
 
      return (
-          <section className="w-full bg-[#F8F6EE] py-14 sm:py-18 md:py-24 font-urbanist relative z-1">
+          <section className="button-neutral w-full bg-[#F8F6EE] py-14 sm:py-18 md:py-24 font-urbanist relative z-1">
                <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto">
 
                     {/* Header Section */}

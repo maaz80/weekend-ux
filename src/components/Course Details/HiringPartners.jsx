@@ -40,7 +40,7 @@ export default function HiringPartners({ data }) {
      const ticker2 = Array(repeatCount2).fill(row2.length ? row2 : row1).flat();
 
      return (
-          <section className="w-full bg-[#EEF2F6] py-7 sm:py-18 md:py-24 font-urbanist relative z-1 overflow-hidden">
+          <section className="button-neutral w-full bg-yellow-100 py-7 sm:py-18 md:py-24 font-urbanist relative z-1 overflow-hidden">
                <style jsx>{`
                     @keyframes marquee-left {
                          0% { transform: translateX(0%); }
@@ -66,10 +66,10 @@ export default function HiringPartners({ data }) {
                     
                     {/* Header Section */}
                     <div className="space-y-2 max-w-2xl mx-auto mb-10 md:mb-14">
-                         <h2 className="font-urbanist text-3xl sm:text-4xl md:text-5xl font-black text-[#1E293B] tracking-tight leading-tight">
-                              Our Hiring <span className="text-[#2563EB] font-extrabold">Partners</span>
+                         <h2 className="font-urbanist text-3xl sm:text-4xl md:text-5xl font-black text-neutral tracking-tight leading-tight">
+                              Our Hiring <span className="text-[#f36600] font-extrabold">Partners</span>
                          </h2>
-                         <p className="font-urbanist text-sm sm:text-base font-semibold text-[#64748B] leading-relaxed">
+                         <p className="font-urbanist text-sm sm:text-base 2xl:text-[18px] font-semibold text-neutral/90 leading-relaxed">
                               {subtitle}
                          </p>
                     </div>
@@ -78,10 +78,10 @@ export default function HiringPartners({ data }) {
                     <div className="relative w-full overflow-hidden space-y-4 sm:space-y-5">
                          
                          {/* Left Fade Overlay */}
-                         <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-[#EEF2F6] to-transparent z-10" />
+                         <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-32 bg-linear-to-r from-yellow-100 to-transparent z-10 h-60" />
                          
                          {/* Right Fade Overlay */}
-                         <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-[#EEF2F6] to-transparent z-10" />
+                         <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-32 bg-linear-to-l from-yellow-100 to-transparent z-10 h-60" />
 
                          {/* ROW 1 (Scroll Left) */}
                          <div className="flex w-max gap-4 sm:gap-6 animate-marquee-left">
@@ -95,7 +95,7 @@ export default function HiringPartners({ data }) {
                                              alt="Hiring Partner Logo"
                                              width="130"
                                              height="40"
-                                             className="h-6 sm:h-10 w-auto max-w-[130px] sm:max-w-[160px] object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
+                                             className="h-6 sm:h-10 w-auto max-w-32.5 sm:max-w-40 object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
                                         />
                                    </div>
                               ))}
@@ -113,7 +113,7 @@ export default function HiringPartners({ data }) {
                                              alt="Hiring Partner Logo"
                                              width="130"
                                              height="40"
-                                             className="h-6 sm:h-10 w-auto max-w-[130px] sm:max-w-[160px] object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
+                                             className="h-6 sm:h-10 w-auto max-w-32.5 sm:max-w-40 object-contain shrink-0 transition-transform duration-300 group-hover:scale-105"
                                         />
                                    </div>
                               ))}

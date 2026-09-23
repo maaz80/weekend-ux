@@ -36,7 +36,7 @@ export default function CourseCertification({ data }) {
      const imageSrc = data?.certificationImage || "/images/certification.webp";
 
      return (
-          <section className="w-full bg-[#051329] py-14 sm:py-18 md:py-24 font-urbanist relative overflow-hidden text-white border-b border-zinc-800/80 px-2">
+          <section id="course-certification" data-navbar-light="true" className="w-full bg-neutral py-14 sm:py-18 md:py-24 font-urbanist relative overflow-hidden text-white border-b border-zinc-800/80 px-2 ">
                {/* Background Decorative Abstract Triangles */}
                {/* <div className="absolute top-12 left-6 w-48 h-48 border-2 border-white/5 rounded-2xl rotate-12 pointer-events-none hidden sm:block"></div>
                <div className="absolute bottom-10 right-10 w-64 h-64 border border-amber-500/10 rounded-full pointer-events-none hidden md:block"></div> */}

@@ -22,7 +22,7 @@ export default function MeetTheTrainer({ data }) {
       bio: "Lead UX Designer with 10 yrs experience. Specialist in User Research, Predictive Analytics, and Interaction Design.",
       rating: "4.9/5",
       students: "250+ Students",
-      image: "/images/kumar-skand.webp",
+      image: "/images/hrishabh-data.webp",
       github: "https://github.com",
       linkedin: "https://linkedin.com"
     },
@@ -32,7 +32,7 @@ export default function MeetTheTrainer({ data }) {
       bio: "Lead UI Designer with 5 yrs experience. Mentoring on High-Fidelity Figma Prototyping, UI Micro-Interactions, and Modern Design Systems.",
       rating: "4.9/5",
       students: "180+ Students",
-      image: "/images/hrishabh-data.webp",
+      image: "/images/kumar-skand.webp",
       github: "https://github.com",
       linkedin: "https://linkedin.com"
     }
@@ -45,7 +45,7 @@ export default function MeetTheTrainer({ data }) {
     : defaultTrainers;
 
   return (
-    <section className="w-full bg-[#F8F6EE] py-14 sm:py-16 md:py-20 border-b border-zinc-200/80 font-urbanist">
+    <section className="w-full bg-[#F8F6EE] py-14 sm:py-16 md:py-20 border-b border-zinc-200/80 font-urbanist button-neutral">
       <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto">
         
         {/* Section Header */}

@@ -14,7 +14,7 @@ import SkillsYouWillLearn from "./SkillsYouWillLearn";
 import WhoShouldEnroll from "./WhoShouldEnroll";
 import TrustedByLearners from "./TrustedByLearners";
 import MeetTheTrainer from "./MeetTheTrainer";
-import DemoClass from "./DemoClass";
+// import DemoClass from "./DemoClass";
 import CourseCertification from "./CourseCertification";
 import CourseBenefits from "./CourseBenefits";
 import JobRoles from "./JobRoles";
@@ -394,7 +394,7 @@ export default function Details({ data }) {
      return (
           <>
                {/* First Section: Promo Content and Admissions Form */}
-               <section className="bg-[#F8F6EE] py-12 lg:py-20 font-urbanist w-full">
+               <section className="bg-[#F8F6EE] py-12 lg:py-20 font-urbanist w-full button-neutral">
                     <div className="custom-width px-4 sm:px-6 lg:px-10">
                          
                          {/* New Custom Section with Left-side Info and Right-side Form/Banner */}
@@ -510,7 +510,7 @@ export default function Details({ data }) {
                                    )}
 
                                    {/* Course Syllabus / Curriculum Section */}
-                                   <div id="curriculum" className="pt-8 border-t border-zinc-200 space-y-5">
+                                   {/* <div id="curriculum" className="pt-8 border-t border-zinc-200 space-y-5">
                                         <div>
                                              <span className="text-xs font-bold uppercase tracking-widest text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200/60 inline-block mb-2 font-urbanist">
                                                   Course Modules
@@ -526,7 +526,7 @@ export default function Details({ data }) {
                                         <div className="pt-1">
                                              <Curriculum curriculum={curriculum} courseId={data?._id} />
                                         </div>
-                                   </div>
+                                   </div> */}
                               </div>
 
                               {/* RIGHT COLUMN: Sidebar Form and CallCard Card */}
@@ -564,7 +564,7 @@ export default function Details({ data }) {
                </section>
 
                {/* Second Section: Brochure CTA Banner */}
-               <section className="bg-white py-12 font-urbanist w-full border-t border-b border-zinc-100">
+               <section className="bg-white py-12 font-urbanist w-full border-t border-b border-zinc-100 button-neutral">
                     <div className="custom-width px-4 sm:px-6 lg:px-16">
                          <div
                               className="relative overflow-hidden bg-white border border-zinc-200 rounded-2xl p-8 md:p-12 flex flex-col md:flex-row justify-between items-center gap-8 shadow-sm"
@@ -612,7 +612,7 @@ export default function Details({ data }) {
                <MeetTheTrainer data={data} />
 
                {/* Free Demo Class Section */}
-               <DemoClass data={data} />
+               {/* <DemoClass data={data} /> */}
 
                {/* Course Certification Section */}
                <CourseCertification data={data} />
@@ -722,13 +722,13 @@ export default function Details({ data }) {
                </section> */}
 
                {/* Fourth Section: Student Case Studies Slider Section */}
-               <section className="bg-[#FAF9F5] py-8 md:py-24 font-urbanist w-full">
+               <section className="bg-[#FAF9F5] py-8 md:py-24 font-urbanist w-full button-neutral">
                     <div className="custom-width px-4 sm:px-6 lg:px-16 overflow-hidden">
                          <div className="text-center space-y-4 mb-5 md:mb-12">
-                              <h2 className="font-playfair text-[32px] md:text-[36px] font-bold text-zinc-900 leading-tight">
+                              <h2 className="text-[38px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 font-medium text-center w-[99%] md:w-[60%] mx-auto z-20 relative font-playfair text-neutral">
                                    {displayCaseStudiesTitle}
                               </h2>
-                              <p className="font-urbanist text-[16px] md:text-[17px] text-zinc-500 max-w-2xl mx-auto leading-relaxed">
+                              <p className="font-urbanist text-[16px] md:text-[18px] text-neutral/90 max-w-3xl mx-auto leading-relaxed">
                                    {data?.caseStudies?.description || "Click and explore our students UX projects done in the institute in their courses."}
                               </p>
                          </div>

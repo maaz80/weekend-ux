@@ -66,7 +66,7 @@ export default function WhyChooseUs({ data }) {
 
      return (
           <section
-               className="w-full py-14 sm:py-18 md:py-24 font-urbanist relative z-1 overflow-hidden"
+               className="w-full py-14 sm:py-18 md:py-24 font-urbanist relative z-1 overflow-hidden button-neutral"
                style={{ backgroundColor: "#FFD400", color: "#18181b" }}
           >
                <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto relative z-10">

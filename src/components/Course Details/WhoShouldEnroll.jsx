@@ -27,7 +27,7 @@ export default function WhoShouldEnroll() {
   ];
 
   return (
-    <section className="w-full bg-official text-neutral font-urbanist relative z-1 py-12 sm:py-16 md:py-20 shadow-sm">
+    <section className="w-full bg-official text-neutral font-urbanist relative z-1 py-12 sm:py-16 md:py-20 shadow-sm button-neutral">
       <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto">
         
         {/* Header */}

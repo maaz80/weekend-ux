@@ -39,6 +39,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
      const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
      const [searchQuery, setSearchQuery] = useState("");
      const [searchResults, setSearchResults] = useState([]);
+     const [isLoginNeutral, setIsLoginNeutral] = useState(false);
      const desktopSearchRef = useRef(null);
      const mobileSearchRef = useRef(null);
 
@@ -210,68 +211,128 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                          ? ["courses-hero"]
                          : ["coming-soon-hero", "not-found-hero"];
 
-          const explicitSections = Array.from(
-               document.querySelectorAll("[data-navbar-light='true'], [data-navbar-light-section='true']")
-          ).filter((section) => section instanceof HTMLElement);
+          // Track all observed sections (route-based + data-attribute-based)
+          const observedSections = new Set();
 
-          const sectionIds = [...new Set([...routeSectionIds, ...explicitSections.map((section) => section.id).filter(Boolean)])];
-          const sections = sectionIds
-               .map((id) => document.getElementById(id))
-               .filter(Boolean);
+          const getAllSections = () => {
+               const explicitSections = Array.from(
+                    document.querySelectorAll("[data-navbar-light='true'], [data-navbar-light-section='true']")
+               ).filter((el) => el instanceof HTMLElement);
 
-          if (isDarkThemePage || explicitSections.length > 0) {
+               const routeSections = routeSectionIds
+                    .map((id) => document.getElementById(id))
+                    .filter(Boolean);
+
+               return [...routeSections, ...explicitSections];
+          };
+
+          const checkVisibility = () => {
+               const hasDarkSection = Boolean(
+                    document.getElementById("not-found-hero") ||
+                    document.getElementById("coming-soon-hero") ||
+                    isDarkThemePage
+               );
+               const allSections = getAllSections();
+               const isVisible = allSections.some((section) => {
+                    const rect = section.getBoundingClientRect();
+                    return rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+               });
+               setIsMoreButtonLight(hasDarkSection || isVisible);
+          };
+
+          const intersectionObserver = new IntersectionObserver(() => {
+               checkVisibility();
+          }, { threshold: 0.2 });
+
+          const startObserving = () => {
+               const allSections = getAllSections();
+               allSections.forEach((section) => {
+                    if (!observedSections.has(section)) {
+                         observedSections.add(section);
+                         intersectionObserver.observe(section);
+                    }
+               });
+          };
+
+          // MutationObserver to detect dynamically added data-navbar-light sections
+          const mutationObserver = new MutationObserver(() => {
+               startObserving();
+               checkVisibility();
+          });
+
+          mutationObserver.observe(document.body, {
+               childList: true,
+               subtree: true,
+               attributes: true,
+               attributeFilter: ["data-navbar-light", "data-navbar-light-section"],
+          });
+
+          // Initial setup
+          if (isDarkThemePage) {
                setIsMoreButtonLight(true);
           }
 
-          if (sections.length === 0 && !isDarkThemePage && explicitSections.length === 0) {
-               setIsMoreButtonLight(false);
-               return;
-          }
+          startObserving();
+          checkVisibility();
 
           let ticking = false;
           let rafId = null;
 
-          const updateLightState = () => {
+          const onScroll = () => {
                if (!ticking) {
                     ticking = true;
                     rafId = requestAnimationFrame(() => {
-                         const hasDarkSection = Boolean(
-                              document.getElementById("not-found-hero") || 
-                              document.getElementById("coming-soon-hero") ||
-                              isDarkThemePage
-                         );
-                         const isVisible = sections.some((section) => {
-                              const rect = section.getBoundingClientRect();
-                              return rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
-                         });
-                         setIsMoreButtonLight(hasDarkSection || isVisible);
+                         checkVisibility();
                          ticking = false;
                     });
                }
           };
 
-          updateLightState();
-
-          const observer = new IntersectionObserver((entries) => {
-               const hasDarkSection = Boolean(
-                    document.getElementById("not-found-hero") || 
-                    document.getElementById("coming-soon-hero") ||
-                    isDarkThemePage
-               );
-               const isVisible = entries.some((entry) => entry.isIntersecting);
-               setIsMoreButtonLight(hasDarkSection || isVisible);
-          }, { threshold: 0.2 });
-
-          sections.forEach((section) => observer.observe(section));
-
-          window.addEventListener("scroll", updateLightState, { passive: true });
-          window.addEventListener("resize", updateLightState);
+          window.addEventListener("scroll", onScroll, { passive: true });
+          window.addEventListener("resize", checkVisibility);
 
           return () => {
                if (rafId) cancelAnimationFrame(rafId);
+               intersectionObserver.disconnect();
+               mutationObserver.disconnect();
+               window.removeEventListener("scroll", onScroll);
+               window.removeEventListener("resize", checkVisibility);
+          };
+     }, [pathname]);
+
+     // Observe .button-neutral sections to toggle Login button style
+     useEffect(() => {
+          const neutralSections = Array.from(
+               document.querySelectorAll(".button-neutral")
+          ).filter((el) => el instanceof HTMLElement);
+
+          if (neutralSections.length === 0) {
+               setIsLoginNeutral(false);
+               return;
+          }
+
+          const observer = new IntersectionObserver(
+               (entries) => {
+                    const anyVisible = entries.some((entry) => entry.isIntersecting);
+                    // Re-check all observed elements since entries may be partial
+                    if (anyVisible) {
+                         setIsLoginNeutral(true);
+                    } else {
+                         // Verify none of the sections are intersecting
+                         const stillVisible = neutralSections.some((section) => {
+                              const rect = section.getBoundingClientRect();
+                              return rect.top < 80 && rect.bottom > 0;
+                         });
+                         setIsLoginNeutral(stillVisible);
+                    }
+               },
+               { threshold: 0, rootMargin: "-0px 0px -70% 0px" }
+          );
+
+          neutralSections.forEach((section) => observer.observe(section));
+
+          return () => {
                observer.disconnect();
-               window.removeEventListener("scroll", updateLightState);
-               window.removeEventListener("resize", updateLightState);
           };
      }, [pathname]);
 
@@ -653,7 +714,15 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              )}
                                         </div>
                                    ) : (
-                                        <Button variant="empty" className="inline-flex" onClick={() => setIsAuthModalOpen(true)}>
+                                        <Button
+                                             variant="empty"
+                                             className={`inline-flex transition-all duration-300 ${
+                                                  isLoginNeutral
+                                                       ? "border-neutral! text-neutral! hover:bg-neutral! hover:text-white!"
+                                                       : ""
+                                             }`}
+                                             onClick={() => setIsAuthModalOpen(true)}
+                                        >
                                              {loginLabel}
                                         </Button>
                                    )}

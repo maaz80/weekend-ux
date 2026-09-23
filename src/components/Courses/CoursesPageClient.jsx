@@ -231,7 +231,7 @@ export default function CoursesPageClient({ coursesData }) {
                     </h1>
                </section>
 
-               <section className="py-7 md:py-14 bg-[#FCFBF7] bg-cover bg-center border-b border-zinc-100">
+               <section className="py-7 md:py-14 bg-[#FCFBF7] bg-cover bg-center border-b border-zinc-100 button-neutral">
                     <div className="custom-width px-4 sm:px-6 lg:px-10">
 
                          {/* Logged-in User Dashboard Banner */}

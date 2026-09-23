@@ -31,7 +31,7 @@ export default function TrustedByLearners() {
   ];
 
   return (
-    <section className="w-full bg-white py-10 sm:py-12 border-b border-zinc-150 font-urbanist">
+    <section className="w-full bg-white py-10 sm:py-12 border-b border-zinc-150 font-urbanist button-neutral">
       <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto text-center space-y-6">
         
         {/* Section Heading */}
