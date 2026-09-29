@@ -91,7 +91,7 @@ const Content = ({
 
                               {/* Info Grid */}
 
-                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-8">
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8 mt-4 md:mt-8">
 
                                    {/* Enquiries */}
 
@@ -140,9 +140,9 @@ const Content = ({
 
                          {/* RIGHT SIDE */}
 
-                         <div className={`mt-10 mb-5 md:mt-0 p-5 md:p-10 rounded-2xl ${formBgColor} ${formShadow}`}>
+                         <div className={`mt-5 mb-5 md:mt-0 p-5 md:p-10 rounded-2xl ${formBgColor} ${formShadow}`}>
 
-                              <h2 className={`font-playfair text-[26px] md:text-[36px] text-center mb-8 ${formHeadingColor}`}>
+                              <h2 className={`font-playfair text-[26px] font-semibold text-neutral leading-[1.2] md:leading-9 text-start md:text-center mb-8 ${formHeadingColor}`}>
                                    Enquire Here!
                               </h2>
 
@@ -152,7 +152,7 @@ const Content = ({
 
                     {/* ================= MAP SECTION ================= */}
 
-                    <div className="pt-8 md:pt-10 overflow-hidden ">
+                    <div className="pt-3 md:pt-10 overflow-hidden ">
 
                          <div className="relative">
 

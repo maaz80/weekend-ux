@@ -103,17 +103,17 @@ export default function Details({
                   hover:-translate-y-1
                 "
                                    >
-                                        <h3 className={`text-center text-[42px] font-semibold leading-none ${cardNumberColor}`}>
+                                        <h3 className={`text-start md:text-center text-[42px] font-semibold leading-none ${cardNumberColor}`}>
                                              {item.number}
                                         </h3>
 
-                                        <p className={`mt-2 text-center font-medium ${cardTitleColor}`}>
+                                        <p className={`mt-2 text-start md:text-center font-medium ${cardTitleColor}`}>
                                              {item.title}
                                         </p>
 
                                         <div className={`my-5 h-px ${cardDividerColor}`} />
 
-                                        <p className={`text-sm leading-6 ${cardDescriptionColor} text-center`}>
+                                        <p className={`text-sm leading-6 ${cardDescriptionColor} text-start md:text-center`}>
                                              {item.description}
                                         </p>
                                    </div>

@@ -41,7 +41,7 @@ export default async function ContactUs() {
                     />
                     {/* Content */}
 
-                    <h1 className="pt-18 md:pt-10 custom-width text-[32px] md:text-[38px] 2xl:text-[56px] text-center leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">
+                    <h1 className="pt-18 md:pt-10 custom-width text-[22px] md:text-[38px] 2xl:text-[56px] leading-10 md:leading-15 2xl:leading-20 text-center text-white relative z-50 font-playfair">
                          {title}
                     </h1>
                     <Image 

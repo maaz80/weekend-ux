@@ -69,17 +69,17 @@ export default function FeatureStrip({
           })
           : [
                {
-                    icon: <HiLightBulb size={42} />,
+                    icon: <HiLightBulb size={36} />,
                     title: "Experience World",
                     subtitle: "Class Learning",
                },
                {
-                    icon: <MdOutlineMapsHomeWork size={42} />,
+                    icon: <MdOutlineMapsHomeWork size={34} />,
                     title: "100% Placement",
                     subtitle: "Assistance",
                },
                {
-                    icon: <BsPersonWorkspace size={42} />,
+                    icon: <BsPersonWorkspace size={32} />,
                     title: "Study On-Campus",
                     subtitle: "or Online",
                },
@@ -103,11 +103,11 @@ export default function FeatureStrip({
                                    key={index}
                                    className={`flex items-center gap-5`}
                               >
-                                   <div className={`shrink-0 ${textColor}`}>
+                                   <div className={`shrink-0 ${textColor} text-sm`}>
                                         {item.icon}
                                    </div>
                                    <div>
-                                        <h2 className={`font-playfair text-[22px] leading-tight lg:text-[28px] ${textColor}`}>
+                                        <h2 className={`font-playfair text-[20px] leading-tight lg:text-[28px] ${textColor}`}>
                                              {item.title}
                                         </h2>
 
