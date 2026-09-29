@@ -9,7 +9,7 @@
   --orange: #f36600;
   --foreground: var(--neutral);
   --yellow-primary: #FFD400;
-  
+
   --font-urbanist: var(--font-urbanist), 'Urbanist', sans-serif;
   --font-playfair: var(--font-playfair), 'Playfair Display', serif;
   --font-inter: var(--font-inter), 'Inter', sans-serif;
@@ -57,7 +57,8 @@
   --foreground: var(--neutral);
 
   /* Foregrounds */
-  --fg-blue: #8ab4f8; /* Dark mode friendly blue */
+  --fg-blue: #8ab4f8;
+  /* Dark mode friendly blue */
   --fg-neutral: #ededed;
   --fg-green: #81c995;
   --fg-gray: #5f6368;
@@ -134,12 +135,12 @@
   --color-bg-gray: var(--bg-gray);
   --color-bg-red-light: var(--bg-red-light);
   --color-bg-gray-soft: var(--bg-gray-soft);
-  
+
   /* Theme overrides to ensure backward compatibility and safety */
   --color-neutral-900: var(--neutral);
   --color-neutral-950: var(--neutral);
   --color-black: var(--neutral);
-  
+
   /* Register your imported fonts */
   --font-urbanist: var(--font-urbanist);
   --font-playfair: var(--font-playfair);
@@ -191,15 +192,53 @@ body {
   line-height: 1.45;
 }
 
-:where(p) {
-  line-height: 1.45;
+.para {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #202124;
+}
+
+.subheading {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #f36600;
+  font-family: (var(--font-inter), 'Inter', sans-serif);
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.subheading-white {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #ffffff;
+  font-family: (var(--font-inter), 'Inter', sans-serif);
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.subheading-black {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #000;
+  font-family: (var(--font-inter), 'Inter', sans-serif);
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.h2-section-title {
+  font-size: 34px;
+  line-height: 1.104;
+  font-weight: 500;
 }
 
 /* Custom Responsive Container Utility */
 .custom-width {
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
   /* padding-left: 8px; */
   /* Spacing for screen edges */
   /* padding-right: 8px; */
@@ -211,8 +250,18 @@ body {
   .custom-width {
     max-width: 900px;
     /* Tablet */
-    padding-left: 16px;
-    padding-right: 16px;
+    /* padding-left: 16px;
+    padding-right: 16px; */
+  }
+
+  .h2-section-title {
+    font-size: 56px;
+    line-height: 60px;
+  }
+
+  .para {
+    font-size: 16px;
+    line-height: 1.7;
   }
 }
 
@@ -220,8 +269,8 @@ body {
   .custom-width {
     max-width: 1280px;
     /* PC */
-    padding-left: 46px;
-    padding-right: 46px;
+    /* padding-left: 46px;
+    padding-right: 46px; */
   }
 }
 
@@ -293,11 +342,11 @@ body {
 }
 
 /* Enforce 53px/48px ratio (1.104 line-height) for all headings on mobile (<768px) */
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
   :where(h1, h2, h3, h4, h5, h6, .h1-hero-title, .h2-section-title, .h2-section-title-lg, .h3-card-title) {
     line-height: 1.104 !important;
   }
-}
+} */
 
 /* Centralized Global Typography & Section Utilities */
 .eyebrow-tagline {
@@ -360,19 +409,6 @@ body {
   }
 }
 
-.h2-section-title {
-  font-family: var(--font-playfair), serif;
-  font-size: 32px;
-  line-height: 1.104;
-  font-weight: 700;
-  color: #18181b;
-}
-
-@media (min-width: 768px) {
-  .h2-section-title {
-    font-size: 42px;
-  }
-}
 
 .h3-card-title {
   font-family: var(--font-urbanist), sans-serif;
@@ -463,7 +499,8 @@ body {
 
 /* Rich-text Editor Content Styling */
 .blog-content {
-  color: #404040; /* text-neutral-700 */
+  color: #404040;
+  /* text-neutral-700 */
 }
 
 .blog-content a,
@@ -471,7 +508,7 @@ body {
 .course-content a,
 .location-content a,
 a.editor-link {
-  color: #0080a5;
+  color: #000;
   font-weight: 700;
   text-decoration: none;
   text-underline-offset: 3px;
@@ -484,7 +521,7 @@ a.editor-link {
 .location-content a:hover,
 a.editor-link:hover {
   text-decoration: underline;
-  color: #0080a5;
+  color: #000;
   opacity: 0.9;
 }
 
@@ -493,7 +530,8 @@ a.editor-link:hover {
   font-weight: 700;
   margin-top: 20px;
   margin-bottom: 15px;
-  color: #171717; /* text-neutral-900 */
+  color: #171717;
+  /* text-neutral-900 */
   scroll-margin-top: 110px;
 }
 

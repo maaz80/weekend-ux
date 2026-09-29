@@ -67,7 +67,7 @@ export default function Details({
                     className="absolute inset-0 bg-cover bg-center"
                     style={{
                          backgroundImage: `url('${bgImage}')`,
-                     }}
+                    }}
                />
 
                <div className="relative z-10 mx-auto max-w-360 px-5 py-14 md:px-10 md:py-20 xl:px-16">
@@ -79,7 +79,7 @@ export default function Details({
                                    {whyTitle}
                               </p>
 
-                              <h2 className={`max-w-150 font-serif text-[38px] md:leading-16 ${titleColor} md:text-[56px] leading-12`}>
+                              <h2 className={`max-w-150 font-playfair text-[38px] md:leading-16 ${titleColor} md:text-[56px] leading-12`}>
                                    {startheading}{" "}
                                    {midheading && <span className={`italic ${titleHighlightColor}`}>{midheading}</span>}
                                    {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>}

@@ -12,7 +12,7 @@ import CallCard from "./CallCard";
 import Curriculum from "./Curriculum";
 import SkillsYouWillLearn from "./SkillsYouWillLearn";
 import WhoShouldEnroll from "./WhoShouldEnroll";
-import TrustedByLearners from "./TrustedByLearners";
+// import TrustedByLearners from "./TrustedByLearners";
 import MeetTheTrainer from "./MeetTheTrainer";
 // import DemoClass from "./DemoClass";
 import CourseCertification from "./CourseCertification";
@@ -190,12 +190,27 @@ export default function Details({ data }) {
      };
 
      const caseStudiesTitle = data?.caseStudies?.title || "UX Case Studies by Our Students";
-     const hasStudiesKeyword = caseStudiesTitle.toLowerCase().startsWith("ux case studies");
-     const displayCaseStudiesTitle = hasStudiesKeyword ? (
-          <>
-               <span className="text-official font-extrabold">UX Case Studies</span> {caseStudiesTitle.substring(15)}
-          </>
-     ) : caseStudiesTitle;
+     const renderCaseStudiesTitle = (titleStr) => {
+          const title = (titleStr || "UX Case Studies by Our Students").trim();
+          if (!title) return null;
+
+          const words = title.split(/\s+/);
+          if (words.length <= 1) {
+               return <span className="text-[#f36600] font-semibold italic">{title}</span>;
+          }
+
+          const mid = Math.ceil(words.length / 2);
+          const firstHalf = words.slice(0, mid).join(" ");
+          const secondHalf = words.slice(mid).join(" ");
+
+          return (
+               <>
+                    <span className="text-neutral">{firstHalf}</span>{" "}
+                    <span className="text-[#f36600] italic font-semibold">{secondHalf}</span>
+               </>
+          );
+     };
+     const displayCaseStudiesTitle = renderCaseStudiesTitle(caseStudiesTitle);
 
      const defaultCaseStudies = [
           {
@@ -503,7 +518,7 @@ export default function Details({ data }) {
                                    {data?.promoSocialBottomContent && (
                                         <div className="pt-6 border-t border-zinc-200">
                                              <div
-                                                  className="prose prose-zinc max-w-none font-urbanist text-[16px] md:text-[17px] text-zinc-700 leading-relaxed space-y-4 [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:text-zinc-900 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-zinc-900 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-zinc-900 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_a]:text-[#0080a5] [&_a]:font-bold [&_a]:no-underline hover:[&_a]:underline blog-content course-content"
+                                                  className="prose prose-zinc max-w-none font-urbanist text-[16px] md:text-[17px] text-zinc-700 leading-relaxed space-y-4 [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:text-zinc-900 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-zinc-900 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-zinc-900 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_a]:text-[#000] [&_a]:font-bold [&_a]:no-underline hover:[&_a]:underline blog-content course-content"
                                                   dangerouslySetInnerHTML={{ __html: data.promoSocialBottomContent }}
                                              />
                                         </div>
@@ -533,12 +548,12 @@ export default function Details({ data }) {
                               <div className="space-y-6 lg:sticky lg:top-29 self-start">
 
                                    {/* Admission Form */}
-                                   <div className="bg-white rounded-2xl shadow-sm p-6 lg:p-7 xl:p-8 border border-zinc-150">
-                                        <h2 className="text-start text-[22px] md:text-[24px] font-bold text-neutral leading-9 mb-4">
+                                   <div className="bg-white rounded-2xl shadow-sm p-6 lg:p-7 xl:p-8 border border-zinc-150 space-y-4">
+                                        <h2 className="font-playfair text-start text-[26px] font-bold text-neutral leading-[1.2] md:leading-9 ">
                                              Send Us Your Training Requirement
                                         </h2>
                                         
-                                        <p className="text-start text-sm text-neutral leading-relaxed mb-6">
+                                        <p className="text-start para">
                                              Not sure yet? Before you pass up the opportunity to sign up for the course, speak with our counselor and get your questions answered.
                                         </p>
                                         <Form courseId={data?._id} courseTitle={data?.title} />
@@ -567,15 +582,15 @@ export default function Details({ data }) {
                <section className="bg-white py-12 font-urbanist w-full border-t border-b border-zinc-100 button-neutral">
                     <div className="custom-width px-4 sm:px-6 lg:px-16">
                          <div
-                              className="relative overflow-hidden bg-white border border-zinc-200 rounded-2xl p-8 md:p-12 flex flex-col md:flex-row justify-between items-center gap-8 shadow-sm"
+                              className="relative overflow-hidden bg-white border border-zinc-200 rounded-2xl p-5 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 shadow-sm"
                               style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54 48c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3zm-48 0c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3zm0-36c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3zm48 0c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3zm-24 18c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3z' fill='%23E85B24' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E")` }}
                          >
                               {/* Content info */}
-                              <div className="flex-1 space-y-3 text-left">
-                                   <h2 className="font-playfair text-[24px] md:text-[28px] font-bold text-zinc-900 leading-tight">
+                              <div className="flex-1 space-y-3 text-left ">
+                                   <h2 className="font-playfair text-[26px] md:text-[28px] font-bold text-zinc-900 leading-tight">
                                         {data?.brochureTitle || "Comprehensive Syllabus for UI UX Design Training"}
                                    </h2>
-                                   <p className="font-urbanist text-[15px] md:text-[16px] text-zinc-500 leading-relaxed max-w-3xl">
+                                   <p className="font-urbanist para max-w-3xl">
                                         {data?.brochureSubtext || "Chart your path to a thriving career as a UI/UX designer. Explore our course brochure for an in-depth look at the syllabus training from the best UI UX Design Institute in Delhi. Download now."}
                                    </p>
 
@@ -606,7 +621,7 @@ export default function Details({ data }) {
                <WhoShouldEnroll />
 
                {/* Trusted By Learners Section */}
-               <TrustedByLearners />
+               {/* <TrustedByLearners /> */}
 
                {/* Meet The Trainer Section */}
                <MeetTheTrainer data={data} />
@@ -723,18 +738,18 @@ export default function Details({ data }) {
 
                {/* Fourth Section: Student Case Studies Slider Section */}
                <section className="bg-[#FAF9F5] py-8 md:py-24 font-urbanist w-full button-neutral">
-                    <div className="custom-width px-4 sm:px-6 lg:px-16 overflow-hidden">
-                         <div className="text-center space-y-4 mb-5 md:mb-12">
-                              <h2 className="text-[38px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 font-medium text-center w-[99%] md:w-[60%] mx-auto z-20 relative font-playfair text-neutral">
+                    <div className="custom-width pl-2 md:pr-0 mx-auto sm:px-6 lg:px-16 overflow-hidden">
+                         <div className="text-left md:text-center space-y-4 mb-5 md:mb-12">
+                              <h2 className="h2-section-title font-playfair text-neutral">
                                    {displayCaseStudiesTitle}
                               </h2>
-                              <p className="font-urbanist text-[16px] md:text-[18px] text-neutral/90 max-w-3xl mx-auto leading-relaxed">
+                              <p className="font-urbanist para">
                                    {data?.caseStudies?.description || "Click and explore our students UX projects done in the institute in their courses."}
                               </p>
                          </div>
 
                          {/* Case Studies Carousel Layout */}
-                         <div className="overflow-hidden relative w-full px-2">
+                         <div className="overflow-hidden relative w-full px-0 md:px-2">
                               <div
                                    className="flex transition-transform duration-500 ease-in-out min-h-50 md:min-h-100"
                                    style={{ transform: `translateX(-${caseStudyIndex * (100 / visibleCards)}%)` }}
@@ -742,12 +757,12 @@ export default function Details({ data }) {
                                    {caseStudiesItems.map((study, idx) => (
                                         <div
                                              key={idx}
-                                             className="shrink-0 px-3 transition-all duration-300"
+                                             className="shrink-0  transition-all duration-300"
                                              style={{ width: `${100 / visibleCards}%` }}
                                         >
                                              <Link
                                                   href={study.link || "#"}
-                                                  className="group block bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-official shadow-sm hover:shadow-lg transition-all duration-300 transform hover:scale-[1.01]"
+                                                  className="w-85 group block bg-white rounded-2xl overflow-hidden border border-zinc-200 hover:border-official shadow-sm hover:shadow-lg transition-all duration-300 transform hover:scale-[1.01]"
                                              >
                                                   <div className="aspect-4/3 bg-zinc-100 overflow-hidden relative">
                                                        {study.image ? (

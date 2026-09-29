@@ -66,23 +66,22 @@ export default function WhyChooseUs({ data }) {
 
      return (
           <section
-               className="w-full py-14 sm:py-18 md:py-24 font-urbanist relative z-1 overflow-hidden button-neutral"
+               className="w-full py-10 sm:py-18 md:py-24 font-urbanist relative z-1 overflow-hidden button-neutral"
                style={{ backgroundColor: "#FFD400", color: "#18181b" }}
           >
                <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto relative z-10">
                     
                     {/* Header Section */}
-                    <div className="text-center space-y-3 max-w-3xl mx-auto mb-12 md:mb-16">
+                    <div className="text-left md:text-center space-y-3 max-w-3xl mx-auto mb-5 md:mb-16">
                          <span
-                              className="inline-block text-xs sm:text-sm font-extrabold uppercase tracking-widest px-4 py-1.5 rounded-full mb-1"
-                              style={{ backgroundColor: "rgba(24, 24, 27, 0.08)", color: "#18181b", border: "1px solid rgba(24, 24, 27, 0.12)" }}
+                              className="subheading-black"
                          >
                               WHY CHOOSE US
                          </span>
-                         <h2 className="font-urbanist text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-tight" style={{ color: "#18181b" }}>
+                         <h2 className="font-playfair h2-section-title font-bold mt-2">
                               {sectionTitle}
                          </h2>
-                         <p className="font-urbanist text-sm sm:text-base font-semibold max-w-2xl mx-auto leading-relaxed" style={{ color: "rgba(24, 24, 27, 0.8)" }}>
+                         <p className="font-urbanist para" >
                               {sectionSubtitle}
                          </p>
                     </div>
@@ -97,14 +96,13 @@ export default function WhyChooseUs({ data }) {
                               >
                                    {/* Icon Container */}
                                    <div
-                                        className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 shadow-xs transition-transform duration-300 group-hover:scale-105"
-                                        style={{ backgroundColor: "#FFD400", color: "#18181b", border: "1px solid rgba(24, 24, 27, 0.1)" }}
+                                        className="w-12 h-12 rounded-2xl flex items-center justify-center border shrink-0 transition-all duration-300 bg-amber-500/10 border-amber-500/20 text-zinc-900 group-hover:bg-zinc-950 group-hover:text-white group-hover:border-zinc-900 shadow-2xs group-hover:shadow-inner"
                                    >
                                         {renderIcon(card.iconName, idx)}
                                    </div>
 
                                    {/* Card Title */}
-                                   <h3 className="font-urbanist font-extrabold text-lg sm:text-xl mt-5 mb-1.5 leading-snug" style={{ color: "#18181b" }}>
+                                   <h3 className="font-urbanist font-extrabold text-xl sm:text-xl leading-snug mb-2 text-zinc-900 group-hover:text-zinc-950 transition-colors mt-5" >
                                         {card.title}
                                    </h3>
 
@@ -115,7 +113,7 @@ export default function WhyChooseUs({ data }) {
                                    />
 
                                    {/* Card Description */}
-                                   <p className="font-urbanist text-xs sm:text-sm font-semibold leading-relaxed" style={{ color: "rgba(24, 24, 27, 0.7)" }}>
+                                   <p className="font-urbanist para ">
                                         {card.description}
                                    </p>
                               </div>

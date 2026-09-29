@@ -77,24 +77,24 @@ export default function RelatedCourses({ currentSlug, data }) {
 
      return (
           <section
-               className="w-full py-14 sm:py-18 md:py-24 font-urbanist relative z-1 overflow-hidden button-neutral"
+               className="w-full py-10 sm:py-18 md:py-24 font-urbanist relative z-1 overflow-hidden button-neutral"
                style={{ backgroundColor: "#FFD400", color: "#18181b" }}
           >
                <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto relative z-10">
                     
                     {/* Header Section matching RelatedBlogs heading style */}
-                    <div className="mx-auto max-w-212.5 text-center mb-12 md:mb-16">
-                         <span className="font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] text-white">
+                    <div className="mx-auto max-w-212.5 text-left md:text-center mb-5 md:mb-16">
+                         <span className="font-urbanist subheading-black">
                               {tagline}
                          </span>
 
-                         <h2 className="mt-4 font-playfair text-[38px] leading-[1.05] md:text-[58px] lg:text-[72px] text-neutral">
+                         <h2 className="mt-4 font-playfair h2-section-title text-neutral">
                               {startheading}{" "}
                               {midheading && <span className="italic text-white">{midheading}</span>}
                               {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>}
                          </h2>
 
-                         <p className="mx-auto mt-5 max-w-200 font-urbanist text-[15px] leading-7 md:text-[17px] text-neutral/80">
+                         <p className="mx-auto mt-5 max-w-200 font-urbanist para">
                               {description}
                          </p>
                     </div>

@@ -90,7 +90,7 @@ export default function ChooseYourLearning({ data }) {
 
      return (
           <section
-               className="w-full py-14 sm:py-18 md:py-24 font-urbanist relative z-1 overflow-hidden"
+               className="w-full py-10 sm:py-18 md:py-24 font-urbanist relative z-1 overflow-hidden"
                style={{ backgroundColor: "#18181b", color: "#ffffff" }}
           >
                {/* Background Decorative Yellow Glows */}

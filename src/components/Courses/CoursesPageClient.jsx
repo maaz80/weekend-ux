@@ -216,7 +216,7 @@ export default function CoursesPageClient({ coursesData }) {
                <Breadcrumb />
 
                {/* Hero Header Section */}
-               <section id="courses-hero" className="relative h-39.5 md:h-104 w-full flex items-center justify-center bg-zinc-950 overflow-hidden">
+               <section id="courses-hero" className="relative h-39.5 md:h-104 w-full flex items-center justify-center md:justify-center px-4 bg-zinc-950 overflow-hidden">
                     <Image
                          src="/images/weekend-ux-courses-hero-bg.webp"
                          alt="weekend-ux-courses-hero-bg"
@@ -226,7 +226,7 @@ export default function CoursesPageClient({ coursesData }) {
                          fetchPriority="high"
                          className="object-cover object-center opacity-60 z-0"
                     />
-                    <h1 className="pt-10 text-[28px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">
+                    <h1 className="pt-12 md:pt-10 text-[28px] md:text-[58px] 2xl:text-[72px] leading-10 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair">
                          {heroStart} <span className="text-official italic">{heroEnd}</span>
                     </h1>
                </section>
@@ -310,7 +310,7 @@ export default function CoursesPageClient({ coursesData }) {
                               <div>
                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                                         {displayedCourses.map((course, idx) => (
-                                             <div key={course._id} className="w-full max-w-sm text-neutral">
+                                             <div key={course._id} className="w-full max-w-85 text-neutral">
                                                   <CourseCard
                                                        course={course}
                                                        widthClass="w-auto md:w-full"

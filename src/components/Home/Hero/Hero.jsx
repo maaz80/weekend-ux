@@ -134,7 +134,7 @@ export default function Hero({
 
                                         {index === 0 ? (
                                              <h1
-                                                  className={`font-playfair text-[37px] leading-[145%] md:leading-16 md:text-[56px] transition-all duration-700 transform delay-300 ${titleColor} ${index === currentSlide
+                                                  className={`font-playfair text-[37px] leading-[1.1] md:leading-[145%] md:leading-16 md:text-[56px] transition-all duration-700 transform delay-300 ${titleColor} ${index === currentSlide
                                                        ? "translate-y-0 opacity-100"
                                                        : "translate-y-8 opacity-0"
                                                        }`}
@@ -151,7 +151,7 @@ export default function Hero({
                                         )}
 
                                         <ul
-                                             className={`mt-8 max-w-140 text-base leading-7 font-urbanist transition-all duration-700 transform delay-500 space-y-2 list-none ${pointsColor} ${index === currentSlide
+                                             className={`mt-0 md:mt-8 max-w-140 text-base leading-7 font-urbanist transition-all duration-700 transform delay-500 space-y-2 list-none ${pointsColor} ${index === currentSlide
                                                   ? "translate-y-0 opacity-100"
                                                   : "translate-y-8 opacity-0"
                                                   }`}

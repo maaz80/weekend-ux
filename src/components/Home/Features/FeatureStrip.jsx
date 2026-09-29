@@ -19,16 +19,16 @@ const ICON_MAP = {
 
 function getIconComponent(iconName, defaultIcon) {
      if (!iconName || !iconName.trim()) return defaultIcon;
-     
+
      const Icon = ICON_MAP[iconName.trim()];
      if (Icon) return <Icon size={42} />;
-     
+
      const matchedKey = Object.keys(ICON_MAP).find(k => k.toLowerCase() === iconName.trim().toLowerCase());
      if (matchedKey) {
           const MatchedIcon = ICON_MAP[matchedKey];
           return <MatchedIcon size={42} />;
      }
-     
+
      return defaultIcon;
 }
 
@@ -109,13 +109,13 @@ export default function FeatureStrip({
                <div className="mx-auto max-w-85 md:max-w-310 min-h-137.5 md:min-h-104 flex flex-col items-start justify-center">
                     {/* Intro Text */}
                     <div className="">
-                         <p className={`font-serif text-[20px] leading-[1.55] md:text-[26px] lg:text-[32px] ${textColor}`}>
+                         <p className={`font-playfair text-[22px] leading-[1.55] md:text-[26px] lg:text-[32px] ${textColor}`}>
                               {introText}
                          </p>
                     </div>
 
                     {/* Features */}
-                    <div className="mt-12 md:mt-16 flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-10">
+                    <div className="mt-6 md:mt-16 flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-10">
                          {featPoints.map((item, index) => (
                               <div
                                    key={index}
@@ -125,12 +125,12 @@ export default function FeatureStrip({
                                         {item.icon}
                                    </div>
                                    <div>
-                                        <h2 className={`font-serif text-[20px] md:text-[22px] leading-tight lg:text-[28px] ${textColor}`}>
+                                        <h2 className={`font-playfair text-[20px] md:text-[22px] leading-tight lg:text-[28px] ${textColor}`}>
                                              {item.title}
                                         </h2>
 
                                         {item.subtitle && (
-                                             <p className={`font-serif text-[20px] md:text-[22px] leading-tight lg:text-[28px] ${textColor}`}>
+                                             <p className={`font-playfair text-[20px] md:text-[22px] leading-tight lg:text-[28px] ${textColor}`}>
                                                   {item.subtitle}
                                              </p>
                                         )}

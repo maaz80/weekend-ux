@@ -62,10 +62,10 @@ export default function BlogListingClient({ blogsList, featuredStart, featuredEn
           <>
                {/* Featured Blogs Section */}
                <div className="custom-width py-10 md:py-20 px-3 button-neutral">
-                    <h2 className="text-[28px] md:text-[36px] text-neutral font-medium font-playfair mb-4">
-                         <span className="text-[#8F6A00] italic">{featuredStart}</span> {featuredEnd}
+                    <h2 className="text-[28px] md:text-[36px] text-neutral font-medium font-playfair mb-6">
+                         <span className="text-[#f36600] italic">{featuredStart}</span> {featuredEnd}
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 ">
                          {activeFeaturedBlogs.map((blog, idx) => (
                               <BlogCard
                                    key={blog._id || blog.id || idx}

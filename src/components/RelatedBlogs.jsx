@@ -87,24 +87,24 @@ export default function RelatedBlogs({
 
 
                     {/* Heading */}
-                    <div className={`mx-auto max-w-212.5 text-center ${pathname === '/' ? 'pt-0' : 'pt-0'}`}>
-                         <span className={`font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] ${taglineColor}`}>
+                    <div className={`mx-auto max-w-212.5 text-left md:text-center ${pathname === '/' ? 'pt-0' : 'pt-0'}`}>
+                         <span className={`subheading-white font-urbanist text-[11px] font-bold uppercase tracking-[0.45em]`}>
                               {title}
                          </span>
 
-                         <h2 className={`mt-4 font-playfair text-[38px] leading-[1.05] md:text-[58px] lg:text-[72px] ${titleColor}`}>
+                         <h2 className={`font-playfair h2-section-title text-zinc-900 font-medium mt-2`}>
                               {startheading}{" "}
-                              {midheading && <span className={`italic ${titleHighlightColor}`}>{midheading}</span>}
+                              {midheading && <span className={`italic ${titleHighlightColor} font-semibold`}>{midheading}</span>}
                               {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>}
                          </h2>
 
-                         <p className={`mx-auto mt-5 max-w-200 font-urbanist text-[15px] leading-7 md:text-[17px] ${descriptionColor}`}>
+                         <p className={`mx-auto mt-5 max-w-200 font-urbanist para ${descriptionColor}`}>
                               {description}
                          </p>
                     </div>
 
                     {/* Blog Grid */}
-                    <div className="mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+                    <div className="mt-7 md:mt-14 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
                          {activeBlogs.map((blog) => {
                               const slugOrId = blog.slug || blog._id || blog.id;
                               const imageSrc = blog.image && blog.image.trim() ? blog.image.trim() : "/images/hero-bg.webp";
@@ -128,7 +128,7 @@ export default function RelatedBlogs({
 
                                         {/* Title */}
                                         <div className="mt-2 md:mt-5 flex items-start justify-between gap-4">
-                                             <h2 className={`font-urbanist text-[20px] md:text-[26px] lg:text-[32px] leading-[1.35] line-clamp-2 ${blogTitleColor}`}>
+                                             <h2 className={`font-urbanist text-[22px] md:text-[26px] lg:text-[30px] leading-[1.35] line-clamp-2 font-semibold ${blogTitleColor}`}>
                                                   {blog.title}
                                              </h2>
 

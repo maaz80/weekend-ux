@@ -215,7 +215,7 @@ export default function Details({ data }) {
                                 )}
 
                                 {/* CTA CARD */}
-                                <div className="mt-10 rounded-xl overflow-hidden relative h-57.5">
+                                <div className="mt-10 rounded-2xl overflow-hidden relative h-57.5">
 
                                      <Image
                                           src={CardBg}

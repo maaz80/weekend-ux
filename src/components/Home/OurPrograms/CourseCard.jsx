@@ -7,7 +7,7 @@ import { useUserAuth } from "@/context/UserAuthContext";
 
 const CourseImage = '/images/weekend-ux-program-image-template.webp';
 
-export default function CourseCard({ course, setIsModal = false, priority = false, fetchPriority = undefined, className = "", widthClass = "w-75 md:w-full" }) {
+export default function CourseCard({ course, setIsModal = false, priority = false, fetchPriority = undefined, className = "", widthClass = "w-85 md:w-full" }) {
      const { isLoggedIn, isCourseUnlocked } = useUserAuth();
 
      const unlocked = isLoggedIn && isCourseUnlocked(course);
@@ -23,7 +23,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
           <Link
                href={targetHref}
                onClick={handleClick}
-               className={`${widthClass} rounded-2xl border min-h-100 md:min-h-114 border-zinc-200 bg-white shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col cursor-pointer group relative block ${className}`}
+               className={`${widthClass} rounded-2xl border min-h-90 md:min-h-114 border-zinc-200 bg-white shadow-md transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col cursor-pointer group relative block ${className}`}
           >
                {/* Image section */}
                <div className="relative rounded-t-2xl rounded-b-none overflow-hidden h-50 md:h-60.5 w-full bg-zinc-100">
@@ -49,21 +49,21 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                </div>
 
                {/* Content */}
-               <div className="p-3 md:p-4 flex flex-col grow justify-between">
+               <div className="px-3 md:px-4 pb-3 md:pb-4 pt-2 md:pt-4 flex flex-col grow justify-between">
                     <div>
                          {/* Title */}
-                         <h2 className="font-urbanist text-[18px] md:text-[23px] lg:text-[26px] 2xl:text-[32px] font-bold leading-8 md:leading-9 text-zinc-900 min-h-14 flex items-center group-hover:text-official transition-colors">
+                         <h2 className="font-urbanist text-[20px] md:text-[24px] lg:text-[26px] font-bold leading-8 md:leading-9 text-zinc-900 min-h-10 md:min-h-14 flex items-center group-hover:text-official transition-colors">
                               {course?.title}
                          </h2>
 
                          {/* Description */}
-                         <p className="mt-2 text-xs md:text-[15px] text-zinc-500 font-urbanist line-clamp-2 leading-6">
+                         <p className="mt-0 md:mt-2 para text-zinc-500 font-urbanist line-clamp-2">
                               {course?.description || course?.overview || "AWS provides services for every domain such as computing, data storage, data analytics, robotics, and"}
                          </p>
                     </div>
 
                     {/* Metadata */}
-                    <div className="flex items-center justify-between text-[13px] md:text-[15px] text-zinc-800 font-bold font-urbanist mt-auto pt-4 border-t border-zinc-100">
+                    <div className="flex items-center justify-between text-[13px] md:text-[15px] text-zinc-800 font-bold font-urbanist  pt-2 border-t border-zinc-100">
                          <p>
                               <span className="text-zinc-500 font-normal">Starts:</span> {course?.startdate || course?.deadline || "10th Dec, 26"}
                          </p>

@@ -62,14 +62,14 @@ export default function HiringPartners({ data }) {
                     }
                `}</style>
 
-               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left md:text-center">
                     
                     {/* Header Section */}
                     <div className="space-y-2 max-w-2xl mx-auto mb-10 md:mb-14">
-                         <h2 className="font-urbanist text-3xl sm:text-4xl md:text-5xl font-black text-neutral tracking-tight leading-tight">
-                              Our Hiring <span className="text-[#f36600] font-extrabold">Partners</span>
+                         <h2 className="font-playfair h2-section-title text-neutral">
+                              Our Hiring <span className="text-[#f36600] font-semibold">Partners</span>
                          </h2>
-                         <p className="font-urbanist text-sm sm:text-base 2xl:text-[18px] font-semibold text-neutral/90 leading-relaxed">
+                         <p className="font-urbanist para">
                               {subtitle}
                          </p>
                     </div>

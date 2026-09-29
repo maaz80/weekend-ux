@@ -44,11 +44,11 @@ export default function Details() {
 
                          {/* Left Content */}
                          <div className="relative">
-                              <p className="mb-5 text-[10px] font-medium uppercase tracking-[0.45em] text-[#fff8d6] font-inter">
+                              <p className="mb-5 subheading">
                                    Why Weekend UX
                               </p>
 
-                              <h2 className="max-w-150 font-serif text-[38px] md:leading-16 text-[#1B1B1B] md:text-[56px] leading-12">
+                              <h2 className="max-w-150 font-playfair h2-section-title text-[#1B1B1B]">
                                    The Numbers Behind Every{" "}
                                    <span className="italic text-white">Designer</span> We've Trained.
                               </h2>

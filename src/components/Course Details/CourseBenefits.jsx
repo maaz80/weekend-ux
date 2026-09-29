@@ -61,26 +61,26 @@ export default function CourseBenefits({ data }) {
      ) : title;
 
      return (
-          <section className="button-neutral w-full bg-[#F8F6EE] py-14 sm:py-18 md:py-24 font-urbanist border-b border-zinc-200/80 relative z-1">
+          <section className="button-neutral w-full bg-[#F8F6EE] py-10 sm:py-18 md:py-24 font-urbanist border-b border-zinc-200/80 relative z-1">
                <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto">
                     
                     {/* Header Section */}
-                    <div className="text-center space-y-3 max-w-3xl mx-auto mb-12 md:mb-16">
+                    <div className="text-left md:text-center space-y-3 max-w-3xl mx-auto mb-5 md:mb-16">
                          
                          {/* Badge Tag */}
                          <div>
-                              <span className="inline-block bg-amber-500/10 text-amber-800 font-extrabold text-xs px-4 py-1.5 rounded-full uppercase tracking-wider border border-amber-500/20 shadow-2xs font-urbanist">
+                              <span className="subheading">
                                    {tag}
                               </span>
                          </div>
 
                          {/* Main Heading */}
-                         <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-extrabold text-zinc-900 leading-tight">
+                         <h2 className="font-playfair h2-section-title text-zinc-900">
                               {displayTitle}
                          </h2>
 
                          {/* Subtitle */}
-                         <p className="font-urbanist text-sm sm:text-base font-medium text-zinc-600 leading-relaxed">
+                         <p className="font-urbanist para">
                               {subtitle}
                          </p>
 
@@ -106,7 +106,7 @@ export default function CourseBenefits({ data }) {
 
                                              {/* Card Title */}
                                              <h3
-                                                  className="font-urbanist font-extrabold text-lg sm:text-xl leading-snug mb-2 text-zinc-900 group-hover:text-zinc-950 transition-colors"
+                                                  className="font-urbanist font-extrabold text-xl sm:text-xl leading-snug mb-2 text-zinc-900 group-hover:text-zinc-950 transition-colors"
                                              >
                                                   {item.title}
                                              </h3>
@@ -118,7 +118,7 @@ export default function CourseBenefits({ data }) {
 
                                              {/* Card Description */}
                                              <p
-                                                  className="font-urbanist text-xs sm:text-sm font-medium leading-relaxed text-zinc-500 group-hover:text-zinc-900/90 transition-colors"
+                                                  className="font-urbanist para"
                                              >
                                                   {item.description}
                                              </p>

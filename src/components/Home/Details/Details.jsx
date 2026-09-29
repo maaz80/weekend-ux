@@ -90,13 +90,13 @@ export default function Details({
 
                          {/* Left Content */}
                          <div className="relative">
-                              <p className={`mb-5 text-[10px] font-medium uppercase tracking-[0.45em] ${taglineColor} font-inter`}>
+                              <p className='subheading-black'>
                                    {whyTitle}
                               </p>
 
-                              <h2 className={`max-w-150 font-serif text-[38px] md:leading-16 ${titleColor} md:text-[56px] leading-12`}>
+                              <h2 className={`max-w-150 font-playfair h2-section-title ${titleColor}`}>
                                    {startheading}{" "}
-                                   {midheading && <span className={`italic ${titleHighlightColor}`}>{midheading}</span>}
+                                   {midheading && <span className={`italic ${titleHighlightColor} font-semibold`}>{midheading}</span>}
                                    {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>}
                               </h2>
 
@@ -118,17 +118,17 @@ export default function Details({
                   hover:-translate-y-1
                 "
                                    >
-                                        <h3 className={`text-center text-[42px] font-semibold leading-none ${cardNumberColor}`}>
+                                        <h3 className={`text-left text-[42px] font-semibold leading-none ${cardNumberColor}`}>
                                              {item.number}
                                         </h3>
 
-                                        <p className={`mt-2 text-center font-medium ${cardTitleColor}`}>
+                                        <p className={`mt-2 text-left font-medium ${cardTitleColor}`}>
                                              {item.title}
                                         </p>
 
                                         <div className={`my-5 h-px ${cardDividerColor}`} />
 
-                                        <p className={`text-sm leading-6 ${cardDescriptionColor} text-center`}>
+                                        <p className={`para text-sm leading-6 ${cardDescriptionColor} text-left`}>
                                              {item.description}
                                         </p>
                                    </div>

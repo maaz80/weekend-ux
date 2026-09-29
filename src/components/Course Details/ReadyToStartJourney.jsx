@@ -27,36 +27,20 @@ export default function ReadyToStartJourney({ data }) {
      return (
           <section
                data-navbar-light="true"
-               className="w-full py-14 sm:py-18 md:py-20 font-urbanist relative z-1 overflow-hidden"
+               className="w-full py-10 sm:py-18 md:py-20 font-urbanist relative z-1 overflow-hidden"
                style={{ backgroundColor: "#18181b", color: "#ffffff" }}
           >
                {/* Decorative Ambient Radial Yellow Glows */}
                <div className="pointer-events-none absolute -top-24 -left-24 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: "rgba(255, 212, 0, 0.12)" }} />
                <div className="pointer-events-none absolute -bottom-24 -right-24 w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: "rgba(255, 212, 0, 0.15)" }} />
 
-               {/* Left Decorative Badge (Desktop) */}
-               {/* <div className="hidden lg:flex absolute left-8 xl:left-16 top-1/2 -translate-y-1/2 flex-col items-center justify-center p-5 rounded-2xl backdrop-blur-md border shadow-2xl transition-transform duration-300 hover:scale-105" style={{ backgroundColor: "rgba(255, 212, 0, 0.08)", borderColor: "rgba(255, 212, 0, 0.25)" }}>
-                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-2 shadow-inner" style={{ backgroundColor: "rgba(255, 212, 0, 0.15)" }}>
-                         <GraduationCap className="w-9 h-9 stroke-[2.2]" style={{ color: "#FFD400" }} />
-                    </div>
-                    <FileCheck className="w-8 h-8 opacity-80" style={{ color: "#FFD400" }} />
-               </div> */}
-
-               {/* Right Decorative Badge (Desktop) */}
-               {/* <div className="hidden lg:flex absolute right-8 xl:right-16 top-1/2 -translate-y-1/2 flex-col items-center justify-center p-5 rounded-2xl backdrop-blur-md border shadow-2xl transition-transform duration-300 hover:scale-105" style={{ backgroundColor: "rgba(255, 212, 0, 0.08)", borderColor: "rgba(255, 212, 0, 0.25)" }}>
-                    <div className="w-16 h-16 rounded-2xl flex items-center justify-center mb-2 shadow-inner" style={{ backgroundColor: "rgba(255, 212, 0, 0.15)" }}>
-                         <Lightbulb className="w-9 h-9 stroke-[2.2]" style={{ color: "#FFD400" }} />
-                    </div>
-                    <BookOpen className="w-8 h-8 opacity-80" style={{ color: "#FFD400" }} />
-               </div> */}
 
                {/* Center Content Box */}
-               <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto relative z-10 text-center">
+               <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto relative z-10 text-left md:text-center space-y-4">
                     
                     {/* Main Heading */}
                     <h2
-                         className="font-urbanist text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight max-w-3xl mx-auto"
-                         style={{ color: "#ffffff" }}
+                         className="font-playfair h2-section-title text-white"
                     >
                          {title.includes("journey?") ? (
                               <>
@@ -69,8 +53,7 @@ export default function ReadyToStartJourney({ data }) {
 
                     {/* Subtitle */}
                     <p
-                         className="font-urbanist text-sm sm:text-base font-medium max-w-2xl mx-auto leading-relaxed mt-3 mb-8 sm:mb-10"
-                         style={{ color: "rgba(255, 255, 255, 0.85)" }}
+                         className="para" style={{ color: '#ffffff' }}
                     >
                          {subtitle}
                     </p>

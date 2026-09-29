@@ -136,12 +136,12 @@ const FAQ = ({
                <div className="custom-width mx-auto relative z-50">
 
                     {/* Heading */}
-                    <div className="mx-auto max-w-212.5 text-center mb-10 md:mb-20">
-                         <span className={`font-urbanist text-[11px] font-bold uppercase tracking-[0.45em] ${taglineColor}`}>
+                    <div className="mx-auto max-w-212.5 text-left md:text-center mb-10 md:mb-20">
+                         <span className={`font-urbanist subheading`}>
                               {title}
                          </span>
 
-                         <h2 className={`mt-4 font-playfair text-[38px] leading-[1.05] md:text-[58px] lg:text-[72px] ${titleColor}`}>
+                         <h2 className={`mt-4 font-playfair h2-section-title ${titleColor}`}>
                               {startheading}{" "}
                               {midheading && (
                                    <span className={`italic ${titleHighlightColor}`}>
@@ -151,7 +151,7 @@ const FAQ = ({
                               {endheading}
                          </h2>
 
-                         <p className={`mx-auto mt-5 max-w-200 font-urbanist text-[15px] leading-5.5 md:leading-7 md:text-[17px] ${descriptionColor}`}>
+                         <p className={`mx-auto mt-5 max-w-200 font-urbanist para `}>
                               {description}
                          </p>
                     </div>
@@ -210,7 +210,7 @@ const FAQ = ({
 
                                              <div className="overflow-hidden">
 
-                                                  <p className={`text-[12px] md:text-[16px] lg:text-[18px] leading-5 md:leading-6 lg:leading-8 ${answerColor}`}>
+                                                  <p className={`para`}>
                                                        {faq.answer || faq.ans}
                                                   </p>
 

@@ -2,7 +2,7 @@
 
 import React from "react";
 import OptimizedImage from "@/components/ui/OptimizedImage";
-
+import { VscDebugBreakpointData } from "react-icons/vsc";
 const DeltaIcon = ({ className = "w-5 h-5" }) => (
      <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
@@ -36,7 +36,7 @@ export default function CourseCertification({ data }) {
      const imageSrc = data?.certificationImage || "/images/certification.webp";
 
      return (
-          <section id="course-certification" data-navbar-light="true" className="w-full bg-neutral py-14 sm:py-18 md:py-24 font-urbanist relative overflow-hidden text-white border-b border-zinc-800/80 px-2 ">
+          <section id="course-certification" data-navbar-light="true" className="w-full bg-neutral py-10 sm:py-18 md:py-24 font-urbanist relative overflow-hidden text-white border-b border-zinc-800/80 px-2 ">
                {/* Background Decorative Abstract Triangles */}
                {/* <div className="absolute top-12 left-6 w-48 h-48 border-2 border-white/5 rounded-2xl rotate-12 pointer-events-none hidden sm:block"></div>
                <div className="absolute bottom-10 right-10 w-64 h-64 border border-amber-500/10 rounded-full pointer-events-none hidden md:block"></div> */}
@@ -84,12 +84,12 @@ export default function CourseCertification({ data }) {
                          <div className="md:col-span-2 space-y-6 text-left min-w-0">
 
                               {/* Title */}
-                              <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-official leading-tight">
+                              <h2 className="font-playfair text-3xl sm:text-4xl md:text-5xl font-semibold text-official leading-tight">
                                    {title}
                               </h2>
 
                               {/* Subtitle */}
-                              <p className="font-urbanist text-lg sm:text-xl md:text-2xl font-bold text-white leading-snug">
+                              <p className="font-urbanist text-xl sm:text-xl md:text-2xl font-semibold text-white leading-snug">
                                    {subtitle}
                               </p>
 
@@ -99,11 +99,11 @@ export default function CourseCertification({ data }) {
                                         <div key={idx} className="flex items-start gap-4 text-left group min-w-0">
                                              {/* Triangular Delta Icon */}
                                              <div className="w-9 h-9 rounded-xl bg-amber-500/10 border border-amber-500/25 text-official flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-official group-hover:text-zinc-950 transition-all duration-300 shadow-2xs">
-                                                  <DeltaIcon className="w-4 h-4 text-official group-hover:text-zinc-950 transition-colors" />
+                                                  <VscDebugBreakpointData  className="w-4 h-4 text-official group-hover:text-zinc-950 transition-colors" />
                                              </div>
 
                                              {/* Bullet Description */}
-                                             <p className="font-urbanist text-sm sm:text-base text-zinc-200 font-medium leading-relaxed pt-1">
+                                             <p style={{color:'#ffffff'}} className="font-urbanist para pt-1">
                                                   {bulletText}
                                              </p>
                                         </div>

@@ -232,19 +232,19 @@ const OurPrograms = ({ data }) => {
      return (
           <section
                id="courses"
-               className="button-neutral w-full bg-[#FCFBF7] bg-cover bg-center py-14 md:py-[40px] border-t border-zinc-100"
+               className="button-neutral w-full bg-[#FCFBF7] bg-cover bg-center py-14 md:py-10 border-t border-zinc-100"
                style={{ backgroundImage: "url('/images/weekend-ux-programs-bg.webp')" }}
           >
-               <div className="mx-auto w-full max-w-7xl px-3 md:px-[24px]">
+               <div className="mx-auto w-full max-w-7xl px-3 md:px-6">
 
                     {/* Heading Area */}
-                    <div className="text-center mb-10 md:mb-12">
-                         <p className="text-[12px] font-semibold tracking-[0.25em] text-official uppercase font-inter mb-1.5 md:mb-2">
+                    <div className="text-left md:text-center mb-10 md:mb-12">
+                         <p className="subheading">
                               {title}
                          </p>
-                         <h2 className="font-playfair text-[38px] md:text-[56px] leading-tight text-zinc-900 font-medium">
+                         <h2 className="font-playfair h2-section-title text-zinc-900 font-medium">
                               {startheading}{" "}
-                              {midheading && <span className="italic text-official font-normal">{midheading}</span>}
+                              {midheading && <span className="italic text-[#f36600] font-normal">{midheading}</span>}
                               {endheading && (
                                    <>
                                         {endheading.startsWith(" ") ? "" : " "}
@@ -257,7 +257,7 @@ const OurPrograms = ({ data }) => {
                                    </>
                               )}
                          </h2>
-                         <p className="mt-4 mx-auto max-w-155 text-sm md:text-base text-zinc-500 leading-relaxed font-urbanist">
+                         <p className="mt-4 mx-auto max-w-155 text-zinc-500 para font-urbanist">
                               {description}
                          </p>
                     </div>
@@ -267,7 +267,7 @@ const OurPrograms = ({ data }) => {
                          {/* Categories Sidebar */}
                          <div className="space-y-1.5 w-[28%] xl:w-[22%] shrink-0 sticky top-36 self-start">
                               {/* Static Heading */}
-                              <div className="w-full text-[13px] font-bold uppercase tracking-wider text-zinc-400 border-b border-zinc-100 pb-2 mb-3 text-left pl-4 select-none">
+                              <div className="w-full text-[24px] font-bold uppercase tracking-wider text-zinc-500 border-b border-zinc-100 pb-2 mb-3 text-left pl-4 select-none">
                                    Categories
                               </div>
                               {categories.map((cat) => (
@@ -359,14 +359,14 @@ const OurPrograms = ({ data }) => {
                     {/* MOBILE VIEW */}
                     <div className="md:hidden mt-8 space-y-3">
                          {/* Static Heading */}
-                         <div className="w-full text-[12px] font-bold uppercase tracking-wider text-zinc-400 border-b border-zinc-100 pb-2 mb-4 text-left pl-2 select-none">
+                         <div className="w-full text-[24px] font-bold uppercase tracking-wider text-zinc-500 border-b border-zinc-100 pb-2 mb-4 text-left  select-none">
                               Categories
                          </div>
 
                          {/* All Courses shown initially when no category is active/open */}
                          {activeMobileIndex === null && (
                               <div className="mb-6">
-                                   <h3 className="text-[14px] font-bold text-zinc-800 mb-3 pl-2">All Courses</h3>
+                                   <h3 className="text-[20px] font-bold text-zinc-800 mb-3 ">All Courses</h3>
                                    <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
                                         {courses.map((course) => (
                                              <div key={course._id} className="min-w-70 shrink-0">

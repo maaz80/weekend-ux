@@ -78,7 +78,7 @@ const Content = ({
 
                               {/* Image */}
 
-                              <div className="overflow-hidden rounded-xl">
+                              <div className="overflow-hidden rounded-2xl">
                                    <OptimizedImage
                                         src={imageSrc}
                                         alt="weekend-ux-contact-decorative-image"

@@ -31,7 +31,7 @@ export default function SkillsYouWillLearn({ data }) {
     <section className="w-full bg-white py-10 sm:py-12 border-b border-zinc-100 font-urbanist button-neutral">
       <div className="custom-width px-6 sm:px-6 lg:px-16">
         <div className="space-y-6 text-left">
-          <h2 className="font-playfair text-2xl sm:text-3xl md:text-[34px] font-extrabold text-zinc-900 leading-tight">
+          <h2 className="font-playfair text-[26px] md:text-[28px] font-semibold text-neutral leading-tight">
             {title}
           </h2>
 

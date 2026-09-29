@@ -26,7 +26,7 @@ export default function FeatureStrip() {
                <div className="mx-auto max-w-95 md:max-w-310 min-h-137.5 md:min-h-104 flex flex-col items-start justify-center">
                     {/* Intro Text */}
                     <div className="max-w-212.5">
-                         <p className="font-serif text-[20px] leading-[1.55] text-neutral md:text-[26px] lg:text-[32px]">
+                         <p className="font-playfair text-[22px] leading-[1.55] text-neutral md:text-[26px] lg:text-[32px]">
                               Weekend UX is a hands-on design institute,
                               in-person classes and structured recordings
                               built for people who learn by doing, not
@@ -35,7 +35,7 @@ export default function FeatureStrip() {
                     </div>
 
                     {/* Features */}
-                    <div className="mt-12 md:mt-16 flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-10">
+                    <div className="mt-6 md:mt-16 flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-10">
                          {features.map((item, index) => (
                               <div
                                    key={index}
@@ -45,11 +45,11 @@ export default function FeatureStrip() {
                                         {item.icon}
                                    </div>
                                    <div>
-                                        <h2 className="font-serif text-[22px] leading-tight text-neutral lg:text-[28px]">
+                                        <h2 className="font-playfair text-[22px] leading-tight text-neutral lg:text-[28px]">
                                              {item.title}
                                         </h2>
 
-                                        <p className="font-serif text-[22px] leading-tight text-neutral lg:text-[28px]">
+                                        <p className="font-playfair text-[22px] leading-tight text-neutral lg:text-[28px]">
                                              {item.subtitle}
                                         </p>
                                    </div>

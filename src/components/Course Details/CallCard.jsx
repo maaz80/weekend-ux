@@ -22,13 +22,13 @@ export default function CallCard({
                />
                <div className={`absolute inset-0 ${overlayOpacity}`} />
 
-               <div className="absolute inset-0 p-10 flex flex-col justify-between">
+               <div className="absolute inset-0 p-4 flex flex-col justify-between">
                     <div>
-                         <h3 className={`text-[24px] font-playfair leading-tight font-semibold ${titleColor}`}>
+                         <h3 className={`font-playfair text-[34px] leading-[1.1] ${titleColor}`}>
                               {title}
                          </h3>
 
-                         <p className={`mt-3 ${subtitleColor}`}>
+                         <p className={`mt-3 text-white/80 text-sm`}>
                               {subtitle}
                          </p>
                     </div>
@@ -45,3 +45,20 @@ export default function CallCard({
           </div>
      );
 }
+<div className="absolute inset-0 p-4 flex flex-col justify-between">
+
+     <div>
+          <h2 className="font-playfair text-white text-[34px] leading-[1.1]">
+               Design is more than just being creative!
+          </h2>
+
+          <p className="mt-3 text-white/80 text-sm">
+               Learn how to make design that sells
+          </p>
+     </div>
+
+     <button className="h-12 rounded-lg bg-[#F7C600] text-neutral font-bold text-sm cursor-pointer">
+          Enquire Now
+     </button>
+
+</div>

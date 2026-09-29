@@ -14,7 +14,7 @@ const Content = ({
 
 
      return (
-          <div className="relative py-9 md:py-15 custom-width px-0 md:px-5 button-neutral">
+          <div className="relative py-9 md:py-15 custom-width px-5 md:px-5 button-neutral">
                <div className={`text-left font-urbanist max-w-310 mx-auto ${fontSize} ${textColor}`}>{quote}</div>
                {showDiamond && (
                     <Image

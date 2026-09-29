@@ -23,7 +23,7 @@ const TeamSection = ({
      bgColor = "bg-[#F8F6EE]",
      tagColor = "text-official",
      headingColor = "text-[#2C2A28]",
-     midHeadingColor = "text-official",
+     midHeadingColor = "text-[#f36600]",
      descriptionColor = "text-[#5A5652]",
      cardNameColor = "text-white",
      cardRoleColor = "text-official"
@@ -67,15 +67,15 @@ const TeamSection = ({
           <section className={`py-10 lg:py-24 ${bgColor} px-2 button-neutral`}>
                <div className="custom-width px-4 sm:px-6 lg:px-8">
 
-                    <div className="grid lg:grid-cols-[380px_1fr] gap-10 lg:gap-16 items-center">
+                    <div className="grid lg:grid-cols-[380px_1fr] gap-6 lg:gap-16 items-center">
 
                          {/* LEFT CONTENT */}
                          <div>
-                              <span className={`font-urbanist text-[12px] font-semibold tracking-[0.35em] uppercase ${tagColor}`}>
+                              <span className={`font-urbanist subheading`}>
                                    {title}
                               </span>
 
-                              <h2 className={`mt-4 font-playfair text-[42px] md:text-[56px] leading-[1.05] ${headingColor}`}>
+                              <h2 className={`mt-4 font-playfair h2-section-title`}>
                                    {startheading}
                                    <br />
                                    {midheading && (
@@ -86,7 +86,7 @@ const TeamSection = ({
                                    {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>}
                               </h2>
 
-                              <p className={`mt-6 max-w-[320px] font-urbanist text-[14px] leading-7 ${descriptionColor}`}>
+                              <p className={`mt-3 md:mt-6 max-w-[320px] font-urbanist para`}>
                                    {description}
                               </p>
                          </div>

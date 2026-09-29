@@ -7,13 +7,13 @@ const ProgramsSidebar = ({ isActive, onClick, category }) => {
                className={`
         w-full md:w-56 2xl:w-64 h-12 md:h-11 2xl:h-12 
         rounded-md flex items-center justify-between 
-        text-[15px] font-medium
+        text-[17px] font-medium
         px-4 py-1 cursor-pointer 
         transition-all duration-300 ease-in-out
 
         ${isActive
-                         ? 'bg-gradient-to-r from-zinc-800 to-zinc-900 text-white shadow-sm'
-                    : 'bg-transparent text-zinc-500 hover:bg-gradient-to-r from-zinc-800 to-zinc-900 hover:text-white transition-all duration-300 ease-in-out'}
+                         ? 'bg-linear-to-r from-zinc-800 to-zinc-900 text-white shadow-sm'
+                    : 'bg-transparent text-zinc-500 hover:bg-linear-to-r from-zinc-800 to-zinc-900 hover:text-white transition-all duration-300 ease-in-out'}
       `}
           >
                <div>{category}</div>
