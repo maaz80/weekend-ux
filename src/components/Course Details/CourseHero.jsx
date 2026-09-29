@@ -47,13 +47,13 @@ export default function CourseHero({ data, heroTitle }) {
 
       {/* Hero Content Wrapper */}
       <div className="custom-width px-4 sm:px-0 md:px-0 lg:px-0 mx-auto w-full relative z-20">
-        <div className="max-w-7xl space-y-4 md:space-y-6 text-left">
+        <div className="max-w-7xl space-y-6 md:space-y-6 text-left">
           
           {/* Top Meta Badges (Duration, Mode, Batch Size) */}
           {(duration || mode || batchSize) && (
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pb-1">
               {duration && (
-                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/15 backdrop-blur-md shadow-xs">
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border-3 border-white/35 backdrop-blur-md shadow-xs">
                   <Clock size={15} className="text-amber-400 shrink-0" />
                   <span>
                     <span className="text-zinc-400 font-medium">Duration:</span> {duration}
@@ -62,7 +62,7 @@ export default function CourseHero({ data, heroTitle }) {
               )}
 
               {mode && (
-                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/15 backdrop-blur-md shadow-xs">
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border-3 border-white/35 backdrop-blur-md shadow-xs">
                   <Monitor size={15} className="text-amber-400 shrink-0" />
                   <span>
                     <span className="text-zinc-400 font-medium">Mode:</span> {mode}
@@ -71,7 +71,7 @@ export default function CourseHero({ data, heroTitle }) {
               )}
 
               {batchSize && (
-                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border border-white/15 backdrop-blur-md shadow-xs">
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border-3 border-white/35 backdrop-blur-md shadow-xs">
                   <Users size={15} className="text-amber-400 shrink-0" />
                   <span>
                     <span className="text-zinc-400 font-medium">Batch Size:</span> {batchSize}
@@ -82,12 +82,12 @@ export default function CourseHero({ data, heroTitle }) {
           )}
 
           {/* Title */}
-          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight md:leading-tight lg:leading-tight font-playfair tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight md:leading-tight lg:leading-tight font-playfair tracking-tight">
             {titleText}
           </h1>
 
           {/* Overview / Summary */}
-          <p className="text-sm sm:text-base md:text-lg text-zinc-200/90 font-medium leading-relaxed font-urbanist max-w-2xl">
+          <p style={{color:'white'}} className="para font-urbanist max-w-2xl">
             {overviewText.replace(/<[^>]*>?/gm, "")}
           </p>
 

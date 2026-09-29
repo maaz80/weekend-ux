@@ -112,11 +112,11 @@ export default function SocialProofBar({ items }) {
                   <span
                     className="
                       mt-1
-                      text-[10px] lg:text-xs
+                      text-[12px] lg:text-xs
                       font-semibold
                       uppercase
                       tracking-[0.08em]
-                      text-black/60
+                      text-black/80
                       truncate
                     "
                   >

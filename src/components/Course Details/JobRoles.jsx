@@ -64,7 +64,7 @@ export default function JobRoles({ data }) {
                const parts = title.split(/after/i);
                return (
                     <>
-                         {parts[0]} <span className="font-playfair text-zinc-900 font-medium">After</span> <span className="text-[#f36600] font-semibold">{parts.slice(1).join("After")}</span>
+                         {parts[0]} <span className="font-playfair text-zinc-900 font-medium">After</span> <span className="text-[#f36600] font-semibold italic">{parts.slice(1).join("After")}</span>
                     </>
                );
           }

@@ -232,7 +232,7 @@ export default function Footer({
                                               className="w-auto h-10 md:h-18 object-contain"
                                               objectFit="contain"
                                               sizes="180px"
-                                              width={180}
+                                              width={80}
                                               height={72}
                                          />
                                     ) : (
@@ -394,7 +394,7 @@ function FooterTextBlock({ title, slug, items }) {
                     {title}
                </h3>
 
-               <div className="flex gap-2 flex-wrap">
+               <div className="flex gap-0 md:gap-2 flex-wrap">
 
                     {items?.map((item, index) => {
                          const itemSlug = item.hero?.[0]?.slug || item.slug || "";

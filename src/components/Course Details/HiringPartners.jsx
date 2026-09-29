@@ -67,7 +67,7 @@ export default function HiringPartners({ data }) {
                     {/* Header Section */}
                     <div className="space-y-2 max-w-2xl mx-auto mb-10 md:mb-14">
                          <h2 className="font-playfair h2-section-title text-neutral">
-                              Our Hiring <span className="text-[#f36600] font-semibold">Partners</span>
+                              Our Hiring <span className="text-[#f36600] font-semibold italic">Partners</span>
                          </h2>
                          <p className="font-urbanist para">
                               {subtitle}

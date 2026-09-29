@@ -418,7 +418,7 @@ export default function Details({ data }) {
                               {/* LEFT COLUMN: Content */}
                               <div className="space-y-8 lg:col-span-2">
                                    <div>
-                                        <h2 className="font-playfair text-[32px] md:text-[36px] font-extrabold leading-tight text-zinc-900">
+                                        <h2 style={{fontWeight: 'bold'}} className="font-playfair h2-section-title text-zinc-900">
                                              {displayTitle}
                                         </h2>
                                         <div className="w-20 h-1 md:h-1.5 bg-official mt-4 rounded"></div>
@@ -582,7 +582,7 @@ export default function Details({ data }) {
                <section className="bg-white py-12 font-urbanist w-full border-t border-b border-zinc-100 button-neutral">
                     <div className="custom-width px-4 sm:px-6 lg:px-16">
                          <div
-                              className="relative overflow-hidden bg-white border border-zinc-200 rounded-2xl p-5 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 shadow-sm"
+                              className="relative overflow-hidden bg-white border border-zinc-200 rounded-2xl p-5 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-8 shadow-sm"
                               style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54 48c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3zm-48 0c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3zm0-36c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3zm48 0c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3zm-24 18c-2 0-3 1-3 3s1 3 3 3 3-1 3-3-1-3-3-3z' fill='%23E85B24' fill-opacity='0.04' fill-rule='evenodd'/%3E%3C/svg%3E")` }}
                          >
                               {/* Content info */}
@@ -594,7 +594,7 @@ export default function Details({ data }) {
                                         {data?.brochureSubtext || "Chart your path to a thriving career as a UI/UX designer. Explore our course brochure for an in-depth look at the syllabus training from the best UI UX Design Institute in Delhi. Download now."}
                                    </p>
 
-                                   <p className="font-urbanist text-[16px] md:text-[17px] text-zinc-800 pt-2">
+                                   <p className="font-urbanist text-[16px] md:text-[17px] text-zinc-800">
                                         Get in touch <span className=" font-bold">{data?.brochurePhones || "+91 9911782350 or +91 9811818122"}</span>
                                    </p>
                               </div>
