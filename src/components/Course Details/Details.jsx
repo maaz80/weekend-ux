@@ -416,7 +416,7 @@ export default function Details({ data }) {
                          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-16">
 
                               {/* LEFT COLUMN: Content */}
-                              <div className="space-y-8 lg:col-span-2">
+                              <div className="space-y-8 lg:col-span-2 ">
                                    <div>
                                         <h2 style={{fontWeight: 'bold'}} className="font-playfair h2-section-title text-zinc-900">
                                              {displayTitle}

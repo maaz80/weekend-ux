@@ -212,51 +212,23 @@ export default function StudentDashboardPage() {
      const activeLiveCourse = allCourses.find(c => c?.liveClass?.active && c?.liveClass?.meetUrl);
 
      return (
-          <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between py-24 md:py-32 " >
+          <div className="min-h-screen bg-[#FCFBF7] text-neutral font-urbanist flex flex-col justify-between py-22 md:py-32 " >
                {/* MAIN BODY CONTENT */}
                <main className="grow">
-                    <div className="custom-width px-3.5 sm:px-6 lg:px-10 ">
+                    <div className="custom-width px-1.5 sm:px-6 lg:px-10 ">
 
                          {/* GREETING BANNER */}
-                         <div className="mb-6 sm:mb-8">
+                         <div className="mb-4 sm:mb-8">
                               <div className="flex items-center gap-2 mb-1">
                                    {/* <span className="text-xl sm:text-2xl">🎓</span> */}
-                                   <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-zinc-900">
+                                   <h1 className="h2-section-title font-playfair text-zinc-900">
                                         Student Dashboard
                                    </h1>
                               </div>
-                              <p className="text-xs sm:text-sm text-zinc-500 font-medium leading-relaxed">
+                              <p className="para">
                                    Welcome back, {user?.name || "Student"}! Access your enrolled course materials and explore new tracks.
                               </p>
                          </div>
-
-                         {/* ACTIVE LIVE ZOOM SESSION FEATURE BANNER */}
-                         {/* {activeLiveCourse && (
-                              <div className="mb-6 sm:mb-8 bg-linear-to-r from-official via-zinc-900 to-zinc-950 rounded-2xl sm:rounded-2xl p-5 sm:p-7 border border-official shadow-xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 text-white animate-fadeIn">
-                                   <div className="space-y-1.5">
-                                        <div className="flex items-center gap-2">
-                                             <span className="w-2.5 h-2.5 rounded-full bg-official/60 animate-ping" />
-                                             <span className="text-xs font-extrabold uppercase tracking-wider text-official">
-                                                  LIVE ZOOM SESSION ACTIVE NOW
-                                             </span>
-                                        </div>
-                                        <h3 className="text-lg sm:text-xl font-bold text-white">
-                                             {activeLiveCourse.liveClass?.title || activeLiveCourse.title}
-                                        </h3>
-                                        <p className="text-xs text-zinc-300 font-medium">
-                                             Scheduled: <strong className="text-official/80">{activeLiveCourse.liveClass?.scheduledAt || "Live Now"}</strong> • {activeLiveCourse.title}
-                                        </p>
-                                   </div>
-
-                                   <button
-                                        onClick={() => setDashboardLiveModalCourse(activeLiveCourse)}
-                                        className="w-full sm:w-auto px-6 py-3.5 bg-official hover:bg-official/90 text-white font-extrabold text-xs sm:text-sm rounded-xl shadow-lg shadow-official/30 transition flex items-center justify-center gap-2 cursor-pointer shrink-0"
-                                   >
-                                        <Radio size={16} className="animate-pulse" />
-                                        <span>Enter Zoom Live Class</span>
-                                   </button>
-                              </div>
-                         )} */}
 
                          {/* TOP SUMMARY STAT CARDS (3 CARDS) */}
                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5 mb-10 sm:mb-10">
@@ -266,11 +238,11 @@ export default function StudentDashboardPage() {
                                         <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
                                              <CheckCircle2 size={12} className="sm:w-3.5 sm:h-3.5" /> Active Learning
                                         </span>
-                                        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900">
+                                        <h2 className="text-xl md:text-2xl font-bold text-zinc-900">
                                              Course To do
                                         </h2>
-                                        <p className="text-xs text-zinc-500 font-medium">
-                                             <strong className="text-emerald-600 text-sm font-bold">{unlockedCourses.length}</strong> course{unlockedCourses.length !== 1 ? 's' : ''} enrolled & unlocked.
+                                        <p className="text-base text-zinc-700 font-medium">
+                                             <strong className="text-emerald-600 text-base font-bold">{unlockedCourses.length}</strong> course{unlockedCourses.length !== 1 ? 's' : ''} enrolled & unlocked.
                                         </p>
                                    </div>
                                    <div className="w-11 h-11 sm:w-14 sm:h-14 rounded-2xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-500/20 group-hover:scale-110 transition-transform">
@@ -284,10 +256,10 @@ export default function StudentDashboardPage() {
                                         <span className="inline-flex items-center gap-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-purple-700 bg-purple-50 px-2.5 py-1 rounded-md border border-purple-200">
                                              <Video size={12} className="sm:w-3.5 sm:h-3.5" /> Live Archive
                                         </span>
-                                        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900">
+                                        <h2 className="text-xl md:text-2xl font-bold text-zinc-900">
                                              Recordings ({totalVideosCount})
                                         </h2>
-                                        <p className="text-xs text-zinc-500 font-medium">
+                                        <p className="text-base text-zinc-700 font-medium">
                                              Access recorded live lectures & workshops.
                                         </p>
                                    </div>
@@ -306,10 +278,10 @@ export default function StudentDashboardPage() {
                                              <Briefcase size={12} className="sm:w-3.5 sm:h-3.5 text-amber-600" />
                                              {unlockedCourses.length > 0 ? "Unlocked Portal" : "Student Exclusive"}
                                         </span>
-                                        <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900 flex items-center gap-1.5">
+                                        <h2 className="text-xl md:text-2xl font-bold text-zinc-900 flex items-center gap-1.5">
                                              Job Board <ArrowRight size={18} className="text-amber-500 group-hover:translate-x-1 transition-transform" />
                                         </h2>
-                                        <p className="text-xs text-zinc-500 font-medium">
+                                        <p className="text-base text-zinc-700 font-medium">
                                              {unlockedCourses.length > 0
                                                   ? "Curated UX/UI & tech jobs from Make.com."
                                                   : "🔒 Exclusive for enrolled students."}
@@ -387,7 +359,7 @@ export default function StudentDashboardPage() {
                                                        <div className="flex items-center justify-between gap-3 mb-4 sm:mb-6">
                                                             <div className="flex items-center gap-2">
                                                                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500" />
-                                                                 <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900">
+                                                                 <h2 className="text-xl md:text-2xl font-bold text-zinc-900">
                                                                       Enrolled Courses (Unlocked)
                                                                  </h2>
                                                             </div>
@@ -471,7 +443,7 @@ export default function StudentDashboardPage() {
                                                             <div className="flex items-center justify-between gap-3 mb-4 sm:mb-6">
                                                                  <div className="flex items-center gap-2">
                                                                       <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-amber-500" />
-                                                                      <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-zinc-900">
+                                                                      <h2 className="text-xl md:text-2xl font-bold text-zinc-900">
                                                                            Remaining Courses (Locked)
                                                                       </h2>
                                                                  </div>
@@ -618,7 +590,7 @@ export default function StudentDashboardPage() {
                                                                                      </div>
                                                                                 ) : (
                                                                                      <div className="bg-zinc-50 border border-dashed border-zinc-200 rounded-2xl p-5 text-center space-y-1">
-                                                                                          <p className="text-xs text-zinc-500 font-medium">No session recordings uploaded for this course yet.</p>
+                                                                                          <p className="text-base text-zinc-700 font-medium">No session recordings uploaded for this course yet.</p>
                                                                                      </div>
                                                                                 )}
                                                                            </div>

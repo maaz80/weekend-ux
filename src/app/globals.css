@@ -237,8 +237,8 @@ body {
 /* Custom Responsive Container Utility */
 .custom-width {
   width: 100%;
-  /* margin-left: auto;font-playfair text-[32px] md: text-[36px] font-extrabold leading-tight text-zinc-900
-  margin-right: auto; */
+  margin-left: auto;
+  margin-right: auto;
   /* padding-left: 8px; */
   /* Spacing for screen edges */
   /* padding-right: 8px; */
@@ -250,8 +250,8 @@ body {
   .custom-width {
     max-width: 900px;
     /* Tablet */
-    /* padding-left: 16px;
-    padding-right: 16px; */
+    padding-left: 16px;
+    padding-right: 16px;
   }
 
   .h2-section-title {
@@ -269,8 +269,8 @@ body {
   .custom-width {
     max-width: 1280px;
     /* PC */
-    /* padding-left: 46px;
-    padding-right: 46px; */
+    padding-left: 46px;
+    padding-right: 46px;
   }
 }
 

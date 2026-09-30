@@ -76,7 +76,7 @@ export default function JobRoles({ data }) {
                <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto">
 
                     {/* Header Section */}
-                    <div className="space-y-3 max-w-3xl mb-5 md:mb-16 text-left">
+                    <div className="space-y-3 max-w-3xl mb-5 md:mb-16 text-left md:text-center mx-auto">
 
                          {/* Badge Tag */}
                          <div>

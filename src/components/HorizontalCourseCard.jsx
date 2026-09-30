@@ -27,7 +27,7 @@ export default function HorizontalCourseCard({ course, unlocked }) {
                          }`}
                >
                     {/* IMAGE CONTAINER (Left) */}
-                    <div className="relative w-full md:w-80 lg:w-110 h-40 sm:h-48 md:h-auto shrink-0 bg-zinc-100 overflow-hidden">
+                    <div className="relative w-full md:w-80 lg:w-110 h-50 sm:h-48 md:h-auto shrink-0 bg-zinc-100 overflow-hidden">
                          <OptimizedImage
                               src={imageSrc}
                               alt={course?.alt && course.alt.trim() !== title.trim() ? course.alt : ""}
@@ -59,23 +59,23 @@ export default function HorizontalCourseCard({ course, unlocked }) {
                                    )}
                               </div>
 
-                              <h3 className="text-base sm:text-lg md:text-xl font-bold text-zinc-900 group-hover:text-official transition-colors line-clamp-2">
+                              <h3 className="text-xl font-bold text-zinc-900 group-hover:text-official transition-colors line-clamp-2">
                                    {title}
                               </h3>
 
-                              <p className="text-xs sm:text-sm text-zinc-500 line-clamp-2 leading-relaxed">
+                              <p className="para line-clamp-2">
                                    {description}
                               </p>
                          </div>
 
                          {/* METADATA & BUTTON FOOTER */}
                          <div className="pt-3 border-t border-zinc-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 sm:gap-4 mt-3 sm:mt-4">
-                              <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs font-semibold text-zinc-500">
+                              <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-sm font-semibold text-zinc-500">
                                    <span className="flex items-center gap-1.5">
-                                        <Clock size={13} className="text-zinc-400" /> {courseLength}
+                                        <Clock size={15} className="text-zinc-400" /> {courseLength}
                                    </span>
                                    <span className="flex items-center gap-1.5">
-                                        <Calendar size={13} className="text-zinc-400" /> {deadline}
+                                        <Calendar size={15} className="text-zinc-400" /> {deadline}
                                    </span>
                               </div>
 
@@ -88,7 +88,7 @@ export default function HorizontalCourseCard({ course, unlocked }) {
                                                   e.stopPropagation();
                                                   setShowZoomModal(true);
                                              }}
-                                             className="w-full sm:w-auto px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-xl text-xs transition flex items-center justify-center gap-2 cursor-pointer shadow-md animate-pulse z-10"
+                                             className="w-full sm:w-auto px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-extrabold rounded-xl text-sm transition flex items-center justify-center gap-2 cursor-pointer shadow-md animate-pulse z-10"
                                         >
                                              <span className="w-2 h-2 rounded-full bg-white animate-ping shrink-0" />
                                              <span>Join Zoom Meeting ({course.liveClass.scheduledAt || "Live Now"})</span>
@@ -97,14 +97,14 @@ export default function HorizontalCourseCard({ course, unlocked }) {
 
                                    {unlocked ? (
                                         <span
-                                             className="w-full sm:w-auto px-4 sm:px-5 py-2.5 bg-official text-neutral font-bold rounded-xl text-xs hover:opacity-90 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                                             className="w-full sm:w-auto px-4 sm:px-5 py-2.5 bg-official text-neutral font-bold rounded-xl text-sm hover:opacity-90 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                                         >
                                              <span>Continue Learning</span>
                                              <ArrowRight size={14} />
                                         </span>
                                    ) : (
                                         <span
-                                             className="w-full sm:w-auto px-4 sm:px-5 py-2.5 bg-zinc-900 text-white font-bold rounded-xl text-xs hover:bg-zinc-800 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                                             className="w-full sm:w-auto px-4 sm:px-5 py-2.5 bg-zinc-900 text-white font-bold rounded-xl text-sm hover:bg-zinc-800 transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
                                         >
                                              <span>View Details</span>
                                              <ArrowRight size={14} />

@@ -56,7 +56,7 @@ export default function CourseBenefits({ data }) {
      const hasKeyword = title.toLowerCase().startsWith("benefits of");
      const displayTitle = hasKeyword ? (
           <>
-               Benefits of <span className="text-[#f36600] italic">{title.substring(12)}</span>
+               Benefits of <span className="text-[#f36600] font-semibold italic">{title.substring(12)}</span>
           </>
      ) : title;
 
