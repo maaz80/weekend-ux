@@ -216,7 +216,7 @@ const Testimonials = ({ data }) => {
                     {endTitle}
                </h2>
                {/* Description */}
-               <p className={`text-neutral para text-left md:text-center ${isLocation ? 'max-w-3xl' : 'max-w-4xl'}  mx-auto mt-6 z-20 relative`}>
+               <p className={`text-neutral font-medium para text-left md:text-center ${isLocation ? 'max-w-3xl' : 'max-w-4xl'}  mx-auto mt-6 z-20 relative`}>
                     {isLocation ? "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs." : testimonialsDescription}
                </p>
 
@@ -250,7 +250,7 @@ const Testimonials = ({ data }) => {
                                    />
 
                                    {/* Testimonial */}
-                                   <p className="para mb-8 max-w-[95%]">
+                                   <p className="para mb-8 max-w-[95%] font-semibold">
                                         {item.text}
                                    </p>
 

@@ -7,7 +7,7 @@ import { useUserAuth } from "@/context/UserAuthContext";
 
 const CourseImage = '/images/weekend-ux-program-image-template.webp';
 
-export default function CourseCard({ course, setIsModal = false, priority = false, fetchPriority = undefined, className = "", widthClass = "w-85 md:w-full" }) {
+export default function CourseCard({ course, setIsModal = false, priority = false, fetchPriority = undefined, className = "", widthClass = "w-full" }) {
      const { isLoggedIn, isCourseUnlocked } = useUserAuth();
 
      const unlocked = isLoggedIn && isCourseUnlocked(course);
@@ -31,7 +31,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                          src={imageSrc}
                          alt={course?.alt && course.alt.trim() !== course?.title?.trim() ? course.alt : ""}
                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                         sizes="(max-width: 640px) 340px, (max-width: 1024px) 420px, 360px"
+                         sizes="(max-width: 640px) 90vw, (max-width: 1024px) 420px, 360px"
                          width={420}
                          height={245}
                          priority={priority}

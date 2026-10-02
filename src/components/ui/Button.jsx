@@ -19,9 +19,9 @@ const Button = ({
      const sizes = {
           sm: "px-3 h-8 text-[11px] font-semibold rounded-[6px]",
           md: "px-6 h-12 text-sm rounded-[6px]",
-          lg: "px-8 h-14 text-base rounded-[8px]",
-          h10: "px-5 h-10 text-sm rounded-xl",
-          h11: "px-6 h-11 text-sm rounded-lg",
+          lg: "px-8 h-14 text-base rounded-[6px]",
+          h10: "px-5 h-10 text-sm rounded-md",
+          h11: "px-6 h-11 text-sm rounded-md",
           none: "",
      };
 

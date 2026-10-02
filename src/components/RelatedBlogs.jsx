@@ -98,7 +98,7 @@ export default function RelatedBlogs({
                               {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>}
                          </h2>
 
-                         <p className={`mx-auto mt-5 max-w-200 font-urbanist para ${descriptionColor}`}>
+                         <p className={`mx-auto font-semibold mt-5 max-w-200 font-urbanist para ${descriptionColor}`}>
                               {description}
                          </p>
                     </div>

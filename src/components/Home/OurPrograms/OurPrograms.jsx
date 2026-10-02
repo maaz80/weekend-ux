@@ -235,7 +235,7 @@ const OurPrograms = ({ data }) => {
                className="button-neutral w-full bg-[#FCFBF7] bg-cover bg-center py-14 md:py-10 border-t border-zinc-100"
                style={{ backgroundImage: "url('/images/weekend-ux-programs-bg.webp')" }}
           >
-               <div className="mx-auto w-full max-w-7xl px-3 md:px-6">
+               <div className="mx-auto w-full max-w-7xl px-4 md:px-6">
 
                     {/* Heading Area */}
                     <div className="text-left md:text-center mb-10 md:mb-12">
@@ -267,7 +267,7 @@ const OurPrograms = ({ data }) => {
                          {/* Categories Sidebar */}
                          <div className="space-y-1.5 w-[28%] xl:w-[22%] shrink-0 sticky top-36 self-start">
                               {/* Static Heading */}
-                              <div className="w-full text-[24px] font-bold uppercase tracking-wider text-zinc-500 border-b border-zinc-100 pb-2 mb-3 text-left pl-4 select-none">
+                              <div className="w-full text-[24px] font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-100 pb-2 mb-3 text-left pl-4 select-none">
                                    Categories
                               </div>
                               {categories.map((cat) => (
@@ -359,7 +359,7 @@ const OurPrograms = ({ data }) => {
                     {/* MOBILE VIEW */}
                     <div className="md:hidden mt-8 space-y-3">
                          {/* Static Heading */}
-                         <div className="w-full text-[24px] font-bold uppercase tracking-wider text-zinc-500 border-b border-zinc-100 pb-2 mb-4 text-left  select-none">
+                         <div className="w-full text-[24px] font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-100 pb-2 mb-4 text-left  select-none">
                               Categories
                          </div>
 
@@ -367,10 +367,10 @@ const OurPrograms = ({ data }) => {
                          {activeMobileIndex === null && (
                               <div className="mb-6">
                                    <h3 className="text-[20px] font-bold text-zinc-800 mb-3 ">All Courses</h3>
-                                   <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
+                                   <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-2 snap-x snap-mandatory scroll-smooth">
                                         {courses.map((course) => (
-                                             <div key={course._id} className="min-w-70 shrink-0">
-                                                  <CourseCard course={course} />
+                                             <div key={course._id} className="w-[92vw] sm:w-85 shrink-0 snap-start">
+                                                  <CourseCard course={course} widthClass="w-full" />
                                              </div>
                                         ))}
                                    </div>
@@ -405,7 +405,7 @@ const OurPrograms = ({ data }) => {
                                         >
                                              <div
                                                   className={`
-                                                       flex gap-4 overflow-x-auto hide-scrollbar pb-2
+                                                       flex gap-4 overflow-x-auto hide-scrollbar pb-2 snap-x snap-mandatory scroll-smooth
                                                        transform transition-transform duration-500 ease-in-out
                                                        ${isOpen ? 'translate-y-0' : '-translate-y-4'}
                                                   `}
@@ -413,9 +413,9 @@ const OurPrograms = ({ data }) => {
                                                   {categoryCourses.map((course) => (
                                                        <div
                                                             key={course._id}
-                                                            className="min-w-70 shrink-0"
+                                                            className="w-[86vw] sm:w-85 shrink-0 snap-start"
                                                        >
-                                                            <CourseCard course={course} />
+                                                            <CourseCard course={course} widthClass="w-full" />
                                                        </div>
                                                   ))}
                                              </div>

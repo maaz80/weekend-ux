@@ -35,7 +35,7 @@ export default function WhoShouldEnroll() {
           <h2 className="font-playfair text-[26px] md:text-[28px] font-semibold text-neutral leading-tight">
             This course is ideal for
           </h2>
-          <p className="font-urbanist para">
+          <p className="font-urbanist para font-semibold">
             Real stories and tailored learning tracks for professionals and learners aiming to advance their careers.
           </p>
         </div>
@@ -63,7 +63,7 @@ export default function WhoShouldEnroll() {
                 <div className="w-8 h-0.5 bg-official my-3.5 rounded-full group-hover:w-12 transition-all duration-300" />
 
                 {/* Description */}
-                <p className="font-urbanist para">
+                <p className="font-urbanist para font-medium">
                   {card.description}
                 </p>
               </div>

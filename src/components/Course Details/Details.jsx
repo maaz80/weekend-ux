@@ -600,12 +600,12 @@ export default function Details({ data }) {
                               </div>
 
                               {/* CTA button */}
-                              <div className="shrink-0">
+                              <div className="shrink-0 w-full md:w-auto">
                                    <button
                                         onClick={() => {
                                              window.dispatchEvent(new CustomEvent("openLeadModal"));
                                         }}
-                                        className="h-12 px-8 bg-linear-to-r from-zinc-800 to-zinc-900 text-white shadow-sm rounded-md hover:from-zinc-800/70 hover:to-zinc-900/70 text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center font-urbanist"
+                                        className="h-12 w-full px-8 bg-linear-to-r from-zinc-800 to-zinc-900 text-white shadow-sm rounded-md hover:from-zinc-800/70 hover:to-zinc-900/70 text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center font-urbanist"
                                    >
                                         Get Brochure
                                    </button>

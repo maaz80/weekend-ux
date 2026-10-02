@@ -35,7 +35,7 @@ export default function CallCard({
 
                     <Button
                          variant="primary"
-                         size="h-12 rounded-lg text-sm px-6"
+                         size="h-12 rounded-md text-sm px-6"
                          className="w-full"
                          onClick={onButtonClick}
                     >

@@ -89,7 +89,7 @@ export default function CourseCertification({ data }) {
                               </h2>
 
                               {/* Subtitle */}
-                              <p className="font-urbanist text-xl sm:text-xl md:text-2xl font-semibold text-white leading-snug">
+                              <p className="font-urbanist text-lg sm:text-xl md:text-2xl font-semibold text-white leading-snug">
                                    {subtitle}
                               </p>
 

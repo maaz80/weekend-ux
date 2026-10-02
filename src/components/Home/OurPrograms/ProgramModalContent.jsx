@@ -172,7 +172,7 @@ const ProgramModalContent = ({ setIsModal }) => {
                          {/* Categories Sidebar */}
                          <div className="space-y-1.5 w-[28%] xl:w-[22%] shrink-0 sticky top-0">
                               {/* Static Heading */}
-                              <div className="w-full text-[13px] font-bold uppercase tracking-wider text-zinc-400 border-b border-zinc-100 pb-2 mb-3 text-left pl-4 select-none">
+                              <div className="w-full text-[13px] font-bold uppercase tracking-wider text-zinc-900 border-b border-zinc-100 pb-2 mb-3 text-left pl-4 select-none">
                                    Categories
                               </div>
                               {categories.map((cat) => (
@@ -204,10 +204,10 @@ const ProgramModalContent = ({ setIsModal }) => {
                          {activeMobileIndex === null && (
                               <div className="mb-6">
                                    <h3 className="text-[14px] font-bold text-zinc-800 mb-3 pl-2">All Courses</h3>
-                                   <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-2">
+                                   <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-2 snap-x snap-mandatory scroll-smooth">
                                         {courses.map((course) => (
-                                             <div key={course._id} className="min-w-70 shrink-0">
-                                                  <CourseCard course={course} setIsModal={setIsModal} />
+                                             <div key={course._id} className="w-[82vw] sm:w-85 shrink-0 snap-start">
+                                                  <CourseCard course={course} setIsModal={setIsModal} widthClass="w-full" />
                                              </div>
                                         ))}
                                    </div>
@@ -242,7 +242,7 @@ const ProgramModalContent = ({ setIsModal }) => {
                                         >
                                              <div
                                                   className={`
-                                                       flex gap-4 overflow-x-auto hide-scrollbar pb-2
+                                                       flex gap-4 overflow-x-auto hide-scrollbar pb-2 snap-x snap-mandatory scroll-smooth
                                                        transform transition-transform duration-500 ease-in-out
                                                        ${isOpen ? 'translate-y-0' : '-translate-y-4'}
                                                   `}
@@ -250,9 +250,9 @@ const ProgramModalContent = ({ setIsModal }) => {
                                                   {categoryCourses.map((course) => (
                                                        <div
                                                             key={course._id}
-                                                            className="min-w-70 shrink-0"
+                                                            className="w-[82vw] sm:w-85 shrink-0 snap-start"
                                                        >
-                                                            <CourseCard course={course} setIsModal={setIsModal} />
+                                                            <CourseCard course={course} setIsModal={setIsModal} widthClass="w-full" />
                                                        </div>
                                                   ))}
                                              </div>

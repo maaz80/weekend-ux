@@ -101,23 +101,23 @@ export default function MeetTheTrainer({ data }) {
                   </div>
 
                   {/* Role Tag */}
-                  <p className="text-base font-extrabold uppercase tracking-wider text-black/90 font-urbanist">
+                  <p className="text-lg font-extrabold uppercase tracking-wider text-black/90 font-urbanist">
                     {trainer.role || "MENTOR"}
                   </p>
 
                   {/* Bio */}
-                  <p className="font-urbanist text-[14px] sm:text-base font-medium text-zinc-500 leading-relaxed line-clamp-3">
+                  <p className="font-urbanist para line-clamp-3">
                     {trainer.bio || "Experienced industry practitioner and mentor."}
                   </p>
                 </div>
 
                 {/* Footer Rating & Profile Link */}
-                <div className="pt-3 sm:pt-4 border-t border-zinc-150 flex items-center justify-between text-xs sm:text-sm font-urbanist">
+                <div className="pt-3 sm:pt-4 border-t border-zinc-150 flex items-center justify-between text-sm sm:text-sm font-urbanist">
                   <div className="flex items-center gap-1.5 font-extrabold text-zinc-900">
                     <span>{trainer.rating || "5.0/5"}</span>
                     <Star size={14} className="fill-amber-400 text-amber-400 shrink-0" />
                     {trainer.students && (
-                      <span className="text-zinc-400 font-medium ml-0.5">({trainer.students})</span>
+                      <span className="text-zinc-700 font-medium ml-0.5">({trainer.students})</span>
                     )}
                   </div>
 

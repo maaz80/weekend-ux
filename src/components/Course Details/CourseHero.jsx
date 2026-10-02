@@ -95,7 +95,7 @@ export default function CourseHero({ data, heroTitle }) {
           <div className="pt-2 md:pt-4 flex flex-wrap items-center gap-3.5 sm:gap-4">
             <Link
               href="/contact-us"
-              className="h-12 px-8 bg-official text-neutral hover:bg-official/80 font-bold text-sm rounded-lg inline-flex items-center justify-center transition-all duration-300 cursor-pointer shrink-0 gap-2"
+              className="h-12 px-8 bg-official text-neutral hover:bg-official/80 font-bold text-sm rounded-[6px] inline-flex items-center justify-center transition-all duration-300 cursor-pointer shrink-0 gap-2"
             >
               <span>Enquire Now</span>
             </Link>
