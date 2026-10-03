@@ -137,9 +137,9 @@ const FAQ = ({
 
                     {/* Heading */}
                     <div className="mx-auto max-w-212.5 text-left md:text-center mb-10 md:mb-20">
-                         <span className={`font-urbanist subheading`}>
+                         {/* <span className={`font-urbanist subheading`}>
                               {title}
-                         </span>
+                         </span> */}
 
                          <h2 className={`mt-4 font-playfair h2-section-title ${titleColor}`}>
                               {startheading}{" "}

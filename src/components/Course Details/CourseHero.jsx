@@ -53,28 +53,28 @@ export default function CourseHero({ data, heroTitle }) {
           {(duration || mode || batchSize) && (
             <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 pb-1">
               {duration && (
-                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border-3 border-white/35 backdrop-blur-md shadow-xs">
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border-3 border-official backdrop-blur-md shadow-xs">
                   <Clock size={15} className="text-amber-400 shrink-0" />
                   <span>
-                    <span className="text-zinc-400 font-medium">Duration:</span> {duration}
+                    <span className="text-zinc-300 font-medium">Duration:</span> {duration}
                   </span>
                 </span>
               )}
 
               {mode && (
-                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border-3 border-white/35 backdrop-blur-md shadow-xs">
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border-3 border-official backdrop-blur-md shadow-xs">
                   <Monitor size={15} className="text-amber-400 shrink-0" />
                   <span>
-                    <span className="text-zinc-400 font-medium">Mode:</span> {mode}
+                    <span className="text-zinc-300 font-medium">Mode:</span> {mode}
                   </span>
                 </span>
               )}
 
               {batchSize && (
-                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border-3 border-white/35 backdrop-blur-md shadow-xs">
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-zinc-100 bg-white/10 px-3.5 py-1.5 rounded-full border-3 border-official backdrop-blur-md shadow-xs">
                   <Users size={15} className="text-amber-400 shrink-0" />
                   <span>
-                    <span className="text-zinc-400 font-medium">Batch Size:</span> {batchSize}
+                    <span className="text-zinc-300 font-medium">Batch Size:</span> {batchSize}
                   </span>
                 </span>
               )}
@@ -92,10 +92,10 @@ export default function CourseHero({ data, heroTitle }) {
           </p>
 
           {/* Hero Action Buttons */}
-          <div className="pt-2 md:pt-4 flex flex-wrap items-center gap-3.5 sm:gap-4">
+          <div className="pt-2 md:pt-2 flex flex-wrap items-center gap-3.5 sm:gap-4">
             <Link
               href="/contact-us"
-              className="h-12 px-8 bg-official text-neutral hover:bg-official/80 font-bold text-sm rounded-[6px] inline-flex items-center justify-center transition-all duration-300 cursor-pointer shrink-0 gap-2"
+              className="h-12 px-8 w-full md:w-auto bg-official text-neutral hover:bg-official/80 font-bold text-sm rounded-md inline-flex items-center justify-center transition-all duration-300 cursor-pointer shrink-0 gap-2"
             >
               <span>Enquire Now</span>
             </Link>

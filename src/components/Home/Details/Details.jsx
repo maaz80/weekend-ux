@@ -90,9 +90,9 @@ export default function Details({
 
                          {/* Left Content */}
                          <div className="relative">
-                              <p className='subheading-black'>
+                              {/* <p className='subheading-black'>
                                    {whyTitle}
-                              </p>
+                              </p> */}
 
                               <h2 className={`max-w-150 font-playfair h2-section-title ${titleColor}`}>
                                    {startheading}{" "}

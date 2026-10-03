@@ -239,9 +239,9 @@ const OurPrograms = ({ data }) => {
 
                     {/* Heading Area */}
                     <div className="text-left md:text-center mb-10 md:mb-12">
-                         <p className="subheading">
+                         {/* <p className="subheading">
                               {title}
-                         </p>
+                         </p> */}
                          <h2 className="font-playfair h2-section-title text-zinc-900 font-medium">
                               {startheading}{" "}
                               {midheading && <span className="italic text-[#f36600] font-normal">{midheading}</span>}

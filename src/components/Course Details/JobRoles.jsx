@@ -80,9 +80,9 @@ export default function JobRoles({ data }) {
 
                          {/* Badge Tag */}
                          <div>
-                              <span className="subheading">
+                              {/* <span className="subheading">
                                    {tag}
-                              </span>
+                              </span> */}
                          </div>
 
                          {/* Main Heading */}

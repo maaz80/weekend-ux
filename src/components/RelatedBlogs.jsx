@@ -53,11 +53,11 @@ export default function RelatedBlogs({
 
      const startheading = (config?.startheading && config.startheading.trim())
           ? config.startheading
-          : "All You";
+          : "Our";
 
      const midheading = (config?.midheading && config.midheading.trim())
           ? config.midheading
-          : "Need";
+          : "Blogs";
 
      const endheading = (config?.endheading && config.endheading.trim())
           ? config.endheading
@@ -88,14 +88,14 @@ export default function RelatedBlogs({
 
                     {/* Heading */}
                     <div className={`mx-auto max-w-212.5 text-left md:text-center ${pathname === '/' ? 'pt-0' : 'pt-0'}`}>
-                         <span className={`subheading-white font-urbanist text-[11px] font-bold uppercase tracking-[0.45em]`}>
+                         {/* <span className={`subheading-white font-urbanist text-[11px] font-bold uppercase tracking-[0.45em]`}>
                               {title}
-                         </span>
+                         </span> */}
 
-                         <h2 className={`font-playfair h2-section-title text-zinc-900 font-medium mt-2`}>
+                         <h2 className={`font-playfair h2-section-title text-zinc-900 font-medium`}>
                               {startheading}{" "}
                               {midheading && <span className={`italic ${titleHighlightColor} font-semibold`}>{midheading}</span>}
-                              {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>}
+                              {/* {endheading && <>{endheading.startsWith(" ") ? "" : " "}{endheading}</>} */}
                          </h2>
 
                          <p className={`mx-auto font-semibold mt-5 max-w-200 font-urbanist para ${descriptionColor}`}>

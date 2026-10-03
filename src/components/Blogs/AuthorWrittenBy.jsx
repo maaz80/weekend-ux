@@ -22,7 +22,7 @@ export default function AuthorWrittenBy({ author = {}, date, read }) {
                 <div className="shrink-0 self-start">
                     <div className="w-16 h-16 rounded-full ring-[2.5px] ring-official ring-offset-2 ring-offset-[#FAF8F2] overflow-hidden bg-official/40 flex items-center justify-center">
                         <svg
-                            className="w-8 h-8 text-official"
+                            className="w-8 h-8 text-black"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                         >
@@ -33,7 +33,7 @@ export default function AuthorWrittenBy({ author = {}, date, read }) {
 
                 {/* Info */}
                 <div className="flex-1 min-w-0">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-official mb-0.5">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-black mb-0.5">
                         Written By
                     </p>
                     <h3 className="font-urbanist font-bold text-lg text-[#1C1C1C] leading-snug">

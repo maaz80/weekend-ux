@@ -15,7 +15,7 @@ const Content = ({
 
      return (
           <div className="relative py-9 md:py-15 custom-width px-5 md:px-5 button-neutral">
-               <div className={`text-left font-urbanist max-w-310 mx-auto ${fontSize} ${textColor}`}>{quote}</div>
+               <div className={`text-left font-urbanist pt-5 md:pt-0 max-w-310 mx-auto ${fontSize} ${textColor}`}>{quote}</div>
                {showDiamond && (
                     <Image
                          src='/images/weekend-ux-decorative-diamond.webp'

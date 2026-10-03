@@ -90,7 +90,7 @@ export default function FeatureStrip({
 
                <div className="mx-auto max-w-95 md:max-w-310 min-h-137.5 md:min-h-104 flex flex-col items-start justify-center">
                     {/* Intro Text */}
-                    <div className="max-w-212.5">
+                    <div className="max-w-212.5 md:max-w-7xl">
                          <p className={`font-playfair text-[22px] leading-[1.55] md:text-[26px] lg:text-[32px] ${textColor}`}>
                               {introText}
                          </p>

@@ -71,11 +71,11 @@ const TeamSection = ({
 
                          {/* LEFT CONTENT */}
                          <div>
-                              <span className={`font-urbanist subheading`}>
+                              {/* <span className={`font-urbanist subheading`}>
                                    {title}
-                              </span>
+                              </span> */}
 
-                              <h2 className={`mt-4 font-playfair h2-section-title`}>
+                              <h2 className={`font-playfair h2-section-title`}>
                                    {startheading}
                                    <br />
                                    {midheading && (

@@ -69,9 +69,9 @@ export default function CourseBenefits({ data }) {
                          
                          {/* Badge Tag */}
                          <div>
-                              <span className="subheading">
+                              {/* <span className="subheading">
                                    {tag}
-                              </span>
+                              </span> */}
                          </div>
 
                          {/* Main Heading */}

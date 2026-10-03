@@ -208,7 +208,7 @@ export default function Footer({
                          {cardTitle}
                     </div>
                     <Link href="/contact-us">
-                         <Button variant="dark" className="mt-2 sm:mt-3 md:mt-5 lg:mt-7 hover:scale-105 relative z-50">
+                         <Button variant="dark" className="mt-5 sm:mt-3 md:mt-5 lg:mt-7 hover:scale-105 relative z-50">
                               {cardButtonName}
                          </Button>
                     </Link>

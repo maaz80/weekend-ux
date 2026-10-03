@@ -560,7 +560,7 @@ export default function Details({ data }) {
                                    </div>
 
                                    {/* Banner */}
-                                   <div className="rounded-2xl overflow-hidden">
+                                   {/* <div className="rounded-2xl overflow-hidden">
                                         <CallCard
                                              title="Design is more than just being creative!"
                                              subtitle="Learn how to make design that sells"
@@ -570,7 +570,7 @@ export default function Details({ data }) {
                                                   window.dispatchEvent(new CustomEvent("openLeadModal"));
                                              }}
                                         />
-                                   </div>
+                                   </div> */}
 
                               </div>
 

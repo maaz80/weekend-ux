@@ -84,9 +84,9 @@ export default function RelatedCourses({ currentSlug, data }) {
                     
                     {/* Header Section matching RelatedBlogs heading style */}
                     <div className="mx-auto max-w-212.5 text-left md:text-center mb-5 md:mb-16">
-                         <span className="font-urbanist subheading-black">
+                         {/* <span className="font-urbanist subheading-black">
                               {tagline}
-                         </span>
+                         </span> */}
 
                          <h2 className="mt-4 font-playfair h2-section-title text-neutral">
                               {startheading}{" "}

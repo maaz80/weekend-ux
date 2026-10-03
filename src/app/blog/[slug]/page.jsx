@@ -119,7 +119,7 @@ export default async function BlogSlugPage({ params }) {
           <div className="min-h-screen bg-white text-white font-urbanist flex flex-col relative pt-15 md:pt-8">
                <Breadcrumb />
                {/* Hero Header Section */}
-               <section className="relative h-61.5 md:h-114 w-full flex md:items-center items-end pb-12 md:pb-0 justify-start bg-zinc-950 " data-navbar-light="true" id='blog-details-hero'>
+               <section className="relative min-h-70 md:h-114 w-full flex flex-col bg-zinc-950 overflow-hidden" data-navbar-light="true" id='blog-details-hero'>
                     <Image
                          src="/images/weekend-ux-blogs-hero-bg.webp"
                          alt="weekend-ux-policy-hero-bg"
@@ -130,10 +130,16 @@ export default async function BlogSlugPage({ params }) {
                          className="object-cover object-center opacity-65 z-0"
                     />
 
-                    {/* Content */}
-                    <h1 className="pt-10 text-[22px] md:text-[38px] 2xl:text-[56px] leading-8 md:leading-15 2xl:leading-20 text-white relative z-50 font-playfair px-4 md:px-6 w-7xl text-center mx-auto">
-                         {heroTitle}
-                    </h1>
+                    {/* Spacer to clear fixed Navbar and Breadcrumb */}
+                    <div className="h-30 sm:h-34 md:h-40 w-full shrink-0" aria-hidden="true" />
+
+                    {/* Content dynamically centered in remaining visible space */}
+                    <div className="flex-1 flex items-center justify-center px-4 md:px-6 w-full max-w-7xl mx-auto relative z-50 pb-4 md:pb-8">
+                         <h1 className="text-[22px] md:text-[38px] 2xl:text-[56px] leading-8 md:leading-15 2xl:leading-20 text-white font-playfair text-center">
+                              {heroTitle}
+                         </h1>
+                    </div>
+
                     <Image src="/images/weekend-ux-decorative-diamond.webp" alt="weekend-ux-decorative-diamond" className="w-24 md:w-50 h-auto absolute left-3 md:left-10 -bottom-8 md:-bottom-16 z-30" width={200} height={200} style={{ height: "auto" }} />
                </section>
 

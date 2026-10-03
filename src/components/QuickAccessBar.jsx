@@ -18,7 +18,7 @@ const QuickAccessBar = ({
                <div className="mx-auto flex h-14 max-w-4xl">
 
                     {/* Request Callback */}
-                    <a
+                    {/* <a
                          href="https://wa.me/919311500424?text=Hi! I would like to request a callback."
                          target="_blank"
                          rel="noopener noreferrer"
@@ -32,7 +32,7 @@ const QuickAccessBar = ({
                          <span className="sm:hidden">
                               Callback
                          </span>
-                     </a>
+                     </a> */}
 
                     {/* Call */}
                     <a

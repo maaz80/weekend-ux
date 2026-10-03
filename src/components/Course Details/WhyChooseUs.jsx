@@ -73,11 +73,11 @@ export default function WhyChooseUs({ data }) {
                     
                     {/* Header Section */}
                     <div className="text-left md:text-center space-y-3 max-w-3xl mx-auto mb-5 md:mb-16">
-                         <span
+                         {/* <span
                               className="subheading-black"
                          >
                               WHY CHOOSE US
-                         </span>
+                         </span> */}
                          <h2 className="font-playfair h2-section-title font-bold mt-2">
                               {sectionTitle}
                          </h2>

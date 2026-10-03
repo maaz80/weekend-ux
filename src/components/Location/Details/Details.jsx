@@ -44,9 +44,9 @@ export default function Details() {
 
                          {/* Left Content */}
                          <div className="relative">
-                              <p className="mb-5 subheading">
+                              {/* <p className="mb-5 subheading">
                                    Why Weekend UX
-                              </p>
+                              </p> */}
 
                               <h2 className="max-w-150 font-playfair h2-section-title text-[#1B1B1B]">
                                    The Numbers Behind Every{" "}

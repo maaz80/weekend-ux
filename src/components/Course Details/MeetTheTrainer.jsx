@@ -50,9 +50,9 @@ export default function MeetTheTrainer({ data }) {
         
         {/* Section Header */}
         <div className="text-start md:text-center space-y-2.5 max-w-2xl mx-auto mb-5 md:mb-14">
-          <span className="subheading">
+          {/* <span className="subheading">
             Learn From Industry Leaders
-          </span>
+          </span> */}
           <h2 className="font-playfair text-[28px] md:text-[28px] font-semibold leading-tight text-black mt-2">
             {title}
           </h2>
