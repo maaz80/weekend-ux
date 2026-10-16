@@ -18,6 +18,7 @@ export default function SkillsYouWillLearn({ data }) {
   ];
 
   const title = data?.skillsYouWillLearn?.title || "Skills you will learn";
+  const titleSplit = title.indexOf(" ");
   const rawSkills = data?.skillsYouWillLearn?.skills;
   const skillsList = Array.isArray(rawSkills) && rawSkills.length > 0
     ? rawSkills.filter(s => s && String(s).trim())
@@ -31,8 +32,13 @@ export default function SkillsYouWillLearn({ data }) {
     <section className="w-full bg-white py-10 sm:py-12 border-b border-zinc-100 font-urbanist button-neutral">
       <div className="custom-width px-6 sm:px-6 lg:px-16">
         <div className="space-y-6 text-left">
-          <h2 className="font-playfair text-[26px] md:text-[28px] font-semibold text-neutral leading-tight">
-            {title}
+          <h2 className="font-playfair h2-section-title text-zinc-900">
+            {titleSplit > 0 ? (
+              <>
+                {title.slice(0, titleSplit)}{" "}
+                <span className="text-[#f36600] font-semibold italic">{title.slice(titleSplit + 1)}</span>
+              </>
+            ) : title}
           </h2>
 
           <div className="flex flex-wrap gap-2.5 sm:gap-3.5 pt-1">

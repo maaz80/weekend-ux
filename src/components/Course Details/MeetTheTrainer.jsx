@@ -39,6 +39,7 @@ export default function MeetTheTrainer({ data }) {
   ];
 
   const title = data?.trainers?.title || "Meet The Trainers";
+  const titleSplit = title.lastIndexOf(" ");
   const subtitle = data?.trainers?.subtitle || "Get 1-on-1 mentorship and practical insights from active design leads and managers at top companies.";
   const trainersList = (Array.isArray(data?.trainers?.items) && data.trainers.items.length > 0)
     ? data.trainers.items
@@ -53,8 +54,13 @@ export default function MeetTheTrainer({ data }) {
           {/* <span className="subheading">
             Learn From Industry Leaders
           </span> */}
-          <h2 className="font-playfair text-[28px] md:text-[28px] font-semibold leading-tight text-black mt-2">
-            {title}
+          <h2 className="font-playfair h2-section-title text-zinc-900 mt-2">
+            {titleSplit > 0 ? (
+              <>
+                {title.slice(0, titleSplit)}{" "}
+                <span className="text-[#f36600] font-semibold italic">{title.slice(titleSplit + 1)}</span>
+              </>
+            ) : title}
           </h2>
           <p className="font-urbanist para">
             {subtitle}

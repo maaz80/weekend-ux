@@ -32,8 +32,8 @@ export default function WhoShouldEnroll() {
         
         {/* Header */}
         <div className="text-start md:text-center space-y-2.5 max-w-2xl mx-auto mb-4 md:mb-12">
-          <h2 className="font-playfair text-[26px] md:text-[28px] font-semibold text-neutral leading-tight">
-            This course is ideal for
+          <h2 className="font-playfair h2-section-title text-zinc-900">
+            This course is <span className="text-white font-semibold italic">ideal for</span>
           </h2>
           <p className="font-urbanist para font-semibold">
             Real stories and tailored learning tracks for professionals and learners aiming to advance their careers.
@@ -47,7 +47,7 @@ export default function WhoShouldEnroll() {
             return (
               <div
                 key={idx}
-                className="bg-[#ffffff] text-[#18181b] rounded-2xl p-6 sm:p-8 flex flex-col items-start md:text-center text-left md:text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group min-h-60"
+                className="bg-[#ffffff] text-[#18181b] rounded-2xl p-6 sm:p-8 flex flex-col items-start md:items-center text-left md:text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group min-h-60"
               >
                 {/* Icon Container */}
                 <div className="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/25 text-[#18181b] flex items-center justify-center mb-5 shrink-0 group-hover:scale-110 group-hover:bg-amber-500/20 transition-all duration-300 shadow-2xs">
