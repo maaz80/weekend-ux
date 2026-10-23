@@ -28,7 +28,7 @@ const BlogCard = ({
                                    alt={blog?.alt && blog.alt.trim() !== blog?.title?.trim() ? blog.alt : ""}
                                    width={380}
                                    height={222}
-                                   className={`w-full object-cover transition duration-700 group-hover:scale-105 ${height}`}
+                                   className={`w-full object-fill transition duration-700 group-hover:scale-105 ${height}`}
                                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
                                    priority={priority}
                                    fetchPriority={fetchPriority}

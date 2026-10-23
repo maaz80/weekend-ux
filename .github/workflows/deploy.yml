@@ -3,10 +3,9 @@ name: Deploy Next.js to Hostinger
 on:
   push:
     branches:
-      - main
-  workflow_dispatch:
-  repository_dispatch:
-    types: [admin_content_update]
+      # This legacy FTP export workflow is paused during the Node/ISR migration.
+      # Keep it off main so it cannot overwrite the live site with an ISR build.
+      - legacy-static
 
 concurrency:
   group: deploy-${{ github.ref }}
@@ -31,6 +30,7 @@ jobs:
 
       - name: Build static site
         env:
+          STATIC_EXPORT: true
           NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
           NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL || 'https://www.weekendux.in' }}
           MONGO_URI: ${{ secrets.MONGO_URI }}

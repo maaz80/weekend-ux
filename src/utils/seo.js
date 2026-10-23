@@ -1,6 +1,5 @@
 import PageSEO from "@/models/PageSEO";
 import connectDB from "@/config/db";
-import { headers } from "next/headers";
 import { buildCanonicalUrl, getSiteUrl } from "@/utils/siteUrl";
 
 export async function getPageSEOData(pageId) {
@@ -13,21 +12,9 @@ export async function getPageSEOData(pageId) {
      }
 }
 
-async function getBaseUrl() {
-     try {
-          const headersList = await headers();
-          const host = headersList.get("x-forwarded-host") || headersList.get("host") || "";
-          const proto = headersList.get("x-forwarded-proto") || "https";
-          if (host) return `${proto}://${host}`.replace(/\/$/, "");
-     } catch {}
-     return getSiteUrl();
-}
-
 export async function generatePageMetadata(pageId, defaultTitle, defaultDesc, pathname = "") {
-     const [seo, baseUrl] = await Promise.all([
-          getPageSEOData(pageId),
-          getBaseUrl(),
-     ]);
+     const seo = await getPageSEOData(pageId);
+     const baseUrl = getSiteUrl();
 
      const title = seo?.title || defaultTitle || "Weekend UX";
      const description = seo?.description || defaultDesc || "Weekend UX learning platform";

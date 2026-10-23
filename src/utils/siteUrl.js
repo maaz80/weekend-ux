@@ -1,4 +1,4 @@
-export const SITE_URL = "https://weekendux.in";
+export const SITE_URL = "https://www.weekendux.in";
 
 export function getSiteUrl() {
      const fromEnv = process.env.NEXT_PUBLIC_BASE_URL;

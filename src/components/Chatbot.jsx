@@ -130,7 +130,7 @@ export default function Chatbot({
           id: "welcome",
           text: "👋 Welcome to Weekend UX!\n\nWe are India's premier online learning platform for UI/UX Design, Figma, AI Design Tools & Career Acceleration. How can we guide your learning journey today?",
           isBot: true,
-          senderName: "Weekend UX Bot",
+          senderName: "Weekend UX Genie",
           timestamp: "Just now",
           options: [
                "🎨 UI/UX Design Course",
@@ -248,7 +248,7 @@ export default function Chatbot({
                          questionId: nextQuestion.id,
                          text: nextQuestion.question,
                          isBot: true,
-                         senderName: "Weekend UX Bot",
+                         senderName: "Weekend UX Genie",
                          timestamp: "Just now",
                          options: nextQuestion.options,
                          multiSelect: nextQuestion.type === "multi",
@@ -261,7 +261,7 @@ export default function Chatbot({
                          id: "exit_card",
                          text: "🎉 Thank you! Based on your answers, a Weekend UX specialist will review your details and reach out to you shortly.",
                          isBot: true,
-                         senderName: "Weekend UX Bot",
+                         senderName: "Weekend UX Genie",
                          timestamp: "Just now",
                          isExitCard: true
                     };
@@ -312,7 +312,7 @@ export default function Chatbot({
                          questionId: nextQuestion.id,
                          text: nextQuestion.question,
                          isBot: true,
-                         senderName: "Weekend UX Bot",
+                         senderName: "Weekend UX Genie",
                          timestamp: "Just now",
                          options: nextQuestion.options,
                          multiSelect: nextQuestion.type === "multi",
@@ -325,7 +325,7 @@ export default function Chatbot({
                          id: "exit_card",
                          text: "🎉 Thank you! Based on your answers, a Weekend UX specialist will review your details and reach out to you shortly.",
                          isBot: true,
-                         senderName: "Weekend UX Bot",
+                         senderName: "Weekend UX Genie",
                          timestamp: "Just now",
                          isExitCard: true
                     };
@@ -367,7 +367,7 @@ export default function Chatbot({
                          questionId: nextQuestion.id,
                          text: nextQuestion.question,
                          isBot: true,
-                         senderName: "Weekend UX Bot",
+                         senderName: "Weekend UX Genie",
                          timestamp: "Just now",
                          options: nextQuestion.options,
                          multiSelect: nextQuestion.type === "multi",
@@ -380,7 +380,7 @@ export default function Chatbot({
                          id: "exit_card",
                          text: "🎉 Thank you! Based on your answers, a Weekend UX specialist will review your details and reach out to you shortly.",
                          isBot: true,
-                         senderName: "Weekend UX Bot",
+                         senderName: "Weekend UX Genie",
                          timestamp: "Just now",
                          isExitCard: true
                     };
@@ -521,7 +521,7 @@ export default function Chatbot({
                                                        <Image src={Logo} alt="Logo" className="w-full h-full object-contain" />
                                                   )}
                                              </div>
-                                             <span className="text-[11px] font-bold text-neutral-800">{m.senderName || "Weekend UX Bot"}</span>
+                                             <span className="text-[11px] font-bold text-neutral-800">{m.senderName || "Weekend UX Genie"}</span>
                                         </div>
                                    )}
 
@@ -554,7 +554,7 @@ export default function Chatbot({
                                                   <div className="grid grid-cols-2 gap-1.5">
                                                        <button
                                                             onClick={resetChat}
-                                                            className="bg-white hover:bg-gradient-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-zinc-800 text-center shadow-xs flex items-center justify-center gap-1.5"
+                                                            className="bg-white hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-zinc-800 text-center shadow-xs flex items-center justify-center gap-1.5"
                                                        >
                                                             <RotateCcw size={13} />
                                                             Restart Chat
@@ -562,14 +562,14 @@ export default function Chatbot({
                                                        <ObfuscatedEmail
                                                             email="info@weekendux.in"
                                                             subject="Inquiry from Chatbot"
-                                                            className="bg-white hover:bg-gradient-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-zinc-800 text-center shadow-xs flex items-center justify-center gap-1.5"
+                                                            className="bg-white hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-zinc-800 text-center shadow-xs flex items-center justify-center gap-1.5"
                                                        >
                                                             <Calendar size={13} />
                                                             Book Call
                                                        </ObfuscatedEmail>
                                                        <Link
                                                             href="/courses"
-                                                            className="bg-white hover:bg-gradient-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-zinc-800 text-center shadow-xs flex items-center justify-center gap-1.5"
+                                                            className="bg-white hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white text-neutral text-[11px] py-2 px-2.5 rounded-md font-semibold cursor-pointer transition-all border border-zinc-200 hover:border-zinc-800 text-center shadow-xs flex items-center justify-center gap-1.5"
                                                        >
                                                             Explore Courses
                                                        </Link>
@@ -588,7 +588,7 @@ export default function Chatbot({
                                    ) : (
                                         /* Regular Message Bubble */
                                         <div
-                                             className={`p-3 rounded-lg text-[13px] leading-relaxed max-w-[85%] text-left ${m.isBot
+                                             className={`p-3 rounded-lg text-[13px] leading-relaxed font-bold max-w-[85%] text-left ${m.isBot
                                                   ? `${botBubbleClass} shadow-xs`
                                                   : `${userBubbleClass} shadow-xs self-end ml-auto`
                                                   }`}
@@ -606,7 +606,7 @@ export default function Chatbot({
                                                        key={oIdx}
                                                        type="button"
                                                        onClick={() => handleOptionClick(m.questionId, opt, m.isWelcomeCard)}
-                                                       className={`${quickQuestionClass} transition-all duration-200 text-[11px] font-semibold px-3 py-1.5 rounded-full text-left cursor-pointer shadow-xs border inline-flex items-center gap-1 hover:scale-[1.02] hover:bg-gradient-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white hover:border-zinc-800`}
+                                                       className={`${quickQuestionClass} transition-all duration-200 text-[11px] font-semibold px-3 py-1.5 rounded-full text-left cursor-pointer shadow-xs border inline-flex items-center gap-1 hover:scale-[1.02] hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white hover:border-zinc-800`}
                                                   >
                                                        <span>{opt}</span>
                                                   </button>
@@ -625,8 +625,8 @@ export default function Chatbot({
                                                             type="button"
                                                             onClick={() => handleMultiOptionToggle(opt)}
                                                             className={`transition-all duration-200 text-[11px] font-semibold px-3 py-1.5 rounded-full cursor-pointer shadow-xs border inline-flex items-center gap-1 hover:scale-[1.02] ${isSelected
-                                                                 ? "bg-gradient-to-r from-zinc-800 to-zinc-900 text-white border-zinc-800"
-                                                                 : "bg-white text-neutral border-zinc-200 hover:bg-gradient-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white hover:border-zinc-800"
+                                                                 ? "bg-linear-to-r from-zinc-800 to-zinc-900 text-white border-zinc-800"
+                                                                 : "bg-white text-neutral border-zinc-200 hover:bg-linear-to-r hover:from-zinc-800 hover:to-zinc-900 hover:text-white hover:border-zinc-800"
                                                                  }`}
                                                        >
                                                             <span>{opt}</span>
@@ -699,7 +699,7 @@ export default function Chatbot({
                                    )}
                               </div>
                               <div className="flex flex-col gap-1 text-left">
-                                   <span className="text-[11px] font-bold text-neutral-800">Weekend UX Bot</span>
+                                   <span className="text-[11px] font-bold text-neutral-800">Weekend UX Genie</span>
                                    <div className={`${botBubbleClass} p-2.5 rounded-md shadow-xs flex items-center space-x-1.5 w-14 h-8 justify-center`}>
                                         <div className="w-1.5 h-1.5 bg-neutral rounded-full animate-bounce" style={{ animationDelay: '0ms', animationDuration: '0.6s' }}></div>
                                         <div className="w-1.5 h-1.5 bg-neutral rounded-full animate-bounce" style={{ animationDelay: '150ms', animationDuration: '0.6s' }}></div>

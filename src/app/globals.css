@@ -508,11 +508,19 @@ body {
 .course-content a,
 .location-content a,
 a.editor-link {
-  color: #000;
+  color: #385aff !important;
   font-weight: 700;
   text-decoration: none;
   text-underline-offset: 3px;
   transition: opacity 0.2s ease, color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.blog-content a *,
+.blog-content .editor-link *,
+.course-content a *,
+.location-content a *,
+a.editor-link * {
+  color: #385aff !important;
 }
 
 .blog-content a:hover,
@@ -521,7 +529,7 @@ a.editor-link {
 .location-content a:hover,
 a.editor-link:hover {
   text-decoration: underline;
-  color: #000;
+  color: #385aff !important;
   opacity: 0.9;
 }
 

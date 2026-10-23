@@ -29,6 +29,27 @@ function fetchJson(url) {
 }
 
 async function generateAllSeoFiles() {
+    // Node deployments use live App Router endpoints for sitemap.xml and llms.txt.
+    // Keep the build-time files only for the legacy static-export deployment.
+    if (process.env.STATIC_EXPORT !== 'true') {
+        const publicDir = path.join(__dirname, 'public');
+        if (!fs.existsSync(publicDir)) fs.mkdirSync(publicDir, { recursive: true });
+        ['sitemap.xml', 'llms.txt', 'urllist.txt', 'ror.xml'].forEach((file) => {
+            fs.rmSync(path.join(publicDir, file), { force: true });
+        });
+        fs.writeFileSync(
+            path.join(publicDir, 'robots.txt'),
+            `User-agent: *\nAllow: /\n\n` +
+            `User-agent: GPTBot\nAllow: /\n` +
+            `User-agent: ChatGPT-User\nAllow: /\n` +
+            `User-agent: ClaudeBot\nAllow: /\n` +
+            `User-agent: PerplexityBot\nAllow: /\n\n` +
+            `Sitemap: ${buildCanonicalUrl('/sitemap.xml')}\n`
+        );
+        console.log('Node deployment: robots.txt prepared; sitemap.xml and llms.txt are served dynamically.');
+        return;
+    }
+
     console.log("🚀 Generating SEO & LLM files at build time...");
 
     const siteRoot = buildCanonicalUrl('/');

@@ -6,7 +6,7 @@ import { gtag_report_conversion } from "@/utils/googleAds";
 
 const QuickAccessBar = ({
      barBackground = "fixed bottom-0 left-0 w-full border-t border-zinc-200 bg-white/95 backdrop-blur-md shadow-[0_-4px_20px_rgba(0,0,0,0.08)]",
-     linkClass = "flex flex-1 items-center justify-center gap-2 text-[13px] md:text-sm font-medium text-neutral transition hover:bg-zinc-50",
+     linkClass = "flex w-full items-center justify-center gap-2 text-[13px] md:text-sm font-medium text-neutral transition hover:bg-zinc-50",
      iconColor = "text-base shrink-0",
      liveChatActive = "bg-neutral text-official",
      liveChatInactive = "bg-official text-neutral hover:bg-official/80",
@@ -15,7 +15,7 @@ const QuickAccessBar = ({
 
      return (
           <div className={barBackground} style={{ zIndex: 9999 }}>
-               <div className="mx-auto flex h-14 max-w-4xl">
+               <div className="mx-auto grid h-14 max-w-md grid-cols-2 items-center gap-3 px-3 md:gap-5">
 
                     {/* Request Callback */}
                     {/* <a
@@ -52,7 +52,7 @@ const QuickAccessBar = ({
                     {/* Live Chat */}
                     <div 
                          onClick={() => setIsChatbotOpen(!isChatbotOpen)}
-                         className="flex flex-1 items-center justify-center gap-2 text-[14px] md:text-sm font-bold text-neutral transition cursor-pointer mr-2.5 md:mr-0 select-none"
+                         className="flex w-full items-center justify-center gap-2 text-[14px] md:text-sm font-bold text-neutral transition cursor-pointer select-none"
                     >
                          <div className={`flex items-center justify-center gap-2 w-35 h-12 rounded-md transition-all duration-300 ${isChatbotOpen ? liveChatActive : liveChatInactive}`}>
                               <FiMessageSquare className="text-base shrink-0" />

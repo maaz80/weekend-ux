@@ -30,7 +30,7 @@ export default function CourseCard({ course, setIsModal = false, priority = fals
                     <OptimizedImage
                          src={imageSrc}
                          alt={course?.alt && course.alt.trim() !== course?.title?.trim() ? course.alt : ""}
-                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                         className="w-full h-full object-fill group-hover:scale-105 transition-transform duration-500"
                          sizes="(max-width: 640px) 90vw, (max-width: 1024px) 420px, 360px"
                          width={420}
                          height={245}

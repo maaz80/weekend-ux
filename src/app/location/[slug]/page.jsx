@@ -6,7 +6,7 @@ import { generatePageMetadata, getPageSEOData } from "@/utils/seo";
 import { buildCanonicalUrl, getSiteUrl } from "@/utils/siteUrl";
 import SchemaRenderer from "@/components/SchemaRenderer";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 const staticLocationSlugs = [
      "ui-ux-design-course-in-bangalore",

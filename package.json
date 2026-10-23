@@ -11,6 +11,7 @@
   "scripts": {
     "prebuild": "node generate_seo_files.js",
     "build": "npm run prebuild && next build && node post-export.js && storybook build -o out/storybook",
+    "build:node": "npm run prebuild && next build --webpack",
     "clean": "node -e \"require('fs').rmSync('.next', { recursive: true, force: true })\"",
     "dev": "node --max-old-space-size=8192 node_modules/next/dist/bin/next dev -H 0.0.0.0",
     "start": "next start",

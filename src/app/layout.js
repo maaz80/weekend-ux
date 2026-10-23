@@ -13,29 +13,28 @@ import CoursesModel from "@/models/Courses";
 import TestimonialModel from "@/models/Testimonial";
 import FaqModel from "@/models/Faq";
 import LocationModel from "@/models/Location";
-import { Urbanist, Playfair_Display, Inter } from "next/font/google";
+import localFont from "next/font/local";
 
-const urbanist = Urbanist({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+const urbanist = localFont({
+  src: "./fonts/urbanist-latin.woff2",
+  weight: "400 800",
   variable: "--font-urbanist",
   display: "swap",
 });
 
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+const playfair = localFont({
+  src: "./fonts/playfair-display-latin.woff2",
+  weight: "400 800",
   variable: "--font-playfair",
   display: "swap",
 });
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+const inter = localFont({
+  src: "./fonts/inter-latin.woff2",
+  weight: "400 700",
   variable: "--font-inter",
   display: "swap",
 });
-
 export const metadata = {
   metadataBase: new URL("https://www.weekendux.in"),
   title: "Weekend UX",
@@ -90,6 +89,10 @@ async function getLayoutInitialData() {
 import StaticPageSchemaRenderer from "@/components/StaticPageSchemaRenderer";
 import { getOptimizedCloudinaryUrl } from "@/utils/cloudinary";
 
+// Cache rendered pages and regenerate them periodically; admin edits can also
+// invalidate this cache through /api/revalidate.
+export const revalidate = 3600;
+
 export default async function RootLayout({ children }) {
   const initialData = await getLayoutInitialData();
   const rawHeroImg = initialData?.homeData?.hero?.[0]?.bgImage || "/images/weekend-ux-hero-bg-template.webp";
@@ -109,8 +112,6 @@ export default async function RootLayout({ children }) {
     >
       <head>
         <meta name="google-site-verification" content="ZLmPVw4g_R1qW8RG-gKME8X1dzCVMFXrLK2thxvD2rY" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://res.cloudinary.com" />
         {heroSrcSet ? (

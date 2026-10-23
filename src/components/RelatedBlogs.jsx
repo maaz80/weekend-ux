@@ -119,7 +119,7 @@ export default function RelatedBlogs({
                                              <OptimizedImage
                                                   src={imageSrc}
                                                   alt={blog.alt && blog.alt.trim() !== blog.title?.trim() ? blog.alt : ""}
-                                                  className="h-55.5 w-full object-cover transition duration-700 group-hover:scale-105 md:h-70"
+                                                  className="h-55.5 w-full object-fill transition duration-700 group-hover:scale-105 md:h-70"
                                                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 380px"
                                                   width={380}
                                                   height={222}

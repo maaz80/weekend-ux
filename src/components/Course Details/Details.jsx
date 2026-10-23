@@ -518,7 +518,7 @@ export default function Details({ data }) {
                                    {data?.promoSocialBottomContent && (
                                         <div className="pt-6 border-t border-zinc-200">
                                              <div
-                                                  className="prose prose-zinc max-w-none font-urbanist text-[16px] md:text-[17px] text-zinc-700 leading-relaxed space-y-4 [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:text-zinc-900 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-zinc-900 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-zinc-900 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_a]:text-[#000] [&_a]:font-bold [&_a]:no-underline hover:[&_a]:underline blog-content course-content"
+                                                  className="prose prose-zinc max-w-none font-urbanist text-[16px] md:text-[17px] text-zinc-700 leading-relaxed space-y-4 [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:text-zinc-900 [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-zinc-900 [&_h3]:text-lg [&_h3]:font-bold [&_h3]:text-zinc-900 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 [&_a]:text-[#385aff] [&_a]:font-bold [&_a]:no-underline hover:[&_a]:underline blog-content course-content"
                                                   dangerouslySetInnerHTML={{ __html: data.promoSocialBottomContent }}
                                              />
                                         </div>

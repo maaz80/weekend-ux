@@ -11,7 +11,7 @@ import { generatePageMetadata, getPageSEOData } from "@/utils/seo";
 import { buildCanonicalUrl, getSiteUrl } from "@/utils/siteUrl";
 import SchemaRenderer from "@/components/SchemaRenderer";
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 
 const staticBlogSlugs = [
      "what-is-the-difference-between-ui-and-ux",
