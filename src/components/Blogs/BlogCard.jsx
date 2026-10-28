@@ -36,7 +36,7 @@ const BlogCard = ({
                          </div>
 
                          {/* Title */}
-                         <div className="mt-2 md:mt-5 flex items-start justify-between gap-4">
+                         <div className="mt-2 md:mt-1 flex items-start justify-between gap-4">
                               <h2 className={`font-urbanist text-[22px] md:text-[26px] lg:text-[30px] leading-[1.35] line-clamp-2 font-semibold ${titleColor}`}>
                                    {blog?.title || "Untitled Post"}
                               </h2>

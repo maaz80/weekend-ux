@@ -7,6 +7,44 @@ import { IoIosArrowForward } from "react-icons/io";
 import Link from "next/link";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 
+const relevanceStopWords = new Set([
+     "about", "after", "also", "and", "are", "because", "been", "being", "but",
+     "can", "could", "does", "during", "each", "for", "from", "have", "into",
+     "more", "most", "other", "our", "over", "should", "that", "their", "them",
+     "then", "there", "these", "they", "this", "those", "through", "under",
+     "very", "was", "were", "what", "when", "where", "which", "while", "with",
+     "would", "your", "you", "the", "this", "these", "those", "into", "than",
+     "how", "why", "who", "where", "when", "what", "which", "from", "your",
+     "weekend"
+]);
+
+const getBlogKeywords = (blog) => {
+     const content = Array.isArray(blog?.content)
+          ? blog.content.map((item) => item?.data || "").join(" ")
+          : "";
+     const text = `${blog?.title || ""} ${blog?.seodescription || ""} ${content}`
+          .replace(/<[^>]*>/g, " ")
+          .replace(/&(?:nbsp|amp|quot|#39);/gi, " ");
+
+     return new Set(
+          text.toLowerCase().match(/[a-z0-9]{2,}/g)?.filter((word) => !relevanceStopWords.has(word)) || []
+     );
+};
+
+const getBlogRelevance = (currentBlog, candidateBlog) => {
+     const currentKeywords = getBlogKeywords(currentBlog);
+     const candidateTitleKeywords = getBlogKeywords({ title: candidateBlog?.title });
+     const candidateKeywords = getBlogKeywords(candidateBlog);
+     let score = 0;
+
+     currentKeywords.forEach((keyword) => {
+          if (candidateTitleKeywords.has(keyword)) score += 3;
+          else if (candidateKeywords.has(keyword)) score += 1;
+     });
+
+     return score;
+};
+
 const staticBlogs = [
      {
           id: 1,
@@ -30,6 +68,7 @@ const staticBlogs = [
 
 export default function RelatedBlogs({
      data,
+     currentBlog,
      bgImage = "/images/weekend-ux-related-blogs-bg.webp",
      overlayColor = "bg-official/25",
      taglineColor = "text-white",
@@ -42,10 +81,25 @@ export default function RelatedBlogs({
      const { homeData, blogsData } = useHomeData();
 
      const config = data || homeData?.relatedBlogs;
+     const pathname = usePathname();
+     const isBlogDetailsPage = pathname?.startsWith("/blog/");
 
-     const activeBlogs = (blogsData?.blogs && Array.isArray(blogsData.blogs) && blogsData.blogs.length > 0)
-          ? blogsData.blogs.slice(0, 3)
+     const allBlogs = blogsData?.blogs && Array.isArray(blogsData.blogs) && blogsData.blogs.length > 0
+          ? blogsData.blogs
           : staticBlogs;
+     const currentSlug = currentBlog?.slug;
+     const activeBlogs = isBlogDetailsPage
+          ? allBlogs
+               .filter((blog) => blog.slug !== currentSlug)
+               .map((blog, index) => ({
+                    blog,
+                    index,
+                    score: getBlogRelevance(currentBlog, blog)
+               }))
+               .sort((a, b) => b.score - a.score || a.index - b.index)
+               .slice(0, 3)
+               .map(({ blog }) => blog)
+          : allBlogs.slice(0, 3);
 
      const title = (config?.title && config.title.trim())
           ? config.title
@@ -53,7 +107,7 @@ export default function RelatedBlogs({
 
      const startheading = (config?.startheading && config.startheading.trim())
           ? config.startheading
-          : "Our";
+          : "Latest";
 
      const midheading = (config?.midheading && config.midheading.trim())
           ? config.midheading
@@ -66,8 +120,6 @@ export default function RelatedBlogs({
      const description = (config?.description && config.description.trim())
           ? config.description
           : "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs.";
-
-     const pathname = usePathname();
 
      return (
           <section className="relative overflow-hidden button-neutral">
@@ -83,7 +135,10 @@ export default function RelatedBlogs({
                <div className={`absolute inset-0 ${overlayColor}`} />
 
                {/* Content */}
-               <div className="relative z-10 mx-auto max-w-360 px-5 py-10 md:px-8 md:py-20 xl:px-12 xl:py-24">
+               <div className={`relative z-10 mx-auto max-w-360 px-5 md:px-8 xl:px-12 ${isBlogDetailsPage
+                    ? "pt-10 pb-[120px] md:pt-20 md:pb-[240px] xl:pt-24 xl:pb-[288px]"
+                    : "py-10 md:py-20 xl:py-24"
+                    }`}>
 
 
                     {/* Heading */}
@@ -127,7 +182,7 @@ export default function RelatedBlogs({
                                         </div>
 
                                         {/* Title */}
-                                        <div className="mt-2 md:mt-5 flex items-start justify-between gap-4">
+                                        <div className="mt-2 md:mt-1 flex items-start justify-between gap-4">
                                              <h2 className={`font-urbanist text-[22px] md:text-[26px] lg:text-[30px] leading-[1.35] line-clamp-2 font-semibold ${blogTitleColor}`}>
                                                   {blog.title}
                                              </h2>

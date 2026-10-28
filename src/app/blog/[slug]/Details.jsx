@@ -6,6 +6,7 @@ import OptimizedImage from "@/components/ui/OptimizedImage";
 import Image from "next/image";
 import AuthorWrittenBy from '@/components/Blogs/AuthorWrittenBy';
 import AuthorAbout from '@/components/Blogs/AuthorAbout';
+import FAQ from '@/components/FAQ';
 
 export default function Details({ data }) {
      const dateStr = data?.date || "22nd July, 2026";
@@ -118,7 +119,7 @@ export default function Details({ data }) {
        };
 
        return (
-            <section className="bg-[#F8F6EE] py-10 lg:py-16">
+            <section className="bg-[#F8F6EE] pt-10 pb-20 lg:pt-16 lg:pb-24">
                  <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-4">
 
                       <div className="grid grid-cols-1 lg:grid-cols-[350px_1fr] gap-8 lg:gap-10 px-1.5">
@@ -279,6 +280,20 @@ export default function Details({ data }) {
                                  <div className="mt-10 mb-4">
                                      <AuthorAbout author={data?.author} />
                                  </div>
+
+                                <FAQ
+                                     paddings="!px-0 !pt-0 !pb-0"
+                                     bgImage=""
+                                     bgColor="bg-transparent"
+                                     faqData={(data?.faq?.items && data.faq.items.length > 0) ? {
+                                          faq: data.faq.items,
+                                          title: data.faq.title?.trim() || "FAQ",
+                                          startheading: data.faq.startheading?.trim() || "Blog",
+                                          midheading: data.faq.midheading?.trim() || "FAQ",
+                                          endheading: data.faq.endheading?.trim() || "",
+                                          description: data.faq.description?.trim() || ""
+                                     } : null}
+                                />
 
                            </div>
 

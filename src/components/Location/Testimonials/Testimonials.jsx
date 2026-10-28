@@ -1,13 +1,14 @@
 "use client";
 
 import Map from '@/app/assets/weekend-ux-testimonials-bg.webp';
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import comma from '@/app/assets/weekend-ux-testimonials-decoratice-comma.webp';
 import testiImage from '@/app/assets/weekend-ux-testimonials-user-default-icon.webp';
 import { usePathname } from "next/navigation";
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import Image from 'next/image';
 import OptimizedImage from "@/components/ui/OptimizedImage";
+import { useHomeData } from "@/context/HomeDataContext";
 
 const DEFAULT_TESTIMONIALS = [
      {
@@ -45,10 +46,20 @@ const getInitials = (nameStr) => {
 };
 
 const Testimonials = ({ data }) => {
+     const { testimonialsData } = useHomeData();
      const sliderRef = useRef();
      const [currentIndex, setCurrentIndex] = useState(0);
      const [maxIndex, setMaxIndex] = useState(0);
-     const [testimonialsList, setTestimonialsList] = useState(DEFAULT_TESTIMONIALS);
+     const testimonialsList = useMemo(
+          () => testimonialsData && Array.isArray(testimonialsData) && testimonialsData.length > 0
+               ? testimonialsData.map((review) => ({
+                    name: review.name,
+                    avatar: review.avatar || "",
+                    text: review.quote
+               }))
+               : DEFAULT_TESTIMONIALS,
+          [testimonialsData]
+     );
      const pathname = usePathname();
 
      const pathnames = pathname.split("/").filter((x) => x);
@@ -231,8 +242,17 @@ const Testimonials = ({ data }) => {
 
                                    {/* User */}
                                    <div className="flex items-center gap-4">
-                                        <div className="w-15 h-15 rounded-full bg-official text-neutral flex items-center justify-center font-bold text-lg border border-official/20 shrink-0 select-none">
-                                             {getInitials(item.name)}
+                                        <div className="w-15 h-15 rounded-full bg-official text-neutral flex items-center justify-center font-bold text-lg border border-official/20 shrink-0 select-none overflow-hidden">
+                                             {item.avatar ? (
+                                                  <OptimizedImage
+                                                       src={item.avatar}
+                                                       alt={`${item.name} testimonial`}
+                                                       width={120}
+                                                       height={120}
+                                                       className="w-full h-full object-cover"
+                                                       sizes="60px"
+                                                  />
+                                             ) : getInitials(item.name)}
                                         </div>
 
                                         <div>

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { HiOutlineCalendar, HiOutlineClock } from "react-icons/hi2";
 import { FiRefreshCw } from "react-icons/fi";
 import { FaLinkedinIn } from "react-icons/fa";
@@ -20,14 +19,20 @@ export default function AuthorWrittenBy({ author = {}, date, read }) {
             <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                 {/* Avatar */}
                 <div className="shrink-0 self-start">
-                    <div className="w-16 h-16 rounded-full ring-[2.5px] ring-official ring-offset-2 ring-offset-[#FAF8F2] overflow-hidden bg-official/40 flex items-center justify-center">
-                        <svg
-                            className="w-8 h-8 text-black"
-                            fill="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v1.2c0 .7.5 1.2 1.2 1.2h16.8c.7 0 1.2-.5 1.2-1.2v-1.2c0-3.2-6.4-4.8-9.6-4.8z" />
-                        </svg>
+                    <div className="relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-full bg-official/40 ring-[2.5px] ring-official ring-offset-2 ring-offset-[#FAF8F2]">
+                        {avatarUrl ? (
+                            <img
+                                src={avatarUrl}
+                                alt={`${name} profile`}
+                                width={64}
+                                height={64}
+                                className="h-full w-full object-cover"
+                            />
+                        ) : (
+                            <svg className="h-8 w-8 text-black" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v1.2c0 .7.5 1.2 1.2 1.2h16.8c.7 0 1.2-.5 1.2-1.2v-1.2c0-3.2-6.4-4.8-9.6-4.8z" />
+                            </svg>
+                        )}
                     </div>
                 </div>
 

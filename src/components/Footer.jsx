@@ -196,10 +196,12 @@ export default function Footer({
      const cardButtonName = settings?.card?.buttonName && settings.card.buttonName.trim()
           ? settings.card.buttonName.trim()
           : "Explore Programs";
+     const locationContact = settings?.locationContact || {};
+     const hasLocationContact = Object.values(locationContact).some((value) => typeof value === "string" && value.trim());
 
      return (
           <footer className={`w-full -mt-10 relative z-1000 pb-16 ${bgColor} ${textColor}`}>
-               <div className="absolute -top-20 sm:-top-28 md:-top-36 lg:-top-44 left-0 right-0 mx-auto w-[92%] sm:w-[88%] md:w-[85%] lg:w-[80%] max-w-6xl h-44 sm:h-56 md:h-72 lg:h-80 xl:h-88 z-20 flex flex-col items-start justify-center px-6 sm:px-10 md:px-14 lg:px-20 rounded-2xl md:rounded-2xl overflow-hidden shadow-xl">
+               <div className="absolute -top-20 sm:-top-28 md:-top-36 lg:-top-44 left-0 right-0 mx-auto w-[92%] sm:w-[88%] md:w-[85%] lg:w-[80%] max-w-6xl h-[132px] sm:h-[168px] md:h-[216px] lg:h-[240px] xl:h-[264px] z-20 flex flex-col items-start justify-center px-6 sm:px-10 md:px-14 lg:px-20 rounded-2xl md:rounded-2xl overflow-hidden shadow-xl">
                     {/* Desktop Footer Decorative Background Image */}
                     <Image src={bannerBgImage} alt="weekend-ux-footer-decorative-bg" fill loading="lazy" sizes="(max-width: 1024px) 100vw, 1200px" className="hidden md:block object-fill rounded-2xl md:rounded-2xl" />
                     {/* Mobile Footer Decorative Background Image */}
@@ -311,19 +313,50 @@ export default function Footer({
 
                     {/* Divider */}
                     <div className="border-t border-white/5 mt-6 md:mt-12 pt-6 md:pt-12">
+                         <div className={`grid grid-cols-1 ${hasLocationContact ? "md:grid-cols-[2fr_1fr] md:gap-10 lg:gap-16" : ""}`}>
+                              <div>
+                                   {/* Dynamic Footer Blocks */}
+                                   {locations?.length > 0 &&
+                                        locations.map((block) => (
+                                             <FooterTextBlock
+                                                  key={block.slug || block._id}
+                                                  title={block.title}
+                                                  slug={block.slug}
+                                                  items={block.items}
+                                             />
+                                        ))
+                                   }
+                              </div>
 
-                         {/* Dynamic Footer Blocks */}
-                         {locations?.length > 0 &&
-                              locations.map((block) => (
-                                   <FooterTextBlock
-                                        key={block.slug || block._id}
-                                        title={block.title}
-                                        slug={block.slug}
-                                        items={block.items}
-                                   />
-                              ))
-                         }
-
+                              {hasLocationContact && (
+                                   <address className="not-italic mt-8 md:mt-0">
+                                        {locationContact.title?.trim() && (
+                                             <h3 className="text-[18px] mb-5 font-medium">
+                                                  {locationContact.title}
+                                             </h3>
+                                        )}
+                                        <div className="space-y-3 text-[14px] text-white/70 leading-relaxed">
+                                             {locationContact.address?.trim() && (
+                                                  <p className="whitespace-pre-line">{locationContact.address}</p>
+                                             )}
+                                             {locationContact.phone?.trim() && (
+                                                  <p>
+                                                       <a href={`tel:${locationContact.phone.replace(/[^\d+]/g, "")}`} className="hover:text-white transition-colors">
+                                                            {locationContact.phone}
+                                                       </a>
+                                                  </p>
+                                             )}
+                                             {locationContact.email?.trim() && (
+                                                  <p>
+                                                       <a href={`mailto:${locationContact.email}`} className="hover:text-white transition-colors">
+                                                            {locationContact.email}
+                                                       </a>
+                                                  </p>
+                                             )}
+                                        </div>
+                                   </address>
+                              )}
+                         </div>
                     </div>
 
                     {/* Bottom Divider */}

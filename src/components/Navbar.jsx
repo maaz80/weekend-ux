@@ -589,7 +589,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                               </div>
 
                               {/* RIGHT SIDE */}
-                              <div className="flex items-center gap-4 md:gap-8">
+                              <div className="flex items-center gap-4 md:gap-5">
                                    {/* MOBILE SEARCH */}
                                    {!isDashboard && (
                                         <button
@@ -604,6 +604,26 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                         >
                                              {isSearchOpen ? <FiX className="text-lg" /> : <FiSearch />}
                                         </button>
+                                   )}
+
+                                   {!isDashboard && (
+                                        <div className="hidden lg:flex items-center gap-11">
+                                             {[
+                                                  { label: "Contact Us", href: "/contact-us" },
+                                                  { label: "About Us", href: "/about-us" },
+                                                  { label: "Blogs", href: "/blog" },
+                                             ].map(({ label, href }) => (
+                                                  <Link
+                                                       key={href}
+                                                       href={href}
+                                                       className={`whitespace-nowrap text-sm font-medium transition-colors duration-300 hover:font-semibold ${
+                                                            isMoreButtonLight ? "text-white" : "text-neutral"
+                                                       }`}
+                                                  >
+                                                       {label}
+                                                  </Link>
+                                             ))}
+                                        </div>
                                    )}
 
                                    {!isDashboard && (

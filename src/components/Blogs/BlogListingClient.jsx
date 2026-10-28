@@ -25,15 +25,19 @@ const staticFeaturedBlogs = [
  */
 export default function BlogListingClient({ blogsList, featuredStart, featuredEnd }) {
      const [currentPage, setCurrentPage] = useState(1);
-     const blogsPerPage = 6;
-
-     const dbFeatured = blogsList.filter(b => b.featured === true || b.featured === "true");
+     const blogsPerPage = 9;
      const activeFeaturedBlogs = blogsList.length > 0
-          ? (dbFeatured.length > 0 ? dbFeatured : blogsList.slice(0, 2))
+          ? blogsList
+               .map((blog, index) => {
+                    const date = typeof blog.date === "string"
+                         ? Date.parse(blog.date.replace(/(\d)(st|nd|rd|th)\b/gi, "$1"))
+                         : NaN;
+                    return { blog, index, timestamp: Number.isFinite(date) ? date : 0 };
+               })
+               .sort((a, b) => b.timestamp - a.timestamp || a.index - b.index)
+               .map(({ blog }) => blog)
           : staticFeaturedBlogs;
-
-     const activeMoreBlogs = blogsList.length > 0 ? blogsList : [];
-     const totalPages = Math.ceil(activeMoreBlogs.length / blogsPerPage);
+     const totalPages = Math.ceil(activeFeaturedBlogs.length / blogsPerPage);
 
      const getPageNumbers = () => {
           const pages = [];
@@ -53,7 +57,7 @@ export default function BlogListingClient({ blogsList, featuredStart, featuredEn
           return pages;
      };
 
-     const displayedBlogs = activeMoreBlogs.slice(
+     const displayedBlogs = activeFeaturedBlogs.slice(
           (currentPage - 1) * blogsPerPage,
           currentPage * blogsPerPage
      );
@@ -65,17 +69,60 @@ export default function BlogListingClient({ blogsList, featuredStart, featuredEn
                     <h2 className="text-[28px] md:text-[36px] text-neutral font-medium font-playfair mb-6">
                          <span className="text-[#f36600] italic">{featuredStart}</span> {featuredEnd}
                     </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 ">
-                         {activeFeaturedBlogs.map((blog, idx) => (
+                    <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+                         {displayedBlogs.map((blog, idx) => (
                               <BlogCard
                                    key={blog._id || blog.id || idx}
                                    blog={blog}
-                                   height="h-52.5 md:h-95"
-                                   priority={idx < 2}
+                                   height="h-52.5 md:h-65 lg:h-70"
+                                   priority={currentPage === 1 && idx < 3}
                                    fetchPriority={idx === 0 ? "high" : undefined}
                               />
                          ))}
                     </div>
+                    {totalPages > 1 && (
+                         <div className="mt-12 flex items-center justify-center gap-3">
+                              <button
+                                   onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}
+                                   aria-label="Previous Page"
+                                   disabled={currentPage === 1}
+                                   className={`flex h-10 w-10 items-center justify-center rounded-xl border text-sm font-semibold transition-all ${currentPage === 1
+                                        ? "cursor-not-allowed border-zinc-200 bg-zinc-50 text-zinc-300"
+                                        : "cursor-pointer border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-neutral"
+                                        }`}
+                              >
+                                   <FiChevronLeft className="text-lg" />
+                              </button>
+                              {getPageNumbers().map((item, idx) => item === "..." ? (
+                                   <span key={`ellipsis-${idx}`} className="flex h-10 w-10 select-none items-center justify-center text-sm font-semibold text-zinc-400">
+                                        ...
+                                   </span>
+                              ) : (
+                                   <button
+                                        key={`page-${item}`}
+                                        onClick={() => setCurrentPage(item)}
+                                        aria-current={currentPage === item ? "page" : undefined}
+                                        className={`h-10 w-10 rounded-xl border text-sm font-semibold transition-all ${currentPage === item
+                                             ? "border-transparent bg-official text-neutral shadow-sm"
+                                             : "cursor-pointer border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-neutral"
+                                             }`}
+                                   >
+                                        {item}
+                                   </button>
+                              ))}
+                              <button
+                                   onClick={() => setCurrentPage((page) => Math.min(page + 1, totalPages))}
+                                   aria-label="Next Page"
+                                   disabled={currentPage === totalPages}
+                                   className={`flex h-10 w-10 items-center justify-center rounded-xl border text-sm font-semibold transition-all ${currentPage === totalPages
+                                        ? "cursor-not-allowed border-zinc-200 bg-zinc-50 text-zinc-300"
+                                        : "cursor-pointer border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-neutral"
+                                        }`}
+                              >
+                                   <FiChevronRight className="text-lg" />
+                              </button>
+                         </div>
+                    )}
                </div>
           </>
      );

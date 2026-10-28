@@ -55,7 +55,7 @@ const Testimonials = ({ data }) => {
           if (testimonialsData && Array.isArray(testimonialsData) && testimonialsData.length > 0) {
                return testimonialsData.map((review) => ({
                     name: review.name,
-                    image: review.avatar || testiImage,
+                    avatar: review.avatar || "",
                     text: review.quote
                }));
           }
@@ -256,8 +256,17 @@ const Testimonials = ({ data }) => {
 
                                    {/* User */}
                                    <div className="flex items-center gap-4">
-                                        <div className="w-15 h-15 rounded-full bg-official text-neutral flex items-center justify-center font-bold text-lg border border-official/20 shrink-0 select-none">
-                                             {getInitials(item.name)}
+                                        <div className="w-15 h-15 rounded-full bg-official text-neutral flex items-center justify-center font-bold text-lg border border-official/20 shrink-0 select-none overflow-hidden">
+                                             {item.avatar ? (
+                                                  <OptimizedImage
+                                                       src={item.avatar}
+                                                       alt={`${item.name} testimonial`}
+                                                       width={120}
+                                                       height={120}
+                                                       className="w-full h-full object-cover"
+                                                       sizes="60px"
+                                                  />
+                                             ) : getInitials(item.name)}
                                         </div>
 
                                         <div>

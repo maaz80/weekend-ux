@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Testimonials from "@/components/Home/Testimonials/Testimonials";
+// import Testimonials from "@/components/Home/Testimonials/Testimonials";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import Breadcrumb from "@/components/Breadcrumb";
 import FAQ from "@/components/FAQ";
@@ -57,7 +57,7 @@ export default async function Blogs() {
                     featuredEnd={featuredEnd}
                />
 
-               <Testimonials />
+               {/* <Testimonials /> */}
                <RelatedBlogs />
                <FAQ />
           </div>

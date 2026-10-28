@@ -1,7 +1,6 @@
 import { cache } from "react";
 import BlogDetailsView from "./Details";
-import FAQ from "@/components/FAQ";
-import Testimonials from "@/components/Home/Testimonials/Testimonials";
+// import Testimonials from "@/components/Home/Testimonials/Testimonials";
 import RelatedBlogs from "@/components/RelatedBlogs";
 import Image from "next/image";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -36,10 +35,31 @@ export async function generateStaticParams() {
 const getBlogData = cache(async (slug) => {
      try {
           await connectDB();
-          const blogPage = await Blog.findOne().select("blogs").lean();
+          const blogPage = await Blog.findOne().select("blogs authorTemplates").lean();
           if (blogPage) {
                const blog = blogPage.blogs.find(b => b.slug === slug);
-               if (blog) return JSON.parse(JSON.stringify(blog));
+               if (blog) {
+                    const blogData = JSON.parse(JSON.stringify(blog));
+                    if (!blogData.author?.avatar) {
+                         const authorName = blogData.author?.name?.trim().toLowerCase();
+                         const matchingTemplate = blogPage.authorTemplates?.find(
+                              (template) => {
+                                   const templateName = template.name?.trim().toLowerCase();
+                                   return template.avatar && authorName && templateName &&
+                                        (templateName === authorName ||
+                                             templateName.startsWith(`${authorName} `) ||
+                                             authorName.startsWith(`${templateName} `));
+                              }
+                         );
+                         if (matchingTemplate) {
+                              blogData.author = {
+                                   ...blogData.author,
+                                   avatar: matchingTemplate.avatar
+                              };
+                         }
+                    }
+                    return blogData;
+               }
           }
      } catch (error) {
           console.error("Error in getBlogData fetching database:", error);
@@ -191,16 +211,8 @@ export default async function BlogSlugPage({ params }) {
                )}
 
                <BlogDetailsView data={data} />
-               <Testimonials />
-               <RelatedBlogs />
-               <FAQ faqData={(data?.faq?.items && data.faq.items.length > 0) ? {
-                    faq: data.faq.items,
-                    title: data.faq.title && data.faq.title.trim() ? data.faq.title.trim() : "FAQ",
-                    startheading: data.faq.startheading && data.faq.startheading.trim() ? data.faq.startheading.trim() : "Blog",
-                    midheading: data.faq.midheading && data.faq.midheading.trim() ? data.faq.midheading.trim() : "FAQ",
-                    endheading: data.faq.endheading && data.faq.endheading.trim() ? data.faq.endheading.trim() : "",
-                    description: data.faq.description && data.faq.description.trim() ? data.faq.description.trim() : ""
-               } : null} />
+               {/* <Testimonials /> */}
+               <RelatedBlogs currentBlog={data} />
           </div>
      );
 }
