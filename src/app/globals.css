@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @source "../**";
+@source "../components/HireFromUs";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -501,6 +502,119 @@ body {
 .blog-content {
   color: #404040;
   /* text-neutral-700 */
+}
+
+.blog-content .tableWrapper,
+.course-content .tableWrapper,
+.location-content .tableWrapper {
+  max-width: 100%;
+  overflow-x: auto;
+  margin: 1.75rem 0;
+  border: 1px solid #e8e4d7;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgb(28 28 28 / 7%);
+  scrollbar-color: #c9a600 #f5f2e8;
+  scrollbar-width: thin;
+}
+
+.blog-content table,
+.course-content table,
+.location-content table {
+  width: 100%;
+  min-width: 540px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.94em;
+  line-height: 1.55;
+}
+
+.blog-content th,
+.blog-content td,
+.course-content th,
+.course-content td,
+.location-content th,
+.location-content td {
+  border-right: 1px solid #ece9df;
+  border-bottom: 1px solid #ece9df;
+  padding: 0.9rem 1rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+.blog-content th,
+.course-content th,
+.location-content th {
+  border-bottom: 2px solid #e6bf00;
+  background: #242424;
+  color: #ffffff !important;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.blog-content th *,
+.course-content th *,
+.location-content th * {
+  color: #ffffff !important;
+}
+
+.blog-content tr > :last-child,
+.course-content tr > :last-child,
+.location-content tr > :last-child {
+  border-right: 0;
+}
+
+.blog-content tbody tr:last-child > *,
+.course-content tbody tr:last-child > *,
+.location-content tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.blog-content tbody tr:nth-child(even),
+.course-content tbody tr:nth-child(even),
+.location-content tbody tr:nth-child(even) {
+  background: #fffdf5;
+}
+
+.blog-content tbody tr,
+.course-content tbody tr,
+.location-content tbody tr {
+  transition: background-color 160ms ease;
+}
+
+.blog-content tbody tr:hover,
+.course-content tbody tr:hover,
+.location-content tbody tr:hover {
+  /* background: #fff7d6; */
+}
+
+.blog-content td p,
+.blog-content th p,
+.course-content td p,
+.course-content th p,
+.location-content td p,
+.location-content th p {
+  margin: 0;
+}
+
+.blog-content .tableWrapper::-webkit-scrollbar,
+.course-content .tableWrapper::-webkit-scrollbar,
+.location-content .tableWrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.blog-content .tableWrapper::-webkit-scrollbar-track,
+.course-content .tableWrapper::-webkit-scrollbar-track,
+.location-content .tableWrapper::-webkit-scrollbar-track {
+  background: #f5f2e8;
+}
+
+.blog-content .tableWrapper::-webkit-scrollbar-thumb,
+.course-content .tableWrapper::-webkit-scrollbar-thumb,
+.location-content .tableWrapper::-webkit-scrollbar-thumb {
+  border: 2px solid #f5f2e8;
+  border-radius: 999px;
+  background: #c9a600;
 }
 
 .blog-content a,

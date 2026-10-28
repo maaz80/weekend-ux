@@ -1,8 +1,6 @@
-# robots.txt generated at build time
 User-agent: *
 Allow: /
 
-# AI Crawlers
 User-agent: GPTBot
 Allow: /
 User-agent: ChatGPT-User
@@ -13,4 +11,3 @@ User-agent: PerplexityBot
 Allow: /
 
 Sitemap: https://www.weekendux.in/sitemap.xml
-Sitemap: https://www.weekendux.in/ror.xml

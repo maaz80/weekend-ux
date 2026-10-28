@@ -96,7 +96,7 @@ export default function WhyChooseUs({ data }) {
                               >
                                    {/* Icon Container */}
                                    <div
-                                        className="w-12 h-12 rounded-2xl flex items-center justify-center border shrink-0 transition-all duration-300 bg-amber-500/10 border-amber-500/20 text-zinc-900 group-hover:bg-zinc-950 group-hover:text-white group-hover:border-zinc-900 shadow-2xs group-hover:shadow-inner"
+                                        className="w-12 h-12 rounded-2xl flex items-center justify-center border shrink-0 transition-all duration-300 bg-amber-500/10 border-amber-500/20 text-zinc-900 group-hover:bg-zinc-950 group-hover:text-[#fff] group-hover:border-zinc-900 shadow-2xs group-hover:shadow-inner"
                                    >
                                         {renderIcon(card.iconName, idx)}
                                    </div>

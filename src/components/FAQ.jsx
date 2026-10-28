@@ -33,6 +33,75 @@ const defaultFaqs = [
 ];
 
 const faqCache = {};
+const managedPageSlugs = new Set(["corporate-training", "free-resources", "hire-from-us"]);
+const corporateTrainingFaqDefaults = [
+     {
+          ques: "What does Weekend UX corporate training cover?",
+          ans: "Our corporate training covers practical UI/UX, product design, Figma, AI tools, and other digital skills. The topics can be aligned with your team's goals and learning needs.",
+     },
+     {
+          ques: "Can the training be customized for our organization?",
+          ans: "Yes. The learning journey can be tailored around your organization's priorities, current team skills, and the capabilities you want to build.",
+     },
+     {
+          ques: "Who can take part in the training?",
+          ans: "Training can be planned for teams with different roles and experience levels. Share your team profile and goals so the program can be scoped appropriately.",
+     },
+     {
+          ques: "How is the training schedule decided?",
+          ans: "The schedule and delivery plan are discussed with your organization based on team availability, learning objectives, and program scope.",
+     },
+     {
+          ques: "How can we get started?",
+          ans: "Use the Start Your Journey button on the Corporate Training page to contact our team. We can discuss your goals and recommend a suitable learning plan.",
+     },
+];
+
+const hireFromUsFaqDefaults = [
+     {
+          ques: "What types of candidates can I hire through Weekend UX?",
+          ans: "You can connect with job-ready designers across beginner, intermediate, senior, and expert skill pools. Use the enquiry form to share the role and experience you need.",
+     },
+     {
+          ques: "Is there a fee to hire candidates?",
+          ans: "Weekend UX's hiring service is offered at no cost to employers.",
+     },
+     {
+          ques: "How do I get started with hiring?",
+          ans: "Submit your details through the enquiry form on this page. The Weekend UX team can follow up to understand your hiring needs and guide you on suitable candidates.",
+     },
+     {
+          ques: "What design roles can I hire for?",
+          ans: "Candidate roles include UI/UX, UI, UX, industrial, graphic, and web design. Contact the team if you are hiring for another design role.",
+     },
+     {
+          ques: "Can I search candidates directly on this page?",
+          ans: "The candidate search section lets you explore suggested job roles. If you have a specific hiring requirement, use the enquiry form to connect with the team.",
+     },
+];
+
+const freeResourcesFaqDefaults = [
+     {
+          ques: "What free resources are available on the Free Resources page?",
+          ans: "The page features selected Weekend UX courses and design tutorials to help you explore practical learning content.",
+     },
+     {
+          ques: "Are the featured courses free to access?",
+          ans: "The Free Resources page highlights selected learning resources. Course details explain the format and any enrollment requirements.",
+     },
+     {
+          ques: "Who are these resources for?",
+          ans: "They are useful for aspiring and practicing designers who want to build UI/UX skills and explore design topics.",
+     },
+     {
+          ques: "How do I view a featured course?",
+          ans: "Select a course card to open its course page, where you can find more information about the curriculum and learning format.",
+     },
+     {
+          ques: "Where can I find more design tutorials?",
+          ans: "Browse the Popular Tutorials section on this page and select a tutorial to continue exploring.",
+     },
+];
 
 const FAQ = ({
      paddings,
@@ -100,27 +169,45 @@ const FAQ = ({
 
      const faqs = faqInfo?.faq && faqInfo.faq.length > 0
           ? faqInfo.faq
-          : defaultFaqs;
+          : slug === "corporate-training"
+               ? corporateTrainingFaqDefaults
+               : slug === "hire-from-us"
+               ? hireFromUsFaqDefaults
+               : slug === "free-resources"
+               ? freeResourcesFaqDefaults
+               : managedPageSlugs.has(slug)
+               ? []
+               : defaultFaqs;
+
+     if (managedPageSlugs.has(slug) && faqs.length === 0) {
+          return null;
+     }
 
      const title = faqInfo?.title && faqInfo.title.trim()
           ? faqInfo.title.trim()
-          : "FAQ";
+          : slug === "corporate-training" ? "Corporate Training FAQs" : slug === "hire-from-us" ? "Hire From Us FAQs" : slug === "free-resources" ? "Free Resources FAQs" : "FAQ";
 
      const startheading = faqInfo?.startheading && faqInfo.startheading.trim()
           ? faqInfo.startheading.trim()
-          : "All You";
+          : slug === "corporate-training" ? "Corporate" : slug === "hire-from-us" ? "Hiring" : slug === "free-resources" ? "Free" : "All You";
 
      const midheading = faqInfo?.midheading && faqInfo.midheading.trim()
           ? faqInfo.midheading.trim()
-          : "Need";
+          : slug === "corporate-training" ? "Training" : slug === "hire-from-us" ? "Candidates" : slug === "free-resources" ? "Resources" : "Need";
 
      const endheading = faqInfo?.endheading && faqInfo.endheading.trim()
           ? faqInfo.endheading.trim()
-          : "To Know";
+          : slug === "corporate-training" ? "FAQs" : slug === "hire-from-us" ? "FAQs" : slug === "free-resources" ? "FAQs" : "To Know";
 
      const description = faqInfo?.description && faqInfo.description.trim()
           ? faqInfo.description.trim()
-          : "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs.";
+          : slug === "corporate-training"
+               ? "Answers to common questions about corporate training with Weekend UX."
+               : slug === "hire-from-us"
+               ? "Learn more about hiring job-ready design candidates through Weekend UX."
+               : slug === "free-resources"
+               ? "Answers to common questions about the free courses and tutorials available from Weekend UX."
+               : "Our students have gone on to build successful careers with leading organizations across diverse industries, showcasing the skills, knowledge, and confidence they gained through our programs.";
 
      return (
           <section className={`button-neutral relative z-999 ${paddings} pt-10 md:pt-15 pb-35 md:pb-70 ${bgColor} px-5 md:px-2.5`}>

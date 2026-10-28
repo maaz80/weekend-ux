@@ -2,11 +2,12 @@
 
 import React from "react";
 import { TrendingUp, Clock, RefreshCw, ShieldCheck, Coins, BarChart3 } from "lucide-react";
+import SectionHeading from "@/components/ui/SectionHeading";
+import CourseBenefitCard from "./CourseBenefitCard";
 
 export default function CourseBenefits({ data }) {
      const courseName = data?.title || "UI/UX Design";
      
-     const tag = data?.benefitsTag || `WHY ${courseName.toUpperCase()}?`;
      const title = data?.benefitsTitle || `Benefits of ${courseName}`;
      const subtitle = data?.benefitsSubtitle || `${courseName} helps learners and businesses streamline workflows, improve efficiency, and drive smarter decisions.`;
 
@@ -65,26 +66,11 @@ export default function CourseBenefits({ data }) {
                <div className="custom-width px-4 sm:px-6 lg:px-16 mx-auto">
                     
                     {/* Header Section */}
-                    <div className="text-left md:text-center space-y-3 max-w-3xl mx-auto mb-5 md:mb-16">
-                         
-                         {/* Badge Tag */}
-                         <div>
-                              {/* <span className="subheading">
-                                   {tag}
-                              </span> */}
-                         </div>
-
-                         {/* Main Heading */}
-                         <h2 className="font-playfair h2-section-title text-zinc-900">
-                              {displayTitle}
-                         </h2>
-
-                         {/* Subtitle */}
-                         <p className="font-urbanist para">
-                              {subtitle}
-                         </p>
-
-                    </div>
+                    <SectionHeading
+                         className="mb-5 md:mb-16"
+                         heading={displayTitle}
+                         description={subtitle}
+                    />
 
                     {/* 6 Cards Grid (3 cols x 2 rows) */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
@@ -92,39 +78,12 @@ export default function CourseBenefits({ data }) {
                               const Icon = item.icon || TrendingUp;
 
                               return (
-                                   <div
+                                   <CourseBenefitCard
                                         key={idx}
-                                        className="group rounded-2xl p-7 sm:p-8 flex flex-col justify-between text-left transition-all duration-300 shadow-sm hover:shadow-xl hover:-translate-y-1 border bg-white text-zinc-900 border-zinc-200/90 hover:bg-official hover:text-zinc-950 hover:border-amber-400"
-                                   >
-                                        <div>
-                                             {/* Icon Container */}
-                                             <div
-                                                  className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shrink-0 transition-all duration-300 border bg-amber-500/10 border-amber-500/20 text-zinc-900 group-hover:bg-zinc-950 group-hover:text-white group-hover:border-zinc-900 shadow-2xs group-hover:shadow-inner"
-                                             >
-                                                  <Icon size={24} className="shrink-0" />
-                                             </div>
-
-                                             {/* Card Title */}
-                                             <h3
-                                                  className="font-urbanist font-extrabold text-xl sm:text-xl leading-snug mb-2 text-zinc-900 group-hover:text-zinc-950 transition-colors"
-                                             >
-                                                  {item.title}
-                                             </h3>
-
-                                             {/* Underline Accent */}
-                                             <div
-                                                  className="w-8 h-0.5 rounded-full mb-3.5 transition-all duration-300 group-hover:w-12 bg-official group-hover:bg-zinc-950"
-                                             />
-
-                                             {/* Card Description */}
-                                             <p
-                                                  className="font-urbanist para"
-                                             >
-                                                  {item.description}
-                                             </p>
-                                        </div>
-
-                                   </div>
+                                        icon={Icon}
+                                        title={item.title}
+                                        description={item.description}
+                                   />
                               );
                          })}
                     </div>

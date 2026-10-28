@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import diamondImg from "@/app/assets/weekend-ux-hero-decorative-diamond.webp";
 
 export const metadata = {
      title: "Page Not Found - Weekend UX",
@@ -9,33 +8,18 @@ export const metadata = {
 
 export default function NotFound() {
      return (
-          <main id="not-found-hero" data-navbar-light="true" className="relative min-h-screen overflow-hidden bg-[#191917] text-white flex items-center justify-center px-5 py-40 font-urbanist">
-
-               {/* Background Golden / Olive Glow */}
-               <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(100,90,25,0.28),transparent_55%)]" />
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_30%,rgba(255,212,0,0.10),transparent_25%)]" />
-                    <div className="absolute inset-0 bg-linear-to-t from-official/30 to-transparent opacity-80" />
-                    <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(0,0,0,0.05),rgba(0,0,0,0.18))]" />
-               </div>
-
-               {/* Decorative Cube */}
-               <div className="absolute z-1 top-[13%] right-[-12%] w-5 sm:w-20 md:w-37.5 lg:w-47.5 xl:right-[7%] xl:top-[5%] pointer-events-none select-none opacity-90">
-                    <img
-                         src={diamondImg.src}
-                         alt="Decorative diamond cube"
-                         aria-hidden="true"
-                         className="w-full h-auto drop-shadow-[0_0_55px_rgba(255,212,0,0.35)]"
-                    />
-               </div>
-
-               {/* Huge Background 404 */}
-               <div className="absolute z-0 left-1/2 top-[40%] md:top-[27%] -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none font-playfair font-bold text-[45vw] md:text-[500px] lg:text-[560px] leading-none text-white/2.5 whitespace-nowrap">
-                    404
-               </div>
+          <main
+               id="not-found-hero"
+               data-navbar-light="true"
+               className="relative min-h-[120vh] overflow-hidden bg-[#191917] bg-cover bg-center text-white flex items-center justify-center py-40 font-urbanist"
+               style={{
+                    backgroundImage:
+                         "linear-gradient(rgba(0,0,0,0.28), rgba(0,0,0,0.42)), url('/images/weekend-ux-error-bg.webp')",
+               }}
+          >
 
                {/* Main Content */}
-               <section className="relative z-10 w-full max-w-180 flex flex-col items-center text-center">
+               <section className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 flex flex-col items-start text-left">
 
                     {/* Error Badge */}
                     <div className="inline-flex items-center gap-2 rounded-full border border-official/30 bg-[#1f1f1b]/60 backdrop-blur-md px-4 py-1.5 mb-6 md:mb-7">
