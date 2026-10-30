@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import BlogCard from "@/components/Blogs/BlogCard";
-import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
-const staticFeaturedBlogs = [
+const fallbackFeaturedBlogs = [
      {
           id: "static-1",
           title: "The Future of AI in Product Design and User Experience",
@@ -20,14 +19,13 @@ const staticFeaturedBlogs = [
 ];
 
 /**
- * BlogListingClient — client component only for interactive pagination state.
+ * BlogListingClient — client component for loading more blog cards.
  * All actual blog data comes from props (fetched at build time by the server page).
  */
 export default function BlogListingClient({ blogsList, featuredStart, featuredEnd }) {
-     const [currentPage, setCurrentPage] = useState(1);
-     const blogsPerPage = 9;
+     const [visibleCount, setVisibleCount] = useState(9);
      const activeFeaturedBlogs = blogsList.length > 0
-          ? blogsList
+               ? blogsList
                .map((blog, index) => {
                     const date = typeof blog.date === "string"
                          ? Date.parse(blog.date.replace(/(\d)(st|nd|rd|th)\b/gi, "$1"))
@@ -36,31 +34,8 @@ export default function BlogListingClient({ blogsList, featuredStart, featuredEn
                })
                .sort((a, b) => b.timestamp - a.timestamp || a.index - b.index)
                .map(({ blog }) => blog)
-          : staticFeaturedBlogs;
-     const totalPages = Math.ceil(activeFeaturedBlogs.length / blogsPerPage);
-
-     const getPageNumbers = () => {
-          const pages = [];
-          if (totalPages <= 4) {
-               for (let i = 1; i <= totalPages; i++) pages.push(i);
-               return pages;
-          }
-          const start = Math.max(1, Math.min(currentPage, totalPages - 2));
-          const actualStart = currentPage < 3 ? 1 : start;
-          const end = Math.min(totalPages, actualStart + 2);
-          for (let i = actualStart; i <= end; i++) pages.push(i);
-          const lastPageInWindow = pages[pages.length - 1];
-          if (lastPageInWindow < totalPages) {
-               if (totalPages - lastPageInWindow > 1) pages.push("...");
-               pages.push(totalPages);
-          }
-          return pages;
-     };
-
-     const displayedBlogs = activeFeaturedBlogs.slice(
-          (currentPage - 1) * blogsPerPage,
-          currentPage * blogsPerPage
-     );
+               : fallbackFeaturedBlogs;
+     const displayedBlogs = activeFeaturedBlogs.slice(0, visibleCount);
 
      return (
           <>
@@ -75,51 +50,18 @@ export default function BlogListingClient({ blogsList, featuredStart, featuredEn
                                    key={blog._id || blog.id || idx}
                                    blog={blog}
                                    height="h-52.5 md:h-65 lg:h-70"
-                                   priority={currentPage === 1 && idx < 3}
+                                   priority={idx < 3}
                                    fetchPriority={idx === 0 ? "high" : undefined}
                               />
                          ))}
                     </div>
-                    {totalPages > 1 && (
-                         <div className="mt-12 flex items-center justify-center gap-3">
+                    {visibleCount < activeFeaturedBlogs.length && (
+                         <div className="mt-12 flex justify-center">
                               <button
-                                   onClick={() => setCurrentPage((page) => Math.max(page - 1, 1))}
-                                   aria-label="Previous Page"
-                                   disabled={currentPage === 1}
-                                   className={`flex h-10 w-10 items-center justify-center rounded-xl border text-sm font-semibold transition-all ${currentPage === 1
-                                        ? "cursor-not-allowed border-zinc-200 bg-zinc-50 text-zinc-300"
-                                        : "cursor-pointer border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-neutral"
-                                        }`}
+                                   onClick={() => setVisibleCount((count) => count + 9)}
+                                   className="rounded-xl bg-official px-7 py-3 text-sm font-semibold text-neutral transition-colors hover:bg-official/80"
                               >
-                                   <FiChevronLeft className="text-lg" />
-                              </button>
-                              {getPageNumbers().map((item, idx) => item === "..." ? (
-                                   <span key={`ellipsis-${idx}`} className="flex h-10 w-10 select-none items-center justify-center text-sm font-semibold text-zinc-400">
-                                        ...
-                                   </span>
-                              ) : (
-                                   <button
-                                        key={`page-${item}`}
-                                        onClick={() => setCurrentPage(item)}
-                                        aria-current={currentPage === item ? "page" : undefined}
-                                        className={`h-10 w-10 rounded-xl border text-sm font-semibold transition-all ${currentPage === item
-                                             ? "border-transparent bg-official text-neutral shadow-sm"
-                                             : "cursor-pointer border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-neutral"
-                                             }`}
-                                   >
-                                        {item}
-                                   </button>
-                              ))}
-                              <button
-                                   onClick={() => setCurrentPage((page) => Math.min(page + 1, totalPages))}
-                                   aria-label="Next Page"
-                                   disabled={currentPage === totalPages}
-                                   className={`flex h-10 w-10 items-center justify-center rounded-xl border text-sm font-semibold transition-all ${currentPage === totalPages
-                                        ? "cursor-not-allowed border-zinc-200 bg-zinc-50 text-zinc-300"
-                                        : "cursor-pointer border-zinc-200 bg-white text-zinc-700 hover:bg-zinc-50 hover:text-neutral"
-                                        }`}
-                              >
-                                   <FiChevronRight className="text-lg" />
+                                   Load More
                               </button>
                          </div>
                     )}

@@ -1,13 +1,14 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, useCallback } from "react";
-import { getCurrentUser, getUserToken } from "@/utils/auth";
+import { getCurrentUser, getUserToken, logoutUser, removeUserToken } from "@/utils/auth";
 
 const UserAuthContext = createContext({
      user: null,
      isLoggedIn: false,
      loading: true,
      refreshUser: async () => {},
+     logout: async () => {},
      isCourseUnlocked: () => false,
 });
 
@@ -33,6 +34,18 @@ export function UserAuthProvider({ children }) {
                setUser(null);
                return null;
           } finally {
+               setLoading(false);
+          }
+     }, []);
+
+     const logout = useCallback(async () => {
+          try {
+               await logoutUser();
+          } catch (err) {
+               console.error("Logout error:", err);
+          } finally {
+               removeUserToken();
+               setUser(null);
                setLoading(false);
           }
      }, []);
@@ -92,9 +105,11 @@ export function UserAuthProvider({ children }) {
           <UserAuthContext.Provider
                value={{
                     user,
+                    setUser,
                     isLoggedIn: !!user,
                     loading,
                     refreshUser,
+                    logout,
                     isCourseUnlocked,
                }}
           >

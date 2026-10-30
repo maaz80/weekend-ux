@@ -5,6 +5,7 @@ import Button from "@/components/ui/Button";
 import { trackMetaEvent } from "@/utils/metaCapi";
 import { gtag_report_conversion } from "@/utils/googleAds";
 import { getApiUrl } from "@/utils/api";
+import { downloadAndOpenBrochure } from "@/utils/brochureDownload";
 
 const Form = ({
      inputBgColor = "bg-transparent",
@@ -189,6 +190,8 @@ const Form = ({
                          { em: formData.email, ph: formData.phone, fn: formData.fullName },
                          { content_name: "Contact Form Booking", message: formData.message }
                     );
+                    window.dispatchEvent(new CustomEvent("leadSubmitted"));
+                    downloadAndOpenBrochure();
                     setStatus("success");
                     setSuccessMessage("Enquiry submitted successfully! We'll contact you soon.");
                     setFormData({ fullName: "", phone: "", email: "", message: "", otp: "" });

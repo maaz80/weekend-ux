@@ -29,6 +29,7 @@ export const HomeDataContext = createContext({
  */
 export function HomeDataProvider({ children, initialData }) {
      const [isChatbotOpen, setIsChatbotOpen] = useState(false);
+     const [faqVisibility, setFaqVisibility] = useState(null);
 
      return (
           <HomeDataContext.Provider
@@ -43,6 +44,8 @@ export function HomeDataProvider({ children, initialData }) {
                     blogsData: initialData?.blogsData || null,
                     locationsData: initialData?.locationsData || null,
                     loading: false,
+                    faqVisibility,
+                    setFaqVisibility,
                     isChatbotOpen,
                     setIsChatbotOpen,
                }}

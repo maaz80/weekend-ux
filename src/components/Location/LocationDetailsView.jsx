@@ -3,7 +3,6 @@
 import Image from "next/image";
 import OptimizedImage from "@/components/ui/OptimizedImage";
 import Breadcrumb from "@/components/Breadcrumb";
-import { useHomeData } from "@/context/HomeDataContext";
 import HomeFeature from "@/components/Home/Features/Feature";
 import Link from "next/link";
 import HomeWhyChoose from "@/components/Home/Details/Details";
@@ -14,7 +13,6 @@ import FAQ from "@/components/FAQ";
 import Button from "@/components/ui/Button";
 
 export default function LocationDetailsView({ data }) {
-     const { faqData } = useHomeData();
 
      const heroData = data?.hero?.[0] || {};
      const heroTitle = heroData.heading || data?.title || "Best Design Academy";
@@ -106,7 +104,7 @@ export default function LocationDetailsView({ data }) {
                     midheading: data.faq.midheading && data.faq.midheading.trim() ? data.faq.midheading.trim() : "FAQ",
                     endheading: data.faq.endheading && data.faq.endheading.trim() ? data.faq.endheading.trim() : "",
                     description: data.faq.description && data.faq.description.trim() ? data.faq.description.trim() : "",
-               } : faqData} />
+               } : null} />
           </main>
      );
 }

@@ -1,6 +1,4 @@
 import Image from "next/image";
-import Testimonials from "@/components/Home/Testimonials/Testimonials";
-import RelatedBlogs from "@/components/RelatedBlogs";
 import FAQ from "@/components/FAQ";
 import Breadcrumb from "@/components/Breadcrumb";
 import connectDB from "@/config/db";
@@ -71,8 +69,6 @@ export default async function TermsConditions() {
                          dangerouslySetInnerHTML={{ __html: content || "" }}
                     />
                </div>
-               <Testimonials />
-               <RelatedBlogs data={termsData?.relatedBlogs} />
                <FAQ/>
           </div>
      );

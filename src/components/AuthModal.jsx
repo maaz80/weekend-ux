@@ -430,10 +430,10 @@ const AuthModal = ({
                                         className={`w-full text-sm font-bold ${submitButtonClass} ${loading || otpSending || (otpSent && !formData.otp) ? "opacity-70 cursor-not-allowed bg-official/50 text-neutral-500" : ""}`}
                                    >
                                         {loading || otpSending ? (
-                                             <>
+                                             <span className="flex items-center justify-center gap-2">
                                                   <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin ml-2" />
-                                                  <span>{otpSending ? "Sending OTP..." : "Processing..."}</span>
-                                             </>
+                                                  <span className="pr-2">{otpSending ? "Sending OTP..." : "Processing..."}</span>
+                                             </span>
 
                                         ) : (
                                              otpSent ? (authMode === "signup" ? "Verify & Sign Up" : "Verify & Login") : "Get OTP"
@@ -463,7 +463,7 @@ const AuthModal = ({
                                    {authMode === "login" && (
                                         <span
                                              onClick={() => { setAuthMode("signup"); setError(""); setSuccessMessage(""); setOtpSent(false); }}
-                                             className={`${toggleLinkColor} ml-1`}
+                                             className={`font-bold text-black ml-1`}
                                         >
                                              Sign up
                                         </span>
@@ -471,7 +471,7 @@ const AuthModal = ({
                                    {authMode === "signup" && (
                                         <span
                                              onClick={() => { setAuthMode("login"); setError(""); setSuccessMessage(""); setOtpSent(false); }}
-                                             className={`${toggleLinkColor} ml-1`}
+                                             className={`font-bold text-black ml-1`}
                                         >
                                              Login
                                         </span>

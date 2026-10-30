@@ -5,6 +5,7 @@ import { Users, BookOpen, ShieldCheck, GraduationCap, ArrowRight, Check, Chevron
 import { FiUser, FiMail, FiPhone, FiLock, FiBookOpen } from "react-icons/fi";
 import { trackMetaEvent } from "@/utils/metaCapi";
 import { gtag_report_conversion } from "@/utils/googleAds";
+import { downloadAndOpenBrochure } from "@/utils/brochureDownload";
 
 export default function DemoClass({ data }) {
      const [status, setStatus] = useState("idle");
@@ -258,6 +259,7 @@ export default function DemoClass({ data }) {
                     localStorage.setItem("leadSubmitted", "true");
                     localStorage.setItem("leadUser", JSON.stringify({ name: formData.fullName, email: formData.email, phone: formData.phone }));
                     window.dispatchEvent(new CustomEvent("leadSubmitted"));
+                    downloadAndOpenBrochure();
                     setFormData({ fullName: "", phone: "", email: "", otp: "" });
                     setOtpStep(false);
                     setErrors({});

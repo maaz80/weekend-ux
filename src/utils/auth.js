@@ -1,7 +1,9 @@
 const getApiBase = () => {
      let baseUrl = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_BACKEND_URL || "https://api.weekendux.in";
-     if (baseUrl.includes("localhost") || baseUrl.includes("127.0.0.1") || baseUrl.includes("onrender.com")) {
-          baseUrl = "https://api.weekendux.in";
+     if (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1") {
+          if (baseUrl.includes("localhost") || baseUrl.includes("127.0.0.1") || baseUrl.includes("onrender.com")) {
+               baseUrl = "https://api.weekendux.in";
+          }
      }
      return `${baseUrl.replace(/\/$/, "")}/api`;
 };
@@ -152,6 +154,25 @@ export const getCurrentUser = async () => {
           removeUserToken();
           return null;
      }
+};
+
+export const updateUserProfile = async (profileDetails, termsAccepted) => {
+     const res = await fetch(`${API}/auth/profile`, {
+          method: "PUT",
+          headers: {
+               "Content-Type": "application/json",
+               ...getAuthHeader(),
+          },
+          body: JSON.stringify({ profileDetails, termsAccepted }),
+     });
+
+     const data = await res.json();
+
+     if (!res.ok) {
+          throw new Error(data.error || "Failed to save profile information");
+     }
+
+     return data;
 };
 
 // Logout

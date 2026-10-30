@@ -137,11 +137,26 @@ export default function Footer({
      bannerTitleColor = "text-neutral"
 }) {
      const pathname = usePathname();
-     if (pathname && (pathname === "/dashboard" || pathname.startsWith("/dashboard/") || pathname === "/jobs" || pathname.startsWith("/jobs/"))) {
+     if (
+          pathname && (
+               pathname === "/dashboard" ||
+               pathname.startsWith("/dashboard/") ||
+               pathname === "/jobs" ||
+               pathname.startsWith("/jobs/") ||
+               pathname === "/complete-profile" ||
+               pathname.startsWith("/complete-profile/")
+          )
+     ) {
           return null;
      }
 
-     const { footerGlobalData, footerColumnsData, navbarData, locationsData } = useHomeData();
+     const { footerGlobalData, footerColumnsData, navbarData, locationsData, faqVisibility } = useHomeData();
+     const faqPageSlug = pathname === "/"
+          ? "home"
+          : pathname === "/blog"
+               ? "category-blogs"
+               : pathname.replace(/^\/|\/$/g, "").replace(/\//g, "-");
+     const hideFooterCta = faqVisibility?.slug === faqPageSlug && !faqVisibility.hasFaq;
      const hasLogoImage = navbarData?.logo?.image && navbarData.logo.image.trim();
 
      // locationsData is fetched at BUILD TIME via layout.js — no runtime API call needed
@@ -201,6 +216,7 @@ export default function Footer({
 
      return (
           <footer className={`w-full -mt-10 relative z-1000 pb-16 ${bgColor} ${textColor}`}>
+               {!hideFooterCta && (
                <div className="absolute -top-20 sm:-top-28 md:-top-36 lg:-top-44 left-0 right-0 mx-auto w-[92%] sm:w-[88%] md:w-[85%] lg:w-[80%] max-w-6xl h-[132px] sm:h-[168px] md:h-[216px] lg:h-[240px] xl:h-[264px] z-20 flex flex-col items-start justify-center px-6 sm:px-10 md:px-14 lg:px-20 rounded-2xl md:rounded-2xl overflow-hidden shadow-xl">
                     {/* Desktop Footer Decorative Background Image */}
                     <Image src={bannerBgImage} alt="weekend-ux-footer-decorative-bg" fill loading="lazy" sizes="(max-width: 1024px) 100vw, 1200px" className="hidden md:block object-fill rounded-2xl md:rounded-2xl" />
@@ -215,6 +231,7 @@ export default function Footer({
                          </Button>
                     </Link>
                </div>
+               )}
                <div className="mx-auto max-w-330 px-6 md:px-9 2xl:px-10 pt-28 sm:pt-36 md:pt-48 lg:pt-56 pb-5">
 
                     {/* TOP GRID */}

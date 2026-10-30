@@ -4,6 +4,7 @@ import Button from "@/components/ui/Button";
 import { trackMetaEvent } from "@/utils/metaCapi";
 import { gtag_report_conversion } from "@/utils/googleAds";
 import { getApiUrl } from "@/utils/api";
+import { downloadAndOpenBrochure } from "@/utils/brochureDownload";
 
 const Form = ({
      courseId,
@@ -198,6 +199,7 @@ const Form = ({
                     localStorage.setItem("leadSubmitted", "true");
                     localStorage.setItem("leadUser", JSON.stringify({ name: formData.fullName, email: formData.email, phone: formData.phone }));
                     window.dispatchEvent(new CustomEvent("leadSubmitted"));
+                    downloadAndOpenBrochure();
                     setFormData({ fullName: "", phone: "", email: "", otp: "" });
                     setOtpStep(false);
                     setErrors({});

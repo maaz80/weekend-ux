@@ -7,6 +7,7 @@ import { useUserAuth } from "@/context/UserAuthContext";
 import Link from "next/link";
 import CardBg from '@/app/assets/weekend-ux-course-details-call-card-bg.webp';
 import OptimizedImage from "@/components/ui/OptimizedImage";
+import { downloadAndOpenBrochure } from "@/utils/brochureDownload";
 import Form from "./Form";
 import CallCard from "./CallCard";
 import Curriculum from "./Curriculum";
@@ -603,7 +604,13 @@ export default function Details({ data }) {
                               <div className="shrink-0 w-full md:w-auto">
                                    <button
                                         onClick={() => {
-                                             window.dispatchEvent(new CustomEvent("openLeadModal"));
+                                             downloadAndOpenBrochure();
+                                             window.dispatchEvent(new CustomEvent("openLeadModal", {
+                                                  detail: {
+                                                       courseId: data?._id,
+                                                       source: `Course Details Get Brochure Button - ${data?.title || "Course"}`
+                                                  }
+                                             }));
                                         }}
                                         className="h-12 w-full px-8 bg-linear-to-r from-zinc-800 to-zinc-900 text-white shadow-sm rounded-md hover:from-zinc-800/70 hover:to-zinc-900/70 text-sm font-bold transition-all duration-300 cursor-pointer flex items-center justify-center font-urbanist"
                                    >

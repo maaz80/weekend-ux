@@ -5,6 +5,7 @@ import { X, Lock, CheckCircle2, Send } from "lucide-react";
 import { trackMetaEvent } from "@/utils/metaCapi";
 import { gtag_report_conversion } from "@/utils/googleAds";
 import { getApiUrl } from "@/utils/api";
+import { downloadAndOpenBrochure } from "@/utils/brochureDownload";
 
 export default function LeadModal() {
      const [isOpen, setIsOpen] = useState(false);
@@ -59,6 +60,7 @@ export default function LeadModal() {
                          if (response.ok) {
                               showToastNotification(`Syllabus email sent to ${savedUser.email}! Check your inbox.`, "success");
                               window.dispatchEvent(new CustomEvent("leadSubmitted"));
+                              downloadAndOpenBrochure();
                          } else {
                               showToastNotification("Could not send email. Please try again.", "error");
                          }
@@ -167,6 +169,7 @@ export default function LeadModal() {
 
                // Let other components know the lead has been submitted successfully
                window.dispatchEvent(new CustomEvent("leadSubmitted"));
+               downloadAndOpenBrochure();
 
                // Close modal after 1.5 seconds success state
                setTimeout(() => {

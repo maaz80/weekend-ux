@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import ClientWidgetsWrapper from "@/components/ClientWidgetsWrapper";
 import { HomeDataProvider } from "@/context/HomeDataContext";
 import { UserAuthProvider } from "@/context/UserAuthContext";
+import ProfileCompletionGate from "@/components/ProfileCompletionGate";
 import connectDB from "@/config/db";
 import NavbarModel from "@/models/Navbar";
 import FooterModel from "@/models/Footer";
@@ -224,13 +225,15 @@ export default async function RootLayout({ children }) {
       <body className="min-h-full flex flex-col">
         <HomeDataProvider initialData={initialData}>
           <UserAuthProvider>
-            <StaticPageSchemaRenderer />
-            <Navbar />
-            <main className="grow">
-              {children}
-            </main>
-            <ClientWidgetsWrapper />
-            <Footer />
+            <ProfileCompletionGate>
+              <StaticPageSchemaRenderer />
+              <Navbar />
+              <main className="grow">
+                {children}
+              </main>
+              <ClientWidgetsWrapper />
+              <Footer />
+            </ProfileCompletionGate>
           </UserAuthProvider>
         </HomeDataProvider>
       </body>

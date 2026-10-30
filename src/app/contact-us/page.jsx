@@ -1,6 +1,4 @@
 import Image from "next/image";
-import Testimonials from "@/components/Home/Testimonials/Testimonials";
-import RelatedBlogs from "@/components/RelatedBlogs";
 import FAQ from "@/components/FAQ";
 import Content from "@/components/Contact/Content";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -56,8 +54,6 @@ export default async function ContactUs() {
                      />
                </section>
                <Content data={contactData} />
-               <Testimonials />
-               <RelatedBlogs data={contactData?.relatedBlogs} />
                <FAQ />
           </div>
      );

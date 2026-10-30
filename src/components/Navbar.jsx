@@ -98,16 +98,15 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
           };
      }, []);
 
-     const { user: authUser, refreshUser } = useUserAuth();
+     const { user: authUser, refreshUser, logout: authLogout } = useUserAuth();
 
      useEffect(() => {
-          if (authUser) {
-               setUser(authUser);
-          }
+          setUser(authUser || null);
      }, [authUser]);
 
      const currentUser = user || authUser;
      const isDashboard = pathname?.startsWith("/dashboard") || pathname?.startsWith("/jobs");
+     const isCompleteProfile = pathname === "/complete-profile" || pathname?.startsWith("/complete-profile");
 
      const handleAuthSuccess = async () => {
           const userData = await refreshUser();
@@ -368,7 +367,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
           <>
                <div className="font-urbanist fixed w-full top-0 z-99999">
                     {/* Top Bar - Hidden on Dashboard */}
-                    {!isDashboard && (
+                    {!isDashboard && !isCompleteProfile && (
                          <div className="w-full bg-official text-neutral py-1.5 md:py-2 text-[11px] md:text-[13px] font-semibold border-b border-zinc-950/10 relative z-50">
                               <div className="max-w-7xl mx-auto flex items-center justify-between gap-3 flex-row max-md:flex-col px-3 md:px-6 pb-0.5 md:pb-0">
                                    <div className="flex items-center gap-4 md:gap-6">
@@ -406,7 +405,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                          </div>
                     )}
 
-                    <nav className={`w-full backdrop-blur-xl transition-colors ${isDashboard ? "bg-white/95 border-b border-zinc-200/80 shadow-xs" : ""}`}>
+                    <nav className={`w-full backdrop-blur-xl transition-colors ${isDashboard || isCompleteProfile ? "bg-white/95 border-b border-zinc-200/80 shadow-xs" : ""}`}>
                          {/* MAIN NAVBAR */}
                          <div className="max-w-7xl mx-auto h-16 md:h-20 px-4 md:px-6 flex items-center justify-between">
 
@@ -414,7 +413,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                               <div className="flex items-center gap-3">
 
                                    {/* MOBILE MENU BUTTON */}
-                                   {!isDashboard && (
+                                   {!isDashboard && !isCompleteProfile && (
                                         <button
                                              onClick={() => {
                                                   setIsMenuOpen(!isMenuOpen);
@@ -423,7 +422,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                   }
                                              }}
                                              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-                                             className={`hidden max-md:flex items-center ${isMoreButtonLight ? "text-white" : "text-neutral"} hover:text-official/80 text-2xl transition-opacity duration-200 cursor-pointer`}
+                                             className={`hidden max-md:flex items-center ${!isCompleteProfile && isMoreButtonLight ? "text-white" : "text-neutral"} hover:text-official/80 text-2xl transition-opacity duration-200 cursor-pointer`}
                                         >
                                              {isMenuOpen ? <FiX /> : <FiMenu />}
                                         </button>
@@ -453,7 +452,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                    </Link>
 
                                    {/* DESKTOP CONTENT */}
-                                   {!isDashboard && (
+                                   {!isDashboard && !isCompleteProfile && (
                                         <div className="hidden md:flex items-center gap-4 ml-4">
                                              {/* AI COURSES BUTTON */}
                                              <Button
@@ -591,7 +590,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                               {/* RIGHT SIDE */}
                               <div className="flex items-center gap-4 md:gap-5">
                                    {/* MOBILE SEARCH */}
-                                   {!isDashboard && (
+                                   {!isDashboard && !isCompleteProfile && (
                                         <button
                                              onClick={() => {
                                                   setIsSearchOpen(!isSearchOpen);
@@ -600,18 +599,19 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                   }
                                              }}
                                              aria-label={isSearchOpen ? "Close search" : "Open search"}
-                                             className={`hidden max-md:flex items-center ${isMoreButtonLight ? "text-white" : "text-neutral"} hover:text-official/80 text-xl transition-opacity duration-200 cursor-pointer`}
+                                             className={`hidden max-md:flex items-center ${!isCompleteProfile && isMoreButtonLight ? "text-white" : "text-neutral"} hover:text-official/80 text-xl transition-opacity duration-200 cursor-pointer`}
                                         >
                                              {isSearchOpen ? <FiX className="text-lg" /> : <FiSearch />}
                                         </button>
                                    )}
 
-                                   {!isDashboard && (
-                                        <div className="hidden lg:flex items-center gap-11">
+                                   {!isDashboard && !isCompleteProfile && (
+                                        <div className="hidden lg:flex items-center gap-12">
                                              {[
-                                                  { label: "Contact Us", href: "/contact-us" },
+                                                  { label: "Home", href: "/" },
                                                   { label: "About Us", href: "/about-us" },
                                                   { label: "Blogs", href: "/blog" },
+                                                  { label: "Contact Us", href: "/contact-us" },
                                              ].map(({ label, href }) => (
                                                   <Link
                                                        key={href}
@@ -626,15 +626,15 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                         </div>
                                    )}
 
-                                   {!isDashboard && (
+                                   {!isDashboard && !isCompleteProfile && (
                                         <div
                                              className="relative hidden md:block group"
                                              onMouseEnter={() => setIsMenuOpen(false)}
                                         >
                                              {/* BUTTON */}
-                                             <button className={`h-17 px-5 rounded-t-md flex items-center gap-2 text-sm transition-all duration-300 cursor-pointer ${isMoreButtonLight ? "text-white" : "text-neutral"} group-hover:bg-white group-hover:text-neutral!`}>
+                                             <button className={`h-17 px-5 rounded-t-md flex items-center gap-2 text-sm transition-all duration-300 cursor-pointer ${!isCompleteProfile && isMoreButtonLight ? "text-white" : "text-neutral"} group-hover:bg-white group-hover:text-neutral!`}>
                                                   {moreTitle}
-                                                  <FiChevronDown className={`text-base transition-all duration-300 group-hover:rotate-180 ${isMoreButtonLight ? "text-white" : "text-neutral"} group-hover:text-neutral!`} />
+                                                  <FiChevronDown className={`text-base transition-all duration-300 group-hover:rotate-180 ${!isCompleteProfile && isMoreButtonLight ? "text-white" : "text-neutral"} group-hover:text-neutral!`} />
                                              </button>
                                              {/* DROPDOWN */}
                                              <div className="absolute top-17 right-0 w-250 max-w-[88vw] p-6 bg-white border border-zinc-100/90 shadow-2xl opacity-0 invisible -translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 z-99999 rounded-b-xl before:absolute before:-top-3 before:left-0 before:w-full before:h-3">
@@ -682,49 +682,58 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                    )}
 
                                    {/* DESKTOP BUTTON */}
-                                   {user ? (
+                                   {currentUser ? (
                                         <div className="relative">
                                              <button
                                                   onClick={(e) => {
                                                        e.stopPropagation();
                                                        setIsUserDropdownOpen(!isUserDropdownOpen);
                                                   }}
-                                                  className={`flex items-center gap-2 text-sm hover:text-official/80 transition-colors duration-300 cursor-pointer font-medium ${isMoreButtonLight ? "text-white" : "text-neutral"}`}
+                                                  className={`flex items-center gap-2 text-sm hover:text-official/80 transition-colors duration-300 cursor-pointer font-medium ${!isCompleteProfile && isMoreButtonLight ? "text-white" : "text-neutral"}`}
                                              >
                                                   <div className="w-7 h-7 rounded-lg bg-official/20 text-official flex items-center justify-center font-bold text-xs shrink-0">
-                                                       {user.name ? user.name.charAt(0).toUpperCase() : "U"}
+                                                       {currentUser.name ? currentUser.name.charAt(0).toUpperCase() : "U"}
                                                   </div>
-                                                  <span>{user.name}</span>
-                                                  <FiChevronDown className={`text-base transition-all duration-300 ${isUserDropdownOpen ? "rotate-180" : ""} ${isMoreButtonLight ? "text-white" : "text-neutral"}`} />
+                                                  <span>{currentUser.name}</span>
+                                                  <FiChevronDown className={`text-base transition-all duration-300 ${isUserDropdownOpen ? "rotate-180" : ""} ${!isCompleteProfile && isMoreButtonLight ? "text-white" : "text-neutral"}`} />
                                              </button>
                                              {isUserDropdownOpen && (
                                                   <div className="absolute right-0 mt-2 w-52 rounded-xl bg-zinc-900 shadow-2xl p-2 border border-zinc-800 z-99999 flex flex-col font-urbanist animate-fadeIn">
                                                        <div className="px-3.5 py-2 border-b border-zinc-800/80 mb-1">
-                                                            <p className="text-xs font-bold text-white truncate">{user.name}</p>
-                                                            {user.email && <p className="text-[11px] text-zinc-400 truncate mt-0.5">{user.email}</p>}
+                                                            <p className="text-xs font-bold text-white truncate">{currentUser.name}</p>
+                                                            {currentUser.email && <p className="text-[11px] text-zinc-400 truncate mt-0.5">{currentUser.email}</p>}
                                                        </div>
-                                                       {!isDashboard ? (
-                                                            <Link
-                                                                 href="/dashboard"
-                                                                 onClick={() => setIsUserDropdownOpen(false)}
-                                                                 className="flex items-center gap-2 px-3.5 py-2 text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-800 rounded-lg transition"
-                                                            >
-                                                                 Student Dashboard
-                                                            </Link>
-                                                       ) : (
-                                                            <Link
-                                                                 href="/"
-                                                                 onClick={() => setIsUserDropdownOpen(false)}
-                                                                 className="flex items-center gap-2 px-3.5 py-2 text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-800 rounded-lg transition"
-                                                            >
-                                                                 Main Homepage
-                                                            </Link>
+                                                       {!isCompleteProfile && (
+                                                            !isDashboard ? (
+                                                                 <Link
+                                                                      href="/dashboard"
+                                                                      onClick={() => setIsUserDropdownOpen(false)}
+                                                                      className="flex items-center gap-2 px-3.5 py-2 text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-800 rounded-lg transition"
+                                                                 >
+                                                                      Student Dashboard
+                                                                 </Link>
+                                                            ) : (
+                                                                 <Link
+                                                                      href="/"
+                                                                      onClick={() => setIsUserDropdownOpen(false)}
+                                                                      className="flex items-center gap-2 px-3.5 py-2 text-xs font-medium text-zinc-300 hover:text-white hover:bg-zinc-800 rounded-lg transition"
+                                                                 >
+                                                                      Main Homepage
+                                                                 </Link>
+                                                            )
                                                        )}
                                                        <button
                                                             onClick={async () => {
-                                                                 await logoutUser();
                                                                  setUser(null);
                                                                  setIsUserDropdownOpen(false);
+                                                                 if (authLogout) {
+                                                                      await authLogout();
+                                                                 } else {
+                                                                      await logoutUser();
+                                                                 }
+                                                                 if (isCompleteProfile) {
+                                                                      window.location.href = "/";
+                                                                 }
                                                             }}
                                                             className="w-full text-left flex items-center gap-2 px-3.5 py-2 text-xs font-semibold text-red-400 hover:bg-red-500/10 rounded-lg cursor-pointer transition mt-1"
                                                        >
@@ -733,7 +742,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                                   </div>
                                              )}
                                         </div>
-                                   ) : (
+                                   ) : !isCompleteProfile ? (
                                         <Button
                                              variant="empty"
                                              className={`inline-flex transition-all duration-300 ${
@@ -745,13 +754,13 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                         >
                                              {loginLabel}
                                         </Button>
-                                   )}
+                                   ) : null}
                               </div>
                               
                          </div>
 
                          {/* MOBILE SEARCH DROPDOWN */}
-                         {isSearchOpen && (
+                         {!isCompleteProfile && isSearchOpen && (
                               <div ref={mobileSearchRef} className="md:hidden border-t border-official/10 backdrop-blur-xl px-4 py-4 relative">
                                    <div className="relative">
                                         <form onSubmit={handleSearchSubmit} className="relative">
@@ -880,7 +889,7 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                          )}
 
                          {/* MOBILE MENU */}
-                         {isMenuOpen && (
+                         {!isCompleteProfile && isMenuOpen && (
                               <div className="md:hidden border-t border-official/10 bg-neutral/95 px-4 pt-5 pb-12 md:pb-5 flex flex-col gap-4 max-h-[calc(100vh-130px)] overflow-y-auto">
                                    {/* MOBILE BUTTONS */}
                                    <div className="flex flex-col gap-3">
@@ -891,15 +900,19 @@ const Navbar = ({ initialMenuOpen = false, initialSearchOpen = false }) => {
                                              {dropdownLabel}
                                         </Button>
 
-                                        {user ? (
+                                        {currentUser ? (
                                              <div className="flex flex-col gap-2 pt-2 border-t border-zinc-800">
-                                                  <span className="text-sm text-neutral-400 font-semibold px-2">Logged in as {user.name}</span>
+                                                  <span className="text-sm text-neutral-400 font-semibold px-2">Logged in as {currentUser?.name}</span>
                                                   <button
                                                        onClick={async () => {
-                                                            await logoutUser();
-                                                            setUser(null);
-                                                            setIsMenuOpen(false);
-                                                       }}
+                                                             setUser(null);
+                                                             setIsMenuOpen(false);
+                                                             if (authLogout) {
+                                                                  await authLogout();
+                                                             } else {
+                                                                  await logoutUser();
+                                                             }
+                                                        }}
                                                        className="w-full text-center py-2 text-sm text-red-400 hover:bg-zinc-800 rounded-md cursor-pointer transition font-semibold"
                                                   >
                                                        Logout
